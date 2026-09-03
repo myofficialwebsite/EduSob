@@ -36,7 +36,8 @@
 - Verified money logic: wallet topup (+1000) → wallet order (-650) → balance 370 correct; server-side price calc + stock + insufficient-balance guard OK
 - Fixes PUSHED to GitHub main (commit 96d5743) on 2026-09-03. Patch also at /app/edusob-fixes.patch.
 
-## Round 4 (2026-09-03) — commit afba18b (pushed)
+## Round 5 (2026-09-03) — brand unify commit (pushed)
+- Global CSS override in layout.ts HEAD_COMMON: emerald accent → terracotta orange, teal gradient stops → amber, smooth scrolling. Verified via dashboard + wallet screenshots. — commit afba18b (pushed)
 - Full-portal dark theme: DARK_PORTAL_CSS override in layout.ts applied to shop/wallet/assisted/admin pages (rest were already dark). Shop header fixed via .shop-header class (JS string escape bug found: `\/` in template literal — used plain class selector instead).
 - Gemini LIVE locally: user-provided AI Studio key validated; model switched gemini-2.5-flash (deprecated for new users) → gemini-3.5-flash; raised maxOutputTokens 400→1200 (thinking tokens were truncating answers). Verified: Bengali study answers working. Key stored in /app/edusob/.env (gitignored, NOT pushed). PENDING MANUAL: user must add GEMINI_API_KEY in Cloudflare Pages → Settings → Environment variables for production AI answers (Workers AI is the no-key fallback meanwhile).
 - bKash/Nagad merchant onboarding cannot be done by agent (requires user's KYC/business docs) — integration code ready and waiting for creds. — commit bdf2b83, +payments commit (pushed)
