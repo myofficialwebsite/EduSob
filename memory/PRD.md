@@ -36,7 +36,11 @@
 - Verified money logic: wallet topup (+1000) → wallet order (-650) → balance 370 correct; server-side price calc + stock + insufficient-balance guard OK
 - Fixes PUSHED to GitHub main (commit 96d5743) on 2026-09-03. Patch also at /app/edusob-fixes.patch.
 
-## Round 2 Audit (2026-09-03) — commits cd0bfb1, f706cdc, f4e4dd9 (all pushed to main)
+## Round 3 (2026-09-03) — commit bdf2b83, +payments commit (pushed)
+- UI Redesign: landing.ts fully rewritten to premium dark editorial theme (obsidian #0b0d12, terracotta #f97316, Syne display font, editorial marquee, giant footer wordmark). ALL ids/JS (slider, filters, FAQ, captcha, contact) preserved and re-verified via screenshots. Live on edusob.pages.dev (Cloudflare auto-deploys from main).
+- AI: Workers AI binding already in wrangler.jsonc (keyless); GEMINI_API_KEY now read from c.env for extra quality. User needs own Gemini key only if they want Gemini instead of Workers AI.
+- Payments: new /api/payments route — bKash tokenized checkout (grant token cache, create mode 0011, execute callback, amount match, idempotent wallet credit via gateway_payments table, migration 0015). Wallet page got "বিকাশ অটো টপ-আপ" button (shows only when creds configured) + success/fail banners. Manual TRX flow untouched. BLOCKED on real use: needs bKash merchant creds (BKASH_APP_KEY/SECRET/USERNAME/PASSWORD) — user must obtain from bKash merchant onboarding. Nagad needs merchant package from Nagad.
+- Dashboard redesign NOT done yet (landing only). (2026-09-03) — commits cd0bfb1, f706cdc, f4e4dd9 (all pushed to main)
 - Auto Collector tested: all 6 sync sources run, curated content library upserts with per-item dedup (no live scraping — by design). Fixed admin force-sync diagnostics showing fabricated "35% new" numbers; now uses real insert counts (verified: re-sync shows new=0, dup=all).
 - Cross-checked all 105 API paths called from frontend pages against 167 defined routes: found teacher-support ticket chat was 404 (pages call /tickets/:id/messages plural; backend had /ticket/:id singular). Added alias routes; chat verified working end-to-end.
 - AI chat (guide + Gemini + Workers AI fallback) already existed; fixed GEMINI_API_KEY to read from Cloudflare c.env bindings (process.env fallback). Live Gemini answers need user's key in env (user will create at aistudio.google.com/apikey).
