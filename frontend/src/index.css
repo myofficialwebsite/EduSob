@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 225 24% 5%;
+        --foreground: 210 40% 98%;
+        --card: 220 21% 9%;
+        --card-foreground: 210 40% 98%;
+        --popover: 220 21% 9%;
+        --popover-foreground: 210 40% 98%;
+        --primary: 24 95% 53%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 220 16% 14%;
+        --secondary-foreground: 210 40% 98%;
+        --muted: 220 16% 14%;
+        --muted-foreground: 215 20% 65%;
+        --accent: 220 16% 14%;
+        --accent-foreground: 210 40% 98%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 100% / 0.08;
+        --input: 0 0% 100% / 0.1;
+        --ring: 24 95% 53%;
+        --radius: 0.75rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    html {
+        scroll-behavior: auto;
+    }
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+    ::selection {
+        background: #f97316;
+        color: #0b0d12;
+    }
+}
+
+.font-display { font-family: 'Syne', 'Hind Siliguri', sans-serif; }
+.font-bangla { font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif; }
+.font-mono-code { font-family: 'JetBrains Mono', monospace; }
+
+@keyframes marquee-drift {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+.animate-marquee {
+    animation: marquee-drift 42s linear infinite;
+}
+.animate-marquee:hover {
+    animation-play-state: paused;
+}
+
+.text-outline {
+    -webkit-text-stroke: 1px rgba(249, 115, 22, 0.55);
+    color: transparent;
+}
+
+.hero-glow {
+    background: radial-gradient(circle at 50% 20%, rgba(249, 115, 22, 0.15) 0%, rgba(6, 182, 212, 0.05) 50%, transparent 80%);
+}
+
+.grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+
+    [data-debug-wrapper="true"] > * {
+        margin-left: inherit;
+        margin-right: inherit;
+        margin-top: inherit;
+        margin-bottom: inherit;
+        padding-left: inherit;
+        padding-right: inherit;
+        padding-top: inherit;
+        padding-bottom: inherit;
+        column-gap: inherit;
+        row-gap: inherit;
+        gap: inherit;
+        border-left-width: inherit;
+        border-right-width: inherit;
+        border-top-width: inherit;
+        border-bottom-width: inherit;
+        border-left-style: inherit;
+        border-right-style: inherit;
+        border-top-style: inherit;
+        border-bottom-style: inherit;
+        border-left-color: inherit;
+        border-right-color: inherit;
+        border-top-color: inherit;
+        border-bottom-color: inherit;
+    }
+}
