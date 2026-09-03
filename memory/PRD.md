@@ -36,7 +36,10 @@
 - Verified money logic: wallet topup (+1000) → wallet order (-650) → balance 370 correct; server-side price calc + stock + insufficient-balance guard OK
 - Fixes PUSHED to GitHub main (commit 96d5743) on 2026-09-03. Patch also at /app/edusob-fixes.patch.
 
-## Round 3 (2026-09-03) — commit bdf2b83, +payments commit (pushed)
+## Round 4 (2026-09-03) — commit afba18b (pushed)
+- Full-portal dark theme: DARK_PORTAL_CSS override in layout.ts applied to shop/wallet/assisted/admin pages (rest were already dark). Shop header fixed via .shop-header class (JS string escape bug found: `\/` in template literal — used plain class selector instead).
+- Gemini LIVE locally: user-provided AI Studio key validated; model switched gemini-2.5-flash (deprecated for new users) → gemini-3.5-flash; raised maxOutputTokens 400→1200 (thinking tokens were truncating answers). Verified: Bengali study answers working. Key stored in /app/edusob/.env (gitignored, NOT pushed). PENDING MANUAL: user must add GEMINI_API_KEY in Cloudflare Pages → Settings → Environment variables for production AI answers (Workers AI is the no-key fallback meanwhile).
+- bKash/Nagad merchant onboarding cannot be done by agent (requires user's KYC/business docs) — integration code ready and waiting for creds. — commit bdf2b83, +payments commit (pushed)
 - UI Redesign: landing.ts fully rewritten to premium dark editorial theme (obsidian #0b0d12, terracotta #f97316, Syne display font, editorial marquee, giant footer wordmark). ALL ids/JS (slider, filters, FAQ, captcha, contact) preserved and re-verified via screenshots. Live on edusob.pages.dev (Cloudflare auto-deploys from main).
 - AI: Workers AI binding already in wrangler.jsonc (keyless); GEMINI_API_KEY now read from c.env for extra quality. User needs own Gemini key only if they want Gemini instead of Workers AI.
 - Payments: new /api/payments route — bKash tokenized checkout (grant token cache, create mode 0011, execute callback, amount match, idempotent wallet credit via gateway_payments table, migration 0015). Wallet page got "বিকাশ অটো টপ-আপ" button (shows only when creds configured) + success/fail banners. Manual TRX flow untouched. BLOCKED on real use: needs bKash merchant creds (BKASH_APP_KEY/SECRET/USERNAME/PASSWORD) — user must obtain from bKash merchant onboarding. Nagad needs merchant package from Nagad.
