@@ -25,6 +25,17 @@
 - Frontend sections: Nav (glass, mobile drawer, lang toggle), Hero, editorial Marquee, numbered Manifesto chapters (01–04 bento), Courses, animated Stats counters, Mentors, Testimonials, searchable FAQ accordion, EnrollForm, editorial Footer with giant EDUSOB wordmark
 - Verified: curl on all endpoints (enroll ৳4,999→৳4,249 with coupon; bad phone/coupon rejected), e2e screenshot test of enroll flow with success toast
 
+## GitHub Repo Audit (2026-09-03, repo made public by user)
+- Repo: github.com/myofficialwebsite/EduSob — Hono + TypeScript + node:sqlite (D1 compat layer), Cloudflare Pages deploy; cloned to /app/edusob
+- Audit: tsc --noEmit clean; production build (vite) passes; 20/20 pages 200; auth (signup/login/session), wallet bonus, shop COD + wallet orders, MCQ quiz/scoring, CV, scholarships, admin panel — all smoke-tested working
+- Bugs found & fixed (commit in /app/edusob, patch: /app/edusob-fixes.patch):
+  1. scholarships.ts:36 `target_level="all"` — double-quoted string literal crashes node:sqlite (DQS disabled) → 500 on /api/scholarships. Fixed to single quotes.
+  2. admin.ts:92 `status = "answered"` — same DQS bug in admin stats count. Fixed.
+  3. teacherSupport.ts:530 — ORDER BY CASE with "urgent"/"pending" double quotes. Fixed.
+  4. server.ts — hardcoded port 3000 → PORT env with 3000 fallback.
+- Verified money logic: wallet topup (+1000) → wallet order (-650) → balance 370 correct; server-side price calc + stock + insufficient-balance guard OK
+- NOT pushed to GitHub (needs user's credentials/PAT). Patch file ready to apply.
+
 ## Backlog
 - P0: Sync/replace with user's actual GitHub repo content once made public or shared
 - P1: Real payment gateway (bKash/Stripe) for enrollments

@@ -79,4 +79,5 @@ agenthub/agents/youtube/db
 memory/test_credentials.md
 
 # Mobile development
-android-sdk/
+android-sdk/edusob/node_modules/workerd/bin/workerd
+edusob/node_modules/@cloudflare/workerd-linux-arm64/bin/workerd
