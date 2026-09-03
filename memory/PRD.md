@@ -36,7 +36,10 @@
 - Verified money logic: wallet topup (+1000) → wallet order (-650) → balance 370 correct; server-side price calc + stock + insufficient-balance guard OK
 - Fixes PUSHED to GitHub main (commit 96d5743) on 2026-09-03. Patch also at /app/edusob-fixes.patch.
 
-## Round 6 (2026-09-03) — PWA + push commit (pushed)
+## Round 7 (2026-09-03) — PRODUCTION LIVE
+- Via Cloudflare API (user-provided token): set 6 env vars on Pages project edusob (GEMINI_API_KEY, VAPID_×4, PUBLIC_BASE_URL), retried deployment → success.
+- Live verified on https://edusob.pages.dev: Gemini AI answers in Bengali (source: ai), push vapid-key endpoint active, dark landing deployed.
+- CF account ID: 6cd806a3439dfb6fd67f5b504fbd3360. bKash/Nagad deferred by user (toggle + code ready). — PWA + push commit (pushed)
 - PWA: manifest.webmanifest, sw.js (root scope routes /sw.js, /manifest.webmanifest), orange graduation-cap icons (192/512/maskable), install-prompt + push-enable banner in layout (hidden when permission denied).
 - Web Push: migration 0016 push_subscriptions, routes /api/push (vapid-key, subscribe, unsubscribe, broadcast, stats). Pure WebCrypto VAPID+aes128gcm sender (Workers-compatible, no deps). Auto-broadcast fires when admin posts announcement. Verified with local mock push server: sent=1, valid vapid JWT + encrypted body; dead subs auto-deleted; Hono executionCtx getter-throw bug fixed.
 - bKash: admin panel toggle 'bkash_auto_enabled' (ratesForm whitelist) gates auto top-up — off by default; turns on when creds added + toggle on.
