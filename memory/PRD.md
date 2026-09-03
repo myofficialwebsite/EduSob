@@ -36,7 +36,12 @@
 - Verified money logic: wallet topup (+1000) → wallet order (-650) → balance 370 correct; server-side price calc + stock + insufficient-balance guard OK
 - Fixes PUSHED to GitHub main (commit 96d5743) on 2026-09-03. Patch also at /app/edusob-fixes.patch.
 
-## Round 5 (2026-09-03) — brand unify commit (pushed)
+## Round 6 (2026-09-03) — PWA + push commit (pushed)
+- PWA: manifest.webmanifest, sw.js (root scope routes /sw.js, /manifest.webmanifest), orange graduation-cap icons (192/512/maskable), install-prompt + push-enable banner in layout (hidden when permission denied).
+- Web Push: migration 0016 push_subscriptions, routes /api/push (vapid-key, subscribe, unsubscribe, broadcast, stats). Pure WebCrypto VAPID+aes128gcm sender (Workers-compatible, no deps). Auto-broadcast fires when admin posts announcement. Verified with local mock push server: sent=1, valid vapid JWT + encrypted body; dead subs auto-deleted; Hono executionCtx getter-throw bug fixed.
+- bKash: admin panel toggle 'bkash_auto_enabled' (ratesForm whitelist) gates auto top-up — off by default; turns on when creds added + toggle on.
+- VAPID keys in /app/edusob/.env (gitignored). PRODUCTION PENDING: user must add VAPID_PUBLIC_KEY/VAPID_PRIVATE_KEY/VAPID_X/VAPID_Y + GEMINI_API_KEY to Cloudflare Pages env vars (user doesn't know how — offered token-based setup).
+- NOT tested: real browser push e2e (headless sandbox denies notification permission); PWA install prompt visual (same reason). Code paths verified logically + mock server. — brand unify commit (pushed)
 - Global CSS override in layout.ts HEAD_COMMON: emerald accent → terracotta orange, teal gradient stops → amber, smooth scrolling. Verified via dashboard + wallet screenshots. — commit afba18b (pushed)
 - Full-portal dark theme: DARK_PORTAL_CSS override in layout.ts applied to shop/wallet/assisted/admin pages (rest were already dark). Shop header fixed via .shop-header class (JS string escape bug found: `\/` in template literal — used plain class selector instead).
 - Gemini LIVE locally: user-provided AI Studio key validated; model switched gemini-2.5-flash (deprecated for new users) → gemini-3.5-flash; raised maxOutputTokens 400→1200 (thinking tokens were truncating answers). Verified: Bengali study answers working. Key stored in /app/edusob/.env (gitignored, NOT pushed). PENDING MANUAL: user must add GEMINI_API_KEY in Cloudflare Pages → Settings → Environment variables for production AI answers (Workers AI is the no-key fallback meanwhile).
