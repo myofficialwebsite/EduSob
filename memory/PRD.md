@@ -34,7 +34,7 @@
   3. teacherSupport.ts:530 — ORDER BY CASE with "urgent"/"pending" double quotes. Fixed.
   4. server.ts — hardcoded port 3000 → PORT env with 3000 fallback.
 - Verified money logic: wallet topup (+1000) → wallet order (-650) → balance 370 correct; server-side price calc + stock + insufficient-balance guard OK
-- NOT pushed to GitHub (needs user's credentials/PAT). Patch file ready to apply.
+- Fixes PUSHED to GitHub main (commit 96d5743) on 2026-09-03. Patch also at /app/edusob-fixes.patch.
 
 ## Backlog
 - P0: Sync/replace with user's actual GitHub repo content once made public or shared
