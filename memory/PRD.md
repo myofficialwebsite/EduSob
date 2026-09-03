@@ -36,6 +36,13 @@
 - Verified money logic: wallet topup (+1000) → wallet order (-650) → balance 370 correct; server-side price calc + stock + insufficient-balance guard OK
 - Fixes PUSHED to GitHub main (commit 96d5743) on 2026-09-03. Patch also at /app/edusob-fixes.patch.
 
+## Round 2 Audit (2026-09-03) — commits cd0bfb1, f706cdc, f4e4dd9 (all pushed to main)
+- Auto Collector tested: all 6 sync sources run, curated content library upserts with per-item dedup (no live scraping — by design). Fixed admin force-sync diagnostics showing fabricated "35% new" numbers; now uses real insert counts (verified: re-sync shows new=0, dup=all).
+- Cross-checked all 105 API paths called from frontend pages against 167 defined routes: found teacher-support ticket chat was 404 (pages call /tickets/:id/messages plural; backend had /ticket/:id singular). Added alias routes; chat verified working end-to-end.
+- AI chat (guide + Gemini + Workers AI fallback) already existed; fixed GEMINI_API_KEY to read from Cloudflare c.env bindings (process.env fallback). Live Gemini answers need user's key in env (user will create at aistudio.google.com/apikey).
+- Full POST flow coverage verified: profile update, planner, notes, saved-rolls, teacher ticket + chat, CV save (22 templates), subscription subscribe→my-plan→premium content access, wallet topup→order deduction, guest COD order, referral bonus.
+- Cloudflare deploy: user's CF account is GitHub-connected — pushes to main auto-deploy. All fixes are live on main.
+
 ## Backlog
 - P0: Sync/replace with user's actual GitHub repo content once made public or shared
 - P1: Real payment gateway (bKash/Stripe) for enrollments
