@@ -4,10 +4,9 @@ import { Menu, X, GraduationCap } from "lucide-react";
 import { useLang, scrollToId } from "./LanguageContext";
 
 const LINKS = [
-  { id: "courses", key: "navCourses" },
-  { id: "manifesto", key: "navMethod" },
-  { id: "mentors", key: "navMentors" },
-  { id: "reviews", key: "navReviews" },
+  { id: "services", key: "navServices" },
+  { id: "steps", key: "navSteps" },
+  { id: "guide", key: "navGuide" },
   { id: "faq", key: "navFaq" },
 ];
 
