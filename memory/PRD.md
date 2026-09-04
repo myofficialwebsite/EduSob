@@ -36,7 +36,9 @@
 - Verified money logic: wallet topup (+1000) → wallet order (-650) → balance 370 correct; server-side price calc + stock + insufficient-balance guard OK
 - Fixes PUSHED to GitHub main (commit 96d5743) on 2026-09-03. Patch also at /app/edusob-fixes.patch.
 
-## Round 7 (2026-09-03) — PRODUCTION LIVE
+## Round 8 (2026-09-03) — Admin dashboard deep audit (pushed)
+- CRITICAL: admin dashboard JS was entirely dead in production — 3 lines used `\'` instead of `\\'` inside TS template literal (triggerForceSync, toggleContentStatus, deleteCrudItem) → whole script parse error → stats stuck at 0, tabs dead. Fixed; verified in browser: no page errors, live stats (12 users, 61 MCQ), all tabs + content CRUD buttons render.
+- Full audit: 72 admin routes all defined & matched to UI calls; 25/25 admin GET endpoints pass; notice CRUD round-trip OK; SQL injection blocked (table whitelist); non-admin blocked; self-suspend blocked; super-admin role protected; admin elevation requires CONFIRM phrase; mentor payout validated + audit-logged.
 - Via Cloudflare API (user-provided token): set 6 env vars on Pages project edusob (GEMINI_API_KEY, VAPID_×4, PUBLIC_BASE_URL), retried deployment → success.
 - Live verified on https://edusob.pages.dev: Gemini AI answers in Bengali (source: ai), push vapid-key endpoint active, dark landing deployed.
 - CF account ID: 6cd806a3439dfb6fd67f5b504fbd3360. bKash/Nagad deferred by user (toggle + code ready). — PWA + push commit (pushed)
@@ -69,3 +71,10 @@
 ## Notes
 - No auth/credentials needed; nothing in test_credentials.md
 - Coupon: EDUSOB2026 (15% off)
+
+## 2026-06 — Landing scroll performance fix (edusob repo)
+- Removed global `html { scroll-behavior: smooth }` (now only `html:focus-within`) in `src/pages/layout.ts`
+- Grain overlay (`.grain::after`, landing.ts): tiled 200px noise + own compositor layer, hidden on <1024px
+- Header backdrop blur reduced (blur-xl → md; scrolled-nav blur 20px+saturate → 10px), removed backdrop-filter transition
+- Removed permanent `will-change` from `.card-hover`, `.reveal-on-scroll`, stagger items
+- Measured: ~20ms avg frame while continuous scroll, 0 JS errors, all sections reveal
