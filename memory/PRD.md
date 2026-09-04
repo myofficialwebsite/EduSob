@@ -78,3 +78,10 @@
 - Header backdrop blur reduced (blur-xl → md; scrolled-nav blur 20px+saturate → 10px), removed backdrop-filter transition
 - Removed permanent `will-change` from `.card-hover`, `.reveal-on-scroll`, stagger items
 - Measured: ~20ms avg frame while continuous scroll, 0 JS errors, all sections reveal
+
+## 2026-06 — User Dashboard deep audit + Lite Mode (edusob repo)
+- Lite Mode toggle (global, dock button `data-testid=lite-mode-toggle`, localStorage `edusob_lite`, auto-on for ≤2GB RAM / 2G / reduced-motion): kills animations, transitions, backdrop-blur, glow shadows, grain
+- Dashboard logic fixes: real push subscription (VAPID subscribe, not just permission), unread-aware notification badge (localStorage seen-id), deck notice/marquee race fixed, dynamic result years (current−5), NU saved rolls → /results hub, href sanitization (safeHref) for notices/news/jobs, cash-in modal uses admin bKash/Nagad/Rocket numbers + wallet_recharge flag, FAB WhatsApp from settings, referral bonus rate shown, `/api/referrals` total_earned excludes signup bonus
+- Design fixes: FAB no longer overlaps global dock, invalid Tailwind classes (w-13, py-0.2, shadow-xs) fixed, lighter backdrop blur, "ভেরিফাইড" → "সক্রিয় অ্যাকাউন্ট", jargon text cleaned
+- Architecture: feeds load in parallel (prayer/verse/notices/news/settings), split into small loaders
+- NOTE: local dev server needs restart after edits (`PORT=3111 bun run --watch server.ts`); rebuild `npm run build:css` when adding Tailwind classes
