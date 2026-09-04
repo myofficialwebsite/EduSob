@@ -121,6 +121,7 @@ function apiPlugin() {
 }
 
 export default defineConfig({
+  base: "./",
   plugins: [react(), apiPlugin()],
   resolve: {
     alias: {
