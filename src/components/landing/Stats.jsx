@@ -5,10 +5,10 @@ import { useLang } from "./LanguageContext";
 const EASE = [0.16, 1, 0.3, 1];
 
 const STATS = [
-  { value: 45000, suffix: "+", label: "শিক্ষার্থী ভর্তি হয়েছেন" },
-  { value: 94, suffix: "%", label: "প্লেসমেন্ট সফলতার হার" },
-  { value: 120, suffix: "+", label: "ইন্ডাস্ট্রি মেন্টর" },
-  { value: 500, suffix: "+", label: "হায়ারিং পার্টনার কোম্পানি" },
+  { value: 150000, suffix: "+", label: "নিবন্ধিত শিক্ষার্থী" },
+  { value: 50000, suffix: "+", label: "প্রশ্নব্যাংক ও রিসোর্স" },
+  { value: 100, suffix: "%", label: "ফ্রি অ্যাক্সেস ও নিরাপদ" },
+  { value: 64, suffix: " জেলায়", label: "সারাদেশে শিক্ষার্থী উপস্থিতি" },
 ];
 
 const Counter = ({ value, suffix }) => {

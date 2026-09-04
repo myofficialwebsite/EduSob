@@ -1,10 +1,11 @@
 const ITEMS = [
-  "শিক্ষা সবার জন্য",
-  "100% LIVE MENTORSHIP",
-  "1:1 CODE REVIEW",
-  "CAREER PLACEMENT AID",
-  "৳ BDT AFFORDABLE PRICING",
-  "EDUCATION FOR EVERYONE",
+  "শিক্ষার সব, এক ঠিকানায়",
+  "বোর্ড ও বিশ্ববিদ্যালয় রেজাল্ট হাব",
+  "১-অন-১ শিক্ষক সহায়তা",
+  "৫০,০০০+ প্রশ্নব্যাংক ও MCQ",
+  "প্রফেশনাল সিভি মেকার",
+  "১০০% ফ্রি শিক্ষার্থী ড্যাশবোর্ড",
+  "স্কলারশিপ ও উপবৃত্তি ট্র্যাকার",
 ];
 
 export const Marquee = () => {

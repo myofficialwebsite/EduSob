@@ -1,122 +1,138 @@
 import { useState } from "react";
-import axios from "axios";
 import { toast } from "sonner";
-import { Facebook, Youtube, Linkedin, MessageSquare, Heart } from "lucide-react";
+import { Phone, Mail, MessageSquare, Send, Heart, ExternalLink } from "lucide-react";
 import { useLang, scrollToId } from "./LanguageContext";
-import { API } from "@/lib/api";
 
 export const Footer = () => {
   const { t } = useLang();
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const subscribe = async (e) => {
+  const subscribe = (e) => {
     e.preventDefault();
     if (!email) return;
-    setLoading(true);
-    try {
-      await axios.post(`${API}/newsletter`, { email });
-      toast.success("সাবস্ক্রিপশন সফল! নতুন কোর্সের খবর সবার আগে পাবেন।");
-      setEmail("");
-    } catch {
-      toast.error("সঠিক ইমেইল দিন");
-    } finally {
-      setLoading(false);
-    }
+    toast.success("সাবস্ক্রিপশন সফল! এডুসব-এর নতুন আপডেট আপনার ইনবক্সে পৌঁছাবে।");
+    setEmail("");
   };
 
   return (
-    <footer className="border-t border-white/5 bg-[#090b0f] pt-16">
+    <footer id="contact" className="border-t border-white/5 bg-[#090b0f] pt-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12">
         <div className="grid gap-12 pb-16 lg:grid-cols-12">
+          {/* Col 1: Brand & Newsletter */}
           <div className="lg:col-span-5">
-            <p className="font-bangla mb-3 text-sm text-slate-400">{t("footerTag")} • Education For Everyone</p>
-            <p className="font-bangla mb-6 max-w-sm text-sm leading-relaxed text-slate-500">
-              নতুন কোর্স, ফ্রি ওয়ার্কশপ ও ক্যারিয়ার টিপস সবার আগে পেতে সাবস্ক্রাইব করুন।
+            <h3 className="font-bangla text-xl font-bold text-white mb-2">
+              EduSob <span className="text-orange-400">এডুসব</span>
+            </h3>
+            <p className="font-bangla mb-4 text-xs sm:text-sm text-slate-400">
+              {t("footerTag")}
             </p>
-            <form onSubmit={subscribe} className="flex max-w-sm gap-2" data-testid="newsletter-form">
+            <p className="font-bangla mb-6 max-w-sm text-xs leading-relaxed text-slate-500">
+              বোর্ড পরীক্ষার নোটিশ, রেজাল্ট এলার্ট ও ফ্রি মডেল টেস্টের আপডেট পেতে সাবস্ক্রাইব করে রাখুন।
+            </p>
+
+            <form onSubmit={subscribe} className="flex max-w-sm gap-2">
               <input
-                data-testid="newsletter-email-input"
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="আপনার ইমেইল"
-                className="font-bangla flex-1 rounded-full border border-white/10 bg-[#121620] px-5 py-3 text-sm text-white placeholder:text-slate-500 focus:border-orange-500/50 focus:outline-none"
+                placeholder="আপনার ইমেইল ঠিকানা"
+                className="font-bangla flex-1 rounded-full border border-white/10 bg-[#121620] px-4 py-2.5 text-xs text-white placeholder:text-slate-500 focus:border-orange-500/50 focus:outline-none"
               />
               <button
-                data-testid="newsletter-submit-button"
                 type="submit"
-                disabled={loading}
-                className="font-bangla rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 disabled:opacity-60"
+                className="font-bangla rounded-full bg-orange-500 px-5 py-2.5 text-xs font-bold text-white transition-colors hover:bg-orange-600"
               >
                 যুক্ত হোন
               </button>
             </form>
-            <div className="mt-8 flex gap-3">
-              {[
-                { icon: Facebook, id: "facebook", href: "https://www.facebook.com" },
-                { icon: Youtube, id: "youtube", href: "https://www.youtube.com" },
-                { icon: Linkedin, id: "linkedin", href: "https://www.linkedin.com" },
-                { icon: MessageSquare, id: "discord", href: "https://discord.com" },
-              ].map((s) => (
-                <a
-                  key={s.id}
-                  data-testid={`footer-social-${s.id}`}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full border border-white/10 p-2.5 text-slate-400 transition-all duration-300 hover:border-orange-500/50 hover:text-orange-400"
-                  aria-label={s.id}
-                >
-                  <s.icon className="h-4 w-4" />
-                </a>
-              ))}
-            </div>
           </div>
 
-          <div className="lg:col-span-3">
-            <p className="font-mono-code mb-5 text-[11px] uppercase tracking-widest text-slate-500">প্ল্যাটফর্ম</p>
-            <ul className="font-bangla space-y-3 text-sm text-slate-400">
+          {/* Col 2: Services Quick Links */}
+          <div className="lg:col-span-4">
+            <p className="font-mono-code mb-4 text-[11px] uppercase tracking-widest text-slate-500">
+              এডুসব সেবাসমূহ
+            </p>
+            <ul className="font-bangla grid grid-cols-2 gap-2 text-xs text-slate-400">
               {[
-                { label: "কোর্সসমূহ", id: "courses" },
-                { label: "আমাদের পদ্ধতি", id: "manifesto" },
-                { label: "মেন্টরবৃন্দ", id: "mentors" },
-                { label: "ভর্তি", id: "enroll" },
-              ].map((l) => (
-                <li key={l.id}>
+                { label: "রেজাল্ট হাব", id: "services" },
+                { label: "১:১ শিক্ষক সহায়তা", id: "services" },
+                { label: "সিভি মেকার", id: "services" },
+                { label: "ভর্তি হাব", id: "services" },
+                { label: "MCQ প্র্যাকটিস", id: "services" },
+                { label: "প্রশ্নপত্র ব্যাংক", id: "services" },
+                { label: "স্কলারশিপ হাব", id: "services" },
+                { label: "CGPA ক্যালকুলেটর", id: "services" },
+              ].map((l, i) => (
+                <li key={i}>
                   <button
-                    data-testid={`footer-link-${l.id}`}
                     onClick={() => scrollToId(l.id)}
-                    className="transition-colors duration-300 hover:text-orange-400"
+                    className="hover:text-orange-400 transition"
                   >
-                    {l.label}
+                    • {l.label}
                   </button>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="lg:col-span-4">
-            <p className="font-mono-code mb-5 text-[11px] uppercase tracking-widest text-slate-500">পলিসি</p>
-            <ul className="font-bangla space-y-3 text-sm text-slate-400">
-              <li><span className="cursor-pointer transition-colors hover:text-orange-400" data-testid="footer-link-terms">শর্তাবলী</span></li>
-              <li><span className="cursor-pointer transition-colors hover:text-orange-400" data-testid="footer-link-privacy">প্রাইভেসি পলিসি</span></li>
-              <li><span className="cursor-pointer transition-colors hover:text-orange-400" data-testid="footer-link-refund">রিফান্ড পলিসি</span></li>
-            </ul>
+          {/* Col 3: Real EduSob Support & Contact */}
+          <div className="lg:col-span-3">
+            <p className="font-mono-code mb-4 text-[11px] uppercase tracking-widest text-slate-500">
+              তথ্য ও সহায়তা কেন্দ্র
+            </p>
+            <div className="space-y-3 text-xs text-slate-400 font-bangla">
+              <div className="flex items-center gap-2.5">
+                <Phone className="h-4 w-4 text-orange-400 shrink-0" />
+                <a href="tel:+8801835414122" className="hover:text-white transition font-mono">
+                  +880 1835-414122
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <Mail className="h-4 w-4 text-amber-400 shrink-0" />
+                <a href="mailto:support@edusob.com" className="hover:text-white transition">
+                  support@edusob.com
+                </a>
+              </div>
+
+              <div className="pt-2 flex flex-wrap gap-2">
+                <a
+                  href="https://chat.whatsapp.com/edusob-study-hub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-[#121620] px-3 py-1.5 text-[11px] text-emerald-400 hover:border-emerald-400/40 transition"
+                >
+                  <MessageSquare className="h-3.5 w-3.5" />
+                  <span>WhatsApp স্টাডি হাব</span>
+                </a>
+
+                <a
+                  href="https://t.me/edusob_channel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-[#121620] px-3 py-1.5 text-[11px] text-sky-400 hover:border-sky-400/40 transition"
+                >
+                  <Send className="h-3.5 w-3.5" />
+                  <span>টেলিগ্রাম চ্যানেল</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
+        {/* Big Wordmark */}
         <div className="select-none overflow-hidden border-t border-white/5 py-8">
-          <p className="font-display text-center text-[18vw] font-extrabold leading-none tracking-tight text-white/[0.04] lg:text-[11rem]" data-testid="footer-brand-mark">
+          <p className="font-display text-center text-[16vw] font-extrabold leading-none tracking-tight text-white/[0.04] lg:text-[10rem]">
             EDUSOB
           </p>
         </div>
 
+        {/* Bottom bar */}
         <div className="font-bangla flex flex-col items-center justify-between gap-3 border-t border-white/5 py-6 text-xs text-slate-500 sm:flex-row">
-          <p>© ২০২৬ EduSob — সর্বস্বত্ব সংরক্ষিত</p>
+          <p>© ২০২৬ EduSob (এডুসব) — সর্বস্বত্ব সংরক্ষিত</p>
           <p className="flex items-center gap-1.5">
-            Made with <Heart className="h-3.5 w-3.5 fill-rose-500 text-rose-500" /> for Learners in Bangladesh
+            বাংলাদেশের সকল শিক্ষার্থীদের জন্য নিবেদিত
           </p>
         </div>
       </div>

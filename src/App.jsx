@@ -9,6 +9,7 @@ import { Hero } from "@/components/landing/Hero";
 import { Marquee } from "@/components/landing/Marquee";
 import { Manifesto } from "@/components/landing/Manifesto";
 import { Courses } from "@/components/landing/Courses";
+import { RegistrationGuide } from "@/components/landing/RegistrationGuide";
 import { Stats } from "@/components/landing/Stats";
 import { Mentors } from "@/components/landing/Mentors";
 import { Testimonials } from "@/components/landing/Testimonials";
@@ -17,8 +18,6 @@ import { EnrollForm } from "@/components/landing/EnrollForm";
 import { Footer } from "@/components/landing/Footer";
 
 const Home = () => {
-  const [preselectedCourse, setPreselectedCourse] = useState("");
-
   useEffect(() => {
     // Only enable smooth wheel on non-touch devices to keep mobile scrolling buttery-smooth and native
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
@@ -27,7 +26,7 @@ const Home = () => {
     }
 
     const lenis = new Lenis({
-      lerp: 0.14, // Snappy response with zero sluggish input delay
+      lerp: 0.14,
       smoothWheel: true,
       syncTouch: false,
     });
@@ -51,30 +50,30 @@ const Home = () => {
       <main>
         <Hero />
         <Marquee />
+        <Courses />
         <Manifesto />
-        <Courses onEnroll={setPreselectedCourse} />
+        <RegistrationGuide />
         <Stats />
         <Mentors />
         <Testimonials />
         <FAQ />
-        <EnrollForm preselectedCourse={preselectedCourse} />
+        <EnrollForm />
       </main>
       <Footer />
+      <Toaster richColors position="top-right" theme="dark" />
     </div>
   );
 };
 
-function App() {
+export default function App() {
   return (
     <LangProvider>
-      <Toaster theme="dark" position="top-center" richColors />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </LangProvider>
   );
 }
-
-export default App;

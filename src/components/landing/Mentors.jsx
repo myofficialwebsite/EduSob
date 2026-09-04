@@ -1,105 +1,102 @@
 import { motion } from "framer-motion";
-import { Linkedin, Globe } from "lucide-react";
-import { useLang } from "./LanguageContext";
+import { GraduationCap, Award, MessageSquare } from "lucide-react";
+import { scrollToId } from "./LanguageContext";
 
 const EASE = [0.16, 1, 0.3, 1];
 
 const MENTORS = [
   {
-    name: "ড. নুসরাত জাহান",
-    role: "AI Researcher, Ex-Google",
-    img: "https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxzbWlsaW5nJTIwdGVhY2hlciUyMHBvcnRyYWl0fGVufDB8fHx8MTc4NzQ3MzcyMw&ixlib=rb-4.1.0&w=500&auto=format&fit=crop&q=75",
-    exp: "১২+ বছরের অভিজ্ঞতা",
-    students: "৩,২০০+ শিক্ষার্থী",
-  },
-  {
-    name: "তানভীর হাসান",
-    role: "Ex-Senior Engineer @ Pathao",
-    img: "https://images.unsplash.com/photo-1758685848404-5b2bf607b38d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwzfHxzbWlsaW5nJTIwdGVhY2hlciUyMHBvcnRyYWl0fGVufDB8fHx8MTc4NzQ3MzcyMw&ixlib=rb-4.1.0&w=500&auto=format&fit=crop&q=75",
+    name: "ড. তানভীর আহমেদ",
+    subject: "উচ্চতর গণিত ও পদার্থবিজ্ঞান",
+    institute: "বুয়েট অ্যালামনাই ও সিনিয়র একাডেমি মেন্টর",
+    img: "https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?crop=entropy&cs=srgb&fm=jpg&w=500&auto=format&fit=crop&q=75",
     exp: "১০+ বছরের অভিজ্ঞতা",
-    students: "৫,৪০০+ শিক্ষার্থী",
+    helped: "৪,৫০০+ সমাধান",
   },
   {
-    name: "মেহজাবিন রহমান",
-    role: "Lead Product Designer @ Optimizely",
-    img: "https://images.unsplash.com/photo-1590650213165-c1fef80648c4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxzbWlsaW5nJTIwdGVhY2hlciUyMHBvcnRyYWl0fGVufDB8fHx8MTc4NzQ3MzcyMw&ixlib=rb-4.1.0&w=500&auto=format&fit=crop&q=75",
-    exp: "৯+ বছরের অভিজ্ঞতা",
-    students: "২,৮০০+ শিক্ষার্থী",
+    name: "ফারহানা ইসলাম",
+    subject: "ইংরেজি ও বিশ্ববিদ্যালয় ভর্তি গাইডলাইন",
+    institute: "ইংরেজি বিভাগ, ঢাকা বিশ্ববিদ্যালয়",
+    img: "https://images.unsplash.com/photo-1590650213165-c1fef80648c4?crop=entropy&cs=srgb&fm=jpg&w=500&auto=format&fit=crop&q=75",
+    exp: "৮+ বছরের অভিজ্ঞতা",
+    helped: "৩,২০০+ সমাধান",
+  },
+  {
+    name: "মোঃ রাকিব হাসান",
+    subject: "রসায়ন ও জীববিজ্ঞানের জটিল ধারণা",
+    institute: "মেডিকেল ও বোর্ড একাডেমি বিশেষজ্ঞ",
+    img: "https://images.unsplash.com/photo-1758685848404-5b2bf607b38d?crop=entropy&cs=srgb&fm=jpg&w=500&auto=format&fit=crop&q=75",
+    exp: "৭+ বছরের অভিজ্ঞতা",
+    helped: "২,৮০০+ সমাধান",
   },
 ];
 
 export const Mentors = () => {
-  const { t } = useLang();
   return (
-    <section id="mentors" className="py-20 lg:py-32">
+    <section id="mentors" className="py-20 lg:py-28 bg-[#0b0d12] border-b border-white/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 32 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.9, ease: EASE }}
-          className="mb-14 max-w-2xl"
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: EASE }}
+          className="mb-14 text-center max-w-2xl mx-auto"
         >
-          <p className="font-mono-code mb-4 text-xs uppercase tracking-[0.25em] text-amber-400/90">{t("mentorsKicker")}</p>
-          <h2 className="font-bangla text-2xl font-bold leading-snug tracking-tight text-white sm:text-3xl lg:text-4xl" data-testid="mentors-title">
-            {t("mentorsTitle")}
+          <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-orange-400">
+            ১-অন-১ শিক্ষক ও মেন্টর প্যানেল
+          </span>
+          <h2 className="font-bangla mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+            অভিজ্ঞ শিক্ষকদের সরাসরি দিকনির্দেশনা
           </h2>
+          <p className="font-bangla mt-2 text-sm text-slate-400">
+            যেকোনো অধ্যায়ের ডাউট জমা দিন এবং অভিজ্ঞ শিক্ষকদের কাছ থেকে ধাপে ধাপে লিখিত ও ভয়েস সমাধান পান।
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {MENTORS.map((m, i) => (
             <motion.div
               key={m.name}
-              data-testid={`mentor-card-${i}`}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.8, delay: i * 0.12, ease: EASE }}
-              whileHover={{ scale: 1.02 }}
-              className="group overflow-hidden rounded-2xl border border-white/[0.08] bg-[#121620] transition-colors duration-500 hover:border-orange-500/40"
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
+              className="group overflow-hidden rounded-2xl border border-white/[0.08] bg-[#121620] p-6 hover:border-orange-500/40 transition-all duration-300"
             >
-              <div className="relative h-72 overflow-hidden">
+              <div className="mb-4 flex items-center gap-4">
                 <img
                   src={m.img}
                   alt={m.name}
-                  className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
+                  className="h-16 w-16 rounded-2xl object-cover border border-white/10"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#121620] via-transparent to-transparent" />
-                <div className="absolute right-4 top-4 flex gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <a
-                    data-testid={`mentor-linkedin-${i}`}
-                    href="https://www.linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full bg-white/10 p-2 text-white backdrop-blur hover:bg-orange-500"
-                    aria-label={`${m.name} LinkedIn`}
-                  >
-                    <Linkedin className="h-4 w-4" />
-                  </a>
-                  <a
-                    data-testid={`mentor-portfolio-${i}`}
-                    href="https://github.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full bg-white/10 p-2 text-white backdrop-blur hover:bg-orange-500"
-                    aria-label={`${m.name} Portfolio`}
-                  >
-                    <Globe className="h-4 w-4" />
-                  </a>
+                <div>
+                  <h3 className="font-bangla text-base font-bold text-white group-hover:text-orange-300 transition">
+                    {m.name}
+                  </h3>
+                  <p className="font-bangla text-xs text-orange-400 font-semibold">{m.subject}</p>
+                  <p className="font-bangla text-[11px] text-slate-500 mt-0.5">{m.institute}</p>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="font-bangla text-lg font-semibold text-white">{m.name}</h3>
-                <p className="mb-3 text-sm text-orange-400/90">{m.role}</p>
-                <div className="font-bangla flex items-center gap-3 text-xs text-slate-500">
-                  <span>{m.exp}</span>
-                  <span className="h-1 w-1 rounded-full bg-slate-600" />
-                  <span>{m.students}</span>
-                </div>
+
+              <div className="border-t border-white/5 pt-3 flex items-center justify-between text-xs text-slate-400 font-bangla">
+                <span className="flex items-center gap-1">
+                  <Award className="h-3.5 w-3.5 text-amber-400" />
+                  {m.exp}
+                </span>
+                <span className="text-emerald-400 font-bold">{m.helped}</span>
               </div>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <button
+            onClick={() => scrollToId("enroll")}
+            className="font-bangla inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-6 py-2.5 text-xs font-bold text-orange-300 hover:bg-orange-500 hover:text-white transition"
+          >
+            <MessageSquare className="h-4 w-4" />
+            <span>শিক্ষকের কাছে প্রশ্ন জমা দিন</span>
+          </button>
         </div>
       </div>
     </section>

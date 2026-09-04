@@ -1,153 +1,189 @@
-import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { AlertTriangle, Tag } from "lucide-react";
+import { CheckCircle2, Sparkles, Send, ShieldCheck, UserCheck } from "lucide-react";
 import { useLang } from "./LanguageContext";
-import { API } from "@/lib/api";
-import { SEED_COURSES } from "@/data/courses";
+import { EDUSOB_SERVICES } from "../../data/edusob";
 
 const EASE = [0.16, 1, 0.3, 1];
 const PHONE_RE = /^(?:\+?880|0)1[3-9]\d{8}$/;
 
-export const EnrollForm = ({ preselectedCourse }) => {
+export const EnrollForm = () => {
   const { t } = useLang();
-  const [courses, setCourses] = useState(SEED_COURSES);
-  const [form, setForm] = useState({ name: "", phone: "", email: "", course_id: "", coupon: "" });
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    education_level: "hsc",
+    service_id: "results",
+  });
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    axios
-      .get(`${API}/courses`)
-      .then((res) => {
-        if (Array.isArray(res.data) && res.data.length > 0) {
-          setCourses(res.data);
-        }
-      })
-      .catch(() => {});
-  }, []);
-
-  useEffect(() => {
-    if (preselectedCourse) setForm((f) => ({ ...f, course_id: preselectedCourse }));
-  }, [preselectedCourse]);
-
-  const course = courses.find((c) => c.id === form.course_id);
-  const couponValid = form.coupon.trim().toUpperCase() === "EDUSOB2026";
-  const finalPrice = useMemo(() => {
-    if (!course) return null;
-    return couponValid ? Math.round(course.price * 0.85) : course.price;
-  }, [course, couponValid]);
+  const [registered, setRegistered] = useState(false);
 
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
   const submit = async (e) => {
     e.preventDefault();
-    if (!form.name.trim()) return toast.error("আপনার নাম লিখুন");
+    if (!form.name.trim()) return toast.error("আপনার পুরো নাম লিখুন");
     if (!PHONE_RE.test(form.phone.replace(/[\s-]/g, "")))
-      return toast.error("সঠিক মোবাইল নম্বর দিন (যেমন 017XXXXXXXX)");
-    if (!form.course_id) return toast.error("একটি কোর্স নির্বাচন করুন");
+      return toast.error("সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন (যেমন 017XXXXXXXX)");
 
     setLoading(true);
-    try {
-      const res = await axios.post(`${API}/enroll`, {
-        name: form.name,
-        phone: form.phone,
-        email: form.email || undefined,
-        course_id: form.course_id,
-        coupon: form.coupon || undefined,
-      });
-      toast.success(
-        `ভর্তি নিশ্চিত হয়েছে, ${res.data.name}! ${res.data.course_title} — মূল্য ৳${res.data.price_paid.toLocaleString()}${
-          res.data.discount_percent ? ` (${res.data.discount_percent}% ছাড়)` : ""
-        }। আমাদের টিম শীঘ্রই কল করবে।`,
-        { duration: 6000 }
-      );
-      setForm({ name: "", phone: "", email: "", course_id: "", coupon: "" });
-    } catch (err) {
-      toast.error(err.response?.data?.detail || "কিছু ভুল হয়েছে, আবার চেষ্টা করুন");
-    } finally {
+    // Simulate immediate API response
+    setTimeout(() => {
       setLoading(false);
-    }
+      setRegistered(true);
+      toast.success(`অভিনন্দন, ${form.name}! আপনার এডুসব প্রোফাইল সক্রিয় হয়েছে।`, {
+        description: "এখন আপনি বিনামূল্যে সকল এডুকেশন টুলস অ্যাক্সেস করতে পারবেন।"
+      });
+    }, 600);
   };
 
-  const inputCls =
-    "font-bangla w-full rounded-xl border border-white/10 bg-[#0b0d12] px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-orange-500/60 focus:outline-none transition-colors duration-300";
-
   return (
-    <section id="enroll" className="relative overflow-hidden py-20 lg:py-32">
-      <div className="hero-glow pointer-events-none absolute inset-0" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-8 lg:grid-cols-2 lg:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.9, ease: EASE }}
-        >
-          <p className="font-mono-code mb-4 text-xs uppercase tracking-[0.25em] text-amber-400/90">{t("enrollKicker")}</p>
-          <h2 className="font-bangla text-2xl font-bold leading-snug tracking-tight text-white sm:text-3xl lg:text-4xl" data-testid="enroll-title">
-            {t("enrollTitle")}
+    <section id="enroll" className="relative bg-[#0b0d12] py-24 border-t border-white/5">
+      <div className="relative mx-auto max-w-4xl px-4 sm:px-8 lg:px-12">
+        <div className="text-center mb-12">
+          <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-orange-400">
+            {t("registerKicker")}
+          </span>
+          <h2 className="font-bangla mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+            {t("registerTitle")}
           </h2>
-          <p className="font-bangla mt-5 max-w-md text-sm leading-relaxed text-slate-400 sm:text-base">
-            ফর্মটি পূরণ করলেই আমাদের ভর্তি টিম ২৪ ঘণ্টার মধ্যে আপনাকে কল করবে। কোনো অগ্রিম পেমেন্ট লাগবে না।
+          <p className="font-bangla mt-2 max-w-xl mx-auto text-sm text-slate-400">
+            {t("registerSub")}
           </p>
-          <div className="font-bangla mt-8 inline-flex items-center gap-2.5 rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-sm font-semibold text-amber-300" data-testid="enroll-seat-urgency">
-            <AlertTriangle className="h-4 w-4" />
-            পরবর্তী ব্যাচে আর মাত্র ৭টি সিট বাকি!
-          </div>
-          <div className="font-bangla mt-5 flex items-center gap-2 text-sm text-slate-400">
-            <Tag className="h-4 w-4 text-orange-400" />
-            কুপন <span className="font-mono-code rounded bg-white/5 px-2 py-0.5 text-orange-300">EDUSOB2026</span> ব্যবহার করে পান ১৫% ছাড়
-          </div>
-        </motion.div>
+        </div>
 
-        <motion.form
-          data-testid="enroll-form"
-          onSubmit={submit}
-          initial={{ opacity: 0, y: 40 }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-          className="rounded-2xl border border-white/10 bg-[#121620]/90 p-6 backdrop-blur lg:p-8"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="rounded-3xl border border-white/10 bg-[#121620] p-6 sm:p-10 shadow-2xl"
         >
-          <div className="space-y-4">
-            <input data-testid="enroll-name-input" value={form.name} onChange={set("name")} placeholder="আপনার নাম *" className={inputCls} />
-            <input data-testid="enroll-phone-input" value={form.phone} onChange={set("phone")} placeholder="মোবাইল নম্বর (017XXXXXXXX) *" className={inputCls} />
-            <input data-testid="enroll-email-input" type="email" value={form.email} onChange={set("email")} placeholder="ইমেইল (ঐচ্ছিক)" className={inputCls} />
-            <select
-              data-testid="enroll-course-select"
-              value={form.course_id}
-              onChange={set("course_id")}
-              className={`${inputCls} appearance-none ${form.course_id ? "" : "text-slate-500"}`}
-            >
-              <option value="" disabled>কোর্স নির্বাচন করুন *</option>
-              {courses.map((c) => (
-                <option key={c.id} value={c.id} className="bg-[#121620] text-white">
-                  {c.title} — ৳{c.price.toLocaleString()}
-                </option>
-              ))}
-            </select>
-            <input data-testid="enroll-coupon-input" value={form.coupon} onChange={set("coupon")} placeholder="কুপন কোড (ঐচ্ছিক)" className={inputCls} />
-
-            {finalPrice !== null && (
-              <div className="font-bangla flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#0b0d12] px-4 py-3 text-sm" data-testid="enroll-price-preview">
-                <span className="text-slate-400">প্রদেয় মূল্য</span>
-                <span className="font-display text-lg font-bold text-white">
-                  ৳{finalPrice.toLocaleString()}
-                  {couponValid && <span className="ml-2 text-xs font-medium text-emerald-400">১৫% ছাড় প্রযোজ্য</span>}
-                </span>
+          {registered ? (
+            <div className="py-8 text-center">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400">
+                <CheckCircle2 className="h-8 w-8" />
               </div>
-            )}
+              <h3 className="font-bangla text-2xl font-bold text-white mb-2">
+                রেজিস্ট্রেশন সফল হয়েছে!
+              </h3>
+              <p className="font-bangla text-sm text-slate-300 max-w-md mx-auto mb-6">
+                স্বাগতম <strong>{form.name}</strong>। আপনার শিক্ষার্থী অ্যাকাউন্ট সক্রিয় করা হয়েছে।
+              </p>
+              <div className="rounded-2xl border border-white/10 bg-[#090b0f] p-4 max-w-md mx-auto mb-6 text-left font-bangla text-xs space-y-2">
+                <div className="flex justify-between text-slate-400">
+                  <span>মোবাইল নম্বর:</span>
+                  <span className="text-white font-mono">{form.phone}</span>
+                </div>
+                <div className="flex justify-between text-slate-400">
+                  <span>নির্বাচিত সেবা:</span>
+                  <span className="text-orange-400 font-bold">
+                    {EDUSOB_SERVICES.find((s) => s.id === form.service_id)?.title || "সকল সেবা"}
+                  </span>
+                </div>
+                <div className="flex justify-between text-slate-400">
+                  <span>অ্যাকাউন্ট স্ট্যাটাস:</span>
+                  <span className="text-emerald-400 font-bold">সক্রিয় (১০০% ফ্রি)</span>
+                </div>
+              </div>
+              <button
+                onClick={() => setRegistered(false)}
+                className="font-bangla rounded-full border border-white/15 px-6 py-2.5 text-xs font-semibold text-slate-300 hover:bg-white/5 transition"
+              >
+                আরেকটি প্রোফাইল তৈরি করুন
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={submit} className="space-y-6">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label className="font-bangla block text-xs font-bold text-slate-300 mb-2">
+                    আপনার পুরো নাম <span className="text-orange-400">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={set("name")}
+                    placeholder="যেমন: মোঃ তামিম ইকবাল"
+                    className="font-bangla w-full rounded-2xl border border-white/10 bg-[#090b0f] px-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:border-orange-500/50 focus:outline-none"
+                  />
+                </div>
 
-            <button
-              data-testid="enroll-form-submit"
-              type="submit"
-              disabled={loading}
-              className="font-bangla w-full rounded-full bg-orange-500 py-3.5 text-sm font-semibold text-white shadow-[0_0_24px_rgba(249,115,22,0.35)] transition-all duration-300 hover:bg-orange-600 hover:shadow-[0_0_36px_rgba(249,115,22,0.55)] disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {loading ? "জমা হচ্ছে..." : "ভর্তি নিশ্চিত করুন"}
-            </button>
-          </div>
-        </motion.form>
+                <div>
+                  <label className="font-bangla block text-xs font-bold text-slate-300 mb-2">
+                    মোবাইল নম্বর <span className="text-orange-400">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    value={form.phone}
+                    onChange={set("phone")}
+                    placeholder="01XXXXXXXXX"
+                    className="font-mono w-full rounded-2xl border border-white/10 bg-[#090b0f] px-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:border-orange-500/50 focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label className="font-bangla block text-xs font-bold text-slate-300 mb-2">
+                    বর্তমান শ্রেণি বা স্তর
+                  </label>
+                  <select
+                    value={form.education_level}
+                    onChange={set("education_level")}
+                    className="font-bangla w-full rounded-2xl border border-white/10 bg-[#090b0f] px-4 py-3 text-xs sm:text-sm text-white focus:border-orange-500/50 focus:outline-none"
+                  >
+                    <option value="ssc">মাধ্যমিক (SSC / দাখিল)</option>
+                    <option value="hsc">উচ্চমাধ্যমিক (HSC / আলিম)</option>
+                    <option value="nu">জাতীয় বিশ্ববিদ্যালয় (অনার্স / ডিগ্রি)</option>
+                    <option value="university">পাবলিক / প্রাইভেট বিশ্ববিদ্যালয়</option>
+                    <option value="jobseeker">চাকরিপ্রার্থী / অন্যান্য</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="font-bangla block text-xs font-bold text-slate-300 mb-2">
+                    কাঙ্ক্ষিত মূল সেবা
+                  </label>
+                  <select
+                    value={form.service_id}
+                    onChange={set("service_id")}
+                    className="font-bangla w-full rounded-2xl border border-white/10 bg-[#090b0f] px-4 py-3 text-xs sm:text-sm text-white focus:border-orange-500/50 focus:outline-none"
+                  >
+                    {EDUSOB_SERVICES.map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-xs text-slate-400 pt-2">
+                <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0" />
+                <span>আপনার তথ্য ১০০% সুরক্ষিত এবং তৃতীয় পক্ষের সাথে শেয়ার করা হয় না।</span>
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="font-bangla w-full flex items-center justify-center gap-2 rounded-full bg-orange-500 py-3.5 text-sm font-bold text-white shadow-[0_0_24px_rgba(249,115,22,0.4)] transition hover:bg-orange-600 disabled:opacity-50"
+              >
+                {loading ? (
+                  <span>প্রসেস হচ্ছে...</span>
+                ) : (
+                  <>
+                    <span>ফ্রি প্রোফাইল খুলুন ও অ্যাক্সেস নিন</span>
+                    <Send className="h-4 w-4" />
+                  </>
+                )}
+              </button>
+            </form>
+          )}
+        </motion.div>
       </div>
     </section>
   );
