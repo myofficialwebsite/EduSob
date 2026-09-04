@@ -3,8 +3,8 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Star, Clock, Users, X, CheckCircle2 } from "lucide-react";
 import { useLang, scrollToId } from "./LanguageContext";
+import { API } from "@/lib/api";
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const EASE = [0.16, 1, 0.3, 1];
 
 const CATEGORIES = [
@@ -18,7 +18,20 @@ const CATEGORIES = [
 
 const fmt = (n) => `৳${n.toLocaleString("en-US")}`;
 
-const CourseModal = ({ course, onClose, onEnroll }) => (
+const CourseModal = ({ course, onClose, onEnroll }) => {
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -75,7 +88,8 @@ const CourseModal = ({ course, onClose, onEnroll }) => (
       </div>
     </motion.div>
   </motion.div>
-);
+  );
+};
 
 export const Courses = ({ onEnroll }) => {
   const { t } = useLang();
@@ -85,10 +99,18 @@ export const Courses = ({ onEnroll }) => {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
+    let ignore = false;
     axios
       .get(`${API}/courses`, { params: { category, q: query || undefined } })
-      .then((res) => setCourses(res.data))
-      .catch(() => setCourses([]));
+      .then((res) => {
+        if (!ignore) setCourses(res.data);
+      })
+      .catch(() => {
+        if (!ignore) setCourses([]);
+      });
+    return () => {
+      ignore = true;
+    };
   }, [category, query]);
 
   const counts = useMemo(() => courses.length, [courses]);

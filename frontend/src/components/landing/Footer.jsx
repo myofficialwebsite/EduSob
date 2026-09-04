@@ -3,8 +3,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { Facebook, Youtube, Linkedin, MessageSquare, Heart } from "lucide-react";
 import { useLang, scrollToId } from "./LanguageContext";
-
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+import { API } from "@/lib/api";
 
 export const Footer = () => {
   const { t } = useLang();
@@ -39,6 +38,7 @@ export const Footer = () => {
               <input
                 data-testid="newsletter-email-input"
                 type="email"
+                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="আপনার ইমেইল"
@@ -55,19 +55,22 @@ export const Footer = () => {
             </form>
             <div className="mt-8 flex gap-3">
               {[
-                { icon: Facebook, id: "facebook" },
-                { icon: Youtube, id: "youtube" },
-                { icon: Linkedin, id: "linkedin" },
-                { icon: MessageSquare, id: "discord" },
+                { icon: Facebook, id: "facebook", href: "https://www.facebook.com" },
+                { icon: Youtube, id: "youtube", href: "https://www.youtube.com" },
+                { icon: Linkedin, id: "linkedin", href: "https://www.linkedin.com" },
+                { icon: MessageSquare, id: "discord", href: "https://discord.com" },
               ].map((s) => (
-                <button
+                <a
                   key={s.id}
                   data-testid={`footer-social-${s.id}`}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="rounded-full border border-white/10 p-2.5 text-slate-400 transition-all duration-300 hover:border-orange-500/50 hover:text-orange-400"
                   aria-label={s.id}
                 >
                   <s.icon className="h-4 w-4" />
-                </button>
+                </a>
               ))}
             </div>
           </div>

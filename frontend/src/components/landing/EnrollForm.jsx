@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { AlertTriangle, Tag } from "lucide-react";
 import { useLang } from "./LanguageContext";
+import { API } from "@/lib/api";
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const EASE = [0.16, 1, 0.3, 1];
 const PHONE_RE = /^(?:\+?880|0)1[3-9]\d{8}$/;
 

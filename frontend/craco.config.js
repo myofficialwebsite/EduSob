@@ -108,6 +108,15 @@ let webpackConfig = {
 };
 
 webpackConfig.devServer = (devServerConfig) => {
+  // Proxy API calls to the FastAPI backend in dev. The frontend uses
+  // same-origin `/api` when REACT_APP_BACKEND_URL is unset (see src/lib/api.js).
+  devServerConfig.proxy = {
+    "/api": {
+      target: process.env.BACKEND_URL || "http://127.0.0.1:8000",
+      changeOrigin: true,
+    },
+  };
+
   // Add health check endpoints if enabled
   if (config.enableHealthCheck && setupHealthEndpoints && healthPluginInstance) {
     const originalSetupMiddlewares = devServerConfig.setupMiddlewares;

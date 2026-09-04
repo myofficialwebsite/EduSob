@@ -1,4 +1,7 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi.responses import JSONResponse
+from pymongo.errors import PyMongoError
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -7,17 +10,31 @@ import re
 import logging
 from pathlib import Path
 from pydantic import BaseModel, EmailStr
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime, timezone
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
-app = FastAPI()
+# Safe env loading: fall back to local defaults so the app can boot (and surface
+# a clear error) instead of crashing with a raw KeyError at import time.
+mongo_url = os.getenv("MONGO_URL", "mongodb://127.0.0.1:27017")
+db_name = os.getenv("DB_NAME", "edusob")
+if os.getenv("MONGO_URL") is None:
+    logger.warning("MONGO_URL not set - using default mongodb://127.0.0.1:27017")
+if os.getenv("DB_NAME") is None:
+    logger.warning("DB_NAME not set - using default 'edusob'")
+
+client = AsyncIOMotorClient(
+    mongo_url,
+    serverSelectionTimeoutMS=3000,
+    connectTimeoutMS=3000,
+)
+db = client[db_name]
+
 api_router = APIRouter(prefix="/api")
 
 PHONE_RE = re.compile(r'^(?:\+?880|0)1[3-9]\d{8}$')
@@ -276,13 +293,45 @@ async def newsletter(req: NewsletterRequest):
     return {"message": "subscribed", "email": req.email}
 
 
-@app.on_event("startup")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        await seed_courses()
+    except Exception as exc:  # DB down at boot should not kill the whole app
+        logger.error("MongoDB unavailable at startup - seeding skipped: %s", exc)
+    yield
+    client.close()
+
+
 async def seed_courses():
     if await db.courses.count_documents({}) == 0:
         await db.courses.insert_many([dict(c) for c in SEED_COURSES])
+        logger.info("Seeded %d courses", len(SEED_COURSES))
 
 
+@api_router.get("/health")
+async def health():
+    try:
+        await db.command("ping")
+        db_ok = True
+    except Exception:
+        db_ok = False
+    return {"status": "ok" if db_ok else "degraded", "db": db_ok}
+
+
+app = FastAPI(lifespan=lifespan)
 app.include_router(api_router)
+
+
+@app.exception_handler(PyMongoError)
+async def mongo_error_handler(request, exc):
+    logger.error("MongoDB error on %s %s: %s", request.method, request.url.path, exc)
+    return JSONResponse(
+        status_code=503,
+        content={
+            "detail": "সার্ভারে সাময়িক সমস্যা — ডেটাবেস সংযোগ হচ্ছে না। কিছুক্ষণ পর আবার চেষ্টা করুন।"
+        },
+    )
 
 app.add_middleware(
     CORSMiddleware,
@@ -292,10 +341,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
 
+if __name__ == "__main__":
+    import uvicorn
 
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
+    port = int(os.getenv("PORT", "8000"))
+    uvicorn.run(app, host="0.0.0.0", port=port)

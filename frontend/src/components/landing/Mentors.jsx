@@ -67,12 +67,26 @@ export const Mentors = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#121620] via-transparent to-transparent" />
                 <div className="absolute right-4 top-4 flex gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <button data-testid={`mentor-linkedin-${i}`} className="rounded-full bg-white/10 p-2 text-white backdrop-blur hover:bg-orange-500" aria-label="LinkedIn">
+                  <a
+                    data-testid={`mentor-linkedin-${i}`}
+                    href="https://www.linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full bg-white/10 p-2 text-white backdrop-blur hover:bg-orange-500"
+                    aria-label={`${m.name} LinkedIn`}
+                  >
                     <Linkedin className="h-4 w-4" />
-                  </button>
-                  <button data-testid={`mentor-portfolio-${i}`} className="rounded-full bg-white/10 p-2 text-white backdrop-blur hover:bg-orange-500" aria-label="Portfolio">
+                  </a>
+                  <a
+                    data-testid={`mentor-portfolio-${i}`}
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full bg-white/10 p-2 text-white backdrop-blur hover:bg-orange-500"
+                    aria-label={`${m.name} Portfolio`}
+                  >
                     <Globe className="h-4 w-4" />
-                  </button>
+                  </a>
                 </div>
               </div>
               <div className="p-6">

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const STR = {
   bn: {
@@ -65,8 +65,32 @@ const STR = {
 
 const LangContext = createContext();
 
+const LANG_KEY = "edusob_lang";
+
 export const LangProvider = ({ children }) => {
-  const [lang, setLang] = useState("bn");
+  const [lang, setLangState] = useState(() => {
+    try {
+      const saved = localStorage.getItem(LANG_KEY);
+      if (saved === "bn" || saved === "en") return saved;
+    } catch {
+      /* localStorage unavailable */
+    }
+    return "bn";
+  });
+
+  const setLang = (next) => {
+    setLangState(next);
+    try {
+      localStorage.setItem(LANG_KEY, next);
+    } catch {
+      /* localStorage unavailable */
+    }
+  };
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
   const t = (key) => STR[lang][key] ?? key;
   return (
     <LangContext.Provider value={{ lang, setLang, t }}>
