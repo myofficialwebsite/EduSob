@@ -1,0 +1,6 @@
+{
+  "name": "EduSob",
+  "description": "EduSob - Bengali-first modern learning and career transformation platform connecting ambitious learners with industry leaders.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
