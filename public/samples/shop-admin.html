@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>এডমিন — প্রোডাক্ট ম্যানেজমেন্ট (স্যাম্পল)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Hind Siliguri', sans-serif; }
+  .card-hover { transition: all .25s ease; } .card-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(15,23,42,.12); }
+  .toggle { width: 40px; height: 22px; } .toggle input:checked + .slider { background: #10b981; } .toggle input:checked + .slider::before { transform: translateX(18px); }
+  .slider { position: absolute; inset: 0; background: #cbd5e1; border-radius: 999px; transition: .25s; cursor: pointer; }
+  .slider::before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; top: 3px; background: white; border-radius: 50%; transition: .25s; }
+</style>
+</head>
+<body class="bg-slate-100">
+
+<div class="flex min-h-screen">
+  <!-- Admin sidebar -->
+  <aside class="hidden lg:flex flex-col w-60 bg-slate-900 text-white fixed h-full z-20">
+    <div class="p-5 border-b border-slate-800 flex items-center gap-3">
+      <div class="w-10 h-10 bg-rose-500 rounded-xl flex items-center justify-center text-white"><i class="fas fa-user-shield"></i></div>
+      <div><h1 class="font-bold leading-tight">এডমিন প্যানেল</h1><p class="text-slate-400 text-xs">সুপার এডমিন</p></div>
+    </div>
+    <nav class="flex-1 py-4 space-y-1 text-sm text-slate-300">
+      <a class="flex items-center gap-3 px-5 py-2.5 hover:bg-slate-800" href="#"><i class="fas fa-gauge w-5"></i> ওভারভিউ</a>
+      <a class="flex items-center gap-3 px-5 py-2.5 bg-slate-800 border-l-3 border-l-4 border-rose-500 text-white" href="#"><i class="fas fa-store w-5"></i> প্রোডাক্ট ম্যানেজমেন্ট</a>
+      <a class="flex items-center gap-3 px-5 py-2.5 hover:bg-slate-800" href="#"><i class="fas fa-truck w-5"></i> অর্ডারসমূহ <span class="ml-auto bg-rose-500 text-white text-xs px-1.5 rounded-full">৭</span></a>
+      <a class="flex items-center gap-3 px-5 py-2.5 hover:bg-slate-800" href="#"><i class="fas fa-money-check w-5"></i> পেমেন্ট রিভিউ <span class="ml-auto bg-amber-500 text-white text-xs px-1.5 rounded-full">৩</span></a>
+      <a class="flex items-center gap-3 px-5 py-2.5 hover:bg-slate-800" href="#"><i class="fas fa-bullhorn w-5"></i> নোটিস/নিউজ</a>
+      <a class="flex items-center gap-3 px-5 py-2.5 hover:bg-slate-800" href="#"><i class="fas fa-briefcase w-5"></i> চাকরি পোস্ট</a>
+      <a class="flex items-center gap-3 px-5 py-2.5 hover:bg-slate-800" href="#"><i class="fas fa-file-lines w-5"></i> CV টেমপ্লেট কাস্টমাইজ</a>
+      <a class="flex items-center gap-3 px-5 py-2.5 hover:bg-slate-800" href="#"><i class="fas fa-users w-5"></i> ইউজার ম্যানেজমেন্ট</a>
+      <a class="flex items-center gap-3 px-5 py-2.5 hover:bg-slate-800" href="#"><i class="fas fa-gear w-5"></i> সেটিংস (নম্বর/রেট)</a>
+    </nav>
+  </aside>
+
+  <main class="flex-1 lg:ml-60 p-4 lg:p-8">
+    <!-- Header -->
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+      <div>
+        <h2 class="text-2xl font-bold text-slate-800">🛒 প্রোডাক্ট ম্যানেজমেন্ট</h2>
+        <p class="text-sm text-slate-500">ইচ্ছেমতো প্রোডাক্ট যোগ করুন — সাথে সাথে পাবলিক সাইটের শপ + পপ-আপ সাইনবোর্ডে চলে যাবে</p>
+      </div>
+      <button onclick="document.getElementById('addModal').classList.remove('hidden')" class="bg-gradient-to-r from-rose-500 to-orange-500 text-white font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-rose-500/30 hover:scale-105 transition"><i class="fas fa-plus mr-2"></i>নতুন প্রোডাক্ট</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-2xl p-4 border-l-4 border-rose-500"><p class="text-xs text-slate-500">মোট প্রোডাক্ট</p><p class="text-2xl font-bold text-slate-800">২৪</p></div>
+      <div class="bg-white rounded-2xl p-4 border-l-4 border-emerald-500"><p class="text-xs text-slate-500">এ মাসের বিক্রি</p><p class="text-2xl font-bold text-slate-800">৳১২,৪৫০</p></div>
+      <div class="bg-white rounded-2xl p-4 border-l-4 border-amber-500"><p class="text-xs text-slate-500">পেন্ডিং অর্ডার</p><p class="text-2xl font-bold text-slate-800">৭</p></div>
+      <div class="bg-white rounded-2xl p-4 border-l-4 border-purple-500"><p class="text-xs text-slate-500">পপ-আপে প্রদর্শিত</p><p class="text-2xl font-bold text-slate-800">৩</p></div>
+    </div>
+
+    <!-- Product table -->
+    <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+      <div class="p-4 border-b border-slate-100 flex flex-wrap gap-3 items-center justify-between">
+        <div class="flex items-center bg-slate-100 rounded-full px-4 py-2 w-64"><i class="fas fa-magnifying-glass text-slate-400 text-sm"></i><input class="bg-transparent outline-none px-3 text-sm w-full" placeholder="প্রোডাক্ট খুঁজুন..."></div>
+        <div class="flex gap-2 text-xs">
+          <button class="bg-slate-800 text-white px-3 py-1.5 rounded-full">সব (২৪)</button>
+          <button class="bg-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-200">ফিজিক্যাল (১৫)</button>
+          <button class="bg-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-200">ডিজিটাল (৯)</button>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50 text-slate-500 text-xs">
+            <tr>
+              <th class="text-left px-4 py-3 font-semibold">প্রোডাক্ট</th>
+              <th class="text-left px-4 py-3 font-semibold">দাম</th>
+              <th class="text-left px-4 py-3 font-semibold">স্টক</th>
+              <th class="text-center px-4 py-3 font-semibold">🎪 পপ-আপ সাইনবোর্ড</th>
+              <th class="text-center px-4 py-3 font-semibold">সক্রিয়</th>
+              <th class="text-right px-4 py-3 font-semibold">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr class="hover:bg-rose-50/40">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-500"><i class="fas fa-book"></i></div><div><p class="font-semibold text-slate-800">NU প্রশ্নব্যাংক ২০২৬</p><p class="text-xs text-slate-400">ফিজিক্যাল · বই</p></div></div></td>
+              <td class="px-4 py-3"><p class="font-bold text-slate-800">৳২৫০</p><p class="text-xs text-slate-400 line-through">৳৩২০</p></td>
+              <td class="px-4 py-3"><span class="text-emerald-600 font-semibold">৪৮ পিস</span></td>
+              <td class="px-4 py-3 text-center"><label class="toggle relative inline-block"><input type="checkbox" checked class="opacity-0 w-0 h-0"><span class="slider"></span></label></td>
+              <td class="px-4 py-3 text-center"><label class="toggle relative inline-block"><input type="checkbox" checked class="opacity-0 w-0 h-0"><span class="slider"></span></label></td>
+              <td class="px-4 py-3 text-right"><button class="w-8 h-8 text-blue-500 hover:bg-blue-50 rounded-lg"><i class="fas fa-pen"></i></button><button class="w-8 h-8 text-red-500 hover:bg-red-50 rounded-lg"><i class="fas fa-trash"></i></button></td>
+            </tr>
+            <tr class="hover:bg-rose-50/40">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-500"><i class="fas fa-file-pdf"></i></div><div><p class="font-semibold text-slate-800">বিসিএস মডেল টেস্ট প্যাক</p><p class="text-xs text-slate-400">ডিজিটাল · তাৎক্ষণিক</p></div></div></td>
+              <td class="px-4 py-3"><p class="font-bold text-slate-800">৳৯৯</p></td>
+              <td class="px-4 py-3"><span class="text-slate-400">∞ আনলিমিটেড</span></td>
+              <td class="px-4 py-3 text-center"><label class="toggle relative inline-block"><input type="checkbox" checked class="opacity-0 w-0 h-0"><span class="slider"></span></label></td>
+              <td class="px-4 py-3 text-center"><label class="toggle relative inline-block"><input type="checkbox" checked class="opacity-0 w-0 h-0"><span class="slider"></span></label></td>
+              <td class="px-4 py-3 text-right"><button class="w-8 h-8 text-blue-500 hover:bg-blue-50 rounded-lg"><i class="fas fa-pen"></i></button><button class="w-8 h-8 text-red-500 hover:bg-red-50 rounded-lg"><i class="fas fa-trash"></i></button></td>
+            </tr>
+            <tr class="hover:bg-rose-50/40">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-500"><i class="fas fa-calculator"></i></div><div><p class="font-semibold text-slate-800">সায়েন্টিফিক ক্যালকুলেটর FX-991EX</p><p class="text-xs text-slate-400">ফিজিক্যাল · ইলেকট্রনিক্স</p></div></div></td>
+              <td class="px-4 py-3"><p class="font-bold text-slate-800">৳১,১৫০</p></td>
+              <td class="px-4 py-3"><span class="text-amber-600 font-semibold">৫ পিস ⚠️</span></td>
+              <td class="px-4 py-3 text-center"><label class="toggle relative inline-block"><input type="checkbox" checked class="opacity-0 w-0 h-0"><span class="slider"></span></label></td>
+              <td class="px-4 py-3 text-center"><label class="toggle relative inline-block"><input type="checkbox" checked class="opacity-0 w-0 h-0"><span class="slider"></span></label></td>
+              <td class="px-4 py-3 text-right"><button class="w-8 h-8 text-blue-500 hover:bg-blue-50 rounded-lg"><i class="fas fa-pen"></i></button><button class="w-8 h-8 text-red-500 hover:bg-red-50 rounded-lg"><i class="fas fa-trash"></i></button></td>
+            </tr>
+            <tr class="hover:bg-rose-50/40 opacity-60">
+              <td class="px-4 py-3"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-500"><i class="fas fa-pen-fancy"></i></div><div><p class="font-semibold text-slate-800">স্টেশনারি কম্বো প্যাক</p><p class="text-xs text-slate-400">ফিজিক্যাল · স্টেশনারি</p></div></div></td>
+              <td class="px-4 py-3"><p class="font-bold text-slate-800">৳৩৪০</p></td>
+              <td class="px-4 py-3"><span class="text-red-500 font-semibold">স্টক শেষ</span></td>
+              <td class="px-4 py-3 text-center"><label class="toggle relative inline-block"><input type="checkbox" class="opacity-0 w-0 h-0"><span class="slider"></span></label></td>
+              <td class="px-4 py-3 text-center"><label class="toggle relative inline-block"><input type="checkbox" class="opacity-0 w-0 h-0"><span class="slider"></span></label></td>
+              <td class="px-4 py-3 text-right"><button class="w-8 h-8 text-blue-500 hover:bg-blue-50 rounded-lg"><i class="fas fa-pen"></i></button><button class="w-8 h-8 text-red-500 hover:bg-red-50 rounded-lg"><i class="fas fa-trash"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="p-4 bg-slate-50 text-xs text-slate-500 flex items-center gap-2"><i class="fas fa-circle-info text-rose-400"></i> "পপ-আপ সাইনবোর্ড" চালু করলে প্রোডাক্টটি পাবলিক সাইটের ভাসমান শপ-বাটনের পপ-আপে "নতুন!" ব্যাজসহ দেখাবে (সর্বোচ্চ ৫টি)</div>
+    </div>
+  </main>
+</div>
+
+<!-- ============ ADD PRODUCT MODAL ============ -->
+<div id="addModal" class="hidden fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+    <div class="bg-gradient-to-r from-rose-500 to-orange-500 px-6 py-4 text-white flex items-center justify-between rounded-t-3xl">
+      <h3 class="font-bold text-lg"><i class="fas fa-plus-circle mr-2"></i>নতুন প্রোডাক্ট যোগ করুন</h3>
+      <button onclick="document.getElementById('addModal').classList.add('hidden')" class="w-8 h-8 bg-white/20 rounded-full hover:bg-white/30"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="p-6 space-y-4 text-sm">
+      <div><label class="font-semibold text-slate-700">প্রোডাক্টের নাম *</label><input class="mt-1.5 w-full border border-slate-200 rounded-xl px-4 py-2.5 focus:border-rose-400 outline-none" placeholder="যেমন: HSC ফিজিক্স গাইড ২০২৬"></div>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="font-semibold text-slate-700">দাম (৳) *</label><input type="number" class="mt-1.5 w-full border border-slate-200 rounded-xl px-4 py-2.5 focus:border-rose-400 outline-none" placeholder="২৫০"></div>
+        <div><label class="font-semibold text-slate-700">অফার দাম (ঐচ্ছিক)</label><input type="number" class="mt-1.5 w-full border border-slate-200 rounded-xl px-4 py-2.5 focus:border-rose-400 outline-none" placeholder="১৯৯"></div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="font-semibold text-slate-700">ধরন *</label><select class="mt-1.5 w-full border border-slate-200 rounded-xl px-4 py-2.5 focus:border-rose-400 outline-none bg-white"><option>ফিজিক্যাল (ডেলিভারি লাগবে)</option><option>ডিজিটাল (তাৎক্ষণিক)</option></select></div>
+        <div><label class="font-semibold text-slate-700">স্টক</label><input type="number" class="mt-1.5 w-full border border-slate-200 rounded-xl px-4 py-2.5 focus:border-rose-400 outline-none" placeholder="৫০"></div>
+      </div>
+      <div><label class="font-semibold text-slate-700">ক্যাটাগরি</label><select class="mt-1.5 w-full border border-slate-200 rounded-xl px-4 py-2.5 bg-white outline-none"><option>বই ও গাইড</option><option>ডিজিটাল প্যাক (PDF/টেস্ট)</option><option>স্টেশনারি</option><option>ইলেকট্রনিক্স</option><option>অন্যান্য</option></select></div>
+      <div><label class="font-semibold text-slate-700">ছবি</label><div class="mt-1.5 border-2 border-dashed border-slate-200 rounded-xl p-6 text-center text-slate-400 hover:border-rose-300 cursor-pointer"><i class="fas fa-cloud-arrow-up text-2xl"></i><p class="text-xs mt-1">ছবি আপলোড করুন (JPG/PNG)</p></div></div>
+      <div><label class="font-semibold text-slate-700">বিবরণ</label><textarea rows="2" class="mt-1.5 w-full border border-slate-200 rounded-xl px-4 py-2.5 focus:border-rose-400 outline-none" placeholder="সংক্ষিপ্ত বিবরণ..."></textarea></div>
+      <div class="flex items-center justify-between bg-rose-50 border border-rose-100 rounded-xl px-4 py-3">
+        <div><p class="font-semibold text-slate-700">🎪 পপ-আপ সাইনবোর্ডে দেখান</p><p class="text-xs text-slate-500">পাবলিক সাইটে ভাসমান বাটনে "নতুন!" ব্যাজসহ প্রচার হবে</p></div>
+        <label class="toggle relative inline-block shrink-0"><input type="checkbox" checked class="opacity-0 w-0 h-0"><span class="slider"></span></label>
+      </div>
+      <div class="flex gap-3 pt-2">
+        <button onclick="document.getElementById('addModal').classList.add('hidden')" class="flex-1 border border-slate-200 py-3 rounded-xl font-semibold text-slate-600 hover:bg-slate-50">বাতিল</button>
+        <button onclick="document.getElementById('addModal').classList.add('hidden')" class="flex-1 bg-gradient-to-r from-rose-500 to-orange-500 text-white py-3 rounded-xl font-bold hover:scale-[1.02] transition"><i class="fas fa-check mr-1"></i>প্রোডাক্ট যোগ করুন</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="fixed bottom-6 left-6 bg-slate-900 text-white text-xs px-4 py-2 rounded-full z-40 opacity-90">📐 স্যাম্পল: শপ এডমিন — <a href="/samples/landing.html" class="text-amber-300 underline">← ল্যান্ডিং পেজে পপ-আপ দেখুন</a></div>
+</body>
+</html>

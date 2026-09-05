@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>পাবলিক ল্যান্ডিং পেজ — প্রিমিয়াম স্যাম্পল</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Hind Siliguri', sans-serif; }
+  .hero-bg { background: radial-gradient(ellipse 80% 60% at 70% -10%, rgba(16,185,129,.25) 0, transparent 60%), radial-gradient(ellipse 60% 50% at 10% 110%, rgba(245,158,11,.15) 0, transparent 60%), linear-gradient(160deg, #041712 0%, #06231c 45%, #052e23 100%); }
+  .glass { background: rgba(255,255,255,.06); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.1); }
+  .card-hover { transition: all .3s cubic-bezier(.2,.8,.2,1); }
+  .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,.25); }
+  .card-hover-light:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(5,46,35,.12); }
+  .card-hover-light { transition: all .3s cubic-bezier(.2,.8,.2,1); }
+  .ticker { animation: ticker 28s linear infinite; }
+  @keyframes ticker { 0% {transform: translateX(0)} 100% {transform: translateX(-50%)} }
+  .pulse { animation: pulse 2s infinite; } @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+  .float-anim { animation: floaty 5s ease-in-out infinite; } @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  .shine { position: relative; overflow: hidden; }
+  .shine::after { content:''; position:absolute; top:0; left:-80%; width:50%; height:100%; background:linear-gradient(105deg, transparent, rgba(255,255,255,.25), transparent); animation: shine 4s infinite; }
+  @keyframes shine { 0%{left:-80%} 45%{left:130%} 100%{left:130%} }
+  .locked { position: relative; }
+  .locked::before { content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(255,255,255,.95) 15%, rgba(255,255,255,.5) 50%, transparent); z-index:5; border-radius: inherit; }
+</style>
+</head>
+<body class="bg-slate-50">
+
+<!-- ============ NAVBAR ============ -->
+<header class="hero-bg sticky top-0 z-40 border-b border-white/10">
+  <nav class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-500 rounded-xl flex items-center justify-center text-emerald-950 text-lg shadow-lg shadow-amber-500/30"><i class="fas fa-graduation-cap"></i></div>
+      <div>
+        <p class="font-bold text-white text-lg leading-tight">আপনার সাইট</p>
+        <p class="text-[10px] text-emerald-300 tracking-wide">রেজাল্ট · চাকরি · CV · শিক্ষা — এক ঠিকানায়</p>
+      </div>
+    </div>
+    <div class="hidden lg:flex items-center gap-6 text-sm text-emerald-100">
+      <a href="#result-hub" class="hover:text-amber-300">রেজাল্ট</a>
+      <a href="#jobs" class="hover:text-amber-300">চাকরি</a>
+      <a href="#services" class="hover:text-amber-300">সেবাসমূহ</a>
+      <a href="#shop" class="hover:text-amber-300">শপ</a>
+      <a href="#news" class="hover:text-amber-300">নিউজ</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="text-emerald-100 text-sm px-4 py-2 rounded-full border border-white/20 hover:bg-white/10">লগইন</button>
+      <button class="shine bg-gradient-to-r from-amber-400 to-amber-500 text-emerald-950 text-sm font-bold px-5 py-2 rounded-full shadow-lg shadow-amber-500/30 hover:scale-105 transition">ফ্রি সাইন আপ <i class="fas fa-arrow-right ml-1"></i></button>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero-bg relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 pt-14 pb-20 grid lg:grid-cols-2 gap-10 items-center">
+    <div class="relative z-10">
+      <span class="inline-flex items-center gap-2 bg-white/10 border border-white/15 text-emerald-200 text-xs px-4 py-1.5 rounded-full"><span class="w-2 h-2 bg-emerald-400 rounded-full pulse"></span> ১২,৪০০+ শিক্ষার্থী যুক্ত হয়েছেন</span>
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mt-5 leading-tight">রেজাল্ট, চাকরি, CV —<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500">সবকিছু এক ক্লিকে</span></h1>
+      <p class="text-emerald-100/80 mt-4 text-lg leading-relaxed">স্কুল-কলেজ-ভার্সিটির রেজাল্ট, আপনার যোগ্যতায় ম্যাচ করা চাকরি, প্রফেশনাল CV, MCQ প্র্যাকটিস, ধর্মভিত্তিক পার্সোনাল ড্যাশবোর্ড — বাংলাদেশের শিক্ষার্থীদের জন্য সবকিছু।</p>
+      <div class="flex flex-wrap gap-3 mt-7">
+        <button class="shine bg-gradient-to-r from-amber-400 to-amber-500 text-emerald-950 font-bold px-7 py-3.5 rounded-2xl shadow-xl shadow-amber-500/30 hover:scale-105 transition"><i class="fas fa-rocket mr-2"></i>ফ্রি অ্যাকাউন্ট খুলুন</button>
+        <button class="glass text-white px-7 py-3.5 rounded-2xl hover:bg-white/15 transition"><i class="fas fa-square-poll-vertical mr-2 text-emerald-300"></i>রেজাল্ট দেখুন</button>
+      </div>
+      <div class="flex gap-8 mt-9 text-white">
+        <div><p class="text-2xl font-bold text-amber-400">৯টি</p><p class="text-xs text-emerald-200">রেজাল্ট পোর্টাল</p></div>
+        <div><p class="text-2xl font-bold text-amber-400">৫০০+</p><p class="text-xs text-emerald-200">চাকরির সার্কুলার</p></div>
+        <div><p class="text-2xl font-bold text-amber-400">১০টি</p><p class="text-xs text-emerald-200">প্রিমিয়াম CV ডিজাইন</p></div>
+        <div><p class="text-2xl font-bold text-amber-400">২৪/৭</p><p class="text-xs text-emerald-200">AI সহকারী</p></div>
+      </div>
+    </div>
+    <!-- Hero visual: floating dashboard preview -->
+    <div class="relative hidden lg:block">
+      <div class="float-anim glass rounded-3xl p-5 relative z-10 shadow-2xl">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Rahim&backgroundColor=047857" class="w-9 h-9 rounded-full ring-2 ring-amber-400"><div><p class="text-white text-sm font-semibold">রহিম উদ্দিন</p><p class="text-emerald-300 text-[10px]">ID: EDU-2026-00147 · ঢাকা কলেজ</p></div></div>
+          <span class="bg-amber-400 text-emerald-950 text-[10px] font-bold px-2 py-1 rounded-full">ওয়ালেট ৳১৫০</span>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-white/10 rounded-2xl p-3"><p class="text-emerald-300 text-[10px]">HSC রেজাল্ট</p><p class="text-white font-bold flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-emerald-400 rounded-full pulse"></span>এক-ক্লিক রেডি</p></div>
+          <div class="bg-white/10 rounded-2xl p-3"><p class="text-emerald-300 text-[10px]">চাকরি ম্যাচ</p><p class="text-white font-bold">৫টি নতুন <span class="text-[10px] bg-red-500 px-1.5 rounded-full">92%</span></p></div>
+          <div class="bg-white/10 rounded-2xl p-3"><p class="text-emerald-300 text-[10px]">MCQ স্ট্রিক</p><p class="text-white font-bold">🔥 ৭ দিন</p></div>
+          <div class="bg-white/10 rounded-2xl p-3"><p class="text-emerald-300 text-[10px]">আসর নামাজ</p><p class="text-white font-bold">৪:৩২ PM</p></div>
+        </div>
+        <div class="mt-3 bg-gradient-to-r from-amber-400/20 to-transparent border border-amber-400/30 rounded-2xl p-3 flex items-center gap-3">
+          <i class="fas fa-file-lines text-amber-400 text-xl"></i>
+          <div class="flex-1"><p class="text-white text-sm font-semibold">আপনার CV ৮৫% রেডি</p><div class="h-1.5 bg-white/10 rounded-full mt-1"><div class="h-full w-[85%] bg-amber-400 rounded-full"></div></div></div>
+        </div>
+      </div>
+      <div class="absolute -top-6 -right-4 glass rounded-2xl px-4 py-3 z-20 float-anim" style="animation-delay:.8s">
+        <p class="text-[10px] text-emerald-300">🕉️ সনাতনী ড্যাশবোর্ড</p><p class="text-white text-sm font-bold">একাদশী: আর ২ দিন</p>
+      </div>
+      <div class="absolute -bottom-5 -left-6 glass rounded-2xl px-4 py-3 z-20 float-anim" style="animation-delay:1.6s">
+        <p class="text-[10px] text-emerald-300">📄 অটো-রিসাইজ</p><p class="text-white text-sm font-bold">ছবি 300×300 ✓ সাইন 300×80 ✓</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- News ticker -->
+  <div class="bg-emerald-950/80 border-t border-white/10 py-2.5 overflow-hidden">
+    <div class="flex items-center">
+      <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-r-full mr-4 whitespace-nowrap z-10 pulse">📢 ব্রেকিং</span>
+      <div class="ticker flex gap-12 whitespace-nowrap text-sm text-emerald-100">
+        <span>🎓 HSC ফরম ফিলাপের সময় ৭ দিন বাড়লো</span><span>💼 ৪৮তম বিসিএস সার্কুলার প্রকাশ — আবেদন শুরু</span><span>🏛️ NU মাস্টার্স ভর্তি আবেদন ১ সেপ্টেম্বর থেকে</span><span>📚 প্রাথমিকে ৪৫ হাজার শিক্ষক নিয়োগের ঘোষণা</span>
+        <span>🎓 HSC ফরম ফিলাপের সময় ৭ দিন বাড়লো</span><span>💼 ৪৮তম বিসিএস সার্কুলার প্রকাশ — আবেদন শুরু</span><span>🏛️ NU মাস্টার্স ভর্তি আবেদন ১ সেপ্টেম্বর থেকে</span><span>📚 প্রাথমিকে ৪৫ হাজার শিক্ষক নিয়োগের ঘোষণা</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULT HUB ============ -->
+<section id="result-hub" class="max-w-7xl mx-auto px-4 py-16">
+  <div class="text-center mb-10">
+    <span class="text-emerald-600 text-sm font-bold tracking-widest">১০০% ফ্রি — সাইন আপ লাগবে না</span>
+    <h2 class="text-3xl font-bold text-slate-800 mt-2">🎯 রেজাল্ট হাব</h2>
+    <p class="text-slate-500 mt-2">সব বোর্ড ও জাতীয় বিশ্ববিদ্যালয়ের রেজাল্ট — ব্যাকআপ লিংক সহ, সার্ভার ডাউন হলে অটো বিকল্প</p>
+  </div>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="card-hover-light bg-white rounded-3xl p-5 border border-slate-100 shadow-sm">
+      <div class="flex justify-between items-start"><div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl"><i class="fas fa-school"></i></div><span class="flex items-center gap-1 text-[11px] text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full pulse"></span>সচল</span></div>
+      <h3 class="font-bold text-slate-800 mt-3 text-lg">SSC / দাখিল</h3>
+      <p class="text-xs text-slate-500 mt-1">সকল বোর্ড · মার্কশিটসহ · ৩টি ব্যাকআপ লিংক</p>
+      <button class="mt-4 w-full bg-emerald-600 text-white text-sm font-semibold py-2.5 rounded-xl hover:bg-emerald-700">রেজাল্ট দেখুন <i class="fas fa-arrow-right ml-1"></i></button>
+    </div>
+    <div class="card-hover-light bg-white rounded-3xl p-5 border border-slate-100 shadow-sm">
+      <div class="flex justify-between items-start"><div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-xl"><i class="fas fa-building-columns"></i></div><span class="flex items-center gap-1 text-[11px] text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full pulse"></span>সচল</span></div>
+      <h3 class="font-bold text-slate-800 mt-3 text-lg">HSC / আলিম</h3>
+      <p class="text-xs text-slate-500 mt-1">সকল বোর্ড · রোল+রেজি দিয়ে · ৩টি ব্যাকআপ</p>
+      <button class="mt-4 w-full bg-blue-600 text-white text-sm font-semibold py-2.5 rounded-xl hover:bg-blue-700">রেজাল্ট দেখুন <i class="fas fa-arrow-right ml-1"></i></button>
+    </div>
+    <div class="card-hover-light bg-white rounded-3xl p-5 border border-slate-100 shadow-sm">
+      <div class="flex justify-between items-start"><div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-xl"><i class="fas fa-graduation-cap"></i></div><span class="flex items-center gap-1 text-[11px] text-amber-600 bg-amber-50 px-2 py-1 rounded-full"><span class="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>ধীরগতি</span></div>
+      <h3 class="font-bold text-slate-800 mt-3 text-lg">NU অনার্স</h3>
+      <p class="text-xs text-slate-500 mt-1">১ম–৪র্থ বর্ষ · ভর্তি ফলাফল · CGPA — সহায়িকাসহ</p>
+      <button class="mt-4 w-full bg-purple-600 text-white text-sm font-semibold py-2.5 rounded-xl hover:bg-purple-700">রেজাল্ট দেখুন <i class="fas fa-arrow-right ml-1"></i></button>
+    </div>
+    <div class="card-hover-light bg-white rounded-3xl p-5 border border-slate-100 shadow-sm">
+      <div class="flex justify-between items-start"><div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center text-xl"><i class="fas fa-user-graduate"></i></div><span class="flex items-center gap-1 text-[11px] text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full pulse"></span>সচল</span></div>
+      <h3 class="font-bold text-slate-800 mt-3 text-lg">ডিগ্রি / মাস্টার্স</h3>
+      <p class="text-xs text-slate-500 mt-1">ডিগ্রি পাস · মাস্টার্স ফাইনাল · প্রাইভেট</p>
+      <button class="mt-4 w-full bg-rose-600 text-white text-sm font-semibold py-2.5 rounded-xl hover:bg-rose-700">রেজাল্ট দেখুন <i class="fas fa-arrow-right ml-1"></i></button>
+    </div>
+  </div>
+  <p class="text-center text-xs text-slate-400 mt-4"><i class="fas fa-shield-halved text-emerald-500 mr-1"></i> সাইন আপ করলে রোল/রেজি নম্বর সেভ থাকবে — পরেরবার এক ক্লিকেই রেজাল্ট</p>
+</section>
+
+<!-- ============ SERVICES (free vs locked) ============ -->
+<section id="services" class="bg-gradient-to-b from-white to-emerald-50/50 py-16">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold text-slate-800">⚡ সেবাসমূহ</h2>
+      <p class="text-slate-500 mt-2">ফ্রি টুল সবার জন্য খোলা — প্রিমিয়াম ফিচার আনলক করুন ফ্রি সাইন আপে</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Free: CGPA calculator -->
+      <div class="card-hover-light bg-white rounded-3xl p-6 border border-slate-100 shadow-sm">
+        <div class="flex justify-between"><div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-xl"><i class="fas fa-calculator"></i></div><span class="text-[10px] bg-emerald-100 text-emerald-700 font-bold px-2.5 py-1 rounded-full h-fit">ফ্রি</span></div>
+        <h3 class="font-bold text-slate-800 mt-4">CGPA ও টার্গেট ক্যালকুলেটর</h3>
+        <p class="text-sm text-slate-500 mt-1.5">NU গ্রেডিং সিস্টেমে CGPA হিসাব + "টার্গেট CGPA পেতে পরের পরীক্ষায় কত লাগবে" ক্যালকুলেটর</p>
+        <button class="mt-4 text-teal-600 text-sm font-semibold hover:underline">ব্যবহার করুন →</button>
+      </div>
+      <!-- Free: fee calculator -->
+      <div class="card-hover-light bg-white rounded-3xl p-6 border border-slate-100 shadow-sm">
+        <div class="flex justify-between"><div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-xl"><i class="fas fa-money-bill-wave"></i></div><span class="text-[10px] bg-emerald-100 text-emerald-700 font-bold px-2.5 py-1 rounded-full h-fit">ফ্রি</span></div>
+        <h3 class="font-bold text-slate-800 mt-4">ফরম ফিলাপ ফি ক্যালকুলেটর</h3>
+        <p class="text-sm text-slate-500 mt-1.5">বোর্ড/NU ফরম ফিলাপে মোট কত টাকা লাগবে — বিষয় সংখ্যা দিলেই হিসাব</p>
+        <button class="mt-4 text-sky-600 text-sm font-semibold hover:underline">ব্যবহার করুন →</button>
+      </div>
+      <!-- Locked: CV maker -->
+      <div class="card-hover-light bg-white rounded-3xl p-6 border-2 border-amber-200 shadow-sm relative overflow-hidden">
+        <div class="absolute top-3 right-3 z-10"><span class="text-[10px] bg-amber-400 text-amber-950 font-bold px-2.5 py-1 rounded-full"><i class="fas fa-lock mr-1"></i>সাইন আপে আনলক</span></div>
+        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-xl"><i class="fas fa-file-lines"></i></div>
+        <h3 class="font-bold text-slate-800 mt-4">প্রিমিয়াম CV মেকার</h3>
+        <p class="text-sm text-slate-500 mt-1.5">১০টি প্রফেশনাল ডিজাইন — প্রোফাইল থেকে অটো-ফিল, বাংলা+ইংরেজি, ছবিসহ PDF</p>
+        <div class="locked mt-3 flex gap-2">
+          <div class="w-16 h-20 bg-slate-800 rounded-lg"></div><div class="w-16 h-20 bg-teal-600 rounded-lg"></div><div class="w-16 h-20 bg-white border rounded-lg"></div><div class="w-16 h-20 bg-purple-700 rounded-lg"></div>
+        </div>
+        <button class="mt-3 w-full bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 text-sm font-bold py-2.5 rounded-xl">ফ্রি সাইন আপ করে দেখুন</button>
+      </div>
+      <!-- Locked: photo resize -->
+      <div class="card-hover-light bg-white rounded-3xl p-6 border-2 border-amber-200 shadow-sm relative">
+        <div class="absolute top-3 right-3"><span class="text-[10px] bg-amber-400 text-amber-950 font-bold px-2.5 py-1 rounded-full"><i class="fas fa-lock mr-1"></i>সাইন আপে আনলক</span></div>
+        <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-xl"><i class="fas fa-crop-simple"></i></div>
+        <h3 class="font-bold text-slate-800 mt-4">ছবি ও স্বাক্ষর অটো-রিসাইজ</h3>
+        <p class="text-sm text-slate-500 mt-1.5">প্রতিটি আবেদনের নির্ধারিত সাইজ (300×300, 300×80...) সফটওয়্যার জানে — এক ক্লিকে রিসাইজ+ডাউনলোড</p>
+        <div class="mt-3 flex items-center gap-2 text-xs text-slate-400"><span class="bg-slate-100 px-2 py-1 rounded">ছবি 300×300 ✓</span><span class="bg-slate-100 px-2 py-1 rounded">সাইন 300×80 ✓</span></div>
+      </div>
+      <!-- Locked: MCQ -->
+      <div class="card-hover-light bg-white rounded-3xl p-6 border-2 border-amber-200 shadow-sm relative">
+        <div class="absolute top-3 right-3"><span class="text-[10px] bg-amber-400 text-amber-950 font-bold px-2.5 py-1 rounded-full"><i class="fas fa-lock mr-1"></i>সাইন আপে আনলক</span></div>
+        <div class="w-12 h-12 bg-red-100 text-red-500 rounded-2xl flex items-center justify-center text-xl"><i class="fas fa-pen-to-square"></i></div>
+        <h3 class="font-bold text-slate-800 mt-4">MCQ ও মডেল টেস্ট</h3>
+        <p class="text-sm text-slate-500 mt-1.5">বিষয়/অধ্যায়ভিত্তিক রিয়েল প্রশ্নব্যাংক, ভুল প্রশ্ন অটো-সেভ + স্মার্ট রিভিশন, কলেজ লিডারবোর্ড</p>
+      </div>
+      <!-- Locked: religion dashboard -->
+      <div class="card-hover-light bg-white rounded-3xl p-6 border-2 border-amber-200 shadow-sm relative">
+        <div class="absolute top-3 right-3"><span class="text-[10px] bg-amber-400 text-amber-950 font-bold px-2.5 py-1 rounded-full"><i class="fas fa-lock mr-1"></i>সাইন আপে আনলক</span></div>
+        <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center text-xl"><i class="fas fa-hands-praying"></i></div>
+        <h3 class="font-bold text-slate-800 mt-4">ধর্মভিত্তিক পার্সোনাল ড্যাশবোর্ড</h3>
+        <p class="text-sm text-slate-500 mt-1.5">নামাজ সময়/একাদশী রিমাইন্ডার, হিজরি/বাংলা সন, ধর্মীয় PDF লাইব্রেরি — পাতা-ওল্টানো রিডারে</p>
+        <div class="mt-3 flex gap-2 text-lg"><span>🕌</span><span>🕉️</span><span>☸️</span><span>✝️</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOBS ============ -->
+<section id="jobs" class="max-w-7xl mx-auto px-4 py-16">
+  <div class="flex items-end justify-between mb-8">
+    <div><h2 class="text-3xl font-bold text-slate-800">💼 সর্বশেষ চাকরির খবর</h2><p class="text-slate-500 mt-1">টেলিটক সরকারি + বিডিজবস থেকে অটো আপডেট</p></div>
+    <div class="hidden sm:flex gap-2 text-xs"><button class="bg-emerald-600 text-white px-4 py-1.5 rounded-full">সব</button><button class="bg-white border px-4 py-1.5 rounded-full hover:bg-emerald-50">সরকারি</button><button class="bg-white border px-4 py-1.5 rounded-full hover:bg-emerald-50">বেসরকারি</button><button class="bg-white border px-4 py-1.5 rounded-full hover:bg-emerald-50">SSC পাস</button><button class="bg-white border px-4 py-1.5 rounded-full hover:bg-emerald-50">HSC পাস</button><button class="bg-white border px-4 py-1.5 rounded-full hover:bg-emerald-50">স্নাতক</button></div>
+  </div>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="card-hover-light bg-white rounded-3xl p-5 border border-slate-100 shadow-sm">
+      <div class="flex justify-between items-start"><div class="w-11 h-11 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-700"><i class="fas fa-landmark"></i></div><span class="text-[10px] bg-red-100 text-red-600 font-bold px-2 py-1 rounded-full pulse">⏰ ৩ দিন বাকি</span></div>
+      <h3 class="font-bold text-slate-800 mt-3 leading-snug">প্রাথমিক বিদ্যালয় সহকারী শিক্ষক — ৪৫,০০০ পদ</h3>
+      <p class="text-xs text-slate-500 mt-1.5"><i class="fas fa-building mr-1"></i>প্রাথমিক শিক্ষা অধিদপ্তর · <i class="fas fa-graduation-cap mx-1"></i>স্নাতক · সারাদেশ</p>
+      <div class="flex gap-2 mt-4"><button class="flex-1 bg-emerald-600 text-white text-sm font-semibold py-2 rounded-xl hover:bg-emerald-700">আবেদন করুন</button><button class="px-3 border rounded-xl text-slate-400 hover:text-emerald-600"><i class="far fa-bookmark"></i></button></div>
+    </div>
+    <div class="card-hover-light bg-white rounded-3xl p-5 border border-slate-100 shadow-sm">
+      <div class="flex justify-between items-start"><div class="w-11 h-11 bg-blue-100 rounded-xl flex items-center justify-center text-blue-700"><i class="fas fa-shield-halved"></i></div><span class="text-[10px] bg-amber-100 text-amber-700 font-bold px-2 py-1 rounded-full">১২ দিন বাকি</span></div>
+      <h3 class="font-bold text-slate-800 mt-3 leading-snug">বাংলাদেশ পুলিশ কনস্টেবল নিয়োগ ২০২৬</h3>
+      <p class="text-xs text-slate-500 mt-1.5"><i class="fas fa-building mr-1"></i>বাংলাদেশ পুলিশ · <i class="fas fa-graduation-cap mx-1"></i>SSC/HSC · সকল জেলা</p>
+      <div class="flex gap-2 mt-4"><button class="flex-1 bg-emerald-600 text-white text-sm font-semibold py-2 rounded-xl hover:bg-emerald-700">আবেদন করুন</button><button class="px-3 border rounded-xl text-slate-400 hover:text-emerald-600"><i class="far fa-bookmark"></i></button></div>
+    </div>
+    <div class="card-hover-light bg-white rounded-3xl p-5 border border-slate-100 shadow-sm">
+      <div class="flex justify-between items-start"><div class="w-11 h-11 bg-purple-100 rounded-xl flex items-center justify-center text-purple-700"><i class="fas fa-building"></i></div><span class="text-[10px] bg-emerald-100 text-emerald-700 font-bold px-2 py-1 rounded-full">নতুন</span></div>
+      <h3 class="font-bold text-slate-800 mt-3 leading-snug">ট্রেইনি অফিসার — বেসরকারি ব্যাংক</h3>
+      <p class="text-xs text-slate-500 mt-1.5"><i class="fas fa-building mr-1"></i>বিডিজবস · <i class="fas fa-graduation-cap mx-1"></i>স্নাতক (ব্যবসায়) · ঢাকা</p>
+      <div class="flex gap-2 mt-4"><button class="flex-1 bg-emerald-600 text-white text-sm font-semibold py-2 rounded-xl hover:bg-emerald-700">আবেদন করুন</button><button class="px-3 border rounded-xl text-slate-400 hover:text-emerald-600"><i class="far fa-bookmark"></i></button></div>
+    </div>
+  </div>
+  <div class="mt-6 bg-gradient-to-r from-emerald-900 to-teal-800 rounded-3xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-white">
+    <div class="flex items-center gap-4"><div class="w-12 h-12 bg-amber-400 rounded-2xl flex items-center justify-center text-emerald-950 text-xl"><i class="fas fa-bell"></i></div><div><h3 class="font-bold text-lg">আপনার যোগ্যতায় ম্যাচ করা চাকরির অটো নোটিফিকেশন চান?</h3><p class="text-emerald-200 text-sm">সাইন আপ করে শিক্ষাগত যোগ্যতা দিন — ম্যাচ % সহ নোটিফিকেশন পাবেন</p></div></div>
+    <button class="shine bg-amber-400 text-emerald-950 font-bold px-6 py-3 rounded-2xl whitespace-nowrap hover:scale-105 transition">ফ্রি সাইন আপ</button>
+  </div>
+</section>
+
+<!-- ============ SHOP ============ -->
+<section id="shop" class="bg-white py-16 border-y border-slate-100">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-end justify-between mb-8">
+      <div><h2 class="text-3xl font-bold text-slate-800">🛒 স্টুডেন্ট শপ</h2><p class="text-slate-500 mt-1">ক্যাশ অন ডেলিভারি — সাইন আপ ছাড়াও অর্ডার করা যায়</p></div>
+      <a href="#" class="text-emerald-600 text-sm font-semibold hover:underline">সব প্রোডাক্ট →</a>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="card-hover-light bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden group">
+        <div class="h-36 bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center text-blue-400 text-5xl relative"><i class="fas fa-book"></i><span class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-২২%</span></div>
+        <div class="p-4"><p class="font-semibold text-slate-800 text-sm leading-tight">NU অনার্স প্রশ্নব্যাংক ২০২৬ (সব বিষয়)</p><div class="flex items-center gap-2 mt-2"><p class="font-bold text-emerald-600">৳২৫০</p><p class="text-xs text-slate-400 line-through">৳৩২০</p></div><button class="mt-3 w-full bg-slate-800 text-white text-xs font-semibold py-2 rounded-xl group-hover:bg-emerald-600 transition"><i class="fas fa-cart-plus mr-1"></i>কার্টে যোগ করুন</button></div>
+      </div>
+      <div class="card-hover-light bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden group">
+        <div class="h-36 bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center text-amber-500 text-5xl"><i class="fas fa-calculator"></i></div>
+        <div class="p-4"><p class="font-semibold text-slate-800 text-sm leading-tight">সায়েন্টিফিক ক্যালকুলেটর FX-991EX</p><p class="font-bold text-emerald-600 mt-2">৳১,১৫০</p><button class="mt-3 w-full bg-slate-800 text-white text-xs font-semibold py-2 rounded-xl group-hover:bg-emerald-600 transition"><i class="fas fa-cart-plus mr-1"></i>কার্টে যোগ করুন</button></div>
+      </div>
+      <div class="card-hover-light bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden group">
+        <div class="h-36 bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center text-emerald-500 text-5xl"><i class="fas fa-file-pdf"></i></div>
+        <div class="p-4"><p class="font-semibold text-slate-800 text-sm leading-tight">বিসিএস প্রিলি মডেল টেস্ট প্যাক (ডিজিটাল)</p><p class="font-bold text-emerald-600 mt-2">৳৯৯</p><button class="mt-3 w-full bg-slate-800 text-white text-xs font-semibold py-2 rounded-xl group-hover:bg-emerald-600 transition"><i class="fas fa-bolt mr-1"></i>এখনই কিনুন</button></div>
+      </div>
+      <div class="card-hover-light bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden group">
+        <div class="h-36 bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center text-purple-400 text-5xl"><i class="fas fa-pen-fancy"></i></div>
+        <div class="p-4"><p class="font-semibold text-slate-800 text-sm leading-tight">পরীক্ষা প্রস্তুতি স্টেশনারি কম্বো</p><p class="font-bold text-emerald-600 mt-2">৳৩৪০</p><button class="mt-3 w-full bg-slate-800 text-white text-xs font-semibold py-2 rounded-xl group-hover:bg-emerald-600 transition"><i class="fas fa-cart-plus mr-1"></i>কার্টে যোগ করুন</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWS ============ -->
+<section id="news" class="max-w-7xl mx-auto px-4 py-16">
+  <div class="flex items-end justify-between mb-8">
+    <div><h2 class="text-3xl font-bold text-slate-800">📰 দেশের শীর্ষ সংবাদ <span class="text-xs align-middle bg-red-100 text-red-600 px-2 py-1 rounded-full ml-2 pulse">LIVE অটো-আপডেট</span></h2></div>
+    <div class="hidden sm:flex gap-2 text-xs"><button class="bg-slate-800 text-white px-4 py-1.5 rounded-full">সব</button><button class="bg-white border px-4 py-1.5 rounded-full">শিক্ষা</button><button class="bg-white border px-4 py-1.5 rounded-full">চাকরি</button><button class="bg-white border px-4 py-1.5 rounded-full">জাতীয়</button></div>
+  </div>
+  <div class="grid md:grid-cols-4 gap-4">
+    <article class="card-hover-light md:col-span-2 md:row-span-2 bg-slate-900 rounded-3xl overflow-hidden relative min-h-[300px] flex items-end">
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent z-10"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-emerald-800 to-slate-900 flex items-center justify-center text-white/10 text-9xl"><i class="fas fa-newspaper"></i></div>
+      <div class="relative z-20 p-6"><span class="text-[10px] bg-red-600 text-white font-bold px-2.5 py-1 rounded-full">প্রধান সংবাদ</span><h3 class="text-white text-2xl font-bold mt-3 leading-snug">প্রাথমিকে ৪৫ হাজার শিক্ষক নিয়োগ — আবেদন শুরু আগামী সপ্তাহে</h3><p class="text-slate-300 text-sm mt-2">প্রাথমিক শিক্ষা অধিদপ্তরের ঘোষণা অনুযায়ী...</p><p class="text-slate-400 text-xs mt-3"><i class="far fa-clock mr-1"></i>১ ঘণ্টা আগে · সূত্র: RSS অটো-ফিড</p></div>
+    </article>
+    <article class="card-hover-light bg-white rounded-3xl p-5 border border-slate-100 shadow-sm"><span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">শিক্ষা</span><h3 class="font-bold text-slate-800 mt-2 leading-snug">HSC ফরম ফিলাপের সময়সীমা ৭ দিন বাড়ানো হলো</h3><p class="text-xs text-slate-400 mt-2"><i class="far fa-clock mr-1"></i>২ ঘণ্টা আগে</p></article>
+    <article class="card-hover-light bg-white rounded-3xl p-5 border border-slate-100 shadow-sm"><span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">চাকরি</span><h3 class="font-bold text-slate-800 mt-2 leading-snug">৪৮তম বিসিএস প্রিলিমিনারি সার্কুলার প্রকাশিত</h3><p class="text-xs text-slate-400 mt-2"><i class="far fa-clock mr-1"></i>৫ ঘণ্টা আগে</p></article>
+    <article class="card-hover-light bg-white rounded-3xl p-5 border border-slate-100 shadow-sm"><span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">ভর্তি</span><h3 class="font-bold text-slate-800 mt-2 leading-snug">NU মাস্টার্স ভর্তি আবেদন শুরু ১ সেপ্টেম্বর</h3><p class="text-xs text-slate-400 mt-2"><i class="far fa-clock mr-1"></i>১ দিন আগে</p></article>
+    <article class="card-hover-light bg-white rounded-3xl p-5 border border-slate-100 shadow-sm"><span class="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">জাতীয়</span><h3 class="font-bold text-slate-800 mt-2 leading-snug">ডিজিটাল সেবায় নতুন মাইলফলক অর্জন</h3><p class="text-xs text-slate-400 mt-2"><i class="far fa-clock mr-1"></i>১ দিন আগে</p></article>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="hero-bg py-16 relative overflow-hidden">
+  <div class="max-w-3xl mx-auto px-4 text-center relative z-10">
+    <h2 class="text-3xl lg:text-4xl font-bold text-white">এক অ্যাকাউন্টে <span class="text-amber-400">সবকিছু</span> —<br>রেজাল্ট থেকে ক্যারিয়ার পর্যন্ত</h2>
+    <p class="text-emerald-200 mt-4">ফ্রি সাইন আপে পাবেন: পার্সোনাল ড্যাশবোর্ড · ওয়ালেট + বোনাস ক্রেডিট · MCQ প্র্যাকটিস · ছবি রিসাইজার · কলেজ নোটিস · ধর্মভিত্তিক ক্যালেন্ডার</p>
+    <button class="shine mt-7 bg-gradient-to-r from-amber-400 to-amber-500 text-emerald-950 font-bold px-10 py-4 rounded-2xl text-lg shadow-2xl shadow-amber-500/30 hover:scale-105 transition"><i class="fas fa-rocket mr-2"></i>ফ্রি অ্যাকাউন্ট খুলুন — ৩০ সেকেন্ডে</button>
+    <p class="text-emerald-300/60 text-xs mt-4">কোনো লুকানো চার্জ নেই · যেকোনো সময় ডিলিট করা যাবে</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-slate-950 text-slate-400 py-12">
+  <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-4 gap-8 text-sm">
+    <div>
+      <div class="flex items-center gap-2 mb-3"><div class="w-8 h-8 bg-amber-400 rounded-lg flex items-center justify-center text-emerald-950"><i class="fas fa-graduation-cap"></i></div><p class="font-bold text-white">আপনার সাইট</p></div>
+      <p class="text-xs leading-relaxed">বাংলাদেশের শিক্ষার্থীদের জন্য অল-ইন-ওয়ান শিক্ষা ও ক্যারিয়ার প্ল্যাটফর্ম।</p>
+    </div>
+    <div><p class="font-bold text-white mb-3">সেবা</p><ul class="space-y-2 text-xs"><li>রেজাল্ট হাব</li><li>চাকরির খবর</li><li>CV মেকার</li><li>MCQ টেস্ট</li><li>স্টুডেন্ট শপ</li></ul></div>
+    <div><p class="font-bold text-white mb-3">টুলস</p><ul class="space-y-2 text-xs"><li>CGPA ক্যালকুলেটর</li><li>ফি ক্যালকুলেটর</li><li>ছবি রিসাইজার</li><li>স্টাডি প্ল্যানার</li></ul></div>
+    <div><p class="font-bold text-white mb-3">যোগাযোগ</p><ul class="space-y-2 text-xs"><li><i class="fab fa-whatsapp text-green-500 mr-1"></i> হোয়াটসঅ্যাপ (এডমিন প্যানেল থেকে সেট হবে)</li><li><i class="fas fa-envelope mr-1"></i> support@...</li></ul></div>
+  </div>
+  <p class="text-center text-xs text-slate-600 mt-10">© ২০২৬ · সর্বস্বত্ব সংরক্ষিত</p>
+</footer>
+
+<!-- ============ FLOATING BUTTONS (right stack) ============ -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+  <!-- AI Assistant button (separate) -->
+  <button onclick="toggleAI()" class="group flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full shadow-xl shadow-purple-500/40 hover:scale-105 transition pl-4 pr-1.5 py-1.5">
+    <span class="text-white text-sm font-semibold hidden sm:block">AI সহকারী</span>
+    <span class="w-11 h-11 bg-white/20 rounded-full flex items-center justify-center text-white text-xl"><i class="fas fa-robot"></i></span>
+  </button>
+  <!-- WhatsApp -->
+  <a href="#" class="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl shadow-xl hover:scale-110 transition"><i class="fab fa-whatsapp"></i></a>
+  <!-- Shop popup trigger -->
+  <button onclick="toggleShop()" class="relative w-14 h-14 bg-gradient-to-br from-rose-500 to-orange-500 rounded-full flex items-center justify-center text-white text-xl shadow-xl shadow-rose-500/40 hover:scale-110 transition">
+    <i class="fas fa-store"></i>
+    <span class="absolute -top-1 -right-1 w-5 h-5 bg-amber-400 text-slate-900 text-[10px] font-bold rounded-full flex items-center justify-center pulse">৩</span>
+  </button>
+</div>
+
+<!-- ============ SHOP SIGNBOARD POPUP ============ -->
+<div id="shopPopup" class="hidden fixed bottom-24 right-6 z-50 w-[330px] max-w-[calc(100vw-3rem)]">
+  <div class="bg-white rounded-3xl shadow-2xl border border-rose-100 overflow-hidden animate-[floaty_.4s_ease]">
+    <!-- Signboard header -->
+    <div class="relative bg-gradient-to-r from-rose-600 via-rose-500 to-orange-500 px-5 pt-4 pb-6 text-white">
+      <div class="absolute inset-x-0 bottom-0 h-3 bg-[repeating-linear-gradient(45deg,#fbbf24_0,#fbbf24_10px,#b91c1c_10px,#b91c1c_20px)] opacity-80"></div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center"><i class="fas fa-store"></i></span>
+          <div><p class="font-bold leading-tight">🎪 স্টুডেন্ট শপ</p><p class="text-[10px] text-rose-100">এডমিনের নতুন প্রোডাক্ট — এইমাত্র যুক্ত!</p></div>
+        </div>
+        <button onclick="toggleShop()" class="w-7 h-7 bg-white/20 rounded-full text-sm hover:bg-white/30"><i class="fas fa-xmark"></i></button>
+      </div>
+    </div>
+    <div class="p-4 space-y-3">
+      <div class="flex gap-3 items-center bg-rose-50/70 border border-rose-100 rounded-2xl p-3 hover:bg-rose-50 transition cursor-pointer">
+        <div class="w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center text-blue-500 text-2xl shrink-0"><i class="fas fa-book"></i></div>
+        <div class="flex-1"><p class="text-sm font-bold text-slate-800 leading-tight">NU প্রশ্নব্যাংক ২০২৬</p><p class="text-xs text-slate-400">এডমিন যোগ করেছেন · ২ ঘণ্টা আগে</p><p class="font-bold text-rose-600 text-sm">৳২৫০ <span class="text-[10px] text-slate-400 line-through">৳৩২০</span> <span class="text-[9px] bg-red-100 text-red-600 px-1.5 rounded-full font-bold">-২২%</span></p></div>
+        <button class="w-9 h-9 bg-rose-500 text-white rounded-xl hover:bg-rose-600"><i class="fas fa-cart-plus text-sm"></i></button>
+      </div>
+      <div class="flex gap-3 items-center bg-rose-50/70 border border-rose-100 rounded-2xl p-3 hover:bg-rose-50 transition cursor-pointer">
+        <div class="w-14 h-14 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-xl flex items-center justify-center text-emerald-500 text-2xl shrink-0"><i class="fas fa-file-pdf"></i></div>
+        <div class="flex-1"><p class="text-sm font-bold text-slate-800 leading-tight">বিসিএস মডেল টেস্ট প্যাক</p><p class="text-xs text-slate-400">ডিজিটাল · তাৎক্ষণিক ডেলিভারি</p><p class="font-bold text-rose-600 text-sm">৳৯৯</p></div>
+        <button class="w-9 h-9 bg-rose-500 text-white rounded-xl hover:bg-rose-600"><i class="fas fa-bolt text-sm"></i></button>
+      </div>
+      <a href="#shop" onclick="toggleShop()" class="block text-center bg-slate-900 text-white text-sm font-semibold py-2.5 rounded-2xl hover:bg-rose-600 transition">সম্পূর্ণ শপ দেখুন <i class="fas fa-arrow-right ml-1"></i></a>
+      <p class="text-center text-[10px] text-slate-400">💵 ক্যাশ অন ডেলিভারি · সাইন আপ ছাড়াও অর্ডার</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ AI ASSISTANT POPUP ============ -->
+<div id="aiPopup" class="hidden fixed bottom-24 right-6 z-50 w-[330px] max-w-[calc(100vw-3rem)]">
+  <div class="bg-white rounded-3xl shadow-2xl border border-purple-100 overflow-hidden">
+    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 px-5 py-4 text-white flex items-center justify-between">
+      <div class="flex items-center gap-2"><span class="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center"><i class="fas fa-robot"></i></span><div><p class="font-bold leading-tight">AI সহকারী</p><p class="text-[10px] text-purple-200">পড়াশোনা + সাইট ব্যবহারের গাইড</p></div></div>
+      <button onclick="toggleAI()" class="w-7 h-7 bg-white/20 rounded-full text-sm hover:bg-white/30"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="p-4">
+      <div class="bg-purple-50 rounded-2xl p-3 text-sm text-slate-700">👋 আমি আপনার AI সহকারী! জিজ্ঞেস করুন:</div>
+      <div class="mt-3 space-y-2 text-xs">
+        <button class="w-full text-left bg-slate-50 hover:bg-purple-50 border border-slate-100 rounded-xl px-3 py-2.5 text-slate-600">💡 "HSC রেজাল্ট কীভাবে দেখবো?"</button>
+        <button class="w-full text-left bg-slate-50 hover:bg-purple-50 border border-slate-100 rounded-xl px-3 py-2.5 text-slate-600">📄 "প্রফেশনাল CV কীভাবে বানাবো?"</button>
+        <button class="w-full text-left bg-slate-50 hover:bg-purple-50 border border-slate-100 rounded-xl px-3 py-2.5 text-slate-600">🎯 "NU ভর্তির আবেদন প্রক্রিয়া কী?"</button>
+      </div>
+      <div class="mt-3 flex items-center bg-slate-100 rounded-full px-4 py-2.5"><input class="bg-transparent outline-none text-sm w-full" placeholder="প্রশ্ন লিখুন..."><button class="text-purple-600"><i class="fas fa-paper-plane"></i></button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleShop(){document.getElementById('aiPopup').classList.add('hidden');document.getElementById('shopPopup').classList.toggle('hidden')}
+function toggleAI(){document.getElementById('shopPopup').classList.add('hidden');document.getElementById('aiPopup').classList.toggle('hidden')}
+// Auto-open shop signboard once after 2.5s (new product announcement)
+setTimeout(()=>{document.getElementById('shopPopup').classList.remove('hidden')},2500);
+</script>
+
+<div class="fixed bottom-6 left-6 bg-slate-900 text-white text-xs px-4 py-2 rounded-full z-50 opacity-90 border border-white/20">📐 স্যাম্পল: পাবলিক ল্যান্ডিং পেজ — <a href="/" class="text-amber-300 underline">গ্যালারিতে ফিরুন</a> · <a href="/samples/shop-admin.html" class="text-rose-300 underline">শপ এডমিন দেখুন →</a></div>
+</body>
+</html>

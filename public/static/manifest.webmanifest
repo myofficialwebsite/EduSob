@@ -1,0 +1,17 @@
+{
+  "name": "এডুসব — শিক্ষার সব, এক ঠিকানায়",
+  "short_name": "এডুসব",
+  "description": "রেজাল্ট হাব, MCQ প্র্যাকটিস, সিভি মেকার, স্কলারশিপ ও ১-অন-১ মেন্টর সহায়তা",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0d12",
+  "theme_color": "#f97316",
+  "lang": "bn",
+  "icons": [
+    { "src": "/static/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/static/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/static/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "name": "EduSob",
-  "description": "বাংলাদেশের শিক্ষার্থীদের একক ডিজিটাল শিক্ষা প্ল্যাটফর্ম — বোর্ড পরীক্ষার ফলাফল, ভর্তি তথ্য, ১-অন-১ শিক্ষক সহায়তা, প্রশ্নব্যাংক ও সিভি মেকার।",
-  "requestFramePermissions": [],
+  "description": "EduSob - Education portal with student tools, CV maker, notices, feeds, shop, and admin management",
+  "requestFramePermissions": ["camera", "microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

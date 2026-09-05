@@ -1,70 +1,193 @@
-# EduSob (এডুসব) — Education For Everyone
+# এডুসব (EduSob) — শিক্ষার সব, এক ঠিকানায়!
 
-Premium dark-editorial landing page + enrollment API for EduSob, a Bengali-first
-online learning & career-transformation platform.
+## Project Overview
+- **Name**: এডুসব (EduSob)
+- **Goal**: বাংলাদেশের শিক্ষার্থীদের জন্য শিক্ষা ও ক্যারিয়ার সুপার-পোর্টাল — রেজাল্ট, ভর্তি, চাকরি, CV, টুলস সব এক জায়গায়
+- **Master Plan**: `MASTER_PLAN.md` (সব রিকোয়ারমেন্ট লকড)
 
-## Architecture
+## URLs
+- **Production (লাইভ)**: https://edusob.pages.dev
+- **Cloudflare Pages Project**: edusob (ইউজারের নিজস্ব CF অ্যাকাউন্ট, BYOK)
 
-- **Frontend** — `frontend/`: React 19 + Tailwind CSS + Framer Motion + Lenis
-  smooth scroll + Sonner toasts (CRA/craco build, JS/JSX).
-- **Backend** — `backend/`: FastAPI + Motor (async MongoDB). All routes under
-  `/api`; course data is seeded automatically on startup.
-- **DB** — MongoDB, configured via env vars (see below).
+## ফেজ-১ সম্পন্ন ফিচার ✅
+- **Auth**: সাইন-আপ/লগইন (মোবাইল+পাসওয়ার্ড, PBKDF2, HttpOnly সেশন কুকি ৩০ দিন)
+- **ইউনিক ইউজার আইডি**: EDU-YYYY-NNNNN
+- **ধর্ম-থিমড ড্যাশবোর্ড**: গ্রিটিং (মুসলিম=আসসালামু আলাইকুম, সনাতনী=হরেকৃষ্ণ, বৌদ্ধ=নমো বুদ্ধায়, খ্রিস্টান=শুভেচ্ছা ও শান্তি) + নিজস্ব সন (হিজরি/বঙ্গাব্দ/বুদ্ধাব্দ/খ্রিস্টাব্দ) + জলছাপ + থিম রঙ
+- **রেজাল্ট হাব**: SSC/HSC/JSC/NU (অনার্স/ডিগ্রি/মাস্টার্স) — অফিসিয়াল লিংক + ব্যাকআপ + লাইভ সার্ভার স্ট্যাটাস + ধাপে ধাপে গাইড + সেভড রোল (এক-ক্লিক কপি)
+- **প্রোফাইল সিস্টেম**: পূর্ণ তথ্য ফর্ম + কপি প্যানেল (এক-ক্লিক কপি) + ছবি/স্বাক্ষর আপলোড
+- **ছবি/স্বাক্ষর রিসাইজ**: ৩০০×৩০০, ৩০০×৮০ প্রিসেট + কাস্টম সাইজ — ক্লায়েন্ট-সাইড, এক-ক্লিক ডাউনলোড
+- **ওয়ালেট**: ব্যালেন্স + লেনদেন কাঠামো (টপ-আপ ফেজ-৫ এ চালু ✅)
+- **AI ফ্লোটিং বাটন** (আলাদা) + WhatsApp বাটন সব পেজে
 
-## Run locally
+## ফেজ-২ সম্পন্ন ফিচার ✅
+- **নামাজের সময় কার্ড** (মুসলিম ড্যাশবোর্ড): AlAdhan API — ৫ ওয়াক্ত + পরবর্তী ওয়াক্ত কাউন্টডাউন + রমাদান/ঈদ কাউন্টডাউন (১৫ শহর)
+- **পঞ্জিকা কার্ড** (সনাতনী/বৌদ্ধ ড্যাশবোর্ড): জ্যোতির্বিজ্ঞান-ভিত্তিক তিথি গণনা — আজকের তিথি + একাদশী/পূর্ণিমা/অমাবস্যা কাউন্টডাউন (গ্রিটিং "হরেকৃষ্ণ" অপরিবর্তিত)
+- **আজকের বাণী**: কুরআন (বাংলা, alquran.cloud) / গীতা / ধম্মপদ / বাইবেল — ধর্ম অনুযায়ী, দিনভিত্তিক রোটেশন
+- **নিউজ পোর্টাল** (`/news`): প্রথম আলো + বিবিসি বাংলা + গুগল নিউজ RSS অটো-ফিড — সর্বশেষ/শিক্ষা/চাকরি ট্যাব (গুগল ব্লকড হলে কীওয়ার্ড-ফলব্যাক)
+- **চাকরির খবর** (`/jobs`): সার্কুলার তালিকা + শিক্ষাগত যোগ্যতা ম্যাচ % + ডেডলাইন অ্যালার্ট (≤৫ দিন = লাল)
+- **নোটিস বোর্ড** (`/notices`): NU/বোর্ড/DSHE/NTRCA/কলেজ ক্যাটাগরি — অফিসিয়াল লিংকসহ
+- **ড্যাশবোর্ড প্রিভিউ**: সর্বশেষ ৫ খবর + ম্যাচড ৪ চাকরি + সাইডবারে লিংক
+- **ল্যান্ডিং লাইভ টিকার**: সর্বশেষ খবর অটো-লোড
+- **D1 ক্যাশ**: সব এক্সটার্নাল API `feed_cache` টেবিলে ক্যাশড (নিউজ ৩০ মি, নামাজ ৬ ঘ, বাণী ৭ দিন)
 
-### Backend (FastAPI)
+## ফেজ-৩ সম্পন্ন ফিচার ✅
+- **MCQ প্র্যাকটিস** (`/mcq`): লেভেল (SSC/HSC/চাকরি) → বিষয় → ১০ প্রশ্নের কুইজ, নিজস্ব D1 প্রশ্নব্যাংক (৪৮টি সিড প্রশ্ন, ব্যাখ্যাসহ)
+- **ভুল-ব্যাংক + স্মার্ট রিভিশন**: ভুল উত্তর অটো-সেভ → ১ → ৩ → ৭ দিন spaced repetition; স্টেজ ৩ = আয়ত্ত
+- **MCQ লিডারবোর্ড**: গড় স্কোরে টপ-১০ (🥇🥈🥉), হিস্টোরি (শেষ ১৫ কুইজ)
+- **স্টাডি প্ল্যানার + নোট** (`/planner`): টাস্ক (বিষয়/ডেডলাইন/ডান-টগল) + অগ্রগতি % + অধ্যায়ভিত্তিক নোট CRUD
+- **CGPA ক্যালকুলেটর** (`/cgpa`): ৪.০০ স্কেলে কোর্স-ভিত্তিক CGPA + টার্গেট ক্যালকুলেটর (কত GPA দরকার)
+- **সিলেবাস হাব** (`/syllabus`): SSC/HSC/NU/চাকরি — NCTB, ঢাকা বোর্ড, NU অফিসিয়াল লিংক; ইউজারের লেভেল অটো-সিলেক্ট
+- ড্যাশবোর্ড সাইডবার + ল্যান্ডিং কার্ডে ৪ টুল লিংক চালু
 
+## ফেজ-৪ সম্পন্ন ফিচার ✅
+- **CV মেকার** (`/cv`): ১০টি প্রফেশনাল টেমপ্লেট (সরল বাংলা ফ্রি + ৳৩০/৳৫০) — লাইভ প্রিভিউ, বাংলা/English, ছবিসহ/ছাড়া, প্রিন্ট/PDF (A4)
+- **প্রোফাইল অটো-ফিল**: এক ক্লিকে নাম/ফোন/ঠিকানা/শিক্ষাগত যোগ্যতা/ছবি CV ফর্মে
+- **CV সেভ**: ইউজারপ্রতি ৫টি পর্যন্ত D1-এ, খোলা/এডিট/ডিলিট
+- **এডমিন CV কাস্টমাইজার** (`/admin/cv-templates`, admin role): প্রতিটি টেমপ্লেটের কালার/ফন্ট/লেআউট/হেডার-স্টাইল/যোগাযোগ-পজিশন/সেকশন-অর্ডার/দাম/সক্রিয়তা — লাইভ নমুনা প্রিভিউসহ
+- ড্যাশবোর্ড সাইডবারে CV মেকার "নতুন" + ল্যান্ডিং প্রিমিয়াম কার্ড "✓ চালু" লিংক
+
+## URIs
+| Path | বিবরণ |
+|---|---|
+| `/` | পাবলিক ল্যান্ডিং |
+| `/signup`, `/login` | অথ পেজ |
+| `/dashboard` | ধর্ম-থিমড ড্যাশবোর্ড (লগইন লাগবে) |
+| `/results` | রেজাল্ট হাব (পাবলিক; লগইনে রোল সেভ) |
+| `/profile` | প্রোফাইল + কপি প্যানেল + রিসাইজ (লগইন লাগবে) |
+| `POST /api/auth/signup, /api/auth/login, /api/auth/logout` | অথ |
+| `GET /api/me` | ইউজার + ধর্ম-তথ্য |
+| `GET/PUT /api/profile` | প্রোফাইল |
+| `GET/POST/DELETE /api/saved-rolls` | সেভড রোল |
+| `GET /api/wallet` | ওয়ালেট |
+| `GET /api/link-status?url=` | রেজাল্ট সাইট লাইভ স্ট্যাটাস |
+| `/news`, `/jobs`, `/notices` | নিউজ পোর্টাল / চাকরি / নোটিস (পাবলিক) |
+| `GET /api/feeds/news?cat=latest\|education\|jobs` | RSS নিউজ ফিড |
+| `GET /api/feeds/prayer?city=Dhaka` | নামাজের সময় + রমাদান/ঈদ কাউন্টডাউন |
+| `GET /api/feeds/panchang` | তিথি + একাদশী/পূর্ণিমা/অমাবস্যা |
+| `GET /api/feeds/verse?religion=` | আজকের বাণী |
+| `GET /api/feeds/jobs?level=` | চাকরি + ম্যাচ % |
+| `GET /api/feeds/notices?cat=` | নোটিস |
+| `/mcq`, `/planner`, `/cgpa`, `/syllabus` | স্টুডেন্ট টুলস পেজ |
+| `GET /api/tools/mcq/subjects?level=` | বিষয় + প্রশ্নসংখ্যা |
+| `GET /api/tools/mcq/quiz?level=&subject=&count=` | কুইজ প্রশ্ন (লগইন লাগবে) |
+| `POST /api/tools/mcq/submit` | উত্তর জমা → স্কোর + ব্যাখ্যা + ভুল-ব্যাংক আপডেট |
+| `GET /api/tools/mcq/history` | কুইজ হিস্টোরি |
+| `GET /api/tools/wrong-bank` | আজকের রিভিশন-ডিউ প্রশ্ন |
+| `GET /api/tools/leaderboard` | টপ-১০ (পাবলিক) |
+| `GET/POST/PUT/DELETE /api/tools/planner` | প্ল্যানার টাস্ক CRUD |
+| `GET/POST/PUT/DELETE /api/tools/notes` | নোট CRUD |
+| `GET /api/tools/syllabus?level=` | সিলেবাস লিংক (পাবলিক) |
+| `/cv` | CV মেকার (গেস্ট: গ্যালারি+লক; লগইন: ফুল বিল্ডার) |
+| `/admin/cv-templates` | এডমিন CV কাস্টমাইজার (role=admin) |
+| `GET /api/cv/templates` | সক্রিয় টেমপ্লেট তালিকা (পাবলিক) |
+| `GET /api/cv/prefill` | প্রোফাইল থেকে CV ডেটা |
+| `GET/POST/DELETE /api/cv/mine`, `/api/cv/save` | CV CRUD (সর্বোচ্চ ৫টি) |
+| `GET/PUT /api/cv/admin/templates` | এডমিন টেমপ্লেট CRUD |
+
+## ফেজ-৫ সম্পন্ন ফিচার ✅
+- **ই-কমার্স শপ** (`/shop`): গেস্ট ব্রাউজ + ক্যাটাগরি ট্যাব + কার্ট (localStorage) + চেকআউট — COD (গেস্ট/লগইন) বা ওয়ালেট পেমেন্ট (লগইন), অফার ব্যাজ, স্টক ম্যানেজমেন্ট
+- **পপ-আপ সাইনবোর্ড**: এডমিন প্রতি-প্রোডাক্ট টগল (সর্বোচ্চ ৫) → সব পেজে ফ্লোটিং শপ বাটনে ব্যাজ + ডোরাকাটা শামিয়ানা-হেডার পপ-আপ (সেশনে একবার অটো-ওপেন, অফার ব্যাজসহ)
+- **ওয়ালেট ও ম্যানুয়াল পেমেন্ট** (`/wallet`): বিকাশ/নগদ নম্বরে টাকা পাঠিয়ে ফর্ম (মাধ্যম, প্রেরক নম্বর, TrxID, পরিমাণ, স্ক্রিনশট) → এডমিন অ্যাপ্রুভ → ওয়ালেট ক্রেডিট; লেনদেন+অর্ডার ইতিহাস; ডুপ্লিকেট TrxID ব্লক
+- **অ্যাসিস্টেড আবেদন** (`/assisted`): "নিজে করবেন নাকি এডমিনকে দিয়ে?" — রিকোয়েস্ট → এডমিন ফি কোট → ওয়ালেটে পরিশোধ → প্রসেসিং → সম্পন্ন
+- **এডমিন শপ প্যানেল** (`/admin/shop`): প্রোডাক্ট ফুল CRUD (সাইনবোর্ড টগল ৫-লিমিট এনফোর্সড), অর্ডার স্ট্যাটাস (বাতিলে অটো-রিফান্ড+স্টক ফেরত), পেমেন্ট রিভিউ কিউ (স্ক্রিনশট প্রিভিউ, অ্যাপ্রুভ/বাতিল), অ্যাসিস্টেড কিউ (ফি/স্ট্যাটাস/নোট), সেটিংস (বিকাশ/নগদ/হোয়াটসঅ্যাপ নম্বর + COD চার্জ)
+- **WhatsApp বাটন**: এখন settings থেকে নম্বর পড়ে wa.me লিংক খোলে (নম্বর সেট না থাকলে বার্তা)
+
+### শপ API (`/api/shop/*`)
+| Endpoint | কাজ |
+|---|---|
+| `GET /products?category=` | পাবলিক প্রোডাক্ট তালিকা |
+| `GET /signboard` | সাইনবোর্ড প্রোডাক্ট (≤৫) |
+| `GET /settings` | পেমেন্ট নম্বর + COD চার্জ |
+| `POST /orders` | অর্ডার (গেস্ট COD / লগইন COD+ওয়ালেট) |
+| `GET /orders/mine` | আমার অর্ডার |
+| `POST /payments`, `GET /payments/mine` | টপ-আপ রিকোয়েস্ট |
+| `POST /assisted`, `GET /assisted/mine`, `POST /assisted/:id/pay` | অ্যাসিস্টেড সার্ভিস |
+| `GET/POST/PUT/DELETE /admin/products*` | এডমিন প্রোডাক্ট CRUD |
+| `GET/PUT /admin/orders*` | এডমিন অর্ডার ম্যানেজ |
+| `GET /admin/payments`, `POST /admin/payments/:id/approve|reject` | পেমেন্ট রিভিউ |
+| `GET/PUT /admin/assisted*` | অ্যাসিস্টেড কিউ |
+| `GET/PUT /admin/settings` | নম্বর/চার্জ সেটিংস |
+
+## Data Architecture
+- **Storage**: Cloudflare D1 (SQLite) — `migrations/0001` … `0007_subscriptions_qpapers_features.sql`
+- **Tables**: users, sessions, profiles, saved_rolls, wallets, wallet_transactions, settings, notices, jobs, feed_cache, mcq_questions, mcq_attempts, wrong_bank, planner_tasks, notes, syllabus, cv_templates, user_cvs, products, orders, order_items, payment_requests, assisted_requests, plans, subscriptions, question_papers, feature_toggles
+- **External APIs**: AlAdhan (নামাজ), alquran.cloud (কুরআন বাংলা), প্রথম আলো/বিবিসি/গুগল নিউজ RSS — সব D1-ক্যাশড
+
+## বাকি ফেজ (MASTER_PLAN.md অনুযায়ী)
+- ~~ফেজ-২~~ ✅ সম্পন্ন (2026-08-29)
+- ~~ফেজ-৩~~ ✅ সম্পন্ন (2026-08-29): MCQ, ভুল-ব্যাংক, প্ল্যানার+নোট, CGPA, সিলেবাস, লিডারবোর্ড
+- ~~ফেজ-৪~~ ✅ সম্পন্ন (2026-08-29): CV মেকার ১০ ডিজাইন + এডমিন কাস্টমাইজার (ছবি/স্বাক্ষর রিসাইজার ফেজ-১ থেকেই চালু)
+- ~~ফেজ-৫~~ ✅ সম্পন্ন (2026-08-29): ওয়ালেট টপ-আপ (বিকাশ/নগদ ম্যানুয়াল), ই-কমার্স শপ + পপ-আপ সাইনবোর্ড, অ্যাসিস্টেড আবেদন, এডমিন শপ প্যানেল
+- ~~ফেজ-৬~~ ✅ সম্পন্ন (2026-08-29): সম্পূর্ণ এডমিন প্যানেল (`/admin` — স্ট্যাটস, ইউজার ম্যানেজমেন্ট/রোল/ওয়ালেট এডজাস্ট, নোটিস/চাকরি/MCQ/সিলেবাস CRUD, রেট ও সেটিংস), AI সহকারী (`/api/ai/chat` — গাইড → Workers AI `@cf/meta/llama-3.3-70b-instruct-fp8-fast` → ফলব্যাক, সব পেজে ফ্লোটিং চ্যাট), রেফারেল সিস্টেম (সাইনআপে কোড/`?ref=` লিংক, দুজনেই বোনাস, ড্যাশবোর্ড রেফারেল কার্ড, `GET /api/referrals`), মাইগ্রেশন `0006_referral_admin.sql` (users.referred_by + signup_bonus/referral_bonus সেটিংস)
+
+- ~~ফেজ-৭~~ ✅ সম্পন্ন (2026-08-29): সাবস্ক্রিপশন প্ল্যান, প্রশ্নপত্র ব্যাংক, ফিচার টগল
+
+**🎉 প্রজেক্ট সম্পূর্ণ — সব ৭টি ফেজ শেষ ও প্রোডাকশনে ডিপ্লয়েড।**
+
+## ফেজ-৭ সম্পন্ন ফিচার ✅
+- **সাবস্ক্রিপশন প্ল্যান** (`/subscription`): ফ্রি / স্ট্যান্ডার্ড ৳৫০ / প্রিমিয়াম ৳১০০ (মাসিক) — ওয়ালেট থেকে পেমেন্ট, আপগ্রেড গার্ড (নিম্নতর প্ল্যানে নামা ব্লকড), মেয়াদ শেষে অটো-ফ্রি
+- **প্রশ্নপত্র ব্যাংক** (`/qpapers`): SSC/HSC/NU/চাকরি ট্যাব — free/standard/premium অ্যাকসেস গেটেড ডাউনলোড, ডাউনলোড কাউন্টার, লকড পেপারে সাবস্ক্রাইব CTA
+- **ফিচার টগল**: ১০টি ফিচার (শপ/AI/CV/MCQ/নিউজ ইত্যাদি) এডমিন অন/অফ — `GET /api/subs/features` পাবলিক রিড
+- **এডমিন ট্যাব** (`/admin`-এ নতুন): 👑 সাবস্ক্রিপশন (প্ল্যান দাম/মেয়াদ/ফিচার এডিট + সাবস্ক্রাইবার তালিকা + ম্যানুয়াল গ্রান্ট), 📜 প্রশ্নপত্র CRUD, 🎛️ ফিচার টগল
+- ড্যাশবোর্ড সাইডবারে "প্রশ্নপত্র ব্যাংক" ও "সাবস্ক্রিপশন" লিংক; ল্যান্ডিং প্রিমিয়াম কার্ড → `/subscription`
+
+### সাবস্ক্রিপশন API (`/api/subs/*`)
+| Endpoint | কাজ |
+|---|---|
+| `GET /plans` | প্ল্যান তালিকা + বর্তমান প্ল্যান (পাবলিক) |
+| `POST /subscribe` | ওয়ালেট থেকে সাবস্ক্রাইব (লগইন) |
+| `GET /my-plan` | আমার প্ল্যান + মেয়াদ |
+| `GET /qpapers?level=` | প্রশ্নপত্র তালিকা (unlocked ফ্ল্যাগসহ) |
+| `GET /qpapers/:id/link` | ডাউনলোড লিংক (প্ল্যান গেট) |
+| `GET /features` | ফিচার টগল ম্যাপ (পাবলিক) |
+| `GET/PUT /admin/plans*` | এডমিন প্ল্যান এডিট |
+| `GET /admin/subscribers`, `POST /admin/grant` | সাবস্ক্রাইবার + ম্যানুয়াল গ্রান্ট |
+| `CRUD /admin/qpapers*` | প্রশ্নপত্র ম্যানেজ |
+| `GET/PUT /admin/features*` | ফিচার অন/অফ |
+
+### এডমিন API (ফেজ-৬, role=admin প্রয়োজন)
+| এন্ডপয়েন্ট | কাজ |
+|---|---|
+| GET /api/admin/stats | ইউজার/অর্ডার/পেন্ডিং/রেভিনিউ স্ট্যাটস |
+| GET /api/admin/users?q= | ইউজার সার্চ (নাম/ফোন/কোড) |
+| PUT /api/admin/users/:id/role | রোল পরিবর্তন (self-demote ব্লকড) |
+| POST /api/admin/users/:id/wallet | ওয়ালেট ± এডজাস্ট (ওভারড্রাফট ব্লকড) |
+| CRUD /api/admin/{notices,jobs,mcq,syllabus} | কনটেন্ট ম্যানেজমেন্ট |
+| GET/PUT /api/admin/rates | signup_bonus, referral_bonus, cod_charge, bkash/nagad/whatsapp নম্বর |
+
+## Development
 ```bash
-cd backend
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env   # set MONGO_URL + DB_NAME (see below)
-python server.py       # serves on http://0.0.0.0:8000 (PORT env overrides)
+npm run build
+npx wrangler d1 migrations apply edusob-production --local
+pm2 start ecosystem.config.cjs   # port 3000, D1 local
 ```
 
-### Frontend (React)
+## Deployment
+- **Platform**: Cloudflare Pages (ফ্রি টিয়ার) — ✅ **লাইভ**: https://edusob.pages.dev
+- **Account**: ইউজারের নিজস্ব Cloudflare অ্যাকাউন্ট (BYOK)
+- **D1 Database**: `edusob-production` (id: 490e0a26-5456-4a74-9845-4ddeaf2e8e3e) — মাইগ্রেশন 0001-0007 প্রয়োগকৃত (local+remote)
+- **Deploy কমান্ড**: `npm run build && npx wrangler pages deploy dist --project-name edusob`
+- **Remote মাইগ্রেশন**: `npx wrangler d1 migrations apply edusob-production --remote`
+- **Tech Stack**: Hono + TypeScript + TailwindCSS (CDN) + D1
+- **Last Updated**: 2026-08-29 (Phase 8)
 
-```bash
-cd frontend
-npm install   # or: bun install / yarn
-npm start     # http://localhost:3000 — /api is proxied to the backend
-```
 
-The dev server proxies `/api` to `http://127.0.0.1:8000` (override with
-`BACKEND_URL`). If the backend is hosted elsewhere, set
-`REACT_APP_BACKEND_URL` (e.g. `https://api.example.com`) and the frontend will
-call that origin directly; when unset it falls back to same-origin `/api`.
+## Phase 8 (সম্পন্ন ✅ — ডিপ্লয়েড)
+- **সরাসরি রেজাল্ট চেকার** (/results): পরীক্ষা/বোর্ড/রোল/রেজি দিয়ে সাইটেই মার্কশিট (GPA + বিষয়ভিত্তিক গ্রেড, প্রিন্ট/কপি); সার্ভার ব্যস্ত হলে অফিসিয়াল লিংকে ফলব্যাক; সেভ করা রোল থেকে ⚡ প্রিফিল
+- **ভর্তি হাব** (/admission): লেভেল ট্যাব, ডেডলাইন কার্ড, ধাপে ধাপে গাইড মডাল, প্রোফাইল-তথ্য ওয়ান-ক্লিক কপি প্যানেল, সহায়তা সেবা লিংক
+- **ঘোষণা কার্ড** (ড্যাশবোর্ড): অ্যাডমিন-অনুমোদিত রুটিন/প্রশ্ন/রেজাল্ট ঘোষণা + ছবি; **পিন সিস্টেম** (সর্বোচ্চ ৫টি শীর্ষে)
+- **প্রোফাইলে শিক্ষাস্তর সম্পাদনা** + MCQ/প্রশ্নব্যাংক/ভর্তিতে স্মার্ট ডিফল্ট ফিল্টার ("সব" ট্যাব বহাল)
+- **নোটিসের পূর্ণ বডি সাইটেই** (বিস্তারিত পড়ুন), নিউজে সূত্র+সময় স্পষ্ট, সর্বত্র তারিখ: বার + DD/MM/YYYY (যেমন: শনিবার, ২৯/০৮/২০২৬)
+- অ্যাডমিন প্যানেল: ঘোষণা ও ভর্তি ট্যাব (textarea/image আপলোড সাপোর্ট), নোটিস বডি ফিল্ড
+- নতুন API: /api/result/check, /api/announcements, /api/pins, /api/admissions(+/myinfo) | মাইগ্রেশন 0008 (লোকাল+রিমোট ✅)
 
-## Environment variables
-
-| Variable                 | Backend/Frontend | Default                    | Purpose                        |
-| ------------------------ | ---------------- | -------------------------- | ------------------------------ |
-| `MONGO_URL`              | backend          | `mongodb://127.0.0.1:27017` | MongoDB connection string      |
-| `DB_NAME`                | backend          | `edusob`                    | Database name                  |
-| `PORT`                   | backend          | `8000`                      | HTTP port                      |
-| `CORS_ORIGINS`           | backend          | `*`                         | Comma-separated allowed origins |
-| `BACKEND_URL`            | frontend (craco) | `http://127.0.0.1:8000`     | Dev-server proxy target        |
-| `REACT_APP_BACKEND_URL`  | frontend (browser)| *(unset)*                 | Overrides the API base origin  |
-
-## API endpoints
-
-| Method | Path                 | Description                                   |
-| ------ | -------------------- | --------------------------------------------- |
-| GET    | `/api/health`        | Liveness + MongoDB ping (`ok` / `degraded`)   |
-| GET    | `/api/courses`       | List courses (`?category=` / `?q=` filters)   |
-| GET    | `/api/courses/{id}`  | Single course detail                          |
-| POST   | `/api/enroll`        | Enroll: BD phone validation, coupon `EDUSOB2026` (15% off), discounted price |
-| POST   | `/api/newsletter`    | Upsert newsletter subscription                |
-
-## Production build
-
-```bash
-cd frontend && npm run build   # outputs to frontend/build/
-```
-
-## Tests
-
-```bash
-cd backend && python -m pytest   # requires pytest-xdist (see pytest.ini)
-```
+## Phase 9 (সর্বশেষ আপডেট)
+- **রেসপন্সিভ ড্যাশবোর্ড**: মোবাইলে হ্যামবার্গার → স্লাইড ড্রয়ার (সব ফিচার), ডেস্কটপ সাইডবারে ৩টি ড্রপডাউন গ্রুপ (পড়াশোনা / খবরাখবর / সেবাসমূহ)
+- **পপআপ কার্ড**: আজকের বাণী (বড় হলে আংশিক → ক্লিকে পূর্ণ পপআপ), শীর্ষ নিউজ (ক্লিকে পপআপ → "মূল খবর পড়ুন"), ঘোষণা (লম্বা হলে "পুরোটা দেখুন" পপআপ)
+- **নিজস্ব প্রস্তুতকৃত কন্টেন্ট**: ৫টি পূর্ণ প্রশ্নপত্র + ৫টি পূর্ণ সাজেশন + ৮টি নতুন MCQ — কোনো লিংক/ডেমো নেই; সাইটেই পড়া, প্রিন্ট ও টেক্সট ডাউনলোড
+- **ইউনিক ডাউনলোড লজিক**: সাবস্ক্রিপশন গেট (free/standard/premium) + দৈনিক লিমিট (ফ্রি ৩, স্ট্যান্ডার্ড ১৫, প্রিমিয়াম আনলিমিটেড); একই আইটেম একই দিনে পুনরায় খুললে গণনা হয় না
+- **ইউজার সাসপেন্ড**: এডমিন প্যানেলে ইউজার তালিকায় সাসপেন্ড/আনসাসপেন্ড বাটন; সাসপেন্ডেড ইউজারের লগইন ব্লক + সব সেশন বাতিল
+- **এডমিন আপডেট বাটন**: প্রতিটি CRUD তালিকায় "✏️ আপডেট" — ফর্মে লোড করে সম্পাদনা করে সেভ; প্রশ্নপত্র/সাজেশন ট্যাবে পূর্ণ কন্টেন্ট textarea; এডমিন সব কন্টেন্ট প্রিভিউ করতে পারেন
+- **API**: `GET /api/subs/qpapers/:id/content`, `GET /api/subs/suggestions[?level=]`, `GET /api/subs/suggestions/:id/content`, `PUT /api/admin/users/:id/status`, `GET/POST/PUT/DELETE /api/subs/admin/suggestions`
+- **DB**: migration 0009 — users.status, question_papers.content, suggestions, content_downloads (লোকাল + রিমোট প্রয়োগকৃত)
+- **Last Updated**: 2026-08-29

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ড্যাশবোর্ড ডিজাইন ১ — Emerald Pro (মুসলিম থিম)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Hind Siliguri', sans-serif; }
+  .card-hover { transition: all .25s ease; }
+  .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(4,120,87,.15); }
+  .sidebar-link { transition: all .2s; }
+  .sidebar-link:hover, .sidebar-link.active { background: rgba(255,255,255,.12); border-left: 3px solid #fbbf24; }
+  .glow-badge { animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+</style>
+</head>
+<body class="bg-slate-100">
+
+<div class="flex min-h-screen">
+  <!-- Sidebar -->
+  <aside class="hidden lg:flex flex-col w-64 bg-gradient-to-b from-emerald-900 to-emerald-800 text-white fixed h-full z-20">
+    <div class="p-5 border-b border-emerald-700/50 flex items-center gap-3">
+      <div class="w-10 h-10 bg-amber-400 rounded-xl flex items-center justify-center text-emerald-900 text-xl font-bold"><i class="fas fa-graduation-cap"></i></div>
+      <div>
+        <h1 class="font-bold text-lg leading-tight">আপনার সাইট</h1>
+        <p class="text-emerald-300 text-xs">শিক্ষা ও ক্যারিয়ার পোর্টাল</p>
+      </div>
+    </div>
+    <nav class="flex-1 py-4 space-y-1 text-sm">
+      <a class="sidebar-link active flex items-center gap-3 px-5 py-2.5" href="#"><i class="fas fa-house w-5"></i> ড্যাশবোর্ড</a>
+      <a class="sidebar-link flex items-center gap-3 px-5 py-2.5" href="#"><i class="fas fa-square-poll-vertical w-5"></i> রেজাল্ট হাব</a>
+      <a class="sidebar-link flex items-center gap-3 px-5 py-2.5" href="#"><i class="fas fa-briefcase w-5"></i> চাকরির খবর <span class="ml-auto bg-red-500 text-xs px-1.5 rounded-full glow-badge">৫</span></a>
+      <a class="sidebar-link flex items-center gap-3 px-5 py-2.5" href="#"><i class="fas fa-pen-to-square w-5"></i> MCQ ও মডেল টেস্ট</a>
+      <a class="sidebar-link flex items-center gap-3 px-5 py-2.5" href="#"><i class="fas fa-book-open w-5"></i> নোট ও স্টাডি প্ল্যানার</a>
+      <a class="sidebar-link flex items-center gap-3 px-5 py-2.5" href="#"><i class="fas fa-file-lines w-5"></i> CV মেকার <span class="ml-auto bg-amber-400 text-emerald-900 text-xs px-1.5 rounded-full font-bold">PRO</span></a>
+      <a class="sidebar-link flex items-center gap-3 px-5 py-2.5" href="#"><i class="fas fa-paper-plane w-5"></i> আমার আবেদনসমূহ</a>
+      <a class="sidebar-link flex items-center gap-3 px-5 py-2.5" href="#"><i class="fas fa-mosque w-5"></i> ইসলামিক কর্নার</a>
+      <a class="sidebar-link flex items-center gap-3 px-5 py-2.5" href="#"><i class="fas fa-cart-shopping w-5"></i> শপ</a>
+      <a class="sidebar-link flex items-center gap-3 px-5 py-2.5" href="#"><i class="fas fa-robot w-5"></i> AI সহকারী</a>
+    </nav>
+    <div class="p-4 m-3 bg-emerald-950/60 rounded-xl text-center">
+      <p class="text-xs text-emerald-300">ওয়ালেট ব্যালেন্স</p>
+      <p class="text-2xl font-bold text-amber-400">৳ ১৫০</p>
+      <button class="mt-2 w-full bg-amber-400 text-emerald-900 text-sm font-semibold py-1.5 rounded-lg hover:bg-amber-300">রিচার্জ করুন</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 lg:ml-64">
+    <!-- Topbar -->
+    <header class="bg-white sticky top-0 z-10 shadow-sm px-4 lg:px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <button class="lg:hidden text-emerald-800 text-xl"><i class="fas fa-bars"></i></button>
+        <div class="hidden md:flex items-center bg-slate-100 rounded-full px-4 py-2 w-72">
+          <i class="fas fa-magnifying-glass text-slate-400 text-sm"></i>
+          <input class="bg-transparent outline-none px-3 text-sm w-full" placeholder="রেজাল্ট, চাকরি, নোট খুঁজুন...">
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <button class="relative text-slate-600 hover:text-emerald-700"><i class="fas fa-bell text-lg"></i><span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] rounded-full flex items-center justify-center">৩</span></button>
+        <div class="flex items-center gap-2">
+          <img src="https://api.dicebear.com/7.x/initials/svg?seed=Rahim&backgroundColor=047857" class="w-9 h-9 rounded-full ring-2 ring-emerald-500">
+          <div class="hidden md:block">
+            <p class="text-sm font-semibold text-slate-800 leading-tight">মো. রহিম উদ্দিন</p>
+            <p class="text-xs text-slate-500">ID: EDU-2026-00147</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="p-4 lg:p-8 space-y-6">
+      <!-- Welcome + prayer strip -->
+      <section class="bg-gradient-to-r from-emerald-800 to-teal-700 rounded-2xl p-6 text-white relative overflow-hidden">
+        <div class="absolute right-0 top-0 opacity-10 text-[140px] leading-none pr-4"><i class="fas fa-mosque"></i></div>
+        <div class="relative z-10">
+          <p class="text-emerald-200 text-sm">আসসালামু আলাইকুম 👋</p>
+          <h2 class="text-2xl font-bold">রহিম উদ্দিন — ঢাকা কলেজ, HSC ২০২৬</h2>
+          <div class="mt-4 flex flex-wrap gap-3 text-sm">
+            <span class="bg-white/15 backdrop-blur px-3 py-1.5 rounded-full"><i class="fas fa-calendar-day mr-1 text-amber-300"></i> ১২ রবিউল আউয়াল ১৪৪৮ হিজরি</span>
+            <span class="bg-white/15 px-3 py-1.5 rounded-full"><i class="fas fa-clock mr-1 text-amber-300"></i> পরবর্তী নামাজ: আসর — ৪:৩২ PM</span>
+            <span class="bg-amber-400 text-emerald-900 font-semibold px-3 py-1.5 rounded-full"><i class="fas fa-fire mr-1"></i> স্টাডি স্ট্রিক: ৭ দিন</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick stats -->
+      <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="card-hover bg-white rounded-2xl p-5 border-l-4 border-emerald-500">
+          <div class="flex justify-between items-start"><p class="text-slate-500 text-sm">MCQ প্র্যাকটিস</p><i class="fas fa-pen-to-square text-emerald-500"></i></div>
+          <p class="text-2xl font-bold text-slate-800">৪২০ <span class="text-sm font-normal text-slate-400">প্রশ্ন</span></p>
+          <p class="text-xs text-emerald-600 mt-1"><i class="fas fa-arrow-up"></i> সঠিক হার ৭৮%</p>
+        </div>
+        <div class="card-hover bg-white rounded-2xl p-5 border-l-4 border-red-400">
+          <div class="flex justify-between items-start"><p class="text-slate-500 text-sm">ভুল প্রশ্ন ব্যাংক</p><i class="fas fa-circle-xmark text-red-400"></i></div>
+          <p class="text-2xl font-bold text-slate-800">৩৭ <span class="text-sm font-normal text-slate-400">টি বাকি</span></p>
+          <p class="text-xs text-red-500 mt-1">আজ ১০টি রিভিশন করুন</p>
+        </div>
+        <div class="card-hover bg-white rounded-2xl p-5 border-l-4 border-blue-400">
+          <div class="flex justify-between items-start"><p class="text-slate-500 text-sm">আবেদন ট্র্যাকিং</p><i class="fas fa-paper-plane text-blue-400"></i></div>
+          <p class="text-2xl font-bold text-slate-800">২ <span class="text-sm font-normal text-slate-400">চলমান</span></p>
+          <p class="text-xs text-blue-500 mt-1">১টি এডমিন প্রসেসিং-এ</p>
+        </div>
+        <div class="card-hover bg-white rounded-2xl p-5 border-l-4 border-amber-400">
+          <div class="flex justify-between items-start"><p class="text-slate-500 text-sm">স্টাডি প্ল্যান</p><i class="fas fa-list-check text-amber-500"></i></div>
+          <p class="text-2xl font-bold text-slate-800">৫/৮ <span class="text-sm font-normal text-slate-400">টাস্ক</span></p>
+          <div class="w-full bg-slate-100 h-1.5 rounded-full mt-2"><div class="bg-amber-400 h-1.5 rounded-full" style="width:62%"></div></div>
+        </div>
+      </section>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        <!-- Left 2 cols -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- Result hub -->
+          <section class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-slate-800 text-lg"><i class="fas fa-square-poll-vertical text-emerald-600 mr-2"></i>রেজাল্ট কুইক অ্যাক্সেস</h3>
+              <span class="text-xs text-slate-400">আপনার প্রোফাইল অনুযায়ী সাজানো</span>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="card-hover border border-emerald-100 bg-emerald-50/50 rounded-xl p-4">
+                <div class="flex items-center justify-between">
+                  <p class="font-semibold text-slate-800">HSC রেজাল্ট ২০২৬</p>
+                  <span class="flex items-center gap-1 text-xs text-emerald-600"><span class="w-2 h-2 bg-emerald-500 rounded-full glow-badge"></span> সার্ভার সচল</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-1">রোল: ১২৩৪৫৬ · ঢাকা বোর্ড (সেভ করা)</p>
+                <button class="mt-3 w-full bg-emerald-600 text-white text-sm py-2 rounded-lg hover:bg-emerald-700"><i class="fas fa-bolt mr-1"></i> এক ক্লিকে রেজাল্ট দেখুন</button>
+                <p class="text-[11px] text-slate-400 mt-2 text-center">লিংক ১ ডাউন হলে অটো লিংক ২ / ৩ ব্যবহার হবে</p>
+              </div>
+              <div class="card-hover border border-slate-100 rounded-xl p-4">
+                <div class="flex items-center justify-between">
+                  <p class="font-semibold text-slate-800">NU অনার্স ভর্তি ফলাফল</p>
+                  <span class="flex items-center gap-1 text-xs text-amber-500"><span class="w-2 h-2 bg-amber-400 rounded-full"></span> ধীরগতি</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-1">১ম বর্ষ · ২০২৫-২৬ সেশন</p>
+                <button class="mt-3 w-full border border-emerald-600 text-emerald-700 text-sm py-2 rounded-lg hover:bg-emerald-50">সহায়িকা সহ যান <i class="fas fa-arrow-right ml-1"></i></button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Job matches -->
+          <section class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-slate-800 text-lg"><i class="fas fa-briefcase text-emerald-600 mr-2"></i>আপনার যোগ্যতায় ম্যাচ করা চাকরি</h3>
+              <a href="#" class="text-sm text-emerald-600 hover:underline">সব দেখুন</a>
+            </div>
+            <div class="space-y-3">
+              <div class="card-hover flex items-center gap-4 border border-slate-100 rounded-xl p-4">
+                <div class="w-11 h-11 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-700"><i class="fas fa-landmark"></i></div>
+                <div class="flex-1">
+                  <p class="font-semibold text-slate-800">প্রাথমিক বিদ্যালয় সহকারী শিক্ষক <span class="ml-1 text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">HSC+ ম্যাচ ৯২%</span></p>
+                  <p class="text-xs text-slate-500">টেলিটক সরকারি · আবেদন শেষ: <span class="text-red-500 font-semibold">৩ দিন বাকি</span></p>
+                </div>
+                <button class="bg-emerald-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-emerald-700">আবেদন</button>
+              </div>
+              <div class="card-hover flex items-center gap-4 border border-slate-100 rounded-xl p-4">
+                <div class="w-11 h-11 bg-blue-100 rounded-lg flex items-center justify-center text-blue-700"><i class="fas fa-building"></i></div>
+                <div class="flex-1">
+                  <p class="font-semibold text-slate-800">অফিস সহকারী — বেসরকারি ব্যাংক <span class="ml-1 text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">ম্যাচ ৮৫%</span></p>
+                  <p class="text-xs text-slate-500">বিডিজবস · ঢাকা · ১২ দিন বাকি</p>
+                </div>
+                <button class="border border-emerald-600 text-emerald-700 text-sm px-4 py-2 rounded-lg hover:bg-emerald-50">বিস্তারিত</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- News -->
+          <section class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-slate-800 text-lg"><i class="fas fa-newspaper text-emerald-600 mr-2"></i>শীর্ষ সংবাদ <span class="text-xs font-normal bg-red-100 text-red-600 px-2 py-0.5 rounded-full ml-1">অটো আপডেট</span></h3>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-3 text-sm">
+              <div class="card-hover border border-slate-100 rounded-xl p-3"><span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 rounded-full">শিক্ষা</span><p class="font-semibold text-slate-700 mt-2 leading-snug">HSC ফরম ফিলাপের সময় বাড়লো ৭ দিন</p><p class="text-xs text-slate-400 mt-1">২ ঘণ্টা আগে</p></div>
+              <div class="card-hover border border-slate-100 rounded-xl p-3"><span class="text-[10px] bg-blue-100 text-blue-700 px-2 rounded-full">জাতীয়</span><p class="font-semibold text-slate-700 mt-2 leading-snug">৪৮তম বিসিএস সার্কুলার প্রকাশ</p><p class="text-xs text-slate-400 mt-1">৫ ঘণ্টা আগে</p></div>
+              <div class="card-hover border border-slate-100 rounded-xl p-3"><span class="text-[10px] bg-amber-100 text-amber-700 px-2 rounded-full">ভর্তি</span><p class="font-semibold text-slate-700 mt-2 leading-snug">NU মাস্টার্স ভর্তি আবেদন শুরু</p><p class="text-xs text-slate-400 mt-1">১ দিন আগে</p></div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right col -->
+        <div class="space-y-6">
+          <!-- College notice -->
+          <section class="bg-white rounded-2xl p-5 shadow-sm">
+            <h3 class="font-bold text-slate-800 mb-3"><i class="fas fa-school text-emerald-600 mr-2"></i>ঢাকা কলেজ নোটিস</h3>
+            <div class="space-y-2.5 text-sm">
+              <div class="card-hover border-l-3 border-l-4 border-red-400 bg-red-50/50 rounded-r-lg p-3">
+                <p class="font-semibold text-slate-700 leading-snug">ফরম ফিলাপ বিজ্ঞপ্তি — শেষ তারিখ ০৫/০৯</p>
+                <div class="flex gap-2 mt-2">
+                  <button class="text-xs bg-emerald-600 text-white px-2.5 py-1 rounded-md">আবেদন লিংক</button>
+                  <button class="text-xs border border-emerald-600 text-emerald-700 px-2.5 py-1 rounded-md">পেমেন্ট লিংক</button>
+                </div>
+              </div>
+              <div class="card-hover border-l-4 border-slate-300 rounded-r-lg p-3 bg-slate-50">
+                <p class="font-semibold text-slate-700 leading-snug">নির্বাচনী পরীক্ষার রুটিন প্রকাশিত</p>
+                <p class="text-xs text-slate-400 mt-1">গতকাল</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Islamic corner -->
+          <section class="bg-gradient-to-b from-emerald-900 to-emerald-800 rounded-2xl p-5 text-white relative overflow-hidden">
+            <div class="absolute -bottom-4 -right-4 text-emerald-700/40 text-8xl"><i class="fas fa-star-and-crescent"></i></div>
+            <h3 class="font-bold mb-3"><i class="fas fa-mosque text-amber-300 mr-2"></i>ইসলামিক কর্নার</h3>
+            <div class="grid grid-cols-3 gap-2 text-center text-xs relative z-10">
+              <div class="bg-white/10 rounded-lg py-2"><p class="text-amber-300 font-bold">ফজর</p><p>৪:৩৮</p></div>
+              <div class="bg-white/10 rounded-lg py-2"><p class="text-amber-300 font-bold">যোহর</p><p>১১:৫৮</p></div>
+              <div class="bg-amber-400 text-emerald-900 rounded-lg py-2 font-bold"><p>আসর</p><p>৪:৩২</p></div>
+              <div class="bg-white/10 rounded-lg py-2"><p class="text-amber-300 font-bold">মাগরিব</p><p>৬:১৪</p></div>
+              <div class="bg-white/10 rounded-lg py-2"><p class="text-amber-300 font-bold">এশা</p><p>৭:৩০</p></div>
+              <div class="bg-white/10 rounded-lg py-2"><p class="text-amber-300 font-bold">সূর্যোদয়</p><p>৫:৫৪</p></div>
+            </div>
+            <p class="text-xs text-emerald-200 mt-3 relative z-10"><i class="fas fa-book-quran mr-1"></i> আজকের আয়াত ও PDF লাইব্রেরি →</p>
+          </section>
+
+          <!-- AI assistant -->
+          <section class="card-hover bg-white rounded-2xl p-5 shadow-sm border border-purple-100">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-xl flex items-center justify-center text-white"><i class="fas fa-robot"></i></div>
+              <div>
+                <h3 class="font-bold text-slate-800">AI সহকারী</h3>
+                <p class="text-xs text-slate-500">"কীভাবে NU ভর্তি আবেদন করবো?" — জিজ্ঞেস করুন</p>
+              </div>
+            </div>
+            <div class="mt-3 flex items-center bg-slate-100 rounded-full px-4 py-2">
+              <input class="bg-transparent outline-none text-sm w-full" placeholder="প্রশ্ন লিখুন...">
+              <button class="text-purple-600"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- WhatsApp float -->
+<a href="#" class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl shadow-lg hover:scale-110 transition z-50"><i class="fab fa-whatsapp"></i></a>
+
+<div class="fixed bottom-6 left-6 bg-slate-900 text-white text-xs px-4 py-2 rounded-full z-50 opacity-90">📐 স্যাম্পল ডিজাইন ১: Emerald Pro — <a href="/samples/dashboard-2.html" class="text-amber-300 underline">ডিজাইন ২ দেখুন →</a></div>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ড্যাশবোর্ড ডিজাইন ২ — Saffron Light (সনাতনী থিম)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Hind Siliguri', sans-serif; }
+  body { background: #fdf8f3; }
+  .watermark { background-image: radial-gradient(circle at 90% 10%, rgba(234,88,12,.06) 0, transparent 40%), radial-gradient(circle at 10% 90%, rgba(202,138,4,.05) 0, transparent 40%); }
+  .om-mark::before { content: 'ॐ'; position: absolute; right: 24px; top: 12px; font-size: 90px; color: rgba(234,88,12,.07); }
+  .card-hover { transition: all .25s ease; }
+  .card-hover:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(234,88,12,.13); }
+  .topnav-link { transition: all .2s; border-bottom: 3px solid transparent; }
+  .topnav-link:hover, .topnav-link.active { border-bottom-color: #ea580c; color: #ea580c; }
+  .pulse { animation: pulse 2s infinite; } @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.55} }
+</style>
+</head>
+<body class="watermark">
+
+<!-- Top navbar layout (no sidebar) -->
+<header class="bg-white/90 backdrop-blur sticky top-0 z-30 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-center justify-between py-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center text-white text-lg font-bold"><i class="fas fa-graduation-cap"></i></div>
+        <div>
+          <h1 class="font-bold text-lg text-slate-800 leading-tight">আপনার সাইট</h1>
+          <p class="text-orange-600 text-[11px] font-medium">শিক্ষা · চাকরি · সেবা — এক ঠিকানায়</p>
+        </div>
+      </div>
+      <div class="hidden md:flex items-center bg-orange-50 border border-orange-100 rounded-full px-4 py-2 w-80">
+        <i class="fas fa-magnifying-glass text-orange-300 text-sm"></i>
+        <input class="bg-transparent outline-none px-3 text-sm w-full" placeholder="খুঁজুন — রেজাল্ট, চাকরি, নোট, বই...">
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="hidden sm:flex items-center gap-2 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-full">
+          <i class="fas fa-wallet text-amber-500"></i><span class="text-sm font-bold text-slate-700">৳ ২৪০</span>
+          <button class="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full">+</button>
+        </div>
+        <button class="relative text-slate-500 hover:text-orange-600"><i class="fas fa-bell text-lg"></i><span class="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 text-white text-[10px] rounded-full flex items-center justify-center">২</span></button>
+        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Priya&backgroundColor=ea580c" class="w-9 h-9 rounded-full ring-2 ring-orange-400">
+      </div>
+    </div>
+    <nav class="flex gap-1 overflow-x-auto text-sm font-medium text-slate-600 -mb-px">
+      <a class="topnav-link active px-4 py-2.5 whitespace-nowrap" href="#"><i class="fas fa-house mr-1.5"></i>হোম</a>
+      <a class="topnav-link px-4 py-2.5 whitespace-nowrap" href="#"><i class="fas fa-square-poll-vertical mr-1.5"></i>রেজাল্ট</a>
+      <a class="topnav-link px-4 py-2.5 whitespace-nowrap" href="#"><i class="fas fa-briefcase mr-1.5"></i>চাকরি</a>
+      <a class="topnav-link px-4 py-2.5 whitespace-nowrap" href="#"><i class="fas fa-pen-to-square mr-1.5"></i>MCQ টেস্ট</a>
+      <a class="topnav-link px-4 py-2.5 whitespace-nowrap" href="#"><i class="fas fa-file-lines mr-1.5"></i>CV মেকার</a>
+      <a class="topnav-link px-4 py-2.5 whitespace-nowrap" href="#"><i class="fas fa-om mr-1.5"></i>সনাতন কর্নার</a>
+      <a class="topnav-link px-4 py-2.5 whitespace-nowrap" href="#"><i class="fas fa-cart-shopping mr-1.5"></i>শপ</a>
+      <a class="topnav-link px-4 py-2.5 whitespace-nowrap" href="#"><i class="fas fa-newspaper mr-1.5"></i>নিউজ</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+
+  <!-- Hero row -->
+  <div class="grid lg:grid-cols-3 gap-5">
+    <section class="lg:col-span-2 om-mark relative bg-white rounded-2xl p-6 shadow-sm border border-orange-100 overflow-hidden">
+      <p class="text-orange-600 text-sm font-medium">🙏 হরেকৃষ্ণ</p>
+      <h2 class="text-2xl font-bold text-slate-800">প্রিয়া রানী দাস</h2>
+      <p class="text-sm text-slate-500">সরকারি সিটি কলেজ, চট্টগ্রাম · অনার্স ২য় বর্ষ (ব্যবস্থাপনা) · ID: EDU-2026-00291</p>
+      <div class="mt-4 flex flex-wrap gap-2 text-sm">
+        <span class="bg-rose-50 border border-rose-200 text-rose-700 px-3 py-1.5 rounded-full"><i class="fas fa-calendar-days mr-1"></i> ১৪ ভাদ্র ১৪৩৩ বঙ্গাব্দ</span>
+        <span class="bg-orange-50 border border-orange-200 text-orange-700 px-3 py-1.5 rounded-full"><i class="fas fa-moon mr-1"></i> শুক্লপক্ষ, ত্রয়োদশী</span>
+        <span class="bg-purple-50 border border-purple-200 text-purple-700 px-3 py-1.5 rounded-full pulse"><i class="fas fa-star mr-1"></i> একাদশী: আর ২ দিন পর</span>
+        <span class="bg-emerald-50 border border-emerald-200 text-emerald-700 px-3 py-1.5 rounded-full"><i class="fas fa-fire mr-1"></i> স্ট্রিক ১২ দিন</span>
+      </div>
+      <div class="mt-5 grid grid-cols-3 gap-3 text-center">
+        <div class="bg-orange-50 rounded-xl py-3"><p class="text-xl font-bold text-orange-600">৭৩%</p><p class="text-xs text-slate-500">প্রোফাইল সম্পূর্ণ</p></div>
+        <div class="bg-orange-50 rounded-xl py-3"><p class="text-xl font-bold text-orange-600">৫৮০</p><p class="text-xs text-slate-500">MCQ সমাধান</p></div>
+        <div class="bg-orange-50 rounded-xl py-3"><p class="text-xl font-bold text-orange-600">৩</p><p class="text-xs text-slate-500">চলমান আবেদন</p></div>
+      </div>
+    </section>
+
+    <!-- Sanatani corner -->
+    <section class="bg-gradient-to-b from-orange-500 via-orange-600 to-amber-600 rounded-2xl p-5 text-white relative overflow-hidden">
+      <div class="absolute -bottom-6 -right-2 text-white/10 text-9xl font-bold">ॐ</div>
+      <h3 class="font-bold text-lg"><i class="fas fa-om mr-2"></i>সনাতন কর্নার</h3>
+      <div class="mt-3 space-y-2.5 text-sm relative z-10">
+        <div class="bg-white/15 backdrop-blur rounded-xl p-3 flex items-center justify-between">
+          <div><p class="font-semibold">আসন্ন: পার্শ্ব একাদশী</p><p class="text-xs text-orange-100">৩১ আগস্ট, রবিবার</p></div>
+          <button class="bg-white text-orange-600 text-xs font-bold px-2.5 py-1 rounded-full">রিমাইন্ডার</button>
+        </div>
+        <div class="bg-white/15 rounded-xl p-3"><p class="font-semibold">দুর্গাপূজা কাউন্টডাউন</p><p class="text-2xl font-bold text-amber-200">৪৯ দিন</p></div>
+        <a href="#" class="block bg-amber-300 text-orange-900 font-semibold text-center rounded-xl py-2 hover:bg-amber-200"><i class="fas fa-book-open mr-1"></i> গীতা পাঠ করুন (পাতা-ওল্টানো রিডার)</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Service icon grid -->
+  <section>
+    <h3 class="font-bold text-slate-800 text-lg mb-3">দ্রুত সেবা</h3>
+    <div class="grid grid-cols-4 md:grid-cols-8 gap-3">
+      <a class="card-hover bg-white rounded-2xl p-3 text-center border border-orange-50" href="#"><div class="w-11 h-11 mx-auto bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-lg"><i class="fas fa-square-poll-vertical"></i></div><p class="text-xs mt-2 font-medium text-slate-600">রেজাল্ট</p></a>
+      <a class="card-hover bg-white rounded-2xl p-3 text-center border border-orange-50" href="#"><div class="w-11 h-11 mx-auto bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-lg"><i class="fas fa-briefcase"></i></div><p class="text-xs mt-2 font-medium text-slate-600">চাকরি</p></a>
+      <a class="card-hover bg-white rounded-2xl p-3 text-center border border-orange-50" href="#"><div class="w-11 h-11 mx-auto bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-lg"><i class="fas fa-file-lines"></i></div><p class="text-xs mt-2 font-medium text-slate-600">CV মেকার</p></a>
+      <a class="card-hover bg-white rounded-2xl p-3 text-center border border-orange-50" href="#"><div class="w-11 h-11 mx-auto bg-red-100 text-red-500 rounded-xl flex items-center justify-center text-lg"><i class="fas fa-pen-to-square"></i></div><p class="text-xs mt-2 font-medium text-slate-600">MCQ টেস্ট</p></a>
+      <a class="card-hover bg-white rounded-2xl p-3 text-center border border-orange-50" href="#"><div class="w-11 h-11 mx-auto bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-lg"><i class="fas fa-list-check"></i></div><p class="text-xs mt-2 font-medium text-slate-600">প্ল্যানার</p></a>
+      <a class="card-hover bg-white rounded-2xl p-3 text-center border border-orange-50" href="#"><div class="w-11 h-11 mx-auto bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center text-lg"><i class="fas fa-book"></i></div><p class="text-xs mt-2 font-medium text-slate-600">নোট</p></a>
+      <a class="card-hover bg-white rounded-2xl p-3 text-center border border-orange-50" href="#"><div class="w-11 h-11 mx-auto bg-pink-100 text-pink-600 rounded-xl flex items-center justify-center text-lg"><i class="fas fa-cart-shopping"></i></div><p class="text-xs mt-2 font-medium text-slate-600">শপ</p></a>
+      <a class="card-hover bg-white rounded-2xl p-3 text-center border border-orange-50" href="#"><div class="w-11 h-11 mx-auto bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-lg"><i class="fas fa-robot"></i></div><p class="text-xs mt-2 font-medium text-slate-600">AI সহকারী</p></a>
+    </div>
+  </section>
+
+  <div class="grid lg:grid-cols-3 gap-5">
+    <!-- Study zone -->
+    <section class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-orange-50">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-slate-800 text-lg"><i class="fas fa-book-open-reader text-orange-500 mr-2"></i>আজকের স্টাডি জোন</h3>
+        <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">অটো-সেভ চালু ✓</span>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="card-hover border border-red-100 bg-red-50/40 rounded-xl p-4">
+          <div class="flex items-center justify-between"><p class="font-semibold text-slate-800"><i class="fas fa-circle-xmark text-red-400 mr-1"></i> ভুল প্রশ্ন রিভিশন</p><span class="text-xs bg-red-500 text-white px-2 rounded-full">২৩ বাকি</span></div>
+          <p class="text-xs text-slate-500 mt-1.5">হিসাববিজ্ঞান অধ্যায় ৩ থেকে সবচেয়ে বেশি ভুল</p>
+          <button class="mt-3 w-full bg-red-500 text-white text-sm py-2 rounded-lg hover:bg-red-600">এখনই প্র্যাকটিস করুন</button>
+        </div>
+        <div class="card-hover border border-emerald-100 bg-emerald-50/40 rounded-xl p-4">
+          <div class="flex items-center justify-between"><p class="font-semibold text-slate-800"><i class="fas fa-stopwatch text-emerald-500 mr-1"></i> আজকের মডেল টেস্ট</p><span class="text-xs bg-emerald-500 text-white px-2 rounded-full">নতুন</span></div>
+          <p class="text-xs text-slate-500 mt-1.5">ব্যবস্থাপনা ২য় বর্ষ · ৩০ প্রশ্ন · ২০ মিনিট</p>
+          <button class="mt-3 w-full bg-emerald-600 text-white text-sm py-2 rounded-lg hover:bg-emerald-700">টেস্ট শুরু করুন</button>
+        </div>
+      </div>
+      <div class="mt-4">
+        <p class="text-sm font-semibold text-slate-700 mb-2">📅 স্টাডি প্ল্যানার — আজ</p>
+        <div class="space-y-2 text-sm">
+          <label class="flex items-center gap-3 bg-slate-50 rounded-lg px-3 py-2.5 cursor-pointer hover:bg-orange-50"><input type="checkbox" checked class="accent-orange-500 w-4 h-4"><span class="line-through text-slate-400">হিসাববিজ্ঞান — অধ্যায় ৪ নোট পড়া</span><span class="ml-auto text-xs text-emerald-600">সম্পন্ন ✓</span></label>
+          <label class="flex items-center gap-3 bg-slate-50 rounded-lg px-3 py-2.5 cursor-pointer hover:bg-orange-50"><input type="checkbox" class="accent-orange-500 w-4 h-4"><span class="text-slate-700">মার্কেটিং MCQ — ৫০টি প্রশ্ন</span><span class="ml-auto text-xs text-slate-400">বিকাল ৫টা</span></label>
+          <label class="flex items-center gap-3 bg-slate-50 rounded-lg px-3 py-2.5 cursor-pointer hover:bg-orange-50"><input type="checkbox" class="accent-orange-500 w-4 h-4"><span class="text-slate-700">ভুল প্রশ্ন রিভিশন — ১০টি</span><span class="ml-auto text-xs text-slate-400">রাত ৮টা</span></label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right column -->
+    <div class="space-y-5">
+      <!-- Application tracking -->
+      <section class="bg-white rounded-2xl p-5 shadow-sm border border-orange-50">
+        <h3 class="font-bold text-slate-800 mb-3"><i class="fas fa-route text-orange-500 mr-2"></i>আবেদন ট্র্যাকিং</h3>
+        <div class="space-y-3 text-sm">
+          <div class="border border-slate-100 rounded-xl p-3">
+            <div class="flex justify-between items-center"><p class="font-semibold text-slate-700">NU ২য় বর্ষ ফরম ফিলাপ</p><span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">এডমিন প্রসেসিং</span></div>
+            <div class="flex items-center gap-1 mt-2.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div><div class="flex-1 h-0.5 bg-emerald-500"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div><div class="flex-1 h-0.5 bg-amber-400"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-amber-400 pulse"></div><div class="flex-1 h-0.5 bg-slate-200"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-slate-200"></div>
+            </div>
+            <div class="flex justify-between text-[10px] text-slate-400 mt-1"><span>জমা</span><span>পেমেন্ট</span><span>প্রসেসিং</span><span>সম্পন্ন</span></div>
+          </div>
+          <div class="border border-slate-100 rounded-xl p-3 flex justify-between items-center">
+            <p class="font-semibold text-slate-700">প্রাথমিক শিক্ষক আবেদন</p><span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">✓ সম্পন্ন</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- E-commerce -->
+      <section class="bg-white rounded-2xl p-5 shadow-sm border border-orange-50">
+        <div class="flex justify-between items-center mb-3"><h3 class="font-bold text-slate-800"><i class="fas fa-fire text-orange-500 mr-2"></i>হট প্রোডাক্ট</h3><a href="#" class="text-xs text-orange-600">শপে যান →</a></div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="card-hover border border-slate-100 rounded-xl overflow-hidden">
+            <div class="h-20 bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center text-blue-400 text-3xl"><i class="fas fa-book"></i></div>
+            <div class="p-2"><p class="text-xs font-semibold text-slate-700 leading-tight">NU প্রশ্নব্যাংক ২০২৬</p><p class="text-sm font-bold text-orange-600">৳২৫০ <span class="text-[10px] text-slate-400 line-through">৳৩২০</span></p></div>
+          </div>
+          <div class="card-hover border border-slate-100 rounded-xl overflow-hidden">
+            <div class="h-20 bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center text-amber-500 text-3xl"><i class="fas fa-calculator"></i></div>
+            <div class="p-2"><p class="text-xs font-semibold text-slate-700 leading-tight">সায়েন্টিফিক ক্যালকুলেটর</p><p class="text-sm font-bold text-orange-600">৳১,১৫০</p></div>
+          </div>
+        </div>
+        <p class="text-[11px] text-center text-slate-400 mt-2">💵 ক্যাশ অন ডেলিভারি সুবিধা</p>
+      </section>
+    </div>
+  </div>
+
+  <!-- News ticker style -->
+  <section class="bg-white rounded-2xl p-5 shadow-sm border border-orange-50">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="font-bold text-slate-800 text-lg"><i class="fas fa-newspaper text-orange-500 mr-2"></i>দেশের শীর্ষ সংবাদ <span class="text-xs font-normal bg-red-100 text-red-600 px-2 py-0.5 rounded-full ml-1 pulse">LIVE</span></h3>
+      <div class="flex gap-1.5 text-xs">
+        <button class="bg-orange-500 text-white px-3 py-1 rounded-full">সব</button>
+        <button class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full hover:bg-orange-100">শিক্ষা</button>
+        <button class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full hover:bg-orange-100">চাকরি</button>
+        <button class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full hover:bg-orange-100">জাতীয়</button>
+      </div>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+      <div class="card-hover border border-slate-100 rounded-xl p-3"><span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 rounded-full">শিক্ষা</span><p class="font-semibold text-slate-700 mt-2 leading-snug">HSC ফরম ফিলাপের সময়সীমা বাড়লো</p><p class="text-xs text-slate-400 mt-1.5"><i class="far fa-clock mr-1"></i>২ ঘণ্টা আগে</p></div>
+      <div class="card-hover border border-slate-100 rounded-xl p-3"><span class="text-[10px] bg-blue-100 text-blue-700 px-2 rounded-full">চাকরি</span><p class="font-semibold text-slate-700 mt-2 leading-snug">৪৮তম বিসিএস প্রিলি সার্কুলার প্রকাশ</p><p class="text-xs text-slate-400 mt-1.5"><i class="far fa-clock mr-1"></i>৫ ঘণ্টা আগে</p></div>
+      <div class="card-hover border border-slate-100 rounded-xl p-3"><span class="text-[10px] bg-amber-100 text-amber-700 px-2 rounded-full">ভর্তি</span><p class="font-semibold text-slate-700 mt-2 leading-snug">NU মাস্টার্স ভর্তি আবেদন শুরু ১ সেপ্টেম্বর</p><p class="text-xs text-slate-400 mt-1.5"><i class="far fa-clock mr-1"></i>১ দিন আগে</p></div>
+      <div class="card-hover border border-slate-100 rounded-xl p-3"><span class="text-[10px] bg-purple-100 text-purple-700 px-2 rounded-full">জাতীয়</span><p class="font-semibold text-slate-700 mt-2 leading-snug">প্রাথমিকে ৪৫ হাজার শিক্ষক নিয়োগের ঘোষণা</p><p class="text-xs text-slate-400 mt-1.5"><i class="far fa-clock mr-1"></i>১ দিন আগে</p></div>
+    </div>
+  </section>
+</main>
+
+<a href="#" class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl shadow-lg hover:scale-110 transition z-50"><i class="fab fa-whatsapp"></i></a>
+<div class="fixed bottom-6 left-6 bg-slate-900 text-white text-xs px-4 py-2 rounded-full z-50 opacity-90">📐 স্যাম্পল ডিজাইন ২: Saffron Light — <a href="/samples/cv-gallery.html" class="text-amber-300 underline">CV স্যাম্পল দেখুন →</a></div>
+</body>
+</html>
