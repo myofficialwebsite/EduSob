@@ -613,9 +613,18 @@ export function dashboardPage(user: SessionUser): string {
   </main>
 </div>
 
-<!-- ৫. ফ্লোটিং অ্যাকশন স্পিড ডায়াল (FAB) -->
+<!-- ৫. ফ্লোটিং অ্যাকশন স্পিড ডায়াল (FAB) ও ১-ক্লিক স্ক্রোল-টু-টপ -->
 <div id="dashFab" class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2">
+  <!-- কুইক স্ক্রোল টু টপ বাটন (২০০px নিচে স্ক্রোল করলে অটো দৃশ্যমান হয়) -->
+  <button id="dashScrollTopBtn" onclick="dashScrollToTop()" class="hidden opacity-0 translate-y-2 pointer-events-none transition-all duration-300 w-10 h-10 rounded-full bg-slate-900/90 hover:bg-slate-800 text-emerald-400 border border-white/20 shadow-xl flex items-center justify-center text-sm active:scale-95 group mb-0.5" title="পৃষ্ঠার শীর্ষে যান">
+    <i class="fas fa-arrow-up group-hover:-translate-y-0.5 transition-transform"></i>
+  </button>
+
   <div id="fabMenu" class="hidden flex-col items-end gap-2 mb-1 transition-all">
+    <button onclick="dashScrollToTop(); toggleFab(false)" class="flex items-center gap-2 bg-slate-900/95 border border-sky-400/40 text-sky-300 px-3 py-1.5 rounded-xl shadow-xl text-xs font-bold hover:bg-slate-800 transition">
+      <span>পৃষ্ঠার শীর্ষে যান</span>
+      <i class="fas fa-arrow-up text-sky-400 text-xs"></i>
+    </button>
     <button onclick="openAskTeacherModal(); toggleFab(false)" class="flex items-center gap-2 bg-slate-900/95 border border-amber-400/40 text-amber-300 px-3 py-1.5 rounded-xl shadow-xl text-xs font-bold hover:bg-slate-800 transition">
       <span>শিক্ষককে প্রশ্ন করুন</span>
       <i class="fas fa-chalkboard-user text-amber-400 text-xs"></i>
@@ -670,6 +679,30 @@ document.addEventListener('click', e => {
   const fab = document.getElementById('dashFab');
   if (fab && !fab.contains(e.target) && isFabOpen) toggleFab(false);
 });
+
+// ১-ক্লিকে পৃষ্ঠার শীর্ষে নিয়ে যাওয়ার আদর্শ সিস্টেম
+function dashScrollToTop(){
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// স্ক্রোল ট্র্যাকিং: ইউজার ২০০px এর বেশি স্ক্রোল করলে স্ক্রোল-টু-টপ বাটন সফটলি ভেসে উঠবে
+(function initScrollTopWatcher(){
+  const btn = document.getElementById('dashScrollTopBtn');
+  if (!btn) return;
+  window.addEventListener('scroll', () => {
+    const shouldShow = (window.pageYOffset || document.documentElement.scrollTop || 0) > 200;
+    if (shouldShow) {
+      btn.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        btn.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
+        btn.classList.add('opacity-100', 'translate-y-0');
+      });
+    } else {
+      btn.classList.remove('opacity-100', 'translate-y-0');
+      btn.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
+    }
+  }, { passive: true });
+})();
 
 // ট্যাব হ্যান্ডলার
 let CURRENT_TAB = 'exams';

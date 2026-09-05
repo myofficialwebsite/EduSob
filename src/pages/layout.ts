@@ -608,6 +608,11 @@ export function floatingButtons(): string {
       <i class="fab fa-whatsapp text-emerald-400 text-sm"></i>
       <span class="hidden md:inline">হেল্প</span>
     </a>
+
+    <!-- গ্লোবাল স্ক্রোল-টু-টপ বাটন (২০০px স্ক্রোলে অটো দৃশ্যমান হয়) -->
+    <button id="edusobGlobalScrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="পৃষ্ঠার শীর্ষে ফিরে যান" aria-label="পৃষ্ঠার শীর্ষে যান" class="hidden items-center justify-center w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white transition ml-0.5">
+      <i class="fas fa-arrow-up text-xs"></i>
+    </button>
   </div>
 </aside>
 
@@ -762,11 +767,13 @@ function edusobTk(n){return '৳'+Number(n).toLocaleString('bn-BD')}
 // EduSob Global Interaction Engine (Scroll Reveal, Staggered Cards & Dynamic Navbar)
 (function(){
   function initEduSobInteractions(){
-    // 1. Dynamic Scroll Sticky Navbar
+    // 1. Dynamic Scroll Sticky Navbar & Scroll-to-Top Button
     var navbars = document.querySelectorAll('header.sticky');
+    var globalScrollBtn = document.getElementById('edusobGlobalScrollTop');
     var isScrolledLast = null;
     function checkScroll(){
-      var isScrolled = (window.scrollY || window.pageYOffset || 0) > 15;
+      var scrollY = window.scrollY || window.pageYOffset || 0;
+      var isScrolled = scrollY > 15;
       if (isScrolled !== isScrolledLast) {
         isScrolledLast = isScrolled;
         for (var i = 0; i < navbars.length; i++) {
@@ -775,6 +782,15 @@ function edusobTk(n){return '৳'+Number(n).toLocaleString('bn-BD')}
           } else {
             navbars[i].classList.remove('scrolled-nav');
           }
+        }
+      }
+      if (globalScrollBtn) {
+        if (scrollY > 250) {
+          globalScrollBtn.classList.remove('hidden');
+          globalScrollBtn.classList.add('flex');
+        } else {
+          globalScrollBtn.classList.add('hidden');
+          globalScrollBtn.classList.remove('flex');
         }
       }
     }
