@@ -99,24 +99,31 @@ html { scroll-behavior: smooth; }
 <script>
 // এডুসব PWA: সার্ভিস ওয়ার্কার + ইনস্টল প্রম্পট + পুশ নোটিফিকেশন
 window.__edusobPwa = { deferredInstall: null };
-window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); window.__edusobPwa.deferredInstall = e; showPwaBanner(); });
+window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); window.__edusobPwa.deferredInstall = e; });
 document.addEventListener('DOMContentLoaded', function(){
   if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').catch(function(){}); }
   var dismissed = localStorage.getItem('edusob_pwa_dismissed');
-  if (!dismissed) showPwaBanner();
+  // নতুন ব্যবহারকারীকে তৎক্ষণাৎ বিরক্ত না করে ৫ সেকেন্ড পর এবং শুধুমাত্র যদি আগে বরখাস্ত না করে থাকে
+  if (!dismissed) {
+    setTimeout(function(){
+      showPwaBanner();
+    }, 5000);
+  }
 });
 function showPwaBanner(){
   if (document.getElementById('pwa-banner')) return;
+  var dismissed = localStorage.getItem('edusob_pwa_dismissed');
+  if (dismissed) return;
   var canInstall = !!window.__edusobPwa.deferredInstall;
   var canPush = ('Notification' in window) && Notification.permission === 'default';
   if (!canInstall && !canPush) return;
   var b = document.createElement('div');
   b.id = 'pwa-banner';
-  b.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:70;background:#121620;border:1px solid rgba(249,115,22,.35);border-radius:16px;padding:12px 16px;display:flex;gap:10px;align-items:center;box-shadow:0 10px 40px rgba(0,0,0,.5);max-width:92vw;flex-wrap:wrap;justify-content:center';
+  b.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:70;background:#121620;border:1px solid rgba(249,115,22,.35);border-radius:16px;padding:10px 16px;display:flex;gap:10px;align-items:center;box-shadow:0 10px 40px rgba(0,0,0,.5);max-width:92vw;flex-wrap:wrap;justify-content:center;animation:fadeIn 0.3s ease';
   var btns = '';
-  if (canInstall) btns += '<button onclick="pwaInstall()" style="background:#f97316;color:#fff;font-weight:700;font-size:12px;padding:8px 14px;border-radius:999px;border:none;cursor:pointer">📱 অ্যাপ ইনস্টল করুন</button>';
-  if (canPush) btns += '<button onclick="pwaEnablePush()" style="background:rgba(255,255,255,.08);color:#fdba74;font-weight:700;font-size:12px;padding:8px 14px;border-radius:999px;border:1px solid rgba(249,115,22,.3);cursor:pointer">🔔 নোটিফিকেশন চালু করুন</button>';
-  b.innerHTML = '<span style="color:#e2e8f0;font-size:12px;font-weight:600">এডুসবকে আপনার ফোনের অ্যাপে বানান</span>' + btns + '<button onclick="pwaDismiss()" style="color:#64748b;font-size:16px;border:none;background:none;cursor:pointer;padding:4px">✕</button>';
+  if (canInstall) btns += '<button onclick="pwaInstall()" style="background:#f97316;color:#fff;font-weight:700;font-size:12px;padding:6px 14px;border-radius:999px;border:none;cursor:pointer">📱 ইনস্টল</button>';
+  if (canPush) btns += '<button onclick="pwaEnablePush()" style="background:rgba(255,255,255,.08);color:#fdba74;font-weight:700;font-size:12px;padding:6px 14px;border-radius:999px;border:1px solid rgba(249,115,22,.3);cursor:pointer">🔔 নোটিফিকেশন</button>';
+  b.innerHTML = '<span style="color:#e2e8f0;font-size:12px;font-weight:600">এডুসব অ্যাপ</span>' + btns + '<button onclick="pwaDismiss()" title="বন্ধ করুন" style="color:#94a3b8;font-size:16px;border:none;background:none;cursor:pointer;padding:4px">✕</button>';
   document.body.appendChild(b);
 }
 function pwaDismiss(){ var b=document.getElementById('pwa-banner'); if(b) b.remove(); localStorage.setItem('edusob_pwa_dismissed','1'); }
@@ -735,7 +742,7 @@ function edusobTk(n){return '৳'+Number(n).toLocaleString('bn-BD')}
           if(badge){badge.textContent=sd.products.length;badge.classList.remove('hidden')}
           var fb=document.getElementById('edusob-fab-badge');
           if(fb){fb.textContent=sd.products.length;fb.classList.remove('hidden')}
-          if(sessionStorage.getItem('edusob_sb_shown')||location.pathname!=='/')return;
+          // নোটিফিকেশন ব্যাজ আপডেট হবে, তবে ব্যবহারকারীকে জোরপূর্বক পপআপ দেখিয়ে রিডিং ব্যাহত করা হবে না
           var list=document.getElementById('edusobSbList');
           if(!list) return;
           list.innerHTML=sd.products.map(function(p){
@@ -743,10 +750,6 @@ function edusobTk(n){return '৳'+Number(n).toLocaleString('bn-BD')}
             var price=p.offer_price?'<span class="line-through text-slate-400 text-xs mr-1">'+edusobTk(p.price)+'</span><span class="text-red-600 font-bold">'+edusobTk(p.offer_price)+'</span>':'<span class="font-bold text-slate-700">'+edusobTk(p.price)+'</span>';
             return '<a href="/shop" class="relative flex items-center gap-3 bg-amber-50 hover:bg-amber-100 rounded-xl p-3 transition">'+offer+'<span class="text-3xl">'+(p.image_url||'📦')+'</span><span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-slate-800 truncate">'+p.name_bn+'</span><span class="text-sm">'+price+'</span></span></a>'
           }).join('');
-          setTimeout(function(){
-            var sb = document.getElementById('edusobSignboard');
-            if(sb) { sb.classList.remove('hidden'); sessionStorage.setItem('edusob_sb_shown','1'); }
-          },1200);
         }).catch(function(){});
       }
     }

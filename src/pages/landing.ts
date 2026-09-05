@@ -249,16 +249,16 @@ export function landingPage(): string {
 
         <div class="bg-[#121620] border border-white/10 rounded-2xl p-4 flex flex-wrap sm:flex-nowrap items-center divide-y sm:divide-y-0 sm:divide-x divide-white/10">
           <div class="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">
-            <p class="font-display text-2xl font-extrabold text-white leading-tight">১,৫০,০০০<span class="text-orange-500">+</span></p>
-            <p class="text-[11px] text-slate-500 font-medium mt-0.5">নিবন্ধিত শিক্ষার্থী</p>
-          </div>
-          <div class="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">
-            <p class="font-display text-2xl font-extrabold text-white leading-tight">৫০,০০০<span class="text-orange-500">+</span></p>
+            <p class="font-display text-2xl font-extrabold text-white leading-tight">১০,০০০<span class="text-orange-500">+</span></p>
             <p class="text-[11px] text-slate-500 font-medium mt-0.5">প্রশ্নব্যাংক ও রিসোর্স</p>
           </div>
           <div class="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">
+            <p class="font-display text-2xl font-extrabold text-white leading-tight">সকল বোর্ড</p>
+            <p class="text-[11px] text-slate-500 font-medium mt-0.5">ফলাফল ও মার্কশিট সাপোর্ট</p>
+          </div>
+          <div class="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">
             <p class="font-display text-2xl font-extrabold text-orange-400 leading-tight">১০০% ফ্রি</p>
-            <p class="text-[11px] text-slate-500 font-medium mt-0.5">নিরাপদ ও নির্ভরযোগ্য</p>
+            <p class="text-[11px] text-slate-500 font-medium mt-0.5">ডিজিটাল স্টাডি প্ল্যাটফর্ম</p>
           </div>
         </div>
       </div>
@@ -677,49 +677,6 @@ export function landingPage(): string {
   </div>
 </section>
 
-<!-- ৮. সাফল্যের চিত্রশালা -->
-<section class="reveal-on-scroll py-16 bg-[#0d1017] border-b border-white/5">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-      <div>
-        <span class="font-mono text-orange-400/90 text-xs font-bold uppercase tracking-[0.25em]">সাফল্যের চিত্রশালা</span>
-        <h2 class="font-display text-2xl sm:text-3xl font-bold text-white mt-2">অতীতের আয়োজন ও স্মরণীয় মুহূর্ত</h2>
-        <p class="text-slate-500 text-xs sm:text-sm mt-1">দেশজুড়ে শিক্ষার্থী সমাবেশ, কর্মশালা ও মেধা অন্বেষণের খণ্ডচিত্র</p>
-      </div>
-
-      <div class="flex items-center gap-1.5 bg-[#121620] p-1 rounded-xl border border-white/10 text-xs font-bold">
-        <button onclick="filterGallery('all', this)" class="gallery-tab tab-active px-3.5 py-1.5 rounded-lg transition">সবগুলো</button>
-        <button onclick="filterGallery('2025', this)" class="gallery-tab px-3.5 py-1.5 rounded-lg text-slate-500 hover:text-orange-300 transition">২০২৫-২০২৬</button>
-        <button onclick="filterGallery('2024', this)" class="gallery-tab px-3.5 py-1.5 rounded-lg text-slate-500 hover:text-orange-300 transition">২০২৩-২০২৪</button>
-      </div>
-    </div>
-
-    <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 stagger-cards">
-      ${[
-        { icon: 'fa-award', grad: 'from-orange-900/70 to-[#0b0d12]', title: 'মেধাবী সংবর্ধনা ও পুরস্কার', yr: '2025', desc: 'কৃতি শিক্ষার্থীদের বিশেষ সম্মাননা' },
-        { icon: 'fa-chalkboard-user', grad: 'from-blue-900/60 to-[#0b0d12]', title: 'স্মার্ট স্টাডি কর্মশালা', yr: '2025', desc: 'লাইভ মেন্টরশিপ ও দিকনির্দেশনা' },
-        { icon: 'fa-users', grad: 'from-teal-900/60 to-[#0b0d12]', title: 'শিক্ষার্থী ক্যারিয়ার সামিট', yr: '2024', desc: 'স্কলারশিপ ও ভর্তি পরামর্শ' },
-        { icon: 'fa-laptop-code', grad: 'from-purple-900/60 to-[#0b0d12]', title: 'ডিজিটাল লার্নিং বুটক্যাম্প', yr: '2025', desc: 'অনলাইন মডেল টেস্ট ও প্রস্তুতি' },
-        { icon: 'fa-medal', grad: 'from-amber-900/60 to-[#0b0d12]', title: 'ট্যালেন্ট স্কলারশিপ ২০২৪', yr: '2024', desc: 'সারাদেশে মেধা মূল্যায়ন পরীক্ষা' },
-        { icon: 'fa-book-open-reader', grad: 'from-sky-900/60 to-[#0b0d12]', title: 'গ্রুপ স্টাডি ও ডিসকাশন', yr: '2025', desc: 'বোর্ড প্রশ্ন সমাধান কর্মশালা' },
-        { icon: 'fa-briefcase', grad: 'from-indigo-900/60 to-[#0b0d12]', title: 'জব অ্যান্ড ক্যারিয়ার ফেয়ার', yr: '2024', desc: 'সিভি তৈরি ও চাকরি প্রস্তুতি' },
-        { icon: 'fa-graduation-cap', grad: 'from-orange-950/80 to-[#0b0d12]', title: 'এডুসব মেগা একাডেমি মিট', yr: '2025', desc: 'দেশসেরা শিক্ষকদের সেমিনার' },
-      ].map((item) => `
-        <div class="gallery-item group relative rounded-2xl overflow-hidden aspect-[4/3] bg-gradient-to-br ${item.grad} p-4 flex flex-col justify-between hover:shadow-[0_0_24px_rgba(249,115,22,0.12)] transition text-white border border-white/10 hover:border-orange-500/30" data-year="${item.yr}">
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] bg-white/10 backdrop-blur text-white font-semibold px-2 py-0.5 rounded-full">${item.yr === '2025' ? '২০২৫-২০২৬' : '২০২৩-২০২৪'}</span>
-            <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-xs group-hover:scale-110 transition"><i class="fas ${item.icon}"></i></div>
-          </div>
-          <div>
-            <p class="text-xs font-bold leading-snug group-hover:text-orange-300 transition">${item.title}</p>
-            <p class="text-[10px] text-slate-400 mt-0.5 line-clamp-1">${item.desc}</p>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  </div>
-</section>
-
 <!-- ৯. সাধারণ জিজ্ঞাসা -->
 <section id="faq-section" class="reveal-on-scroll py-16 bg-[#0b0d12] border-b border-white/5">
   <div class="max-w-4xl mx-auto px-4">
@@ -935,8 +892,8 @@ export function landingPage(): string {
               <i class="fas fa-map-marker-alt"></i>
             </div>
             <div>
-              <p class="font-bold text-white">প্রধান কার্যালয়</p>
-              <p class="mt-0.5 leading-relaxed">এডুসব সচিবালয়, শিক্ষা ভবন এলাকা, ঢাকা-১০০০, বাংলাদেশ।</p>
+              <p class="font-bold text-white">যোগাযোগের ঠিকানা</p>
+              <p class="mt-0.5 leading-relaxed">ঢাকা, বাংলাদেশ (অনলাইন ডিজিটাল এডুটেক প্ল্যাটফর্ম ও স্টুডেন্ট হেল্পডেস্ক)।</p>
             </div>
           </div>
 
@@ -1098,41 +1055,36 @@ function toggleFaq(idx) {
   }
 }
 
-// গ্যালারি ফিল্টার
-function filterGallery(yr, btn) {
-  var tabs = document.querySelectorAll('.gallery-tab');
-  tabs.forEach(function(t){ t.classList.remove('tab-active'); t.classList.add('text-slate-500'); });
-  btn.classList.add('tab-active');
-  btn.classList.remove('text-slate-500');
-
-  var items = document.querySelectorAll('.gallery-item');
-  items.forEach(function(el){
-    if (yr === 'all' || el.getAttribute('data-year') === yr) {
-      el.style.display = 'block';
-    } else {
-      el.style.display = 'none';
-    }
-  });
-}
-
 // যোগাযোগ ফর্ম
 function handleContact(e) {
   e.preventDefault();
   var ans = document.getElementById('c_captcha').value.trim();
+  var alertBox = document.getElementById('contactStatusMsg');
+  if (!alertBox) {
+    alertBox = document.createElement('div');
+    alertBox.id = 'contactStatusMsg';
+    alertBox.className = 'p-3 rounded-xl text-xs font-bold text-center mt-3';
+    document.getElementById('contactForm').appendChild(alertBox);
+  }
   if (ans !== '11') {
-    alert('নিরাপত্তা কোডের উত্তর ভুল হয়েছে (৪ + ৭ = ১১)। অনুগ্রহ করে সঠিক উত্তর লিখুন।');
+    alertBox.className = 'p-3 rounded-xl text-xs font-bold text-center mt-3 bg-red-500/20 text-red-300 border border-red-500/30';
+    alertBox.textContent = 'নিরাপত্তা কোডের উত্তর ভুল হয়েছে (৪ + ৭ = ১১)। অনুগ্রহ করে সঠিক উত্তর লিখুন।';
     return false;
   }
+  var name = (document.getElementById('c_name').value || '').trim();
+  var sub = (document.getElementById('c_subject').value || '').trim();
+  var msg = (document.getElementById('c_msg').value || '').trim();
   var btn = document.getElementById('c_btn');
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> পাঠানো হচ্ছে...';
 
   setTimeout(function() {
-    alert('ধন্যবাদ! আপনার বার্তাটি সফলভাবে আমাদের হেল্পডেস্কে পাঠানো হয়েছে। আমরা শীঘ্রই যোগাযোগ করবো।');
+    alertBox.className = 'p-3 rounded-xl text-xs font-bold text-center mt-3 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+    alertBox.innerHTML = '✓ আপনার বার্তাটি সফলভাবে জমা হয়েছে! হেল্পডেস্ক টিম শীঘ্রই আপনার সাথে যোগাযোগ করবে।<br><a href="https://wa.me/8801835414122?text=' + encodeURIComponent('এডুসব হেল্পডেস্ক: নাম: ' + name + ', বিষয়: ' + sub + ' - ' + msg) + '" target="_blank" class="inline-block mt-2 underline text-white font-extrabold">দ্রুত হোয়াটসঅ্যাপে বার্তা পাঠান →</a>';
     document.getElementById('contactForm').reset();
     btn.disabled = false;
     btn.innerHTML = '<span>বার্তা পাঠান</span> <i class="fas fa-paper-plane text-xs"></i>';
-  }, 800);
+  }, 600);
   return false;
 }
 </script>
