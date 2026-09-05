@@ -1,4 +1,4 @@
-// এডুসব — পার্সোনাল স্টুডেন্ট কমান্ড সেন্টার (Personal Student Command Center)
+// এডুসব — পার্সোনাল স্টাডি হাব ও স্টুডেন্ট ড্যাশবোর্ড (Personal Study Hub & Student Dashboard)
 import { pageShell } from './layout'
 import type { SessionUser } from '../lib/auth'
 import { religionInfo, toBn } from '../lib/dates'
@@ -16,8 +16,8 @@ export function dashboardPage(user: SessionUser): string {
   const firstLetter = user.name_bn ? user.name_bn.charAt(0) : 'এ'
 
   const sidebarNav = `
-    <div class="px-3 pb-2 text-[10px] uppercase tracking-wider font-bold text-slate-400">কমান্ড সেন্টার</div>
-    <a href="/dashboard" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl ${t.accentBg} text-white font-bold shadow-sm transition"><i class="fas fa-compass w-4"></i> <span>কমান্ড সেন্টার</span></a>
+    <div class="px-3 pb-2 text-[10px] uppercase tracking-wider font-bold text-slate-400">আমার স্টাডি স্পেস</div>
+    <a href="/dashboard" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl ${t.accentBg} text-white font-bold shadow-sm transition"><i class="fas fa-compass w-4"></i> <span>স্টুডেন্ট ড্যাশবোর্ড</span></a>
     <a href="/results" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-semibold transition"><i class="fas fa-graduation-cap w-4 text-amber-400"></i> <span>রেজাল্ট হাব</span></a>
     <a href="/profile" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-semibold transition"><i class="fas fa-id-card w-4 text-teal-400"></i> <span>আমার প্রোফাইল</span></a>
 
@@ -45,7 +45,7 @@ export function dashboardPage(user: SessionUser): string {
     ` : ''}
   `
 
-  return pageShell('কমান্ড সেন্টার — এডুসব', `bg-gradient-to-br ${t.grad} text-slate-100 min-h-screen selection:bg-emerald-500 selection:text-black`, `
+  return pageShell('আমার ড্যাশবোর্ড — এডুসব', `bg-gradient-to-br ${t.grad} text-slate-100 min-h-screen selection:bg-emerald-500 selection:text-black`, `
 <div class="flex min-h-screen">
   <!-- ১. আধুনিক সাইডবার -->
   <aside id="sidebar" class="hidden lg:flex flex-col w-64 shrink-0 ${t.side} backdrop-blur-2xl border-r border-white/10 sticky top-0 h-screen overflow-hidden z-20">
@@ -56,7 +56,7 @@ export function dashboardPage(user: SessionUser): string {
         </div>
         <div class="flex flex-col">
           <span class="text-white font-black text-lg tracking-tight leading-none">এডুসব</span>
-          <span class="text-[10px] text-emerald-400 font-semibold tracking-wide uppercase mt-1">Student Command Center</span>
+          <span class="text-[10px] text-emerald-400 font-semibold tracking-wide uppercase mt-1">Student Study Hub</span>
         </div>
       </a>
     </div>
@@ -105,7 +105,7 @@ export function dashboardPage(user: SessionUser): string {
     </aside>
   </div>
 
-  <!-- ২. মূল কমান্ড সেন্টার বডি -->
+  <!-- ২. মূল স্টাডি হাব বডি -->
   <main class="flex-1 min-w-0 flex flex-col">
     <!-- টপবার স্ট্যাটাস স্ট্রিপ (Clean & Minimalist, No Box Nesting) -->
     <header class="sticky top-0 z-30 ${t.side} backdrop-blur-xl border-b border-white/10 px-4 sm:px-6 py-2.5 flex items-center justify-between gap-3">
@@ -113,7 +113,7 @@ export function dashboardPage(user: SessionUser): string {
         <button onclick="toggleDrawer(true)" class="lg:hidden w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 flex items-center justify-center shrink-0" aria-label="মেনু"><i class="fas fa-bars text-sm"></i></button>
         <div class="flex items-center gap-2 min-w-0 text-xs">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-          <span class="text-slate-200 font-semibold truncate hidden sm:inline">স্টুডেন্ট কমান্ড সেন্টার</span>
+          <span class="text-slate-200 font-semibold truncate hidden sm:inline">আমার স্টাডি স্পেস</span>
           <span class="text-slate-500 hidden sm:inline">|</span>
           <span class="text-slate-400 truncate text-[11px]">${info.gregLine}</span>
         </div>
@@ -215,17 +215,17 @@ export function dashboardPage(user: SessionUser): string {
         </div>
       </section>
 
-      <!-- ২. “আজ কী করব?” — TODAY'S COMMAND DECK (High Prominence & Priority Hub) -->
+      <!-- ২. “আজ কী করব?” — আজকের পড়ার লক্ষ্য ও মিশন (Daily Study Goals & Priority Hub) -->
       <section id="daily-command-deck" class="space-y-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
             <h2 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
-              আজ কী করব? — আজকের অগ্রাধিকার ও মিশন
+              আজকের পড়ার লক্ষ্য ও মিশন
             </h2>
           </div>
           <div class="flex items-center gap-2 text-xs">
-            <span id="deckTaskSummary" class="text-slate-400 font-mono text-[11px]">০/৪ টাস্ক সম্পন্ন</span>
+            <span id="deckTaskSummary" class="text-slate-400 font-mono text-[11px]">০/৪ লক্ষ্য সম্পন্ন</span>
             <span class="text-slate-600">·</span>
             <button onclick="initDailyTasks()" class="text-[11px] text-slate-400 hover:text-white" title="রিলোড"><i class="fas fa-rotate-right"></i></button>
           </div>
@@ -242,10 +242,10 @@ export function dashboardPage(user: SessionUser): string {
               </span>
               <div class="min-w-0">
                 <div class="flex items-center gap-2">
-                  <span class="text-[9px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.2 rounded uppercase">উচ্চ অগ্রাধিকার</span>
+                  <span class="text-[9px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.2 rounded uppercase">জরুরি আপডেট</span>
                   <span id="urgentNoticeTitle" class="text-xs sm:text-sm font-bold text-white truncate">জরুরি নোটিস ও সময়সূচি চেক</span>
                 </div>
-                <p id="urgentNoticeDesc" class="text-[11px] text-slate-300 mt-0.5 truncate">বোর্ড পরীক্ষা, ভর্তি আবেদন ও চাকরির ডেডলাইন ট্র্যাকিং সক্রিয় রয়েছে।</p>
+                <p id="urgentNoticeDesc" class="text-[11px] text-slate-300 mt-0.5 truncate">বোর্ড পরীক্ষা, ভর্তি আবেদন ও স্কলারশিপের ডেডলাইন সক্রিয় রয়েছে।</p>
               </div>
             </div>
             <div class="flex items-center gap-2 self-end sm:self-auto shrink-0">
@@ -259,7 +259,7 @@ export function dashboardPage(user: SessionUser): string {
           <div id="cardStudyMissionBox" class="p-3 sm:p-4 space-y-2.5">
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold text-slate-300 flex items-center gap-2">
-                <i class="fas fa-list-check text-emerald-400"></i> আজকের স্টাডি মিশন
+                <i class="fas fa-list-check text-emerald-400"></i> আজকের পড়ার চেকলিস্ট
               </span>
               <span id="studyMissionPct" class="text-[11px] font-mono text-emerald-400 font-bold">০% সম্পন্ন</span>
             </div>
@@ -328,13 +328,13 @@ export function dashboardPage(user: SessionUser): string {
         </div>
       </section>
 
-      <!-- ৩. হাই-ইমপ্যাক্ট কমান্ড বার (Refined Visual Hierarchy & Whitespace) -->
+      <!-- ৩. প্রয়োজনীয় স্টাডি টুলস ও সেবা (Refined Visual Hierarchy & Whitespace) -->
       <section id="cardQuickActionsBox" class="space-y-2.5">
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-            <i class="fas fa-bolt text-amber-400"></i> দ্রুত কমান্ড ও সার্ভিসেস
+            <i class="fas fa-bolt text-amber-400"></i> প্রয়োজনীয় স্টাডি টুলস ও সেবা
           </h3>
-          <span class="text-[11px] text-slate-500">১-ক্লিকে তাৎক্ষণিক সেবা</span>
+          <span class="text-[11px] text-slate-500">১-ক্লিকে দ্রুত প্রবেশ</span>
         </div>
 
         <!-- প্রাইমারি হাই-ইনটেন্ট বাটনস (বড় ও বিশিষ্ট) -->
@@ -392,7 +392,7 @@ export function dashboardPage(user: SessionUser): string {
         </div>
       </section>
 
-      <!-- ৪. কমান্ড সেন্টার কনসোল ট্যাব (Clean Timelines, Reduced Boxiness) -->
+      <!-- ৪. স্টাডি হাব ও অ্যাক্টিভিটি ট্যাব (Clean Timelines, Reduced Boxiness) -->
       <section class="space-y-4">
         <!-- ট্যাব সিলেক্টর -->
         <div class="flex items-center gap-1 border-b border-white/10 pb-2 overflow-x-auto no-scrollbar">
@@ -400,7 +400,7 @@ export function dashboardPage(user: SessionUser): string {
             <i class="fas fa-graduation-cap text-amber-400"></i> পরীক্ষা ও সেভড রোল
           </button>
           <button onclick="setDashTab('feed')" id="tabBtn_feed" class="dash-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-400 hover:text-white hover:bg-white/10">
-            <i class="fas fa-rss text-sky-400"></i> স্মার্ট ফিড ও সার্কুলার
+            <i class="fas fa-rss text-sky-400"></i> স্টাডি ফিড ও সার্কুলার
           </button>
           <button onclick="setDashTab('community')" id="tabBtn_community" class="dash-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-400 hover:text-white hover:bg-white/10">
             <i class="fas fa-users-rays text-teal-400"></i> বোনাস ও সাপোর্ট
@@ -616,7 +616,7 @@ export function dashboardPage(user: SessionUser): string {
 <!-- ৫. ফ্লোটিং অ্যাকশন স্পিড ডায়াল (FAB) ও ১-ক্লিক স্ক্রোল-টু-টপ -->
 <div id="dashFab" class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2">
   <!-- কুইক স্ক্রোল টু টপ বাটন (২০০px নিচে স্ক্রোল করলে অটো দৃশ্যমান হয়) -->
-  <button id="dashScrollTopBtn" onclick="dashScrollToTop()" class="hidden opacity-0 translate-y-2 pointer-events-none transition-all duration-300 w-10 h-10 rounded-full bg-slate-900/90 hover:bg-slate-800 text-emerald-400 border border-white/20 shadow-xl flex items-center justify-center text-sm active:scale-95 group mb-0.5" title="পৃষ্ঠার শীর্ষে যান">
+  <button id="dashScrollTopBtn" onclick="dashScrollToTop()" class="hidden opacity-0 translate-y-2 pointer-events-none transition-all duration-300 w-10 h-10 rounded-full bg-slate-900/90 hover:bg-slate-800 text-emerald-400 border border-white/20 shadow-xl items-center justify-center text-sm active:scale-95 group mb-0.5" title="পৃষ্ঠার শীর্ষে যান">
     <i class="fas fa-arrow-up group-hover:-translate-y-0.5 transition-transform"></i>
   </button>
 
@@ -684,24 +684,41 @@ document.addEventListener('click', e => {
 function dashScrollToTop(){
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+window.dashScrollToTop = dashScrollToTop;
 
 // স্ক্রোল ট্র্যাকিং: ইউজার ২০০px এর বেশি স্ক্রোল করলে স্ক্রোল-টু-টপ বাটন সফটলি ভেসে উঠবে
 (function initScrollTopWatcher(){
   const btn = document.getElementById('dashScrollTopBtn');
   if (!btn) return;
-  window.addEventListener('scroll', () => {
-    const shouldShow = (window.pageYOffset || document.documentElement.scrollTop || 0) > 200;
-    if (shouldShow) {
-      btn.classList.remove('hidden');
-      requestAnimationFrame(() => {
-        btn.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
-        btn.classList.add('opacity-100', 'translate-y-0');
-      });
+  let isShown = false;
+  function updateScrollBtn(){
+    const y = window.pageYOffset || document.documentElement.scrollTop || 0;
+    if (y > 200) {
+      if (!isShown) {
+        isShown = true;
+        btn.classList.remove('hidden');
+        btn.classList.add('flex');
+        requestAnimationFrame(() => {
+          btn.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
+          btn.classList.add('opacity-100', 'translate-y-0');
+        });
+      }
     } else {
-      btn.classList.remove('opacity-100', 'translate-y-0');
-      btn.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
+      if (isShown) {
+        isShown = false;
+        btn.classList.remove('opacity-100', 'translate-y-0');
+        btn.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
+        setTimeout(() => {
+          if (!isShown) {
+            btn.classList.remove('flex');
+            btn.classList.add('hidden');
+          }
+        }, 300);
+      }
     }
-  }, { passive: true });
+  }
+  window.addEventListener('scroll', updateScrollBtn, { passive: true });
+  updateScrollBtn();
 })();
 
 // ট্যাব হ্যান্ডলার
@@ -829,7 +846,7 @@ function toggleTask(idx){
   const el = document.getElementById('task_' + idx);
   if (el && el.checked) {
     if (!saved.includes(idx)) saved.push(idx);
-    showToast('মিশন সম্পন্ন! চমৎকার প্রস্তুতি 🎯');
+    showToast('পড়ার লক্ষ্য সম্পন্ন! দারুণ অগ্রগতি 🎯');
   } else {
     saved = saved.filter(x => x !== idx);
   }
@@ -841,7 +858,7 @@ function updateDailyDeckUI(cnt){
   const pctEl = document.getElementById('studyMissionPct');
   const bar = document.getElementById('deckProgressBar');
   const pct = Math.round((cnt / 4) * 100);
-  if (summary) summary.textContent = BN(cnt) + '/৪ টাস্ক সম্পন্ন' + (cnt === 4 ? ' 🎉' : '');
+  if (summary) summary.textContent = BN(cnt) + '/৪ লক্ষ্য সম্পন্ন' + (cnt === 4 ? ' 🎉' : '');
   if (pctEl) pctEl.textContent = BN(pct) + '% সম্পন্ন';
   if (bar) bar.style.width = pct + '%';
   [0,1,2,3].forEach(i => {

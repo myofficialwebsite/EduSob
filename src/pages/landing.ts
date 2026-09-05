@@ -57,13 +57,9 @@ export function landingPage(): string {
     </div>
 
     <div class="flex items-center gap-3">
-      <div class="hidden lg:flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full border border-white/10 text-[11px] text-slate-300">
+      <div class="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full border border-white/10 text-[11px] text-slate-300">
         <span class="bg-orange-500 text-white font-bold px-1.5 py-0.2 rounded text-[10px]">আপডেট</span>
-        <span class="truncate max-w-xs">২০২৬ সেশনের ভর্তি, রেজাল্ট ও মডেল টেস্ট হাব লাইভ</span>
-      </div>
-      <div class="flex items-center gap-2 text-xs">
-        <a href="/login" class="hover:text-white transition px-2.5 py-1 rounded-lg hover:bg-white/5 text-slate-300 font-semibold">লগইন</a>
-        <a href="/signup" class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded-lg font-bold transition shadow-[0_0_16px_rgba(249,115,22,0.35)]">রেজিস্ট্রেশন</a>
+        <span class="truncate max-w-xs sm:max-w-md">২০২৬ সেশনের ভর্তি, রেজাল্ট ও প্রশ্নব্যাংক লাইভ</span>
       </div>
     </div>
   </div>
