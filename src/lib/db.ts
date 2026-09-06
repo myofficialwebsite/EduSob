@@ -305,7 +305,7 @@ export async function initDatabase(): Promise<D1Database> {
     console.warn('[Database] Column upgrade note:', e)
   }
 
-  // Seed default admin user (phone: 01835414122)
+  // Seed default admin user (phone: 01835414122 / email: ab5353069@gmail.com)
   try {
     const salt = 'edusob_admin_salt_2026'
     const hash = crypto.pbkdf2Sync('52944820', salt, 100000, 32, 'sha256').toString('hex')
@@ -315,7 +315,7 @@ export async function initDatabase(): Promise<D1Database> {
       db.prepare(`
         INSERT INTO users (user_code, name_bn, name_en, email, phone, password_hash, salt, religion, education_level, role)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `).run('EDU-2026-ADMIN', 'এডমিন', 'Admin', 'admin@edusob.com', '01835414122', hash, salt, 'islam', 'masters', 'admin')
+      `).run('EDU-2026-ADMIN', 'এডমিন', 'Admin', 'ab5353069@gmail.com', '01835414122', hash, salt, 'islam', 'masters', 'admin')
 
       const userRow = db.prepare("SELECT id FROM users WHERE phone = '01835414122'").get() as any
       if (userRow?.id) {
@@ -324,7 +324,7 @@ export async function initDatabase(): Promise<D1Database> {
       }
     } else {
       db.prepare(`
-        UPDATE users SET password_hash = ?, salt = ?, role = 'admin' WHERE phone = '01835414122'
+        UPDATE users SET password_hash = ?, salt = ?, role = 'admin', email = 'ab5353069@gmail.com' WHERE phone = '01835414122'
       `).run(hash, salt)
     }
   } catch (e) {
