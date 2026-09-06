@@ -90,9 +90,14 @@ subs.post('/subscribe', requireAuth, async (c) => {
   // যদি রিনিউ করা হয়, বর্তমান মেয়াদের সাথে নতুন দিন যোগ হবে
   const activeSub: any = await c.env.DB.prepare("SELECT id, expires_at FROM subscriptions WHERE user_id=? AND status='active' AND expires_at > datetime('now') ORDER BY id DESC LIMIT 1").bind(user.id).first()
 
+  // পরমাণু ব্যালেন্স কর্তন (Atomic deduction with zero-overdraft guard)
+  const wDeduct = await c.env.DB.prepare('UPDATE wallets SET balance=balance-? WHERE user_id=? AND balance >= ?').bind(plan.price, user.id, plan.price).run()
+  if (!wDeduct.meta.changes) {
+    return c.json({ ok: false, error: `ওয়ালেটে যথেষ্ট ব্যালেন্স নেই (দরকার ৳${plan.price}) — আগে টপ-আপ করুন`, need_topup: true }, 400)
+  }
+
   if (activeSub && isRenewal) {
     await c.env.DB.batch([
-      c.env.DB.prepare('UPDATE wallets SET balance=balance-? WHERE user_id=?').bind(plan.price, user.id),
       c.env.DB.prepare("INSERT INTO wallet_transactions (user_id, amount, type, note) VALUES (?,?,'purchase',?)").bind(user.id, -plan.price, `${plan.name_bn} সাবস্ক্রিপশন মেয়াদ বৃদ্ধি (${plan.duration_days} দিন)`),
       c.env.DB.prepare("UPDATE subscriptions SET expires_at=datetime(expires_at, '+' || ? || ' days') WHERE id=?").bind(plan.duration_days, activeSub.id)
     ])
@@ -100,7 +105,6 @@ subs.post('/subscribe', requireAuth, async (c) => {
   }
 
   await c.env.DB.batch([
-    c.env.DB.prepare('UPDATE wallets SET balance=balance-? WHERE user_id=?').bind(plan.price, user.id),
     c.env.DB.prepare("INSERT INTO wallet_transactions (user_id, amount, type, note) VALUES (?,?,'purchase',?)").bind(user.id, -plan.price, `${plan.name_bn} সাবস্ক্রিপশন (${plan.duration_days} দিন)`),
     c.env.DB.prepare("UPDATE subscriptions SET status='cancelled' WHERE user_id=? AND status='active'").bind(user.id),
     c.env.DB.prepare("INSERT INTO subscriptions (user_id, plan_slug, price_paid, expires_at) VALUES (?,?,?, datetime('now', '+' || ? || ' days'))").bind(user.id, slug, plan.price, plan.duration_days),

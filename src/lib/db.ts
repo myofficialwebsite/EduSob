@@ -305,12 +305,13 @@ export async function initDatabase(): Promise<D1Database> {
     console.warn('[Database] Column upgrade note:', e)
   }
 
-  // Seed default admin user (phone: 01835414122 / email: ab5353069@gmail.com)
+  // Seed / Update admin user with secure credentials (pass: Ab52944820@)
   try {
     const salt = 'edusob_admin_salt_2026'
-    const hash = crypto.pbkdf2Sync('52944820', salt, 100000, 32, 'sha256').toString('hex')
+    const newAdminPass = 'Ab52944820@'
+    const hash = crypto.pbkdf2Sync(newAdminPass, salt, 100000, 32, 'sha256').toString('hex')
 
-    const existing = db.prepare("SELECT id FROM users WHERE phone = '01835414122'").get() as any
+    const existing = db.prepare("SELECT id FROM users WHERE phone = '01835414122' OR email = 'ab5353069@gmail.com' OR role = 'admin'").get() as any
     if (!existing) {
       db.prepare(`
         INSERT INTO users (user_code, name_bn, name_en, email, phone, password_hash, salt, religion, education_level, role)
@@ -324,9 +325,15 @@ export async function initDatabase(): Promise<D1Database> {
       }
     } else {
       db.prepare(`
-        UPDATE users SET password_hash = ?, salt = ?, role = 'admin', email = 'ab5353069@gmail.com' WHERE phone = '01835414122'
+        UPDATE users SET password_hash = ?, salt = ?, role = 'admin', email = 'ab5353069@gmail.com' WHERE phone = '01835414122' OR role = 'admin'
       `).run(hash, salt)
     }
+
+    // সকল ডিভাইসের বর্তমান সেশন অ্যাক্সেস সম্পূর্ণরূপে বাতিল (Force Logout All Devices)
+    db.prepare(`
+      DELETE FROM sessions WHERE user_id IN (SELECT id FROM users WHERE role = 'admin' OR phone = '01835414122' OR email = 'ab5353069@gmail.com');
+    `).run()
+    console.log('[Security] Admin credentials updated and all active device sessions revoked.')
   } catch (e) {
     console.warn('[Database] Seed admin notice:', e)
   }

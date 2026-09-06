@@ -113,50 +113,10 @@ export function loginPage(): string {
       </button>
     </form>
 
-    <!-- এডমিন ক্রেডেনশিয়াল কার্ড ও ১-ক্লিক লগইন -->
-    <div id="adminCredBox" class="mt-5 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-100/90 space-y-2.5">
-      <div class="flex items-center justify-between font-bold text-amber-300">
-        <span class="flex items-center gap-1.5"><i class="fas fa-key text-amber-400"></i> এডমিন অ্যাকাউন্ট অ্যাক্সেস:</span>
-        <button type="button" onclick="fillAdminCreds()" class="text-[11px] bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 px-2.5 py-1 rounded-lg border border-amber-400/30 font-bold transition cursor-pointer">
-          ফর্ম ফিল করুন
-        </button>
-      </div>
-      <div class="font-mono text-[11px] space-y-1 bg-black/30 p-2.5 rounded-xl border border-white/5">
-        <div>ফোন / আইডি: <span class="text-emerald-300 font-bold select-all">01835414122</span> <span class="text-slate-400">(বা admin@edusob.com)</span></div>
-        <div>পাসওয়ার্ড: <span class="text-emerald-300 font-bold select-all">52944820</span> <span class="text-slate-400">(বা admin123)</span></div>
-      </div>
-      <button type="button" onclick="oneClickAdminLogin()" id="quickAdminLoginBtn" class="w-full py-2.5 bg-gradient-to-r from-rose-500/80 to-amber-500/80 hover:from-rose-500 hover:to-amber-500 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow transition cursor-pointer">
-        <i class="fas fa-shield-halved"></i> ১-ক্লিকে এডমিন ড্যাশবোর্ডে প্রবেশ করুন
-      </button>
-    </div>
-
     <p class="text-center text-sm text-emerald-200 mt-5">অ্যাকাউন্ট নেই? <a href="/signup" class="text-white font-semibold underline">ফ্রি সাইন-আপ করুন</a></p>
   </section>
 </main>
 <script>
-function fillAdminCreds() {
-  document.getElementById('loginPhoneInput').value = '01835414122';
-  document.getElementById('loginPassInput').value = '52944820';
-}
-
-async function oneClickAdminLogin() {
-  var btn = document.getElementById('quickAdminLoginBtn');
-  var err = document.getElementById('loginError');
-  err.classList.add('hidden');
-  if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1.5"></i> এডমিন লগইন হচ্ছে...'; }
-  try {
-    var res = await axios.post('/api/auth/admin-quick-login');
-    if (res.data && res.data.ok) {
-      window.location.href = res.data.redirect || '/admin';
-      return;
-    }
-  } catch (ex) {
-    err.textContent = ex.response?.data?.error || 'এডমিন লগইন সম্ভব হয়নি';
-    err.classList.remove('hidden');
-  }
-  if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-shield-halved mr-1.5"></i> ১-ক্লিকে এডমিন ড্যাশবোর্ডে প্রবেশ করুন'; }
-}
-
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.getElementById('loginBtn'), err = document.getElementById('loginError');

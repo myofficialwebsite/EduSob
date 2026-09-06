@@ -49,8 +49,9 @@ api.post('/auth/signup', async (c) => {
   let referrer: any = null
   const refCode = String(body.referral_code || '').trim().toUpperCase()
   if (refCode) {
-    referrer = await DB.prepare('SELECT id, user_code FROM users WHERE user_code = ?').bind(refCode).first()
+    referrer = await DB.prepare('SELECT id, user_code, phone FROM users WHERE user_code = ?').bind(refCode).first()
     if (!referrer) return c.json({ ok: false, error: 'রেফারেল কোডটি সঠিক নয় — খালি রাখুন অথবা সঠিক কোড দিন' }, 400)
+    if (referrer.phone === phone) return c.json({ ok: false, error: 'নিজের ফোন নম্বর বা অ্যাকাউন্ট থেকে নিজেকে রেফার করা যাবে না' }, 400)
   }
 
   // বোনাস রেট (এডমিন-নিয়ন্ত্রিত)
@@ -118,12 +119,7 @@ api.post('/auth/login', async (c) => {
 
   if (!row) return c.json({ ok: false, error: 'এই নম্বর বা আইডিতে কোনো অ্যাকাউন্ট পাওয়া যায়নি' }, 404)
   
-  let okPass = await verifyPassword(password, row.salt, row.password_hash)
-  // এডমিন অ্যাকাউন্টের ক্ষেত্রে পরিচিত পাসওয়ার্ডসমূহ (52944820 বা admin123) নিরাপদ ফলব্যাক হিসেবে গ্রহণযোগ্য
-  if (!okPass && row.role === 'admin' && (password === '52944820' || password === 'admin123' || password === '123456')) {
-    okPass = true
-  }
-
+  const okPass = await verifyPassword(password, row.salt, row.password_hash)
   if (!okPass) return c.json({ ok: false, error: 'ভুল পাসওয়ার্ড' }, 401)
   if (row.status === 'suspended') return c.json({ ok: false, error: '⛔ আপনার অ্যাকাউন্টটি সাসপেন্ড করা হয়েছে। সহায়তার জন্য যোগাযোগ করুন।' }, 403)
 
@@ -133,19 +129,9 @@ api.post('/auth/login', async (c) => {
   return c.json({ ok: true, redirect, role: row.role })
 })
 
-// ---------- ১-ক্লিক এডমিন কুইক লগইন ----------
+// ---------- কুইক লগইন নিরাপত্তা গার্ড (সম্পূর্ণ নিষ্ক্রিয়) ----------
 api.post('/auth/admin-quick-login', async (c) => {
-  const { DB } = c.env
-  let adminUser = await DB.prepare("SELECT id, role FROM users WHERE role = 'admin' ORDER BY id ASC LIMIT 1").first<any>()
-  if (!adminUser) {
-    adminUser = await DB.prepare("SELECT id, role FROM users WHERE phone = '01835414122' LIMIT 1").first<any>()
-  }
-  if (!adminUser) {
-    return c.json({ ok: false, error: 'এডমিন অ্যাকাউন্ট প্রস্তুত নয়' }, 404)
-  }
-  const token = await createSession(DB, adminUser.id)
-  c.header('Set-Cookie', sessionCookie(token))
-  return c.json({ ok: true, redirect: '/admin' })
+  return c.json({ ok: false, error: 'নিরাপত্তার স্বার্থে কুইক লগইন নিষ্ক্রিয় করা হয়েছে। অনুগ্রহ করে অফিসিয়াল পাসওয়ার্ড দিয়ে লগইন করুন।' }, 403)
 })
 
 // ---------- লগআউট ----------

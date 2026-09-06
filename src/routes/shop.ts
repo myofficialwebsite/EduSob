@@ -114,22 +114,28 @@ shop.post('/orders', async (c) => {
     if (bal < total) return c.json({ ok: false, error: `ওয়ালেটে পর্যাপ্ত ব্যালেন্স নেই (আছে ৳${bal}, দরকার ৳${total})` }, 400)
   }
 
+  // ওয়ালেট হলে পরমাণু (Atomic) ব্যালেন্স চেক ও কর্তন
+  if (method === 'wallet') {
+    const wDeduct = await c.env.DB.prepare('UPDATE wallets SET balance=balance-? WHERE user_id=? AND balance >= ?').bind(total, user!.id, total).run()
+    if (!wDeduct.meta.changes) {
+      return c.json({ ok: false, error: 'ওয়ালেটে পর্যাপ্ত ব্যালেন্স নেই বা একযোগে একাধিক লেনদেন সম্পন্ন হয়েছে' }, 400)
+    }
+  }
+
   // অর্ডার ইনসার্ট
   const ores = await c.env.DB.prepare(
-    'INSERT INTO orders (user_id, customer_name, customer_phone, address, payment_method, total, note) VALUES (?,?,?,?,?,?,?)'
-  ).bind(user?.id ?? null, name, phone, address, method, total, note).run()
+    'INSERT INTO orders (user_id, customer_name, customer_phone, address, payment_method, total, note, status) VALUES (?,?,?,?,?,?,?,?)'
+  ).bind(user?.id ?? null, name, phone, address, method, total, note, method === 'wallet' ? 'confirmed' : 'pending').run()
   const orderId = ores.meta.last_row_id
 
-  // আইটেম + স্টক + (ওয়ালেট হলে) ব্যালেন্স কাটা — এক ব্যাচে
+  // আইটেম + স্টক + ট্রানজেকশন — এক ব্যাচে
   const batch: any[] = []
   for (const l of lines) {
     batch.push(c.env.DB.prepare('INSERT INTO order_items (order_id, product_id, product_name, unit_price, qty) VALUES (?,?,?,?,?)').bind(orderId, l.pid, l.name, l.unit, l.qty))
-    batch.push(c.env.DB.prepare('UPDATE products SET stock=stock-? WHERE id=?').bind(l.qty, l.pid))
+    batch.push(c.env.DB.prepare('UPDATE products SET stock=MAX(0, stock-?) WHERE id=?').bind(l.qty, l.pid))
   }
   if (method === 'wallet') {
-    batch.push(c.env.DB.prepare('UPDATE wallets SET balance=balance-? WHERE user_id=?').bind(total, user!.id))
     batch.push(c.env.DB.prepare("INSERT INTO wallet_transactions (user_id, amount, type, note) VALUES (?,?,'purchase',?)").bind(user!.id, -total, `অর্ডার #${orderId} — শপ কেনাকাটা`))
-    batch.push(c.env.DB.prepare("UPDATE orders SET status='confirmed' WHERE id=?").bind(orderId))
   }
   await c.env.DB.batch(batch)
 
@@ -214,14 +220,22 @@ shop.post('/assisted/:id/pay', requireAuth, async (c) => {
   const req: any = await c.env.DB.prepare("SELECT id, fee, status FROM assisted_requests WHERE id=? AND user_id=?").bind(id, user.id).first()
   if (!req) return c.json({ ok: false, error: 'পাওয়া যায়নি' }, 404)
   if (req.status !== 'quoted' || !req.fee) return c.json({ ok: false, error: 'এডমিন ফি নির্ধারণের পর পরিশোধ করা যাবে' }, 400)
-  const w: any = await c.env.DB.prepare('SELECT balance FROM wallets WHERE user_id=?').bind(user.id).first()
-  const bal = Number(w?.balance) || 0
-  if (bal < req.fee) return c.json({ ok: false, error: `ওয়ালেটে পর্যাপ্ত ব্যালেন্স নেই (আছে ৳${bal}, দরকার ৳${req.fee})` }, 400)
-  await c.env.DB.batch([
-    c.env.DB.prepare('UPDATE wallets SET balance=balance-? WHERE user_id=?').bind(req.fee, user.id),
-    c.env.DB.prepare("INSERT INTO wallet_transactions (user_id, amount, type, note) VALUES (?,?,'purchase',?)").bind(user.id, -req.fee, `অ্যাসিস্টেড আবেদন #${id} ফি`),
-    c.env.DB.prepare("UPDATE assisted_requests SET status='paid', updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(id)
-  ])
+  
+  // এটমিকভাবে স্ট্যাটাস 'paid' এ রূপান্তর (যাতে একযোগে দুইবার পরিশোধ না হয়)
+  const updReq = await c.env.DB.prepare("UPDATE assisted_requests SET status='paid', updated_at=CURRENT_TIMESTAMP WHERE id=? AND status='quoted'").bind(id).run()
+  if (!updReq.meta.changes) {
+    return c.json({ ok: false, error: 'অনুরোধটি ইতিমধ্যে পরিশোধিত বা প্রক্রিয়াধীন' }, 400)
+  }
+
+  // ওয়ালেট ব্যালেন্স থেকে কর্তন
+  const wDeduct = await c.env.DB.prepare('UPDATE wallets SET balance=balance-? WHERE user_id=? AND balance >= ?').bind(req.fee, user.id, req.fee).run()
+  if (!wDeduct.meta.changes) {
+    // অপর্যাপ্ত ব্যালেন্স থাকলে স্ট্যাটাস পূর্বের 'quoted'-এ ফিরিয়ে আনা (Self-healing rollback)
+    await c.env.DB.prepare("UPDATE assisted_requests SET status='quoted' WHERE id=?").bind(id).run()
+    return c.json({ ok: false, error: `ওয়ালেটে পর্যাপ্ত ব্যালেন্স নেই (দরকার ৳${req.fee})` }, 400)
+  }
+
+  await c.env.DB.prepare("INSERT INTO wallet_transactions (user_id, amount, type, note) VALUES (?,?,'purchase',?)").bind(user.id, -req.fee, `অ্যাসিস্টেড আবেদন #${id} ফি`).run()
   return c.json({ ok: true })
 })
 
@@ -346,8 +360,14 @@ shop.post('/admin/payments/:id/approve', requireAdmin, async (c) => {
   const id = Number(c.req.param('id'))
   const pr: any = await c.env.DB.prepare("SELECT * FROM payment_requests WHERE id=? AND status='pending'").bind(id).first()
   if (!pr) return c.json({ ok: false, error: 'পেন্ডিং রিকোয়েস্ট পাওয়া যায়নি' }, 404)
+
+  // এটমিকভাবে 'pending' থেকে 'approved'-এ নেওয়া যাতে সমসাময়িক দুইবার ব্যালেন্স ক্রেডিট না হয়
+  const upd = await c.env.DB.prepare("UPDATE payment_requests SET status='approved', reviewed_at=CURRENT_TIMESTAMP WHERE id=? AND status='pending'").bind(id).run()
+  if (!upd.meta.changes) {
+    return c.json({ ok: false, error: 'অনুরোধটি ইতিমধ্যে অনুমোদিত বা প্রক্রিয়াধীন' }, 400)
+  }
+
   await c.env.DB.batch([
-    c.env.DB.prepare("UPDATE payment_requests SET status='approved', reviewed_at=CURRENT_TIMESTAMP WHERE id=?").bind(id),
     c.env.DB.prepare('INSERT INTO wallets (user_id, balance) VALUES (?,?) ON CONFLICT(user_id) DO UPDATE SET balance=balance+excluded.balance').bind(pr.user_id, pr.amount),
     c.env.DB.prepare("INSERT INTO wallet_transactions (user_id, amount, type, note) VALUES (?,?,'manual_topup',?)").bind(pr.user_id, pr.amount, `${pr.method === 'bkash' ? 'বিকাশ' : 'নগদ'} টপ-আপ (TrxID: ${pr.trx_id})`)
   ])
