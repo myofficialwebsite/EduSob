@@ -9,10 +9,10 @@ export interface AdminCategory {
 export const ADMIN_CATEGORIES: AdminCategory[] = [
   {
     id: 'cat-command',
-    label: 'কমান্ড ও মনিটরিং',
+    label: 'ওভারভিউ ও মনিটরিং',
     icon: 'fa-gauge-high',
     tabs: [
-      { id: 'overview', label: 'লাইভ কমান্ড ডেক', icon: 'fa-chart-pie' },
+      { id: 'overview', label: 'লাইভ ওভারভিউ ডেক', icon: 'fa-chart-pie' },
       { id: 'autocollect', label: 'ডাটা সিঙ্ক ও অটো কালেকশন', icon: 'fa-bolt', badge: 'লাইভ' },
       { id: 'auditlogs', label: 'সিকিউরিটি অডিট ট্রেইল', icon: 'fa-shield-halved' }
     ]
@@ -85,7 +85,7 @@ export function renderAdminHeader(): string {
       <a href="/dashboard" class="flex items-center gap-2 font-black text-lg tracking-tight">
         <span class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center text-slate-950 font-bold shadow-md">📚</span>
         <span>এডুসব</span>
-        <span class="text-[11px] font-extrabold bg-gradient-to-r from-rose-500 to-amber-500 text-white px-2.5 py-0.5 rounded-full shadow-sm uppercase tracking-wider">কমান্ড সেন্টার</span>
+        <span class="text-[11px] font-extrabold bg-gradient-to-r from-rose-500 to-amber-500 text-white px-2.5 py-0.5 rounded-full shadow-sm uppercase tracking-wider">এডমিন প্যানেল</span>
       </a>
       <span class="hidden md:inline-flex items-center gap-1.5 text-xs text-slate-400 bg-slate-800/80 border border-slate-700/60 px-2.5 py-1 rounded-lg">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>

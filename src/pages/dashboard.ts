@@ -153,7 +153,7 @@ export function dashboardPage(user: SessionUser): string {
 
     <div class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-6">
 
-      <!-- ১. ইন্টেলিজেন্ট হেডলাইন ও কমান্ড স্ট্রিপ (Borderless, Integrated Layout) -->
+      <!-- ১. ইন্টেলিজেন্ট হেডলাইন ও স্টাডি স্ট্রিপ (Borderless, Integrated Layout) -->
       <section class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <!-- বামে: স্টুডেন্ট আইডেন্টিটি ও গ্রিটিং -->
         <div class="flex items-center gap-3.5 min-w-0">
@@ -191,7 +191,7 @@ export function dashboardPage(user: SessionUser): string {
           <div class="h-4 w-px bg-white/10 hidden sm:block"></div>
 
           <!-- সেভড রোল -->
-          <button onclick="setDashTab('exams')" class="flex items-center gap-1.5 text-xs text-slate-300 hover:text-white transition">
+          <button onclick="setDashTab('exams')" class="flex items-center gap-1.5 text-xs text-slate-300 hover:text-white transition" title="সংরক্ষিত রোল নম্বর — পরীক্ষার রেজাল্ট দ্রুত দেখতে সহায়ক">
             <i class="fas fa-bookmark text-amber-400"></i>
             <span>রোল: <b class="text-white" id="rollCount">০</b>টি</span>
           </button>
@@ -216,7 +216,7 @@ export function dashboardPage(user: SessionUser): string {
       </section>
 
       <!-- ২. “আজ কী করব?” — আজকের পড়ার লক্ষ্য ও মিশন (Daily Study Goals & Priority Hub) -->
-      <section id="daily-command-deck" class="space-y-3">
+      <section id="daily-study-deck" class="space-y-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
@@ -980,10 +980,14 @@ function renderSavedRolls(rolls){
 
   if (!rolls.length) {
     list.innerHTML =
-      '<div class="text-center py-4 border border-dashed border-white/15 rounded-xl bg-white/5">' +
-        '<p class="text-slate-400 text-xs">এখনো কোনো রোল সেভ করেননি</p>' +
-        '<button onclick="openSaveRollModal()" class="mt-2 text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 px-3 py-1 rounded-lg font-bold transition inline-flex items-center gap-1">' +
-          '<i class="fas fa-plus text-[10px]"></i> রোল সেভ করুন' +
+      '<div class="text-center py-6 px-4 border border-dashed border-amber-500/30 rounded-2xl bg-gradient-to-b from-amber-500/10 to-transparent space-y-2">' +
+        '<div class="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-lg mx-auto shadow-sm">' +
+          '<i class="fas fa-bookmark"></i>' +
+        '</div>' +
+        '<p class="text-white text-xs sm:text-sm font-bold">আপনার পরীক্ষার রোল সেভ করে রাখুন</p>' +
+        '<p class="text-slate-300 text-[11px] sm:text-xs max-w-sm mx-auto leading-relaxed">বোর্ড পরীক্ষার রেজাল্ট প্রকাশের দিন সার্ভার জ্যামের মাঝেও কোনো ঝামেলা ছাড়াই ১-ক্লিকে রেজাল্ট ও পূর্ণাঙ্গ মার্কশিট দেখতে পাবেন।</p>' +
+        '<button onclick="openSaveRollModal()" class="mt-2 text-xs bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 px-4 py-2 rounded-xl font-black transition inline-flex items-center gap-1.5 shadow-md">' +
+          '<i class="fas fa-plus text-[10px]"></i> এখনই পরীক্ষার রোল সেভ করুন' +
         '</button>' +
       '</div>';
     return;

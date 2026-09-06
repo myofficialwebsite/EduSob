@@ -27,7 +27,7 @@ const EduSobInteractivePreview = () => {
       tag: "এডুসব লার্নিং হাব ২০২৬",
       badge: "🎓 অল-ইন-ওয়ান এডুকেশন",
       desc: "বোর্ড পরীক্ষার ফলাফল, সিলেবাস, প্রশ্নব্যাংক ও স্কলারশিপ এক ছাতার নিচে",
-      metric: "৫ লক্ষ+ শিক্ষার্থী ট্রাস্টেড",
+      metric: "সারা দেশের শিক্ষার্থীদের বিশ্বস্ত হাব",
       color: "from-orange-500/20 via-[#121620] to-[#090b0f]",
       border: "border-orange-500/30",
       accent: "text-orange-400"
@@ -37,7 +37,7 @@ const EduSobInteractivePreview = () => {
       tag: "লাইভ মডেল টেস্ট",
       badge: "⚡ স্পেসড রিপিটেশন",
       desc: "ভুল প্রশ্নের স্বয়ংক্রিয় রিভিশন শিডিউল ও বোর্ডভিত্তিক প্রশ্নব্যাংক",
-      metric: "৫০,০০০+ যাচাইকৃত প্রশ্ন",
+      metric: "১০,০০০+ যাচাইকৃত প্রশ্ন",
       color: "from-teal-500/20 via-[#121620] to-[#090b0f]",
       border: "border-teal-500/30",
       accent: "text-teal-400"
@@ -128,7 +128,7 @@ const EduSobInteractivePreview = () => {
         </div>
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">নিবন্ধিত শিক্ষার্থী</p>
-          <p className="font-bangla text-lg font-bold text-white">১,৫০,০০০+</p>
+          <p className="font-bangla text-lg font-bold text-white">১০,০০০+</p>
         </div>
       </motion.div>
     </div>
@@ -226,11 +226,11 @@ export const Hero = () => {
             className="mt-10 rounded-2xl border border-white/10 bg-[#121620] p-4 flex flex-wrap sm:flex-nowrap items-center divide-y sm:divide-y-0 sm:divide-x divide-white/10"
           >
             <div className="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">
-              <p className="font-bangla text-2xl font-bold text-white">১,৫০,০০০<span className="text-orange-400">+</span></p>
+              <p className="font-bangla text-2xl font-bold text-white">১০,০০০<span className="text-orange-400">+</span></p>
               <p className="text-[11px] text-slate-400 font-medium mt-0.5">নিবন্ধিত শিক্ষার্থী</p>
             </div>
             <div className="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">
-              <p className="font-bangla text-2xl font-bold text-white">৫০,০০০<span className="text-orange-400">+</span></p>
+              <p className="font-bangla text-2xl font-bold text-white">১০,০০০<span className="text-orange-400">+</span></p>
               <p className="text-[11px] text-slate-400 font-medium mt-0.5">প্রশ্নব্যাংক ও রিসোর্স</p>
             </div>
             <div className="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">

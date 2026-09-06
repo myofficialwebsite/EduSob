@@ -11,7 +11,7 @@ export function renderOverviewTab(): string {
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <h2 class="text-base sm:text-lg font-black tracking-tight">এডুসব সিস্টেম কমান্ড সেন্টার</h2>
+            <h2 class="text-base sm:text-lg font-black tracking-tight">এডুসব সিস্টেম অ্যাডমিন ওভারভিউ</h2>
             <span class="inline-flex items-center gap-1 text-[11px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> লাইভ মনিটরিং
             </span>

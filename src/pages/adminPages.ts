@@ -61,14 +61,14 @@ async function quickAdminUnlock(){
 
 export function adminPage(isAdmin: boolean): string {
   if (!isAdmin) return pageShell('এডমিন প্যানেল', 'bg-slate-950', lockScreen)
-  return pageShell('এডমিন কমান্ড সেন্টার', 'bg-slate-100 min-h-screen', ADMIN_BODY + ADMIN_SCRIPT, DARK_PORTAL_CSS)
+  return pageShell('এডমিন কন্ট্রোল প্যানেল', 'bg-slate-100 min-h-screen', ADMIN_BODY + ADMIN_SCRIPT, DARK_PORTAL_CSS)
 }
 
 const ADMIN_BODY = `
 ${renderAdminHeader()}
 
 <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
-  <!-- ১. লাইভ কমান্ড সেন্টার ও ওভারভিউ -->
+  <!-- ১. লাইভ ওভারভিউ ও মনিটরিং -->
   ${renderOverviewTab()}
 
   <!-- ২. ডাটা সিঙ্ক ও অটো কালেকশন সেন্টার -->
@@ -485,7 +485,7 @@ ${renderAdminHeader()}
             </label>
 
             <label class="p-2.5 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-indigo-300 transition">
-              <span class="font-semibold text-slate-800 text-xs">⚡ দ্রুত কমান্ড ও সার্ভিসেস</span>
+              <span class="font-semibold text-slate-800 text-xs">⚡ দ্রুত অ্যাকশন ও সার্ভিসেস</span>
               <input type="checkbox" name="card_quick_actions" class="w-4 h-4 rounded text-indigo-600">
             </label>
 

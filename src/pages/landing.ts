@@ -196,7 +196,7 @@ export function landingPage(): string {
         <span class="mx-6">👨‍🏫 <strong>নতুন ফিচার:</strong> ১-অন-১ প্রিমিয়াম শিক্ষক ও মেন্টর সহায়তা — ১৫-৩০ মিনিটে স্টেপ-বাই-স্টেপ সমাধান নিন!</span>
         <span class="mx-6">📢 এডুসব রেজাল্ট হাব — জাতীয় ও সকল শিক্ষা বোর্ডের ফলাফল একাধিক ব্যাকআপ লিংকে লাইভ।</span>
         <span class="mx-6">🎓 প্রফেশনাল ১, ২ ও ৩ পেজ সিভি মেকার — ১৪টি স্ট্যান্ডার্ড টেমপ্লেটে পিডিএফ ডাউনলোড।</span>
-        <span class="mx-6">📚 ৫০,০০০+ প্রশ্নব্যাংক ও প্রতিদিনের মডেল টেস্টে অংশ নিন সম্পূর্ণ ফ্রিতে।</span>
+        <span class="mx-6">📚 ১০,০০০+ প্রশ্নব্যাংক ও প্রতিদিনের মডেল টেস্টে অংশ নিন সম্পূর্ণ ফ্রিতে।</span>
       </div>
     </div>
   </div>
@@ -220,7 +220,7 @@ export function landingPage(): string {
         </h1>
 
         <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl">
-          বোর্ড পরীক্ষার দ্রুত ফলাফল, কলেজ ও বিশ্ববিদ্যালয়ের ভর্তি তথ্য, ১-অন-১ শিক্ষক সহায়তা, ৫০,০০০+ প্রশ্নব্যাংক ও প্রফেশনাল সিভি মেকার—সব এক সমন্বিত সিস্টেমে।
+          বোর্ড পরীক্ষার দ্রুত ফলাফল, কলেজ ও বিশ্ববিদ্যালয়ের ভর্তি তথ্য, ১-অন-১ শিক্ষক সহায়তা, ১০,০০০+ প্রশ্নব্যাংক ও প্রফেশনাল সিভি মেকার—সব এক সমন্বিত সিস্টেমে।
         </p>
 
         <div class="flex items-center gap-2 text-xs text-slate-400">
@@ -279,7 +279,7 @@ export function landingPage(): string {
               </div>
               <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
                 <span>১০০% ভেরিফাইড কারিকুলাম</span>
-                <span class="text-orange-400 font-bold">৫ লক্ষ+ শিক্ষার্থী ট্রাস্টেড</span>
+                <span class="text-orange-400 font-bold">সারা দেশের শিক্ষার্থীদের বিশ্বস্ত হাব</span>
               </div>
             </div>
 
