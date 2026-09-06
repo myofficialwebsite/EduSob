@@ -132,7 +132,14 @@ app.get('/api/link-status', async (c) => {
 
 // ---------- সেশন হেল্পার ----------
 async function currentUser(c: any) {
-  const token = getCookie(c.req.header('Cookie'), 'edusob_session')
+  let token = getCookie(c.req.header('Cookie'), 'edusob_session')
+  if (!token) {
+    const authHeader = c.req.header('Authorization')
+    if (authHeader?.startsWith('Bearer ')) token = authHeader.slice(7).trim()
+  }
+  if (!token) {
+    token = c.req.query('session_token') || c.req.query('token')
+  }
   return getSessionUser(c.env.DB, token)
 }
 

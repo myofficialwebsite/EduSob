@@ -91,9 +91,9 @@ export function getCookie(cookieHeader: string | undefined, name: string): strin
 }
 
 export function sessionCookie(token: string): string {
-  return `edusob_session=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${SESSION_DAYS * 24 * 60 * 60}`
+  return `edusob_session=${token}; Path=/; HttpOnly; SameSite=None; Secure; Max-Age=${SESSION_DAYS * 24 * 60 * 60}`
 }
 
 export function clearSessionCookie(): string {
-  return 'edusob_session=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0'
+  return 'edusob_session=; Path=/; HttpOnly; SameSite=None; Secure; Max-Age=0'
 }

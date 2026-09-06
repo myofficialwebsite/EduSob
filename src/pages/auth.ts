@@ -146,7 +146,16 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   if (data.password) data.password = String(data.password).trim();
   try {
     const res = await axios.post('/api/auth/login', data);
-    if (res.data.ok) { window.location.href = res.data.redirect; return; }
+    if (res.data.ok) {
+      if (res.data.token) {
+        localStorage.setItem('edusob_session_token', res.data.token);
+      }
+      const target = res.data.role === 'admin' && res.data.token 
+        ? '/admin?session_token=' + encodeURIComponent(res.data.token) 
+        : res.data.redirect;
+      window.location.href = target;
+      return;
+    }
   } catch (ex) {
     err.textContent = ex.response?.data?.error || 'সমস্যা হয়েছে, আবার চেষ্টা করুন';
     err.classList.remove('hidden');

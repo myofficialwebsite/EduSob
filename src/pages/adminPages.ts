@@ -11,25 +11,104 @@ import { renderContentWorkflowBar } from './admin/contentWorkflow'
 
 const lockScreen = `
 <main class="min-h-screen flex items-center justify-center bg-slate-950 text-white px-4 py-10">
-  <section class="text-center max-w-md w-full bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
-    <div class="w-16 h-16 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center text-3xl mx-auto shadow-inner">
+  <section class="text-center max-w-md w-full bg-slate-900/95 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+    <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl mx-auto shadow-inner">
       <i class="fas fa-shield-halved"></i>
     </div>
     <div>
-      <h1 class="text-2xl font-black text-white">এডমিন অনুমতি প্রয়োজন</h1>
-      <p class="text-xs text-slate-400 mt-2 leading-relaxed">এই সেন্ট্রাল কনসোলটি শুধুমাত্র প্ল্যাটফর্মের অনুমোদিত এডমিনদের জন্য সংরক্ষিত। অনুগ্রহ করে আপনার এডমিন ক্রেডেনশিয়াল ব্যবহার করে লগইন করুন।</p>
+      <h1 class="text-2xl font-black text-white">এডমিন কনসোল আনলক</h1>
+      <p class="text-xs text-slate-400 mt-2 leading-relaxed">এই সেন্ট্রাল কনসোলটি শুধুমাত্র প্ল্যাটফর্ম এডমিনের জন্য সংরক্ষিত। নিচে আপনার পাসওয়ার্ড দিয়ে তাৎক্ষণিক আনলক করুন:</p>
     </div>
 
-    <div class="space-y-3 pt-2">
-      <a href="/login" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-sm shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2 cursor-pointer">
-        <i class="fas fa-right-to-bracket"></i> এডমিন লগইন পেজে যান
-      </a>
-      <a href="/" class="block w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-bold transition">
-        হোমপেজে ফিরে যান
+    <form id="adminDirectUnlockForm" class="space-y-4 text-left">
+      <div>
+        <label class="text-xs text-slate-400 font-bold block mb-1">এডমিন আইডি / ফোন</label>
+        <input id="adminUnlockPhone" type="text" value="01835414122" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+      </div>
+      <div>
+        <div class="flex items-center justify-between mb-1">
+          <label class="text-xs text-slate-400 font-bold">পাসওয়ার্ড</label>
+        </div>
+        <div class="relative">
+          <input id="adminUnlockPass" type="password" required placeholder="Ab52944820@" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 pr-10 text-sm text-white focus:outline-none focus:border-emerald-400">
+          <button type="button" onclick="toggleAdminPassVisible()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-white cursor-pointer" title="পাসওয়ার্ড দেখুন">
+            <i id="adminPassEye" class="fas fa-eye text-xs"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="adminUnlockMsg" class="hidden text-xs rounded-xl p-3"></div>
+
+      <button type="submit" id="adminUnlockBtn" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-sm shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2 cursor-pointer">
+        <i class="fas fa-lock-open"></i> এডমিন প্যানেল আনলক করুন
+      </button>
+    </form>
+
+    <div class="pt-2 border-t border-slate-800/80">
+      <a href="/" class="text-xs text-slate-400 hover:text-emerald-400 transition font-medium">
+        <i class="fas fa-arrow-left mr-1"></i> এডুসব হোমপেজে যান
       </a>
     </div>
   </section>
-</main>`
+</main>
+<script>
+function toggleAdminPassVisible() {
+  const inp = document.getElementById('adminUnlockPass');
+  const icon = document.getElementById('adminPassEye');
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    icon.classList.remove('fa-eye');
+    icon.classList.add('fa-eye-slash');
+  } else {
+    inp.type = 'password';
+    icon.classList.remove('fa-eye-slash');
+    icon.classList.add('fa-eye');
+  }
+}
+
+document.getElementById('adminDirectUnlockForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('adminUnlockBtn');
+  const msg = document.getElementById('adminUnlockMsg');
+  const phone = document.getElementById('adminUnlockPhone').value.trim();
+  const password = document.getElementById('adminUnlockPass').value.trim();
+
+  msg.className = 'hidden';
+  btn.disabled = true;
+  btn.innerHTML = '<i class=\"fas fa-spinner fa-spin\"></i> যাচাই হচ্ছে...';
+
+  try {
+    const res = await axios.post('/api/auth/login', { phone, password });
+    if (res.data.ok) {
+      if (res.data.token) {
+        localStorage.setItem('edusob_session_token', res.data.token);
+      }
+      msg.className = 'text-xs rounded-xl p-3 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+      msg.textContent = '✅ সফল! এডমিন প্যানেল লোড হচ্ছে...';
+      setTimeout(() => {
+        if (res.data.token) {
+          window.location.href = '/admin?session_token=' + encodeURIComponent(res.data.token);
+        } else {
+          window.location.reload();
+        }
+      }, 400);
+      return;
+    }
+  } catch (ex) {
+    msg.className = 'text-xs rounded-xl p-3 bg-rose-500/20 text-rose-300 border border-rose-500/30';
+    msg.textContent = '❌ ' + (ex.response?.data?.error || 'ভুল পাসওয়ার্ড বা সমস্যা হয়েছে');
+  }
+  btn.disabled = false;
+  btn.innerHTML = '<i class=\"fas fa-lock-open\"></i> এডমিন প্যানেল আনলক করুন';
+});
+
+(function() {
+  const saved = localStorage.getItem('edusob_session_token');
+  if (saved && !window.location.search.includes('session_token=')) {
+    window.location.href = '/admin?session_token=' + encodeURIComponent(saved);
+  }
+})();
+</script>`
 
 export function adminPage(isAdmin: boolean): string {
   if (!isAdmin) return pageShell('এডমিন প্যানেল', 'bg-slate-950', lockScreen)

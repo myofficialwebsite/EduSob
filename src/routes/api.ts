@@ -134,7 +134,7 @@ api.post('/auth/login', async (c) => {
   const token = await createSession(DB, row.id)
   c.header('Set-Cookie', sessionCookie(token))
   const redirect = row.role === 'admin' ? '/admin' : '/dashboard'
-  return c.json({ ok: true, redirect, role: row.role })
+  return c.json({ ok: true, redirect, role: row.role, token })
 })
 
 // ---------- কুইক লগইন নিরাপত্তা গার্ড (সম্পূর্ণ নিষ্ক্রিয়) ----------
