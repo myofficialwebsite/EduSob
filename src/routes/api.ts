@@ -99,6 +99,7 @@ api.post('/auth/login', async (c) => {
   if (!body) return c.json({ ok: false, error: 'ভুল অনুরোধ' }, 400)
   const identifier = String(body.phone || body.identifier || body.email || '').trim()
   const password = String(body.password || '')
+  const trimmedPassword = password.trim()
 
   if (!identifier || !password) {
     return c.json({ ok: false, error: 'মোবাইল নম্বর / ইমেইল / ইউজার আইডি ও পাসওয়ার্ড দিন' }, 400)
@@ -119,7 +120,10 @@ api.post('/auth/login', async (c) => {
 
   if (!row) return c.json({ ok: false, error: 'এই নম্বর বা আইডিতে কোনো অ্যাকাউন্ট পাওয়া যায়নি' }, 404)
   
-  const okPass = await verifyPassword(password, row.salt, row.password_hash)
+  let okPass = await verifyPassword(password, row.salt, row.password_hash)
+  if (!okPass && trimmedPassword !== password) {
+    okPass = await verifyPassword(trimmedPassword, row.salt, row.password_hash)
+  }
   if (!okPass) return c.json({ ok: false, error: 'ভুল পাসওয়ার্ড' }, 401)
   if (row.status === 'suspended') return c.json({ ok: false, error: '⛔ আপনার অ্যাকাউন্টটি সাসপেন্ড করা হয়েছে। সহায়তার জন্য যোগাযোগ করুন।' }, 403)
 

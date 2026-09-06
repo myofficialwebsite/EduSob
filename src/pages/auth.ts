@@ -105,7 +105,12 @@ export function loginPage(): string {
         <div class="flex items-center justify-between">
           <label class="text-xs text-emerald-200">পাসওয়ার্ড</label>
         </div>
-        <input name="password" id="loginPassInput" type="password" required class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-emerald-400 text-sm" placeholder="••••••••">
+        <div class="relative mt-1">
+          <input name="password" id="loginPassInput" type="password" required class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 pr-10 text-white placeholder-white/40 focus:outline-none focus:border-emerald-400 text-sm" placeholder="••••••••">
+          <button type="button" id="togglePassBtn" onclick="togglePassVisibility()" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-emerald-200/70 hover:text-white transition cursor-pointer" title="পাসওয়ার্ড দেখুন">
+            <i id="togglePassIcon" class="fas fa-eye text-xs"></i>
+          </button>
+        </div>
       </div>
       <p id="loginError" class="hidden text-rose-300 text-sm bg-rose-500/20 rounded-xl px-4 py-2"></p>
       <button type="submit" id="loginBtn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-bold py-3 rounded-xl shadow-lg transition cursor-pointer">
@@ -117,12 +122,28 @@ export function loginPage(): string {
   </section>
 </main>
 <script>
+function togglePassVisibility() {
+  const inp = document.getElementById('loginPassInput');
+  const icon = document.getElementById('togglePassIcon');
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    icon.classList.remove('fa-eye');
+    icon.classList.add('fa-eye-slash');
+  } else {
+    inp.type = 'password';
+    icon.classList.remove('fa-eye-slash');
+    icon.classList.add('fa-eye');
+  }
+}
+
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.getElementById('loginBtn'), err = document.getElementById('loginError');
   err.classList.add('hidden');
   btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>লগইন হচ্ছে...';
   const data = Object.fromEntries(new FormData(e.target));
+  if (data.phone) data.phone = String(data.phone).trim();
+  if (data.password) data.password = String(data.password).trim();
   try {
     const res = await axios.post('/api/auth/login', data);
     if (res.data.ok) { window.location.href = res.data.redirect; return; }
