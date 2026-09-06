@@ -38,14 +38,37 @@ subs.get('/plans', async (c) => {
   const user = c.get('user')
   const current = await getUserPlan(c.env.DB, user?.id ?? null)
   let expires: string | null = null
+  let subId: string | null = null
+  let startsAt: string | null = null
+  let daysLeft: number = 0
+  let currentPlanData: any = null
+
   if (user && current !== 'free') {
-    const r: any = await c.env.DB.prepare("SELECT expires_at FROM subscriptions WHERE user_id=? AND status='active' AND expires_at > datetime('now') ORDER BY id DESC LIMIT 1").bind(user.id).first()
-    expires = r?.expires_at || null
+    const r: any = await c.env.DB.prepare("SELECT id, price_paid, starts_at, expires_at, CAST((julianday(expires_at) - julianday('now')) AS INTEGER) as days_remaining FROM subscriptions WHERE user_id=? AND status='active' AND expires_at > datetime('now') ORDER BY id DESC LIMIT 1").bind(user.id).first()
+    if (r) {
+      expires = r.expires_at || null
+      startsAt = r.starts_at || null
+      subId = `SUB-2026-${String(r.id).padStart(4, '0')}`
+      daysLeft = Math.max(0, Number(r.days_remaining) || 0)
+    }
+    currentPlanData = plans.find(p => p.slug === current) || null
   }
-  return c.json({ ok: true, plans, current_plan: current, expires_at: expires })
+
+  return c.json({
+    ok: true,
+    plans,
+    current_plan: current,
+    current_plan_name: current === 'premium' ? 'প্রিমিয়াম প্রো' : current === 'standard' ? 'স্ট্যান্ডার্ড মেম্বার' : 'ফ্রি মেম্বার',
+    subscription_id: subId,
+    starts_at: startsAt,
+    expires_at: expires,
+    days_left: daysLeft,
+    badge_label: current === 'premium' ? '👑 প্রিমিয়াম প্রো' : current === 'standard' ? '⚡ স্ট্যান্ডার্ড মেম্বার' : 'সাধারণ শিক্ষার্থী',
+    current_plan_details: currentPlanData
+  })
 })
 
-// ---------- সাবস্ক্রাইব (ওয়ালেট থেকে পেমেন্ট) ----------
+// ---------- সাবস্ক্রাইব অথবা রিনিউ/মেয়াদ বৃদ্ধি (ওয়ালেট থেকে পেমেন্ট) ----------
 subs.post('/subscribe', requireAuth, async (c) => {
   const user = c.get('user')!
   const body = await c.req.json<any>().catch(() => null)
@@ -55,10 +78,26 @@ subs.post('/subscribe', requireAuth, async (c) => {
   if (!plan) return c.json({ ok: false, error: 'প্ল্যান পাওয়া যায়নি' }, 404)
 
   const current = await getUserPlan(c.env.DB, user.id)
-  if (PLAN_RANK[current] >= PLAN_RANK[slug]) return c.json({ ok: false, error: `আপনার ইতিমধ্যে ${current === 'premium' ? 'প্রিমিয়াম' : 'স্ট্যান্ডার্ড'} প্ল্যান সক্রিয় আছে` }, 400)
+  if (PLAN_RANK[current] > PLAN_RANK[slug]) {
+    return c.json({ ok: false, error: `আপনার ইতিমধ্যে উচ্চতর ${current === 'premium' ? 'প্রিমিয়াম' : 'স্ট্যান্ডার্ড'} প্ল্যান সক্রিয় আছে` }, 400)
+  }
+
+  const isRenewal = current === slug
 
   const w: any = await c.env.DB.prepare('SELECT balance FROM wallets WHERE user_id=?').bind(user.id).first()
   if ((w?.balance ?? 0) < plan.price) return c.json({ ok: false, error: `ওয়ালেটে যথেষ্ট ব্যালেন্স নেই (দরকার ৳${plan.price}) — আগে টপ-আপ করুন`, need_topup: true }, 400)
+
+  // যদি রিনিউ করা হয়, বর্তমান মেয়াদের সাথে নতুন দিন যোগ হবে
+  const activeSub: any = await c.env.DB.prepare("SELECT id, expires_at FROM subscriptions WHERE user_id=? AND status='active' AND expires_at > datetime('now') ORDER BY id DESC LIMIT 1").bind(user.id).first()
+
+  if (activeSub && isRenewal) {
+    await c.env.DB.batch([
+      c.env.DB.prepare('UPDATE wallets SET balance=balance-? WHERE user_id=?').bind(plan.price, user.id),
+      c.env.DB.prepare("INSERT INTO wallet_transactions (user_id, amount, type, note) VALUES (?,?,'purchase',?)").bind(user.id, -plan.price, `${plan.name_bn} সাবস্ক্রিপশন মেয়াদ বৃদ্ধি (${plan.duration_days} দিন)`),
+      c.env.DB.prepare("UPDATE subscriptions SET expires_at=datetime(expires_at, '+' || ? || ' days') WHERE id=?").bind(plan.duration_days, activeSub.id)
+    ])
+    return c.json({ ok: true, plan: slug, is_renewal: true, message: `আপনার ${plan.name_bn} এর মেয়াদ আরও ${plan.duration_days} দিন বৃদ্ধি করা হয়েছে।` })
+  }
 
   await c.env.DB.batch([
     c.env.DB.prepare('UPDATE wallets SET balance=balance-? WHERE user_id=?').bind(plan.price, user.id),
@@ -66,7 +105,7 @@ subs.post('/subscribe', requireAuth, async (c) => {
     c.env.DB.prepare("UPDATE subscriptions SET status='cancelled' WHERE user_id=? AND status='active'").bind(user.id),
     c.env.DB.prepare("INSERT INTO subscriptions (user_id, plan_slug, price_paid, expires_at) VALUES (?,?,?, datetime('now', '+' || ? || ' days'))").bind(user.id, slug, plan.price, plan.duration_days),
   ])
-  return c.json({ ok: true, plan: slug })
+  return c.json({ ok: true, plan: slug, is_renewal: false, message: `অভিনন্দন! আপনার ${plan.name_bn} সাবস্ক্রিপশন সক্রিয় হয়েছে।` })
 })
 
 // ---------- আমার সাবস্ক্রিপশন স্ট্যাটাস ----------
@@ -74,11 +113,30 @@ subs.get('/my-plan', async (c) => {
   const user = c.get('user')
   const plan = await getUserPlan(c.env.DB, user?.id ?? null)
   let expires: string | null = null
+  let subId: string | null = null
+  let startsAt: string | null = null
+  let daysLeft: number = 0
+
   if (user && plan !== 'free') {
-    const r: any = await c.env.DB.prepare("SELECT expires_at FROM subscriptions WHERE user_id=? AND status='active' AND expires_at > datetime('now') ORDER BY id DESC LIMIT 1").bind(user.id).first()
-    expires = r?.expires_at || null
+    const r: any = await c.env.DB.prepare("SELECT id, starts_at, expires_at, CAST((julianday(expires_at) - julianday('now')) AS INTEGER) as days_remaining FROM subscriptions WHERE user_id=? AND status='active' AND expires_at > datetime('now') ORDER BY id DESC LIMIT 1").bind(user.id).first()
+    if (r) {
+      expires = r.expires_at || null
+      startsAt = r.starts_at || null
+      subId = `SUB-2026-${String(r.id).padStart(4, '0')}`
+      daysLeft = Math.max(0, Number(r.days_remaining) || 0)
+    }
   }
-  return c.json({ ok: true, plan, expires_at: expires })
+
+  return c.json({
+    ok: true,
+    plan,
+    plan_name_bn: plan === 'premium' ? 'প্রিমিয়াম প্রো' : plan === 'standard' ? 'স্ট্যান্ডার্ড মেম্বার' : 'ফ্রি মেম্বার',
+    subscription_id: subId,
+    starts_at: startsAt,
+    expires_at: expires,
+    days_left: daysLeft,
+    badge_label: plan === 'premium' ? '👑 প্রিমিয়াম প্রো' : plan === 'standard' ? '⚡ স্ট্যান্ডার্ড মেম্বার' : 'সাধারণ শিক্ষার্থী'
+  })
 })
 
 // ---------- প্রশ্নপত্র ব্যাংক (তালিকা — অ্যাকসেস চিহ্নসহ; কন্টেন্ট সাইটেই) ----------

@@ -1086,5 +1086,5 @@ function handleContact(e) {
 </script>
 `
 
-  return pageShell('হোম — শিক্ষার সব, এক ঠিকানায়', 'bg-[#0b0d12] text-slate-100 grain', html, extraHead)
+  return pageShell('হোম — শিক্ষার সব, এক ঠিকানায়', 'bg-[#0b0d12] text-slate-100 grain', html, extraHead, true)
 }

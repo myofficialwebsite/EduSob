@@ -1,5 +1,5 @@
 // এডুসব ফেজ-৭ — সাবস্ক্রিপশন পেজ + প্রশ্নপত্র ব্যাংক পেজ
-import { pageShell, floatingButtons } from './layout'
+import { pageShell } from './layout'
 
 const NAV = (loggedIn: boolean) => `
 <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-xl border-b border-white/10">
@@ -15,67 +15,203 @@ const NAV = (loggedIn: boolean) => `
 
 // ================= সাবস্ক্রিপশন পেজ =================
 export function subscriptionPage(loggedIn: boolean): string {
-  return pageShell('সাবস্ক্রিপশন', 'bg-slate-950 text-white min-h-screen', `
+  return pageShell('সাবস্ক্রিপশন ও মেম্বারশিপ হাব', 'bg-slate-950 text-white min-h-screen', `
 ${NAV(loggedIn)}
-<main class="max-w-6xl mx-auto px-4 py-10">
-  <div class="text-center mb-10">
-    <h1 class="text-3xl sm:text-4xl font-bold mb-3">👑 এডুসব সাবস্ক্রিপশন</h1>
-    <p class="text-slate-400">আপনার পড়াশোনার গতি বাড়ান — পছন্দের প্ল্যান বেছে নিন</p>
-    <p id="currentPlanBar" class="hidden mt-4 inline-block bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 px-4 py-2 rounded-full text-sm"></p>
+<main class="max-w-6xl mx-auto px-4 py-8 sm:py-10 space-y-8">
+  <!-- ১. সক্রিয় মেম্বারশিপ হাব কার্ড (সক্রিয় সাবস্ক্রাইবারদের জন্য প্রদর্শিত) -->
+  <div id="activeMembershipCard" class="hidden"></div>
+
+  <!-- ২. মূল প্ল্যান পরিচিতি হেডার (নন-সাবস্ক্রাইবার অথবা প্ল্যান এক্সপ্লোর করার জন্য) -->
+  <div id="plansHeader" class="text-center">
+    <div class="inline-flex items-center gap-2 bg-amber-500/15 border border-amber-400/30 text-amber-300 px-4 py-1.5 rounded-full text-xs font-bold mb-3">
+      <i class="fas fa-crown"></i> এডুসব স্টুডেন্ট মেম্বারশিপ
+    </div>
+    <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-2">আপনার পছন্দের স্টাডি প্যাকেজ</h1>
+    <p class="text-slate-400 text-sm max-w-xl mx-auto">বোর্ড প্রশ্নব্যাংক, ১০০% কমন সাজেশন, শিক্ষকের সাথে ১-অন-১ ডাউট সলভ ও অফিশিয়াল PDF ডাউনলোড সুবিধা</p>
   </div>
+
+  <!-- ৩. প্ল্যান কার্ড গ্রিড -->
   <div id="plansGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
-    <div class="text-center text-slate-500 col-span-full py-10"><i class="fas fa-spinner fa-spin text-2xl"></i></div>
+    <div class="text-center text-slate-500 col-span-full py-10"><i class="fas fa-spinner fa-spin text-2xl text-emerald-400"></i></div>
   </div>
-  <div class="mt-10 bg-white/5 border border-white/10 rounded-2xl p-6 text-sm text-slate-300">
-    <p class="font-semibold text-white mb-2"><i class="fas fa-circle-info mr-2 text-sky-400"></i>কীভাবে কাজ করে?</p>
-    <ul class="space-y-1.5 list-disc list-inside">
-      <li>পেমেন্ট হয় আপনার <a href="/wallet" class="text-emerald-400 underline">এডুসব ওয়ালেট</a> থেকে — আগে বিকাশ/নগদে টপ-আপ করুন</li>
-      <li>মেয়াদ শেষ হলে অটোমেটিক ফ্রি প্ল্যানে ফিরে যাবেন — কোনো লুকানো চার্জ নেই</li>
-      <li>আপগ্রেড করলে নতুন প্ল্যানের পুরো মেয়াদ পাবেন</li>
+
+  <!-- ৪. সহায়তা ও ওয়ালেট গাইড -->
+  <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-sm text-slate-300">
+    <div class="flex items-center justify-between gap-4 flex-wrap pb-3 border-b border-white/10 mb-3">
+      <p class="font-bold text-white flex items-center gap-2">
+        <i class="fas fa-shield-halved text-emerald-400"></i> ১০০% নিরাপদ ও স্বচ্ছ মেম্বারশিপ নীতি
+      </p>
+      <a href="/wallet" class="text-xs text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1">
+        <i class="fas fa-wallet"></i> ওয়ালেট ব্যালেন্স চেক করুন →
+      </a>
+    </div>
+    <ul class="grid sm:grid-cols-3 gap-3 text-xs text-slate-400">
+      <li class="flex items-start gap-2">
+        <i class="fas fa-check text-emerald-400 mt-0.5 shrink-0"></i>
+        <span>পেমেন্ট হয় আপনার এডুসব ওয়ালেট থেকে — বিকাশ/নগদ/রকেটে দ্রুত রিচার্জযোগ্য।</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <i class="fas fa-check text-emerald-400 mt-0.5 shrink-0"></i>
+        <span>মেম্বারদের জন্য অফিসিয়াল ট্র্যাকিং আইডি (#SUB-XXXX) প্রদান করা হয়।</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <i class="fas fa-check text-emerald-400 mt-0.5 shrink-0"></i>
+        <span>মেয়াদ শেষ হলেও কোনো লুকানো ফি নেই — যেকোনো সময় মেয়াদ বৃদ্ধি করা যায়।</span>
+      </li>
     </ul>
   </div>
 </main>
-${floatingButtons()}
 <script>
 function tk(n){return '৳'+Number(n).toLocaleString('bn-BD')}
 function esc(s){var d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML}
 var loggedIn=${loggedIn ? 'true' : 'false'};
+
+function copySubId(id){
+  navigator.clipboard.writeText(id).then(function(){
+    alert('সাবস্ক্রিপশন আইডি ' + id + ' সফলভাবে কপি হয়েছে!');
+  }).catch(function(){
+    alert('কপি করা সম্ভব হয়নি।');
+  });
+}
+
 function loadPlans(){
   axios.get('/api/subs/plans').then(function(res){
-    var d=res.data; if(!d.ok) return;
-    var cur=d.current_plan;
-    if(cur!=='free'){
-      var bar=document.getElementById('currentPlanBar');
-      bar.textContent='✅ আপনার বর্তমান প্ল্যান: '+(cur==='premium'?'প্রিমিয়াম':'স্ট্যান্ডার্ড')+(d.expires_at?' — মেয়াদ: '+d.expires_at.slice(0,10):'');
-      bar.classList.remove('hidden');
+    var d = res.data;
+    if(!d.ok) return;
+    var cur = d.current_plan;
+    var cardEl = document.getElementById('activeMembershipCard');
+    var plansHeader = document.getElementById('plansHeader');
+
+    // যদি সক্রিয় পেইড সাবস্ক্রিপশন থাকে, তবে প্রধান আকর্ষণ হিসেবে মেম্বারশিপ কার্ড রেন্ডার করা হবে
+    if(cur && cur !== 'free'){
+      var isPrem = cur === 'premium';
+      var badgeCls = isPrem ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950' : 'bg-emerald-500 text-slate-950';
+      var borderCls = isPrem ? 'border-amber-400/40 shadow-[0_0_50px_rgba(251,191,36,.12)]' : 'border-emerald-400/40';
+
+      cardEl.className = 'block relative overflow-hidden bg-slate-900 border ' + borderCls + ' rounded-3xl p-6 sm:p-8 transition';
+      cardEl.innerHTML = 
+        '<div class="flex items-start justify-between gap-4 flex-wrap pb-6 border-b border-white/10">' +
+          '<div>' +
+            '<div class="flex items-center gap-2 mb-2 flex-wrap">' +
+              '<span class="px-3.5 py-1 rounded-full text-xs font-black ' + badgeCls + ' flex items-center gap-1.5 shadow-sm">' +
+                (isPrem ? '<i class="fas fa-crown"></i>' : '<i class="fas fa-bolt"></i>') +
+                '<span>' + esc(d.badge_label || 'সক্রিয় মেম্বার') + '</span>' +
+              '</span>' +
+              '<span class="text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">' +
+                '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> সক্রিয় (Active)' +
+              '</span>' +
+            '</div>' +
+            '<h2 class="text-xl sm:text-2xl font-black text-white">🎉 আপনার এডুসব সাবস্ক্রিপশন সক্রিয় রয়েছে</h2>' +
+            '<p class="text-slate-300 text-xs sm:text-sm mt-1">সকল প্রিমিয়াম ফিচার, প্রশ্নপত্র সমাধান ও মেন্টর সুবিধা আপনার অ্যাকাউন্টে উন্মুক্ত।</p>' +
+          '</div>' +
+          '<div class="bg-slate-950/80 border border-white/10 rounded-2xl p-3 sm:px-4 sm:py-2.5 flex items-center gap-3">' +
+            '<div>' +
+              '<span class="text-[10px] text-slate-400 uppercase tracking-wider font-bold block">সাবস্ক্রিপশন আইডি</span>' +
+              '<code class="text-sm sm:text-base font-mono font-black text-amber-300">' + esc(d.subscription_id || '#SUB-2026') + '</code>' +
+            '</div>' +
+            '<button onclick="copySubId(\\'' + (d.subscription_id || '') + '\\')" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition flex items-center justify-center text-xs" title="আইডি কপি করুন">' +
+              '<i class="fas fa-copy"></i>' +
+            '</button>' +
+          '</div>' +
+        '</div>' +
+
+        '<!-- ৪-মেট্রিক স্ট্যাটাস গ্রিড -->' +
+        '<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 py-5 border-b border-white/10 text-xs">' +
+          '<div>' +
+            '<span class="text-slate-400 block">বর্তমান প্ল্যান</span>' +
+            '<span class="font-bold text-white text-sm sm:text-base mt-0.5 block">' + (isPrem ? 'প্রিমিয়াম প্রো' : 'স্ট্যান্ডার্ড মেম্বার') + '</span>' +
+          '</div>' +
+          '<div>' +
+            '<span class="text-slate-400 block">মেয়াদ শেষ তারিখ</span>' +
+            '<span class="font-bold text-emerald-400 text-sm sm:text-base mt-0.5 block">' + (d.expires_at ? d.expires_at.slice(0,10) : 'অনির্দিষ্ট') + '</span>' +
+          '</div>' +
+          '<div>' +
+            '<span class="text-slate-400 block">অবশিষ্ট সময়</span>' +
+            '<span class="font-bold text-amber-300 text-sm sm:text-base mt-0.5 block">' + (d.days_left ? d.days_left + ' দিন বাকি' : 'মেয়াদ সক্রিয়') + '</span>' +
+          '</div>' +
+          '<div>' +
+            '<span class="text-slate-400 block">ডাউনলোড ও সমাধান অ্যাক্সেস</span>' +
+            '<span class="font-bold text-sky-400 text-sm sm:text-base mt-0.5 block">আনলিমিটেড</span>' +
+          '</div>' +
+        '</div>' +
+
+        '<!-- আনলকড সুবিধা ও কুইক অ্যাকশন -->' +
+        '<div class="pt-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 flex-wrap">' +
+          '<div class="flex items-center gap-2 flex-wrap text-xs">' +
+            '<span class="text-slate-400 font-semibold mr-1">আনলকড সার্ভিসেস:</span>' +
+            '<a href="/qpapers" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-bold transition flex items-center gap-1.5"><i class="fas fa-file-invoice text-emerald-400"></i> প্রশ্নপত্র ও সমাধান</a>' +
+            '<a href="/teacher-support" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-bold transition flex items-center gap-1.5"><i class="fas fa-user-graduate text-sky-400"></i> শিক্ষক ও মেন্টর সাপোর্ট</a>' +
+          '</div>' +
+          '<div class="flex items-center gap-2 flex-wrap w-full sm:w-auto">' +
+            '<button onclick="subscribe(\\'' + cur + '\\', ' + (d.current_plan_details ? d.current_plan_details.price : 100) + ')" class="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-95 text-slate-950 font-black text-xs transition shadow flex items-center justify-center gap-1.5">' +
+              '<i class="fas fa-rotate"></i> মেয়াদ বৃদ্ধি (+৩০ দিন)' +
+            '</button>' +
+          '</div>' +
+        '</div>';
+
+      // হেডার পরিবর্তন যাতে পেইড ইউজার অযাচিত "সাবস্ক্রিপশন কিনুন" মেসেজ না পায়
+      plansHeader.innerHTML = 
+        '<h2 class="text-xl sm:text-2xl font-black text-white mb-1">অন্যান্য মেম্বারশিপ প্ল্যান ও ফিচার তুলনা</h2>' +
+        '<p class="text-slate-400 text-xs">আপনার বর্তমান অ্যাকাউন্টের সাথে অন্যান্য স্তরের সুবিধার তুলনামূলক বিবরণ</p>';
     }
-    var rank={free:0,standard:1,premium:2};
-    document.getElementById('plansGrid').innerHTML=d.plans.map(function(p){
-      var isCur=p.slug===cur;
-      var popular=p.badge?'<span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 text-xs font-bold px-4 py-1 rounded-full shadow-lg">'+esc(p.badge)+'</span>':'';
-      var ring=p.slug==='premium'?'border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,.15)]':p.slug==='standard'?'border-emerald-400/40':'border-white/10';
+
+    var rank = { free: 0, standard: 1, premium: 2 };
+    document.getElementById('plansGrid').innerHTML = d.plans.map(function(p){
+      var isCur = p.slug === cur;
+      var popular = p.badge ? '<span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 text-xs font-black px-4 py-1 rounded-full shadow-lg">' + esc(p.badge) + '</span>' : '';
+      var ring = p.slug === 'premium' ? 'border-amber-400/50 shadow-[0_0_30px_rgba(251,191,36,.1)]' : p.slug === 'standard' ? 'border-emerald-400/40' : 'border-white/10';
       var btn;
-      if(p.slug==='free') btn='<span class="block text-center py-3 rounded-xl bg-white/10 text-slate-400 font-semibold">সবসময় ফ্রি</span>';
-      else if(isCur) btn='<span class="block text-center py-3 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-bold">✅ সক্রিয় আছে</span>';
-      else if(rank[cur]>rank[p.slug]) btn='<span class="block text-center py-3 rounded-xl bg-white/5 text-slate-500 font-semibold">নিম্নতর প্ল্যান</span>';
-      else btn='<button onclick="subscribe(\\''+p.slug+'\\','+p.price+')" class="w-full py-3 rounded-xl bg-gradient-to-r '+(p.slug==='premium'?'from-amber-400 to-orange-500 text-slate-900':'from-emerald-500 to-teal-500 text-white')+' font-bold hover:opacity-90 transition">সাবস্ক্রাইব করুন →</button>';
-      return '<div class="relative bg-white/5 border '+ring+' rounded-2xl p-6 flex flex-col">'+popular+
-        '<p class="text-lg font-bold '+(p.slug==='premium'?'text-amber-300':p.slug==='standard'?'text-emerald-300':'text-slate-300')+'">'+esc(p.name_bn)+'</p>'+
-        '<p class="text-slate-400 text-sm mb-4">'+esc(p.description)+'</p>'+
-        '<p class="mb-5"><span class="text-4xl font-bold">'+(p.price===0?'ফ্রি':tk(p.price))+'</span>'+(p.price>0?'<span class="text-slate-400 text-sm"> / '+(p.duration_days===30?'মাস':p.duration_days+' দিন')+'</span>':'')+'</p>'+
-        '<ul class="space-y-2.5 text-sm text-slate-300 flex-1 mb-6">'+p.features.map(function(f){return '<li class="flex gap-2"><i class="fas fa-check text-emerald-400 mt-0.5"></i><span>'+esc(f)+'</span></li>'}).join('')+'</ul>'+btn+'</div>';
+      if(p.slug === 'free') {
+        btn = '<span class="block text-center py-3 rounded-xl bg-white/10 text-slate-400 font-semibold text-xs">ডিফল্ট ফ্রি অ্যাক্সেস</span>';
+      } else if(isCur) {
+        btn = '<div class="space-y-2">' +
+                '<span class="block text-center py-2.5 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black text-xs">✅ বর্তমানে সক্রিয় (Active)</span>' +
+                '<button onclick="subscribe(\\'' + p.slug + '\\',' + p.price + ')" class="w-full py-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-bold text-xs transition flex items-center justify-center gap-1">' +
+                  '<i class="fas fa-rotate"></i> মেয়াদ বৃদ্ধি করুন' +
+                '</button>' +
+              '</div>';
+      } else if(rank[cur] > rank[p.slug]) {
+        btn = '<span class="block text-center py-3 rounded-xl bg-white/5 text-slate-500 font-semibold text-xs">বর্তমান প্ল্যানের অন্তর্ভুক্ত</span>';
+      } else {
+        btn = '<button onclick="subscribe(\\'' + p.slug + '\\',' + p.price + ')" class="w-full py-3 rounded-xl bg-gradient-to-r ' + (p.slug === 'premium' ? 'from-amber-400 to-orange-500 text-slate-950' : 'from-emerald-500 to-teal-500 text-white') + ' font-black text-xs hover:opacity-90 transition shadow">সাবস্ক্রাইব করুন →</button>';
+      }
+
+      return '<div class="relative bg-slate-900/90 border ' + ring + ' rounded-2xl p-6 flex flex-col justify-between space-y-4">' + popular +
+        '<div>' +
+          '<div class="flex items-center justify-between">' +
+            '<p class="text-lg font-black ' + (p.slug === 'premium' ? 'text-amber-300' : p.slug === 'standard' ? 'text-emerald-300' : 'text-slate-200') + '">' + esc(p.name_bn) + '</p>' +
+            (isCur ? '<span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">আমার প্ল্যান</span>' : '') +
+          '</div>' +
+          '<p class="text-slate-400 text-xs mt-1 mb-4">' + esc(p.description) + '</p>' +
+          '<div class="mb-5 pb-4 border-b border-white/10">' +
+            '<span class="text-3xl sm:text-4xl font-black text-white">' + (p.price === 0 ? 'বিনামূল্যে' : tk(p.price)) + '</span>' +
+            (p.price > 0 ? '<span class="text-slate-400 text-xs"> / ' + (p.duration_days === 30 ? 'মাস' : p.duration_days + ' দিন') + '</span>' : '') +
+          '</div>' +
+          '<ul class="space-y-2.5 text-xs text-slate-300">' +
+            p.features.map(function(f){ return '<li class="flex items-start gap-2"><i class="fas fa-check text-emerald-400 mt-0.5 shrink-0"></i><span>' + esc(f) + '</span></li>'; }).join('') +
+          '</ul>' +
+        '</div>' +
+        '<div>' + btn + '</div>' +
+      '</div>';
     }).join('');
   });
 }
+
 function subscribe(slug, price){
   if(!loggedIn){location.href='/login';return}
-  if(!confirm('ওয়ালেট থেকে '+tk(price)+' কেটে '+(slug==='premium'?'প্রিমিয়াম':'স্ট্যান্ডার্ড')+' প্ল্যান চালু হবে। নিশ্চিত?'))return;
-  axios.post('/api/subs/subscribe',{plan:slug}).then(function(res){
-    if(res.data.ok){alert('🎉 অভিনন্দন! আপনার প্ল্যান সক্রিয় হয়েছে');loadPlans()}
+  if(!confirm('ওয়ালেট থেকে ' + tk(price) + ' কেটে ' + (slug === 'premium' ? 'প্রিমিয়াম প্রো' : 'স্ট্যান্ডার্ড') + ' প্যাকেজের মেয়াদ সক্রিয়/বৃদ্ধি করা হবে। নিশ্চিত?')) return;
+  axios.post('/api/subs/subscribe', { plan: slug }).then(function(res){
+    if(res.data.ok){
+      alert('🎉 ' + (res.data.message || 'অভিনন্দন! আপনার সাবস্ক্রিপশন সফলভাবে সক্রিয় হয়েছে।'));
+      loadPlans();
+    }
   }).catch(function(e){
-    var d=e.response&&e.response.data;
-    if(d&&d.need_topup){if(confirm(d.error+'\\n\\nএখনই টপ-আপ করবেন?'))location.href='/wallet'}
-    else alert(d&&d.error||'সমস্যা হয়েছে');
+    var d = e.response && e.response.data;
+    if(d && d.need_topup){
+      if(confirm(d.error + '\\n\\nএখনই ওয়ালেটে টপ-আপ করবেন?')) location.href = '/wallet';
+    } else {
+      alert(d && d.error || 'সমস্যা হয়েছে');
+    }
   });
 }
 loadPlans();
@@ -125,7 +261,7 @@ ${NAV(loggedIn)}
     <div class="text-center text-slate-500 col-span-full py-12"><i class="fas fa-spinner fa-spin text-3xl text-emerald-400"></i><p class="mt-2 text-xs">প্রশ্নব্যাংক লোড হচ্ছে...</p></div>
   </div>
 
-  <div class="text-center py-4 bg-gradient-to-r from-amber-500/10 via-emerald-500/10 to-teal-500/10 border border-amber-500/20 rounded-2xl p-4">
+  <div id="qpapersSubBanner" class="text-center py-4 bg-gradient-to-r from-amber-500/10 via-emerald-500/10 to-teal-500/10 border border-amber-500/20 rounded-2xl p-4">
     <p class="text-xs text-amber-300 font-semibold mb-2">⭐ প্রিমিয়াম সদস্যরা প্রতিদিন আনলিমিটেড প্রশ্নপত্র ও পূর্ণাঙ্গ সমাধান সরাসরি অফিশিয়াল ফরম্যাটে ডাউনলোড করতে পারেন</p>
     <a href="/subscription" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black px-6 py-2.5 rounded-xl transition shadow text-xs">
       <i class="fas fa-crown"></i> আনলিমিটেড ডাউনলোড প্যাকেজ সক্রিয় করুন
@@ -193,7 +329,6 @@ ${NAV(loggedIn)}
     </div>
   </div>
 </div>
-${floatingButtons()}
 <script>
 function esc(s){var d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML}
 function toBn(n){var d={'0':'০','1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯'};return String(n).replace(/[0-9]/g,function(x){return d[x]})}
@@ -453,6 +588,30 @@ var SMART={ssc:'ssc',hsc:'hsc',nu:'nu',masters:'nu'};
 var defLv=SMART[USER_LEVEL]||'';
 if(defLv){var db=document.querySelector('.lv-tab[data-lv="'+defLv+'"]');if(db){db.click()}else{load('')}}
 else load('');
+
+// সক্রিয় সাবস্ক্রিপশন চেক এবং অ্যাডাপ্টিভ ব্যানার রেন্ডার
+axios.get('/api/subs/my-plan').then(function(res){
+  var d = res.data;
+  if(d && d.ok && d.plan && d.plan !== 'free'){
+    var sb = document.getElementById('qpapersSubBanner');
+    if(sb){
+      var isPrem = d.plan === 'premium';
+      sb.className = 'text-center py-5 bg-gradient-to-r from-emerald-500/15 via-teal-500/15 to-emerald-500/15 border border-emerald-500/30 rounded-2xl p-5 shadow-lg';
+      sb.innerHTML = 
+        '<div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-3.5 py-1 rounded-full text-xs font-black mb-2">' +
+          (isPrem ? '<i class="fas fa-crown text-amber-400"></i>' : '<i class="fas fa-bolt text-emerald-400"></i>') +
+          '<span>' + esc(d.badge_label) + ' (' + esc(d.subscription_id) + ') — সক্রিয়</span>' +
+        '</div>' +
+        '<p class="text-sm font-black text-white mb-1">🎉 আপনার ' + (isPrem ? 'প্রিমিয়াম প্রো' : 'স্ট্যান্ডার্ড') + ' মেম্বারশিপ সক্রিয় রয়েছে</p>' +
+        '<p class="text-xs text-slate-300 max-w-xl mx-auto">সকল প্রশ্নপত্র, বোর্ড সলিউশন, এক্সক্লুসিভ সাজেশন ও অফিশিয়াল A4 PDF এক্সপোর্ট আপনার জন্য ১০০% উন্মুক্ত।</p>' +
+        '<div class="mt-3 flex items-center justify-center gap-3 text-xs">' +
+          '<a href="/subscription" class="px-4 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-bold border border-white/10 transition flex items-center gap-1.5">' +
+            '<i class="fas fa-id-card text-sky-400"></i> মেম্বারশিপ হাব ও বিবরণী (' + (d.days_left || 0) + ' দিন বাকি)' +
+          '</a>' +
+        '</div>';
+    }
+  }
+}).catch(function(){});
 </script>
 `)
 }

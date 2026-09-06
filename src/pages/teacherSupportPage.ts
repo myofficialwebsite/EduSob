@@ -1,5 +1,5 @@
 // এডুসব — প্রিমিয়াম শিক্ষক সহায়তা ও ১-অন-১ মেন্টরশিপ পোর্টাল
-import { pageShell, floatingButtons } from './layout'
+import { pageShell } from './layout'
 
 const NAV = (loggedIn: boolean) => `
 <header class="sticky top-0 z-40 bg-slate-950/85 backdrop-blur-xl border-b border-white/10">
@@ -422,8 +422,6 @@ ${NAV(loggedIn)}
   </div>
 </div>
 
-${floatingButtons()}
-
 <script>
 var loggedIn = ${loggedIn ? 'true' : 'false'};
 var userPlan = 'free';
@@ -459,11 +457,11 @@ function checkUserStatus() {
     userPlan = d.plan || 'free';
     var badge = document.getElementById('userPlanBadge');
     if (userPlan === 'premium') {
-      badge.className = 'p-3.5 rounded-xl bg-amber-500/15 border border-amber-400/40 text-amber-300 text-center text-sm font-bold flex items-center justify-center gap-2';
-      badge.innerHTML = '<i class="fas fa-crown text-amber-400"></i> আপনার প্রিমিয়াম সুবিধা সক্রিয় (আনলিমিটেড ডাউট ও প্রায়োরিটি)';
+      badge.className = 'p-3.5 rounded-xl bg-amber-500/15 border border-amber-400/40 text-amber-300 text-center text-sm font-bold flex items-center justify-center gap-2 flex-wrap';
+      badge.innerHTML = '<i class="fas fa-crown text-amber-400"></i> প্রিমিয়াম মেম্বারশিপ সক্রিয় (আইডি: ' + (d.subscription_id || '#SUB-2026') + ') — আনলিমিটেড ডাউট ও শিক্ষক প্রায়োরিটি উন্মুক্ত';
     } else if (userPlan === 'standard') {
-      badge.className = 'p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-center text-sm font-semibold flex items-center justify-center gap-2';
-      badge.innerHTML = '<i class="fas fa-bolt text-emerald-400"></i> স্ট্যান্ডার্ড প্ল্যান — <a href="/subscription" class="text-amber-400 underline font-bold ml-1">প্রিমিয়ামে আপগ্রেড করুন</a>';
+      badge.className = 'p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-center text-sm font-semibold flex items-center justify-center gap-2 flex-wrap';
+      badge.innerHTML = '<i class="fas fa-bolt text-emerald-400"></i> স্ট্যান্ডার্ড মেম্বার (আইডি: ' + (d.subscription_id || '#SUB-2026') + ') — <a href="/subscription" class="text-amber-400 underline font-bold ml-1">প্রিমিয়ামে আপগ্রেড করুন</a>';
     } else {
       badge.className = 'p-3.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 text-center text-sm';
       badge.innerHTML = 'ফ্রি প্ল্যান (দৈনিক ১টি ডাউট) — <a href="/subscription" class="text-amber-400 underline font-bold">প্রিমিয়াম নিন (৳১০০/মাস)</a>';

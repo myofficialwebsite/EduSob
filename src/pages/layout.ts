@@ -837,7 +837,7 @@ function edusobTk(n){return '৳'+Number(n).toLocaleString('bn-BD')}
 `
 }
 
-export function pageShell(title: string, bodyClass: string, content: string, extraHead = ''): string {
+export function pageShell(title: string, bodyClass: string, content: string, extraHead = '', showFloating = false): string {
   return `<!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -847,7 +847,7 @@ ${extraHead}
 </head>
 <body class="${bodyClass}">
 ${content}
-${floatingButtons()}
+${showFloating ? floatingButtons() : ''}
 </body>
 </html>`
 }

@@ -137,6 +137,12 @@ export function dashboardPage(user: SessionUser): string {
           <span id="pushStatusText">পুশ</span>
         </button>
 
+        <!-- সাবস্ক্রিপশন স্ট্যাটাস পিল (টপবার) -->
+        <a href="/subscription" id="topbarSubPill" class="hidden items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold transition shadow-xs">
+          <i id="topbarSubIcon" class="fas fa-crown text-[10px]"></i>
+          <span id="topbarSubLabel">প্ল্যান</span>
+        </a>
+
         <!-- ওয়ালেট পিল -->
         <a href="/wallet" class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25 text-xs font-bold transition">
           <i class="fas fa-wallet text-[10px]"></i>
@@ -170,6 +176,7 @@ export function dashboardPage(user: SessionUser): string {
               <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2 py-0.2 rounded-full font-bold flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ভেরিফাইড
               </span>
+              <a href="/subscription" id="userSubBadge" class="hidden"></a>
             </div>
             <div class="flex items-center gap-2 mt-1 text-xs text-slate-400 flex-wrap">
               <span>${({ ssc: 'SSC (মাধ্যমিক)', hsc: 'HSC (উচ্চ মাধ্যমিক)', nu: 'অনার্স / ডিগ্রি', masters: 'মাস্টার্স', other: 'সাধারণ' } as any)[user.education_level ?? ''] ?? 'শিক্ষার্থী'}</span>
@@ -186,6 +193,16 @@ export function dashboardPage(user: SessionUser): string {
             <span class="text-slate-400 text-[11px]">আইডি:</span>
             <code class="font-mono font-bold text-white bg-black/40 px-2 py-0.5 rounded border border-white/10 ${t.accent}">${user.user_code}</code>
             <button onclick="copyText('${user.user_code}', 'আইডি কপি হয়েছে!')" class="text-slate-400 hover:text-white transition" title="কপি"><i class="fas fa-copy text-xs"></i></button>
+          </div>
+
+          <!-- সাবস্ক্রিপশন আইডি ও স্ট্যাটাস চিপ -->
+          <div id="subIdChip" class="hidden items-center gap-1.5 text-xs">
+            <div class="h-4 w-px bg-white/10 hidden sm:block"></div>
+            <span class="text-slate-400 text-[11px]">সাবস্ক্রিপশন:</span>
+            <a href="/subscription" class="font-mono font-bold text-amber-300 bg-black/40 px-2 py-0.5 rounded border border-amber-500/30 hover:border-amber-400 transition flex items-center gap-1.5 text-[11px]" title="ক্লিক করে সাবস্ক্রিপশন বিবরণী দেখুন">
+              <span id="subIdText">#SUB-2026</span>
+              <span id="subDaysLeftText" class="text-slate-400 font-sans text-[10px]"></span>
+            </a>
           </div>
 
           <div class="h-4 w-px bg-white/10 hidden sm:block"></div>
@@ -882,7 +899,8 @@ async function loadDashboardCore(){
       axios.get('/api/wallet'),
       axios.get('/api/saved-rolls'),
       axios.get('/api/profile'),
-      axios.get('/api/referrals')
+      axios.get('/api/referrals'),
+      axios.get('/api/subs/my-plan')
     ]);
 
     if (results[0].status === 'fulfilled' && results[0].value.data.ok) {
@@ -925,6 +943,57 @@ async function loadDashboardCore(){
       const earn = document.getElementById('refEarned');
       if (cnt) cnt.textContent = BN((d.referrals || []).length);
       if (earn) earn.textContent = BN(d.total_earned || 0);
+    }
+
+    // ৫. সাবস্ক্রিপশন আইডি ও মেম্বারশিপ স্ট্যাটাস
+    if (results[4] && results[4].status === 'fulfilled' && results[4].value.data.ok) {
+      const sub = results[4].value.data;
+      const subBadge = document.getElementById('userSubBadge');
+      const topbarPill = document.getElementById('topbarSubPill');
+      const topbarIcon = document.getElementById('topbarSubIcon');
+      const topbarLabel = document.getElementById('topbarSubLabel');
+      const subChip = document.getElementById('subIdChip');
+      const subIdText = document.getElementById('subIdText');
+      const subDaysLeftText = document.getElementById('subDaysLeftText');
+
+      if (sub.plan && sub.plan !== 'free') {
+        const isPrem = sub.plan === 'premium';
+        // ১. নামের পাশে ডিস্টিঙ্কট মেম্বারশিপ ব্যাজ
+        if (subBadge) {
+          subBadge.className = isPrem
+            ? 'inline-flex text-[10px] font-black px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 items-center gap-1 shadow-sm hover:opacity-90 transition'
+            : 'inline-flex text-[10px] font-black px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 items-center gap-1 hover:bg-emerald-500/30 transition';
+          subBadge.innerHTML = (isPrem ? '<i class="fas fa-crown text-[9px]"></i>' : '<i class="fas fa-bolt text-[9px]"></i>') + ' ' + (isPrem ? 'প্রিমিয়াম প্রো' : 'স্ট্যান্ডার্ড');
+          subBadge.title = 'সাবস্ক্রিপশন আইডি: ' + (sub.subscription_id || '') + ' — বিস্তারিত দেখতে ক্লিক করুন';
+        }
+
+        // ২. টপবার মেম্বারশিপ পিল
+        if (topbarPill) {
+          topbarPill.className = isPrem
+            ? 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 hover:bg-amber-500/25 text-xs font-bold transition shadow-xs'
+            : 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25 text-xs font-bold transition shadow-xs';
+          if (topbarIcon) topbarIcon.className = isPrem ? 'fas fa-crown text-[10px] text-amber-400' : 'fas fa-bolt text-[10px] text-emerald-400';
+          if (topbarLabel) topbarLabel.textContent = isPrem ? 'প্রিমিয়াম প্রো' : 'স্ট্যান্ডার্ড';
+          topbarPill.title = 'সক্রিয় মেম্বারশিপ: ' + (sub.subscription_id || '') + ' (' + (sub.days_left || 0) + ' দিন বাকি)';
+        }
+
+        // ৩. ড্যাশবোর্ড আইডি চিপ স্ট্রিপে সাবস্ক্রিপশন আইডি ও বাকি দিন
+        if (subChip && subIdText) {
+          subChip.classList.remove('hidden');
+          subChip.classList.add('flex');
+          subIdText.textContent = sub.subscription_id || '#SUB-2026';
+          if (subDaysLeftText && sub.days_left) {
+            subDaysLeftText.textContent = '(' + BN(sub.days_left) + ' দিন বাকি)';
+          }
+        }
+      } else {
+        // নন-সাবস্ক্রাইবার
+        if (subBadge) {
+          subBadge.className = 'inline-flex text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/5 text-slate-400 hover:text-slate-200 border border-white/10 items-center gap-1 transition';
+          subBadge.innerHTML = '<i class="fas fa-arrow-up-right-from-square text-[8px]"></i> ফ্রি প্ল্যান';
+          subBadge.title = 'ক্লিক করে মেম্বারশিপ আপগ্রেড করুন';
+        }
+      }
     }
   } catch(e){}
 }
