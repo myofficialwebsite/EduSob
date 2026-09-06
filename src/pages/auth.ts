@@ -147,13 +147,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   try {
     const res = await axios.post('/api/auth/login', data);
     if (res.data.ok) {
-      if (res.data.token) {
-        localStorage.setItem('edusob_session_token', res.data.token);
-      }
-      const target = res.data.role === 'admin' && res.data.token 
-        ? '/admin?session_token=' + encodeURIComponent(res.data.token) 
-        : res.data.redirect;
-      window.location.href = target;
+      window.location.href = res.data.redirect;
       return;
     }
   } catch (ex) {

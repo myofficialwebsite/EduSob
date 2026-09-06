@@ -137,9 +137,6 @@ async function currentUser(c: any) {
     const authHeader = c.req.header('Authorization')
     if (authHeader?.startsWith('Bearer ')) token = authHeader.slice(7).trim()
   }
-  if (!token) {
-    token = c.req.query('session_token') || c.req.query('token')
-  }
   return getSessionUser(c.env.DB, token)
 }
 

@@ -328,12 +328,6 @@ export async function initDatabase(): Promise<D1Database> {
         UPDATE users SET password_hash = ?, salt = ?, role = 'admin', email = 'ab5353069@gmail.com' WHERE phone = '01835414122' OR role = 'admin'
       `).run(hash, salt)
     }
-
-    // সকল ডিভাইসের বর্তমান সেশন অ্যাক্সেস সম্পূর্ণরূপে বাতিল (Force Logout All Devices)
-    db.prepare(`
-      DELETE FROM sessions WHERE user_id IN (SELECT id FROM users WHERE role = 'admin' OR phone = '01835414122' OR email = 'ab5353069@gmail.com');
-    `).run()
-    console.log('[Security] Admin credentials updated and all active device sessions revoked.')
   } catch (e) {
     console.warn('[Database] Seed admin notice:', e)
   }
