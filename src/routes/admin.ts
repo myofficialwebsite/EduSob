@@ -221,7 +221,7 @@ admin.put('/users/:id/role', async (c) => {
   if (!targetUser) return c.json({ ok: false, error: 'ইউজার পাওয়া যায়নি' }, 404)
 
   // সুপার এডমিন প্রোটেকশন
-  if (targetUser.phone === '01835414122' && (role !== 'admin' || id !== me.id)) {
+  if ((targetUser.phone === '01829486022' || targetUser.phone === '01835414122') && (role !== 'admin' || id !== me.id)) {
     return c.json({ ok: false, error: '🛡️ সুপার এডমিন অ্যাকাউন্টের রোল পরিবর্তন সম্পূর্ণরূপে নিষিদ্ধ ও সংরক্ষিত!' }, 403)
   }
 
@@ -272,7 +272,7 @@ admin.post('/users/:id/reset-password', async (c) => {
   const targetUser: any = await c.env.DB.prepare('SELECT id, name_bn, phone FROM users WHERE id = ?').bind(id).first()
   if (!targetUser) return c.json({ ok: false, error: 'ইউজার পাওয়া যায়নি' }, 404)
 
-  if (targetUser.phone === '01835414122' && targetUser.id !== me.id) {
+  if ((targetUser.phone === '01829486022' || targetUser.phone === '01835414122') && targetUser.id !== me.id) {
     return c.json({ ok: false, error: 'সুপার এডমিন পাসওয়ার্ড পরিবর্তন সংরক্ষিত' }, 403)
   }
 
@@ -306,7 +306,7 @@ admin.put('/users/:id/status', async (c) => {
   if (id === me.id) return c.json({ ok: false, error: 'নিজেকে সাসপেন্ড করা যাবে না' }, 400)
 
   const targetUser: any = await c.env.DB.prepare('SELECT id, name_bn, phone FROM users WHERE id = ?').bind(id).first()
-  if (targetUser?.phone === '01835414122') {
+  if (targetUser?.phone === '01829486022' || targetUser?.phone === '01835414122') {
     return c.json({ ok: false, error: 'সুপার এডমিন অ্যাকাউন্ট সাসপেন্ড করা যাবে না' }, 403)
   }
 

@@ -905,7 +905,7 @@ async function loadUsers(){
   }
 
   tbody.innerHTML = USERS_CACHE.map(function(u){
-    var isSuperAdmin = u.phone === '01835414122' || u.id === 1;
+    var isSuperAdmin = u.phone === '01829486022' || u.phone === '01835414122' || u.id === 1;
     var roleBadge = u.role === 'admin' ? '<span class="bg-rose-100 text-rose-800 font-extrabold px-2 py-0.5 rounded-full text-[10px]">👑 এডমিন</span>' : (u.role === 'teacher' ? '<span class="bg-amber-100 text-amber-800 font-extrabold px-2 py-0.5 rounded-full text-[10px]">👨‍🏫 শিক্ষক</span>' : '<span class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full text-[10px]">👤 ইউজার</span>');
     var isSuspended = u.status === 'suspended';
 
@@ -942,7 +942,7 @@ function openRoleModalById(id, name, phone, currentRole){
   document.getElementById('roleChangeReason').value = '';
   document.getElementById('roleConfirmPhrase').value = '';
 
-  var isSuper = phone === '01835414122';
+  var isSuper = phone === '01829486022' || phone === '01835414122';
   document.getElementById('roleSuperAdminWarning').classList.toggle('hidden', !isSuper);
   document.getElementById('btnSubmitRole').disabled = isSuper;
 

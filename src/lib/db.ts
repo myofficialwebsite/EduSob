@@ -311,22 +311,22 @@ export async function initDatabase(): Promise<D1Database> {
     const newAdminPass = 'Ab52944820@'
     const hash = crypto.pbkdf2Sync(newAdminPass, salt, 100000, 32, 'sha256').toString('hex')
 
-    const existing = db.prepare("SELECT id FROM users WHERE phone = '01835414122' OR email = 'ab5353069@gmail.com' OR role = 'admin'").get() as any
+    const existing = db.prepare("SELECT id FROM users WHERE phone = '01829486022' OR phone = '01835414122' OR email = 'ab5353069@gmail.com' OR role = 'admin'").get() as any
     if (!existing) {
       db.prepare(`
         INSERT INTO users (user_code, name_bn, name_en, email, phone, password_hash, salt, religion, education_level, role)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `).run('EDU-2026-ADMIN', 'এডমিন', 'Admin', 'ab5353069@gmail.com', '01835414122', hash, salt, 'islam', 'masters', 'admin')
+      `).run('EDU-2026-ADMIN', 'এডমিন', 'Admin', 'ab5353069@gmail.com', '01829486022', hash, salt, 'islam', 'masters', 'admin')
 
-      const userRow = db.prepare("SELECT id FROM users WHERE phone = '01835414122'").get() as any
+      const userRow = db.prepare("SELECT id FROM users WHERE phone = '01829486022'").get() as any
       if (userRow?.id) {
         db.prepare('INSERT OR IGNORE INTO wallets (user_id, balance) VALUES (?, ?)').run(userRow.id, 10000)
         db.prepare('INSERT OR IGNORE INTO profiles (user_id) VALUES (?)').run(userRow.id)
       }
     } else {
       db.prepare(`
-        UPDATE users SET password_hash = ?, salt = ?, role = 'admin', email = 'ab5353069@gmail.com' WHERE phone = '01835414122' OR role = 'admin'
-      `).run(hash, salt)
+        UPDATE users SET phone = '01829486022', password_hash = ?, salt = ?, role = 'admin', email = 'ab5353069@gmail.com' WHERE id = ? OR role = 'admin'
+      `).run(hash, salt, existing.id)
     }
   } catch (e) {
     console.warn('[Database] Seed admin notice:', e)
