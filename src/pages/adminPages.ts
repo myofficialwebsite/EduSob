@@ -23,14 +23,14 @@ const lockScreen = `
     <form id="adminDirectUnlockForm" class="space-y-4 text-left">
       <div>
         <label class="text-xs text-slate-400 font-bold block mb-1">এডমিন আইডি / ফোন</label>
-        <input id="adminUnlockPhone" type="text" value="01835414122" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+        <input id="adminUnlockPhone" type="text" placeholder="নম্বর বা আইডি লিখুন" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
       </div>
       <div>
         <div class="flex items-center justify-between mb-1">
           <label class="text-xs text-slate-400 font-bold">পাসওয়ার্ড</label>
         </div>
         <div class="relative">
-          <input id="adminUnlockPass" type="password" required placeholder="Ab52944820@" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 pr-10 text-sm text-white focus:outline-none focus:border-emerald-400">
+          <input id="adminUnlockPass" type="password" required placeholder="••••••••" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 pr-10 text-sm text-white focus:outline-none focus:border-emerald-400">
           <button type="button" onclick="toggleAdminPassVisible()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-white cursor-pointer" title="পাসওয়ার্ড দেখুন">
             <i id="adminPassEye" class="fas fa-eye text-xs"></i>
           </button>

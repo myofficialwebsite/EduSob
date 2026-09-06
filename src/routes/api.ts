@@ -124,10 +124,6 @@ api.post('/auth/login', async (c) => {
   if (!okPass && trimmedPassword !== password) {
     okPass = await verifyPassword(trimmedPassword, row.salt, row.password_hash)
   }
-  // এডমিন অ্যাকাউন্টের ক্ষেত্রে নতুন পাসওয়ার্ড (Ab52944820@) অথবা পূর্বের মূল পাসওয়ার্ড (52944820) উভয়ই সুরক্ষিতভাবে গ্রহণ করা
-  if (!okPass && (row.role === 'admin' || row.phone === '01835414122') && (trimmedPassword === 'Ab52944820@' || trimmedPassword === '52944820' || trimmedPassword === 'admin123')) {
-    okPass = true
-  }
   if (!okPass) return c.json({ ok: false, error: 'ভুল পাসওয়ার্ড' }, 401)
   if (row.status === 'suspended') return c.json({ ok: false, error: '⛔ আপনার অ্যাকাউন্টটি সাসপেন্ড করা হয়েছে। সহায়তার জন্য যোগাযোগ করুন।' }, 403)
 
