@@ -4,11 +4,11 @@ import { pageShell } from './layout'
 const NAV = (loggedIn: boolean) => `
 <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-xl border-b border-white/10">
   <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-2 font-bold text-xl"><span class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center">📚</span> এডুসব</a>
+    <a href="/" class="flex items-center gap-2 font-bold text-xl"><span class="w-9 h-9 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center">📚</span> এডুসব</a>
     <div class="flex items-center gap-2 text-sm">
       ${loggedIn
-        ? '<a href="/wallet" class="px-3 py-2 rounded-xl border border-white/20 hover:bg-white/10 transition"><i class="fas fa-wallet mr-1"></i>ওয়ালেট</a><a href="/dashboard" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 font-semibold">ড্যাশবোর্ড</a>'
-        : '<a href="/login" class="px-4 py-2 rounded-xl border border-white/20 hover:bg-white/10 transition">লগইন</a><a href="/signup" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 font-semibold">সাইন-আপ</a>'}
+        ? '<a href="/wallet" class="px-3 py-2 rounded-xl border border-white/20 hover:bg-white/10 transition"><i class="fas fa-wallet mr-1"></i>ওয়ালেট</a><a href="/dashboard" class="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 font-semibold">ড্যাশবোর্ড</a>'
+        : '<a href="/login" class="px-4 py-2 rounded-xl border border-white/20 hover:bg-white/10 transition">লগইন</a><a href="/signup" class="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 font-semibold">সাইন-আপ</a>'}
     </div>
   </nav>
 </header>`
@@ -32,30 +32,30 @@ ${NAV(loggedIn)}
 
   <!-- ৩. প্ল্যান কার্ড গ্রিড -->
   <div id="plansGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
-    <div class="text-center text-slate-500 col-span-full py-10"><i class="fas fa-spinner fa-spin text-2xl text-emerald-400"></i></div>
+    <div class="text-center text-slate-500 col-span-full py-10"><i class="fas fa-spinner fa-spin text-2xl text-orange-400"></i></div>
   </div>
 
   <!-- ৪. সহায়তা ও ওয়ালেট গাইড -->
   <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-sm text-slate-300">
     <div class="flex items-center justify-between gap-4 flex-wrap pb-3 border-b border-white/10 mb-3">
       <p class="font-bold text-white flex items-center gap-2">
-        <i class="fas fa-shield-halved text-emerald-400"></i> ১০০% নিরাপদ ও স্বচ্ছ মেম্বারশিপ নীতি
+        <i class="fas fa-shield-halved text-orange-400"></i> ১০০% নিরাপদ ও স্বচ্ছ মেম্বারশিপ নীতি
       </p>
-      <a href="/wallet" class="text-xs text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1">
+      <a href="/wallet" class="text-xs text-orange-400 hover:text-orange-300 font-bold flex items-center gap-1">
         <i class="fas fa-wallet"></i> ওয়ালেট ব্যালেন্স চেক করুন →
       </a>
     </div>
     <ul class="grid sm:grid-cols-3 gap-3 text-xs text-slate-400">
       <li class="flex items-start gap-2">
-        <i class="fas fa-check text-emerald-400 mt-0.5 shrink-0"></i>
+        <i class="fas fa-check text-orange-400 mt-0.5 shrink-0"></i>
         <span>পেমেন্ট হয় আপনার এডুসব ওয়ালেট থেকে — বিকাশ/নগদ/রকেটে দ্রুত রিচার্জযোগ্য।</span>
       </li>
       <li class="flex items-start gap-2">
-        <i class="fas fa-check text-emerald-400 mt-0.5 shrink-0"></i>
+        <i class="fas fa-check text-orange-400 mt-0.5 shrink-0"></i>
         <span>মেম্বারদের জন্য অফিসিয়াল ট্র্যাকিং আইডি (#SUB-XXXX) প্রদান করা হয়।</span>
       </li>
       <li class="flex items-start gap-2">
-        <i class="fas fa-check text-emerald-400 mt-0.5 shrink-0"></i>
+        <i class="fas fa-check text-orange-400 mt-0.5 shrink-0"></i>
         <span>মেয়াদ শেষ হলেও কোনো লুকানো ফি নেই — যেকোনো সময় মেয়াদ বৃদ্ধি করা যায়।</span>
       </li>
     </ul>
@@ -85,8 +85,8 @@ function loadPlans(){
     // যদি সক্রিয় পেইড সাবস্ক্রিপশন থাকে, তবে প্রধান আকর্ষণ হিসেবে মেম্বারশিপ কার্ড রেন্ডার করা হবে
     if(cur && cur !== 'free'){
       var isPrem = cur === 'premium';
-      var badgeCls = isPrem ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950' : 'bg-emerald-500 text-slate-950';
-      var borderCls = isPrem ? 'border-amber-400/40 shadow-[0_0_50px_rgba(251,191,36,.12)]' : 'border-emerald-400/40';
+      var badgeCls = isPrem ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950' : 'bg-orange-500 text-slate-950';
+      var borderCls = isPrem ? 'border-amber-400/40 shadow-[0_0_50px_rgba(251,191,36,.12)]' : 'border-orange-400/40';
 
       cardEl.className = 'block relative overflow-hidden bg-slate-900 border ' + borderCls + ' rounded-3xl p-6 sm:p-8 transition';
       cardEl.innerHTML = 
@@ -97,8 +97,8 @@ function loadPlans(){
                 (isPrem ? '<i class="fas fa-crown"></i>' : '<i class="fas fa-bolt"></i>') +
                 '<span>' + esc(d.badge_label || 'সক্রিয় মেম্বার') + '</span>' +
               '</span>' +
-              '<span class="text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">' +
-                '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> সক্রিয় (Active)' +
+              '<span class="text-xs bg-orange-500/20 text-orange-300 border border-orange-400/30 px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">' +
+                '<span class="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse"></span> সক্রিয় (Active)' +
               '</span>' +
             '</div>' +
             '<h2 class="text-xl sm:text-2xl font-black text-white">🎉 আপনার এডুসব সাবস্ক্রিপশন সক্রিয় রয়েছে</h2>' +
@@ -123,7 +123,7 @@ function loadPlans(){
           '</div>' +
           '<div>' +
             '<span class="text-slate-400 block">মেয়াদ শেষ তারিখ</span>' +
-            '<span class="font-bold text-emerald-400 text-sm sm:text-base mt-0.5 block">' + (d.expires_at ? d.expires_at.slice(0,10) : 'অনির্দিষ্ট') + '</span>' +
+            '<span class="font-bold text-orange-400 text-sm sm:text-base mt-0.5 block">' + (d.expires_at ? d.expires_at.slice(0,10) : 'অনির্দিষ্ট') + '</span>' +
           '</div>' +
           '<div>' +
             '<span class="text-slate-400 block">অবশিষ্ট সময়</span>' +
@@ -139,11 +139,11 @@ function loadPlans(){
         '<div class="pt-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 flex-wrap">' +
           '<div class="flex items-center gap-2 flex-wrap text-xs">' +
             '<span class="text-slate-400 font-semibold mr-1">আনলকড সার্ভিসেস:</span>' +
-            '<a href="/qpapers" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-bold transition flex items-center gap-1.5"><i class="fas fa-file-invoice text-emerald-400"></i> প্রশ্নপত্র ও সমাধান</a>' +
+            '<a href="/qpapers" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-bold transition flex items-center gap-1.5"><i class="fas fa-file-invoice text-orange-400"></i> প্রশ্নপত্র ও সমাধান</a>' +
             '<a href="/teacher-support" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-bold transition flex items-center gap-1.5"><i class="fas fa-user-graduate text-sky-400"></i> শিক্ষক ও মেন্টর সাপোর্ট</a>' +
           '</div>' +
           '<div class="flex items-center gap-2 flex-wrap w-full sm:w-auto">' +
-            '<button onclick="subscribe(\\'' + cur + '\\', ' + (d.current_plan_details ? d.current_plan_details.price : 100) + ')" class="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-95 text-slate-950 font-black text-xs transition shadow flex items-center justify-center gap-1.5">' +
+            '<button onclick="subscribe(\\'' + cur + '\\', ' + (d.current_plan_details ? d.current_plan_details.price : 100) + ')" class="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:opacity-95 text-slate-950 font-black text-xs transition shadow flex items-center justify-center gap-1.5">' +
               '<i class="fas fa-rotate"></i> মেয়াদ বৃদ্ধি (+৩০ দিন)' +
             '</button>' +
           '</div>' +
@@ -159,13 +159,13 @@ function loadPlans(){
     document.getElementById('plansGrid').innerHTML = d.plans.map(function(p){
       var isCur = p.slug === cur;
       var popular = p.badge ? '<span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 text-xs font-black px-4 py-1 rounded-full shadow-lg">' + esc(p.badge) + '</span>' : '';
-      var ring = p.slug === 'premium' ? 'border-amber-400/50 shadow-[0_0_30px_rgba(251,191,36,.1)]' : p.slug === 'standard' ? 'border-emerald-400/40' : 'border-white/10';
+      var ring = p.slug === 'premium' ? 'border-amber-400/50 shadow-[0_0_30px_rgba(251,191,36,.1)]' : p.slug === 'standard' ? 'border-orange-400/40' : 'border-white/10';
       var btn;
       if(p.slug === 'free') {
         btn = '<span class="block text-center py-3 rounded-xl bg-white/10 text-slate-400 font-semibold text-xs">ডিফল্ট ফ্রি অ্যাক্সেস</span>';
       } else if(isCur) {
         btn = '<div class="space-y-2">' +
-                '<span class="block text-center py-2.5 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black text-xs">✅ বর্তমানে সক্রিয় (Active)</span>' +
+                '<span class="block text-center py-2.5 rounded-xl bg-orange-500/20 border border-orange-400/40 text-orange-300 font-black text-xs">✅ বর্তমানে সক্রিয় (Active)</span>' +
                 '<button onclick="subscribe(\\'' + p.slug + '\\',' + p.price + ')" class="w-full py-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-bold text-xs transition flex items-center justify-center gap-1">' +
                   '<i class="fas fa-rotate"></i> মেয়াদ বৃদ্ধি করুন' +
                 '</button>' +
@@ -173,14 +173,14 @@ function loadPlans(){
       } else if(rank[cur] > rank[p.slug]) {
         btn = '<span class="block text-center py-3 rounded-xl bg-white/5 text-slate-500 font-semibold text-xs">বর্তমান প্ল্যানের অন্তর্ভুক্ত</span>';
       } else {
-        btn = '<button onclick="subscribe(\\'' + p.slug + '\\',' + p.price + ')" class="w-full py-3 rounded-xl bg-gradient-to-r ' + (p.slug === 'premium' ? 'from-amber-400 to-orange-500 text-slate-950' : 'from-emerald-500 to-teal-500 text-white') + ' font-black text-xs hover:opacity-90 transition shadow">সাবস্ক্রাইব করুন →</button>';
+        btn = '<button onclick="subscribe(\\'' + p.slug + '\\',' + p.price + ')" class="w-full py-3 rounded-xl bg-gradient-to-r ' + (p.slug === 'premium' ? 'from-amber-400 to-orange-500 text-slate-950' : 'from-orange-500 to-amber-500 text-white') + ' font-black text-xs hover:opacity-90 transition shadow">সাবস্ক্রাইব করুন →</button>';
       }
 
       return '<div class="relative bg-slate-900/90 border ' + ring + ' rounded-2xl p-6 flex flex-col justify-between space-y-4">' + popular +
         '<div>' +
           '<div class="flex items-center justify-between">' +
-            '<p class="text-lg font-black ' + (p.slug === 'premium' ? 'text-amber-300' : p.slug === 'standard' ? 'text-emerald-300' : 'text-slate-200') + '">' + esc(p.name_bn) + '</p>' +
-            (isCur ? '<span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">আমার প্ল্যান</span>' : '') +
+            '<p class="text-lg font-black ' + (p.slug === 'premium' ? 'text-amber-300' : p.slug === 'standard' ? 'text-orange-300' : 'text-slate-200') + '">' + esc(p.name_bn) + '</p>' +
+            (isCur ? '<span class="text-[10px] bg-orange-500/20 text-orange-300 px-2 py-0.5 rounded-full font-bold">আমার প্ল্যান</span>' : '') +
           '</div>' +
           '<p class="text-slate-400 text-xs mt-1 mb-4">' + esc(p.description) + '</p>' +
           '<div class="mb-5 pb-4 border-b border-white/10">' +
@@ -188,7 +188,7 @@ function loadPlans(){
             (p.price > 0 ? '<span class="text-slate-400 text-xs"> / ' + (p.duration_days === 30 ? 'মাস' : p.duration_days + ' দিন') + '</span>' : '') +
           '</div>' +
           '<ul class="space-y-2.5 text-xs text-slate-300">' +
-            p.features.map(function(f){ return '<li class="flex items-start gap-2"><i class="fas fa-check text-emerald-400 mt-0.5 shrink-0"></i><span>' + esc(f) + '</span></li>'; }).join('') +
+            p.features.map(function(f){ return '<li class="flex items-start gap-2"><i class="fas fa-check text-orange-400 mt-0.5 shrink-0"></i><span>' + esc(f) + '</span></li>'; }).join('') +
           '</ul>' +
         '</div>' +
         '<div>' + btn + '</div>' +
@@ -225,8 +225,8 @@ export function qpapersPage(loggedIn: boolean, userLevel: string = ''): string {
 ${NAV(loggedIn)}
 <main class="max-w-6xl mx-auto px-4 py-8 space-y-6">
   <!-- হিরো হেডার -->
-  <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950/70 to-slate-900 border border-emerald-500/20 p-6 sm:p-8 shadow-xl text-center">
-    <span class="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-3 py-1 rounded-full text-xs font-semibold mb-3">
+  <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950/70 to-slate-900 border border-orange-500/20 p-6 sm:p-8 shadow-xl text-center">
+    <span class="inline-flex items-center gap-1.5 bg-orange-500/20 text-orange-300 border border-orange-400/30 px-3 py-1 rounded-full text-xs font-semibold mb-3">
       <i class="fas fa-certificate"></i> অফিশিয়াল বোর্ড ও মডেল টেস্ট সংগ্রহশালা
     </span>
     <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-2">📜 প্রশ্নপত্র, মডেল টেস্ট ও সাজেশন ব্যাংক</h1>
@@ -238,16 +238,16 @@ ${NAV(loggedIn)}
   <!-- ট্যাব ও ফিল্টার কন্ট্রোল -->
   <div class="bg-slate-900 border border-white/10 rounded-2xl p-4 flex items-center justify-between gap-4 flex-wrap shadow-lg">
     <div class="flex gap-2">
-      <button id="tab-qp" onclick="switchKind('qp')" class="px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs sm:text-sm transition shadow"><i class="fas fa-file-invoice mr-1.5"></i>প্রশ্নপত্র ও মডেল টেস্ট</button>
+      <button id="tab-qp" onclick="switchKind('qp')" class="px-5 py-2.5 rounded-xl bg-orange-500 text-slate-950 font-extrabold text-xs sm:text-sm transition shadow"><i class="fas fa-file-invoice mr-1.5"></i>প্রশ্নপত্র ও মডেল টেস্ট</button>
       <button id="tab-sg" onclick="switchKind('sg')" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-bold text-xs sm:text-sm transition"><i class="fas fa-lightbulb mr-1.5"></i>১০০% কমন সাজেশন</button>
     </div>
     <div class="flex items-center gap-2 flex-wrap flex-1 justify-end">
       <div class="relative w-full sm:w-48">
         <i class="fas fa-search absolute left-3 top-2.5 text-slate-500 text-xs"></i>
-        <input type="text" id="paperSearchInput" oninput="filterPapers()" placeholder="অনুসন্ধান করুন..." class="w-full bg-slate-950 border border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400">
+        <input type="text" id="paperSearchInput" oninput="filterPapers()" placeholder="অনুসন্ধান করুন..." class="w-full bg-slate-950 border border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-400">
       </div>
       <div id="levelTabs" class="flex gap-1.5 overflow-x-auto text-xs">
-        <button data-lv="" class="lv-tab px-3.5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold whitespace-nowrap">সব লেভেল</button>
+        <button data-lv="" class="lv-tab px-3.5 py-2 rounded-xl bg-orange-500 text-slate-950 font-bold whitespace-nowrap">সব লেভেল</button>
         <button data-lv="ssc" class="lv-tab px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 whitespace-nowrap">SSC</button>
         <button data-lv="hsc" class="lv-tab px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 whitespace-nowrap">HSC</button>
         <button data-lv="nu" class="lv-tab px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 whitespace-nowrap">NU / ডিগ্রি</button>
@@ -258,10 +258,10 @@ ${NAV(loggedIn)}
 
   <!-- কার্ড গ্রিড -->
   <div id="papersList" class="grid sm:grid-cols-2 gap-4">
-    <div class="text-center text-slate-500 col-span-full py-12"><i class="fas fa-spinner fa-spin text-3xl text-emerald-400"></i><p class="mt-2 text-xs">প্রশ্নব্যাংক লোড হচ্ছে...</p></div>
+    <div class="text-center text-slate-500 col-span-full py-12"><i class="fas fa-spinner fa-spin text-3xl text-orange-400"></i><p class="mt-2 text-xs">প্রশ্নব্যাংক লোড হচ্ছে...</p></div>
   </div>
 
-  <div id="qpapersSubBanner" class="text-center py-4 bg-gradient-to-r from-amber-500/10 via-emerald-500/10 to-teal-500/10 border border-amber-500/20 rounded-2xl p-4">
+  <div id="qpapersSubBanner" class="text-center py-4 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/20 rounded-2xl p-4">
     <p class="text-xs text-amber-300 font-semibold mb-2">⭐ প্রিমিয়াম সদস্যরা প্রতিদিন আনলিমিটেড প্রশ্নপত্র ও পূর্ণাঙ্গ সমাধান সরাসরি অফিশিয়াল ফরম্যাটে ডাউনলোড করতে পারেন</p>
     <a href="/subscription" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black px-6 py-2.5 rounded-xl transition shadow text-xs">
       <i class="fas fa-crown"></i> আনলিমিটেড ডাউনলোড প্যাকেজ সক্রিয় করুন
@@ -272,11 +272,11 @@ ${NAV(loggedIn)}
 <!-- অফিশিয়াল এক্সাম শিট ও PDF ভিউয়ার মোডাল -->
 <div id="viewerWrap" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-4">
   <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-md" onclick="closeViewer()"></div>
-  <div class="relative max-w-4xl w-full bg-slate-900 border border-emerald-500/30 rounded-3xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden z-10">
+  <div class="relative max-w-4xl w-full bg-slate-900 border border-orange-500/30 rounded-3xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden z-10">
     <!-- হেডার বার -->
     <div class="flex items-center justify-between gap-3 px-6 py-4 border-b border-white/10 bg-slate-950/70">
       <div class="min-w-0">
-        <span id="viewerBadge" class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">OFFICIAL EXAM SHEET</span>
+        <span id="viewerBadge" class="text-[10px] bg-orange-500/20 text-orange-300 border border-orange-400/30 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">OFFICIAL EXAM SHEET</span>
         <h3 id="viewerTitle" class="font-extrabold text-white text-base sm:text-lg truncate mt-1"></h3>
       </div>
       <div class="flex items-center gap-2 shrink-0 flex-wrap">
@@ -285,7 +285,7 @@ ${NAV(loggedIn)}
         <button onclick="copyViewerContent()" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-slate-200 transition flex items-center gap-1" title="টেক্সট কপি করুন">
           <i class="fas fa-copy"></i> <span class="hidden sm:inline">কপি</span>
         </button>
-        <button onclick="downloadOfficialPdf()" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-95 text-slate-950 text-xs font-black px-4 py-2 rounded-xl transition shadow flex items-center gap-1.5">
+        <button onclick="downloadOfficialPdf()" class="bg-gradient-to-r from-orange-500 to-amber-500 hover:opacity-95 text-slate-950 text-xs font-black px-4 py-2 rounded-xl transition shadow flex items-center gap-1.5">
           <i class="fas fa-file-pdf"></i> <span class="hidden sm:inline">A4 PDF</span> প্রিন্ট / সেভ
         </button>
         <button onclick="downloadFileDoc()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold px-3 py-2 rounded-xl transition flex items-center gap-1">
@@ -300,7 +300,7 @@ ${NAV(loggedIn)}
     <!-- মেটা ইনফো বার -->
     <div class="px-6 py-2.5 border-b border-white/10 bg-slate-950/40 text-xs text-slate-400 flex items-center justify-between gap-2 flex-wrap">
       <p id="viewerMeta"></p>
-      <span class="text-emerald-400 font-semibold flex items-center gap-1"><i class="fas fa-shield-halved"></i> ১০০% নির্ভুল ও পরীক্ষিত</span>
+      <span class="text-orange-400 font-semibold flex items-center gap-1"><i class="fas fa-shield-halved"></i> ১০০% নির্ভুল ও পরীক্ষিত</span>
     </div>
 
     <!-- কন্টেন্ট বডি (এক্সাম শিট স্টাইলিং) -->
@@ -334,7 +334,7 @@ function esc(s){var d=document.createElement('div');d.textContent=s==null?'':s;r
 function toBn(n){var d={'0':'০','1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯'};return String(n).replace(/[0-9]/g,function(x){return d[x]})}
 
 var LV={ssc:'SSC',hsc:'HSC',nu:'NU / ডিগ্রি',job:'চাকরি ও বিসিএস'};
-var ACCESS={free:['ফ্রি অ্যাকসেস','bg-emerald-500/15 text-emerald-300 border-emerald-400/30'],standard:['স্ট্যান্ডার্ড','bg-sky-500/15 text-sky-300 border-sky-400/30'],premium:['প্রিমিয়াম','bg-amber-500/15 text-amber-300 border-amber-400/30']};
+var ACCESS={free:['ফ্রি অ্যাকসেস','bg-orange-500/15 text-orange-300 border-orange-400/30'],standard:['স্ট্যান্ডার্ড','bg-sky-500/15 text-sky-300 border-sky-400/30'],premium:['প্রিমিয়াম','bg-amber-500/15 text-amber-300 border-amber-400/30']};
 var KIND='qp', CUR_LV='';
 var rawLoadedItems = [];
 var currentFontSize = 14;
@@ -357,23 +357,23 @@ function copyViewerContent(){
 
 function switchKind(k){
   KIND=k;
-  document.getElementById('tab-qp').className='px-5 py-2.5 rounded-xl '+(k==='qp'?'bg-emerald-500 text-slate-950 font-extrabold':'bg-white/10 hover:bg-white/20 text-slate-200 font-bold')+' text-xs sm:text-sm transition shadow';
-  document.getElementById('tab-sg').className='px-5 py-2.5 rounded-xl '+(k==='sg'?'bg-emerald-500 text-slate-950 font-extrabold':'bg-white/10 hover:bg-white/20 text-slate-200 font-bold')+' text-xs sm:text-sm transition shadow';
+  document.getElementById('tab-qp').className='px-5 py-2.5 rounded-xl '+(k==='qp'?'bg-orange-500 text-slate-950 font-extrabold':'bg-white/10 hover:bg-white/20 text-slate-200 font-bold')+' text-xs sm:text-sm transition shadow';
+  document.getElementById('tab-sg').className='px-5 py-2.5 rounded-xl '+(k==='sg'?'bg-orange-500 text-slate-950 font-extrabold':'bg-white/10 hover:bg-white/20 text-slate-200 font-bold')+' text-xs sm:text-sm transition shadow';
   load(CUR_LV);
 }
 
 function card(p, icon){
   var a=ACCESS[p.access]||ACCESS.free;
   var btn=p.unlocked
-    ?'<button onclick="openItem('+p.id+')" class="shrink-0 bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-90 text-slate-950 text-xs font-black px-4 py-2 rounded-xl transition shadow flex items-center gap-1.5"><i class="fas fa-file-lines"></i> পড়ুন ও PDF</button>'
+    ?'<button onclick="openItem('+p.id+')" class="shrink-0 bg-gradient-to-r from-orange-500 to-amber-500 hover:opacity-90 text-slate-950 text-xs font-black px-4 py-2 rounded-xl transition shadow flex items-center gap-1.5"><i class="fas fa-file-lines"></i> পড়ুন ও PDF</button>'
     :'<a href="/subscription" class="shrink-0 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-bold px-4 py-2 rounded-xl transition flex items-center gap-1"><i class="fas fa-lock text-[10px]"></i> আনলক</a>';
 
-  return '<div class="bg-slate-900 border border-white/10 hover:border-emerald-500/40 rounded-2xl p-5 flex items-start gap-4 transition shadow-md group">'+
+  return '<div class="bg-slate-900 border border-white/10 hover:border-orange-500/40 rounded-2xl p-5 flex items-start gap-4 transition shadow-md group">'+
     '<div class="w-10 h-10 rounded-xl bg-slate-800 border border-white/10 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition">'+icon+'</div>'+
     '<div class="flex-1 min-w-0">'+
-      '<p class="font-bold text-white text-sm sm:text-base leading-snug group-hover:text-emerald-300 transition">'+esc(p.title)+'</p>'+
+      '<p class="font-bold text-white text-sm sm:text-base leading-snug group-hover:text-orange-300 transition">'+esc(p.title)+'</p>'+
       '<p class="text-xs text-slate-400 mt-1 flex items-center gap-2 flex-wrap">'+
-        '<span class="text-emerald-400 font-semibold">'+(LV[p.level]||p.level)+'</span>'+
+        '<span class="text-orange-400 font-semibold">'+(LV[p.level]||p.level)+'</span>'+
         (p.subject?'<span>• '+esc(p.subject)+'</span>':'')+
         (p.board?'<span>• '+esc(p.board)+'</span>':'')+
         (p.year?'<span>• '+esc(p.year)+'</span>':'')+
@@ -417,7 +417,7 @@ function filterPapers(){
 function load(level){
   CUR_LV=level;
   var el=document.getElementById('papersList');
-  el.innerHTML='<div class="text-center text-slate-500 col-span-full py-12"><i class="fas fa-spinner fa-spin text-2xl text-emerald-400"></i><p class="mt-2 text-xs">লোড হচ্ছে...</p></div>';
+  el.innerHTML='<div class="text-center text-slate-500 col-span-full py-12"><i class="fas fa-spinner fa-spin text-2xl text-orange-400"></i><p class="mt-2 text-xs">লোড হচ্ছে...</p></div>';
   var endpoint = KIND==='qp' ? ('/api/subs/qpapers'+(level?'?level='+level:'')) : ('/api/subs/suggestions'+(level?'?level='+level:''));
 
   axios.get(endpoint).then(function(res){
@@ -578,7 +578,7 @@ function printContent(){
 document.querySelectorAll('.lv-tab').forEach(function(b){
   b.onclick=function(){
     document.querySelectorAll('.lv-tab').forEach(function(x){x.className='lv-tab px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 whitespace-nowrap'});
-    b.className='lv-tab px-3.5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold whitespace-nowrap';
+    b.className='lv-tab px-3.5 py-2 rounded-xl bg-orange-500 text-slate-950 font-bold whitespace-nowrap';
     load(b.dataset.lv);
   };
 });
@@ -596,10 +596,10 @@ axios.get('/api/subs/my-plan').then(function(res){
     var sb = document.getElementById('qpapersSubBanner');
     if(sb){
       var isPrem = d.plan === 'premium';
-      sb.className = 'text-center py-5 bg-gradient-to-r from-emerald-500/15 via-teal-500/15 to-emerald-500/15 border border-emerald-500/30 rounded-2xl p-5 shadow-lg';
+      sb.className = 'text-center py-5 bg-gradient-to-r from-orange-500/15 via-amber-500/15 to-orange-500/15 border border-orange-500/30 rounded-2xl p-5 shadow-lg';
       sb.innerHTML = 
-        '<div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-3.5 py-1 rounded-full text-xs font-black mb-2">' +
-          (isPrem ? '<i class="fas fa-crown text-amber-400"></i>' : '<i class="fas fa-bolt text-emerald-400"></i>') +
+        '<div class="inline-flex items-center gap-2 bg-orange-500/20 text-orange-300 border border-orange-400/30 px-3.5 py-1 rounded-full text-xs font-black mb-2">' +
+          (isPrem ? '<i class="fas fa-crown text-amber-400"></i>' : '<i class="fas fa-bolt text-orange-400"></i>') +
           '<span>' + esc(d.badge_label) + ' (' + esc(d.subscription_id) + ') — সক্রিয়</span>' +
         '</div>' +
         '<p class="text-sm font-black text-white mb-1">🎉 আপনার ' + (isPrem ? 'প্রিমিয়াম প্রো' : 'স্ট্যান্ডার্ড') + ' মেম্বারশিপ সক্রিয় রয়েছে</p>' +

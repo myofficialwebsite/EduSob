@@ -13,7 +13,7 @@ ${siteHeader({ activeKey: 'scholarships', loggedIn, theme: 'dark' })}
         <i class="fas fa-wand-magic-sparkles"></i> এআই অটো-যোগ্যতা ও রোডম্যাপ সিস্টেম
       </span>
       <h1 class="text-2xl md:text-4xl font-extrabold text-white leading-tight">
-        আপনার যোগ্যতা অনুযায়ী <span class="bg-gradient-to-r from-amber-400 via-emerald-400 to-teal-300 bg-clip-text text-transparent">উপযুক্ত স্কলারশিপ</span> ও আবেদনের পূর্ণাঙ্গ পথরেখা
+        আপনার যোগ্যতা অনুযায়ী <span class="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-300 bg-clip-text text-transparent">উপযুক্ত স্কলারশিপ</span> ও আবেদনের পূর্ণাঙ্গ পথরেখা
       </h1>
       <p class="text-slate-300 text-sm md:text-base leading-relaxed">
         আপনার শিক্ষাগত স্তর, জিপিএ, পারিবারিক আয় ও কোটা প্রবেশ করান — আমাদের সিস্টেম নিমিষেই যাচাই করে জানাবে আপনি কোন কোন সরকারি, বোর্ড, ব্যাংক ও আন্তর্জাতিক ফুল-ফান্ডেড স্কলারশিপের জন্য শতভাগ যোগ্য!
@@ -31,7 +31,7 @@ ${siteHeader({ activeKey: 'scholarships', loggedIn, theme: 'dark' })}
         </h2>
         <p class="text-xs text-slate-400 mt-0.5">১ ক্লিকে আপনার প্রোফাইলের সাথে সকল স্কলারশিপের ক্রাইটেরিয়া মিলিয়ে দেখুন</p>
       </div>
-      <button id="btnAutoProfile" class="text-xs bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 px-4 py-2 rounded-xl transition flex items-center gap-1.5 font-semibold">
+      <button id="btnAutoProfile" class="text-xs bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 border border-orange-500/40 px-4 py-2 rounded-xl transition flex items-center gap-1.5 font-semibold">
         <i class="fas fa-user-check"></i> আমার প্রোফাইল থেকে স্বয়ংক্রিয় পূরণ
       </button>
     </div>
@@ -99,7 +99,7 @@ ${siteHeader({ activeKey: 'scholarships', loggedIn, theme: 'dark' })}
       </div>
 
       <div class="sm:col-span-2 lg:col-span-3 pt-2">
-        <button type="submit" class="w-full bg-gradient-to-r from-amber-500 via-emerald-500 to-teal-500 hover:opacity-95 text-slate-950 font-extrabold py-3.5 rounded-2xl transition shadow-lg text-base flex items-center justify-center gap-2">
+        <button type="submit" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 hover:opacity-95 text-slate-950 font-extrabold py-3.5 rounded-2xl transition shadow-lg text-base flex items-center justify-center gap-2">
           <i class="fas fa-calculator"></i> আমার স্কলারশিপ ম্যাচ ও রোডম্যাপ জেনারেট করুন
         </button>
       </div>
@@ -117,7 +117,7 @@ ${siteHeader({ activeKey: 'scholarships', loggedIn, theme: 'dark' })}
         <button data-cat="bank" class="cat-btn px-4 py-2 rounded-xl bg-slate-900 border border-white/10 text-slate-300 hover:text-white font-semibold whitespace-nowrap transition">🏦 ব্যাংক ও ট্রাস্ট</button>
         <button data-cat="international" class="cat-btn px-4 py-2 rounded-xl bg-slate-900 border border-white/10 text-slate-300 hover:text-white font-semibold whitespace-nowrap transition">🌍 আন্তর্জাতিক ফুল-ফান্ডেড</button>
       </div>
-      <div id="evalSummaryBanner" class="hidden text-xs bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 px-3.5 py-1.5 rounded-xl font-bold">
+      <div id="evalSummaryBanner" class="hidden text-xs bg-orange-500/20 border border-orange-500/30 text-orange-300 px-3.5 py-1.5 rounded-xl font-bold">
         🎉 <span id="summaryEligibleCount">0</span>টি স্কলারশিপের জন্য শতভাগ যোগ্য!
       </div>
     </div>
@@ -181,7 +181,7 @@ function renderCards(items, isEvaluated = false) {
   grid.innerHTML = items.map(function(s) {
     var matchBadge = '';
     if (s.match_score !== undefined) {
-      var scoreColor = s.match_score >= 80 ? 'from-emerald-500 to-teal-500 text-slate-950' : (s.match_score >= 50 ? 'from-amber-500 to-orange-500 text-slate-950' : 'from-rose-500 to-red-600 text-white');
+      var scoreColor = s.match_score >= 80 ? 'from-orange-500 to-amber-500 text-slate-950' : (s.match_score >= 50 ? 'from-amber-500 to-orange-500 text-slate-950' : 'from-rose-500 to-red-600 text-white');
       matchBadge = '<div class="bg-gradient-to-r ' + scoreColor + ' px-3 py-1 rounded-xl text-xs font-black shadow-md flex items-center gap-1.5 shrink-0">' +
         '<i class="fas fa-chart-pie"></i> ' + toBn(s.match_score) + '% ম্যাচ' +
       '</div>';
@@ -208,7 +208,7 @@ function renderCards(items, isEvaluated = false) {
         '<div class="grid grid-cols-2 gap-2 text-xs bg-slate-950/60 p-3 rounded-2xl border border-white/5">' +
           '<div><span class="text-slate-500">ন্যূনতম জিপিএ:</span> <b class="text-slate-200">' + (s.min_gpa > 0 ? toBn(s.min_gpa) : 'উন্মুক্ত') + '</b></div>' +
           '<div><span class="text-slate-500">আয় সীমা:</span> <b class="text-slate-200">' + (s.max_family_income > 0 ? '৳' + toBn(s.max_family_income) : 'সীমাহীন') + '</b></div>' +
-          '<div class="col-span-2"><span class="text-slate-500">বৃত্তি সুবিধা:</span> <b class="text-emerald-400">' + esc(s.stipend_amount || 'নির্ধারিত নয়') + '</b></div>' +
+          '<div class="col-span-2"><span class="text-slate-500">বৃত্তি সুবিধা:</span> <b class="text-orange-400">' + esc(s.stipend_amount || 'নির্ধারিত নয়') + '</b></div>' +
           '<div class="col-span-2 text-slate-400"><i class="fas fa-clock mr-1 text-slate-500"></i>' + esc(s.deadline || 'নিয়মিত আপডেট') + '</div>' +
         '</div>' +
       '</div>' +
@@ -216,13 +216,13 @@ function renderCards(items, isEvaluated = false) {
       '<div class="pt-2 border-t border-white/10 flex items-center justify-between gap-3 flex-wrap">' +
         '<div class="text-xs text-slate-400">' +
           '<span><i class="fas fa-file-invoice mr-1 text-amber-400"></i>' + toBn(docsCount) + 'টি ডকুমেন্ট</span> · ' +
-          '<span><i class="fas fa-route mr-1 text-teal-400"></i>' + toBn(stepsCount) + ' ধাপের রোডম্যাপ</span>' +
+          '<span><i class="fas fa-route mr-1 text-amber-400"></i>' + toBn(stepsCount) + ' ধাপের রোডম্যাপ</span>' +
         '</div>' +
         '<div class="flex items-center gap-2">' +
           '<button onclick="viewDetails(' + s.id + ')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold rounded-xl text-xs transition border border-white/10 flex items-center gap-1">' +
             '<i class="fas fa-eye"></i> বিস্তারিত ও পথরেখা' +
           '</button>' +
-          (s.apply_link ? '<a href="' + esc(s.apply_link) + '" target="_blank" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition shadow flex items-center gap-1">' +
+          (s.apply_link ? '<a href="' + esc(s.apply_link) + '" target="_blank" class="px-4 py-2 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl text-xs transition shadow flex items-center gap-1">' +
             'আবেদন পোর্টাল <i class="fas fa-external-link text-[10px]"></i></a>' : '') +
         '</div>' +
       '</div>' +
@@ -236,7 +236,7 @@ function viewDetails(id) {
 
   var docsHtml = (item.required_docs || []).map(function(doc, idx) {
     return '<li class="flex items-start gap-2 text-xs text-slate-200">' +
-      '<i class="fas fa-check-circle text-emerald-400 mt-0.5 shrink-0"></i> ' +
+      '<i class="fas fa-check-circle text-orange-400 mt-0.5 shrink-0"></i> ' +
       '<span>' + esc(doc) + '</span>' +
     '</li>';
   }).join('') || '<p class="text-xs text-slate-400">সাধারণ একাডেমিক কাগজপত্র প্রয়োজন</p>';
@@ -260,7 +260,7 @@ function viewDetails(id) {
       '<div><span class="text-slate-400">ন্যূনতম জিপিএ:</span> <b class="text-slate-100">' + (item.min_gpa > 0 ? toBn(item.min_gpa) : 'উন্মুক্ত') + '</b></div>' +
       '<div><span class="text-slate-400">সর্বোচ্চ পারিবারিক আয়:</span> <b class="text-slate-100">' + (item.max_family_income > 0 ? '৳' + toBn(item.max_family_income) : 'কোনো বাধ্যবাধকতা নেই') + '</b></div>' +
       '<div><span class="text-slate-400">কোটা সুবিধা:</span> <b class="text-slate-100">' + esc(item.quota || 'সাধারণ') + '</b></div>' +
-      '<div class="sm:col-span-2"><span class="text-slate-400">আর্থিক অনুদান / বৃত্তি পরিমাণ:</span> <b class="text-emerald-400 text-sm">' + esc(item.stipend_amount) + '</b></div>' +
+      '<div class="sm:col-span-2"><span class="text-slate-400">আর্থিক অনুদান / বৃত্তি পরিমাণ:</span> <b class="text-orange-400 text-sm">' + esc(item.stipend_amount) + '</b></div>' +
     '</div>' +
 
     '<div class="space-y-2">' +
@@ -269,7 +269,7 @@ function viewDetails(id) {
     '</div>' +
 
     '<div class="space-y-2">' +
-      '<h4 class="font-bold text-teal-400 text-sm flex items-center gap-2"><i class="fas fa-route"></i> ধাপে ধাপে আবেদনের পূর্ণাঙ্গ পথরেখা (Roadmap)</h4>' +
+      '<h4 class="font-bold text-amber-400 text-sm flex items-center gap-2"><i class="fas fa-route"></i> ধাপে ধাপে আবেদনের পূর্ণাঙ্গ পথরেখা (Roadmap)</h4>' +
       '<div class="space-y-2">' + stepsHtml + '</div>' +
     '</div>' +
 
@@ -277,7 +277,7 @@ function viewDetails(id) {
 
     '<div class="pt-4 border-t border-white/10 flex items-center justify-between gap-3 flex-wrap">' +
       '<button onclick="closeModal()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl text-xs transition">বন্ধ করুন</button>' +
-      (item.apply_link ? '<a href="' + esc(item.apply_link) + '" target="_blank" class="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black rounded-xl text-xs transition shadow-lg flex items-center gap-2">অফিসিয়াল সাইটে সরাসরি আবেদন করুন <i class="fas fa-arrow-up-right-from-square"></i></a>' : '') +
+      (item.apply_link ? '<a href="' + esc(item.apply_link) + '" target="_blank" class="px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 font-black rounded-xl text-xs transition shadow-lg flex items-center gap-2">অফিসিয়াল সাইটে সরাসরি আবেদন করুন <i class="fas fa-arrow-up-right-from-square"></i></a>' : '') +
     '</div>';
 
   document.getElementById('modalDetails').classList.remove('hidden');

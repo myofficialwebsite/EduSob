@@ -1,32 +1,7 @@
 // এডুসব — কমন লেআউট হেল্পার
 
 // হালকা থিমের পেজগুলোকে ডার্ক পোর্টাল থিমে রূপান্তরের গ্লোবাল ওভাররাইড
-export const DARK_PORTAL_CSS = `
-<style>
-body { background:#0b0d12 !important; color:#e2e8f0 !important; }
-.bg-white { background-color:#121620 !important; }
-.bg-slate-50 { background-color:#0d1017 !important; }
-.bg-slate-100 { background-color:#121620 !important; }
-.text-slate-900 { color:#f1f5f9 !important; }
-.text-slate-800 { color:#e2e8f0 !important; }
-.text-slate-700 { color:#cbd5e1 !important; }
-.text-slate-600 { color:#94a3b8 !important; }
-.border-slate-200, .border-slate-300, .border-slate-100 { border-color:rgba(255,255,255,.09) !important; }
-.bg-emerald-50 { background-color:rgba(249,115,22,.08) !important; }
-.bg-emerald-100 { background-color:rgba(249,115,22,.14) !important; }
-.text-emerald-700, .text-emerald-800 { color:#fb923c !important; }
-.bg-pink-50 { background-color:rgba(236,72,153,.08) !important; }
-.bg-orange-50 { background-color:rgba(249,115,22,.08) !important; }
-.bg-indigo-50 { background-color:rgba(129,140,248,.08) !important; }
-.bg-sky-50 { background-color:rgba(56,189,248,.08) !important; }
-.bg-amber-50 { background-color:rgba(251,191,36,.08) !important; }
-.bg-teal-50 { background-color:rgba(45,212,191,.08) !important; }
-.bg-purple-50 { background-color:rgba(168,85,247,.08) !important; }
-input:not([type=checkbox]):not([type=radio]):not([type=file]), select, textarea { background-color:#0b0d12 !important; color:#f1f5f9 !important; border-color:rgba(255,255,255,.12) !important; }
-input::placeholder, textarea::placeholder { color:#475569 !important; }
-::selection { background:#f97316; color:#0b0d12; }
-.shop-header { background:rgba(11,13,18,.88) !important; border-color:rgba(255,255,255,.1) !important; }
-</style>`
+export const DARK_PORTAL_CSS = ``;
 
 export const HEAD_COMMON = `
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,59 +17,6 @@ export const HEAD_COMMON = `
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-<style>
-/* এডুসব ব্র্যান্ড ইউনিফিকেশন — emerald অ্যাকসেন্ট → টেরাকোটা অরেঞ্জ, গ্রেডিয়েন্ট পার্টনার teal → amber */
-html { scroll-behavior: smooth; }
-.bg-emerald-400 { background-color:#fb923c !important; }
-.bg-emerald-500 { background-color:#f97316 !important; }
-.bg-emerald-600 { background-color:#ea580c !important; }
-.bg-emerald-700 { background-color:#c2410c !important; }
-.bg-emerald-50 { background-color:rgba(249,115,22,.07) !important; }
-.bg-emerald-100 { background-color:rgba(249,115,22,.14) !important; }
-.bg-emerald-500\/10 { background-color:rgba(249,115,22,.10) !important; }
-.bg-emerald-500\/15 { background-color:rgba(249,115,22,.15) !important; }
-.bg-emerald-500\/20 { background-color:rgba(249,115,22,.18) !important; }
-.bg-emerald-500\/25 { background-color:rgba(249,115,22,.25) !important; }
-.bg-emerald-500\/30 { background-color:rgba(249,115,22,.30) !important; }
-.text-emerald-100 { color:#fed7aa !important; }
-.text-emerald-200 { color:#fdba74 !important; }
-.text-emerald-300, .text-emerald-400, .text-emerald-500 { color:#fb923c !important; }
-.text-emerald-600, .text-emerald-700 { color:#f97316 !important; }
-.text-emerald-800 { color:#fb923c !important; }
-.border-emerald-300 { border-color:#fdba74 !important; }
-.border-emerald-400 { border-color:rgba(251,146,60,.55) !important; }
-.border-emerald-500 { border-color:#f97316 !important; }
-.border-emerald-400\/20 { border-color:rgba(251,146,60,.20) !important; }
-.border-emerald-400\/30 { border-color:rgba(251,146,60,.30) !important; }
-.border-emerald-400\/40 { border-color:rgba(251,146,60,.40) !important; }
-.border-emerald-500\/20 { border-color:rgba(249,115,22,.20) !important; }
-.border-emerald-500\/30 { border-color:rgba(249,115,22,.30) !important; }
-.border-emerald-500\/40 { border-color:rgba(249,115,22,.40) !important; }
-.border-emerald-500\/50 { border-color:rgba(249,115,22,.50) !important; }
-.hover\:bg-emerald-400:hover { background-color:#fb923c !important; }
-.hover\:bg-emerald-500:hover { background-color:#f97316 !important; }
-.hover\:bg-emerald-600:hover { background-color:#ea580c !important; }
-.hover\:bg-emerald-700:hover { background-color:#c2410c !important; }
-.hover\:bg-emerald-500\/10:hover { background-color:rgba(249,115,22,.10) !important; }
-.hover\:bg-emerald-500\/20:hover { background-color:rgba(249,115,22,.22) !important; }
-.hover\:bg-emerald-500\/30:hover { background-color:rgba(249,115,22,.30) !important; }
-.hover\:text-emerald-300:hover { color:#fdba74 !important; }
-.hover\:text-emerald-400:hover { color:#fb923c !important; }
-.hover\:border-emerald-400:hover { border-color:rgba(251,146,60,.55) !important; }
-.hover\:border-emerald-500:hover { border-color:#f97316 !important; }
-.hover\:border-emerald-500\/40:hover { border-color:rgba(249,115,22,.40) !important; }
-.hover\:border-emerald-500\/50:hover { border-color:rgba(249,115,22,.50) !important; }
-.from-emerald-400 { --tw-gradient-from:#fb923c !important; --tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to, rgba(251,146,60,0)) !important; }
-.from-emerald-500 { --tw-gradient-from:#f97316 !important; --tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to, rgba(249,115,22,0)) !important; }
-.from-emerald-600 { --tw-gradient-from:#ea580c !important; --tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to, rgba(234,88,12,0)) !important; }
-.from-emerald-700 { --tw-gradient-from:#c2410c !important; --tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to, rgba(194,65,12,0)) !important; }
-.to-teal-400 { --tw-gradient-to:#fbbf24 !important; }
-.to-teal-500 { --tw-gradient-to:#f59e0b !important; }
-.to-teal-600 { --tw-gradient-to:#d97706 !important; }
-.via-emerald-500 { --tw-gradient-via:#f97316 !important; --tw-gradient-stops:var(--tw-gradient-from), #f97316, var(--tw-gradient-to, rgba(249,115,22,0)) !important; }
-.ring-emerald-500\/30, .ring-emerald-400\/30 { --tw-ring-color:rgba(249,115,22,.35) !important; }
-.shadow-emerald-500\/20 { --tw-shadow-color:rgba(249,115,22,.25) !important; }
-</style>
 <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
 <script>
 // এডুসব PWA: সার্ভিস ওয়ার্কার + ইনস্টল প্রম্পট + পুশ নোটিফিকেশন
@@ -211,190 +133,6 @@ function pwaEnablePush(){
   setTimeout(function(){ if (!window.axios) window.axios = ax; }, 800);
 })();
 </script>
-<style>
-html { 
-  scroll-behavior: smooth; 
-  overflow-x: hidden; 
-  width: 100%; 
-  max-width: 100vw;
-  -webkit-text-size-adjust: 100%;
-}
-body { 
-  overflow-x: hidden; 
-  width: 100%; 
-  max-width: 100vw; 
-  min-height: 100vh; 
-  margin: 0; 
-  padding: 0;
-}
-*, *::before, *::after { 
-  box-sizing: border-box; 
-}
-img, svg, video, canvas, audio, iframe, embed, object {
-  max-width: 100%;
-  height: auto;
-}
-pre, code, table {
-  max-width: 100%;
-}
-* { font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-.font-en { font-family: 'Plus Jakarta Sans', sans-serif; }
-/* Refined Micro-Interactions & Surfaces */
-.card-hover { 
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease !important; 
-  position: relative; 
-  will-change: transform, box-shadow;
-}
-@media (hover: hover) and (pointer: fine) {
-  .card-hover:hover { 
-    transform: translateY(-4px); 
-    box-shadow: 0 16px 36px -10px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(16, 185, 129, 0.25) !important; 
-  }
-}
-.card-hover:active {
-  transform: translateY(-1px) scale(0.985);
-}
-
-/* 1. Scroll Section Reveal */
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-.reveal-on-scroll.is-revealed {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* 2. Staggered Card Entrance / Elevation */
-.stagger-cards > *,
-.stagger-group .stagger-item {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.25s ease;
-  will-change: opacity, transform;
-}
-.is-revealed.stagger-cards > *,
-.is-revealed .stagger-cards > *,
-.is-revealed .stagger-item,
-.stagger-item.is-revealed {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-.is-revealed.stagger-cards > *:nth-child(1), .is-revealed .stagger-item:nth-child(1) { transition-delay: 0.04s; }
-.is-revealed.stagger-cards > *:nth-child(2), .is-revealed .stagger-item:nth-child(2) { transition-delay: 0.08s; }
-.is-revealed.stagger-cards > *:nth-child(3), .is-revealed .stagger-item:nth-child(3) { transition-delay: 0.12s; }
-.is-revealed.stagger-cards > *:nth-child(4), .is-revealed .stagger-item:nth-child(4) { transition-delay: 0.16s; }
-.is-revealed.stagger-cards > *:nth-child(5), .is-revealed .stagger-item:nth-child(5) { transition-delay: 0.20s; }
-.is-revealed.stagger-cards > *:nth-child(6), .is-revealed .stagger-item:nth-child(6) { transition-delay: 0.24s; }
-.is-revealed.stagger-cards > *:nth-child(7), .is-revealed .stagger-item:nth-child(7) { transition-delay: 0.28s; }
-.is-revealed.stagger-cards > *:nth-child(8), .is-revealed .stagger-item:nth-child(8) { transition-delay: 0.32s; }
-.is-revealed.stagger-cards > *:nth-child(9), .is-revealed .stagger-item:nth-child(9) { transition-delay: 0.36s; }
-.is-revealed.stagger-cards > *:nth-child(10), .is-revealed .stagger-item:nth-child(10) { transition-delay: 0.40s; }
-.is-revealed.stagger-cards > *:nth-child(11), .is-revealed .stagger-item:nth-child(11) { transition-delay: 0.44s; }
-.is-revealed.stagger-cards > *:nth-child(12), .is-revealed .stagger-item:nth-child(12) { transition-delay: 0.48s; }
-
-/* 3. Dynamic Sticky Scroll Navbar */
-header.sticky {
-  transition: padding 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-              background-color 0.3s ease, 
-              border-color 0.3s ease, 
-              box-shadow 0.3s ease, 
-              backdrop-filter 0.3s ease !important;
-}
-header.sticky.scrolled-nav {
-  padding-top: 0.45rem !important;
-  padding-bottom: 0.45rem !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.04) !important;
-  border-color: rgba(226, 232, 240, 0.95) !important;
-}
-/* Dark styled headers on scroll */
-header.sticky.scrolled-nav.dark-nav,
-.dark header.sticky.scrolled-nav,
-header.sticky.scrolled-nav[class*="bg-slate-950"],
-header.sticky.scrolled-nav[class*="bg-slate-900"] {
-  background-color: rgba(15, 23, 42, 0.95) !important;
-  border-color: rgba(255, 255, 255, 0.14) !important;
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5) !important;
-}
-
-/* 4. Micro-Interactions: Press-down, Icon Shift & Focus Ring */
-button, a[role="button"], .btn-touch {
-  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.16s ease, background-color 0.16s ease, color 0.16s ease;
-}
-button:active, a[role="button"]:active, .btn-touch:active {
-  transform: scale(0.965);
-}
-.hover-arrow, .group-hover-arrow {
-  display: inline-block;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.group:hover .hover-arrow, :hover > .hover-arrow, .group:hover .group-hover-arrow {
-  transform: translateX(4px);
-}
-
-/* Reduced motion accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .reveal-on-scroll,
-  .stagger-cards > *,
-  .stagger-group .stagger-item,
-  .card-hover,
-  header.sticky {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-}
-.shiny-card { position: relative; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.25); }
-.shiny-card:hover { border-color: rgba(52, 211, 153, 0.4); box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.35); }
-.glass-panel { background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-.glass-panel-light { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(226, 232, 240, 0.8); }
-.shiny-glow-emerald { border: 1px solid rgba(16, 185, 129, 0.25); }
-.shiny-glow-emerald:hover { border-color: rgba(52, 211, 153, 0.6); box-shadow: 0 12px 28px -6px rgba(16, 185, 129, 0.25); }
-.shiny-glow-amber { border: 1px solid rgba(245, 158, 11, 0.25); }
-.shiny-glow-amber:hover { border-color: rgba(245, 158, 11, 0.6); box-shadow: 0 12px 28px -6px rgba(245, 158, 11, 0.25); }
-.shiny-glow-blue { border: 1px solid rgba(59, 130, 246, 0.25); }
-.shiny-glow-blue:hover { border-color: rgba(59, 130, 246, 0.6); box-shadow: 0 12px 28px -6px rgba(59, 130, 246, 0.25); }
-@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-.floaty { animation: floaty 4s ease-in-out infinite; }
-@keyframes pulse-soft { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .75; transform: scale(0.97); } }
-.pulse-soft { animation: pulse-soft 2.5s infinite ease-in-out; }
-.awning-stripe { background: repeating-linear-gradient(45deg, #dc2626 0 14px, #fff 14px 28px); }
-@keyframes sb-pop { 0% { transform: scale(.92) translateY(16px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
-.sb-pop { animation: sb-pop .3s cubic-bezier(0.16, 1, 0.3, 1); }
-@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-.ticker-track { animation: ticker 35s linear infinite; }
-.ticker-track:hover { animation-play-state: paused; }
-/* Custom refined scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.4); border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(16, 185, 129, 0.7); }
-.no-scrollbar::-webkit-scrollbar { display: none; width: 0; height: 0; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* Dark UI Text Contrast & Visual Hierarchy Polish */
-.dark, [class*="bg-slate-950"], [class*="bg-slate-900"] {
-  color: #f8fafc;
-}
-/* Ensure secondary text never drops below WCAG AA contrast against dark canvases */
-[class*="bg-slate-950"] .text-slate-400,
-[class*="bg-slate-900"] .text-slate-400,
-[class*="bg-slate-950"] .text-slate-500,
-[class*="bg-slate-900"] .text-slate-500 {
-  color: #cbd5e1 !important; /* High-contrast readable slate-300 tone */
-}
-[class*="bg-slate-950"] .text-slate-600,
-[class*="bg-slate-900"] .text-slate-600 {
-  color: #94a3b8 !important; /* slate-400 */
-}
-</style>
 `
 
 // ============ ইউনিফাইড সাইট হেডার (Unified Header System) ============
@@ -414,12 +152,12 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
     const isActive = active === key;
     if (isDark) {
       return isActive 
-        ? `text-emerald-400 bg-emerald-500/10 font-bold px-3 py-1.5 rounded-xl border border-emerald-500/20 ${activeExtra}`
+        ? `text-orange-400 bg-orange-500/10 font-bold px-3 py-1.5 rounded-xl border border-orange-500/20 ${activeExtra}`
         : `text-slate-200 hover:text-white hover:bg-white/5 font-medium px-3 py-1.5 rounded-xl transition ${base}`;
     } else {
       return isActive
-        ? `text-emerald-700 bg-emerald-50 font-bold px-3 py-1.5 rounded-xl border border-emerald-200 ${activeExtra}`
-        : `text-slate-700 hover:text-emerald-700 hover:bg-slate-100 font-medium px-3 py-1.5 rounded-xl transition ${base}`;
+        ? `text-orange-700 bg-orange-50 font-bold px-3 py-1.5 rounded-xl border border-orange-200 ${activeExtra}`
+        : `text-slate-700 hover:text-orange-700 hover:bg-slate-100 font-medium px-3 py-1.5 rounded-xl transition ${base}`;
     }
   };
 
@@ -432,13 +170,13 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
     <!-- ১. ব্র‍্যান্ড লোগো (Consistent Identity) -->
     <a href="/" class="flex items-center gap-2.5 sm:gap-3 group shrink-0" aria-label="এডুসব হোম">
-      <div class="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+      <div class="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
         <i class="fas fa-graduation-cap text-base sm:text-lg"></i>
       </div>
       <div class="flex flex-col">
         <div class="flex items-center gap-1.5">
           <span class="text-lg sm:text-xl font-black ${isDark ? 'text-white' : 'text-slate-900'} tracking-tight">এডুসব</span>
-          <span class="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 ${isDark ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-emerald-100 text-emerald-800'} rounded-full font-en">EduSob</span>
+          <span class="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 ${isDark ? 'bg-orange-500/20 text-orange-300 border border-orange-500/30' : 'bg-orange-100 text-orange-800'} rounded-full font-en">EduSob</span>
         </div>
         <span class="hidden sm:block text-[10px] ${isDark ? 'text-slate-300' : 'text-slate-500'} -mt-0.5 font-medium">শিক্ষার সব, এক ঠিকানায়</span>
       </div>
@@ -479,7 +217,7 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
             </div>
           </a>
           <a href="/cgpa" class="flex items-center gap-3 px-4 py-2.5 text-xs ${isDark ? 'hover:bg-slate-800 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
-            <span class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center text-sm"><i class="fas fa-calculator"></i></span>
+            <span class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm"><i class="fas fa-calculator"></i></span>
             <div>
               <p class="font-bold">CGPA ক্যালকুলেটর</p>
               <p class="text-[10px] ${isDark ? 'text-slate-300' : 'text-slate-500'} font-normal">ভার্সিটি ও কলেজ গ্রেড হিসাব</p>
@@ -510,13 +248,13 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
           <i class="fas fa-wallet text-amber-400"></i>
           <span>ওয়ালেট</span>
         </a>
-        <a href="/dashboard" class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-1.5">
+        <a href="/dashboard" class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-1.5">
           <i class="fas fa-user-graduate text-xs"></i>
           <span>ড্যাশবোর্ড</span>
         </a>
       ` : `
-        <a href="/login" class="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold ${isDark ? 'text-slate-200 hover:text-white hover:bg-white/10' : 'text-slate-700 hover:text-emerald-700 hover:bg-slate-100'} transition">লগইন</a>
-        <a href="/signup" class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition">ফ্রি সাইন-আপ</a>
+        <a href="/login" class="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold ${isDark ? 'text-slate-200 hover:text-white hover:bg-white/10' : 'text-slate-700 hover:text-orange-700 hover:bg-slate-100'} transition">লগইন</a>
+        <a href="/signup" class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition">ফ্রি সাইন-আপ</a>
       `}
 
       <!-- মোবাইল মেনু টগল বাটন -->
@@ -528,25 +266,25 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
 
   <!-- ৪. ইউনিফাইড মোবাইল ড্রয়ার (Unified Responsive Mobile Drawer) -->
   <div id="siteMobileDrawer" class="hidden lg:hidden border-t ${isDark ? 'border-white/10 bg-slate-950/95 text-white' : 'border-slate-200 bg-white text-slate-800'} px-4 py-4 space-y-2 text-sm font-semibold shadow-2xl max-h-[85vh] overflow-y-auto no-scrollbar">
-    <a href="/" class="flex items-center gap-2.5 p-2.5 rounded-xl ${active === 'home' ? 'bg-emerald-500/20 text-emerald-400 font-bold' : isDark ? 'hover:bg-slate-900 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
-      <i class="fas fa-home text-emerald-500 w-5"></i> হোম পেজ
+    <a href="/" class="flex items-center gap-2.5 p-2.5 rounded-xl ${active === 'home' ? 'bg-orange-500/20 text-orange-400 font-bold' : isDark ? 'hover:bg-slate-900 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
+      <i class="fas fa-home text-orange-500 w-5"></i> হোম পেজ
     </a>
-    <a href="/results" class="flex items-center gap-2.5 p-2.5 rounded-xl ${active === 'results' ? 'bg-emerald-500/20 text-emerald-400 font-bold' : isDark ? 'hover:bg-slate-900 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
+    <a href="/results" class="flex items-center gap-2.5 p-2.5 rounded-xl ${active === 'results' ? 'bg-orange-500/20 text-orange-400 font-bold' : isDark ? 'hover:bg-slate-900 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
       <i class="fas fa-graduation-cap text-amber-400 w-5"></i> রেজাল্ট ও মার্কশিট হাব
     </a>
-    <a href="/admission" class="flex items-center gap-2.5 p-2.5 rounded-xl ${active === 'admission' ? 'bg-emerald-500/20 text-emerald-400 font-bold' : isDark ? 'hover:bg-slate-900 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
+    <a href="/admission" class="flex items-center gap-2.5 p-2.5 rounded-xl ${active === 'admission' ? 'bg-orange-500/20 text-orange-400 font-bold' : isDark ? 'hover:bg-slate-900 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
       <i class="fas fa-door-open text-sky-400 w-5"></i> ভর্তি আবেদন ও নির্দেশিকা
     </a>
-    <a href="/scholarships" class="flex items-center justify-between p-2.5 rounded-xl ${active === 'scholarships' ? 'bg-emerald-500/20 text-emerald-400 font-bold' : isDark ? 'hover:bg-slate-900 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
+    <a href="/scholarships" class="flex items-center justify-between p-2.5 rounded-xl ${active === 'scholarships' ? 'bg-orange-500/20 text-orange-400 font-bold' : isDark ? 'hover:bg-slate-900 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
       <span class="flex items-center gap-2.5"><i class="fas fa-award text-amber-400 w-5"></i> স্কলারশিপ ও বৃত্তি</span>
       <span class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-full font-bold">AI ম্যাচিং</span>
     </a>
-    <a href="/cv" class="flex items-center justify-between p-2.5 rounded-xl ${active === 'cv' ? 'bg-emerald-500/20 text-emerald-400 font-bold' : isDark ? 'hover:bg-slate-900 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
+    <a href="/cv" class="flex items-center justify-between p-2.5 rounded-xl ${active === 'cv' ? 'bg-orange-500/20 text-orange-400 font-bold' : isDark ? 'hover:bg-slate-900 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
       <span class="flex items-center gap-2.5"><i class="fas fa-file-invoice text-cyan-400 w-5"></i> প্রফেশনাল CV ও বায়োডাটা মেকার</span>
-      <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold">Pro</span>
+      <span class="text-[10px] bg-orange-500/20 text-orange-300 border border-orange-500/30 px-2 py-0.5 rounded-full font-bold">Pro</span>
     </a>
-    <a href="/mcq" class="flex items-center gap-2.5 p-2.5 rounded-xl ${active === 'mcq' ? 'bg-emerald-500/20 text-emerald-400 font-bold' : isDark ? 'hover:bg-slate-900 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
-      <i class="fas fa-list-check text-teal-400 w-5"></i> বিষয়ভিত্তিক MCQ প্র্যাকটিস
+    <a href="/mcq" class="flex items-center gap-2.5 p-2.5 rounded-xl ${active === 'mcq' ? 'bg-orange-500/20 text-orange-400 font-bold' : isDark ? 'hover:bg-slate-900 text-slate-200' : 'hover:bg-slate-50 text-slate-700'}">
+      <i class="fas fa-list-check text-amber-400 w-5"></i> বিষয়ভিত্তিক MCQ প্র্যাকটিস
     </a>
     <a href="/teacher-support" class="flex items-center justify-between p-2.5 rounded-xl ${isDark ? 'bg-amber-500/10 text-amber-300 border border-amber-500/20' : 'bg-amber-50 text-amber-900 border border-amber-200'} font-bold">
       <span class="flex items-center gap-2.5"><i class="fas fa-chalkboard-user text-amber-500 w-5"></i> শিক্ষক ও মেন্টর সহায়তা</span>
@@ -561,12 +299,12 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
     ${loggedIn ? `
       <div class="pt-2 border-t ${isDark ? 'border-white/10' : 'border-slate-200'} flex gap-2">
         <a href="/wallet" class="flex-1 text-center py-2 rounded-xl bg-amber-500/20 text-amber-300 font-bold text-xs border border-amber-500/30">ওয়ালেট</a>
-        <a href="/dashboard" class="flex-1 text-center py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs">ড্যাশবোর্ড</a>
+        <a href="/dashboard" class="flex-1 text-center py-2 rounded-xl bg-orange-500 text-slate-950 font-bold text-xs">ড্যাশবোর্ড</a>
       </div>
     ` : `
       <div class="pt-2 border-t ${isDark ? 'border-white/10' : 'border-slate-200'} flex gap-2">
         <a href="/login" class="flex-1 text-center py-2 rounded-xl border ${isDark ? 'border-white/20 text-slate-200' : 'border-slate-300 text-slate-700'} font-bold text-xs">লগইন</a>
-        <a href="/signup" class="flex-1 text-center py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs">ফ্রি সাইন-আপ</a>
+        <a href="/signup" class="flex-1 text-center py-2 rounded-xl bg-orange-500 text-slate-950 font-bold text-xs">ফ্রি সাইন-আপ</a>
       </div>
     `}
   </div>
@@ -604,8 +342,8 @@ export function floatingButtons(): string {
     <span class="w-px h-3.5 bg-white/15"></span>
 
     <!-- WhatsApp বাটন -->
-    <a id="edusob-wa" href="#" onclick="return edusobWa()" title="সরাসরি WhatsApp সহায়তা" aria-label="WhatsApp সাপোর্ট" class="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-full text-emerald-300 hover:text-white hover:bg-emerald-600/30 transition">
-      <i class="fab fa-whatsapp text-emerald-400 text-sm"></i>
+    <a id="edusob-wa" href="#" onclick="return edusobWa()" title="সরাসরি WhatsApp সহায়তা" aria-label="WhatsApp সাপোর্ট" class="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-full text-orange-300 hover:text-white hover:bg-orange-600/30 transition">
+      <i class="fab fa-whatsapp text-orange-400 text-sm"></i>
       <span class="hidden md:inline">হেল্প</span>
     </a>
 

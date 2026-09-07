@@ -470,21 +470,21 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
       <div>
         <h1 class="text-2xl md:text-3xl font-black flex items-center gap-2.5">
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">প্রফেশনাল CV ও বায়োডাটা মেকার</span>
-          <span class="text-xs px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full font-semibold">১, ২ ও ৩ পেজ</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-300 to-cyan-400">প্রফেশনাল CV ও বায়োডাটা মেকার</span>
+          <span class="text-xs px-2.5 py-0.5 bg-orange-500/20 text-orange-300 border border-orange-500/30 rounded-full font-semibold">১, ২ ও ৩ পেজ</span>
         </h1>
         <p class="text-slate-300 text-xs md:text-sm mt-1">মনোগ্রাম, সাইডবার, এক্সিকিউটিভ ও ATS টেমপ্লেট — সহজে তথ্য পূরণ করে ১-ক্লিকে A4 প্রিন্ট বা PDF ডাউনলোড করুন</p>
       </div>
       <div class="flex items-center gap-2 shrink-0">
-        <button onclick="fillSampleData('bn')" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-white/15 text-slate-200 rounded-xl text-xs font-semibold transition flex items-center gap-1.5"><i class="fas fa-magic text-emerald-400"></i>বাংলা ডেমো</button>
+        <button onclick="fillSampleData('bn')" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-white/15 text-slate-200 rounded-xl text-xs font-semibold transition flex items-center gap-1.5"><i class="fas fa-magic text-orange-400"></i>বাংলা ডেমো</button>
         <button onclick="fillSampleData('en')" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-white/15 text-slate-200 rounded-xl text-xs font-semibold transition flex items-center gap-1.5"><i class="fas fa-wand-magic-sparkles text-cyan-400"></i>English Demo</button>
       </div>
     </div>
 
     <!-- ৩-ধাপের স্পষ্ট গাইডলাইন রিবন -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-      <div class="flex items-center gap-3 p-3 rounded-2xl bg-slate-900/80 border border-emerald-500/30">
-        <span class="w-7 h-7 rounded-xl bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center shrink-0 text-xs">১</span>
+      <div class="flex items-center gap-3 p-3 rounded-2xl bg-slate-900/80 border border-orange-500/30">
+        <span class="w-7 h-7 rounded-xl bg-orange-500/20 text-orange-400 font-bold flex items-center justify-center shrink-0 text-xs">১</span>
         <div>
           <p class="text-xs font-bold text-white">টেমপ্লেট ও পেজ বাছুন</p>
           <p class="text-[11px] text-slate-300">২৪টি ফরম্যাট, ১/২/৩ পেজ</p>
@@ -508,12 +508,12 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
   </header>
 
   ${!loggedIn ? `
-  <section class="bg-slate-900/90 border border-emerald-500/30 rounded-2xl p-8 text-center max-w-2xl mx-auto my-12">
-    <div class="w-16 h-16 bg-emerald-500/20 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 text-emerald-400">🔒</div>
+  <section class="bg-slate-900/90 border border-orange-500/30 rounded-2xl p-8 text-center max-w-2xl mx-auto my-12">
+    <div class="w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 text-orange-400">🔒</div>
     <h2 class="text-2xl font-bold">CV সংরক্ষণ ও প্রিন্ট করতে ফ্রি অ্যাকাউন্ট প্রয়োজন</h2>
     <p class="text-slate-300 mt-2 text-sm leading-relaxed">অ্যাকাউন্ট খুললে প্রোফাইলের সকল রেজাল্ট ও তথ্য অটো-ফিল হবে এবং একাধিক CV সুরক্ষিতভাবে সেভ থাকবে।</p>
     <div class="mt-6 flex gap-3 justify-center">
-      <a href="/signup" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-6 py-2.5 rounded-xl font-bold transition">ফ্রি সাইন-আপ করুন</a>
+      <a href="/signup" class="bg-orange-500 hover:bg-orange-400 text-slate-950 px-6 py-2.5 rounded-xl font-bold transition">ফ্রি সাইন-আপ করুন</a>
       <a href="/login" class="border border-white/20 hover:bg-white/10 px-6 py-2.5 rounded-xl text-slate-200 transition">লগইন</a>
     </div>
   </section>
@@ -525,7 +525,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <!-- ক্যাটাগরি ফিল্টার -->
       <div class="flex flex-wrap items-center gap-1.5 text-xs" id="cat-filters">
         <span class="text-slate-400 font-semibold mr-1">ফিল্টার:</span>
-        <button onclick="filterTpl('all')" class="cat-btn active px-3 py-1 bg-emerald-500 text-slate-950 rounded-lg font-bold">সব (All)</button>
+        <button onclick="filterTpl('all')" class="cat-btn active px-3 py-1 bg-orange-500 text-slate-950 rounded-lg font-bold">সব (All)</button>
         <button onclick="filterTpl('Monogram')" class="cat-btn px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">মনোগ্রাম (Monogram)</button>
         <button onclick="filterTpl('Sidebar')" class="cat-btn px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">সাইডবার (Sidebar)</button>
         <button onclick="filterTpl('Executive')" class="cat-btn px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">এক্সিকিউটিভ (Executive)</button>
@@ -537,7 +537,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <div class="flex flex-wrap items-center gap-3 text-xs">
         <div class="flex items-center gap-1.5 bg-slate-800 border border-white/10 px-2.5 py-1 rounded-xl">
           <span class="text-slate-400">📄 পেজ মোড:</span>
-          <select id="cv-page-mode" onchange="refresh()" class="bg-transparent text-emerald-400 font-bold focus:outline-none cursor-pointer">
+          <select id="cv-page-mode" onchange="refresh()" class="bg-transparent text-orange-400 font-bold focus:outline-none cursor-pointer">
             <option value="auto">স্বাভাবিক (Auto)</option>
             <option value="1">১ পেজ ফিট (Compact 1-Page)</option>
             <option value="2">২ পেজ স্ট্যান্ডার্ড (2-Page Standard)</option>
@@ -554,7 +554,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
         </div>
 
         <label class="flex items-center gap-1.5 cursor-pointer bg-slate-800 border border-white/10 px-2.5 py-1 rounded-xl">
-          <input type="checkbox" id="with-photo" checked onchange="refresh()" class="accent-emerald-500">
+          <input type="checkbox" id="with-photo" checked onchange="refresh()" class="accent-orange-500">
           <span class="text-slate-300 font-medium">ছবিসহ</span>
         </label>
       </div>
@@ -604,8 +604,8 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
     <!-- বাম পাশ: ফর্ম ইনপুট -->
     <section class="lg:col-span-5 bg-slate-900 border border-white/10 rounded-2xl p-5 space-y-4 max-h-[85vh] overflow-y-auto scrollbar-thin">
       <div class="flex items-center justify-between pb-2 border-b border-white/10">
-        <h2 class="font-bold text-sm text-slate-200 flex items-center gap-2"><i class="fas fa-edit text-emerald-400"></i>CV তথ্য এডিটর</h2>
-        <button onclick="prefill()" class="text-xs bg-teal-600 hover:bg-teal-500 text-white font-semibold px-3 py-1.5 rounded-lg transition flex items-center gap-1"><i class="fas fa-sparkles text-amber-300"></i>প্রোফাইল থেকে আনো</button>
+        <h2 class="font-bold text-sm text-slate-200 flex items-center gap-2"><i class="fas fa-edit text-orange-400"></i>CV তথ্য এডিটর</h2>
+        <button onclick="prefill()" class="text-xs bg-amber-600 hover:bg-amber-500 text-white font-semibold px-3 py-1.5 rounded-lg transition flex items-center gap-1"><i class="fas fa-sparkles text-amber-300"></i>প্রোফাইল থেকে আনো</button>
       </div>
 
       <!-- ছবি আপলোড ও বেসিক তথ্য -->
@@ -617,7 +617,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
           <div class="flex-1 space-y-1">
             <label class="block text-xs font-semibold text-slate-300">প্রোফাইল ছবি (CV-র জন্য)</label>
             <div class="flex items-center gap-2">
-              <label class="cursor-pointer bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1">
+              <label class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1">
                 <i class="fas fa-upload text-[10px]"></i> আপলোড
                 <input type="file" id="photo-file" accept="image/*" class="hidden" onchange="handlePhotoUpload(this)">
               </label>
@@ -627,7 +627,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
         </div>
 
         <div class="grid grid-cols-2 gap-2.5">
-          <input id="f-name" placeholder="পূর্ণ নাম *" class="cv-in col-span-2 font-semibold text-emerald-300">
+          <input id="f-name" placeholder="পূর্ণ নাম *" class="cv-in col-span-2 font-semibold text-orange-300">
           <input id="f-desig" placeholder="পদ / প্রফেশনাল পরিচয় (যেমন: সফটওয়্যার ইঞ্জিনিয়ার / অনার্স শিক্ষার্থী)" class="cv-in col-span-2">
           <input id="f-phone" placeholder="মোবাইল নম্বর *" class="cv-in">
           <input id="f-email" placeholder="ইমেইল অ্যাড্রেস *" class="cv-in">
@@ -640,8 +640,8 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <!-- ক্যারিয়ার অবজেক্টিভ ও প্রিসেট -->
       <div class="space-y-1.5 pt-2 border-t border-white/5">
         <div class="flex items-center justify-between">
-          <label class="text-xs font-bold text-emerald-400 flex items-center gap-1"><i class="fas fa-bullseye"></i>ক্যারিয়ার অবজেক্টিভ / সারাংশ</label>
-          <select onchange="applyPreset(this.value)" class="bg-slate-800 border border-white/10 text-emerald-400 rounded-lg px-2 py-0.5 text-[11px] cursor-pointer">
+          <label class="text-xs font-bold text-orange-400 flex items-center gap-1"><i class="fas fa-bullseye"></i>ক্যারিয়ার অবজেক্টিভ / সারাংশ</label>
+          <select onchange="applyPreset(this.value)" class="bg-slate-800 border border-white/10 text-orange-400 rounded-lg px-2 py-0.5 text-[11px] cursor-pointer">
             <option value="">+ তৈরি প্রিসেট বসান</option>
             <option value="fresher">ফ্রেশ গ্র্যাজুয়েট (Bangla)</option>
             <option value="fresher_en">Fresh Graduate (English)</option>
@@ -658,8 +658,8 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <!-- শিক্ষাগত যোগ্যতা -->
       <div class="space-y-2 pt-2 border-t border-white/5">
         <div class="flex items-center justify-between">
-          <h3 class="text-xs font-bold text-emerald-400 flex items-center gap-1"><i class="fas fa-graduation-cap"></i>শিক্ষাগত যোগ্যতা (Education)</h3>
-          <button onclick="addEdu()" class="text-xs bg-slate-800 hover:bg-slate-700 border border-white/10 text-emerald-300 px-2.5 py-1 rounded-lg transition">+ যোগ করুন</button>
+          <h3 class="text-xs font-bold text-orange-400 flex items-center gap-1"><i class="fas fa-graduation-cap"></i>শিক্ষাগত যোগ্যতা (Education)</h3>
+          <button onclick="addEdu()" class="text-xs bg-slate-800 hover:bg-slate-700 border border-white/10 text-orange-300 px-2.5 py-1 rounded-lg transition">+ যোগ করুন</button>
         </div>
         <div id="edu-rows" class="space-y-2"></div>
       </div>
@@ -667,8 +667,8 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <!-- কাজের অভিজ্ঞতা -->
       <div class="space-y-2 pt-2 border-t border-white/5">
         <div class="flex items-center justify-between">
-          <h3 class="text-xs font-bold text-emerald-400 flex items-center gap-1"><i class="fas fa-briefcase"></i>কাজের অভিজ্ঞতা (Work Experience)</h3>
-          <button onclick="addExp()" class="text-xs bg-slate-800 hover:bg-slate-700 border border-white/10 text-emerald-300 px-2.5 py-1 rounded-lg transition">+ যোগ করুন</button>
+          <h3 class="text-xs font-bold text-orange-400 flex items-center gap-1"><i class="fas fa-briefcase"></i>কাজের অভিজ্ঞতা (Work Experience)</h3>
+          <button onclick="addExp()" class="text-xs bg-slate-800 hover:bg-slate-700 border border-white/10 text-orange-300 px-2.5 py-1 rounded-lg transition">+ যোগ করুন</button>
         </div>
         <div id="exp-rows" class="space-y-2"></div>
       </div>
@@ -676,8 +676,8 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <!-- প্রজেক্ট ও পোর্টফোলিও -->
       <div class="space-y-2 pt-2 border-t border-white/5">
         <div class="flex items-center justify-between">
-          <h3 class="text-xs font-bold text-emerald-400 flex items-center gap-1"><i class="fas fa-laptop-code"></i>প্রজেক্ট / গুরুত্বপূর্ণ কাজ (ঐচ্ছিক)</h3>
-          <button onclick="addProject()" class="text-xs bg-slate-800 hover:bg-slate-700 border border-white/10 text-emerald-300 px-2.5 py-1 rounded-lg transition">+ যোগ করুন</button>
+          <h3 class="text-xs font-bold text-orange-400 flex items-center gap-1"><i class="fas fa-laptop-code"></i>প্রজেক্ট / গুরুত্বপূর্ণ কাজ (ঐচ্ছিক)</h3>
+          <button onclick="addProject()" class="text-xs bg-slate-800 hover:bg-slate-700 border border-white/10 text-orange-300 px-2.5 py-1 rounded-lg transition">+ যোগ করুন</button>
         </div>
         <div id="project-rows" class="space-y-2"></div>
       </div>
@@ -685,18 +685,18 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <!-- দক্ষতা ও ভাষা -->
       <div class="grid grid-cols-2 gap-3 pt-2 border-t border-white/5">
         <div>
-          <h3 class="text-xs font-bold text-emerald-400 mb-1 flex items-center gap-1"><i class="fas fa-tools"></i>দক্ষতা (Skills - কমা দিয়ে)</h3>
+          <h3 class="text-xs font-bold text-orange-400 mb-1 flex items-center gap-1"><i class="fas fa-tools"></i>দক্ষতা (Skills - কমা দিয়ে)</h3>
           <input id="f-skills" placeholder="JavaScript, Python, MS Word, ..." class="cv-in w-full text-xs">
         </div>
         <div>
-          <h3 class="text-xs font-bold text-emerald-400 mb-1 flex items-center gap-1"><i class="fas fa-language"></i>ভাষা (Languages)</h3>
+          <h3 class="text-xs font-bold text-orange-400 mb-1 flex items-center gap-1"><i class="fas fa-language"></i>ভাষা (Languages)</h3>
           <input id="f-langs" placeholder="বাংলা (Native), English (Fluent)" class="cv-in w-full text-xs">
         </div>
       </div>
 
       <!-- ব্যক্তিগত তথ্য / বায়োডাটা -->
       <div class="space-y-2 pt-2 border-t border-white/5">
-        <h3 class="text-xs font-bold text-emerald-400 flex items-center gap-1"><i class="fas fa-id-card"></i>ব্যক্তিগত তথ্য ও বায়োডাটা (Personal Bio-data)</h3>
+        <h3 class="text-xs font-bold text-orange-400 flex items-center gap-1"><i class="fas fa-id-card"></i>ব্যক্তিগত তথ্য ও বায়োডাটা (Personal Bio-data)</h3>
         <div class="grid grid-cols-2 gap-2">
           <input id="f-father" placeholder="পিতার নাম" class="cv-in text-xs">
           <input id="f-mother" placeholder="মাতার নাম" class="cv-in text-xs">
@@ -711,8 +711,8 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <!-- রেফারেন্স -->
       <div class="space-y-2 pt-2 border-t border-white/5">
         <div class="flex items-center justify-between">
-          <h3 class="text-xs font-bold text-emerald-400 flex items-center gap-1"><i class="fas fa-user-check"></i>রেফারেন্স (References)</h3>
-          <button onclick="addRef()" class="text-xs bg-slate-800 hover:bg-slate-700 border border-white/10 text-emerald-300 px-2.5 py-1 rounded-lg transition">+ যোগ করুন</button>
+          <h3 class="text-xs font-bold text-orange-400 flex items-center gap-1"><i class="fas fa-user-check"></i>রেফারেন্স (References)</h3>
+          <button onclick="addRef()" class="text-xs bg-slate-800 hover:bg-slate-700 border border-white/10 text-orange-300 px-2.5 py-1 rounded-lg transition">+ যোগ করুন</button>
         </div>
         <div id="ref-rows" class="space-y-2"></div>
       </div>
@@ -721,7 +721,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <div class="pt-3 border-t border-white/10 space-y-2">
         <div class="flex gap-2">
           <input id="cv-title" placeholder="CV-র নাম (যেমন: জব অ্যাপ্লিকেশন ২০২৩)" class="cv-in flex-1 text-xs">
-          <button onclick="saveCV()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-1.5"><i class="fas fa-save"></i>সেভ করুন</button>
+          <button onclick="saveCV()" class="bg-orange-500 hover:bg-orange-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-1.5"><i class="fas fa-save"></i>সেভ করুন</button>
         </div>
         <div id="save-msg" class="text-xs"></div>
         <div id="my-cvs"></div>
@@ -733,15 +733,15 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <div class="bg-slate-900 border border-white/10 rounded-2xl p-3 sm:p-4 sticky top-20 shadow-2xl">
         <div class="flex items-center justify-between mb-3 pb-3 border-b border-white/10 flex-wrap gap-2">
           <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-orange-400 animate-pulse"></span>
             <h2 class="font-bold text-sm text-slate-200">লাইভ A4 প্রিভিউ</h2>
-            <span id="page-count-badge" class="text-[10px] bg-slate-800 text-emerald-300 px-2.5 py-0.5 rounded-full border border-white/10 font-bold">A4 ফরম্যাট</span>
+            <span id="page-count-badge" class="text-[10px] bg-slate-800 text-orange-300 px-2.5 py-0.5 rounded-full border border-white/10 font-bold">A4 ফরম্যাট</span>
           </div>
           <div class="flex items-center gap-2">
             <button onclick="togglePreviewFit()" id="fitToggleBtn" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-white/15 text-slate-300 hover:text-white rounded-xl text-xs font-semibold transition flex items-center gap-1">
-              <i class="fas fa-expand text-[10px] text-teal-400"></i> <span id="fitLabel">স্ক্রিন ফিট</span>
+              <i class="fas fa-expand text-[10px] text-amber-400"></i> <span id="fitLabel">স্ক্রিন ফিট</span>
             </button>
-            <button onclick="printCV()" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 px-4 py-1.5 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-1.5">
+            <button onclick="printCV()" class="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 px-4 py-1.5 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-1.5">
               <i class="fas fa-print"></i>প্রিন্ট / PDF ডাউনলোড
             </button>
           </div>
@@ -754,7 +754,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
 
         <div class="flex items-center justify-between text-[11px] text-slate-300 mt-3 pt-2 border-t border-white/5">
           <span>💡 <b>টিপ:</b> প্রিন্ট ডায়ালগে পেপারের সাইজ <b>A4</b> ও মার্জিন <b>None/Default</b> নির্বাচন করুন।</span>
-          <span class="text-emerald-400 font-semibold"><i class="fas fa-check-circle mr-1"></i>ATS ও প্রিন্ট রেডি</span>
+          <span class="text-orange-400 font-semibold"><i class="fas fa-check-circle mr-1"></i>ATS ও প্রিন্ট রেডি</span>
         </div>
       </div>
     </section>
@@ -1009,15 +1009,15 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
     document.querySelectorAll('.tpl-card').forEach(function(el){
       var isCur = el.dataset.slug === slug;
       el.classList.toggle('ring-2', isCur);
-      el.classList.toggle('ring-emerald-400', isCur);
-      el.classList.toggle('border-emerald-500', isCur);
+      el.classList.toggle('ring-orange-400', isCur);
+      el.classList.toggle('border-orange-500', isCur);
     });
     refresh();
   };
 
   window.filterTpl = function(cat){
-    document.querySelectorAll('.cat-btn').forEach(function(b){ b.classList.remove('bg-emerald-500','text-slate-950','active'); b.classList.add('bg-slate-800','text-slate-300') });
-    event.target.classList.add('bg-emerald-500','text-slate-950','active');
+    document.querySelectorAll('.cat-btn').forEach(function(b){ b.classList.remove('bg-orange-500','text-slate-950','active'); b.classList.add('bg-slate-800','text-slate-300') });
+    event.target.classList.add('bg-orange-500','text-slate-950','active');
     event.target.classList.remove('bg-slate-800','text-slate-300');
 
     document.querySelectorAll('.tpl-card').forEach(function(card){
@@ -1037,12 +1037,12 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       document.getElementById('tpl-list').innerHTML = templates.map(function(t){
         var cfg = t.config;
         var badge = cfg.badge || (cfg.layout==='sidebar-left'?'Sidebar':(cfg.headerStyle==='monogram'?'Monogram':'Clean'));
-        return '<button data-slug="'+t.slug+'" data-badge="'+esc(badge)+'" onclick="pickTpl(\\''+t.slug+'\\')" class="tpl-card shrink-0 w-36 bg-slate-900 border border-white/10 rounded-xl p-2.5 text-left hover:border-emerald-500/50 transition cursor-pointer">'
+        return '<button data-slug="'+t.slug+'" data-badge="'+esc(badge)+'" onclick="pickTpl(\\''+t.slug+'\\')" class="tpl-card shrink-0 w-36 bg-slate-900 border border-white/10 rounded-xl p-2.5 text-left hover:border-orange-500/50 transition cursor-pointer">'
           +'<div class="h-16 rounded-lg mb-2 flex items-center justify-center font-bold text-white text-xs relative overflow-hidden shadow" style="background:linear-gradient(135deg,'+cfg.primary+','+cfg.accent+')">'
           +(cfg.headerStyle==='monogram'?'<span class="w-7 h-7 rounded bg-white/20 flex items-center justify-center text-sm font-serif">CV</span>':'<span class="opacity-90">'+esc(badge)+'</span>')
           +'</div>'
           +'<div class="text-[11px] font-bold text-slate-200 truncate">'+esc(t.name_bn)+'</div>'
-          +'<div class="flex items-center justify-between mt-1"><span class="text-[10px] text-slate-400">'+esc(badge)+'</span><span class="text-[10px] '+(t.price===0?'text-emerald-400 font-bold':'text-amber-400')+'">'+(t.price===0?'ফ্রি':'৳'+toBn(t.price))+'</span></div></button>';
+          +'<div class="flex items-center justify-between mt-1"><span class="text-[10px] text-slate-400">'+esc(badge)+'</span><span class="text-[10px] '+(t.price===0?'text-orange-400 font-bold':'text-amber-400')+'">'+(t.price===0?'ফ্রি':'৳'+toBn(t.price))+'</span></div></button>';
       }).join('');
       pickTpl(templates[0].slug);
     });
@@ -1061,7 +1061,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
         p.education.forEach(function(e){ addEdu(e) });
       }
       refresh();
-      showMsg('✅ প্রোফাইল থেকে তথ্য সফলভাবে আনা হয়েছে','text-emerald-400');
+      showMsg('✅ প্রোফাইল থেকে তথ্য সফলভাবে আনা হয়েছে','text-orange-400');
     });
   };
 
@@ -1135,7 +1135,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       addRef({ name: 'ড. মাহবুবুর রহমান', designation: 'অধ্যাপক', org: 'ঢাকা বিশ্ববিদ্যালয়', phone: '০১৮১২-৩৪৫৬৭৮' });
     }
     refresh();
-    showMsg('✨ নমুনা তথ্য সফলভাবে লোড হয়েছে','text-emerald-400');
+    showMsg('✨ নমুনা তথ্য সফলভাবে লোড হয়েছে','text-orange-400');
   };
 
   function showMsg(t, cls){
@@ -1161,7 +1161,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
     }).then(r=>r.json()).then(function(d){
       if(d.ok){
         curCvId = d.id;
-        showMsg('✅ CV সফলভাবে সংরক্ষিত হয়েছে','text-emerald-400');
+        showMsg('✅ CV সফলভাবে সংরক্ষিত হয়েছে','text-orange-400');
         loadMine();
       } else {
         showMsg('❌ ' + (d.error || 'সংরক্ষণে সমস্যা হয়েছে'), 'text-red-400');
@@ -1208,7 +1208,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       (v.references || []).forEach(function(r){ addRef(r) });
 
       if(templates.length) pickTpl(c.template_slug);
-      showMsg('✅ "' + c.title + '" লোড হয়েছে', 'text-emerald-400');
+      showMsg('✅ "' + c.title + '" লোড হয়েছে', 'text-orange-400');
     });
   };
 
@@ -1226,11 +1226,11 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       if(!d.ok) return;
       var el = document.getElementById('my-cvs');
       if(!d.cvs.length){ el.innerHTML = ''; return; }
-      el.innerHTML = '<h3 class="text-xs font-bold text-emerald-400 mb-1.5 mt-3 flex items-center gap-1"><i class="fas fa-folder"></i>সংরক্ষিত CV ('+toBn(d.cvs.length)+'/৫)</h3>'
+      el.innerHTML = '<h3 class="text-xs font-bold text-orange-400 mb-1.5 mt-3 flex items-center gap-1"><i class="fas fa-folder"></i>সংরক্ষিত CV ('+toBn(d.cvs.length)+'/৫)</h3>'
         + d.cvs.map(function(c){
           return '<div class="flex items-center justify-between bg-slate-800/80 border border-white/5 rounded-xl px-3 py-2 text-xs mb-1.5 hover:border-white/10 transition">'
             +'<span class="truncate font-medium text-slate-200">'+esc(c.title)+' <span class="text-[10px] text-slate-500 font-normal">('+esc(c.template_slug)+')</span></span>'
-            +'<span class="shrink-0 flex gap-2"><button onclick="loadCV('+c.id+')" class="text-emerald-400 hover:text-emerald-300 font-semibold">খুলুন</button>'
+            +'<span class="shrink-0 flex gap-2"><button onclick="loadCV('+c.id+')" class="text-orange-400 hover:text-orange-300 font-semibold">খুলুন</button>'
             +'<button onclick="delCV('+c.id+')" class="text-red-400 hover:text-red-300">ডিলিট</button></span></div>';
         }).join('');
     });
@@ -1296,12 +1296,12 @@ export function cvAdminPage(isAdmin: boolean): string {
 <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-xl border-b border-white/10">
   <nav class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
     <a href="/" class="flex items-center gap-2 font-bold text-xl">
-      <span class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center text-slate-950 font-black">⚙️</span> এডুসব <span class="text-xs bg-amber-500/20 text-amber-400 px-2.5 py-0.5 rounded-full font-bold border border-amber-500/30">CV এডমিন</span>
+      <span class="w-9 h-9 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center text-slate-950 font-black">⚙️</span> এডুসব <span class="text-xs bg-amber-500/20 text-amber-400 px-2.5 py-0.5 rounded-full font-bold border border-amber-500/30">CV এডমিন</span>
     </a>
     <div class="flex gap-3 text-sm items-center">
       <a href="/admin" class="text-slate-300 hover:text-white transition">মূল এডমিন প্যানেল</a>
-      <a href="/cv" class="text-emerald-400 hover:text-emerald-300 font-semibold transition">CV মেকার</a>
-      <a href="/dashboard" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2 rounded-xl font-bold transition">ড্যাশবোর্ড</a>
+      <a href="/cv" class="text-orange-400 hover:text-orange-300 font-semibold transition">CV মেকার</a>
+      <a href="/dashboard" class="bg-orange-500 hover:bg-orange-400 text-slate-950 px-4 py-2 rounded-xl font-bold transition">ড্যাশবোর্ড</a>
     </div>
   </nav>
 </header>
@@ -1312,7 +1312,7 @@ export function cvAdminPage(isAdmin: boolean): string {
     <div class="text-5xl mb-3">⛔</div>
     <h1 class="text-xl font-bold">এডমিন অনুমতি প্রয়োজন</h1>
     <p class="text-slate-400 mt-2 text-sm">এই পেজ শুধুমাত্র সিস্টেম এডমিনদের জন্য।</p>
-    <a href="/dashboard" class="inline-block mt-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-6 py-2.5 rounded-xl font-bold transition">ড্যাশবোর্ডে ফিরুন</a>
+    <a href="/dashboard" class="inline-block mt-4 bg-orange-500 hover:bg-orange-400 text-slate-950 px-6 py-2.5 rounded-xl font-bold transition">ড্যাশবোর্ডে ফিরুন</a>
   </section>
   ` : `
   <header class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -1320,7 +1320,7 @@ export function cvAdminPage(isAdmin: boolean): string {
       <h1 class="text-3xl font-black">🎨 CV টেমপ্লেট কাস্টমাইজার</h1>
       <p class="text-slate-400 mt-1 text-sm">টেমপ্লেটের কালার প্যালেট, ফন্ট, লেআউট, সেকশন-অর্ডার, ব্যাজ ও প্রাইসিং কাস্টমাইজ করুন</p>
     </div>
-    <a href="/cv" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-white/10 text-slate-200 rounded-xl text-xs font-bold transition flex items-center gap-2"><i class="fas fa-external-link-alt text-emerald-400"></i>ইউজার CV মেকার দেখুন</a>
+    <a href="/cv" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-white/10 text-slate-200 rounded-xl text-xs font-bold transition flex items-center gap-2"><i class="fas fa-external-link-alt text-orange-400"></i>ইউজার CV মেকার দেখুন</a>
   </header>
 
   <div class="grid lg:grid-cols-12 gap-6">
@@ -1332,7 +1332,7 @@ export function cvAdminPage(isAdmin: boolean): string {
       <div class="bg-slate-900 border border-white/10 rounded-2xl p-4 sticky top-20 shadow-2xl">
         <h2 class="font-bold text-sm text-slate-200 mb-3 flex items-center justify-between">
           <span>লাইভ প্রিভিউ (নমুনা ডেটা)</span>
-          <span id="admin-sel-label" class="text-xs text-emerald-400 font-normal"></span>
+          <span id="admin-sel-label" class="text-xs text-orange-400 font-normal"></span>
         </h2>
         <div class="bg-slate-950/80 rounded-xl p-2 sm:p-3 max-h-[75vh] overflow-y-auto overflow-x-auto flex justify-center border border-white/5 w-full">
           <div id="admin-preview" class="w-full max-w-[210mm] bg-white rounded shadow-2xl"></div>
@@ -1404,13 +1404,13 @@ export function cvAdminPage(isAdmin: boolean): string {
         +'<button onclick="moveSec(\\''+t.slug+'\\','+i+',1)" class="text-slate-400 hover:text-white cursor-pointer">▶</button></span>';
     }).join(' ');
 
-    return '<article class="bg-slate-900 border '+(selSlug===t.slug?'border-emerald-500/80 ring-1 ring-emerald-500/50':'border-white/10')+' rounded-2xl p-4 transition" id="card-'+t.slug+'">'
+    return '<article class="bg-slate-900 border '+(selSlug===t.slug?'border-orange-500/80 ring-1 ring-orange-500/50':'border-white/10')+' rounded-2xl p-4 transition" id="card-'+t.slug+'">'
       +'<div class="flex items-center justify-between gap-2 mb-3">'
       +'<button onclick="selTpl(\\''+t.slug+'\\')" class="flex items-center gap-2 font-bold text-sm text-left cursor-pointer">'
       +'<span class="w-8 h-8 rounded-lg shrink-0 flex items-center justify-center font-bold text-white text-xs shadow" style="background:linear-gradient(135deg,'+cfg.primary+','+cfg.accent+')">'+(cfg.headerStyle==='monogram'?'M':'CV')+'</span>'
       +'<span>'+esc(t.name_bn)+'</span>'
       +'</button>'
-      +'<label class="flex items-center gap-1.5 text-[11px] cursor-pointer shrink-0"><input type="checkbox" '+(t.is_active?'checked':'')+' onchange="setField(\\''+t.slug+'\\',\\'is_active\\',this.checked?1:0)" class="accent-emerald-500">সক্রিয়</label>'
+      +'<label class="flex items-center gap-1.5 text-[11px] cursor-pointer shrink-0"><input type="checkbox" '+(t.is_active?'checked':'')+' onchange="setField(\\''+t.slug+'\\',\\'is_active\\',this.checked?1:0)" class="accent-orange-500">সক্রিয়</label>'
       +'</div>'
       +'<div class="grid grid-cols-2 gap-2 text-[11px]">'
       +'<label class="flex items-center gap-1.5">মূল কালার: <input type="color" value="'+cfg.primary+'" onchange="setCfg(\\''+t.slug+'\\',\\'primary\\',this.value)" class="w-8 h-6 rounded cursor-pointer bg-transparent"></label>'
@@ -1430,7 +1430,7 @@ export function cvAdminPage(isAdmin: boolean): string {
       +'<div class="mt-2"><div class="text-[10px] text-slate-400 mb-1">সেকশন ক্রম (◀▶ বাটনে পরিবর্তন করুন):</div><div class="flex flex-wrap gap-1">'+orderChips+'</div></div>'
       +'<div class="mt-3 flex items-center justify-between">'
       +'<span id="msg-'+t.slug+'" class="text-[11px]"></span>'
-      +'<button onclick="saveTpl(\\''+t.slug+'\\')" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition cursor-pointer"><i class="fas fa-save mr-1"></i>সেভ করুন</button></div>'
+      +'<button onclick="saveTpl(\\''+t.slug+'\\')" class="bg-orange-500 hover:bg-orange-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition cursor-pointer"><i class="fas fa-save mr-1"></i>সেভ করুন</button></div>'
       +'</article>';
   }
 
@@ -1483,7 +1483,7 @@ export function cvAdminPage(isAdmin: boolean): string {
     }).then(r=>r.json()).then(function(d){
       var el = document.getElementById('msg-' + slug);
       el.textContent = d.ok ? '✅ সেভ হয়েছে' : '❌ ' + (d.error || 'সমস্যা');
-      el.className = 'text-[11px] ' + (d.ok ? 'text-emerald-400 font-bold' : 'text-red-400');
+      el.className = 'text-[11px] ' + (d.ok ? 'text-orange-400 font-bold' : 'text-red-400');
       setTimeout(function(){ el.textContent = '' }, 3000);
     });
   };

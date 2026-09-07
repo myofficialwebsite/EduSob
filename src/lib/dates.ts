@@ -93,7 +93,7 @@ export function religionInfo(religion: string, now = new Date()): ReligionInfo {
   const bn = toBanglaDate(now)
   switch (religion) {
     case 'islam':
-      return { greeting: 'আসসালামু আলাইকুম', dateLine: toHijriDate(now).formatted, gregLine: greg, theme: 'emerald', watermark: '☪' }
+      return { greeting: 'আসসালামু আলাইকুম', dateLine: toHijriDate(now).formatted, gregLine: greg, theme: 'orange', watermark: '☪' }
     case 'sanatan':
       return { greeting: 'হরেকৃষ্ণ', dateLine: bn.formatted, gregLine: greg, theme: 'saffron', watermark: 'ॐ' }
     case 'buddhist':
@@ -101,6 +101,6 @@ export function religionInfo(religion: string, now = new Date()): ReligionInfo {
     case 'christian':
       return { greeting: 'শুভেচ্ছা ও শান্তি', dateLine: greg, gregLine: bn.formatted, theme: 'blue', watermark: '✝' }
     default:
-      return { greeting: 'শুভেচ্ছা', dateLine: bn.formatted, gregLine: greg, theme: 'emerald', watermark: '📚' }
+      return { greeting: 'শুভেচ্ছা', dateLine: bn.formatted, gregLine: greg, theme: 'orange', watermark: '📚' }
   }
 }

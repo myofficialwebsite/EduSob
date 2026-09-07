@@ -20,11 +20,11 @@ ${siteHeader({ activeKey: 'mcq', loggedIn, theme: 'dark' })}
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
       <div>
         <div class="flex items-center gap-2 mb-1.5">
-          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">স্মার্ট মডেল টেস্ট</span>
-          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">স্পেসড রিভিশন ১→৩→৭ দিন</span>
+          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-500/20 text-orange-300 border border-orange-500/30">স্মার্ট মডেল টেস্ট</span>
+          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">স্পেসড রিভিশন ১→৩→৭ দিন</span>
         </div>
         <h1 class="text-2xl sm:text-3xl font-black flex items-center gap-2.5 text-white">
-          <span class="text-emerald-400"><i class="fas fa-list-check mr-1.5"></i>MCQ প্র্যাকটিস ও রিভিশন হাব</span>
+          <span class="text-orange-400"><i class="fas fa-list-check mr-1.5"></i>MCQ প্র্যাকটিস ও রিভিশন হাব</span>
         </h1>
         <p class="text-slate-300 text-xs sm:text-sm mt-1">বিষয়ভিত্তিক প্রশ্নব্যাংক — পরীক্ষা দিন, ভুল প্রশ্ন স্বয়ংক্রিয়ভাবে ভুল-ব্যাংকে সেভ হবে ও সময়মতো মনে করিয়ে দেবে</p>
       </div>
@@ -32,8 +32,8 @@ ${siteHeader({ activeKey: 'mcq', loggedIn, theme: 'dark' })}
 
     <!-- ৩-ধাপের স্পষ্ট গাইডলাইন রিবন (প্রথম নজরে কী করতে হবে) -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-      <div class="flex items-center gap-3 p-3 rounded-2xl bg-slate-900/80 border border-emerald-500/30">
-        <span class="w-7 h-7 rounded-xl bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center shrink-0 text-xs">১</span>
+      <div class="flex items-center gap-3 p-3 rounded-2xl bg-slate-900/80 border border-orange-500/30">
+        <span class="w-7 h-7 rounded-xl bg-orange-500/20 text-orange-400 font-bold flex items-center justify-center shrink-0 text-xs">১</span>
         <div>
           <p class="text-xs font-bold text-white">লেভেল ও বিষয় নির্বাচন</p>
           <p class="text-[11px] text-slate-300">SSC, HSC বা সরকারি চাকরি</p>
@@ -59,7 +59,7 @@ ${siteHeader({ activeKey: 'mcq', loggedIn, theme: 'dark' })}
   ${loggedIn ? '' : `
   <section class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-5 mb-6 text-center max-w-2xl mx-auto">
     <p class="text-amber-300 font-semibold text-sm">🔒 MCQ পরীক্ষা দিতে ফ্রি সাইন-আপ করুন — স্কোর ও ভুল প্রশ্ন অটো-সেভ হবে!</p>
-    <a href="/signup" class="inline-block mt-3 px-6 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-xl font-bold transition text-xs">ফ্রি সাইন-আপ</a>
+    <a href="/signup" class="inline-block mt-3 px-6 py-2.5 bg-orange-500 hover:bg-orange-400 text-slate-950 rounded-xl font-bold transition text-xs">ফ্রি সাইন-আপ</a>
   </section>`}
 
   <!-- ২. ফ্ল্যাট এডিটোরিয়াল ২-কলাম লেআউট: বামে টেস্ট/সেটআপ, ডানে ভুল-ব্যাংক ও লিডারবোর্ড -->
@@ -70,7 +70,7 @@ ${siteHeader({ activeKey: 'mcq', loggedIn, theme: 'dark' })}
       <section id="quiz-setup" class="bg-slate-900 border border-white/10 rounded-2xl p-5 sm:p-6 shadow-xl">
         <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
           <h2 class="font-bold text-base text-white flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> পরীক্ষা সেটআপ
+            <span class="w-2.5 h-2.5 rounded-full bg-orange-400"></span> পরীক্ষা সেটআপ
           </h2>
           <span class="text-xs text-slate-300 font-medium">১০টি প্রশ্ন · তাৎক্ষণিক ফলাফল</span>
         </div>
@@ -79,7 +79,7 @@ ${siteHeader({ activeKey: 'mcq', loggedIn, theme: 'dark' })}
           <div>
             <label class="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-2">১. শিক্ষাস্তর বেছে নিন</label>
             <div class="flex flex-wrap gap-2" id="level-btns">
-              <button data-level="ssc" class="lvl-btn px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs transition shadow-sm">SSC ও সমমান</button>
+              <button data-level="ssc" class="lvl-btn px-4 py-2 rounded-xl bg-orange-500 text-slate-950 font-bold text-xs transition shadow-sm">SSC ও সমমান</button>
               <button data-level="hsc" class="lvl-btn px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition">HSC ও সমমান</button>
               <button data-level="nu" class="lvl-btn px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition">অনার্স / ডিগ্রি (NU)</button>
               <button data-level="job" class="lvl-btn px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition">বিসিএস ও চাকরি প্রস্তুতি</button>
@@ -89,12 +89,12 @@ ${siteHeader({ activeKey: 'mcq', loggedIn, theme: 'dark' })}
           <div>
             <label class="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-2">২. বিষয় বেছে নিন</label>
             <div id="subject-btns" class="flex flex-wrap gap-2 text-xs min-h-[38px] items-center">
-              <span class="text-slate-400 text-xs flex items-center gap-1.5"><i class="fas fa-spinner fa-spin text-emerald-400"></i> বিষয় লোড হচ্ছে...</span>
+              <span class="text-slate-400 text-xs flex items-center gap-1.5"><i class="fas fa-spinner fa-spin text-orange-400"></i> বিষয় লোড হচ্ছে...</span>
             </div>
           </div>
 
           <div class="pt-3 border-t border-white/10">
-            <button id="start-btn" class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 rounded-xl font-black transition shadow-lg text-sm flex items-center justify-center gap-2">
+            <button id="start-btn" class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 rounded-xl font-black transition shadow-lg text-sm flex items-center justify-center gap-2">
               <span>🚀 পরীক্ষা শুরু করুন (১০ প্রশ্ন)</span>
             </button>
           </div>
@@ -102,7 +102,7 @@ ${siteHeader({ activeKey: 'mcq', loggedIn, theme: 'dark' })}
       </section>
 
       <!-- পরীক্ষা ক্ষেত্র -->
-      <section id="quiz-area" class="hidden bg-slate-900 border border-emerald-500/30 rounded-2xl p-5 sm:p-6 shadow-xl space-y-5"></section>
+      <section id="quiz-area" class="hidden bg-slate-900 border border-orange-500/30 rounded-2xl p-5 sm:p-6 shadow-xl space-y-5"></section>
 
       <!-- ফলাফল বিশ্লেষণ -->
       <section id="quiz-result" class="hidden space-y-4"></section>
@@ -157,7 +157,7 @@ var curLevel = SMART_LV[USER_LEVEL] || 'ssc', curSubject = '', quizQs = [], answ
 function updateLevelButtons(){
   document.querySelectorAll('.lvl-btn').forEach(function(x){
     if(x.dataset.level === curLevel){
-      x.className = 'lvl-btn px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs transition shadow-sm';
+      x.className = 'lvl-btn px-4 py-2 rounded-xl bg-orange-500 text-slate-950 font-bold text-xs transition shadow-sm';
     } else {
       x.className = 'lvl-btn px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition';
     }
@@ -168,7 +168,7 @@ loadSubjects();
 
 function loadSubjects(){
   var box = document.getElementById('subject-btns');
-  box.innerHTML = '<span class="text-slate-400 text-xs flex items-center gap-1.5"><i class="fas fa-spinner fa-spin text-emerald-400"></i> বিষয় লোড হচ্ছে...</span>';
+  box.innerHTML = '<span class="text-slate-400 text-xs flex items-center gap-1.5"><i class="fas fa-spinner fa-spin text-orange-400"></i> বিষয় লোড হচ্ছে...</span>';
   fetch('/api/tools/mcq/subjects?level='+curLevel)
     .then(function(r){
       if(!r.ok) throw new Error('সার্ভার সাড়া দেয়নি');
@@ -178,10 +178,10 @@ function loadSubjects(){
       var subs = (d && d.subjects) || [];
       curSubject = '';
       if(!subs.length){
-        box.innerHTML = '<button data-sub="" class="sub-btn px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs">সব বিষয়</button> <span class="text-slate-400 text-xs ml-2">এই স্তরের সব প্রশ্ন একত্রে প্র্যাকটিস করতে পারবেন</span>';
+        box.innerHTML = '<button data-sub="" class="sub-btn px-3 py-1.5 rounded-lg bg-orange-500 text-slate-950 font-bold text-xs">সব বিষয়</button> <span class="text-slate-400 text-xs ml-2">এই স্তরের সব প্রশ্ন একত্রে প্র্যাকটিস করতে পারবেন</span>';
         return;
       }
-      box.innerHTML = '<button data-sub="" class="sub-btn px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs">সব বিষয়</button>' +
+      box.innerHTML = '<button data-sub="" class="sub-btn px-3 py-1.5 rounded-lg bg-orange-500 text-slate-950 font-bold text-xs">সব বিষয়</button>' +
         subs.map(function(s){
           return '<button data-sub="'+esc(s.subject)+'" class="sub-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition">'+esc(s.subject)+' ('+toBn(s.cnt)+')</button>';
         }).join('');
@@ -191,12 +191,12 @@ function loadSubjects(){
           box.querySelectorAll('.sub-btn').forEach(function(x){
             x.className = 'sub-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition';
           });
-          b.className = 'sub-btn px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs';
+          b.className = 'sub-btn px-3 py-1.5 rounded-lg bg-orange-500 text-slate-950 font-bold text-xs';
         };
       });
     })
     .catch(function(err){
-      box.innerHTML = '<span class="text-rose-400 text-xs">বিষয় লোড করা যায়নি। <button onclick="loadSubjects()" class="underline text-emerald-400 ml-1 font-bold">পুনরায় চেষ্টা করুন</button></span>';
+      box.innerHTML = '<span class="text-rose-400 text-xs">বিষয় লোড করা যায়নি। <button onclick="loadSubjects()" class="underline text-orange-400 ml-1 font-bold">পুনরায় চেষ্টা করুন</button></span>';
     });
 }
 document.querySelectorAll('.lvl-btn').forEach(function(b){
@@ -241,23 +241,23 @@ function renderQuiz(){
   var area = document.getElementById('quiz-area');
   area.classList.remove('hidden');
   area.innerHTML = '<div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10">' +
-    '<h2 class="font-bold text-white text-base flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>প্রশ্ন: '+toBn(quizQs.length)+'টি</h2>' +
-    '<span id="answered-count" class="text-xs font-bold text-emerald-300 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">উত্তর: ০/'+toBn(quizQs.length)+'</span>' +
+    '<h2 class="font-bold text-white text-base flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-orange-400 animate-pulse"></span>প্রশ্ন: '+toBn(quizQs.length)+'টি</h2>' +
+    '<span id="answered-count" class="text-xs font-bold text-orange-300 bg-orange-500/10 px-2.5 py-1 rounded-full border border-orange-500/20">উত্তর: ০/'+toBn(quizQs.length)+'</span>' +
     '</div>' +
     quizQs.map(function(q,i){
       var opts = ['a','b','c','d'].map(function(o){
-        return '<label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-800/90 hover:bg-slate-700/90 border border-white/15 hover:border-emerald-500/50 cursor-pointer transition min-h-[44px]">' +
-          '<input type="radio" name="q'+q.id+'" value="'+o+'" class="mt-0.5 accent-emerald-500 w-4 h-4 shrink-0" onchange="pick('+q.id+',\\''+o+'\\')">' +
+        return '<label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-800/90 hover:bg-slate-700/90 border border-white/15 hover:border-orange-500/50 cursor-pointer transition min-h-[44px]">' +
+          '<input type="radio" name="q'+q.id+'" value="'+o+'" class="mt-0.5 accent-orange-500 w-4 h-4 shrink-0" onchange="pick('+q.id+',\\''+o+'\\')">' +
           '<span class="text-xs sm:text-sm text-slate-100 font-medium leading-relaxed">'+esc(q['option_'+o])+'</span>' +
           '</label>';
       }).join('');
       return '<article class="mb-5 pb-5 border-b border-white/10 last:border-0">' +
-        '<p class="font-bold text-white text-sm sm:text-base mb-3 leading-relaxed">'+toBn(i+1)+'. '+esc(q.question)+' <span class="text-xs text-emerald-400 font-normal">['+esc(q.subject)+(q.chapter?' · '+esc(q.chapter):'')+']</span></p>' +
+        '<p class="font-bold text-white text-sm sm:text-base mb-3 leading-relaxed">'+toBn(i+1)+'. '+esc(q.question)+' <span class="text-xs text-orange-400 font-normal">['+esc(q.subject)+(q.chapter?' · '+esc(q.chapter):'')+']</span></p>' +
         '<div class="grid sm:grid-cols-2 gap-2.5">'+opts+'</div>' +
         '</article>';
     }).join('') +
     '<div class="pt-3 border-t border-white/10">' +
-    '<button id="quiz-submit-btn" onclick="submitQuiz()" class="w-full px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 rounded-xl font-black hover:opacity-95 transition shadow-xl text-sm flex items-center justify-center gap-2">' +
+    '<button id="quiz-submit-btn" onclick="submitQuiz()" class="w-full px-8 py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 rounded-xl font-black hover:opacity-95 transition shadow-xl text-sm flex items-center justify-center gap-2">' +
     '<span>✅ উত্তর জমা দিন ও ফলাফল দেখুন</span>' +
     '</button></div>';
   window.scrollTo({top: area.offsetTop - 80, behavior: 'smooth'});
@@ -283,7 +283,7 @@ window.submitQuiz = function(){
     document.getElementById('quiz-area').classList.add('hidden');
     var res = document.getElementById('quiz-result');
     res.classList.remove('hidden');
-    var color = d.pct>=80?'emerald':d.pct>=50?'amber':'rose';
+    var color = d.pct>=80?'orange':d.pct>=50?'amber':'rose';
     var qmap = {}; quizQs.forEach(function(q){qmap[q.id]=q});
     
     var guestBanner = d.guest ? 
@@ -296,13 +296,13 @@ window.submitQuiz = function(){
       '<p class="text-4xl font-black text-'+color+'-400">'+toBn(d.pct)+'%</p>'+
       '<p class="mt-2 text-slate-100 font-semibold text-base">সঠিক: '+toBn(d.correct)+'/'+toBn(d.total)+(d.guest ? '' : (d.total-d.correct>0?' — ভুল '+toBn(d.total-d.correct)+'টি ভুল-ব্যাংকে সেভ হলো':' — অসাধারণ! সম্পূর্ণ সঠিক 🎉'))+'</p>'+
       guestBanner +
-      '<button onclick="location.reload()" class="mt-4 px-6 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl text-xs transition shadow">🔄 নতুন পরীক্ষা দিন</button></div>'+
+      '<button onclick="location.reload()" class="mt-4 px-6 py-2.5 bg-orange-500 hover:bg-orange-400 text-slate-950 font-bold rounded-xl text-xs transition shadow">🔄 নতুন পরীক্ষা দিন</button></div>'+
       '<div class="bg-slate-900 border border-white/10 rounded-2xl p-5 space-y-4 shadow-xl">'+
       '<h3 class="font-bold text-white text-sm pb-2 border-b border-white/10">পূর্ণাঙ্গ উত্তরমালা ও ব্যাখ্যা</h3>'+
       d.results.map(function(r,i){
         var q = qmap[r.id]||{};
         return '<div class="pb-3 border-b border-white/5 last:border-0"><p class="font-bold text-slate-100 text-sm">'+toBn(i+1)+'. '+esc(q.question||'')+'</p>'+
-        '<p class="mt-1.5 text-xs">'+(r.isCorrect?'<span class="text-emerald-400 font-bold">✔ সঠিক উত্তর</span>':'<span class="text-rose-400 font-bold">✘ ভুল উত্তর</span> — সঠিক বিকল্প: <b class="text-emerald-300 font-bold">'+esc(q['option_'+r.correct]||r.correct)+'</b>')+'</p>'+
+        '<p class="mt-1.5 text-xs">'+(r.isCorrect?'<span class="text-orange-400 font-bold">✔ সঠিক উত্তর</span>':'<span class="text-rose-400 font-bold">✘ ভুল উত্তর</span> — সঠিক বিকল্প: <b class="text-orange-300 font-bold">'+esc(q['option_'+r.correct]||r.correct)+'</b>')+'</p>'+
         (r.explanation?'<div class="text-xs text-slate-300 mt-1.5 bg-slate-800/80 p-2.5 rounded-lg border border-white/5">💡 '+esc(r.explanation)+'</div>':'')+'</div>';
       }).join('')+'</div>';
     if(LOGGED_IN){loadWrongBank();loadHistory();}
@@ -320,10 +320,10 @@ function loadWrongBank(){
     var el = document.getElementById('wrong-bank-list'); if(!el) return;
     document.getElementById('wb-stats').textContent = 'মোট: '+toBn(d.total)+' · আয়ত্তে: '+toBn(d.mastered);
     var due = d.due||[];
-    if(!due.length){el.innerHTML='<p class="text-emerald-400 font-semibold p-2">🎉 আজ কোনো রিভিশন বাকি নেই!</p>';return}
+    if(!due.length){el.innerHTML='<p class="text-orange-400 font-semibold p-2">🎉 আজ কোনো রিভিশন বাকি নেই!</p>';return}
     el.innerHTML = due.map(function(q){
       return '<details class="bg-slate-800/80 border border-white/10 rounded-xl p-3"><summary class="cursor-pointer font-semibold text-slate-100">'+esc(q.question)+' <span class="text-[10px] text-rose-400 font-bold">(ভুল '+toBn(q.wrong_count)+' বার)</span></summary>'+
-      '<p class="mt-2 text-emerald-300 font-bold">✔ সঠিক: '+esc(q['option_'+q.correct])+'</p>'+(q.explanation?'<p class="text-xs text-slate-300 mt-1.5 bg-slate-900/60 p-2 rounded">💡 '+esc(q.explanation)+'</p>':'')+'</details>';
+      '<p class="mt-2 text-orange-300 font-bold">✔ সঠিক: '+esc(q['option_'+q.correct])+'</p>'+(q.explanation?'<p class="text-xs text-slate-300 mt-1.5 bg-slate-900/60 p-2 rounded">💡 '+esc(q.explanation)+'</p>':'')+'</details>';
     }).join('');
   });
 }
@@ -333,7 +333,7 @@ function loadHistory(){
     var a = d.attempts||[];
     if(!a.length){el.innerHTML='<p class="text-slate-400">এখনো কোনো পরীক্ষা দেননি।</p>';return}
     el.innerHTML = '<div class="space-y-2">'+a.map(function(t){
-      var c = t.score_pct>=80?'text-emerald-400':t.score_pct>=50?'text-amber-400':'text-rose-400';
+      var c = t.score_pct>=80?'text-orange-400':t.score_pct>=50?'text-amber-400':'text-rose-400';
       return '<div class="flex justify-between items-center bg-slate-800/80 border border-white/5 rounded-xl px-3 py-2.5"><span><strong class="text-white font-semibold">'+esc(t.subject||t.level.toUpperCase())+'</strong> <span class="text-[10px] text-slate-400 ml-1">'+esc((t.taken_at||'').slice(0,10))+'</span></span><span class="font-bold '+c+'">'+toBn(t.correct_count)+'/'+toBn(t.total)+' ('+toBn(t.score_pct)+'%)</span></div>';
     }).join('')+'</div>';
   });
@@ -363,7 +363,7 @@ ${toolsHeader('planner', loggedIn)}
   <header class="mb-6 pb-4 border-b border-white/10">
     <div class="flex items-center gap-2 mb-1.5">
       <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">স্মার্ট স্টাডি টুল</span>
-      <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">ক্লাউড অটো-সেভ</span>
+      <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-500/20 text-orange-300 border border-orange-500/30">ক্লাউড অটো-সেভ</span>
     </div>
     <h1 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-2">
       <i class="fas fa-calendar-check text-purple-400"></i>
@@ -378,14 +378,14 @@ ${toolsHeader('planner', loggedIn)}
     <section class="lg:col-span-6 bg-slate-900 border border-white/10 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
       <div class="flex items-center justify-between pb-3 border-b border-white/10">
         <h2 class="font-bold text-white text-base flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> আজকের পড়ার তালিকা
+          <span class="w-2.5 h-2.5 rounded-full bg-orange-400"></span> আজকের পড়ার তালিকা
         </h2>
-        <span id="task-progress" class="text-xs text-emerald-300 font-semibold"></span>
+        <span id="task-progress" class="text-xs text-orange-300 font-semibold"></span>
       </div>
       <form id="task-form" class="flex flex-col sm:flex-row gap-2">
-        <input id="t-title" placeholder="কী পড়বেন? যেমন: পদার্থ বিজ্ঞান অধ্যায় ৩" class="w-full sm:flex-1 min-w-0 bg-slate-800 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-400 outline-none focus:border-emerald-400 transition" required>
-        <input id="t-date" type="date" class="w-full sm:w-auto bg-slate-800 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-slate-100 outline-none focus:border-emerald-400 transition">
-        <button class="w-full sm:w-auto px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 shrink-0 shadow">
+        <input id="t-title" placeholder="কী পড়বেন? যেমন: পদার্থ বিজ্ঞান অধ্যায় ৩" class="w-full sm:flex-1 min-w-0 bg-slate-800 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-400 outline-none focus:border-orange-400 transition" required>
+        <input id="t-date" type="date" class="w-full sm:w-auto bg-slate-800 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-slate-100 outline-none focus:border-orange-400 transition">
+        <button class="w-full sm:w-auto px-4 py-2.5 bg-orange-500 hover:bg-orange-400 text-slate-950 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 shrink-0 shadow">
           <span>+ যোগ</span>
         </button>
       </form>
@@ -416,7 +416,7 @@ ${toolsHeader('planner', loggedIn)}
     <p class="text-3xl mb-2">🔒</p>
     <p class="text-amber-300 font-bold text-base">প্ল্যানার ও নোট ব্যবহার করতে ফ্রি সাইন-আপ করুন</p>
     <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">আপনার সব পড়ার রুটিন ও নোট অ্যাকাউন্টে অটো-সেভ থাকবে — যেকোনো ডিভাইস থেকে ব্যবহার করতে পারবেন।</p>
-    <a href="/signup" class="inline-block mt-4 px-8 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-xl font-bold transition text-xs shadow-lg">ফ্রি সাইন-আপ করুন</a>
+    <a href="/signup" class="inline-block mt-4 px-8 py-3 bg-orange-500 hover:bg-orange-400 text-slate-950 rounded-xl font-bold transition text-xs shadow-lg">ফ্রি সাইন-আপ করুন</a>
   </section>`}
 </main>
 
@@ -432,7 +432,7 @@ function loadTasks(){
     document.getElementById('task-progress').textContent = 'অগ্রগতি: '+toBn(done)+'/'+toBn(ts.length)+' সম্পন্ন ('+toBn(Math.round(done/ts.length*100))+'%)';
     el.innerHTML = ts.map(function(t){
       return '<div class="flex items-center gap-2 bg-slate-800/60 rounded-xl px-3 py-2.5 '+(t.status==='done'?'opacity-60':'')+'">'+
-      '<input type="checkbox" '+(t.status==='done'?'checked':'')+' class="accent-emerald-500 w-4 h-4" onchange="toggleTask('+t.id+', this.checked)">'+
+      '<input type="checkbox" '+(t.status==='done'?'checked':'')+' class="accent-orange-500 w-4 h-4" onchange="toggleTask('+t.id+', this.checked)">'+
       '<span class="flex-1 '+(t.status==='done'?'line-through text-slate-500':'')+'">'+esc(t.title)+(t.due_date?' <span class="text-[10px] text-sky-400">📅 '+esc(t.due_date)+'</span>':'')+'</span>'+
       '<button onclick="delTask('+t.id+')" class="text-rose-400 hover:text-rose-300 text-xs">✕</button></div>';
     }).join('');
@@ -451,7 +451,7 @@ function loadNotes(){
     var ns = d.notes||[];
     if(!ns.length){el.innerHTML='<p class="text-slate-500">কোনো নোট নেই।</p>';return}
     el.innerHTML = ns.map(function(n){
-      return '<details class="bg-slate-800/60 rounded-xl p-3"><summary class="cursor-pointer font-semibold">'+(n.subject?'<span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full mr-1.5">'+esc(n.subject)+'</span>':'')+esc(n.title)+'</summary>'+
+      return '<details class="bg-slate-800/60 rounded-xl p-3"><summary class="cursor-pointer font-semibold">'+(n.subject?'<span class="text-[10px] bg-orange-500/20 text-orange-300 px-2 py-0.5 rounded-full mr-1.5">'+esc(n.subject)+'</span>':'')+esc(n.title)+'</summary>'+
       '<p class="mt-2 whitespace-pre-wrap text-slate-300">'+esc(n.content||'(খালি)')+'</p>'+
       '<button onclick="delNote('+n.id+')" class="mt-2 text-xs text-rose-400 hover:text-rose-300">🗑 মুছুন</button></details>';
     }).join('');
@@ -474,11 +474,11 @@ ${toolsHeader('cgpa', loggedIn)}
 <main class="max-w-7xl mx-auto px-4 py-8">
   <header class="mb-6 pb-4 border-b border-white/10">
     <div class="flex items-center gap-2 mb-1.5">
-      <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">NU ও বিশ্ববিদ্যালয় স্কেল</span>
+      <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-500/20 text-orange-300 border border-orange-500/30">NU ও বিশ্ববিদ্যালয় স্কেল</span>
       <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">৪.০০ পয়েন্ট স্কেল</span>
     </div>
     <h1 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-2">
-      <i class="fas fa-calculator text-emerald-400"></i>
+      <i class="fas fa-calculator text-orange-400"></i>
       <span>CGPA ক্যালকুলেটর ও টার্গেট প্ল্যানার</span>
     </h1>
     <p class="text-xs sm:text-sm text-slate-300 mt-1">কোর্স অনুযায়ী CGPA গণনা এবং নির্দিষ্ট টার্গেটে পৌঁছাতে বাকি সেমিস্টারে কত GPA প্রয়োজন তা সহজে নির্ধারণ করুন</p>
@@ -489,7 +489,7 @@ ${toolsHeader('cgpa', loggedIn)}
     <section class="lg:col-span-6 bg-slate-900 border border-white/10 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
       <div class="flex items-center justify-between pb-3 border-b border-white/10">
         <h2 class="font-bold text-white text-base flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> সেমিস্টার / মোট CGPA গণনা
+          <span class="w-2.5 h-2.5 rounded-full bg-orange-400"></span> সেমিস্টার / মোট CGPA গণনা
         </h2>
         <span class="text-xs text-slate-300">কোর্সভিত্তিক ক্রেডিট ও গ্রেড</span>
       </div>
@@ -500,14 +500,14 @@ ${toolsHeader('cgpa', loggedIn)}
         <button onclick="addRow()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5">
           <span>+ কোর্স যোগ</span>
         </button>
-        <button onclick="calcCgpa()" class="flex-1 px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-xl text-xs sm:text-sm font-black transition shadow">
+        <button onclick="calcCgpa()" class="flex-1 px-5 py-2.5 bg-orange-500 hover:bg-orange-400 text-slate-950 rounded-xl text-xs sm:text-sm font-black transition shadow">
           <span>গণনা করুন</span>
         </button>
       </div>
 
-      <div id="cgpa-result" class="hidden mt-4 bg-emerald-500/10 border border-emerald-500/40 rounded-2xl p-5 text-center shadow-lg">
+      <div id="cgpa-result" class="hidden mt-4 bg-orange-500/10 border border-orange-500/40 rounded-2xl p-5 text-center shadow-lg">
         <p class="text-xs text-slate-300 font-medium">আপনার অর্জিত CGPA</p>
-        <p id="cgpa-value" class="text-4xl font-black text-emerald-400 my-1"></p>
+        <p id="cgpa-value" class="text-4xl font-black text-orange-400 my-1"></p>
         <p id="cgpa-grade" class="text-sm font-bold text-slate-100"></p>
       </div>
 
@@ -515,10 +515,10 @@ ${toolsHeader('cgpa', loggedIn)}
         <summary class="cursor-pointer font-bold text-slate-200">জাতীয় বিশ্ববিদ্যালয় ও বোর্ড স্ট্যান্ডার্ড গ্রেডিং স্কেল</summary>
         <table class="w-full mt-2.5 text-left border-collapse text-xs">
           <thead>
-            <tr class="text-emerald-400 border-b border-white/10"><th class="py-1">মার্কস</th><th>লেটার গ্রেড</th><th>গ্রেড পয়েন্ট</th></tr>
+            <tr class="text-orange-400 border-b border-white/10"><th class="py-1">মার্কস</th><th>লেটার গ্রেড</th><th>গ্রেড পয়েন্ট</th></tr>
           </thead>
           <tbody class="divide-y divide-white/5 text-slate-200">
-            <tr><td class="py-1">৮০% বা তদূর্ধ্ব</td><td class="font-bold text-emerald-300">A+</td><td>৪.০০</td></tr>
+            <tr><td class="py-1">৮০% বা তদূর্ধ্ব</td><td class="font-bold text-orange-300">A+</td><td>৪.০০</td></tr>
             <tr><td class="py-1">৭৫% থেকে ৭৯%</td><td class="font-bold">A</td><td>৩.৭৫</td></tr>
             <tr><td class="py-1">৭০% থেকে ৭৪%</td><td class="font-bold">A-</td><td>৩.৫০</td></tr>
             <tr><td class="py-1">৬৫% থেকে ৬৯%</td><td class="font-bold">B+</td><td>৩.২৫</td></tr>
@@ -607,8 +607,8 @@ window.calcTarget=function(){
     el.className='mt-4 rounded-2xl p-5 text-center bg-rose-500/10 border border-rose-500/40';
     el.innerHTML='<p class="text-2xl font-bold text-rose-400">সম্ভব নয় 😔</p><p class="text-sm text-slate-300 mt-1">দরকার গড়ে '+toBn(need.toFixed(2))+' — যা ৪.০০-এর বেশি। টার্গেট কমিয়ে দেখুন।</p>';
   }else if(need<=0){
-    el.className='mt-4 rounded-2xl p-5 text-center bg-emerald-500/10 border border-emerald-500/40';
-    el.innerHTML='<p class="text-2xl font-bold text-emerald-400">টার্গেট ইতিমধ্যে অর্জিত! 🎉</p>';
+    el.className='mt-4 rounded-2xl p-5 text-center bg-orange-500/10 border border-orange-500/40';
+    el.innerHTML='<p class="text-2xl font-bold text-orange-400">টার্গেট ইতিমধ্যে অর্জিত! 🎉</p>';
   }else{
     var hard=need>=3.75?' (কঠিন কিন্তু সম্ভব 💪)':need>=3?' (ভালোভাবে পড়লেই হবে ✅)':' (সহজেই সম্ভব 😊)';
     el.className='mt-4 rounded-2xl p-5 text-center bg-amber-500/10 border border-amber-500/40';
@@ -627,11 +627,11 @@ ${toolsHeader('syllabus', loggedIn)}
   <header class="mb-6 pb-4 border-b border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
     <div>
       <div class="flex items-center gap-2 mb-1.5">
-        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">অফিসিয়াল ২০২৬</span>
+        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-500/20 text-orange-300 border border-orange-500/30">অফিসিয়াল ২০২৬</span>
         <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">অন-সাইট পূর্ণাঙ্গ ডাটাবেজ</span>
       </div>
       <h1 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-2">
-        <i class="fas fa-book-open-reader text-emerald-400"></i>
+        <i class="fas fa-book-open-reader text-orange-400"></i>
         <span>সিলেবাস, পাঠ্যক্রম ও মানবণ্টন হাব</span>
       </h1>
       <p class="text-xs sm:text-sm text-slate-300 mt-1">জাতীয় শিক্ষাক্রম, বোর্ড পরীক্ষা, বিশ্ববিদ্যালয় ও চাকরির পূর্ণাঙ্গ বিষয়ভিত্তিক সিলেবাস</p>
@@ -640,13 +640,13 @@ ${toolsHeader('syllabus', loggedIn)}
     <!-- সার্চ বার -->
     <div class="relative w-full md:w-80">
       <i class="fas fa-search absolute left-3.5 top-3.5 text-slate-400 text-xs"></i>
-      <input type="text" id="sylSearchInput" oninput="filterSyllabus()" placeholder="বিষয় বা অধ্যায় খুঁজুন..." class="w-full bg-slate-900 border border-white/15 rounded-xl pl-9 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-emerald-400 transition">
+      <input type="text" id="sylSearchInput" oninput="filterSyllabus()" placeholder="বিষয় বা অধ্যায় খুঁজুন..." class="w-full bg-slate-900 border border-white/15 rounded-xl pl-9 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-orange-400 transition">
     </div>
   </header>
 
   <!-- শিক্ষাস্তর ট্যাব -->
   <div class="flex items-center gap-2 overflow-x-auto pb-2 mb-6 border-b border-white/10 no-scrollbar" id="lvl-tabs">
-    <button data-lvl="ssc" class="s-tab px-4 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-1.5 shadow">
+    <button data-lvl="ssc" class="s-tab px-4 py-2.5 rounded-xl bg-orange-500 text-slate-950 font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-1.5 shadow">
       <i class="fas fa-school text-xs"></i> SSC ও সমমান
     </button>
     <button data-lvl="hsc" class="s-tab px-4 py-2.5 rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 font-semibold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-1.5 border border-white/10">
@@ -666,7 +666,7 @@ ${toolsHeader('syllabus', loggedIn)}
   <!-- সিলেবাস কার্ড গ্রিড -->
   <div id="syllabus-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
     <div class="col-span-full py-12 text-center text-slate-400">
-      <i class="fas fa-spinner fa-spin text-2xl text-emerald-400 mb-2"></i>
+      <i class="fas fa-spinner fa-spin text-2xl text-orange-400 mb-2"></i>
       <p class="text-sm">সিলেবাস লোড হচ্ছে...</p>
     </div>
   </div>
@@ -678,7 +678,7 @@ ${toolsHeader('syllabus', loggedIn)}
     <!-- হেডার বার -->
     <div class="p-4 bg-slate-950 border-b border-white/10 flex items-center justify-between gap-3">
       <div class="min-w-0">
-        <span id="sylModalBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">SSC</span>
+        <span id="sylModalBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 border border-orange-500/30">SSC</span>
         <h2 id="sylModalTitle" class="text-base sm:text-lg font-bold text-white truncate mt-1">সিলেবাসের নাম</h2>
       </div>
       <div class="flex items-center gap-2">
@@ -710,7 +710,7 @@ ${toolsHeader('syllabus', loggedIn)}
 
       <!-- অধ্যায় তালিকা -->
       <div id="sylModalChaptersWrapper" class="hidden">
-        <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+        <h4 class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <i class="fas fa-list-check"></i> পাঠ্যসূচির মূল অধ্যায়সমূহ
         </h4>
         <div id="sylModalChapters" class="grid sm:grid-cols-2 gap-2 text-xs"></div>
@@ -718,7 +718,7 @@ ${toolsHeader('syllabus', loggedIn)}
 
       <!-- মূল সিলেবাস টেক্সট -->
       <div>
-        <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+        <h4 class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <i class="fas fa-file-lines"></i> বিস্তারিত সিলেবাস ও পরীক্ষার রূপরেখা
         </h4>
         <div id="sylModalBody" class="bg-black/40 border border-white/10 rounded-xl p-4 text-xs sm:text-sm font-mono whitespace-pre-wrap leading-relaxed text-slate-200"></div>
@@ -728,9 +728,9 @@ ${toolsHeader('syllabus', loggedIn)}
     <!-- ফুটার -->
     <div class="p-3 bg-slate-950 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
       <span class="flex items-center gap-1.5">
-        <i class="fas fa-circle-check text-emerald-400"></i> এডুসব অনুমোদিত কারিকুলাম
+        <i class="fas fa-circle-check text-orange-400"></i> এডুসব অনুমোদিত কারিকুলাম
       </span>
-      <button onclick="closeSylModal()" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg transition">
+      <button onclick="closeSylModal()" class="px-4 py-1.5 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-lg transition">
         সম্পন্ন
       </button>
     </div>
@@ -748,11 +748,11 @@ function loadSyllabus() {
   document.querySelectorAll('.s-tab').forEach(function(b){
     var isActive = b.dataset.lvl === currentLevel;
     b.className = 's-tab px-4 py-2.5 rounded-xl text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-1.5 ' + 
-      (isActive ? 'bg-emerald-500 text-white font-bold shadow-lg shadow-emerald-500/20' : 'bg-slate-900 text-slate-300 hover:bg-slate-800 font-semibold');
+      (isActive ? 'bg-orange-500 text-white font-bold shadow-lg shadow-orange-500/20' : 'bg-slate-900 text-slate-300 hover:bg-slate-800 font-semibold');
   });
 
   var listEl = document.getElementById('syllabus-list');
-  listEl.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500"><i class="fas fa-spinner fa-spin text-2xl text-emerald-400 mb-2"></i><p class="text-sm">সিলেবাস লোড হচ্ছে...</p></div>';
+  listEl.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500"><i class="fas fa-spinner fa-spin text-2xl text-orange-400 mb-2"></i><p class="text-sm">সিলেবাস লোড হচ্ছে...</p></div>';
 
   fetch('/api/tools/syllabus?level=' + currentLevel)
     .then(function(r){ return r.json(); })
@@ -779,18 +779,18 @@ function renderSyllabusList(items) {
       chaptersCount = ch.length;
     } catch(e){}
 
-    return '<div class="bg-slate-900 border border-white/10 hover:border-emerald-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all group shadow-sm hover:shadow-emerald-500/5">'+
+    return '<div class="bg-slate-900 border border-white/10 hover:border-orange-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all group shadow-sm hover:shadow-orange-500/5">'+
       '<div>'+
         '<div class="flex items-start justify-between gap-3 mb-2.5">'+
-          '<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase">'+esc(s.level)+'</span>'+
+          '<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30 uppercase">'+esc(s.level)+'</span>'+
           (s.source ? '<span class="text-[11px] text-sky-400 font-medium truncate max-w-[180px] sm:max-w-xs"><i class="fas fa-building-columns mr-1"></i>'+esc(s.source)+'</span>' : '')+
         '</div>'+
-        '<h3 class="font-bold text-white text-base leading-snug group-hover:text-emerald-300 transition mb-2">'+esc(s.title)+'</h3>'+
+        '<h3 class="font-bold text-white text-base leading-snug group-hover:text-orange-300 transition mb-2">'+esc(s.title)+'</h3>'+
         (s.description ? '<p class="text-xs text-slate-400 line-clamp-2 mb-3 leading-relaxed">'+esc(s.description)+'</p>' : '')+
         (s.marks_distribution ? '<div class="text-[11px] bg-white/5 border border-white/5 rounded-lg px-2.5 py-1.5 text-amber-300/90 mb-3"><i class="fas fa-calculator mr-1"></i> '+esc(s.marks_distribution)+'</div>' : '')+
       '</div>'+
       '<div class="pt-3 border-t border-white/10 flex items-center justify-between gap-2 mt-2">'+
-        '<button onclick="openSylModal('+idx+')" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md">'+
+        '<button onclick="openSylModal('+idx+')" class="flex-1 py-2 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md">'+
           '<i class="fas fa-eye"></i> সিলেবাস পড়ুন ও প্রিন্ট'+
         '</button>'+
         (s.link ? '<a href="'+esc(s.link)+'" target="_blank" rel="noopener" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 text-xs transition" title="অফিসিয়াল সাইট"><i class="fas fa-external-link"></i></a>' : '')+
@@ -836,7 +836,7 @@ function openSylModal(idx) {
     chWrapper.classList.remove('hidden');
     chContainer.innerHTML = chapters.map(function(ch, i){
       return '<div class="bg-black/30 border border-white/5 rounded-lg p-2 flex items-start gap-2">'+
-        '<span class="w-5 h-5 rounded bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-[10px] shrink-0">'+(i+1)+'</span>'+
+        '<span class="w-5 h-5 rounded bg-orange-500/20 text-orange-300 flex items-center justify-center font-bold text-[10px] shrink-0">'+(i+1)+'</span>'+
         '<span class="text-slate-300">'+esc(ch)+'</span>'+
       '</div>';
     }).join('');

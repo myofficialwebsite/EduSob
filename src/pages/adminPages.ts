@@ -21,7 +21,7 @@ const lockScreen = `
     </div>
 
     <div class="space-y-3 pt-2">
-      <a href="/login" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-sm shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2 cursor-pointer">
+      <a href="/login" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-black text-sm shadow-lg shadow-orange-500/20 transition flex items-center justify-center gap-2 cursor-pointer">
         <i class="fas fa-right-to-bracket"></i> এডমিন লগইন পেজে যান
       </a>
       <a href="/" class="block w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-bold transition">
@@ -58,7 +58,7 @@ ${renderAdminHeader()}
     <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 sm:p-6 space-y-4">
       <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 pb-4 border-b border-slate-100">
         <div>
-          <div class="inline-flex items-center gap-1 text-[11px] bg-emerald-100 text-emerald-800 font-bold px-2.5 py-0.5 rounded-full mb-1">
+          <div class="inline-flex items-center gap-1 text-[11px] bg-orange-100 text-orange-800 font-bold px-2.5 py-0.5 rounded-full mb-1">
             👥 ইউজার ও রোল গভর্ন্যান্স
           </div>
           <h2 class="text-xl font-black text-slate-900">ইউজার ম্যানেজমেন্ট ও প্রোটেক্টেড রোল কন্ট্রোল</h2>
@@ -66,7 +66,7 @@ ${renderAdminHeader()}
         </div>
 
         <div class="flex items-center gap-2 flex-wrap">
-          <input id="userSearch" oninput="debounceUserSearch()" placeholder="নাম / ফোন / কোড দিয়ে খুঁজুন..." class="border border-slate-300 rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-emerald-500 w-full sm:w-60">
+          <input id="userSearch" oninput="debounceUserSearch()" placeholder="নাম / ফোন / কোড দিয়ে খুঁজুন..." class="border border-slate-300 rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-orange-500 w-full sm:w-60">
           <select id="userRoleFilter" onchange="loadUsers()" class="border border-slate-300 rounded-xl px-3 py-2 text-xs bg-white">
             <option value="">সকল রোল</option>
             <option value="admin">👑 এডমিন</option>
@@ -225,12 +225,12 @@ ${renderAdminHeader()}
       <div class="space-y-5">
         <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 space-y-4">
           <h2 class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
-            <i class="fas fa-gift text-emerald-600"></i> সরাসরি প্ল্যান প্রদান (ম্যানুয়াল গ্রান্ট)
+            <i class="fas fa-gift text-orange-600"></i> সরাসরি প্ল্যান প্রদান (ম্যানুয়াল গ্রান্ট)
           </h2>
           <form id="grantForm" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             <label class="block text-slate-600 sm:col-span-2 font-semibold">
               ইউজার আইডি / ফোন নম্বর *
-              <input name="user_id" id="grantUserIdInput" type="text" placeholder="যেমন: 1, 2 বা 018..." required class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500">
+              <input name="user_id" id="grantUserIdInput" type="text" placeholder="যেমন: 1, 2 বা 018..." required class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-orange-500">
             </label>
             <label class="block text-slate-600 font-semibold">
               প্ল্যান
@@ -243,7 +243,7 @@ ${renderAdminHeader()}
               মেয়াদ (দিন)
               <input name="days" type="number" value="30" min="1" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs">
             </label>
-            <button class="sm:col-span-2 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-2.5 rounded-xl transition shadow">
+            <button class="sm:col-span-2 bg-orange-600 hover:bg-orange-500 text-white font-extrabold py-2.5 rounded-xl transition shadow">
               সরাসরি প্ল্যান দিন
             </button>
           </form>
@@ -267,7 +267,7 @@ ${renderAdminHeader()}
   <!-- ১৭. ফিচার টগল -->
   <section id="tab-features" class="tab-pane hidden">
     <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 max-w-2xl space-y-3">
-      <h2 class="font-extrabold text-slate-800 text-sm flex items-center gap-2"><i class="fas fa-toggle-on text-emerald-600"></i> প্ল্যাটফর্ম ফিচার অন/অফ</h2>
+      <h2 class="font-extrabold text-slate-800 text-sm flex items-center gap-2"><i class="fas fa-toggle-on text-orange-600"></i> প্ল্যাটফর্ম ফিচার অন/অফ</h2>
       <p class="text-xs text-slate-400">বন্ধ করলে সংশ্লিষ্ট মডিউল সাধারণ শিক্ষার্থীদের কাছে লুকানো থাকবে</p>
       <div id="featureList" class="divide-y divide-slate-100 text-xs"></div>
     </div>
@@ -281,13 +281,13 @@ ${renderAdminHeader()}
       <div class="pb-4 border-b border-slate-200">
         <div class="flex items-center justify-between gap-4 flex-wrap">
           <div>
-            <span class="text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">সেন্ট্রাল কন্ট্রোল আর্কিটেকচার</span>
+            <span class="text-xs font-bold text-orange-800 bg-orange-100 px-3 py-1 rounded-full">সেন্ট্রাল কন্ট্রোল আর্কিটেকচার</span>
             <h2 class="text-xl font-extrabold text-slate-900 mt-1 flex items-center gap-2">
-              <i class="fas fa-sliders text-emerald-600"></i> এডমিন মাস্টার কন্ট্রোল, ভিজিবিলিটি ও প্ল্যাটফর্ম সেটিংস
+              <i class="fas fa-sliders text-orange-600"></i> এডমিন মাস্টার কন্ট্রোল, ভিজিবিলিটি ও প্ল্যাটফর্ম সেটিংস
             </h2>
             <p class="text-xs text-slate-500 mt-0.5">মডিউল অন/অফ, পাবলিক ড্যাশবোর্ড কার্ড ফিল্টারিং, সোশ্যাল চ্যানেল লিংক ও পেমেন্ট রেট নিয়ন্ত্রণ করুন।</p>
           </div>
-          <button type="button" onclick="document.getElementById('ratesFormSubmitBtn').click()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold px-6 py-2 rounded-xl text-xs transition shadow flex items-center gap-1.5">
+          <button type="button" onclick="document.getElementById('ratesFormSubmitBtn').click()" class="bg-orange-600 hover:bg-orange-500 text-white font-extrabold px-6 py-2 rounded-xl text-xs transition shadow flex items-center gap-1.5">
             <i class="fas fa-check"></i> সেটিংস সংরক্ষণ করুন
           </button>
         </div>
@@ -306,44 +306,44 @@ ${renderAdminHeader()}
           <p class="text-[11px] text-slate-500">কোনো মডিউল অফ করলে পাবলিক ন্যাভবার, ড্যাশবোর্ড, ফ্লোটিং বাটন ও সংশ্লিষ্ট পেজ থেকে তা স্বয়ংক্রিয়ভাবে বন্ধ হয়ে যাবে।</p>
 
           <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
-            <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-emerald-300 transition">
+            <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-orange-300 transition">
               <div>
                 <p class="font-bold text-slate-900 text-xs">🛍️ এডুসব শপ</p>
                 <p class="text-[10px] text-slate-500">বই, গ্যাজেট ও কার্ট</p>
               </div>
-              <input type="checkbox" name="shop_enabled" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+              <input type="checkbox" name="shop_enabled" class="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 cursor-pointer">
             </label>
 
-            <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-emerald-300 transition">
+            <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-orange-300 transition">
               <div>
                 <p class="font-bold text-slate-900 text-xs">👨‍🏫 শিক্ষক সহায়তা</p>
                 <p class="text-[10px] text-slate-500">মেন্টর ডাউট সলভ</p>
               </div>
-              <input type="checkbox" name="teacher_support_enabled" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+              <input type="checkbox" name="teacher_support_enabled" class="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 cursor-pointer">
             </label>
 
-            <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-emerald-300 transition">
+            <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-orange-300 transition">
               <div>
                 <p class="font-bold text-slate-900 text-xs">🤝 আবেদন সেবা</p>
                 <p class="text-[10px] text-slate-500">অ্যাসিস্টেড অ্যাডমিশন/জব</p>
               </div>
-              <input type="checkbox" name="assisted_service_enabled" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+              <input type="checkbox" name="assisted_service_enabled" class="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 cursor-pointer">
             </label>
 
-            <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-emerald-300 transition">
+            <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-orange-300 transition">
               <div>
                 <p class="font-bold text-slate-900 text-xs">💳 ওয়ালেট রিচার্জ</p>
                 <p class="text-[10px] text-slate-500">অ্যাড মানি ও ব্যালেন্স</p>
               </div>
-              <input type="checkbox" name="wallet_recharge_enabled" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+              <input type="checkbox" name="wallet_recharge_enabled" class="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 cursor-pointer">
             </label>
 
-            <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-emerald-300 transition">
+            <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-orange-300 transition">
               <div>
                 <p class="font-bold text-slate-900 text-xs">⚡ বিকাশ অটো পেমেন্ট</p>
                 <p class="text-[10px] text-slate-500">টোকেনাইজড চেকআউট টপ-আপ</p>
               </div>
-              <input type="checkbox" name="bkash_auto_enabled" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+              <input type="checkbox" name="bkash_auto_enabled" class="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 cursor-pointer">
             </label>
           </div>
         </div>
@@ -352,10 +352,10 @@ ${renderAdminHeader()}
         <div class="p-4 bg-slate-50/80 border border-slate-200/90 rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <h3 class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2">
-              <i class="fas fa-users-rays text-teal-600"></i> ২. সোশ্যাল মিডিয়া ও অফিসিয়াল কমিউনিটি চ্যানেল
+              <i class="fas fa-users-rays text-amber-600"></i> ২. সোশ্যাল মিডিয়া ও অফিসিয়াল কমিউনিটি চ্যানেল
             </h3>
             <label class="inline-flex items-center gap-1.5 cursor-pointer text-[11px] font-bold text-slate-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200">
-              <input type="checkbox" name="card_social_hub" class="w-3.5 h-3.5 rounded text-teal-600">
+              <input type="checkbox" name="card_social_hub" class="w-3.5 h-3.5 rounded text-amber-600">
               <span>মাস্টার সোশ্যাল স্ট্রিপ সক্রিয়</span>
             </label>
           </div>
@@ -365,9 +365,9 @@ ${renderAdminHeader()}
             <!-- WhatsApp -->
             <div class="bg-white p-3 border border-slate-200 rounded-xl space-y-2">
               <div class="flex items-center justify-between">
-                <span class="font-bold text-emerald-700 flex items-center gap-1.5"><i class="fab fa-whatsapp text-emerald-500"></i> হোয়াটসঅ্যাপ গ্রুপ</span>
+                <span class="font-bold text-orange-700 flex items-center gap-1.5"><i class="fab fa-whatsapp text-orange-500"></i> হোয়াটসঅ্যাপ গ্রুপ</span>
                 <label class="inline-flex items-center gap-1 cursor-pointer text-[10px] font-semibold text-slate-600">
-                  <input type="checkbox" name="card_community_wa" class="w-3.5 h-3.5 rounded text-emerald-600"> অন
+                  <input type="checkbox" name="card_community_wa" class="w-3.5 h-3.5 rounded text-orange-600"> অন
                 </label>
               </div>
               <input name="whatsapp_group" placeholder="https://chat.whatsapp.com/..." class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs">
@@ -498,7 +498,7 @@ ${renderAdminHeader()}
         <div class="p-4 bg-slate-50/80 border border-slate-200/90 rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <h3 class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2">
-              <i class="fas fa-bangladeshi-taka-sign text-emerald-600"></i> ৪. পেমেন্ট নম্বর, ডেলিভারি ও বোনাস রেট
+              <i class="fas fa-bangladeshi-taka-sign text-orange-600"></i> ৪. পেমেন্ট নম্বর, ডেলিভারি ও বোনাস রেট
             </h3>
             <span class="text-[10px] text-slate-500">আর্থিক কনফিগারেশন</span>
           </div>
@@ -529,16 +529,16 @@ ${renderAdminHeader()}
         </div>
 
         <!-- ৫. সিস্টেম কন্ট্রোল আর্কিটেকচার ম্যাট্রিক্স (Structural Responsibilities) -->
-        <div class="p-4 bg-emerald-50/50 border border-emerald-200/80 rounded-2xl space-y-3">
+        <div class="p-4 bg-orange-50/50 border border-orange-200/80 rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
-            <h3 class="font-extrabold text-emerald-900 text-xs sm:text-sm flex items-center gap-2">
-              <i class="fas fa-sitemap text-emerald-600"></i> ৫. EduSob কন্ট্রোল দায়িত্ব বণ্টন ম্যাট্রিক্স (Responsibility Matrix)
+            <h3 class="font-extrabold text-orange-900 text-xs sm:text-sm flex items-center gap-2">
+              <i class="fas fa-sitemap text-orange-600"></i> ৫. EduSob কন্ট্রোল দায়িত্ব বণ্টন ম্যাট্রিক্স (Responsibility Matrix)
             </h3>
-            <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">সিস্টেম ব্লুপ্রিন্ট</span>
+            <span class="text-[10px] bg-orange-100 text-orange-800 font-bold px-2 py-0.5 rounded-full">সিস্টেম ব্লুপ্রিন্ট</span>
           </div>
           <div class="grid md:grid-cols-3 gap-3 text-[11px] text-slate-700">
-            <div class="p-3 bg-white rounded-xl border border-emerald-100 space-y-1">
-              <p class="font-bold text-emerald-800 flex items-center gap-1.5"><i class="fas fa-user-shield text-emerald-600"></i> এডমিন কন্ট্রোল (Manual Policy)</p>
+            <div class="p-3 bg-white rounded-xl border border-orange-100 space-y-1">
+              <p class="font-bold text-orange-800 flex items-center gap-1.5"><i class="fas fa-user-shield text-orange-600"></i> এডমিন কন্ট্রোল (Manual Policy)</p>
               <ul class="list-disc list-inside text-[10px] space-y-0.5 text-slate-600">
                 <li>শপ ও শিক্ষক মডিউল অন/অফ</li>
                 <li>সোশ্যাল লিংক ও কার্ড ভিজিবিলিটি</li>
@@ -572,7 +572,7 @@ ${renderAdminHeader()}
 
         <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
           <span class="text-[11px] text-slate-500">যেকোনো পরিবর্তন সাথে সাথে পাবলিক সাইট ও ড্যাশবোর্ডে প্রযোজ্য হবে।</span>
-          <button id="ratesFormSubmitBtn" type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold px-6 py-2.5 rounded-xl text-xs transition shadow flex items-center gap-1.5">
+          <button id="ratesFormSubmitBtn" type="submit" class="bg-orange-600 hover:bg-orange-500 text-white font-extrabold px-6 py-2.5 rounded-xl text-xs transition shadow flex items-center gap-1.5">
             <i class="fas fa-check"></i> সেটিংস সংরক্ষণ করুন
           </button>
         </div>
@@ -626,10 +626,10 @@ ${renderSecurityModals()}
       </div>
       <div class="flex items-center gap-4 py-1">
         <label class="inline-flex items-center gap-1.5 cursor-pointer font-semibold">
-          <input type="checkbox" name="is_online" id="tf_online" checked class="w-4 h-4 rounded text-emerald-600"> 🟢 সরাসরি অনলাইন আছেন
+          <input type="checkbox" name="is_online" id="tf_online" checked class="w-4 h-4 rounded text-orange-600"> 🟢 সরাসরি অনলাইন আছেন
         </label>
         <label class="inline-flex items-center gap-1.5 cursor-pointer font-semibold">
-          <input type="checkbox" name="is_active" id="tf_active" checked class="w-4 h-4 rounded text-emerald-600"> ✓ সক্রিয় প্রোফাইল
+          <input type="checkbox" name="is_active" id="tf_active" checked class="w-4 h-4 rounded text-orange-600"> ✓ সক্রিয় প্রোফাইল
         </label>
       </div>
       <div class="flex gap-2 pt-2 border-t border-slate-100">
@@ -672,8 +672,8 @@ var CATEGORIES_DATA = ${JSON.stringify(ADMIN_CATEGORIES)};
 // টোস্ট
 function toastMsg(msg){
   var el = document.createElement('div');
-  el.className = 'fixed bottom-5 right-5 z-50 bg-slate-900 text-white border border-emerald-400/40 text-xs font-bold px-4 py-2.5 rounded-xl shadow-2xl transition transform translate-y-2 opacity-0 flex items-center gap-2';
-  el.innerHTML = '<span class="text-emerald-400">✓</span> ' + msg;
+  el.className = 'fixed bottom-5 right-5 z-50 bg-slate-900 text-white border border-orange-400/40 text-xs font-bold px-4 py-2.5 rounded-xl shadow-2xl transition transform translate-y-2 opacity-0 flex items-center gap-2';
+  el.innerHTML = '<span class="text-orange-400">✓</span> ' + msg;
   document.body.appendChild(el);
   requestAnimationFrame(function(){ el.classList.remove('translate-y-2','opacity-0'); });
   setTimeout(function(){ el.classList.add('translate-y-2','opacity-0'); setTimeout(function(){ el.remove(); }, 300); }, 3000);
@@ -708,7 +708,7 @@ function switchAdminCategory(catId, targetTabId){
   });
   var activeBtn = document.getElementById('btn-' + catId);
   if(activeBtn) {
-    activeBtn.className = 'admin-cat-btn px-3.5 py-2 rounded-t-xl font-bold whitespace-nowrap transition flex items-center gap-1.5 bg-slate-800 text-emerald-400 border-t-2 border-emerald-400';
+    activeBtn.className = 'admin-cat-btn px-3.5 py-2 rounded-t-xl font-bold whitespace-nowrap transition flex items-center gap-1.5 bg-slate-800 text-orange-400 border-t-2 border-orange-400';
   }
 
   var cat = CATEGORIES_DATA.find(function(c){ return c.id === catId; }) || CATEGORIES_DATA[0];
@@ -717,7 +717,7 @@ function switchAdminCategory(catId, targetTabId){
     chipsBox.innerHTML = cat.tabs.map(function(t){
       return '<button onclick="switchAdminTab(\\''+t.id+'\\')" id="chip-'+t.id+'" class="admin-chip px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition flex items-center gap-1.5 text-slate-300 hover:bg-slate-800">'+
         '<i class="fas '+t.icon+' text-[11px]"></i><span>'+t.label+'</span>'+
-        (t.badge ? ' <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded-full font-bold">'+t.badge+'</span>' : '')+
+        (t.badge ? ' <span class="text-[9px] bg-orange-500/20 text-orange-300 px-1.5 py-0.5 rounded-full font-bold">'+t.badge+'</span>' : '')+
       '</button>';
     }).join('');
   }
@@ -737,7 +737,7 @@ function switchAdminTab(tabId){
   });
   var activeChip = document.getElementById('chip-' + tabId);
   if(activeChip){
-    activeChip.className = 'admin-chip px-3 py-1.5 rounded-xl font-extrabold whitespace-nowrap transition flex items-center gap-1.5 bg-emerald-500 text-slate-950 shadow-md';
+    activeChip.className = 'admin-chip px-3 py-1.5 rounded-xl font-extrabold whitespace-nowrap transition flex items-center gap-1.5 bg-orange-500 text-slate-950 shadow-md';
   }
 
   // ট্যাব অনুযায়ী স্পেসিফিক লোডার কল
@@ -858,7 +858,7 @@ async function loadStats(){
       items.push({
         time: a.created_at || 'কিছুক্ষণ আগে',
         icon: 'fa-shield',
-        color: 'text-emerald-600 bg-emerald-50',
+        color: 'text-orange-600 bg-orange-50',
         text: '<b>' + esc(a.admin_name||'এডমিন') + '</b>: ' + esc(a.details||a.action)
       });
     });
@@ -912,11 +912,11 @@ async function loadUsers(){
     return '<tr class="hover:bg-slate-50 transition border-b border-slate-100">'+
       '<td class="py-2.5 px-3"><b>'+esc(u.name_bn||'শিক্ষার্থী')+'</b><div class="text-[10px] text-slate-400">'+esc(u.user_code)+'</div></td>'+
       '<td class="py-2.5 px-3 font-mono">'+esc(u.phone)+'</td>'+
-      '<td class="py-2.5 px-3 font-bold '+(u.balance>0?'text-emerald-600':'text-slate-500')+'">'+tk(u.balance)+'</td>'+
+      '<td class="py-2.5 px-3 font-bold '+(u.balance>0?'text-orange-600':'text-slate-500')+'">'+tk(u.balance)+'</td>'+
       '<td class="py-2.5 px-3 text-slate-500">'+toBn(u.referrals||0)+' জন</td>'+
       '<td class="py-2.5 px-3 text-center">'+roleBadge+'</td>'+
       '<td class="py-2.5 px-3 text-center">'+
-        '<button onclick="confirmUserStatus('+u.id+', \\''+u.status+'\\')" class="text-[10px] font-bold px-2 py-1 rounded-lg '+(isSuspended?'bg-rose-100 text-rose-700':'bg-emerald-100 text-emerald-700')+' hover:opacity-80">'+
+        '<button onclick="confirmUserStatus('+u.id+', \\''+u.status+'\\')" class="text-[10px] font-bold px-2 py-1 rounded-lg '+(isSuspended?'bg-rose-100 text-rose-700':'bg-orange-100 text-orange-700')+' hover:opacity-80">'+
           (isSuspended ? '⛔ স্থগিত' : '✓ সক্রিয়')+
         '</button>'+
       '</td>'+
@@ -924,7 +924,7 @@ async function loadUsers(){
         '<div class="flex items-center justify-end gap-1">'+
           '<button onclick="openRoleModalById('+u.id+', \\''+esc(u.name_bn||'')+'\\', \\''+esc(u.phone)+'\\', \\''+u.role+'\\')" class="text-[10px] px-2 py-1 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 rounded-lg font-bold" title="রোল পরিবর্তন"><i class="fas fa-shield-halved"></i> রোল</button>'+
           '<button onclick="openPasswordModal('+u.id+', \\''+esc(u.name_bn||'')+'\\', \\''+esc(u.phone)+'\\')" class="text-[10px] px-2 py-1 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 rounded-lg font-bold" title="পাসওয়ার্ড রিসেট"><i class="fas fa-key"></i></button>'+
-          '<button onclick="openWalletModal('+u.id+', \\''+esc(u.name_bn||'')+'\\', '+u.balance+')" class="text-[10px] px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-lg font-bold" title="ব্যালেন্স"><i class="fas fa-wallet"></i> +/-</button>'+
+          '<button onclick="openWalletModal('+u.id+', \\''+esc(u.name_bn||'')+'\\', '+u.balance+')" class="text-[10px] px-2 py-1 bg-orange-50 hover:bg-orange-100 text-orange-800 border border-orange-200 rounded-lg font-bold" title="ব্যালেন্স"><i class="fas fa-wallet"></i> +/-</button>'+
           '<button onclick="grantPlanForUser(\\''+esc(u.phone)+'\\')" class="text-[10px] px-2 py-1 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 rounded-lg font-bold" title="প্ল্যান দিন">👑 প্ল্যান</button>'+
         '</div>'+
       '</td>'+
@@ -1084,15 +1084,15 @@ async function loadSyncSources(){
       '<td class="py-3 px-3"><span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono text-[10px]">'+esc(s.category)+'</span></td>'+
       '<td class="py-3 px-3 text-slate-500">'+esc(s.last_synced_at || 'এখনো সিঙ্ক হয়নি')+'</td>'+
       '<td class="py-3 px-3 text-center font-bold text-slate-800">'+toBn(s.total_fetched || 0)+'</td>'+
-      '<td class="py-3 px-3 text-center font-bold text-emerald-600">+'+toBn(s.new_added || 0)+'</td>'+
+      '<td class="py-3 px-3 text-center font-bold text-orange-600">+'+toBn(s.new_added || 0)+'</td>'+
       '<td class="py-3 px-3 text-center text-slate-400">'+toBn(s.duplicates_count || 0)+'</td>'+
       '<td class="py-3 px-3 text-center">'+
-        '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold '+(isLive?'bg-emerald-100 text-emerald-800':'bg-amber-100 text-amber-800')+'">'+
+        '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold '+(isLive?'bg-orange-100 text-orange-800':'bg-amber-100 text-amber-800')+'">'+
           (isLive ? '🟢 সক্রিয়' : 'অপেক্ষমান')+
         '</span>'+
       '</td>'+
       '<td class="py-3 px-3 text-right">'+
-        '<button onclick="triggerForceSync(\\''+s.key+'\\')" class="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-extrabold text-[10px] transition shadow flex items-center gap-1 ml-auto">'+
+        '<button onclick="triggerForceSync(\\''+s.key+'\\')" class="px-2.5 py-1.5 bg-orange-600 hover:bg-orange-500 text-white rounded-xl font-extrabold text-[10px] transition shadow flex items-center gap-1 ml-auto">'+
           '<i class="fas fa-bolt"></i> ফোর্স সিঙ্ক'+
         '</button>'+
       '</td>'+
@@ -1130,7 +1130,7 @@ async function triggerForceSync(sourceKey){
     toastMsg(res.message || 'সিঙ্ক সম্পন্ন হয়েছে ✓');
     if(logBox && res.diagnostics){
       var d = res.diagnostics;
-      logBox.innerHTML += '<p class="text-emerald-400">✅ ['+new Date().toLocaleTimeString('bn-BD')+'] ' + res.message + '</p>';
+      logBox.innerHTML += '<p class="text-orange-400">✅ ['+new Date().toLocaleTimeString('bn-BD')+'] ' + res.message + '</p>';
       logBox.innerHTML += '<p class="text-slate-300">» স্ক্যানকৃত: '+toBn(d.total_scanned)+' | নতুন যুক্ত: +'+toBn(d.new_added)+' | ফিল্টার্ড: '+toBn(d.duplicates_prevented)+' ('+toBn(d.duration_ms)+'ms)</p>';
       logBox.scrollTop = logBox.scrollHeight;
     }
@@ -1152,11 +1152,11 @@ async function loadSyncLogs(){
       '<td class="py-2 px-3 text-slate-400">'+esc(l.created_at)+'</td>'+
       '<td class="py-2 px-3 font-semibold text-slate-800">'+esc(l.source_name)+'</td>'+
       '<td class="py-2 px-3 text-center">'+
-        '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold '+(isSuccess?'bg-emerald-100 text-emerald-800':'bg-rose-100 text-rose-800')+'">'+
+        '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold '+(isSuccess?'bg-orange-100 text-orange-800':'bg-rose-100 text-rose-800')+'">'+
           (isSuccess ? '✓ সফল' : '✕ ত্রুটি')+
         '</span>'+
       '</td>'+
-      '<td class="py-2 px-3 text-center font-bold text-emerald-600">+'+toBn(l.new_count||0)+'</td>'+
+      '<td class="py-2 px-3 text-center font-bold text-orange-600">+'+toBn(l.new_count||0)+'</td>'+
       '<td class="py-2 px-3 text-center text-slate-400">'+toBn(l.duration_ms||0)+'ms</td>'+
       '<td class="py-2 px-3 text-slate-500">'+esc(l.triggered_by||'এডমিন')+'</td>'+
     '</tr>';
@@ -1277,7 +1277,7 @@ async function loadMentorOverview(){
       payBox.innerHTML = d.payouts.map(function(p){
         return '<div class="py-2.5 px-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">'+
           '<div><p class="font-bold text-slate-900">'+esc(p.mentor_name)+'</p><p class="text-[10px] text-slate-400">'+esc(p.note)+' • '+esc(p.created_at)+'</p></div>'+
-          '<div class="text-right font-bold text-emerald-600 text-sm">'+tk(p.amount)+'</div>'+
+          '<div class="text-right font-bold text-orange-600 text-sm">'+tk(p.amount)+'</div>'+
         '</div>';
       }).join('');
     }
@@ -1332,7 +1332,7 @@ async function loadAssistedApps(status){
   }
 
   box.innerHTML = ASSISTED_CACHE.map(function(r){
-    var stColor = r.status === 'requested' ? 'bg-amber-100 text-amber-800' : (r.status === 'paid' ? 'bg-sky-100 text-sky-800' : (r.status === 'processing' ? 'bg-purple-100 text-purple-800' : 'bg-emerald-100 text-emerald-800'));
+    var stColor = r.status === 'requested' ? 'bg-amber-100 text-amber-800' : (r.status === 'paid' ? 'bg-sky-100 text-sky-800' : (r.status === 'processing' ? 'bg-purple-100 text-purple-800' : 'bg-orange-100 text-orange-800'));
     var stName = r.status === 'requested' ? '⌛ নতুন অনুরোধ' : (r.status === 'paid' ? '💳 ফি পরিশোধিত' : (r.status === 'processing' ? '🔄 প্রসেসিং চলছে' : '✓ সম্পন্ন'));
 
     return '<div class="border border-slate-200 rounded-2xl p-4 bg-white hover:border-sky-400 transition space-y-3">'+
@@ -1524,7 +1524,7 @@ function renderCrud(t){
       '<form id="form-'+t+'" class="space-y-3">'+formInputs+
         '<div class="flex gap-2 pt-2">'+
           '<button type="button" onclick="toggleManualCrudForm(\\''+t+'\\')" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 rounded-xl text-xs">বাতিল</button>'+
-          '<button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-2 rounded-xl text-xs transition shadow">সংরক্ষণ করুন</button>'+
+          '<button type="submit" class="flex-1 bg-orange-600 hover:bg-orange-500 text-white font-extrabold py-2 rounded-xl text-xs transition shadow">সংরক্ষণ করুন</button>'+
         '</div>'+
       '</form>'+
     '</div>'+
@@ -1602,14 +1602,14 @@ function renderFilteredCrudList(t) {
       '<div class="min-w-0 flex-1">' +
         cfg.row(it) +
         '<div class="flex items-center gap-2 mt-1.5 flex-wrap">' +
-          '<span class="text-[10px] px-2 py-0.5 rounded-full font-bold ' + (isLive ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800') + '">' +
+          '<span class="text-[10px] px-2 py-0.5 rounded-full font-bold ' + (isLive ? 'bg-orange-100 text-orange-800' : 'bg-amber-100 text-amber-800') + '">' +
             (isLive ? '🟢 লাইভ ও অনুমোদিত' : '🟡 অপেক্ষমান যাচাই') +
           '</span>' +
           (srcUrl ? '<a href="' + esc(srcUrl) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[10px] text-sky-600 hover:text-sky-800 hover:underline font-medium"><i class="fas fa-external-link-alt text-[9px]"></i>সোর্স যাচাই ↗</a>' : '') +
         '</div>' +
       '</div>' +
       '<div class="flex items-center gap-1.5 shrink-0">' +
-        '<button onclick="toggleContentStatus(\\'' + t + '\\', ' + it.id + ', ' + (isLive ? 0 : 1) + ')" class="text-[10px] font-bold px-2.5 py-1 rounded-lg transition-colors ' + (isLive ? 'bg-slate-100 text-slate-700 hover:bg-amber-100 hover:text-amber-800' : 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm') + '">' +
+        '<button onclick="toggleContentStatus(\\'' + t + '\\', ' + it.id + ', ' + (isLive ? 0 : 1) + ')" class="text-[10px] font-bold px-2.5 py-1 rounded-lg transition-colors ' + (isLive ? 'bg-slate-100 text-slate-700 hover:bg-amber-100 hover:text-amber-800' : 'bg-orange-600 text-white hover:bg-orange-700 shadow-sm') + '">' +
           (isLive ? 'হাইড' : '✓ পাবলিশ') +
         '</button>' +
         '<button onclick="deleteCrudItem(\\'' + t + '\\', ' + it.id + ')" class="text-[10px] font-bold px-2 py-1 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-100">মুছুন</button>' +
@@ -1677,7 +1677,7 @@ async function loadSubsTab(){
   var s = await api('get', '/api/subs/admin/subscribers');
   if(s && s.subscribers){
     document.getElementById('subsList').innerHTML = (s.subscribers||[]).map(function(x){
-      return '<div class="py-2 flex items-center justify-between"><span><b>'+esc(x.name_bn)+'</b> ('+esc(x.phone)+')</span><span class="font-bold text-emerald-600">'+esc(x.plan_slug)+'</span></div>';
+      return '<div class="py-2 flex items-center justify-between"><span><b>'+esc(x.name_bn)+'</b> ('+esc(x.phone)+')</span><span class="font-bold text-orange-600">'+esc(x.plan_slug)+'</span></div>';
     }).join('') || '<p class="text-slate-400 py-3">কোনো সাবস্ক্রাইবার নেই</p>';
   }
 }
@@ -1698,7 +1698,7 @@ async function loadFeatures(){
   if(!d) return;
   document.getElementById('featureList').innerHTML = (d.features||[]).map(function(f){
     return '<div class="py-3 flex items-center justify-between gap-3"><div><p class="font-bold">'+esc(f.name_bn)+'</p><p class="text-[10px] text-slate-400">'+esc(f.key)+'</p></div>'+
-      '<button onclick="toggleFeature(\\''+f.key+'\\','+(f.is_enabled?0:1)+')" class="px-3 py-1 rounded-full text-[10px] font-bold '+(f.is_enabled?'bg-emerald-100 text-emerald-800':'bg-slate-200 text-slate-500')+'">'+(f.is_enabled?'✓ চালু':'✕ বন্ধ')+'</button></div>';
+      '<button onclick="toggleFeature(\\''+f.key+'\\','+(f.is_enabled?0:1)+')" class="px-3 py-1 rounded-full text-[10px] font-bold '+(f.is_enabled?'bg-orange-100 text-orange-800':'bg-slate-200 text-slate-500')+'">'+(f.is_enabled?'✓ চালু':'✕ বন্ধ')+'</button></div>';
   }).join('');
 }
 async function toggleFeature(key, v){
@@ -1759,7 +1759,7 @@ async function loadAdminTeachers(){
       '<p class="text-[11px] text-slate-600">বিষয়: <b>'+esc(t.subject)+'</b> • স্তর: '+esc(t.education_level||'all')+'</p>'+
       '<div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-100">'+
         '<span>⭐ '+toBn(t.rating||4.9)+' • '+esc(t.response_time||'১৫ মিনিট')+'</span>'+
-        '<span class="font-bold '+(isOnline?'text-emerald-600':'text-slate-400')+'">'+(isOnline?'🟢 সরাসরি অনলাইন':'অফলাইন')+'</span>'+
+        '<span class="font-bold '+(isOnline?'text-orange-600':'text-slate-400')+'">'+(isOnline?'🟢 সরাসরি অনলাইন':'অফলাইন')+'</span>'+
       '</div>'+
     '</div>';
   }).join('') || '<div class="col-span-full py-8 text-center text-slate-400">কোনো শিক্ষক পাওয়া যায়নি</div>';
@@ -1776,7 +1776,7 @@ async function loadTeacherTickets(status){
     return '<div class="border border-slate-200 rounded-2xl p-4 bg-white space-y-2 shadow-sm">'+
       '<div class="flex items-center justify-between">'+
         '<span class="font-bold text-slate-900 text-xs">টিকেট #'+esc(tk.ticket_code)+' • '+esc(tk.subject)+' ('+esc(tk.topic||'সাধারণ')+')</span>'+
-        '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full '+(tk.status==='pending'?'bg-amber-100 text-amber-800':'bg-emerald-100 text-emerald-800')+'">'+(tk.status==='pending'?'অপেক্ষমান':'সমাধান')+
+        '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full '+(tk.status==='pending'?'bg-amber-100 text-amber-800':'bg-orange-100 text-orange-800')+'">'+(tk.status==='pending'?'অপেক্ষমান':'সমাধান')+
       '</span></div>'+
       '<p class="text-xs text-slate-700 bg-slate-50 p-2 rounded-xl"><b>প্রশ্ন:</b> '+esc(tk.question)+'</p>'+
       '<div class="flex items-center justify-between text-[11px] pt-1">'+
@@ -1877,7 +1877,7 @@ async function triggerAutoCollection(type){
       var resNow = new Date().toLocaleTimeString('bn-BD');
       if(timeSpan) timeSpan.textContent = 'সম্পন্ন ✓ ' + resNow;
       if(logBox){
-        logBox.innerHTML += '<p class="text-emerald-400 font-bold">✅ ['+resNow+'] ' + (res.message || 'কালেকশন সফলভাবে সম্পন্ন হয়েছে') + '</p>';
+        logBox.innerHTML += '<p class="text-orange-400 font-bold">✅ ['+resNow+'] ' + (res.message || 'কালেকশন সফলভাবে সম্পন্ন হয়েছে') + '</p>';
         var c = res.collected || res.counts || {};
         logBox.innerHTML += '<p class="text-slate-200 font-semibold">» লাইভ ডাটাবেজ কন্টেন্ট: স্কলারশিপ ('+toBn(c.scholarships||0)+'টি), প্রশ্নপত্র ('+toBn(c.question_papers||c.qpapers||0)+'টি), সিলেবাস ('+toBn(c.syllabus||0)+'টি), MCQ ('+toBn(c.mcq||0)+'টি), চাকরি ('+toBn(c.jobs||8)+'টি), ভর্তি ('+toBn(c.admissions||3)+'টি)</p>';
         if(res.total_active || res.scanned){

@@ -33,7 +33,7 @@ const shopHelpersJs = `
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function toBn(n){var d={'0':'০','1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯'};return String(n).replace(/[0-9]/g,function(x){return d[x]})}
 function tk(n){return '৳'+toBn(Number(n).toLocaleString('en-US'))}
-function toastMsg(m,ok){var t=document.createElement('div');t.className='fixed top-4 left-1/2 -translate-x-1/2 z-[70] px-5 py-3 rounded-xl text-white font-semibold shadow-2xl '+(ok?'bg-emerald-600':'bg-red-600');t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},3500)}
+function toastMsg(m,ok){var t=document.createElement('div');t.className='fixed top-4 left-1/2 -translate-x-1/2 z-[70] px-5 py-3 rounded-xl text-white font-semibold shadow-2xl '+(ok?'bg-orange-600':'bg-red-600');t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},3500)}
 `
 
 // ============ শপ পেজ (গেস্ট ব্রাউজ + কার্ট + চেকআউট) ============
@@ -262,10 +262,10 @@ export function walletPage(loggedIn: boolean): string {
 ${shopHeader('wallet', loggedIn)}
 <main class="max-w-3xl mx-auto px-4 py-8 space-y-6">
   <div id="pay-banner" class="hidden rounded-2xl px-5 py-4 text-sm font-bold"></div>
-  <section id="wallet-balance-card" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-2xl p-6 shadow-xl">
-    <p class="text-emerald-100 text-sm">আপনার ওয়ালেট ব্যালেন্স</p>
+  <section id="wallet-balance-card" class="bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-2xl p-6 shadow-xl">
+    <p class="text-orange-100 text-sm">আপনার ওয়ালেট ব্যালেন্স</p>
     <p id="w-balance" class="text-4xl font-bold mt-1">—</p>
-    <p class="text-emerald-100 text-xs mt-2">💡 বিকাশ/নগদে টাকা পাঠিয়ে নিচের ফর্মে জমা দিন — এডমিন অ্যাপ্রুভ করলেই ব্যালেন্স যোগ হবে</p>
+    <p class="text-orange-100 text-xs mt-2">💡 বিকাশ/নগদে টাকা পাঠিয়ে নিচের ফর্মে জমা দিন — এডমিন অ্যাপ্রুভ করলেই ব্যালেন্স যোগ হবে</p>
   </section>
 
   <section id="auto-topup-section" class="hidden bg-gradient-to-br from-pink-600 to-rose-600 text-white rounded-2xl p-6 shadow-xl">
@@ -293,30 +293,30 @@ ${shopHeader('wallet', loggedIn)}
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="text-sm font-semibold text-slate-600">মাধ্যম *</label>
-          <select id="tp-method" class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-emerald-400">
+          <select id="tp-method" class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-orange-400">
             <option value="bkash">বিকাশ</option><option value="nagad">নগদ</option>
           </select>
         </div>
         <div>
           <label class="text-sm font-semibold text-slate-600">পরিমাণ (টাকা) *</label>
-          <input id="tp-amount" type="number" min="10" max="50000" required class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-emerald-400" placeholder="৫০০">
+          <input id="tp-amount" type="number" min="10" max="50000" required class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-orange-400" placeholder="৫০০">
         </div>
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="text-sm font-semibold text-slate-600">যে নম্বর থেকে পাঠিয়েছেন *</label>
-          <input id="tp-sender" required maxlength="11" class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-emerald-400" placeholder="01XXXXXXXXX">
+          <input id="tp-sender" required maxlength="11" class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-orange-400" placeholder="01XXXXXXXXX">
         </div>
         <div>
           <label class="text-sm font-semibold text-slate-600">ট্রানজেকশন আইডি (TrxID) *</label>
-          <input id="tp-trx" required maxlength="40" class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-emerald-400" placeholder="9AB7XXXX">
+          <input id="tp-trx" required maxlength="40" class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-orange-400" placeholder="9AB7XXXX">
         </div>
       </div>
       <div>
         <label class="text-sm font-semibold text-slate-600">স্ক্রিনশট (ঐচ্ছিক)</label>
-        <input id="tp-ss" type="file" accept="image/*" class="w-full mt-1 text-sm text-slate-500 file:mr-3 file:px-4 file:py-2 file:rounded-xl file:border-0 file:bg-emerald-100 file:text-emerald-700 file:font-semibold">
+        <input id="tp-ss" type="file" accept="image/*" class="w-full mt-1 text-sm text-slate-500 file:mr-3 file:px-4 file:py-2 file:rounded-xl file:border-0 file:bg-orange-100 file:text-orange-700 file:font-semibold">
       </div>
-      <button id="tp-submit" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 rounded-xl hover:opacity-90 transition">জমা দিন ✓</button>
+      <button id="tp-submit" class="w-full bg-gradient-to-r from-orange-600 to-amber-600 text-white font-bold py-3 rounded-xl hover:opacity-90 transition">জমা দিন ✓</button>
     </form>
   </section>
 
@@ -377,7 +377,7 @@ function loadAll(){
     document.getElementById('w-balance').textContent=tk(r.data.balance||0);
     var tx=r.data.transactions||[];
     document.getElementById('tx-list').innerHTML=tx.length?tx.map(function(t){
-      return '<div class="flex justify-between items-center bg-slate-50 rounded-xl px-4 py-2.5"><span>'+(TX_BN[t.type]||t.type)+(t.note?' <span class="text-slate-400 text-xs">— '+esc(t.note)+'</span>':'')+'</span><b class="'+(t.amount>=0?'text-emerald-600':'text-red-500')+'">'+(t.amount>=0?'+':'')+tk(Math.abs(t.amount))+'</b></div>'
+      return '<div class="flex justify-between items-center bg-slate-50 rounded-xl px-4 py-2.5"><span>'+(TX_BN[t.type]||t.type)+(t.note?' <span class="text-slate-400 text-xs">— '+esc(t.note)+'</span>':'')+'</span><b class="'+(t.amount>=0?'text-orange-600':'text-red-500')+'">'+(t.amount>=0?'+':'')+tk(Math.abs(t.amount))+'</b></div>'
     }).join(''):'<p class="text-slate-400 text-center py-4">কোনো লেনদেন নেই</p>'
   });
   axios.get('/api/shop/payments/mine').then(function(r){
@@ -425,7 +425,7 @@ function startAutoTopup(){
   var b=document.getElementById('pay-banner');
   b.classList.remove('hidden');
   if(pay==='success'){
-    b.className='rounded-2xl px-5 py-4 text-sm font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
+    b.className='rounded-2xl px-5 py-4 text-sm font-bold bg-orange-100 text-orange-800 border border-orange-300';
     b.textContent='✅ অভিনন্দন! ৳'+toBn(q.get('amount')||'')+' সফলভাবে আপনার ওয়ালেটে যোগ হয়েছে।';
   }else{
     b.className='rounded-2xl px-5 py-4 text-sm font-bold bg-red-100 text-red-700 border border-red-300';
@@ -575,7 +575,7 @@ function prodForm(p){
       '<label class="flex items-center gap-1.5"><input id="pf-sb" type="checkbox"'+(p.is_signboard?' checked':'')+'> 🪧 সাইনবোর্ড পপ-আপ (সর্বোচ্চ ৫)</label>'+
     '</div>'+
     '<div class="md:col-span-2 flex gap-2">'+
-      '<button class="bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl">'+(p.id?'আপডেট ✓':'যোগ করুন +')+'</button>'+
+      '<button class="bg-orange-600 text-white font-bold px-5 py-2.5 rounded-xl">'+(p.id?'আপডেট ✓':'যোগ করুন +')+'</button>'+
       (p.id?'<button type="button" onclick="load()" class="bg-slate-200 px-5 py-2.5 rounded-xl font-semibold">বাতিল</button>':'')+
     '</div></form>'
 }
@@ -657,7 +657,7 @@ function renderPayments(list){
   }).join(' ');
   var body=list.length?list.map(function(p){
     var ss=p.screenshot_data?'<img src="'+p.screenshot_data+'" class="mt-2 max-h-48 rounded-lg border cursor-pointer" onclick="window.open(this.src)" alt="স্ক্রিনশট">':'<p class="text-xs text-slate-400 mt-1">স্ক্রিনশট নেই</p>';
-    var acts=p.status==='pending'?'<div class="flex gap-2 mt-2"><button onclick="approvePay('+p.id+')" class="bg-emerald-600 text-white text-xs font-bold px-4 py-1.5 rounded-lg">✓ অ্যাপ্রুভ</button><button onclick="rejectPay('+p.id+')" class="bg-red-500 text-white text-xs font-bold px-4 py-1.5 rounded-lg">✗ বাতিল</button></div>':'';
+    var acts=p.status==='pending'?'<div class="flex gap-2 mt-2"><button onclick="approvePay('+p.id+')" class="bg-orange-600 text-white text-xs font-bold px-4 py-1.5 rounded-lg">✓ অ্যাপ্রুভ</button><button onclick="rejectPay('+p.id+')" class="bg-red-500 text-white text-xs font-bold px-4 py-1.5 rounded-lg">✗ বাতিল</button></div>':'';
     return '<div class="bg-white border rounded-xl p-4 text-sm"><div class="flex justify-between"><b>'+(p.method==='bkash'?'বিকাশ':'নগদ')+' — '+tk(p.amount)+'</b><span class="text-xs">'+esc(p.created_at||'')+'</span></div>'+
       '<p class="text-xs mt-1">ইউজার: '+esc(p.user_name)+' ('+toBn(p.user_phone)+') • প্রেরক: '+toBn(p.sender_number)+' • TrxID: <b>'+esc(p.trx_id)+'</b></p>'+ss+acts+'</div>'
   }).join(''):'<p class="text-center text-slate-400 py-10">কিছু নেই</p>';
@@ -702,7 +702,7 @@ function renderSettings(s){
     '<div><label class="font-semibold text-slate-600">নগদ নম্বর (পার্সোনাল)</label><input id="st-nagad" maxlength="11" value="'+esc(s.nagad_number||'')+'" placeholder="01XXXXXXXXX" class="w-full mt-1 border rounded-xl px-3 py-2.5"></div>'+
     '<div><label class="font-semibold text-slate-600">হোয়াটসঅ্যাপ নম্বর</label><input id="st-wa" maxlength="11" value="'+esc(s.whatsapp_number||'')+'" placeholder="01XXXXXXXXX" class="w-full mt-1 border rounded-xl px-3 py-2.5"></div>'+
     '<div><label class="font-semibold text-slate-600">COD ডেলিভারি চার্জ (টাকা)</label><input id="st-cod" type="number" min="0" value="'+esc(s.cod_charge||'0')+'" class="w-full mt-1 border rounded-xl px-3 py-2.5"></div>'+
-    '<button class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl">সেভ করুন ✓</button></form>'
+    '<button class="w-full bg-orange-600 text-white font-bold py-3 rounded-xl">সেভ করুন ✓</button></form>'
 }
 
 function load(){

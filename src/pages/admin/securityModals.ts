@@ -61,7 +61,7 @@ export function renderSecurityModals(): string {
 
       <div class="flex gap-2 pt-2 border-t border-slate-100">
         <button type="button" onclick="closeRoleModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 font-bold py-2.5 rounded-xl transition text-slate-700">বাতিল</button>
-        <button type="submit" id="btnSubmitRole" class="flex-1 bg-gradient-to-r from-amber-500 to-emerald-600 hover:from-amber-400 hover:to-emerald-500 text-white font-extrabold py-2.5 rounded-xl transition shadow">রোল নিশ্চিত করুন</button>
+        <button type="submit" id="btnSubmitRole" class="flex-1 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-extrabold py-2.5 rounded-xl transition shadow">রোল নিশ্চিত করুন</button>
       </div>
     </form>
   </div>
@@ -103,7 +103,7 @@ export function renderSecurityModals(): string {
   <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 overflow-hidden">
     <div class="p-5 bg-slate-900 text-white flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">💰</span>
+        <span class="w-8 h-8 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold">💰</span>
         <h3 class="font-bold text-sm">ওয়ালেট ব্যালেন্স অ্যাডজাস্ট</h3>
       </div>
       <button onclick="closeWalletModal()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
@@ -111,21 +111,21 @@ export function renderSecurityModals(): string {
 
     <form onsubmit="return submitWalletAdjust(event)" class="p-5 space-y-4 text-xs text-slate-700">
       <input type="hidden" id="walletTargetUserId">
-      <p class="text-slate-600">ইউজার: <b id="walletTargetUserName">—</b> • বর্তমান ব্যালেন্স: <b class="text-emerald-600" id="walletTargetCurrentBalance">০ ৳</b></p>
+      <p class="text-slate-600">ইউজার: <b id="walletTargetUserName">—</b> • বর্তমান ব্যালেন্স: <b class="text-orange-600" id="walletTargetCurrentBalance">০ ৳</b></p>
 
       <label class="block font-semibold">
         টাকার পরিমাণ (+ বা - দিয়ে যোগ/কর্তন করুন) *
-        <input type="number" id="walletAdjustAmount" required placeholder="যেমন: 50 বা -20" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:border-emerald-500 focus:outline-none">
+        <input type="number" id="walletAdjustAmount" required placeholder="যেমন: 50 বা -20" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:border-orange-500 focus:outline-none">
       </label>
 
       <label class="block font-semibold">
         অ্যাডজাস্টের কারণ / নোট *
-        <input type="text" id="walletAdjustNote" required placeholder="যেমন: রেফারেল বোনাস অ্যাডজাস্ট বা রিফান্ড" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:border-emerald-500 focus:outline-none">
+        <input type="text" id="walletAdjustNote" required placeholder="যেমন: রেফারেল বোনাস অ্যাডজাস্ট বা রিফান্ড" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:border-orange-500 focus:outline-none">
       </label>
 
       <div class="flex gap-2 pt-2 border-t border-slate-100">
         <button type="button" onclick="closeWalletModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 font-bold py-2.5 rounded-xl transition text-slate-700">বাতিল</button>
-        <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl transition shadow">ব্যালেন্স আপডেট করুন</button>
+        <button type="submit" class="flex-1 bg-orange-600 hover:bg-orange-500 text-white font-bold py-2.5 rounded-xl transition shadow">ব্যালেন্স আপডেট করুন</button>
       </div>
     </form>
   </div>
@@ -136,9 +136,9 @@ export function renderSecurityModals(): string {
   <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
     <div class="p-5 bg-slate-900 text-white flex items-center justify-between">
       <div class="flex items-center gap-2.5">
-        <span class="w-9 h-9 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold">👁️</span>
+        <span class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold">👁️</span>
         <div>
-          <h3 id="cpModalModule" class="font-extrabold text-sm uppercase tracking-wider text-teal-400">কন্টেন্ট প্রিভিউ</h3>
+          <h3 id="cpModalModule" class="font-extrabold text-sm uppercase tracking-wider text-amber-400">কন্টেন্ট প্রিভিউ</h3>
           <p id="cpModalTitle" class="font-bold text-xs text-slate-200 truncate max-w-md">—</p>
         </div>
       </div>
@@ -155,7 +155,7 @@ export function renderSecurityModals(): string {
       </a>
       <div class="flex gap-2">
         <button onclick="closeContentPreviewModal()" class="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs">বন্ধ করুন</button>
-        <button id="cpModalApproveBtn" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow">
+        <button id="cpModalApproveBtn" class="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-extrabold text-xs shadow">
           <i class="fas fa-check mr-1"></i> পাবলিশ অনুমোদন করুন
         </button>
       </div>

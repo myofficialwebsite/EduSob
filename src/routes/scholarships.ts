@@ -135,12 +135,12 @@ scholarships.post('/evaluate', async (c) => {
     const finalScore = Math.max(0, Math.min(100, score))
     let status: 'eligible' | 'almost_eligible' | 'ineligible' = 'eligible'
     let statusText = '🎉 আপনি এই স্কলারশিপের জন্য শতভাগ যোগ্য!'
-    let statusBadge = 'bg-emerald-100 text-emerald-800 border-emerald-300'
+    let statusBadge = 'bg-orange-100 text-orange-800 border-orange-300'
 
     if (finalScore >= 80) {
       status = 'eligible'
       statusText = '🎉 আপনি এই স্কলারশিপের জন্য সরাসরি আবেদনযোগ্য!'
-      statusBadge = 'bg-emerald-100 text-emerald-800 border-emerald-300'
+      statusBadge = 'bg-orange-100 text-orange-800 border-orange-300'
     } else if (finalScore >= 50) {
       status = 'almost_eligible'
       statusText = '⚡ কিছু শর্ত শিথিলযোগ্য / বিকল্প কোটায় আবেদন করা যেতে পারে'

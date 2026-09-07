@@ -6,7 +6,7 @@ const NAV = (loggedIn: boolean) => `
   <nav class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
     <div class="flex items-center gap-3">
       <a href="/" class="flex items-center gap-2 font-bold text-xl">
-        <span class="w-9 h-9 bg-gradient-to-br from-amber-400 via-emerald-400 to-teal-500 rounded-xl flex items-center justify-center text-slate-950 font-black shadow-lg shadow-emerald-500/20">🎓</span>
+        <span class="w-9 h-9 bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 rounded-xl flex items-center justify-center text-slate-950 font-black shadow-lg shadow-orange-500/20">🎓</span>
         <span>এডুসব <span class="text-xs bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 px-2 py-0.5 rounded-full font-bold">PREMIUM</span></span>
       </a>
     </div>
@@ -15,8 +15,8 @@ const NAV = (loggedIn: boolean) => `
         <i class="fas fa-crown text-amber-400"></i>সাবস্ক্রিপশন
       </a>
       ${loggedIn
-        ? '<a href="/dashboard" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 font-bold hover:shadow-lg transition">ড্যাশবোর্ড</a>'
-        : '<a href="/login" class="px-4 py-2 rounded-xl border border-white/20 hover:bg-white/10 transition">লগইন</a><a href="/signup" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 font-bold">সাইন-আপ</a>'}
+        ? '<a href="/dashboard" class="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 font-bold hover:shadow-lg transition">ড্যাশবোর্ড</a>'
+        : '<a href="/login" class="px-4 py-2 rounded-xl border border-white/20 hover:bg-white/10 transition">লগইন</a><a href="/signup" class="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 font-bold">সাইন-আপ</a>'}
     </div>
   </nav>
 </header>`
@@ -27,9 +27,9 @@ ${NAV(loggedIn)}
 
 <main class="max-w-7xl mx-auto px-4 py-8">
   <!-- হিরো হেডার ব্যানার -->
-  <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/90 to-emerald-950/40 border border-amber-400/25 p-6 sm:p-10 mb-8 shadow-2xl">
+  <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/90 to-orange-950/40 border border-amber-400/25 p-6 sm:p-10 mb-8 shadow-2xl">
     <div class="absolute -right-20 -top-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
     
     <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
       <div class="space-y-4 text-center lg:text-left max-w-2xl">
@@ -38,7 +38,7 @@ ${NAV(loggedIn)}
         </div>
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
           কঠিন অংক বা পড়ায় আটকে গেছেন? <br class="hidden sm:inline" />
-          <span class="bg-gradient-to-r from-amber-300 via-emerald-300 to-teal-200 bg-clip-text text-transparent">সরাসরি সমাধান নিন সেরা শিক্ষকের কাছে</span>
+          <span class="bg-gradient-to-r from-amber-300 via-orange-300 to-amber-200 bg-clip-text text-transparent">সরাসরি সমাধান নিন সেরা শিক্ষকের কাছে</span>
         </h1>
         <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
           গণিত, উচ্চতর গণিত, ইংরেজি গ্রামার, পদার্থবিজ্ঞান, হিসাববিজ্ঞান কিংবা বিসিএস/চাকরি প্রস্তুতি — আপনার যেকোনো ডাউটের স্টেপ-বাই-স্টেপ সমাধান ও অডিও/ভিজ্যুয়াল ব্যাখ্যা প্রদান করবেন অভিজ্ঞ শিক্ষকমণ্ডলী।
@@ -52,7 +52,7 @@ ${NAV(loggedIn)}
           </div>
           <div class="bg-white/5 border border-white/10 rounded-2xl p-3 text-center">
             <p class="text-xs text-slate-400">অভিজ্ঞ মেন্টর</p>
-            <p class="text-lg sm:text-xl font-extrabold text-emerald-400">১২+ শিক্ষক</p>
+            <p class="text-lg sm:text-xl font-extrabold text-orange-400">১২+ শিক্ষক</p>
           </div>
           <div class="bg-white/5 border border-white/10 rounded-2xl p-3 text-center">
             <p class="text-xs text-slate-400">সফল সমাধান</p>
@@ -68,13 +68,13 @@ ${NAV(loggedIn)}
       <!-- ডানপাশের অ্যাকশন কার্ড -->
       <div class="w-full lg:w-96 bg-slate-900/90 border border-white/15 rounded-2xl p-6 shadow-xl space-y-4 backdrop-blur-sm">
         <div id="userPlanBadge" class="p-3.5 rounded-xl bg-white/5 border border-white/10 text-center text-sm">
-          <i class="fas fa-spinner fa-spin text-emerald-400 mr-2"></i>প্ল্যান যাচাই হচ্ছে...
+          <i class="fas fa-spinner fa-spin text-orange-400 mr-2"></i>প্ল্যান যাচাই হচ্ছে...
         </div>
         <button onclick="openAskModal()" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-extrabold text-base shadow-lg shadow-amber-500/25 hover:brightness-110 active:scale-[0.98] transition flex items-center justify-center gap-2">
           <i class="fas fa-paper-plane text-slate-950"></i> নতুন প্রশ্ন / ডাউট জমা দিন
         </button>
         <button onclick="switchMainTab('consultation')" class="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-semibold text-sm transition flex items-center justify-center gap-2">
-          <i class="fas fa-video text-emerald-400"></i> ১-অন-১ লাইভ সেশন বুকিং
+          <i class="fas fa-video text-orange-400"></i> ১-অন-১ লাইভ সেশন বুকিং
         </button>
       </div>
     </div>
@@ -82,7 +82,7 @@ ${NAV(loggedIn)}
 
   <!-- প্রধান ন্যাভিগেশন ট্যাব -->
   <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 border-b border-white/10 no-scrollbar">
-    <button onclick="switchMainTab('mentors')" id="tab-btn-mentors" class="main-tab-btn px-5 py-2.5 rounded-xl bg-emerald-500 text-white font-bold text-sm whitespace-nowrap transition flex items-center gap-2">
+    <button onclick="switchMainTab('mentors')" id="tab-btn-mentors" class="main-tab-btn px-5 py-2.5 rounded-xl bg-orange-500 text-white font-bold text-sm whitespace-nowrap transition flex items-center gap-2">
       <i class="fas fa-chalkboard-user"></i> শিক্ষক প্যানেল
     </button>
     <button onclick="switchMainTab('my-tickets')" id="tab-btn-my-tickets" class="main-tab-btn px-5 py-2.5 rounded-xl bg-white/5 text-slate-300 hover:bg-white/10 font-bold text-sm whitespace-nowrap transition flex items-center gap-2">
@@ -106,7 +106,7 @@ ${NAV(loggedIn)}
         <p class="text-xs sm:text-sm text-slate-400">যেকোনো শিক্ষকের প্রোফাইল দেখে সরাসরি তাঁর কাছে প্রশ্ন করতে পারেন</p>
       </div>
       <div class="flex items-center gap-2 w-full sm:w-auto">
-        <select id="mentorSubjectFilter" onchange="filterMentors()" class="w-full sm:w-48 bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-400">
+        <select id="mentorSubjectFilter" onchange="filterMentors()" class="w-full sm:w-48 bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-orange-400">
           <option value="">সকল বিষয়</option>
           <option value="গণিত">গণিত ও ক্যালকুলাস</option>
           <option value="পদার্থ">পদার্থবিজ্ঞান</option>
@@ -121,7 +121,7 @@ ${NAV(loggedIn)}
     <!-- মেন্টর গ্রিড -->
     <div id="mentorsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="col-span-full py-12 text-center text-slate-500">
-        <i class="fas fa-spinner fa-spin text-3xl text-emerald-400 mb-2"></i>
+        <i class="fas fa-spinner fa-spin text-3xl text-orange-400 mb-2"></i>
         <p>শিক্ষকদের তথ্য লোড হচ্ছে...</p>
       </div>
     </div>
@@ -132,18 +132,18 @@ ${NAV(loggedIn)}
     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>
         <h2 class="text-xl font-bold text-white flex items-center gap-2">
-          <i class="fas fa-clipboard-list-check text-emerald-400"></i> আপনার জমাকৃত প্রশ্ন ও শিক্ষকের সমাধান
+          <i class="fas fa-clipboard-list-check text-orange-400"></i> আপনার জমাকৃত প্রশ্ন ও শিক্ষকের সমাধান
         </h2>
         <p class="text-xs sm:text-sm text-slate-400">শিক্ষক উত্তর প্রদান করলে আপনি এখানে বিস্তারিত সমাধান ও সূত্র পাবেন</p>
       </div>
-      <button onclick="openAskModal()" class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl font-bold text-sm text-white hover:opacity-90 transition">
+      <button onclick="openAskModal()" class="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl font-bold text-sm text-white hover:opacity-90 transition">
         <i class="fas fa-plus mr-1"></i> নতুন প্রশ্ন করুন
       </button>
     </div>
 
     <div id="myTicketsList" class="space-y-4">
       <div class="text-center py-12 text-slate-500">
-        <i class="fas fa-spinner fa-spin text-3xl text-emerald-400 mb-2"></i>
+        <i class="fas fa-spinner fa-spin text-3xl text-orange-400 mb-2"></i>
         <p>প্রশ্নাবলি লোড হচ্ছে...</p>
       </div>
     </div>
@@ -176,8 +176,8 @@ ${NAV(loggedIn)}
   <div id="tab-content-consultation" class="main-tab-content hidden space-y-6">
     <div class="grid lg:grid-cols-12 gap-8">
       <div class="lg:col-span-6 bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 space-y-5">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-bold">
-          <i class="fas fa-video text-emerald-400"></i> লাইভ ভিডিও গাইডলাইন সেশন
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/15 border border-orange-400/30 text-orange-300 text-xs font-bold">
+          <i class="fas fa-video text-orange-400"></i> লাইভ ভিডিও গাইডলাইন সেশন
         </div>
         <h2 class="text-2xl font-black text-white">শিক্ষকের সাথে লাইভ ১-অন-১ সেশন বুক করুন</h2>
         <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -187,20 +187,20 @@ ${NAV(loggedIn)}
         <form id="consultationForm" onsubmit="submitConsultation(event)" class="space-y-4 pt-2">
           <div>
             <label class="block text-xs font-bold text-slate-300 mb-1">পছন্দের শিক্ষক / মেন্টর</label>
-            <select id="consTeacherSelect" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-emerald-400"></select>
+            <select id="consTeacherSelect" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-orange-400"></select>
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-300 mb-1">যে বিষয়ে আলোচনা করতে চান</label>
-            <input type="text" id="consTopic" required placeholder="উদা: HSC গণিত রিভিশন স্ট্র্যাটেজি / NU অনার্স ৩য় বর্ষ হিসাববিজ্ঞান গাইডলাইন" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-400">
+            <input type="text" id="consTopic" required placeholder="উদা: HSC গণিত রিভিশন স্ট্র্যাটেজি / NU অনার্স ৩য় বর্ষ হিসাববিজ্ঞান গাইডলাইন" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-orange-400">
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="block text-xs font-bold text-slate-300 mb-1">পছন্দের তারিখ</label>
-              <input type="date" id="consDate" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+              <input type="date" id="consDate" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-400">
             </div>
             <div>
               <label class="block text-xs font-bold text-slate-300 mb-1">পছন্দের সময়</label>
-              <select id="consTime" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+              <select id="consTime" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-400">
                 <option value="বিকাল ০৪:০০ - ০৪:৩০">বিকাল ০৪:০০ - ০৪:৩০</option>
                 <option value="সন্ধ্যা ০৬:০০ - ০৬:৩০">সন্ধ্যা ০৬:০০ - ০৬:৩০</option>
                 <option value="রাত ০৮:০০ - ০৮:৩০">রাত ০৮:০০ - ০৮:৩০</option>
@@ -211,10 +211,10 @@ ${NAV(loggedIn)}
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-300 mb-1">আপনার নির্দিষ্ট কোনো সমস্যা বা নোট (ঐচ্ছিক)</label>
-            <textarea id="consNote" rows="2" placeholder="নির্দিষ্ট কোনো চ্যাপ্টার বা বইয়ের কথা লিখে রাখতে পারেন..." class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-400"></textarea>
+            <textarea id="consNote" rows="2" placeholder="নির্দিষ্ট কোনো চ্যাপ্টার বা বইয়ের কথা লিখে রাখতে পারেন..." class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-orange-400"></textarea>
           </div>
 
-          <button type="submit" id="consSubmitBtn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-extrabold text-sm shadow-lg hover:brightness-110 transition">
+          <button type="submit" id="consSubmitBtn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-extrabold text-sm shadow-lg hover:brightness-110 transition">
             <i class="fas fa-calendar-plus mr-1"></i> সেশন বুকিং রিকোয়েস্ট পাঠান
           </button>
         </form>
@@ -226,7 +226,7 @@ ${NAV(loggedIn)}
         </h3>
         <div id="myConsultationsList" class="space-y-3">
           <div class="text-center py-8 text-slate-500">
-            <i class="fas fa-spinner fa-spin text-2xl text-emerald-400 mb-2"></i>
+            <i class="fas fa-spinner fa-spin text-2xl text-orange-400 mb-2"></i>
             <p>সেশন তালিকা লোড হচ্ছে...</p>
           </div>
         </div>
@@ -311,7 +311,7 @@ ${NAV(loggedIn)}
   <div class="bg-slate-900 border border-white/20 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl space-y-6">
     <div class="flex items-center justify-between pb-3 border-b border-white/10">
       <div class="flex items-center gap-2">
-        <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">💡</span>
+        <span class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold">💡</span>
         <div>
           <h3 id="solModalTopic" class="text-lg font-bold text-white">টপিক শিরোনাম</h3>
           <p id="solModalCode" class="text-xs text-slate-400">TS-2026-XXXX</p>
@@ -328,27 +328,27 @@ ${NAV(loggedIn)}
     </div>
 
     <!-- শিক্ষকের পূর্ণাঙ্গ সমাধান -->
-    <div id="solAnswerBox" class="bg-emerald-950/30 border border-emerald-500/30 rounded-2xl p-5 sm:p-6 space-y-4">
-      <div class="flex items-center justify-between border-b border-emerald-500/20 pb-3">
+    <div id="solAnswerBox" class="bg-orange-950/30 border border-orange-500/30 rounded-2xl p-5 sm:p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-orange-500/20 pb-3">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300 font-bold text-lg">👨‍🏫</div>
+          <div class="w-10 h-10 rounded-full bg-orange-500/20 border border-orange-400/30 flex items-center justify-center text-orange-300 font-bold text-lg">👨‍🏫</div>
           <div>
-            <p id="solTeacherName" class="text-sm font-bold text-emerald-300">শিক্ষকের নাম</p>
+            <p id="solTeacherName" class="text-sm font-bold text-orange-300">শিক্ষকের নাম</p>
             <p id="solAnsweredTime" class="text-[11px] text-slate-400">উত্তর দেওয়ার সময়</p>
           </div>
         </div>
-        <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-400/30">
+        <span class="px-2.5 py-1 rounded-full bg-orange-500/20 text-orange-300 text-xs font-bold border border-orange-400/30">
           ✅ ভেরিফাইড সমাধান
         </span>
       </div>
 
       <div class="space-y-2">
-        <p class="text-xs font-bold text-emerald-400 uppercase tracking-wider">স্টেপ-বাই-স্টেপ সমাধান ও বিশ্লেষণ:</p>
+        <p class="text-xs font-bold text-orange-400 uppercase tracking-wider">স্টেপ-বাই-স্টেপ সমাধান ও বিশ্লেষণ:</p>
         <div id="solModalAnswer" class="text-sm text-slate-100 whitespace-pre-wrap leading-relaxed font-sans bg-black/20 p-4 rounded-xl border border-white/5"></div>
       </div>
 
       <!-- রেটিং সেকশন -->
-      <div id="solRatingSection" class="pt-3 border-t border-emerald-500/20 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div id="solRatingSection" class="pt-3 border-t border-orange-500/20 flex flex-col sm:flex-row items-center justify-between gap-3">
         <p class="text-xs text-slate-300">এই সমাধানটি আপনার কেমন লাগলো?</p>
         <div class="flex items-center gap-1.5" id="solStarRatingBtns">
           <button onclick="rateSolution(1)" class="text-lg text-slate-600 hover:text-amber-400 transition">★</button>
@@ -374,7 +374,7 @@ ${NAV(loggedIn)}
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <button id="stdChatVideoBtn" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center gap-1"><i class="fas fa-video"></i> ভিডিও রুম</button>
+        <button id="stdChatVideoBtn" class="px-3 py-1.5 rounded-lg bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs transition flex items-center gap-1"><i class="fas fa-video"></i> ভিডিও রুম</button>
         <button onclick="closeStudentChat()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
       </div>
     </div>
@@ -408,7 +408,7 @@ ${NAV(loggedIn)}
     </div>
 
     <div class="flex-1 relative bg-slate-950 flex flex-col items-center justify-center p-6 text-center text-white">
-      <div class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-amber-400 via-emerald-400 to-teal-400 text-slate-950 text-4xl font-extrabold flex items-center justify-center shadow-2xl mb-4">
+      <div class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-amber-400 via-orange-400 to-amber-400 text-slate-950 text-4xl font-extrabold flex items-center justify-center shadow-2xl mb-4">
         🎓
       </div>
       <h2 class="text-xl font-bold mb-1">শিক্ষকের সাথে লাইভ ভিডিও সেশন</h2>
@@ -434,7 +434,7 @@ function esc(s){var d=document.createElement('div');d.textContent=s==null?'':s;r
 function switchMainTab(tab) {
   document.querySelectorAll('.main-tab-content').forEach(function(el){ el.classList.add('hidden'); });
   document.querySelectorAll('.main-tab-btn').forEach(function(btn){
-    btn.classList.remove('bg-emerald-500', 'text-white');
+    btn.classList.remove('bg-orange-500', 'text-white');
     btn.classList.add('bg-white/5', 'text-slate-300');
   });
 
@@ -443,7 +443,7 @@ function switchMainTab(tab) {
   if (targetContent) targetContent.classList.remove('hidden');
   if (targetBtn) {
     targetBtn.classList.remove('bg-white/5', 'text-slate-300');
-    targetBtn.classList.add('bg-emerald-500', 'text-white');
+    targetBtn.classList.add('bg-orange-500', 'text-white');
   }
 
   if (tab === 'my-tickets') loadMyTickets();
@@ -460,15 +460,15 @@ function checkUserStatus() {
       badge.className = 'p-3.5 rounded-xl bg-amber-500/15 border border-amber-400/40 text-amber-300 text-center text-sm font-bold flex items-center justify-center gap-2 flex-wrap';
       badge.innerHTML = '<i class="fas fa-crown text-amber-400"></i> প্রিমিয়াম মেম্বারশিপ সক্রিয় (আইডি: ' + (d.subscription_id || '#SUB-2026') + ') — আনলিমিটেড ডাউট ও শিক্ষক প্রায়োরিটি উন্মুক্ত';
     } else if (userPlan === 'standard') {
-      badge.className = 'p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-center text-sm font-semibold flex items-center justify-center gap-2 flex-wrap';
-      badge.innerHTML = '<i class="fas fa-bolt text-emerald-400"></i> স্ট্যান্ডার্ড মেম্বার (আইডি: ' + (d.subscription_id || '#SUB-2026') + ') — <a href="/subscription" class="text-amber-400 underline font-bold ml-1">প্রিমিয়ামে আপগ্রেড করুন</a>';
+      badge.className = 'p-3.5 rounded-xl bg-orange-500/15 border border-orange-400/40 text-orange-300 text-center text-sm font-semibold flex items-center justify-center gap-2 flex-wrap';
+      badge.innerHTML = '<i class="fas fa-bolt text-orange-400"></i> স্ট্যান্ডার্ড মেম্বার (আইডি: ' + (d.subscription_id || '#SUB-2026') + ') — <a href="/subscription" class="text-amber-400 underline font-bold ml-1">প্রিমিয়ামে আপগ্রেড করুন</a>';
     } else {
       badge.className = 'p-3.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 text-center text-sm';
       badge.innerHTML = 'ফ্রি প্ল্যান (দৈনিক ১টি ডাউট) — <a href="/subscription" class="text-amber-400 underline font-bold">প্রিমিয়াম নিন (৳১০০/মাস)</a>';
     }
   }).catch(function(){
     var badge = document.getElementById('userPlanBadge');
-    badge.innerHTML = '<a href="/login" class="text-emerald-400 font-bold">লগইন করুন</a> ডাউট সমাধান পেতে';
+    badge.innerHTML = '<a href="/login" class="text-orange-400 font-bold">লগইন করুন</a> ডাউট সমাধান পেতে';
   });
 }
 
@@ -490,22 +490,22 @@ function renderMentors(list) {
 
   grid.innerHTML = list.map(function(m){
     var avatarHtml = m.avatar && m.avatar.indexOf('unsplash.com') === -1
-      ? '<img src="'+esc(m.avatar)+'" alt="'+esc(m.name)+'" class="w-16 h-16 rounded-2xl object-cover border-2 border-white/20 group-hover:border-emerald-400 transition">'
-      : '<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-800 border-2 border-white/20 flex items-center justify-center text-white text-xl font-bold shadow-md group-hover:border-emerald-400 transition"><span>'+esc((m.name||'শি').charAt(0))+'</span></div>';
+      ? '<img src="'+esc(m.avatar)+'" alt="'+esc(m.name)+'" class="w-16 h-16 rounded-2xl object-cover border-2 border-white/20 group-hover:border-orange-400 transition">'
+      : '<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-600 to-amber-800 border-2 border-white/20 flex items-center justify-center text-white text-xl font-bold shadow-md group-hover:border-orange-400 transition"><span>'+esc((m.name||'শি').charAt(0))+'</span></div>';
 
-    return '<div class="bg-white/5 border border-white/10 hover:border-emerald-400/40 rounded-3xl p-6 transition-all duration-200 flex flex-col justify-between group">'+
+    return '<div class="bg-white/5 border border-white/10 hover:border-orange-400/40 rounded-3xl p-6 transition-all duration-200 flex flex-col justify-between group">'+
       '<div>'+
         '<div class="flex items-start gap-4 mb-4">'+
           '<div class="relative">'+
             avatarHtml+
-            (m.is_online ? '<span class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 border-2 border-slate-900 rounded-full" title="অনলাইন আছেন"></span>' : '')+
+            (m.is_online ? '<span class="absolute -bottom-1 -right-1 w-4 h-4 bg-orange-400 border-2 border-slate-900 rounded-full" title="অনলাইন আছেন"></span>' : '')+
           '</div>'+
           '<div class="flex-1 min-w-0">'+
             '<div class="flex items-center justify-between">'+
               '<h3 class="font-bold text-white text-base truncate">'+esc(m.name)+'</h3>'+
               '<span class="text-xs font-bold text-amber-400 flex items-center gap-1"><i class="fas fa-star text-[10px]"></i> '+Number(m.rating).toFixed(2)+'</span>'+
             '</div>'+
-            '<p class="text-xs text-emerald-300 font-medium truncate">'+esc(m.designation)+'</p>'+
+            '<p class="text-xs text-orange-300 font-medium truncate">'+esc(m.designation)+'</p>'+
             '<span class="inline-block mt-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-[11px] font-semibold text-slate-300">'+esc(m.subject)+'</span>'+
           '</div>'+
         '</div>'+
@@ -611,7 +611,7 @@ function submitQuestion(e) {
 
 function loadMyTickets() {
   if (!loggedIn) {
-    document.getElementById('myTicketsList').innerHTML = '<div class="text-center py-12 text-slate-400">প্রশ্ন দেখতে <a href="/login" class="text-emerald-400 font-bold underline">লগইন করুন</a></div>';
+    document.getElementById('myTicketsList').innerHTML = '<div class="text-center py-12 text-slate-400">প্রশ্ন দেখতে <a href="/login" class="text-orange-400 font-bold underline">লগইন করুন</a></div>';
     return;
   }
 
@@ -636,7 +636,7 @@ function loadMyTickets() {
     container.innerHTML = myTicketsList.map(function(t){
       var isAnswered = t.status === 'answered';
       var statusBadge = isAnswered
-        ? '<span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold flex items-center gap-1"><i class="fas fa-check-circle"></i> সমাধান সম্পন্ন</span>'
+        ? '<span class="px-3 py-1 rounded-full bg-orange-500/20 border border-orange-400/30 text-orange-300 text-xs font-bold flex items-center gap-1"><i class="fas fa-check-circle"></i> সমাধান সম্পন্ন</span>'
         : '<span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-bold flex items-center gap-1"><i class="fas fa-clock"></i> শিক্ষক সমাধান করছেন</span>';
 
       return '<div class="bg-white/5 border border-white/10 hover:border-white/20 rounded-2xl p-5 sm:p-6 transition space-y-4">'+
@@ -656,9 +656,9 @@ function loadMyTickets() {
           '<div>জমা দেওয়ার সময়: '+esc(t.created_at ? t.created_at.slice(0, 16) : '')+'</div>'+
           '<div class="flex items-center gap-2 flex-wrap">'+
             '<button onclick="openStudentChat('+t.id+', \\''+esc(t.topic || t.subject)+'\\')" class="px-3.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 font-bold transition flex items-center gap-1"><i class="fas fa-comments"></i> 💬 চ্যাট / SMS</button>'+
-            '<button onclick="joinStudentVideoRoom('+t.id+', \\''+esc(t.topic || t.subject)+'\\')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-400/40 font-bold transition flex items-center gap-1"><i class="fas fa-video"></i> 📹 ১-অন-১ ভিডিও রুম</button>'+
+            '<button onclick="joinStudentVideoRoom('+t.id+', \\''+esc(t.topic || t.subject)+'\\')" class="px-3.5 py-1.5 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 border border-orange-400/40 font-bold transition flex items-center gap-1"><i class="fas fa-video"></i> 📹 ১-অন-১ ভিডিও রুম</button>'+
             (isAnswered
-              ? '<button onclick="viewSolution('+t.id+')" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold hover:shadow-lg transition flex items-center gap-1.5"><i class="fas fa-eye"></i> সম্পূর্ণ সমাধান</button>'
+              ? '<button onclick="viewSolution('+t.id+')" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold hover:shadow-lg transition flex items-center gap-1.5"><i class="fas fa-eye"></i> সম্পূর্ণ সমাধান</button>'
               : '<span class="text-amber-400/90 text-xs italic">শিক্ষক সমাধান করছেন</span>')+
           '</div>'+
         '</div>'+
@@ -734,16 +734,16 @@ function loadPublicSolutions() {
     }
 
     container.innerHTML = list.map(function(s){
-      return '<div class="bg-white/5 border border-white/10 hover:border-emerald-400/30 rounded-2xl p-5 space-y-3 transition">'+
+      return '<div class="bg-white/5 border border-white/10 hover:border-orange-400/30 rounded-2xl p-5 space-y-3 transition">'+
         '<div class="flex items-center justify-between gap-2">'+
-          '<span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full">'+esc(s.subject)+'</span>'+
+          '<span class="text-xs font-bold text-orange-400 bg-orange-500/10 px-2.5 py-0.5 rounded-full">'+esc(s.subject)+'</span>'+
           '<span class="text-xs text-slate-400">শিক্ষক: '+esc(s.answered_by_name || s.teacher_name)+'</span>'+
         '</div>'+
         '<h4 class="text-base font-bold text-white">'+esc(s.topic)+'</h4>'+
         '<div class="p-3 bg-black/30 rounded-xl text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap">'+
           '<p class="font-bold text-amber-300 mb-1">প্রশ্ন:</p>'+esc(s.question)+
           '<hr class="my-2 border-white/10">'+
-          '<p class="font-bold text-emerald-300 mb-1">সমাধান:</p>'+esc(s.answer)+
+          '<p class="font-bold text-orange-300 mb-1">সমাধান:</p>'+esc(s.answer)+
         '</div>'+
       '</div>';
     }).join('');
@@ -790,7 +790,7 @@ function submitConsultation(e) {
 
 function loadMyConsultations() {
   if (!loggedIn) {
-    document.getElementById('myConsultationsList').innerHTML = '<div class="text-center py-6 text-slate-400 text-xs">সেশন দেখতে <a href="/login" class="text-emerald-400 font-bold underline">লগইন করুন</a></div>';
+    document.getElementById('myConsultationsList').innerHTML = '<div class="text-center py-6 text-slate-400 text-xs">সেশন দেখতে <a href="/login" class="text-orange-400 font-bold underline">লগইন করুন</a></div>';
     return;
   }
 
@@ -807,7 +807,7 @@ function loadMyConsultations() {
     container.innerHTML = list.map(function(c){
       var isApproved = c.status === 'approved';
       var badge = isApproved
-        ? '<span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold">অনুমোদিত</span>'
+        ? '<span class="px-2.5 py-0.5 rounded-full bg-orange-500/20 text-orange-300 text-[11px] font-bold">অনুমোদিত</span>'
         : '<span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[11px] font-bold">অপেক্ষমান</span>';
 
       return '<div class="bg-white/5 border border-white/10 rounded-2xl p-4 space-y-2">'+
@@ -821,7 +821,7 @@ function loadMyConsultations() {
           '<span>⏰ '+esc(c.preferred_time)+'</span>'+
         '</div>'+
         (c.meeting_link
-          ? '<a href="'+esc(c.meeting_link)+'" target="_blank" class="inline-block mt-2 px-3 py-1.5 rounded-xl bg-emerald-500 text-white font-bold text-xs hover:bg-emerald-400 transition"><i class="fas fa-video mr-1"></i> গুগল মিট লিংকে প্রবেশ করুন</a>'
+          ? '<a href="'+esc(c.meeting_link)+'" target="_blank" class="inline-block mt-2 px-3 py-1.5 rounded-xl bg-orange-500 text-white font-bold text-xs hover:bg-orange-400 transition"><i class="fas fa-video mr-1"></i> গুগল মিট লিংকে প্রবেশ করুন</a>'
           : '')+
       '</div>';
     }).join('');
@@ -877,7 +877,7 @@ function loadStudentMessages(ticketId, silent) {
       var isMe = m.sender_role === 'student' || m.sender_role === 'user';
       return '<div class="flex flex-col '+(isMe?'items-end':'items-start')+' space-y-1">'+
         '<div class="flex items-center gap-1.5 text-[10px] text-slate-400">'+
-          '<span class="font-bold '+(isMe?'text-amber-400':'text-emerald-400')+'">'+(isMe?'🎓 আপনি':'👨‍🏫 '+esc(m.sender_name||'শিক্ষক'))+'</span>'+
+          '<span class="font-bold '+(isMe?'text-amber-400':'text-orange-400')+'">'+(isMe?'🎓 আপনি':'👨‍🏫 '+esc(m.sender_name||'শিক্ষক'))+'</span>'+
           '<span>'+esc(String(m.created_at||'').slice(11,16))+'</span>'+
         '</div>'+
         '<div class="max-w-[80%] rounded-2xl px-4 py-2.5 text-xs '+(isMe?'bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-medium rounded-tr-none shadow-md':'bg-slate-800 text-white border border-white/10 rounded-tl-none shadow-sm')+' leading-relaxed whitespace-pre-wrap">'+
@@ -928,12 +928,12 @@ function closeStudentVideoModal() {
 
 function toggleStdVideoMic() {
   var btn = document.getElementById('stdVMicBtn');
-  btn.classList.toggle('bg-emerald-600');
+  btn.classList.toggle('bg-orange-600');
   alert('মাইক্রোফোন টগল হয়েছে');
 }
 function toggleStdVideoCam() {
   var btn = document.getElementById('stdVCamBtn');
-  btn.classList.toggle('bg-emerald-600');
+  btn.classList.toggle('bg-orange-600');
   alert('ক্যামেরা টগল হয়েছে');
 }
 

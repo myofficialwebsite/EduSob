@@ -16,7 +16,7 @@ export function renderMentorControlTab(): string {
           শিক্ষকদের অনুমোদন, লাইভ অনলাইন স্ট্যাটাস, শিক্ষার্থী ডাউট অ্যাসাইনমেন্ট, ভিডিও রুম মনিটরিং, রিভিউ অডিট ও পেআউট হিসাব।
         </p>
       </div>
-      <button onclick="openNewTeacherModal()" class="px-4 py-2.5 rounded-2xl text-xs font-black bg-gradient-to-r from-amber-400 to-emerald-400 hover:from-amber-300 hover:to-emerald-300 text-slate-950 transition shadow-xl flex items-center gap-2">
+      <button onclick="openNewTeacherModal()" class="px-4 py-2.5 rounded-2xl text-xs font-black bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 transition shadow-xl flex items-center gap-2">
         <i class="fas fa-user-plus"></i> নতুন শিক্ষক / মেন্টর যোগ করুন
       </button>
     </div>
@@ -109,7 +109,7 @@ export function renderMentorControlTab(): string {
       <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 space-y-4 lg:col-span-1">
         <div>
           <h3 class="font-extrabold text-slate-900 text-sm flex items-center gap-2">
-            <i class="fas fa-wallet text-emerald-600"></i> মেন্টর পেআউট সেটেলমেন্ট
+            <i class="fas fa-wallet text-orange-600"></i> মেন্টর পেআউট সেটেলমেন্ট
           </h3>
           <p class="text-xs text-slate-500">সংশ্লিষ্ট শিক্ষকের সমাধান বিল পরিশোধ ও ওয়ালেট ট্রান্সফার</p>
         </div>
@@ -117,14 +117,14 @@ export function renderMentorControlTab(): string {
         <form onsubmit="return submitMentorPayout(event)" class="space-y-3 text-xs text-slate-700">
           <label class="block font-semibold">
             শিক্ষক নির্বাচন করুন *
-            <select id="payoutTeacherSelect" required class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 bg-white">
+            <select id="payoutTeacherSelect" required class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-orange-500 bg-white">
               <option value="">-- শিক্ষক বেছে নিন --</option>
             </select>
           </label>
 
           <label class="block font-semibold">
             পরিশোধের পরিমাণ (৳) *
-            <input type="number" min="1" id="payoutAmount" required placeholder="যেমন: 500" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500">
+            <input type="number" min="1" id="payoutAmount" required placeholder="যেমন: 500" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-orange-500">
           </label>
 
           <div class="grid grid-cols-2 gap-2">
@@ -140,10 +140,10 @@ export function renderMentorControlTab(): string {
 
           <label class="block font-semibold">
             নোট / রেফারেন্স *
-            <input type="text" id="payoutNote" required placeholder="যেমন: ফেব্রুয়ারি মাসের টিকেট সমাধান বিল" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500">
+            <input type="text" id="payoutNote" required placeholder="যেমন: ফেব্রুয়ারি মাসের টিকেট সমাধান বিল" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-orange-500">
           </label>
 
-          <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl text-xs transition shadow">
+          <button type="submit" class="w-full py-2.5 bg-orange-600 hover:bg-orange-500 text-white font-extrabold rounded-xl text-xs transition shadow">
             বিল সেটেল ও ওয়ালেট ক্রেডিট করুন
           </button>
         </form>

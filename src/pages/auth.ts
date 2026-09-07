@@ -2,36 +2,36 @@
 import { pageShell } from './layout'
 
 export function signupPage(): string {
-  return pageShell('সাইন-আপ', 'min-h-screen bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 text-white', `
+  return pageShell('সাইন-আপ', 'min-h-screen bg-gradient-to-br from-orange-950 via-slate-900 to-orange-900 text-white', `
 <main class="min-h-screen flex items-center justify-center px-4 py-10">
   <section id="signup-card" class="w-full max-w-lg bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
     <header class="text-center mb-6">
-      <a href="/" class="inline-flex items-center gap-2 text-2xl font-bold"><span class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center">📚</span> এডুসব</a>
-      <p class="text-emerald-200 text-sm mt-2">ফ্রি অ্যাকাউন্ট খুলুন — শিক্ষার সব, এক ঠিকানায়!</p>
+      <a href="/" class="inline-flex items-center gap-2 text-2xl font-bold"><span class="w-10 h-10 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center">📚</span> এডুসব</a>
+      <p class="text-orange-200 text-sm mt-2">ফ্রি অ্যাকাউন্ট খুলুন — শিক্ষার সব, এক ঠিকানায়!</p>
     </header>
     <form id="signupForm" class="space-y-4">
       <div class="grid grid-cols-2 gap-3">
         <div class="col-span-2 sm:col-span-1">
-          <label class="text-xs text-emerald-200">নাম (বাংলা) *</label>
-          <input name="name_bn" required class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-emerald-400" placeholder="যেমন: রাকিব হাসান">
+          <label class="text-xs text-orange-200">নাম (বাংলা) *</label>
+          <input name="name_bn" required class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400" placeholder="যেমন: রাকিব হাসান">
         </div>
         <div class="col-span-2 sm:col-span-1">
-          <label class="text-xs text-emerald-200">Name (English)</label>
-          <input name="name_en" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-emerald-400" placeholder="Rakib Hasan">
+          <label class="text-xs text-orange-200">Name (English)</label>
+          <input name="name_en" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400" placeholder="Rakib Hasan">
         </div>
       </div>
       <div>
-        <label class="text-xs text-emerald-200">মোবাইল নম্বর *</label>
-        <input name="phone" required pattern="01[3-9][0-9]{8}" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-emerald-400" placeholder="01XXXXXXXXX">
+        <label class="text-xs text-orange-200">মোবাইল নম্বর *</label>
+        <input name="phone" required pattern="01[3-9][0-9]{8}" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400" placeholder="01XXXXXXXXX">
       </div>
       <div>
-        <label class="text-xs text-emerald-200">পাসওয়ার্ড * (কমপক্ষে ৬ অক্ষর)</label>
-        <input name="password" type="password" required minlength="6" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-emerald-400" placeholder="••••••">
+        <label class="text-xs text-orange-200">পাসওয়ার্ড * (কমপক্ষে ৬ অক্ষর)</label>
+        <input name="password" type="password" required minlength="6" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400" placeholder="••••••">
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
-          <label class="text-xs text-emerald-200">ধর্ম * <span class="opacity-60">(আপনার ড্যাশবোর্ড থিম)</span></label>
-          <select name="religion" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-emerald-400 [&>option]:text-slate-900">
+          <label class="text-xs text-orange-200">ধর্ম * <span class="opacity-60">(আপনার ড্যাশবোর্ড থিম)</span></label>
+          <select name="religion" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-orange-400 [&>option]:text-slate-900">
             <option value="islam">ইসলাম</option>
             <option value="sanatan">সনাতন</option>
             <option value="buddhist">বৌদ্ধ</option>
@@ -40,8 +40,8 @@ export function signupPage(): string {
           </select>
         </div>
         <div>
-          <label class="text-xs text-emerald-200">শিক্ষাস্তর</label>
-          <select name="education_level" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-emerald-400 [&>option]:text-slate-900">
+          <label class="text-xs text-orange-200">শিক্ষাস্তর</label>
+          <select name="education_level" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-orange-400 [&>option]:text-slate-900">
             <option value="">নির্বাচন করুন</option>
             <option value="ssc">SSC / সমমান</option>
             <option value="hsc">HSC / সমমান</option>
@@ -52,15 +52,15 @@ export function signupPage(): string {
         </div>
       </div>
       <div>
-        <label class="text-xs text-emerald-200">রেফারেল কোড <span class="opacity-60">(ঐচ্ছিক — বন্ধুর ইউজার আইডি দিলে দুজনেই বোনাস! 🎁)</span></label>
-        <input name="referral_code" id="refCodeInput" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-emerald-400 uppercase" placeholder="EDU-2026-00001">
+        <label class="text-xs text-orange-200">রেফারেল কোড <span class="opacity-60">(ঐচ্ছিক — বন্ধুর ইউজার আইডি দিলে দুজনেই বোনাস! 🎁)</span></label>
+        <input name="referral_code" id="refCodeInput" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400 uppercase" placeholder="EDU-2026-00001">
       </div>
       <p id="signupError" class="hidden text-rose-300 text-sm bg-rose-500/20 rounded-xl px-4 py-2"></p>
-      <button type="submit" id="signupBtn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-bold py-3 rounded-xl shadow-lg transition">
+      <button type="submit" id="signupBtn" class="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white font-bold py-3 rounded-xl shadow-lg transition">
         <i class="fas fa-user-plus mr-2"></i>ফ্রি অ্যাকাউন্ট খুলুন
       </button>
     </form>
-    <p class="text-center text-sm text-emerald-200 mt-5">ইতিমধ্যে অ্যাকাউন্ট আছে? <a href="/login" class="text-white font-semibold underline">লগইন করুন</a></p>
+    <p class="text-center text-sm text-orange-200 mt-5">ইতিমধ্যে অ্যাকাউন্ট আছে? <a href="/login" class="text-white font-semibold underline">লগইন করুন</a></p>
   </section>
 </main>
 <script>
@@ -89,36 +89,36 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
 }
 
 export function loginPage(): string {
-  return pageShell('লগইন', 'min-h-screen bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 text-white', `
+  return pageShell('লগইন', 'min-h-screen bg-gradient-to-br from-orange-950 via-slate-900 to-orange-900 text-white', `
 <main class="min-h-screen flex items-center justify-center px-4 py-10">
   <section id="login-card" class="w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 sm:p-8 shadow-2xl">
     <header class="text-center mb-6">
-      <a href="/" class="inline-flex items-center gap-2 text-2xl font-bold"><span class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center">📚</span> এডুসব</a>
-      <p class="text-emerald-200 text-sm mt-2">আবার স্বাগতম! লগইন করুন</p>
+      <a href="/" class="inline-flex items-center gap-2 text-2xl font-bold"><span class="w-10 h-10 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center">📚</span> এডুসব</a>
+      <p class="text-orange-200 text-sm mt-2">আবার স্বাগতম! লগইন করুন</p>
     </header>
     <form id="loginForm" class="space-y-4">
       <div>
-        <label class="text-xs text-emerald-200">মোবাইল নম্বর / ইমেইল / ইউজার আইডি</label>
-        <input name="phone" id="loginPhoneInput" required class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-emerald-400 text-sm" placeholder="01XXXXXXXXX অথবা admin@edusob.com">
+        <label class="text-xs text-orange-200">মোবাইল নম্বর / ইমেইল / ইউজার আইডি</label>
+        <input name="phone" id="loginPhoneInput" required class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400 text-sm" placeholder="01XXXXXXXXX অথবা admin@edusob.com">
       </div>
       <div>
         <div class="flex items-center justify-between">
-          <label class="text-xs text-emerald-200">পাসওয়ার্ড</label>
+          <label class="text-xs text-orange-200">পাসওয়ার্ড</label>
         </div>
         <div class="relative mt-1">
-          <input name="password" id="loginPassInput" type="password" required class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 pr-10 text-white placeholder-white/40 focus:outline-none focus:border-emerald-400 text-sm" placeholder="••••••••">
-          <button type="button" id="togglePassBtn" onclick="togglePassVisibility()" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-emerald-200/70 hover:text-white transition cursor-pointer" title="পাসওয়ার্ড দেখুন">
+          <input name="password" id="loginPassInput" type="password" required class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 pr-10 text-white placeholder-white/40 focus:outline-none focus:border-orange-400 text-sm" placeholder="••••••••">
+          <button type="button" id="togglePassBtn" onclick="togglePassVisibility()" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-orange-200/70 hover:text-white transition cursor-pointer" title="পাসওয়ার্ড দেখুন">
             <i id="togglePassIcon" class="fas fa-eye text-xs"></i>
           </button>
         </div>
       </div>
       <p id="loginError" class="hidden text-rose-300 text-sm bg-rose-500/20 rounded-xl px-4 py-2"></p>
-      <button type="submit" id="loginBtn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-bold py-3 rounded-xl shadow-lg transition cursor-pointer">
+      <button type="submit" id="loginBtn" class="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white font-bold py-3 rounded-xl shadow-lg transition cursor-pointer">
         <i class="fas fa-right-to-bracket mr-2"></i>লগইন করুন
       </button>
     </form>
 
-    <p class="text-center text-sm text-emerald-200 mt-5">অ্যাকাউন্ট নেই? <a href="/signup" class="text-white font-semibold underline">ফ্রি সাইন-আপ করুন</a></p>
+    <p class="text-center text-sm text-orange-200 mt-5">অ্যাকাউন্ট নেই? <a href="/signup" class="text-white font-semibold underline">ফ্রি সাইন-আপ করুন</a></p>
   </section>
 </main>
 <script>

@@ -111,7 +111,7 @@ export function landingPage(): string {
             </div>
           </a>
           <a href="/mcq" class="flex items-center gap-3 px-4 py-2.5 text-xs text-slate-300 hover:bg-white/5">
-            <span class="w-8 h-8 rounded-lg bg-teal-400/10 text-teal-300 flex items-center justify-center text-sm"><i class="fas fa-list-check"></i></span>
+            <span class="w-8 h-8 rounded-lg bg-amber-400/10 text-amber-300 flex items-center justify-center text-sm"><i class="fas fa-list-check"></i></span>
             <div>
               <p class="font-bold">MCQ প্র্যাকটিস হাব</p>
               <p class="text-[10px] text-slate-500">স্পেসড রিপিটেশন রিভিশন</p>
@@ -175,7 +175,7 @@ export function landingPage(): string {
     <a href="/qpapers" class="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/5"><i class="fas fa-file-pdf text-orange-400"></i> প্রশ্নপত্র ও মডেল টেস্ট (PDF)</a>
     <a href="/admission" class="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/5"><i class="fas fa-door-open text-sky-400"></i> ভর্তি হাব</a>
     <a href="/cv" class="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/5"><i class="fas fa-file-invoice text-indigo-400"></i> ১-৩ পেজ সিভি মেকার</a>
-    <a href="/mcq" class="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/5"><i class="fas fa-list-check text-teal-400"></i> MCQ মডেল টেস্ট</a>
+    <a href="/mcq" class="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/5"><i class="fas fa-list-check text-amber-400"></i> MCQ মডেল টেস্ট</a>
     <a href="/planner" class="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/5"><i class="fas fa-calendar-check text-purple-400"></i> স্টাডি প্ল্যানার</a>
     <a href="/cgpa" class="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/5"><i class="fas fa-calculator text-sky-400"></i> CGPA ক্যালকুলেটর</a>
     <div class="pt-3 border-t border-white/5 flex gap-2">
@@ -283,15 +283,15 @@ export function landingPage(): string {
               </div>
             </div>
 
-            <div id="slide-2" class="hero-slider-slide absolute inset-0 opacity-0 bg-gradient-to-br from-teal-950/60 via-[#121620] to-slate-950 flex flex-col justify-between p-6">
+            <div id="slide-2" class="hero-slider-slide absolute inset-0 opacity-0 bg-gradient-to-br from-amber-950/60 via-[#121620] to-slate-950 flex flex-col justify-between p-6">
               <div class="flex items-center justify-between">
-                <span class="inline-flex items-center gap-1.5 bg-teal-500/15 text-teal-300 border border-teal-500/30 text-[11px] font-bold px-3 py-1 rounded-full">
-                  <i class="fas fa-bolt text-teal-400"></i> লাইভ মডেল টেস্ট
+                <span class="inline-flex items-center gap-1.5 bg-amber-500/15 text-amber-300 border border-amber-500/30 text-[11px] font-bold px-3 py-1 rounded-full">
+                  <i class="fas fa-bolt text-amber-400"></i> লাইভ মডেল টেস্ট
                 </span>
                 <span class="text-2xl opacity-40">📝</span>
               </div>
               <div class="my-auto text-center py-4">
-                <div class="w-14 h-14 mx-auto rounded-2xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-300 text-2xl mb-3">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-300 text-2xl mb-3">
                   <i class="fas fa-list-check"></i>
                 </div>
                 <h4 class="font-display text-lg font-bold text-white">স্মার্ট MCQ প্র্যাকটিস ও এনালাইসিস</h4>
@@ -299,7 +299,7 @@ export function landingPage(): string {
               </div>
               <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
                 <span>স্বয়ংক্রিয় মূল্যায়ন</span>
-                <span class="text-teal-400 font-bold">রিয়েল-টাইম স্কোর</span>
+                <span class="text-amber-400 font-bold">রিয়েল-টাইম স্কোর</span>
               </div>
             </div>
 
@@ -388,11 +388,11 @@ export function landingPage(): string {
           </p>
         </div>
 
-        <div class="card-hover group relative overflow-hidden p-5 rounded-2xl bg-[#121620] border border-white/[0.08] hover:border-teal-400/40 transition space-y-2">
-          <div class="absolute -right-3 -top-4 font-display text-6xl font-extrabold text-white/[0.04] group-hover:text-teal-400/10 transition-colors">০২</div>
+        <div class="card-hover group relative overflow-hidden p-5 rounded-2xl bg-[#121620] border border-white/[0.08] hover:border-amber-400/40 transition space-y-2">
+          <div class="absolute -right-3 -top-4 font-display text-6xl font-extrabold text-white/[0.04] group-hover:text-amber-400/10 transition-colors">০২</div>
           <div class="flex items-center justify-between relative">
-            <span class="text-teal-300/80 font-mono font-bold text-sm">০২</span>
-            <div class="w-9 h-9 rounded-xl bg-teal-400/10 text-teal-300 flex items-center justify-center text-sm"><i class="fas fa-user-graduate"></i></div>
+            <span class="text-amber-300/80 font-mono font-bold text-sm">০২</span>
+            <div class="w-9 h-9 rounded-xl bg-amber-400/10 text-amber-300 flex items-center justify-center text-sm"><i class="fas fa-user-graduate"></i></div>
           </div>
           <h3 class="font-bold text-base text-white">বয়স ও যোগ্যতা</h3>
           <p class="text-slate-400 text-xs leading-relaxed">
@@ -520,18 +520,18 @@ export function landingPage(): string {
         </div>
       </a>
 
-      <a href="/mcq" class="service-item card-hover bg-[#121620] border border-white/[0.08] hover:border-teal-400/40 rounded-2xl p-5 block group transition-colors" data-category="prep">
+      <a href="/mcq" class="service-item card-hover bg-[#121620] border border-white/[0.08] hover:border-amber-400/40 rounded-2xl p-5 block group transition-colors" data-category="prep">
         <div class="flex items-center justify-between mb-4">
-          <div class="w-12 h-12 bg-teal-400/10 border border-teal-400/25 text-teal-300 rounded-xl flex items-center justify-center text-xl group-hover:scale-105 transition-transform">
+          <div class="w-12 h-12 bg-amber-400/10 border border-amber-400/25 text-amber-300 rounded-xl flex items-center justify-center text-xl group-hover:scale-105 transition-transform">
             <i class="fas fa-list-check"></i>
           </div>
-          <span class="text-[10px] bg-teal-400/15 text-teal-200 font-bold px-2.5 py-0.5 rounded-full">স্পেসড রিভিশন</span>
+          <span class="text-[10px] bg-amber-400/15 text-amber-200 font-bold px-2.5 py-0.5 rounded-full">স্পেসড রিভিশন</span>
         </div>
-        <h3 class="font-bold text-white text-base group-hover:text-teal-300 transition">MCQ প্র্যাকটিস ও প্রশ্নব্যাংক</h3>
+        <h3 class="font-bold text-white text-base group-hover:text-amber-300 transition">MCQ প্র্যাকটিস ও প্রশ্নব্যাংক</h3>
         <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">
           অধ্যায়ভিত্তিক বহুনির্বাচনী প্রশ্ন অনুশীলন, ভুল প্রশ্ন ১→৩→৭ দিন ব্যবধানে অটো-রিভিশন ও তাৎক্ষণিক স্কোর।
         </p>
-        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-bold text-teal-300">
+        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-bold text-amber-300">
           <span>পরীক্ষা দিন</span>
           <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
         </div>
@@ -614,15 +614,15 @@ export function landingPage(): string {
         <span class="text-[10px] text-orange-400 font-bold mt-3 block">শুরু</span>
       </div>
 
-      <div class="step-node relative z-10 bg-[#121620] border border-white/[0.08] rounded-2xl p-4.5 flex flex-col justify-between hover:border-teal-400/40 transition-colors">
+      <div class="step-node relative z-10 bg-[#121620] border border-white/[0.08] rounded-2xl p-4.5 flex flex-col justify-between hover:border-amber-400/40 transition-colors">
         <div>
-          <div class="w-10 h-10 rounded-full bg-teal-500 text-white font-bold text-xs flex items-center justify-center mb-3">০২</div>
+          <div class="w-10 h-10 rounded-full bg-amber-500 text-white font-bold text-xs flex items-center justify-center mb-3">০২</div>
           <h3 class="font-bold text-sm text-white mb-1">পারসোনালাইজড ড্যাশবোর্ড</h3>
           <p class="text-slate-500 text-[11px] leading-relaxed">
             ধর্ম ও ক্লাস অনুযায়ী বিশেষ ক্যালেন্ডার, নোটিস ও ড্যাশবোর্ড সক্রিয়করণ।
           </p>
         </div>
-        <span class="text-[10px] text-teal-300 font-bold mt-3 block">কাস্টমাইজ</span>
+        <span class="text-[10px] text-amber-300 font-bold mt-3 block">কাস্টমাইজ</span>
       </div>
 
       <div class="step-node relative z-10 bg-[#121620] border border-white/[0.08] rounded-2xl p-4.5 flex flex-col justify-between hover:border-sky-400/40 transition-colors">
@@ -766,8 +766,8 @@ export function landingPage(): string {
           </div>
         </div>
 
-        <div class="card-hover bg-[#121620] border border-white/[0.08] hover:border-teal-400/30 rounded-2xl p-5 flex items-start gap-4 transition-colors">
-          <div class="w-10 h-10 rounded-xl bg-teal-400/10 text-teal-300 flex items-center justify-center font-bold text-sm shrink-0">২</div>
+        <div class="card-hover bg-[#121620] border border-white/[0.08] hover:border-amber-400/30 rounded-2xl p-5 flex items-start gap-4 transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-amber-400/10 text-amber-300 flex items-center justify-center font-bold text-sm shrink-0">২</div>
           <div>
             <h3 class="font-bold text-white text-sm mb-1">ছবি ও স্বাক্ষর আপলোড (স্বয়ংক্রিয় রিসাইজ)</h3>
             <p class="text-slate-400 text-xs leading-relaxed">
@@ -1075,7 +1075,7 @@ function handleContact(e) {
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> পাঠানো হচ্ছে...';
 
   setTimeout(function() {
-    alertBox.className = 'p-3 rounded-xl text-xs font-bold text-center mt-3 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+    alertBox.className = 'p-3 rounded-xl text-xs font-bold text-center mt-3 bg-orange-500/20 text-orange-300 border border-orange-500/30';
     alertBox.innerHTML = '✓ আপনার বার্তাটি সফলভাবে জমা হয়েছে! হেল্পডেস্ক টিম শীঘ্রই আপনার সাথে যোগাযোগ করবে।<br><a href="https://wa.me/8801835414122?text=' + encodeURIComponent('এডুসব হেল্পডেস্ক: নাম: ' + name + ', বিষয়: ' + sub + ' - ' + msg) + '" target="_blank" class="inline-block mt-2 underline text-white font-extrabold">দ্রুত হোয়াটসঅ্যাপে বার্তা পাঠান →</a>';
     document.getElementById('contactForm').reset();
     btn.disabled = false;

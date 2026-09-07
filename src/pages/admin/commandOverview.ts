@@ -6,14 +6,14 @@ export function renderOverviewTab(): string {
   <div class="bg-slate-900 text-white border border-slate-800 rounded-3xl p-4 sm:p-5 shadow-xl">
     <div class="flex items-center justify-between gap-4 flex-wrap pb-4 border-b border-slate-800">
       <div class="flex items-center gap-3">
-        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 text-slate-950 flex items-center justify-center font-black text-xl shadow-lg">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-400 text-slate-950 flex items-center justify-center font-black text-xl shadow-lg">
           ⚡
         </div>
         <div>
           <div class="flex items-center gap-2">
             <h2 class="text-base sm:text-lg font-black tracking-tight">এডুসব সিস্টেম অ্যাডমিন ওভারভিউ</h2>
-            <span class="inline-flex items-center gap-1 text-[11px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> লাইভ মনিটরিং
+            <span class="inline-flex items-center gap-1 text-[11px] bg-orange-500/20 text-orange-400 border border-orange-500/30 px-2 py-0.5 rounded-full font-bold">
+              <span class="w-1.5 h-1.5 rounded-full bg-orange-400 animate-ping"></span> লাইভ মনিটরিং
             </span>
           </div>
           <p class="text-xs text-slate-400 mt-0.5">রিয়েল-টাইম ডাটাবেজ স্ট্যাটাস, অটো-কালেকশন স্বাস্থ্য ও উচ্চ-অগ্রাধিকার অ্যালার্ট</p>
@@ -25,7 +25,7 @@ export function renderOverviewTab(): string {
         <button onclick="loadStats()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
           <i class="fas fa-rotate"></i> রিফ্রেশ
         </button>
-        <button onclick="triggerAutoCollection('all')" class="px-4 py-2 bg-gradient-to-r from-amber-400 to-emerald-400 hover:from-amber-300 hover:to-emerald-300 text-slate-950 rounded-xl text-xs font-black transition flex items-center gap-1.5 shadow-lg">
+        <button onclick="triggerAutoCollection('all')" class="px-4 py-2 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 rounded-xl text-xs font-black transition flex items-center gap-1.5 shadow-lg">
           <i class="fas fa-bolt"></i> মাস্টার অটো-সিঙ্ক
         </button>
       </div>
@@ -34,7 +34,7 @@ export function renderOverviewTab(): string {
     <!-- সিস্টেম নোড মেট্রিক্স সারি -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 text-xs">
       <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-3 flex items-center gap-3">
-        <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-sm">
+        <div class="w-8 h-8 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center font-bold text-sm">
           <i class="fas fa-database"></i>
         </div>
         <div>
@@ -106,9 +106,9 @@ export function renderOverviewTab(): string {
     </div>
 
     <!-- ৩. পেমেন্ট রিকোয়েস্ট -->
-    <div onclick="navigateToTab('subs')" class="cursor-pointer bg-white border border-emerald-200 rounded-2xl p-4 shadow-sm hover:border-emerald-400 hover:shadow transition flex items-center justify-between">
+    <div onclick="navigateToTab('subs')" class="cursor-pointer bg-white border border-orange-200 rounded-2xl p-4 shadow-sm hover:border-orange-400 hover:shadow transition flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg">
+        <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-lg">
           💳
         </div>
         <div>
@@ -116,7 +116,7 @@ export function renderOverviewTab(): string {
           <p class="text-base font-black text-slate-900"><span id="alertPendingPayments">০</span> টি অনুরোধ</p>
         </div>
       </div>
-      <span class="text-xs text-emerald-600 font-bold bg-emerald-50 px-2 py-1 rounded-lg">সেটেল করুন →</span>
+      <span class="text-xs text-orange-600 font-bold bg-orange-50 px-2 py-1 rounded-lg">সেটেল করুন →</span>
     </div>
   </div>
 
@@ -124,21 +124,21 @@ export function renderOverviewTab(): string {
   <div>
     <div class="flex items-center justify-between mb-3">
       <h3 class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
-        <i class="fas fa-layer-group text-emerald-600"></i> এডুসব সেন্ট্রাল কন্টেন্ট ও সিস্টেম মেট্রিক্স
+        <i class="fas fa-layer-group text-orange-600"></i> এডুসব সেন্ট্রাল কন্টেন্ট ও সিস্টেম মেট্রিক্স
       </h3>
       <span class="text-xs text-slate-400">প্রতিটি ব্লকে ক্লিক করে সরাসরি সংশ্লিষ্ট মডিউলে যেতে পারবেন</span>
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
       <!-- ১. ইউজার -->
-      <div onclick="navigateToTab('users')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-emerald-500/50 hover:shadow-md transition">
+      <div onclick="navigateToTab('users')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-orange-500/50 hover:shadow-md transition">
         <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
           <span class="font-semibold">নিবন্ধিত শিক্ষার্থী</span>
-          <span class="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-users"></i></span>
+          <span class="w-6 h-6 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-users"></i></span>
         </div>
         <p class="text-2xl font-black text-slate-900" id="cmdMetricUsers">০</p>
         <p class="text-[11px] text-slate-400 mt-1 flex items-center justify-between">
-          <span>সক্রিয়: <b id="cmdSubActiveUsers" class="text-emerald-600">০</b></span>
+          <span>সক্রিয়: <b id="cmdSubActiveUsers" class="text-orange-600">০</b></span>
           <span>স্থগিত: <b id="cmdSubSuspendedUsers" class="text-rose-500">০</b></span>
         </p>
       </div>
@@ -156,13 +156,13 @@ export function renderOverviewTab(): string {
       </div>
 
       <!-- ৩. ভর্তি -->
-      <div onclick="navigateToTab('admissions')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-teal-500/50 hover:shadow-md transition">
+      <div onclick="navigateToTab('admissions')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-amber-500/50 hover:shadow-md transition">
         <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
           <span class="font-semibold">ভর্তি ও ফলাফল</span>
-          <span class="w-6 h-6 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-landmark"></i></span>
+          <span class="w-6 h-6 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-landmark"></i></span>
         </div>
         <p class="text-2xl font-black text-slate-900" id="cmdMetricAdmissions">০</p>
-        <p class="text-[11px] text-teal-600 mt-1 font-semibold flex items-center gap-1">
+        <p class="text-[11px] text-amber-600 mt-1 font-semibold flex items-center gap-1">
           <i class="fas fa-check-circle text-[10px]"></i> বোর্ড ও বিশ্ববিদ্যালয় সার্কুলার
         </p>
       </div>
@@ -204,14 +204,14 @@ export function renderOverviewTab(): string {
       </div>
 
       <!-- ৭. শিক্ষক ও মেন্টর -->
-      <div onclick="navigateToTab('teacher')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-emerald-500/50 hover:shadow-md transition">
+      <div onclick="navigateToTab('teacher')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-orange-500/50 hover:shadow-md transition">
         <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
           <span class="font-semibold">শিক্ষক ও মেন্টর হাব</span>
-          <span class="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-chalkboard-user"></i></span>
+          <span class="w-6 h-6 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-chalkboard-user"></i></span>
         </div>
         <p class="text-2xl font-black text-slate-900" id="cmdMetricMentors">০</p>
         <p class="text-[11px] text-slate-400 mt-1 flex items-center justify-between">
-          <span>অনলাইন: <b id="cmdSubOnlineMentors" class="text-emerald-600">০</b></span>
+          <span>অনলাইন: <b id="cmdSubOnlineMentors" class="text-orange-600">০</b></span>
           <span>সমাধান: <b id="cmdSubSolvedTickets" class="text-sky-600">০</b></span>
         </p>
       </div>
@@ -236,9 +236,9 @@ export function renderOverviewTab(): string {
     <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 space-y-3">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100">
         <h3 class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
-          <i class="fas fa-user-plus text-emerald-600"></i> সাম্প্রতিক ইউজার তালিকা
+          <i class="fas fa-user-plus text-orange-600"></i> সাম্প্রতিক ইউজার তালিকা
         </h3>
-        <button onclick="navigateToTab('users')" class="text-xs text-emerald-600 hover:text-emerald-700 font-bold">
+        <button onclick="navigateToTab('users')" class="text-xs text-orange-600 hover:text-orange-700 font-bold">
           সব ইউজার দেখুন →
         </button>
       </div>

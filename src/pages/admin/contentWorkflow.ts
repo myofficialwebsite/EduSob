@@ -14,13 +14,13 @@ export function renderContentWorkflowBar(cfg: ContentModuleConfig): string {
 <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-4 sm:p-5 mb-5 space-y-3">
   <div class="flex items-center justify-between gap-3 flex-wrap">
     <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center font-black text-base">
+      <div class="w-10 h-10 rounded-2xl bg-orange-50 border border-orange-200 text-orange-700 flex items-center justify-center font-black text-base">
         ⚡
       </div>
       <div>
         <div class="flex items-center gap-2">
           <h3 class="font-extrabold text-slate-900 text-sm">${cfg.title} — অটো-কালেকশন ও ভেরিফিকেশন পাইপলাইন</h3>
-          <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">স্বয়ংক্রিয় সিঙ্ক</span>
+          <span class="text-[10px] bg-orange-100 text-orange-800 font-bold px-2 py-0.5 rounded-full">স্বয়ংক্রিয় সিঙ্ক</span>
         </div>
         <p class="text-xs text-slate-500 mt-0.5">
           সোর্স: <a href="${cfg.sourcePortalUrl}" target="_blank" class="text-sky-600 hover:underline font-semibold">${cfg.sourcePortalName} ↗</a> • অটো-সিঙ্ক থেকে সংগৃহীত ডাটা যাচাই ও ১-ক্লিকে অনুমোদন
@@ -29,7 +29,7 @@ export function renderContentWorkflowBar(cfg: ContentModuleConfig): string {
     </div>
 
     <div class="flex items-center gap-2 flex-wrap">
-      <button onclick="triggerAutoCollection('${cfg.scope}')" class="px-3.5 py-2 bg-gradient-to-r from-amber-400 to-emerald-400 hover:from-amber-300 hover:to-emerald-300 text-slate-950 font-black rounded-xl text-xs transition shadow flex items-center gap-1.5">
+      <button onclick="triggerAutoCollection('${cfg.scope}')" class="px-3.5 py-2 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 font-black rounded-xl text-xs transition shadow flex items-center gap-1.5">
         <i class="fas fa-rotate"></i> ${cfg.sourcePortalName} সিঙ্ক করুন
       </button>
       <button onclick="toggleManualCrudForm('${cfg.moduleKey}')" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition flex items-center gap-1.5">

@@ -3,10 +3,10 @@ export function renderSyncCenterTab(): string {
   return `
 <section id="tab-autocollect" class="tab-pane space-y-6">
   <!-- হেডার ও পরিচিতি ব্যানার -->
-  <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 text-white rounded-3xl p-6 sm:p-7 shadow-xl border border-slate-800">
+  <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-orange-950 text-white rounded-3xl p-6 sm:p-7 shadow-xl border border-slate-800">
     <div class="flex items-start justify-between gap-4 flex-wrap pb-5 border-b border-slate-700/60">
       <div>
-        <div class="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-2">
+        <div class="inline-flex items-center gap-1.5 bg-orange-500/20 text-orange-300 border border-orange-500/30 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-2">
           <i class="fas fa-bolt text-amber-400"></i> সেন্ট্রাল ইনজেশন ও ডাটা অটোমেশন ইঞ্জিন
         </div>
         <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">
@@ -19,7 +19,7 @@ export function renderSyncCenterTab(): string {
 
       <!-- মাস্টার সিঙ্ক ট্রিগার -->
       <div class="flex items-center gap-2">
-        <button onclick="triggerAutoCollection('all')" id="btnMasterSync" class="bg-gradient-to-r from-amber-400 to-emerald-400 hover:from-amber-300 hover:to-emerald-300 text-slate-950 font-black px-5 py-3 rounded-2xl text-xs transition shadow-xl flex items-center gap-2 transform active:scale-95">
+        <button onclick="triggerAutoCollection('all')" id="btnMasterSync" class="bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 font-black px-5 py-3 rounded-2xl text-xs transition shadow-xl flex items-center gap-2 transform active:scale-95">
           <i class="fas fa-wand-magic-sparkles text-sm"></i>
           <span>১-ক্লিক সম্পূর্ণ মাস্টার সিঙ্ক চালান</span>
         </button>
@@ -34,7 +34,7 @@ export function renderSyncCenterTab(): string {
       </div>
       <div>
         <span class="text-slate-400">সর্বশেষ সফল সিঙ্ক</span>
-        <p class="text-xl font-black text-emerald-400 mt-0.5" id="syncStatLastTime">কিছুক্ষণ আগে</p>
+        <p class="text-xl font-black text-orange-400 mt-0.5" id="syncStatLastTime">কিছুক্ষণ আগে</p>
       </div>
       <div>
         <span class="text-slate-400">মোট সংগৃহীত কন্টেন্ট</span>
@@ -52,7 +52,7 @@ export function renderSyncCenterTab(): string {
     <div class="flex items-center justify-between gap-3 flex-wrap">
       <div>
         <h3 class="font-black text-slate-900 text-base flex items-center gap-2">
-          <i class="fas fa-tower-broadcast text-emerald-600"></i> অটো কালেকশন সোর্স ও ইনজেশন পাইপলাইন
+          <i class="fas fa-tower-broadcast text-orange-600"></i> অটো কালেকশন সোর্স ও ইনজেশন পাইপলাইন
         </h3>
         <p class="text-xs text-slate-500">প্রতিটি শিক্ষা সোর্সের লাইভ স্ট্যাটাস, নতুন আইটেম সংখ্যা এবং ম্যানুয়াল ফোর্স সিঙ্ক</p>
       </div>
@@ -88,7 +88,7 @@ export function renderSyncCenterTab(): string {
     <div class="lg:col-span-1 bg-slate-950 text-slate-200 rounded-3xl p-4 sm:p-5 font-mono text-xs border border-slate-800 flex flex-col justify-between space-y-3">
       <div>
         <div class="flex items-center justify-between text-slate-400 pb-2 border-b border-slate-800">
-          <span class="flex items-center gap-1.5 text-xs text-emerald-400 font-bold">
+          <span class="flex items-center gap-1.5 text-xs text-orange-400 font-bold">
             <i class="fas fa-terminal"></i> লাইভ এক্সিকিউশন টার্মিনাল
           </span>
           <span id="autoCollectTime" class="text-[10px] text-slate-500">প্রস্তুত</span>
@@ -107,7 +107,7 @@ export function renderSyncCenterTab(): string {
     <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 space-y-3">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100">
         <h3 class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
-          <i class="fas fa-clock-rotate-left text-emerald-600"></i> সিঙ্ক হিস্ট্রি ও ডায়াগনস্টিক অডিট (sync_logs)
+          <i class="fas fa-clock-rotate-left text-orange-600"></i> সিঙ্ক হিস্ট্রি ও ডায়াগনস্টিক অডিট (sync_logs)
         </h3>
         <span class="text-xs text-slate-400">বিগত ৫০টি সিঙ্ক ইভেন্ট</span>
       </div>

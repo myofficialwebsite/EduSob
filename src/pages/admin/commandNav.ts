@@ -83,12 +83,12 @@ export function renderAdminHeader(): string {
   <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3 flex-wrap border-b border-slate-800/80">
     <div class="flex items-center gap-3">
       <a href="/dashboard" class="flex items-center gap-2 font-black text-lg tracking-tight">
-        <span class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center text-slate-950 font-bold shadow-md">📚</span>
+        <span class="w-8 h-8 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center text-slate-950 font-bold shadow-md">📚</span>
         <span>এডুসব</span>
         <span class="text-[11px] font-extrabold bg-gradient-to-r from-rose-500 to-amber-500 text-white px-2.5 py-0.5 rounded-full shadow-sm uppercase tracking-wider">এডমিন প্যানেল</span>
       </a>
       <span class="hidden md:inline-flex items-center gap-1.5 text-xs text-slate-400 bg-slate-800/80 border border-slate-700/60 px-2.5 py-1 rounded-lg">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></span>
         <span id="headerSyncStatus">ডাটাবেজ ও সিঙ্ক ইঞ্জিন লাইভ</span>
       </span>
     </div>
@@ -97,7 +97,7 @@ export function renderAdminHeader(): string {
     <div class="flex items-center gap-2 text-xs flex-wrap">
       <div class="relative hidden sm:block">
         <i class="fas fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-        <input id="quickModuleSearch" placeholder="যেকোনো মডিউল খুঁজুন (যেমন: mcq, job, শিক্ষক)..." oninput="filterAdminModules(this.value)" class="bg-slate-800/90 border border-slate-700/80 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-emerald-400 w-56 lg:w-64 transition">
+        <input id="quickModuleSearch" placeholder="যেকোনো মডিউল খুঁজুন (যেমন: mcq, job, শিক্ষক)..." oninput="filterAdminModules(this.value)" class="bg-slate-800/90 border border-slate-700/80 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-orange-400 w-56 lg:w-64 transition">
         <div id="quickSearchResults" class="absolute left-0 right-0 top-full mt-1 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl p-2 hidden z-50 text-xs space-y-1"></div>
       </div>
       <a href="/admin/shop" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 px-3 py-1.5 rounded-xl font-medium transition flex items-center gap-1.5">
@@ -106,7 +106,7 @@ export function renderAdminHeader(): string {
       <a href="/admin/cv-templates" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 px-3 py-1.5 rounded-xl font-medium transition flex items-center gap-1.5">
         <i class="fas fa-file-lines text-sky-400"></i><span>CV টেমপ্লেট</span>
       </a>
-      <a href="/dashboard" class="bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-semibold transition flex items-center gap-1.5">
+      <a href="/dashboard" class="bg-orange-600/20 hover:bg-orange-600/30 text-orange-300 border border-orange-500/30 px-3 py-1.5 rounded-xl font-semibold transition flex items-center gap-1.5">
         <i class="fas fa-arrow-left"></i><span>ড্যাশবোর্ড</span>
       </a>
     </div>
@@ -119,7 +119,7 @@ export function renderAdminHeader(): string {
         <button 
           id="btn-${cat.id}" 
           onclick="switchAdminCategory('${cat.id}')"
-          class="admin-cat-btn px-3.5 py-2 rounded-t-xl font-bold whitespace-nowrap transition flex items-center gap-1.5 ${idx === 0 ? 'bg-slate-800 text-emerald-400 border-t-2 border-emerald-400' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'}"
+          class="admin-cat-btn px-3.5 py-2 rounded-t-xl font-bold whitespace-nowrap transition flex items-center gap-1.5 ${idx === 0 ? 'bg-slate-800 text-orange-400 border-t-2 border-orange-400' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'}"
         >
           <i class="fas ${cat.icon}"></i>
           <span>${cat.label}</span>

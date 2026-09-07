@@ -4,7 +4,7 @@ import type { SessionUser } from '../lib/auth'
 import { religionInfo, toBn } from '../lib/dates'
 
 const THEMES: Record<string, { grad: string; side: string; accent: string; accentBg: string; chip: string; border: string }> = {
-  emerald: { grad: 'from-slate-950 via-slate-900 to-emerald-950', side: 'bg-slate-900/95', accent: 'text-emerald-400', accentBg: 'bg-emerald-500', chip: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30', border: 'border-emerald-500/20' },
+  orange: { grad: 'from-slate-950 via-slate-900 to-orange-950', side: 'bg-slate-900/95', accent: 'text-orange-400', accentBg: 'bg-orange-500', chip: 'bg-orange-500/15 text-orange-300 border-orange-500/30', border: 'border-orange-500/20' },
   saffron: { grad: 'from-slate-950 via-slate-900 to-amber-950', side: 'bg-slate-900/95', accent: 'text-amber-400', accentBg: 'bg-amber-500', chip: 'bg-amber-500/15 text-amber-300 border-amber-500/30', border: 'border-amber-500/20' },
   maroon: { grad: 'from-slate-950 via-slate-900 to-rose-950', side: 'bg-slate-900/95', accent: 'text-rose-400', accentBg: 'bg-rose-600', chip: 'bg-rose-500/15 text-rose-300 border-rose-500/30', border: 'border-rose-500/20' },
   blue: { grad: 'from-slate-950 via-slate-900 to-sky-950', side: 'bg-slate-900/95', accent: 'text-sky-400', accentBg: 'bg-sky-500', chip: 'bg-sky-500/15 text-sky-300 border-sky-500/30', border: 'border-sky-500/20' },
@@ -12,17 +12,17 @@ const THEMES: Record<string, { grad: string; side: string; accent: string; accen
 
 export function dashboardPage(user: SessionUser): string {
   const info = religionInfo(user.religion)
-  const t = THEMES[info.theme] ?? THEMES.emerald
+  const t = THEMES[info.theme] ?? THEMES.orange
   const firstLetter = user.name_bn ? user.name_bn.charAt(0) : 'এ'
 
   const sidebarNav = `
     <div class="px-3 pb-2 text-[10px] uppercase tracking-wider font-bold text-slate-400">আমার স্টাডি স্পেস</div>
     <a href="/dashboard" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl ${t.accentBg} text-white font-bold shadow-sm transition"><i class="fas fa-compass w-4"></i> <span>স্টুডেন্ট ড্যাশবোর্ড</span></a>
     <a href="/results" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-semibold transition"><i class="fas fa-graduation-cap w-4 text-amber-400"></i> <span>রেজাল্ট হাব</span></a>
-    <a href="/profile" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-semibold transition"><i class="fas fa-id-card w-4 text-teal-400"></i> <span>আমার প্রোফাইল</span></a>
+    <a href="/profile" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-semibold transition"><i class="fas fa-id-card w-4 text-amber-400"></i> <span>আমার প্রোফাইল</span></a>
 
     <div class="pt-4 px-3 pb-2 text-[10px] uppercase tracking-wider font-bold text-slate-400">স্টাডি ও প্র্যাকটিস</div>
-    <a href="/mcq" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-list-check w-4 text-emerald-400"></i> <span>MCQ টেস্ট</span></a>
+    <a href="/mcq" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-list-check w-4 text-orange-400"></i> <span>MCQ টেস্ট</span></a>
     <a href="/qpapers" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-file-pdf w-4 text-amber-400"></i> <span>প্রশ্নব্যাংক PDF</span></a>
     <a href="/scholarships" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-award w-4 text-yellow-400"></i> <span>স্কলারশিপ হাব</span></a>
     <a href="/planner" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-calendar-check w-4 text-purple-400"></i> <span>স্টাডি প্ল্যানার</span></a>
@@ -30,13 +30,13 @@ export function dashboardPage(user: SessionUser): string {
     <div class="pt-4 px-3 pb-2 text-[10px] uppercase tracking-wider font-bold text-slate-400">স্টুডেন্ট টুলস</div>
     <a href="/teacher-support" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-amber-300 hover:bg-amber-500/20 font-semibold transition text-xs bg-amber-500/10 border border-amber-400/20"><i class="fas fa-chalkboard-user w-4 text-amber-400"></i> <span>শিক্ষক সহায়তা</span> <span class="text-[9px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.5 rounded-full ml-auto">LIVE</span></a>
     <a href="/cv" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-file-lines w-4 text-sky-400"></i> <span>CV মেকার</span></a>
-    <a href="/wallet" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-wallet w-4 text-teal-400"></i> <span>ওয়ালেট</span></a>
+    <a href="/wallet" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-wallet w-4 text-amber-400"></i> <span>ওয়ালেট</span></a>
     <a href="/assisted" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-hands-helping w-4 text-rose-400"></i> <span>আবেদন সহায়তা</span></a>
 
     <div class="pt-4 px-3 pb-2 text-[10px] uppercase tracking-wider font-bold text-slate-400">আপডেট ও সার্কুলার</div>
     <a href="/notices" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-bullhorn w-4 text-amber-400"></i> <span>নোটিস বোর্ড</span></a>
-    <a href="/admissions" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-door-open w-4 text-emerald-400"></i> <span>ভর্তি হাব</span></a>
-    <a href="/jobs" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-briefcase w-4 text-teal-400"></i> <span>চাকরির খবর</span></a>
+    <a href="/admissions" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-door-open w-4 text-orange-400"></i> <span>ভর্তি হাব</span></a>
+    <a href="/jobs" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-briefcase w-4 text-amber-400"></i> <span>চাকরির খবর</span></a>
     <a href="/news" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-newspaper w-4 text-sky-400"></i> <span>শিক্ষা সংবাদ</span></a>
 
     ${user.role === 'admin' ? `
@@ -45,18 +45,18 @@ export function dashboardPage(user: SessionUser): string {
     ` : ''}
   `
 
-  return pageShell('আমার ড্যাশবোর্ড — এডুসব', `bg-gradient-to-br ${t.grad} text-slate-100 min-h-screen selection:bg-emerald-500 selection:text-black`, `
+  return pageShell('আমার ড্যাশবোর্ড — এডুসব', `bg-gradient-to-br ${t.grad} text-slate-100 min-h-screen selection:bg-orange-500 selection:text-black`, `
 <div class="flex min-h-screen">
   <!-- ১. আধুনিক সাইডবার -->
   <aside id="sidebar" class="hidden lg:flex flex-col w-64 shrink-0 ${t.side} backdrop-blur-2xl border-r border-white/10 sticky top-0 h-screen overflow-hidden z-20">
     <div class="p-5 border-b border-white/10">
       <a href="/" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center text-white text-lg shadow-md shadow-emerald-500/20 group-hover:scale-105 transition">
+        <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl flex items-center justify-center text-white text-lg shadow-md shadow-orange-500/20 group-hover:scale-105 transition">
           <i class="fas fa-graduation-cap"></i>
         </div>
         <div class="flex flex-col">
           <span class="text-white font-black text-lg tracking-tight leading-none">এডুসব</span>
-          <span class="text-[10px] text-emerald-400 font-semibold tracking-wide uppercase mt-1">Student Study Hub</span>
+          <span class="text-[10px] text-orange-400 font-semibold tracking-wide uppercase mt-1">Student Study Hub</span>
         </div>
       </a>
     </div>
@@ -74,7 +74,7 @@ export function dashboardPage(user: SessionUser): string {
         <div class="flex-1 min-w-0">
           <p class="text-xs font-bold text-white truncate">${user.name_bn}</p>
           <div class="flex items-center gap-2 mt-0.5">
-            <span class="text-[10px] text-emerald-400 font-mono">৳ <span class="wallet-val">০</span></span>
+            <span class="text-[10px] text-orange-400 font-mono">৳ <span class="wallet-val">০</span></span>
             <span class="text-[10px] text-slate-400">·</span>
             <button onclick="logout()" class="text-[10px] text-rose-400 hover:underline">লগআউট</button>
           </div>
@@ -89,7 +89,7 @@ export function dashboardPage(user: SessionUser): string {
     <aside class="absolute left-0 top-0 h-full w-72 max-w-[85vw] ${t.side} backdrop-blur-2xl border-r border-white/10 p-5 overflow-y-auto flex flex-col z-10 shadow-2xl">
       <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
         <a href="/" class="flex items-center gap-2.5">
-          <span class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center text-white text-sm"><i class="fas fa-graduation-cap"></i></span>
+          <span class="w-8 h-8 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center text-white text-sm"><i class="fas fa-graduation-cap"></i></span>
           <span class="font-extrabold text-white text-base">এডুসব</span>
         </a>
         <button onclick="toggleDrawer(false)" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 flex items-center justify-center"><i class="fas fa-xmark"></i></button>
@@ -112,7 +112,7 @@ export function dashboardPage(user: SessionUser): string {
       <div class="flex items-center gap-3 min-w-0">
         <button onclick="toggleDrawer(true)" class="lg:hidden w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 flex items-center justify-center shrink-0" aria-label="মেনু"><i class="fas fa-bars text-sm"></i></button>
         <div class="flex items-center gap-2 min-w-0 text-xs">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+          <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse shrink-0"></span>
           <span class="text-slate-200 font-semibold truncate hidden sm:inline">আমার স্টাডি স্পেস</span>
           <span class="text-slate-500 hidden sm:inline">|</span>
           <span class="text-slate-400 truncate text-[11px]">${info.gregLine}</span>
@@ -121,7 +121,7 @@ export function dashboardPage(user: SessionUser): string {
 
       <div class="flex items-center gap-2 sm:gap-3 shrink-0">
         <!-- ১-ক্লিক রেজাল্ট বাটন -->
-        <button onclick="openResultModal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-slate-950 text-xs font-bold transition shadow-sm">
+        <button onclick="openResultModal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-500 hover:bg-orange-600 text-slate-950 text-xs font-bold transition shadow-sm">
           <i class="fas fa-search text-[10px]"></i> <span>রেজাল্ট চেক</span>
         </button>
 
@@ -144,7 +144,7 @@ export function dashboardPage(user: SessionUser): string {
         </a>
 
         <!-- ওয়ালেট পিল -->
-        <a href="/wallet" class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25 text-xs font-bold transition">
+        <a href="/wallet" class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-500/15 border border-orange-500/30 text-orange-300 hover:bg-orange-500/25 text-xs font-bold transition">
           <i class="fas fa-wallet text-[10px]"></i>
           <span>৳ <span class="wallet-val">০</span></span>
         </a>
@@ -168,13 +168,13 @@ export function dashboardPage(user: SessionUser): string {
               <span class="user-init">${firstLetter}</span>
               <img class="user-photo w-full h-full object-cover hidden" alt="${user.name_bn}">
             </div>
-            <a href="/profile" class="absolute -bottom-1 -right-1 w-5 h-5 bg-slate-900 border border-white/20 text-white rounded-full flex items-center justify-center text-[9px] hover:bg-emerald-600 transition" title="প্রোফাইল"><i class="fas fa-pen"></i></a>
+            <a href="/profile" class="absolute -bottom-1 -right-1 w-5 h-5 bg-slate-900 border border-white/20 text-white rounded-full flex items-center justify-center text-[9px] hover:bg-orange-600 transition" title="প্রোফাইল"><i class="fas fa-pen"></i></a>
           </div>
           <div class="min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
               <h1 class="text-lg sm:text-xl font-black text-white truncate">${info.greeting}, ${user.name_bn}</h1>
-              <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2 py-0.2 rounded-full font-bold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ভেরিফাইড
+              <span class="text-[10px] bg-orange-500/20 text-orange-300 border border-orange-400/30 px-2 py-0.2 rounded-full font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span> ভেরিফাইড
               </span>
               <a href="/subscription" id="userSubBadge" class="hidden"></a>
             </div>
@@ -218,15 +218,15 @@ export function dashboardPage(user: SessionUser): string {
           <!-- প্রোফাইল প্রগ্রেস -->
           <a href="/profile" class="flex items-center gap-2 text-xs text-slate-300 hover:text-white transition" title="প্রোফাইল আপডেট">
             <div class="w-14 bg-black/40 h-1.5 rounded-full overflow-hidden border border-white/10">
-              <div id="profileProgressBar" class="bg-gradient-to-r from-emerald-400 to-teal-400 h-full rounded-full transition-all duration-500" style="width:0%"></div>
+              <div id="profileProgressBar" class="bg-gradient-to-r from-orange-400 to-amber-400 h-full rounded-full transition-all duration-500" style="width:0%"></div>
             </div>
-            <span id="profilePct" class="font-mono font-bold text-emerald-400 text-[11px]">০%</span>
+            <span id="profilePct" class="font-mono font-bold text-orange-400 text-[11px]">০%</span>
           </a>
 
           <div class="h-4 w-px bg-white/10 hidden sm:block"></div>
 
           <!-- ওয়ালেট কুইক রিচার্জ -->
-          <button onclick="openAddMoneyModal()" class="text-xs font-bold text-emerald-400 hover:underline flex items-center gap-1">
+          <button onclick="openAddMoneyModal()" class="text-xs font-bold text-orange-400 hover:underline flex items-center gap-1">
             <i class="fas fa-plus-circle text-[11px]"></i> ক্যাশ-ইন
           </button>
         </div>
@@ -236,7 +236,7 @@ export function dashboardPage(user: SessionUser): string {
       <section id="daily-study-deck" class="space-y-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-orange-400 animate-ping"></span>
             <h2 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
               আজকের পড়ার লক্ষ্য ও মিশন
             </h2>
@@ -276,38 +276,38 @@ export function dashboardPage(user: SessionUser): string {
           <div id="cardStudyMissionBox" class="p-3 sm:p-4 space-y-2.5">
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold text-slate-300 flex items-center gap-2">
-                <i class="fas fa-list-check text-emerald-400"></i> আজকের পড়ার চেকলিস্ট
+                <i class="fas fa-list-check text-orange-400"></i> আজকের পড়ার চেকলিস্ট
               </span>
-              <span id="studyMissionPct" class="text-[11px] font-mono text-emerald-400 font-bold">০% সম্পন্ন</span>
+              <span id="studyMissionPct" class="text-[11px] font-mono text-orange-400 font-bold">০% সম্পন্ন</span>
             </div>
 
             <!-- প্রগ্রেস বার -->
             <div class="w-full bg-black/40 h-1.5 rounded-full overflow-hidden border border-white/10">
-              <div id="deckProgressBar" class="bg-gradient-to-r from-emerald-400 via-teal-400 to-sky-400 h-full rounded-full transition-all duration-300" style="width:0%"></div>
+              <div id="deckProgressBar" class="bg-gradient-to-r from-orange-400 via-amber-400 to-sky-400 h-full rounded-full transition-all duration-300" style="width:0%"></div>
             </div>
 
             <!-- কম্প্যাক্ট টাস্ক লিস্ট (No box within box!) -->
             <div class="grid sm:grid-cols-2 gap-2 pt-1">
               <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition border border-transparent hover:border-white/5">
-                <input type="checkbox" onchange="toggleTask(0)" id="task_0" class="w-4 h-4 rounded text-emerald-500 bg-slate-900 border-white/20">
+                <input type="checkbox" onchange="toggleTask(0)" id="task_0" class="w-4 h-4 rounded text-orange-500 bg-slate-900 border-white/20">
                 <span id="task_text_0" class="text-xs text-slate-200 flex-1 select-none transition-all">২০টি বিষয়ভিত্তিক MCQ অনুশীলন</span>
-                <a href="/mcq" class="text-[10px] text-emerald-400 font-bold hover:underline shrink-0" onclick="event.stopPropagation()">টেস্ট দিন →</a>
+                <a href="/mcq" class="text-[10px] text-orange-400 font-bold hover:underline shrink-0" onclick="event.stopPropagation()">টেস্ট দিন →</a>
               </label>
 
               <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition border border-transparent hover:border-white/5">
-                <input type="checkbox" onchange="toggleTask(1)" id="task_1" class="w-4 h-4 rounded text-emerald-500 bg-slate-900 border-white/20">
+                <input type="checkbox" onchange="toggleTask(1)" id="task_1" class="w-4 h-4 rounded text-orange-500 bg-slate-900 border-white/20">
                 <span id="task_text_1" class="text-xs text-slate-200 flex-1 select-none transition-all">বিগত বছরের ১টি প্রশ্ন সমাধান</span>
                 <a href="/qpapers" class="text-[10px] text-amber-400 font-bold hover:underline shrink-0" onclick="event.stopPropagation()">PDF →</a>
               </label>
 
               <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition border border-transparent hover:border-white/5">
-                <input type="checkbox" onchange="toggleTask(2)" id="task_2" class="w-4 h-4 rounded text-emerald-500 bg-slate-900 border-white/20">
+                <input type="checkbox" onchange="toggleTask(2)" id="task_2" class="w-4 h-4 rounded text-orange-500 bg-slate-900 border-white/20">
                 <span id="task_text_2" class="text-xs text-slate-200 flex-1 select-none transition-all">নতুন স্কলারশিপ বা উপবৃত্তি যোগ্যতা চেক</span>
                 <a href="/scholarships" class="text-[10px] text-yellow-400 font-bold hover:underline shrink-0" onclick="event.stopPropagation()">যাচাই →</a>
               </label>
 
               <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition border border-transparent hover:border-white/5">
-                <input type="checkbox" onchange="toggleTask(3)" id="task_3" class="w-4 h-4 rounded text-emerald-500 bg-slate-900 border-white/20">
+                <input type="checkbox" onchange="toggleTask(3)" id="task_3" class="w-4 h-4 rounded text-orange-500 bg-slate-900 border-white/20">
                 <span id="task_text_3" class="text-xs text-slate-200 flex-1 select-none transition-all">আজকের বোর্ড নোটিস ও রুটিন দেখা</span>
                 <a href="/notices" class="text-[10px] text-sky-400 font-bold hover:underline shrink-0" onclick="event.stopPropagation()">নোটিস →</a>
               </label>
@@ -320,7 +320,7 @@ export function dashboardPage(user: SessionUser): string {
               <span class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
                 <i class="fas fa-copy text-amber-400"></i> ১-ক্লিক ফরম ফিলিং ক্লিপবোর্ড
               </span>
-              <a href="/profile" class="text-[11px] text-emerald-400 hover:underline">প্রোফাইল এডিট</a>
+              <a href="/profile" class="text-[11px] text-orange-400 hover:underline">প্রোফাইল এডিট</a>
             </div>
             <div id="quickCopyStrip" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
               <div class="text-[11px] text-slate-400 animate-pulse">প্রোফাইল চিপস লোড হচ্ছে...</div>
@@ -338,7 +338,7 @@ export function dashboardPage(user: SessionUser): string {
             <div id="compactVerseBox" class="flex items-center gap-2 text-[11px] text-slate-300 italic min-w-0 truncate md:max-w-md">
               <i class="fas fa-quote-left text-amber-400 shrink-0"></i>
               <span id="compactVerseText" class="truncate">অনুপ্রেরণা লোড হচ্ছে...</span>
-              <button onclick="copyVerseText()" class="text-emerald-400 hover:underline shrink-0 not-italic ml-1" title="কপি"><i class="fas fa-copy"></i></button>
+              <button onclick="copyVerseText()" class="text-orange-400 hover:underline shrink-0 not-italic ml-1" title="কপি"><i class="fas fa-copy"></i></button>
             </div>
           </div>
 
@@ -356,18 +356,18 @@ export function dashboardPage(user: SessionUser): string {
 
         <!-- প্রাইমারি হাই-ইনটেন্ট বাটনস (বড় ও বিশিষ্ট) -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          <button onclick="openResultModal()" class="group bg-gradient-to-br from-white/10 to-white/5 hover:from-emerald-500/20 hover:to-teal-500/20 border border-white/10 hover:border-emerald-400/50 rounded-2xl p-3.5 text-left transition flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg shrink-0 group-hover:scale-110 transition"><i class="fas fa-magnifying-glass"></i></div>
+          <button onclick="openResultModal()" class="group bg-gradient-to-br from-white/10 to-white/5 hover:from-orange-500/20 hover:to-amber-500/20 border border-white/10 hover:border-orange-400/50 rounded-2xl p-3.5 text-left transition flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center text-lg shrink-0 group-hover:scale-110 transition"><i class="fas fa-magnifying-glass"></i></div>
             <div class="min-w-0">
-              <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 truncate">রেজাল্ট চেক</h4>
+              <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-orange-300 truncate">রেজাল্ট চেক</h4>
               <p class="text-[10px] text-slate-400 truncate">SSC/HSC অফিসিয়াল ডাটা</p>
             </div>
           </button>
 
-          <a href="/mcq" class="group bg-gradient-to-br from-white/10 to-white/5 hover:from-teal-500/20 hover:to-emerald-500/20 border border-white/10 hover:border-teal-400/50 rounded-2xl p-3.5 text-left transition flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-lg shrink-0 group-hover:scale-110 transition"><i class="fas fa-list-check"></i></div>
+          <a href="/mcq" class="group bg-gradient-to-br from-white/10 to-white/5 hover:from-amber-500/20 hover:to-orange-500/20 border border-white/10 hover:border-amber-400/50 rounded-2xl p-3.5 text-left transition flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg shrink-0 group-hover:scale-110 transition"><i class="fas fa-list-check"></i></div>
             <div class="min-w-0">
-              <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-teal-300 truncate">MCQ টেস্ট</h4>
+              <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-amber-300 truncate">MCQ টেস্ট</h4>
               <p class="text-[10px] text-slate-400 truncate">অধ্যায়ভিত্তিক প্রশ্ন অনুশীলন</p>
             </div>
           </a>
@@ -401,7 +401,7 @@ export function dashboardPage(user: SessionUser): string {
             <i class="fas fa-hands-helping text-rose-400 text-[10px]"></i> আবেদন সেবা
           </a>
           <a id="dashQuickShopBtn" href="/shop" class="feature-shop-link px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs whitespace-nowrap transition flex items-center gap-1.5">
-            <i class="fas fa-store text-emerald-400 text-[10px]"></i> এডুসব শপ
+            <i class="fas fa-store text-orange-400 text-[10px]"></i> এডুসব শপ
           </a>
           <a href="/planner" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs whitespace-nowrap transition flex items-center gap-1.5">
             <i class="fas fa-calendar-check text-purple-400 text-[10px]"></i> স্টাডি প্ল্যানার
@@ -420,7 +420,7 @@ export function dashboardPage(user: SessionUser): string {
             <i class="fas fa-rss text-sky-400"></i> স্টাডি ফিড ও সার্কুলার
           </button>
           <button onclick="setDashTab('community')" id="tabBtn_community" class="dash-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-400 hover:text-white hover:bg-white/10">
-            <i class="fas fa-users-rays text-teal-400"></i> বোনাস ও সাপোর্ট
+            <i class="fas fa-users-rays text-amber-400"></i> বোনাস ও সাপোর্ট
           </button>
         </div>
 
@@ -447,7 +447,7 @@ export function dashboardPage(user: SessionUser): string {
             <div class="pt-4 border-t border-white/10 space-y-3">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-white flex items-center gap-2">
-                  <i class="fas fa-search text-emerald-400"></i> দ্রুত যে কোনো রেজাল্ট খুঁজুন
+                  <i class="fas fa-search text-orange-400"></i> দ্রুত যে কোনো রেজাল্ট খুঁজুন
                 </span>
                 <span class="text-[10px] text-slate-400">অফিসিয়াল ডাটা প্রক্সি</span>
               </div>
@@ -493,7 +493,7 @@ export function dashboardPage(user: SessionUser): string {
                   <input type="text" id="qrReg" placeholder="রেজি নম্বর" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-2.5 py-1.5 text-white font-mono">
                 </div>
                 <div class="col-span-2 sm:col-span-5 flex justify-end">
-                  <button type="submit" id="qrSubmitBtn" class="px-4 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold transition flex items-center gap-1.5 text-xs shadow-md">
+                  <button type="submit" id="qrSubmitBtn" class="px-4 py-1.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-slate-950 font-bold transition flex items-center gap-1.5 text-xs shadow-md">
                     <i class="fas fa-search text-[10px]"></i> রেজাল্ট অনুসন্ধান
                   </button>
                 </div>
@@ -537,9 +537,9 @@ export function dashboardPage(user: SessionUser): string {
             <div id="cardJobsBox" class="bg-white/5 border border-white/10 rounded-2xl p-4 space-y-3">
               <div class="flex items-center justify-between">
                 <h4 class="text-xs font-bold text-white flex items-center gap-2">
-                  <i class="fas fa-briefcase text-teal-400"></i> নতুন চাকরির সার্কুলার
+                  <i class="fas fa-briefcase text-amber-400"></i> নতুন চাকরির সার্কুলার
                 </h4>
-                <a href="/jobs" class="text-[11px] text-teal-400 hover:underline">সকল চাকরি →</a>
+                <a href="/jobs" class="text-[11px] text-amber-400 hover:underline">সকল চাকরি →</a>
               </div>
               <div id="jobsPreviewTimeline" class="divide-y divide-white/5 space-y-2 pt-1 text-xs">
                 <p class="text-slate-400 text-center py-3 text-xs animate-pulse">চাকরি লোড হচ্ছে...</p>
@@ -558,8 +558,8 @@ export function dashboardPage(user: SessionUser): string {
                 <h4 class="text-xs sm:text-sm font-bold text-white">রেফারেল প্রোগ্রাম — বন্ধুকে আমন্ত্রণ জানান</h4>
                 <p class="text-[11px] text-slate-400 mt-0.5">আপনার রেফারেল কোডে রেজিস্ট্রেশন করলে দুজনের ওয়ালেটেই ক্যাশব্যাক যোগ হবে।</p>
                 <div class="flex items-center gap-2 mt-2">
-                  <code class="bg-black/40 border border-white/15 px-2.5 py-0.5 rounded text-xs font-mono text-emerald-400 font-bold">${user.user_code}</code>
-                  <button onclick="copyRefLink()" class="px-2.5 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-xs transition flex items-center gap-1">
+                  <code class="bg-black/40 border border-white/15 px-2.5 py-0.5 rounded text-xs font-mono text-orange-400 font-bold">${user.user_code}</code>
+                  <button onclick="copyRefLink()" class="px-2.5 py-1 rounded-lg bg-orange-500 hover:bg-orange-600 text-slate-950 font-bold text-xs transition flex items-center gap-1">
                     <i class="fas fa-link text-[9px]"></i> লিংক কপি
                   </button>
                 </div>
@@ -572,7 +572,7 @@ export function dashboardPage(user: SessionUser): string {
               </div>
               <div class="text-right">
                 <p class="text-[10px] text-slate-400">মোট বোনাস</p>
-                <p class="text-base font-black text-emerald-400">৳<span id="refEarned">০</span></p>
+                <p class="text-base font-black text-orange-400">৳<span id="refEarned">০</span></p>
               </div>
             </div>
           </div>
@@ -583,7 +583,7 @@ export function dashboardPage(user: SessionUser): string {
               <h4 class="text-xs font-bold text-white flex items-center gap-2">
                 <i class="fas fa-headset text-amber-400"></i> অফিসিয়াল সাপোর্ট ও কমিউনিটি
               </h4>
-              <span class="text-[10px] text-emerald-400 font-semibold">সরাসরি যুক্ত থাকুন</span>
+              <span class="text-[10px] text-orange-400 font-semibold">সরাসরি যুক্ত থাকুন</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs">
               <a id="linkFacebook" href="https://facebook.com/groups/edusob.community" target="_blank" rel="noopener" class="p-2.5 rounded-xl bg-white/5 hover:bg-blue-600/20 border border-white/5 hover:border-blue-400/40 text-left transition flex items-center gap-2.5">
@@ -600,8 +600,8 @@ export function dashboardPage(user: SessionUser): string {
                   <p class="text-[9px] text-slate-400 truncate">ভিডিও ক্লাস</p>
                 </div>
               </a>
-              <a id="linkWhatsapp" href="https://chat.whatsapp.com/edusob-study-hub" target="_blank" rel="noopener" class="p-2.5 rounded-xl bg-white/5 hover:bg-emerald-600/20 border border-white/5 hover:border-emerald-400/40 text-left transition flex items-center gap-2.5">
-                <i class="fab fa-whatsapp text-emerald-400 text-sm"></i>
+              <a id="linkWhatsapp" href="https://chat.whatsapp.com/edusob-study-hub" target="_blank" rel="noopener" class="p-2.5 rounded-xl bg-white/5 hover:bg-orange-600/20 border border-white/5 hover:border-orange-400/40 text-left transition flex items-center gap-2.5">
+                <i class="fab fa-whatsapp text-orange-400 text-sm"></i>
                 <div class="min-w-0">
                   <p class="font-bold text-white truncate text-[11px]">হোয়াটসঅ্যাপ</p>
                   <p class="text-[9px] text-slate-400 truncate">গ্রুপ আপডেট</p>
@@ -633,7 +633,7 @@ export function dashboardPage(user: SessionUser): string {
 <!-- ৫. ফ্লোটিং অ্যাকশন স্পিড ডায়াল (FAB) ও ১-ক্লিক স্ক্রোল-টু-টপ -->
 <div id="dashFab" class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2">
   <!-- কুইক স্ক্রোল টু টপ বাটন (২০০px নিচে স্ক্রোল করলে অটো দৃশ্যমান হয়) -->
-  <button id="dashScrollTopBtn" onclick="dashScrollToTop()" class="hidden opacity-0 translate-y-2 pointer-events-none transition-all duration-300 w-10 h-10 rounded-full bg-slate-900/90 hover:bg-slate-800 text-emerald-400 border border-white/20 shadow-xl items-center justify-center text-sm active:scale-95 group mb-0.5" title="পৃষ্ঠার শীর্ষে যান">
+  <button id="dashScrollTopBtn" onclick="dashScrollToTop()" class="hidden opacity-0 translate-y-2 pointer-events-none transition-all duration-300 w-10 h-10 rounded-full bg-slate-900/90 hover:bg-slate-800 text-orange-400 border border-white/20 shadow-xl items-center justify-center text-sm active:scale-95 group mb-0.5" title="পৃষ্ঠার শীর্ষে যান">
     <i class="fas fa-arrow-up group-hover:-translate-y-0.5 transition-transform"></i>
   </button>
 
@@ -646,17 +646,17 @@ export function dashboardPage(user: SessionUser): string {
       <span>শিক্ষককে প্রশ্ন করুন</span>
       <i class="fas fa-chalkboard-user text-amber-400 text-xs"></i>
     </button>
-    <button onclick="openResultModal(); toggleFab(false)" class="flex items-center gap-2 bg-slate-900/95 border border-emerald-400/40 text-emerald-300 px-3 py-1.5 rounded-xl shadow-xl text-xs font-bold hover:bg-slate-800 transition">
+    <button onclick="openResultModal(); toggleFab(false)" class="flex items-center gap-2 bg-slate-900/95 border border-orange-400/40 text-orange-300 px-3 py-1.5 rounded-xl shadow-xl text-xs font-bold hover:bg-slate-800 transition">
       <span>রেজাল্ট চেক</span>
-      <i class="fas fa-graduation-cap text-emerald-400 text-xs"></i>
+      <i class="fas fa-graduation-cap text-orange-400 text-xs"></i>
     </button>
-    <a href="https://wa.me/8801835414122" target="_blank" rel="noopener" class="flex items-center gap-2 bg-slate-900/95 border border-teal-400/40 text-teal-300 px-3 py-1.5 rounded-xl shadow-xl text-xs font-bold hover:bg-slate-800 transition">
+    <a href="https://wa.me/8801835414122" target="_blank" rel="noopener" class="flex items-center gap-2 bg-slate-900/95 border border-amber-400/40 text-amber-300 px-3 py-1.5 rounded-xl shadow-xl text-xs font-bold hover:bg-slate-800 transition">
       <span>সরাসরি হোয়াটসঅ্যাপ</span>
-      <i class="fab fa-whatsapp text-teal-400 text-xs"></i>
+      <i class="fab fa-whatsapp text-amber-400 text-xs"></i>
     </a>
   </div>
 
-  <button id="fabMainBtn" onclick="toggleFab()" class="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black shadow-xl hover:scale-105 active:scale-95 transition flex items-center justify-center text-base border border-white/20" title="কুইক মেনু">
+  <button id="fabMainBtn" onclick="toggleFab()" class="w-12 h-12 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 font-black shadow-xl hover:scale-105 active:scale-95 transition flex items-center justify-center text-base border border-white/20" title="কুইক মেনু">
     <i id="fabIcon" class="fas fa-bolt"></i>
   </button>
 </div>
@@ -784,10 +784,10 @@ function showToast(msg){
   if (!t) {
     t = document.createElement('div');
     t.id = 'dashToast';
-    t.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] bg-slate-900 border border-emerald-500/40 text-emerald-300 font-bold px-4 py-2 rounded-xl shadow-2xl text-xs flex items-center gap-2 transition-all opacity-0 pointer-events-none transform translate-y-3';
+    t.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] bg-slate-900 border border-orange-500/40 text-orange-300 font-bold px-4 py-2 rounded-xl shadow-2xl text-xs flex items-center gap-2 transition-all opacity-0 pointer-events-none transform translate-y-3';
     document.body.appendChild(t);
   }
-  t.innerHTML = '<i class="fas fa-circle-check text-emerald-400"></i> ' + msg;
+  t.innerHTML = '<i class="fas fa-circle-check text-orange-400"></i> ' + msg;
   t.classList.remove('opacity-0', 'translate-y-3');
   t.classList.add('opacity-100', 'translate-y-0');
   setTimeout(function(){
@@ -817,7 +817,7 @@ function updatePushStatusUI(){
   if (!icon || !txt) return;
   if (!('Notification' in window)) { txt.textContent = 'পুশ বন্ধ'; return; }
   if (Notification.permission === 'granted') {
-    icon.className = 'fas fa-bell text-emerald-400';
+    icon.className = 'fas fa-bell text-orange-400';
     txt.textContent = 'পুশ অন';
   } else if (Notification.permission === 'denied') {
     icon.className = 'fas fa-bell-slash text-rose-400';
@@ -962,7 +962,7 @@ async function loadDashboardCore(){
         if (subBadge) {
           subBadge.className = isPrem
             ? 'inline-flex text-[10px] font-black px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 items-center gap-1 shadow-sm hover:opacity-90 transition'
-            : 'inline-flex text-[10px] font-black px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 items-center gap-1 hover:bg-emerald-500/30 transition';
+            : 'inline-flex text-[10px] font-black px-2.5 py-0.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-400/40 items-center gap-1 hover:bg-orange-500/30 transition';
           subBadge.innerHTML = (isPrem ? '<i class="fas fa-crown text-[9px]"></i>' : '<i class="fas fa-bolt text-[9px]"></i>') + ' ' + (isPrem ? 'প্রিমিয়াম প্রো' : 'স্ট্যান্ডার্ড');
           subBadge.title = 'সাবস্ক্রিপশন আইডি: ' + (sub.subscription_id || '') + ' — বিস্তারিত দেখতে ক্লিক করুন';
         }
@@ -971,8 +971,8 @@ async function loadDashboardCore(){
         if (topbarPill) {
           topbarPill.className = isPrem
             ? 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 hover:bg-amber-500/25 text-xs font-bold transition shadow-xs'
-            : 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25 text-xs font-bold transition shadow-xs';
-          if (topbarIcon) topbarIcon.className = isPrem ? 'fas fa-crown text-[10px] text-amber-400' : 'fas fa-bolt text-[10px] text-emerald-400';
+            : 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-500/15 border border-orange-500/30 text-orange-300 hover:bg-orange-500/25 text-xs font-bold transition shadow-xs';
+          if (topbarIcon) topbarIcon.className = isPrem ? 'fas fa-crown text-[10px] text-amber-400' : 'fas fa-bolt text-[10px] text-orange-400';
           if (topbarLabel) topbarLabel.textContent = isPrem ? 'প্রিমিয়াম প্রো' : 'স্ট্যান্ডার্ড';
           topbarPill.title = 'সক্রিয় মেম্বারশিপ: ' + (sub.subscription_id || '') + ' (' + (sub.days_left || 0) + ' দিন বাকি)';
         }
@@ -1023,7 +1023,7 @@ function renderQuickCopyStrip(prof){
     return '<button onclick="copyPillDirect(this, \\''+escH(c.val)+'\\', \\''+escH(c.label)+'\\')" class="copy-chip-btn px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-slate-200 text-[11px] whitespace-nowrap transition inline-flex items-center gap-1.5 active:scale-95 group">' +
       '<span class="text-slate-400">'+escH(c.label)+':</span>' +
       '<span class="font-mono font-bold text-white">'+escH(c.val)+'</span>' +
-      '<i class="copy-icon fas fa-copy text-[9px] text-emerald-400 group-hover:scale-110"></i>' +
+      '<i class="copy-icon fas fa-copy text-[9px] text-orange-400 group-hover:scale-110"></i>' +
     '</button>';
   }).join('');
 }
@@ -1033,8 +1033,8 @@ function copyPillDirect(btn, val, label){
   navigator.clipboard.writeText(val).then(() => {
     const icon = btn.querySelector('.copy-icon');
     if (icon) {
-      icon.className = 'copy-icon fas fa-check text-[9px] text-emerald-300 animate-bounce';
-      setTimeout(() => { icon.className = 'copy-icon fas fa-copy text-[9px] text-emerald-400 group-hover:scale-110'; }, 1500);
+      icon.className = 'copy-icon fas fa-check text-[9px] text-orange-300 animate-bounce';
+      setTimeout(() => { icon.className = 'copy-icon fas fa-copy text-[9px] text-orange-400 group-hover:scale-110'; }, 1500);
     }
     showToast(label + ' কপি হয়েছে ✓');
   }).catch(() => {
@@ -1072,7 +1072,7 @@ function renderSavedRolls(rolls){
         '</div>' +
       '</div>' +
       '<div class="flex items-center gap-1.5 shrink-0">' +
-        '<button onclick="quickCheckSpecificRoll(\\''+x.exam_type+'\\', \\''+x.exam_year+'\\', \\''+x.board+'\\', \\''+x.roll+'\\', \\''+x.reg+'\\')" class="text-xs bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 px-2.5 py-1 rounded-lg font-bold transition flex items-center gap-1">' +
+        '<button onclick="quickCheckSpecificRoll(\\''+x.exam_type+'\\', \\''+x.exam_year+'\\', \\''+x.board+'\\', \\''+x.roll+'\\', \\''+x.reg+'\\')" class="text-xs bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 px-2.5 py-1 rounded-lg font-bold transition flex items-center gap-1">' +
           '<i class="fas fa-search text-[9px]"></i> রেজাল্ট' +
         '</button>' +
         '<button onclick="deleteSavedRoll('+x.id+')" class="w-7 h-7 rounded-lg bg-rose-500/10 hover:bg-rose-500/25 text-rose-400 transition flex items-center justify-center" title="মুছে ফেলুন">' +
@@ -1114,7 +1114,7 @@ async function loadFeedsAndTimelines(){
               if (h * 60 + m > nowMin) { nextName = NAMES[k]; nextMin = h * 60 + m; break; }
             }
             prayerBox.innerHTML =
-              '<i class="fas fa-mosque text-emerald-400 text-sm shrink-0"></i>' +
+              '<i class="fas fa-mosque text-orange-400 text-sm shrink-0"></i>' +
               '<span class="text-slate-300 font-semibold">নামাজ (ঢাকা): পরবর্তী <b class="text-white">' + nextName + '</b></span>' +
               '<div class="hidden sm:flex items-center gap-1.5 text-[11px] text-slate-400 ml-2 font-mono">' +
                 order.map(k => '<span class="bg-black/30 px-1.5 py-0.5 rounded">'+NAMES[k]+': '+BN(t[k])+'</span>').join('') +
@@ -1216,7 +1216,7 @@ async function loadAnnouncementsFeed(){
               '</div>' +
               '<p class="text-[11px] text-slate-300 line-clamp-1">' + escH(a.body || '') + '</p>' +
             '</div>' +
-            (a.link ? '<a href="'+a.link+'" '+(a.link.startsWith('http') ? 'target="_blank" rel="noopener"' : '')+' class="text-[10px] text-emerald-400 font-bold hover:underline shrink-0">দেখুন →</a>' : '<button onclick="openNotificationsModal()" class="text-[10px] text-amber-400 font-bold hover:underline shrink-0">পড়ুন</button>') +
+            (a.link ? '<a href="'+a.link+'" '+(a.link.startsWith('http') ? 'target="_blank" rel="noopener"' : '')+' class="text-[10px] text-orange-400 font-bold hover:underline shrink-0">দেখুন →</a>' : '<button onclick="openNotificationsModal()" class="text-[10px] text-amber-400 font-bold hover:underline shrink-0">পড়ুন</button>') +
           '</div>'
         ).join('');
       }
@@ -1251,7 +1251,7 @@ async function loadNewsAndJobsFeed(){
             '<p class="font-semibold text-white truncate">' + escH(j.title) + '</p>' +
             '<p class="text-[10px] text-slate-400 truncate">' + escH(j.org || '') + (j.deadline ? ' · শেষ: ' + BN(j.deadline) : '') + '</p>' +
           '</div>' +
-          '<a href="' + (j.apply_link || '/jobs') + '" ' + (j.apply_link ? 'target="_blank" rel="noopener"' : '') + ' class="text-[10px] bg-teal-500/20 text-teal-300 hover:bg-teal-500/30 px-2 py-0.5 rounded font-bold shrink-0 transition">আবেদন</a>' +
+          '<a href="' + (j.apply_link || '/jobs') + '" ' + (j.apply_link ? 'target="_blank" rel="noopener"' : '') + ' class="text-[10px] bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 px-2 py-0.5 rounded font-bold shrink-0 transition">আবেদন</a>' +
         '</div>'
       ).join('') : '<p class="text-slate-400 text-center py-2">চাকরি লোড হয়নি</p>';
     }
@@ -1405,7 +1405,7 @@ function openResultModal(){
           '<input type="text" id="mResReg" placeholder="রেজি নম্বর দিন" required class="w-full bg-slate-800 border border-white/20 rounded-xl p-2.5 text-white font-mono">' +
         '</div>' +
       '</div>' +
-      '<button type="submit" id="mResSubmitBtn" class="w-full mt-3 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black transition flex items-center justify-center gap-2 shadow-lg">' +
+      '<button type="submit" id="mResSubmitBtn" class="w-full mt-3 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-slate-950 font-black transition flex items-center justify-center gap-2 shadow-lg">' +
         '<i class="fas fa-search"></i> রেজাল্ট দেখুন' +
       '</button>' +
       '<div id="mResOutput" class="pt-2"></div>' +
@@ -1433,13 +1433,13 @@ async function handleModalResultSubmit(e){
       const s = res.data.student || {};
       const r = res.data.result || {};
       out.innerHTML =
-        '<div class="bg-emerald-500/15 rounded-xl p-3.5 border border-emerald-500/40 space-y-1.5">' +
+        '<div class="bg-orange-500/15 rounded-xl p-3.5 border border-orange-500/40 space-y-1.5">' +
           '<div class="flex items-center justify-between">' +
             '<h4 class="font-bold text-white text-xs sm:text-sm">' + (s.name || 'শিক্ষার্থী') + '</h4>' +
-            '<span class="text-xs bg-emerald-500 text-slate-950 font-black px-2 py-0.5 rounded">GPA: ' + (r.gpa || 'Passed') + '</span>' +
+            '<span class="text-xs bg-orange-500 text-slate-950 font-black px-2 py-0.5 rounded">GPA: ' + (r.gpa || 'Passed') + '</span>' +
           '</div>' +
           '<p class="text-slate-300 text-xs">রোল: ' + roll + ' · বোর্ড: ' + board.toUpperCase() + ' · ফলাফল: ' + (r.status || 'উত্তীর্ণ') + '</p>' +
-          '<a href="/results" class="inline-block pt-1 text-xs text-emerald-400 font-bold hover:underline">পূর্ণাঙ্গ মার্কশিট হাব →</a>' +
+          '<a href="/results" class="inline-block pt-1 text-xs text-orange-400 font-bold hover:underline">পূর্ণাঙ্গ মার্কশিট হাব →</a>' +
         '</div>';
     } else {
       out.innerHTML = '<p class="text-rose-400 text-xs text-center py-2">' + (res.data?.error || 'রেজাল্ট পাওয়া যায়নি') + '</p>';
@@ -1487,13 +1487,13 @@ async function handleQuickResultSubmit(e){
       const s = res.data.student || {};
       const r = res.data.result || {};
       container.innerHTML =
-        '<div class="bg-emerald-500/15 border border-emerald-500/40 rounded-xl p-3 flex items-center justify-between gap-3">' +
+        '<div class="bg-orange-500/15 border border-orange-500/40 rounded-xl p-3 flex items-center justify-between gap-3">' +
           '<div>' +
             '<p class="text-xs font-bold text-white">' + (s.name || 'শিক্ষার্থী') + ' · বোর্ড: ' + board.toUpperCase() + '</p>' +
             '<p class="text-[11px] text-slate-300">রোল: ' + roll + ' | রেজি: ' + reg + ' | সাল: ' + year + '</p>' +
           '</div>' +
           '<div class="flex items-center gap-2">' +
-            '<span class="text-xs font-black bg-emerald-500 text-slate-950 px-2.5 py-1 rounded">GPA ' + (r.gpa || 'উত্তীর্ণ') + '</span>' +
+            '<span class="text-xs font-black bg-orange-500 text-slate-950 px-2.5 py-1 rounded">GPA ' + (r.gpa || 'উত্তীর্ণ') + '</span>' +
             '<a href="/results" class="text-xs bg-white/10 text-white font-bold px-2 py-1 rounded hover:bg-white/20">মার্কশিট</a>' +
           '</div>' +
         '</div>';
@@ -1658,14 +1658,14 @@ function openAddMoneyModal(){
     '<div class="space-y-3.5 text-xs">' +
       '<p class="text-slate-300">বিকাশ, নগদ বা রকেটের মাধ্যমে খুব সহজেই ওয়ালেট রিচার্জ করুন। ব্যালেন্স দিয়ে বিভিন্ন পরীক্ষার ফরম পূরণ ও প্রিমিয়াম স্টুডেন্ট টুলস ব্যবহার করতে পারবেন।</p>' +
       '<div class="bg-white/5 border border-white/15 rounded-xl p-3 space-y-1.5">' +
-        '<p class="font-bold text-white flex items-center gap-2"><i class="fas fa-money-bill-transfer text-emerald-400"></i> সেন্ড মানি নম্বর (Personal):</p>' +
+        '<p class="font-bold text-white flex items-center gap-2"><i class="fas fa-money-bill-transfer text-orange-400"></i> সেন্ড মানি নম্বর (Personal):</p>' +
         '<div class="flex items-center justify-between bg-black/40 px-3 py-2 rounded-lg border border-white/10">' +
-          '<code class="font-mono font-bold text-sm text-emerald-300">01835414122</code>' +
+          '<code class="font-mono font-bold text-sm text-orange-300">01835414122</code>' +
           '<button onclick="copyText(\\'01835414122\\', \\'নম্বর কপি হয়েছে!\\')" class="text-[11px] bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded text-slate-200 transition">কপি</button>' +
         '</div>' +
         '<p class="text-[10px] text-slate-400">টাকা পাঠিয়ে ট্রানজেকশন আইডি ওয়ালেট পেজে সাবমিট করুন।</p>' +
       '</div>' +
-      '<a href="/wallet" class="block text-center w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black transition shadow-lg">' +
+      '<a href="/wallet" class="block text-center w-full py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-slate-950 font-black transition shadow-lg">' +
         'ওয়ালেট ড্যাশবোর্ডে যান →' +
       '</a>' +
     '</div>'
@@ -1688,7 +1688,7 @@ function openNotificationsModal(){
           '</div>' +
           '<h4 class="font-bold text-white text-xs sm:text-sm">' + escH(a.title) + '</h4>' +
           '<p class="text-[11px] text-slate-300">' + escH(a.body || '') + '</p>' +
-          (a.link ? '<a href="'+a.link+'" target="_blank" class="inline-block pt-1 text-emerald-400 font-bold text-xs hover:underline">বিস্তারিত →</a>' : '') +
+          (a.link ? '<a href="'+a.link+'" target="_blank" class="inline-block pt-1 text-orange-400 font-bold text-xs hover:underline">বিস্তারিত →</a>' : '') +
         '</div>'
       ).join('') +
     '</div>'
