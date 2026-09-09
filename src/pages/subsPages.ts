@@ -26,7 +26,7 @@ ${NAV(loggedIn)}
     <div class="inline-flex items-center gap-2 bg-amber-500/15 border border-amber-400/30 text-amber-300 px-4 py-1.5 rounded-full text-xs font-bold mb-3">
       <i class="fas fa-crown"></i> এডুসব স্টুডেন্ট মেম্বারশিপ
     </div>
-    <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-2">আপনার পছন্দের স্টাডি প্যাকেজ</h1>
+    <h1 class="font-serif-bn text-2xl sm:text-4xl font-bold text-white mb-2">আপনার পছন্দের স্টাডি প্যাকেজ</h1>
     <p class="text-slate-400 text-sm max-w-xl mx-auto">বোর্ড প্রশ্নব্যাংক, ১০০% কমন সাজেশন, শিক্ষকের সাথে ১-অন-১ ডাউট সলভ ও অফিশিয়াল PDF ডাউনলোড সুবিধা</p>
   </div>
 
@@ -229,7 +229,7 @@ ${NAV(loggedIn)}
     <span class="inline-flex items-center gap-1.5 bg-orange-500/20 text-orange-300 border border-orange-400/30 px-3 py-1 rounded-full text-xs font-semibold mb-3">
       <i class="fas fa-certificate"></i> অফিশিয়াল বোর্ড ও মডেল টেস্ট সংগ্রহশালা
     </span>
-    <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-2">📜 প্রশ্নপত্র, মডেল টেস্ট ও সাজেশন ব্যাংক</h1>
+    <h1 class="font-serif-bn text-2xl sm:text-4xl font-bold text-white mb-2">📜 প্রশ্নপত্র, মডেল টেস্ট ও সাজেশন ব্যাংক</h1>
     <p class="text-slate-300 text-sm max-w-2xl mx-auto">
       নতুন কারিকুলাম, বিগত ৫-৭ বছরের সকল বোর্ড প্রশ্ন (২০১৭-২০২৪), বিসিএস ও চাকরির প্রশ্নব্যাংক — সাইটেই পড়ুন এবং এক ক্লিকে বুকস্টোর-গ্রেড অফিশিয়াল A4 PDF প্রিন্ট/ডাউনলোড করুন।
     </p>

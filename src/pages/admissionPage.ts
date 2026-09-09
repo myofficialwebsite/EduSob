@@ -10,7 +10,7 @@ ${siteHeader({ activeKey: 'admission', loggedIn, theme: 'dark' })}
     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-400/30 text-orange-300 text-xs font-semibold mb-3">
       <i class="fas fa-bolt text-amber-400"></i> শতভাগ সরাসরি আবেদন ফরম (Direct Internal Forms) ও সেন্ট্রাল গেটওয়ে
     </div>
-    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">🎓 কেন্দ্রীয় ভর্তি ও আবেদন হাব</h1>
+    <h1 class="font-serif-bn text-3xl sm:text-[2.6rem] font-bold tracking-tight leading-snug">🎓 কেন্দ্রীয় ভর্তি ও আবেদন হাব</h1>
     <p class="text-slate-400 mt-2 max-w-2xl mx-auto text-sm sm:text-base">
       জাতীয় বিশ্ববিদ্যালয় (ডিগ্রি/অনার্স/মাস্টার্স) · একাদশ শ্রেণি · গুচ্ছ (GST) · উন্মুক্ত (BOU) · মেডিকেল ও নার্সিং · সরকারি চাকরি (NTRCA/BCS/Primary) — সরাসরি আবেদন ফরম লিংক ও নির্দেশিকা
     </p>

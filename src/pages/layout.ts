@@ -6,6 +6,14 @@ export const DARK_PORTAL_CSS = ``;
 export const HEAD_COMMON = `
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0b0d12">
+<meta name="description" content="এডুসব (EduSob) — বাংলাদেশের শিক্ষার্থীদের ডিজিটাল শিক্ষা সুপার-পোর্টাল: রেজাল্ট হাব, ভর্তি তথ্য, MCQ প্র্যাকটিস, প্রশ্নব্যাংক, CV মেকার, স্কলারশিপ ও মেন্টর সহায়তা — সব এক ঠিকানায়, ফ্রি।">
+<meta name="keywords" content="SSC result, HSC result, NU result, রেজাল্ট, ভর্তি, MCQ, CV maker, স্কলারশিপ, বাংলাদেশ শিক্ষা">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="এডুসব | EduSob">
+<meta property="og:title" content="এডুসব — শিক্ষার সব, এক ঠিকানায়">
+<meta property="og:description" content="SSC · HSC · NU রেজাল্ট, ভর্তি তথ্য, MCQ, প্রশ্নব্যাংক, CV মেকার, স্কলারশিপ ও মেন্টর সহায়তা — সম্পূর্ণ ফ্রি, এক প্ল্যাটফর্মে।">
+<meta property="og:image" content="/static/img/hero-students.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="এডুসব">

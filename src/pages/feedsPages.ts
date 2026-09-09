@@ -58,7 +58,7 @@ export function newsPage(loggedIn: boolean): string {
 ${publicHeader('news', loggedIn)}
 <main class="max-w-4xl mx-auto px-4 py-8">
   <section id="news-header" class="mb-6">
-    <h1 class="text-3xl font-bold"><i class="fas fa-newspaper text-orange-400 mr-2"></i>নিউজ পোর্টাল</h1>
+    <h1 class="font-serif-bn text-3xl font-bold"><i class="fas fa-newspaper text-orange-400 mr-2"></i>নিউজ পোর্টাল</h1>
     <p class="text-slate-400 text-sm mt-1">দেশের শীর্ষ সংবাদ — অটো-আপডেট (প্রথম আলো, বিবিসি বাংলা, গুগল নিউজ)</p>
   </section>
 
@@ -114,7 +114,7 @@ export function jobsPage(loggedIn: boolean, userLevel = ''): string {
 ${publicHeader('jobs', loggedIn)}
 <main class="max-w-4xl mx-auto px-4 py-8">
   <section id="jobs-header" class="mb-6">
-    <h1 class="text-3xl font-bold"><i class="fas fa-briefcase text-orange-400 mr-2"></i>চাকরির খবর</h1>
+    <h1 class="font-serif-bn text-3xl font-bold"><i class="fas fa-briefcase text-orange-400 mr-2"></i>চাকরির খবর</h1>
     <p class="text-slate-400 text-sm mt-1">সরকারি (টেলিটক) + ব্যাংক + বেসরকারি — শিক্ষাস্তর অনুযায়ী ম্যাচ %</p>
     ${loggedIn ? '' : `<p class="text-xs text-amber-300 mt-2 bg-amber-500/10 border border-amber-400/20 rounded-xl px-3 py-2 inline-block"><i class="fas fa-lock mr-1"></i> সাইন-আপ করলে আপনার শিক্ষাস্তর অনুযায়ী অটো ম্যাচ % দেখাবে — <a href="/signup" class="underline font-semibold">ফ্রি সাইন-আপ</a></p>`}
   </section>
@@ -195,7 +195,7 @@ export function noticesPage(loggedIn: boolean): string {
 ${publicHeader('notices', loggedIn)}
 <main class="max-w-4xl mx-auto px-4 py-8">
   <section id="notices-header" class="mb-6">
-    <h1 class="text-3xl font-bold"><i class="fas fa-bullhorn text-orange-400 mr-2"></i>নোটিস বোর্ড</h1>
+    <h1 class="font-serif-bn text-3xl font-bold"><i class="fas fa-bullhorn text-orange-400 mr-2"></i>নোটিস বোর্ড</h1>
     <p class="text-slate-400 text-sm mt-1">NU · শিক্ষা বোর্ড · DSHE · NTRCA — গুরুত্বপূর্ণ বিজ্ঞপ্তি এক জায়গায়</p>
   </section>
 

@@ -21,7 +21,7 @@ export function boardChallengePage(loggedIn: boolean): string {
     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-400/30 text-amber-300 text-xs font-semibold mb-3">
       <i class="fas fa-scale-balanced"></i> সকল শিক্ষা বোর্ড, জাতীয় বিশ্ববিদ্যালয় ও উন্মুক্ত
     </div>
-    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">⚖️ বোর্ড চ্যালেঞ্জ ও খাতা পুনর্নিরীক্ষণ হাব</h1>
+    <h1 class="font-serif-bn text-3xl sm:text-[2.6rem] font-bold tracking-tight leading-snug">⚖️ বোর্ড চ্যালেঞ্জ ও খাতা পুনর্নিরীক্ষণ হাব</h1>
     <p class="text-slate-400 mt-2 max-w-2xl mx-auto text-sm sm:text-base">
       এসএসসি, এইচএসসি, ডিগ্রি, অনার্স ও উন্মুক্ত — সঠিক এসএমএস ফরমেট জেনারেটর, ফি ক্যালকুলেটর, ধাপে ধাপে নিয়মাবলী ও সরাসরি বোর্ড নোটিস-ফলাফল লিংক
     </p>

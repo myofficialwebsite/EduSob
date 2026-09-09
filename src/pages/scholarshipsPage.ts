@@ -12,7 +12,7 @@ ${siteHeader({ activeKey: 'scholarships', loggedIn, theme: 'dark' })}
       <span class="inline-flex items-center gap-2 bg-amber-500/20 text-amber-300 border border-amber-400/30 px-3 py-1 rounded-full text-xs font-semibold">
         <i class="fas fa-wand-magic-sparkles"></i> এআই অটো-যোগ্যতা ও রোডম্যাপ সিস্টেম
       </span>
-      <h1 class="text-2xl md:text-4xl font-extrabold text-white leading-tight">
+      <h1 class="font-serif-bn text-2xl md:text-[2.6rem] font-bold text-white leading-snug">
         আপনার যোগ্যতা অনুযায়ী <span class="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-300 bg-clip-text text-transparent">উপযুক্ত স্কলারশিপ</span> ও আবেদনের পূর্ণাঙ্গ পথরেখা
       </h1>
       <p class="text-slate-300 text-sm md:text-base leading-relaxed">

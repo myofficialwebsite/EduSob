@@ -36,7 +36,7 @@ ${NAV(loggedIn)}
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs sm:text-sm font-bold">
           <i class="fas fa-crown text-amber-400"></i> ১-অন-১ প্রিমিয়াম শিক্ষক সহায়তা
         </div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
+        <h1 class="font-serif-bn text-3xl sm:text-4xl lg:text-[3.2rem] font-bold tracking-tight leading-snug text-white">
           কঠিন অংক বা পড়ায় আটকে গেছেন? <br class="hidden sm:inline" />
           <span class="bg-gradient-to-r from-amber-300 via-orange-300 to-amber-200 bg-clip-text text-transparent">সরাসরি সমাধান নিন সেরা শিক্ষকের কাছে</span>
         </h1>

@@ -158,7 +158,7 @@ ${siteHeader({ activeKey: 'results', loggedIn, theme: 'dark' })}
     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-400/30 text-orange-300 text-xs font-semibold mb-3">
       <i class="fas fa-circle-check"></i> শতভাগ যাচাইকৃত সরাসরি সরকারি ও প্রাতিষ্ঠানিক ফলাফল লিংক
     </div>
-    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">🎓 কেন্দ্রীয় রেজাল্ট হাব</h1>
+    <h1 class="font-serif-bn text-3xl sm:text-[2.7rem] font-bold tracking-tight leading-snug">🎓 কেন্দ্রীয় <span class="bg-gradient-to-r from-orange-300 to-amber-300 bg-clip-text text-transparent">রেজাল্ট হাব</span></h1>
     <p class="text-slate-400 mt-2 max-w-2xl mx-auto text-sm sm:text-base">
       SSC · HSC · অনার্স · ডিগ্রি · উন্মুক্ত (BOU) · কারিগরি · মেডিকেল · NTRCA · BCS — সরাসরি রেজাল্ট গেটওয়ে, এসএমএস পদ্ধতি ও লাইভ সার্ভার স্ট্যাটাস
     </p>

@@ -172,7 +172,7 @@ export function dashboardPage(user: SessionUser): string {
           </div>
           <div class="min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
-              <h1 class="text-lg sm:text-xl font-black text-white truncate">${info.greeting}, ${user.name_bn}</h1>
+              <h1 class="font-serif-bn text-xl sm:text-2xl font-bold text-white truncate">${info.greeting}, ${user.name_bn}</h1>
               <span class="text-[10px] bg-orange-500/20 text-orange-300 border border-orange-400/30 px-2 py-0.2 rounded-full font-bold flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span> ভেরিফাইড
               </span>

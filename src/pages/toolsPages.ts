@@ -23,7 +23,7 @@ ${siteHeader({ activeKey: 'mcq', loggedIn, theme: 'dark' })}
           <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-500/20 text-orange-300 border border-orange-500/30">স্মার্ট মডেল টেস্ট</span>
           <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">স্পেসড রিভিশন ১→৩→৭ দিন</span>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-black flex items-center gap-2.5 text-white">
+        <h1 class="font-serif-bn text-2xl sm:text-3xl font-bold flex items-center gap-2.5 text-white">
           <span class="text-orange-400"><i class="fas fa-list-check mr-1.5"></i>MCQ প্র্যাকটিস ও রিভিশন হাব</span>
         </h1>
         <p class="text-slate-300 text-xs sm:text-sm mt-1">বিষয়ভিত্তিক প্রশ্নব্যাংক — পরীক্ষা দিন, ভুল প্রশ্ন স্বয়ংক্রিয়ভাবে ভুল-ব্যাংকে সেভ হবে ও সময়মতো মনে করিয়ে দেবে</p>
@@ -365,7 +365,7 @@ ${toolsHeader('planner', loggedIn)}
       <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">স্মার্ট স্টাডি টুল</span>
       <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-500/20 text-orange-300 border border-orange-500/30">ক্লাউড অটো-সেভ</span>
     </div>
-    <h1 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-2">
+    <h1 class="font-serif-bn text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
       <i class="fas fa-calendar-check text-purple-400"></i>
       <span>স্টাডি প্ল্যানার ও অধ্যায়ভিত্তিক নোট</span>
     </h1>
@@ -477,7 +477,7 @@ ${toolsHeader('cgpa', loggedIn)}
       <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-500/20 text-orange-300 border border-orange-500/30">NU ও বিশ্ববিদ্যালয় স্কেল</span>
       <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">৪.০০ পয়েন্ট স্কেল</span>
     </div>
-    <h1 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-2">
+    <h1 class="font-serif-bn text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
       <i class="fas fa-calculator text-orange-400"></i>
       <span>CGPA ক্যালকুলেটর ও টার্গেট প্ল্যানার</span>
     </h1>
@@ -630,7 +630,7 @@ ${toolsHeader('syllabus', loggedIn)}
         <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-500/20 text-orange-300 border border-orange-500/30">অফিসিয়াল ২০২৬</span>
         <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">অন-সাইট পূর্ণাঙ্গ ডাটাবেজ</span>
       </div>
-      <h1 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-2">
+      <h1 class="font-serif-bn text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
         <i class="fas fa-book-open-reader text-orange-400"></i>
         <span>সিলেবাস, পাঠ্যক্রম ও মানবণ্টন হাব</span>
       </h1>
