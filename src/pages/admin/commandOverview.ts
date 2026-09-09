@@ -3,7 +3,7 @@ export function renderOverviewTab(): string {
   return `
 <section id="tab-overview" class="tab-pane space-y-6">
   <!-- ১. সিস্টেম হেলথ ও রিয়েল-টাইম স্ট্যাটাস বার -->
-  <div class="bg-slate-900 text-white border border-slate-800 rounded-3xl p-4 sm:p-5 shadow-xl">
+  <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-orange-950/60 text-white border border-slate-800 rounded-3xl p-4 sm:p-5 shadow-xl">
     <div class="flex items-center justify-between gap-4 flex-wrap pb-4 border-b border-slate-800">
       <div class="flex items-center gap-3">
         <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-400 text-slate-950 flex items-center justify-center font-black text-xl shadow-lg">
@@ -78,7 +78,7 @@ export function renderOverviewTab(): string {
   <!-- ২. উচ্চ-অগ্রাধিকার অ্যালার্ট ডেক (Urgent Pending Items) -->
   <div id="urgentAlertsBox" class="grid sm:grid-cols-3 gap-3">
     <!-- ১. অ্যাসিস্টেড আবেদন -->
-    <div onclick="navigateToTab('assisted')" class="cursor-pointer bg-white border border-rose-200 rounded-2xl p-4 shadow-sm hover:border-rose-400 hover:shadow transition flex items-center justify-between">
+    <div onclick="navigateToTab('assisted')" class="kpi-card cursor-pointer bg-white border border-rose-200 rounded-2xl p-4 shadow-sm hover:border-rose-400 hover:shadow transition flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-lg">
           📋
@@ -92,7 +92,7 @@ export function renderOverviewTab(): string {
     </div>
 
     <!-- ২. অনুত্তরিত ডাউট টিকিট -->
-    <div onclick="navigateToTab('teacher')" class="cursor-pointer bg-white border border-amber-200 rounded-2xl p-4 shadow-sm hover:border-amber-400 hover:shadow transition flex items-center justify-between">
+    <div onclick="navigateToTab('teacher')" class="kpi-card cursor-pointer bg-white border border-amber-200 rounded-2xl p-4 shadow-sm hover:border-amber-400 hover:shadow transition flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-lg">
           💬
@@ -106,7 +106,7 @@ export function renderOverviewTab(): string {
     </div>
 
     <!-- ৩. পেমেন্ট রিকোয়েস্ট -->
-    <div onclick="navigateToTab('subs')" class="cursor-pointer bg-white border border-orange-200 rounded-2xl p-4 shadow-sm hover:border-orange-400 hover:shadow transition flex items-center justify-between">
+    <div onclick="navigateToTab('subs')" class="kpi-card cursor-pointer bg-white border border-orange-200 rounded-2xl p-4 shadow-sm hover:border-orange-400 hover:shadow transition flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-lg">
           💳
@@ -131,12 +131,12 @@ export function renderOverviewTab(): string {
 
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
       <!-- ১. ইউজার -->
-      <div onclick="navigateToTab('users')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-orange-500/50 hover:shadow-md transition">
+      <div onclick="navigateToTab('users')" class="kpi-card cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-orange-500/50 hover:shadow-md transition">
         <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
           <span class="font-semibold">নিবন্ধিত শিক্ষার্থী</span>
-          <span class="w-6 h-6 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-users"></i></span>
+          <span class="w-7 h-7 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-users"></i></span>
         </div>
-        <p class="text-2xl font-black text-slate-900" id="cmdMetricUsers">০</p>
+        <p class="text-3xl font-black text-slate-900 tracking-tight kpi-num" id="cmdMetricUsers">০</p>
         <p class="text-[11px] text-slate-400 mt-1 flex items-center justify-between">
           <span>সক্রিয়: <b id="cmdSubActiveUsers" class="text-orange-600">০</b></span>
           <span>স্থগিত: <b id="cmdSubSuspendedUsers" class="text-rose-500">০</b></span>
@@ -144,72 +144,72 @@ export function renderOverviewTab(): string {
       </div>
 
       <!-- ২. চাকরি -->
-      <div onclick="navigateToTab('jobs')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-sky-500/50 hover:shadow-md transition">
+      <div onclick="navigateToTab('jobs')" class="kpi-card cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-sky-500/50 hover:shadow-md transition">
         <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
           <span class="font-semibold">চাকরি সার্কুলার</span>
-          <span class="w-6 h-6 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-briefcase"></i></span>
+          <span class="w-7 h-7 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-briefcase"></i></span>
         </div>
-        <p class="text-2xl font-black text-slate-900" id="cmdMetricJobs">০</p>
+        <p class="text-3xl font-black text-slate-900 tracking-tight kpi-num" id="cmdMetricJobs">০</p>
         <p class="text-[11px] text-sky-600 mt-1 font-semibold flex items-center gap-1">
           <i class="fas fa-check-circle text-[10px]"></i> BPSC ও সরকারি পোর্টাল লাইভ
         </p>
       </div>
 
       <!-- ৩. ভর্তি -->
-      <div onclick="navigateToTab('admissions')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-amber-500/50 hover:shadow-md transition">
+      <div onclick="navigateToTab('admissions')" class="kpi-card cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-amber-500/50 hover:shadow-md transition">
         <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
           <span class="font-semibold">ভর্তি ও ফলাফল</span>
-          <span class="w-6 h-6 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-landmark"></i></span>
+          <span class="w-7 h-7 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-landmark"></i></span>
         </div>
-        <p class="text-2xl font-black text-slate-900" id="cmdMetricAdmissions">০</p>
+        <p class="text-3xl font-black text-slate-900 tracking-tight kpi-num" id="cmdMetricAdmissions">০</p>
         <p class="text-[11px] text-amber-600 mt-1 font-semibold flex items-center gap-1">
           <i class="fas fa-check-circle text-[10px]"></i> বোর্ড ও বিশ্ববিদ্যালয় সার্কুলার
         </p>
       </div>
 
       <!-- ৪. MCQ -->
-      <div onclick="navigateToTab('mcq')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-purple-500/50 hover:shadow-md transition">
+      <div onclick="navigateToTab('mcq')" class="kpi-card cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-purple-500/50 hover:shadow-md transition">
         <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
           <span class="font-semibold">MCQ ও প্রশ্নব্যাংক</span>
-          <span class="w-6 h-6 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-circle-question"></i></span>
+          <span class="w-7 h-7 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-circle-question"></i></span>
         </div>
-        <p class="text-2xl font-black text-slate-900" id="cmdMetricMCQ">০</p>
+        <p class="text-3xl font-black text-slate-900 tracking-tight kpi-num" id="cmdMetricMCQ">০</p>
         <p class="text-[11px] text-purple-600 mt-1 font-semibold flex items-center gap-1">
           <i class="fas fa-check-circle text-[10px]"></i> ব্যাখ্যাসহ কুইজ ডাটাবেজ
         </p>
       </div>
 
       <!-- ৫. সিলেবাস -->
-      <div onclick="navigateToTab('syllabus')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-indigo-500/50 hover:shadow-md transition">
+      <div onclick="navigateToTab('syllabus')" class="kpi-card cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-indigo-500/50 hover:shadow-md transition">
         <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
           <span class="font-semibold">সিলেবাস হাব</span>
-          <span class="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-book-open"></i></span>
+          <span class="w-7 h-7 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-book-open"></i></span>
         </div>
-        <p class="text-2xl font-black text-slate-900" id="cmdMetricSyllabus">০</p>
+        <p class="text-3xl font-black text-slate-900 tracking-tight kpi-num" id="cmdMetricSyllabus">০</p>
         <p class="text-[11px] text-indigo-600 mt-1 font-semibold flex items-center gap-1">
           <i class="fas fa-check-circle text-[10px]"></i> NCTB ও NU পাঠ্যক্রম
         </p>
       </div>
 
       <!-- ৬. বিগত প্রশ্নপত্র -->
-      <div onclick="navigateToTab('qpapers')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-amber-500/50 hover:shadow-md transition">
+      <div onclick="navigateToTab('qpapers')" class="kpi-card cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-amber-500/50 hover:shadow-md transition">
         <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
           <span class="font-semibold">বোর্ড প্রশ্নপত্র (২০১৭-২৪)</span>
-          <span class="w-6 h-6 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-scroll"></i></span>
+          <span class="w-7 h-7 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-scroll"></i></span>
         </div>
-        <p class="text-2xl font-black text-slate-900" id="cmdMetricQpapers">০</p>
+        <p class="text-3xl font-black text-slate-900 tracking-tight kpi-num" id="cmdMetricQpapers">০</p>
         <p class="text-[11px] text-amber-600 mt-1 font-semibold flex items-center gap-1">
           <i class="fas fa-check-circle text-[10px]"></i> উত্তরমালা ও PDF ড্রাইভ
         </p>
       </div>
 
       <!-- ৭. শিক্ষক ও মেন্টর -->
-      <div onclick="navigateToTab('teacher')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-orange-500/50 hover:shadow-md transition">
+      <div onclick="navigateToTab('teacher')" class="kpi-card cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-orange-500/50 hover:shadow-md transition">
         <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
           <span class="font-semibold">শিক্ষক ও মেন্টর হাব</span>
-          <span class="w-6 h-6 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-chalkboard-user"></i></span>
+          <span class="w-7 h-7 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-chalkboard-user"></i></span>
         </div>
-        <p class="text-2xl font-black text-slate-900" id="cmdMetricMentors">০</p>
+        <p class="text-3xl font-black text-slate-900 tracking-tight kpi-num" id="cmdMetricMentors">০</p>
         <p class="text-[11px] text-slate-400 mt-1 flex items-center justify-between">
           <span>অনলাইন: <b id="cmdSubOnlineMentors" class="text-orange-600">০</b></span>
           <span>সমাধান: <b id="cmdSubSolvedTickets" class="text-sky-600">০</b></span>
@@ -217,12 +217,12 @@ export function renderOverviewTab(): string {
       </div>
 
       <!-- ৮. স্কলারশিপ -->
-      <div onclick="navigateToTab('scholarships')" class="cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-rose-500/50 hover:shadow-md transition">
+      <div onclick="navigateToTab('scholarships')" class="kpi-card cursor-pointer bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-rose-500/50 hover:shadow-md transition">
         <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
           <span class="font-semibold">স্কলারশিপ ও অনুদান</span>
-          <span class="w-6 h-6 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-award"></i></span>
+          <span class="w-7 h-7 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-xs"><i class="fas fa-award"></i></span>
         </div>
-        <p class="text-2xl font-black text-slate-900" id="cmdMetricScholarships">০</p>
+        <p class="text-3xl font-black text-slate-900 tracking-tight kpi-num" id="cmdMetricScholarships">০</p>
         <p class="text-[11px] text-rose-600 mt-1 font-semibold flex items-center gap-1">
           <i class="fas fa-check-circle text-[10px]"></i> সরকারি ও ব্যাংক বৃত্তি
         </p>

@@ -159,76 +159,80 @@ export function dashboardPage(user: SessionUser): string {
 
     <div class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-6">
 
-      <!-- ১. ইন্টেলিজেন্ট হেডলাইন ও স্টাডি স্ট্রিপ (Borderless, Integrated Layout) -->
-      <section class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-white/10">
-        <!-- বামে: স্টুডেন্ট আইডেন্টিটি ও গ্রিটিং -->
-        <div class="flex items-center gap-3.5 min-w-0">
-          <div class="relative shrink-0">
-            <div class="w-13 h-13 sm:w-14 sm:h-14 ${t.accentBg} rounded-2xl flex items-center justify-center text-xl font-black shadow-md overflow-hidden border border-white/20">
-              <span class="user-init">${firstLetter}</span>
-              <img class="user-photo w-full h-full object-cover hidden" alt="${user.name_bn}">
-            </div>
-            <a href="/profile" class="absolute -bottom-1 -right-1 w-5 h-5 bg-slate-900 border border-white/20 text-white rounded-full flex items-center justify-center text-[9px] hover:bg-orange-600 transition" title="প্রোফাইল"><i class="fas fa-pen"></i></a>
-          </div>
-          <div class="min-w-0">
-            <div class="flex items-center gap-2 flex-wrap">
-              <h1 class="font-serif-bn text-xl sm:text-2xl font-bold text-white truncate">${info.greeting}, ${user.name_bn}</h1>
-              <span class="text-[10px] bg-orange-500/20 text-orange-300 border border-orange-400/30 px-2 py-0.2 rounded-full font-bold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span> ভেরিফাইড
-              </span>
-              <a href="/subscription" id="userSubBadge" class="hidden"></a>
-            </div>
-            <div class="flex items-center gap-2 mt-1 text-xs text-slate-400 flex-wrap">
-              <span>${({ ssc: 'SSC (মাধ্যমিক)', hsc: 'HSC (উচ্চ মাধ্যমিক)', nu: 'অনার্স / ডিগ্রি', masters: 'মাস্টার্স', other: 'সাধারণ' } as any)[user.education_level ?? ''] ?? 'শিক্ষার্থী'}</span>
-              <span>·</span>
-              <span class="text-slate-300">${info.dateLine}</span>
-            </div>
-          </div>
-        </div>
+      <!-- ১. প্রিমিয়াম প্রোফাইল হিরো ও লাইভ মিনি স্ট্যাটস -->
+      <section class="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.08] via-white/[0.04] to-transparent p-4 sm:p-6">
+        <div style="position:absolute;top:-90px;right:-70px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(249,115,22,.25),transparent 70%);pointer-events:none"></div>
+        <div style="position:absolute;bottom:-110px;left:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.13),transparent 70%);pointer-events:none"></div>
 
-        <!-- ডানে: কম্প্যাক্ট মেট্রিক স্ট্রিপ (No Heavy Boxes!) -->
-        <div class="flex items-center gap-3 sm:gap-5 flex-wrap bg-white/5 border border-white/10 px-4 py-2 rounded-2xl">
-          <!-- আইডি চিপ -->
-          <div class="flex items-center gap-1.5 text-xs">
-            <span class="text-slate-400 text-[11px]">আইডি:</span>
-            <code class="font-mono font-bold text-white bg-black/40 px-2 py-0.5 rounded border border-white/10 ${t.accent}">${user.user_code}</code>
-            <button onclick="copyText('${user.user_code}', 'আইডি কপি হয়েছে!')" class="text-slate-400 hover:text-white transition" title="কপি"><i class="fas fa-copy text-xs"></i></button>
+        <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-5">
+          <!-- বামে: স্টুডেন্ট আইডেন্টিটি ও গ্রিটিং -->
+          <div class="flex items-center gap-3.5 sm:gap-4 min-w-0">
+            <div class="relative shrink-0">
+              <div style="padding:3px;border-radius:1.2rem;background:linear-gradient(135deg,#fb923c,#f59e0b,#f97316);box-shadow:0 8px 24px -8px rgba(249,115,22,.45)">
+                <div class="w-[52px] h-[52px] sm:w-14 sm:h-14 ${t.accentBg} rounded-[1.05rem] flex items-center justify-center text-xl font-black overflow-hidden text-white">
+                  <span class="user-init">${firstLetter}</span>
+                  <img class="user-photo w-full h-full object-cover hidden" alt="${user.name_bn}">
+                </div>
+              </div>
+              <a href="/profile" class="absolute -bottom-1 -right-1 w-5 h-5 bg-slate-900 border border-white/25 text-white rounded-full flex items-center justify-center text-[9px] hover:bg-orange-600 transition" title="প্রোফাইল এডিট"><i class="fas fa-pen"></i></a>
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <h1 class="font-serif-bn text-xl sm:text-2xl font-bold text-white truncate">${info.greeting}, ${user.name_bn}</h1>
+                <span class="text-[10px] bg-orange-500/20 text-orange-300 border border-orange-400/30 px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse"></span> ভেরিফাইড
+                </span>
+                <a href="/subscription" id="userSubBadge" class="hidden"></a>
+              </div>
+              <div class="flex items-center gap-2 mt-1.5 text-xs text-slate-400 flex-wrap">
+                <span class="inline-flex items-center gap-1 bg-white/5 border border-white/10 rounded-lg px-2 py-0.5 text-[11px] text-slate-300">${({ ssc: 'SSC (মাধ্যমিক)', hsc: 'HSC (উচ্চ মাধ্যমিক)', nu: 'অনার্স / ডিগ্রি', masters: 'মাস্টার্স', other: 'সাধারণ' } as any)[user.education_level ?? ''] ?? 'শিক্ষার্থী'}</span>
+                <span class="text-slate-400 text-[11px]">${info.dateLine}</span>
+              </div>
+              <div class="flex items-center gap-2 mt-2 flex-wrap">
+                <button onclick="copyText('${user.user_code}', 'আইডি কপি হয়েছে!')" class="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-orange-300 bg-black/40 border border-orange-500/30 hover:border-orange-400 rounded-lg px-2 py-0.5 transition" title="আইডি কপি করুন">
+                  <i class="fas fa-id-card text-[9px] opacity-70"></i> ${user.user_code} <i class="fas fa-copy text-[8px] opacity-50"></i>
+                </button>
+                <div id="subIdChip" class="hidden items-center gap-1.5 text-xs">
+                  <a href="/subscription" class="font-mono font-bold text-amber-300 bg-black/40 px-2 py-0.5 rounded-lg border border-amber-500/30 hover:border-amber-400 transition flex items-center gap-1.5 text-[11px]" title="সাবস্ক্রিপশন বিবরণী">
+                    <i class="fas fa-crown text-[9px]"></i><span id="subIdText">#SUB-2026</span>
+                    <span id="subDaysLeftText" class="text-slate-400 font-sans text-[10px]"></span>
+                  </a>
+                </div>
+                <button onclick="openAddMoneyModal()" class="text-[11px] font-bold text-orange-400 hover:text-orange-300 flex items-center gap-1 transition">
+                  <i class="fas fa-circle-plus text-[10px]"></i> ক্যাশ-ইন
+                </button>
+              </div>
+            </div>
           </div>
 
-          <!-- সাবস্ক্রিপশন আইডি ও স্ট্যাটাস চিপ -->
-          <div id="subIdChip" class="hidden items-center gap-1.5 text-xs">
-            <div class="h-4 w-px bg-white/10 hidden sm:block"></div>
-            <span class="text-slate-400 text-[11px]">সাবস্ক্রিপশন:</span>
-            <a href="/subscription" class="font-mono font-bold text-amber-300 bg-black/40 px-2 py-0.5 rounded border border-amber-500/30 hover:border-amber-400 transition flex items-center gap-1.5 text-[11px]" title="ক্লিক করে সাবস্ক্রিপশন বিবরণী দেখুন">
-              <span id="subIdText">#SUB-2026</span>
-              <span id="subDaysLeftText" class="text-slate-400 font-sans text-[10px]"></span>
+          <!-- ডানে: লাইভ মিনি স্ট্যাট গ্রিড -->
+          <div class="grid grid-cols-2 gap-2.5 w-full md:w-auto md:min-w-[330px]">
+            <div onclick="openAddMoneyModal()" class="cursor-pointer group bg-black/30 hover:bg-black/50 border border-white/10 hover:border-orange-400/50 rounded-2xl p-3 transition">
+              <p class="text-[10px] text-slate-400 font-semibold flex items-center gap-1.5"><i class="fas fa-wallet text-orange-400"></i> ওয়ালেট ব্যালেন্স</p>
+              <p class="text-lg sm:text-xl font-black text-white mt-0.5">৳ <span class="wallet-val">০</span></p>
+              <p class="text-[10px] text-orange-400 font-bold mt-0.5 group-hover:underline">+ ক্যাশ-ইন করুন</p>
+            </div>
+            <button onclick="setDashTab('exams')" class="text-left group bg-black/30 hover:bg-black/50 border border-white/10 hover:border-amber-400/50 rounded-2xl p-3 transition">
+              <p class="text-[10px] text-slate-400 font-semibold flex items-center gap-1.5"><i class="fas fa-bookmark text-amber-400"></i> সেভ করা রোল</p>
+              <p class="text-lg sm:text-xl font-black text-white mt-0.5"><span id="rollCount">০</span> টি</p>
+              <p class="text-[10px] text-amber-400 font-bold mt-0.5 group-hover:underline">১-ক্লিক রেজাল্ট →</p>
+            </button>
+            <button onclick="setDashTab('community')" class="text-left group bg-black/30 hover:bg-black/50 border border-white/10 hover:border-orange-400/50 rounded-2xl p-3 transition">
+              <p class="text-[10px] text-slate-400 font-semibold flex items-center gap-1.5"><i class="fas fa-gift text-orange-400"></i> রেফারেল বোনাস</p>
+              <p class="text-lg sm:text-xl font-black text-white mt-0.5"><span id="heroRefCount">০</span> জন</p>
+              <p class="text-[10px] text-orange-400 font-bold mt-0.5 group-hover:underline">বোনাস দেখুন →</p>
+            </button>
+            <a href="/profile" class="group bg-black/30 hover:bg-black/50 border border-white/10 hover:border-sky-400/50 rounded-2xl p-3 transition">
+              <div class="flex items-center justify-between">
+                <p class="text-[10px] text-slate-400 font-semibold flex items-center gap-1.5"><i class="fas fa-id-card-clip text-sky-400"></i> প্রোফাইল</p>
+                <span id="profilePct" class="text-[11px] font-mono font-bold text-sky-300">০%</span>
+              </div>
+              <div class="w-full bg-black/50 h-1.5 rounded-full overflow-hidden border border-white/10 mt-2">
+                <div id="profileProgressBar" class="bg-gradient-to-r from-sky-400 to-orange-400 h-full rounded-full transition-all duration-500" style="width:0%"></div>
+              </div>
+              <p class="text-[10px] text-sky-400 font-bold group-hover:underline mt-1.5">তথ্য সম্পূর্ণ করুন →</p>
             </a>
           </div>
-
-          <div class="h-4 w-px bg-white/10 hidden sm:block"></div>
-
-          <!-- সেভড রোল -->
-          <button onclick="setDashTab('exams')" class="flex items-center gap-1.5 text-xs text-slate-300 hover:text-white transition" title="সংরক্ষিত রোল নম্বর — পরীক্ষার রেজাল্ট দ্রুত দেখতে সহায়ক">
-            <i class="fas fa-bookmark text-amber-400"></i>
-            <span>রোল: <b class="text-white" id="rollCount">০</b>টি</span>
-          </button>
-
-          <div class="h-4 w-px bg-white/10 hidden sm:block"></div>
-
-          <!-- প্রোফাইল প্রগ্রেস -->
-          <a href="/profile" class="flex items-center gap-2 text-xs text-slate-300 hover:text-white transition" title="প্রোফাইল আপডেট">
-            <div class="w-14 bg-black/40 h-1.5 rounded-full overflow-hidden border border-white/10">
-              <div id="profileProgressBar" class="bg-gradient-to-r from-orange-400 to-amber-400 h-full rounded-full transition-all duration-500" style="width:0%"></div>
-            </div>
-            <span id="profilePct" class="font-mono font-bold text-orange-400 text-[11px]">০%</span>
-          </a>
-
-          <div class="h-4 w-px bg-white/10 hidden sm:block"></div>
-
-          <!-- ওয়ালেট কুইক রিচার্জ -->
-          <button onclick="openAddMoneyModal()" class="text-xs font-bold text-orange-400 hover:underline flex items-center gap-1">
-            <i class="fas fa-plus-circle text-[11px]"></i> ক্যাশ-ইন
-          </button>
         </div>
       </section>
 
@@ -630,36 +634,7 @@ export function dashboardPage(user: SessionUser): string {
   </main>
 </div>
 
-<!-- ৫. ফ্লোটিং অ্যাকশন স্পিড ডায়াল (FAB) ও ১-ক্লিক স্ক্রোল-টু-টপ -->
-<div id="dashFab" class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2">
-  <!-- কুইক স্ক্রোল টু টপ বাটন (২০০px নিচে স্ক্রোল করলে অটো দৃশ্যমান হয়) -->
-  <button id="dashScrollTopBtn" onclick="dashScrollToTop()" class="hidden opacity-0 translate-y-2 pointer-events-none transition-all duration-300 w-10 h-10 rounded-full bg-slate-900/90 hover:bg-slate-800 text-orange-400 border border-white/20 shadow-xl items-center justify-center text-sm active:scale-95 group mb-0.5" title="পৃষ্ঠার শীর্ষে যান">
-    <i class="fas fa-arrow-up group-hover:-translate-y-0.5 transition-transform"></i>
-  </button>
-
-  <div id="fabMenu" class="hidden flex-col items-end gap-2 mb-1 transition-all">
-    <button onclick="dashScrollToTop(); toggleFab(false)" class="flex items-center gap-2 bg-slate-900/95 border border-sky-400/40 text-sky-300 px-3 py-1.5 rounded-xl shadow-xl text-xs font-bold hover:bg-slate-800 transition">
-      <span>পৃষ্ঠার শীর্ষে যান</span>
-      <i class="fas fa-arrow-up text-sky-400 text-xs"></i>
-    </button>
-    <button onclick="openAskTeacherModal(); toggleFab(false)" class="flex items-center gap-2 bg-slate-900/95 border border-amber-400/40 text-amber-300 px-3 py-1.5 rounded-xl shadow-xl text-xs font-bold hover:bg-slate-800 transition">
-      <span>শিক্ষককে প্রশ্ন করুন</span>
-      <i class="fas fa-chalkboard-user text-amber-400 text-xs"></i>
-    </button>
-    <button onclick="openResultModal(); toggleFab(false)" class="flex items-center gap-2 bg-slate-900/95 border border-orange-400/40 text-orange-300 px-3 py-1.5 rounded-xl shadow-xl text-xs font-bold hover:bg-slate-800 transition">
-      <span>রেজাল্ট চেক</span>
-      <i class="fas fa-graduation-cap text-orange-400 text-xs"></i>
-    </button>
-    <a href="https://wa.me/8801835414122" target="_blank" rel="noopener" class="flex items-center gap-2 bg-slate-900/95 border border-amber-400/40 text-amber-300 px-3 py-1.5 rounded-xl shadow-xl text-xs font-bold hover:bg-slate-800 transition">
-      <span>সরাসরি হোয়াটসঅ্যাপ</span>
-      <i class="fab fa-whatsapp text-amber-400 text-xs"></i>
-    </a>
-  </div>
-
-  <button id="fabMainBtn" onclick="toggleFab()" class="w-12 h-12 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 font-black shadow-xl hover:scale-105 active:scale-95 transition flex items-center justify-center text-base border border-white/20" title="কুইক মেনু">
-    <i id="fabIcon" class="fas fa-bolt"></i>
-  </button>
-</div>
+<!-- ৫. ফ্লোটিং FAB অপসারিত — গ্লোবাল ডক (layout floatingButtons) দ্বারা প্রতিস্থাপিত -->
 
 <!-- ৬. ক্লায়েন্ট স্ক্রিপ্ট ও ইন্টারঅ্যাকশন -->
 <script>
@@ -943,6 +918,8 @@ async function loadDashboardCore(){
       const earn = document.getElementById('refEarned');
       if (cnt) cnt.textContent = BN((d.referrals || []).length);
       if (earn) earn.textContent = BN(d.total_earned || 0);
+      const hRef = document.getElementById('heroRefCount');
+      if (hRef) hRef.textContent = BN((d.referrals || []).length);
     }
 
     // ৫. সাবস্ক্রিপশন আইডি ও মেম্বারশিপ স্ট্যাটাস

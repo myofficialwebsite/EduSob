@@ -35,9 +35,16 @@ const lockScreen = `
 try { localStorage.removeItem('edusob_session_token'); } catch(e){}
 </script>`
 
+const ADMIN_DASH_CSS = `<style>
+.kpi-card{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.kpi-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -12px rgba(15,23,42,.18)}
+.kpi-num{font-variant-numeric:tabular-nums}
+</style>
+`
+
 export function adminPage(isAdmin: boolean): string {
   if (!isAdmin) return pageShell('এডমিন প্যানেল', 'bg-slate-950', lockScreen, '', false)
-  return pageShell('এডমিন কন্ট্রোল প্যানেল', 'bg-slate-100 min-h-screen', ADMIN_BODY + ADMIN_SCRIPT, DARK_PORTAL_CSS, false)
+  return pageShell('এডমিন কন্ট্রোল প্যানেল', 'bg-slate-100 min-h-screen', ADMIN_BODY + ADMIN_SCRIPT, DARK_PORTAL_CSS + ADMIN_DASH_CSS, false)
 }
 
 const ADMIN_BODY = `
@@ -684,6 +691,21 @@ function toBn(num){
   return String(num == null ? 0 : num).replace(/[0-9]/g, function(w){ return bn[+w]; });
 }
 
+var KPI_RAF = {};
+function setKpi(id, val){
+  var el = document.getElementById(id);
+  if(!el) return;
+  var target = Number(val) || 0;
+  if(KPI_RAF[id]) cancelAnimationFrame(KPI_RAF[id]);
+  if(target <= 0){ el.textContent = toBn(0); return; }
+  var t0 = performance.now();
+  function step(now){
+    var p = Math.min(1, (now - t0) / 700);
+    el.textContent = toBn(Math.round(target * (1 - Math.pow(1 - p, 3))));
+    if(p < 1) KPI_RAF[id] = requestAnimationFrame(step);
+  }
+  KPI_RAF[id] = requestAnimationFrame(step);
+}
 function tk(amt){ return toBn(amt || 0) + ' ৳'; }
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
@@ -802,30 +824,30 @@ async function loadStats(){
   var s = d.stats;
   // মেট্রিক্স গ্রিড
   if(s.users){
-    document.getElementById('cmdMetricUsers').textContent = toBn(s.users.total);
-    document.getElementById('cmdSubActiveUsers').textContent = toBn(s.users.active);
-    document.getElementById('cmdSubSuspendedUsers').textContent = toBn(s.users.suspended);
+    setKpi('cmdMetricUsers', s.users.total);
+    setKpi('cmdSubActiveUsers', s.users.active);
+    setKpi('cmdSubSuspendedUsers', s.users.suspended);
   }
   if(s.content){
-    document.getElementById('cmdMetricJobs').textContent = toBn(s.content.jobs);
-    document.getElementById('cmdMetricAdmissions').textContent = toBn(s.content.admissions);
-    document.getElementById('cmdMetricMCQ').textContent = toBn(s.content.mcq);
-    document.getElementById('cmdMetricSyllabus').textContent = toBn(s.content.syllabus);
-    document.getElementById('cmdMetricQpapers').textContent = toBn(s.content.qpapers);
-    document.getElementById('cmdMetricScholarships').textContent = toBn(s.content.scholarships);
+    setKpi('cmdMetricJobs', s.content.jobs);
+    setKpi('cmdMetricAdmissions', s.content.admissions);
+    setKpi('cmdMetricMCQ', s.content.mcq);
+    setKpi('cmdMetricSyllabus', s.content.syllabus);
+    setKpi('cmdMetricQpapers', s.content.qpapers);
+    setKpi('cmdMetricScholarships', s.content.scholarships);
   }
   if(s.mentors){
-    document.getElementById('cmdMetricMentors').textContent = toBn(s.mentors.total);
-    document.getElementById('cmdSubOnlineMentors').textContent = toBn(s.mentors.online);
-    document.getElementById('cmdSubSolvedTickets').textContent = toBn(s.mentors.solved_tickets);
+    setKpi('cmdMetricMentors', s.mentors.total);
+    setKpi('cmdSubOnlineMentors', s.mentors.online);
+    setKpi('cmdSubSolvedTickets', s.mentors.solved_tickets);
   }
 
   // অ্যালার্টস
   if(s.pending_action){
     document.getElementById('metricTotalAlerts').textContent = toBn(s.pending_action.total_alerts) + 'টি অ্যালার্ট';
-    document.getElementById('alertPendingAssist').textContent = toBn(s.pending_action.assisted);
-    document.getElementById('alertPendingTickets').textContent = toBn(s.pending_action.tickets);
-    document.getElementById('alertPendingPayments').textContent = toBn(s.pending_action.payments);
+    setKpi('alertPendingAssist', s.pending_action.assisted);
+    setKpi('alertPendingTickets', s.pending_action.tickets);
+    setKpi('alertPendingPayments', s.pending_action.payments);
   }
 
   // সাম্প্রতিক ইউজার তালিকা
@@ -1230,10 +1252,10 @@ async function loadMentorOverview(){
   if(!d) return;
 
   // কাউন্টারস
-  document.getElementById('mCountTeachers').textContent = toBn((d.mentors||[]).length);
-  document.getElementById('mCountPendingTickets').textContent = toBn((d.unassigned_tickets||[]).length);
-  document.getElementById('mCountComplaints').textContent = toBn((d.complaints||[]).length);
-  document.getElementById('mCountPayouts').textContent = toBn((d.payouts||[]).length);
+  setKpi('mCountTeachers', (d.mentors||[]).length);
+  setKpi('mCountPendingTickets', (d.unassigned_tickets||[]).length);
+  setKpi('mCountComplaints', (d.complaints||[]).length);
+  setKpi('mCountPayouts', (d.payouts||[]).length);
 
   // শিক্ষক ড্রপডাউন পপুলেট
   var pSel = document.getElementById('payoutTeacherSelect');
@@ -1904,5 +1926,16 @@ document.addEventListener('DOMContentLoaded', function(){
   switchAdminCategory('cat-command', 'overview');
 });
 switchAdminCategory('cat-command', 'overview');
+
+(function liveHeaderClock(){
+  var el = document.getElementById('headerSyncStatus');
+  if(!el) return;
+  function tick(){
+    try {
+      el.textContent = 'ডাটাবেজ লাইভ · ঢাকা ' + new Date().toLocaleTimeString('bn-BD', { timeZone:'Asia/Dhaka', hour:'2-digit', minute:'2-digit' });
+    } catch(e){}
+  }
+  tick(); setInterval(tick, 30000);
+})();
 </script>
 `
