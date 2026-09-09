@@ -115,8 +115,17 @@ const ALLOWED_STATUS_HOSTS = new Set([
 app.get('/api/link-status', async (c) => {
   const url = c.req.query('url') || ''
   try {
-    const host = new URL(url).hostname
-    if (!ALLOWED_STATUS_HOSTS.has(host)) return c.json({ up: false, error: 'অননুমোদিত' }, 400)
+    const rawHost = new URL(url).hostname.toLowerCase()
+    // www. প্রিফিক্স ও ভ্যারিয়েন্ট স্বীকার — যেমন www.bteb.gov.bd ≡ bteb.gov.bd
+    const host = rawHost.replace(/^www\./, '')
+    const knownAlias: Record<string, string> = {
+      'sonaliseba.nu.ac.bd': 'results.nu.ac.bd',
+      'bmeb.gov.bd': 'bmeb.ebmeb.gov.bd'
+    }
+    const effective = knownAlias[host] || host
+    if (!ALLOWED_STATUS_HOSTS.has(effective) && !ALLOWED_STATUS_HOSTS.has(rawHost)) {
+      return c.json({ up: false, error: 'অননুমোদিত' }, 400)
+    }
     const ctrl = new AbortController()
     const timer = setTimeout(() => ctrl.abort(), 8000)
     const res = await fetch(url, { method: 'HEAD', signal: ctrl.signal, redirect: 'follow' }).catch(async () => {

@@ -191,3 +191,24 @@ pm2 start ecosystem.config.cjs   # port 3000, D1 local
 - **API**: `GET /api/subs/qpapers/:id/content`, `GET /api/subs/suggestions[?level=]`, `GET /api/subs/suggestions/:id/content`, `PUT /api/admin/users/:id/status`, `GET/POST/PUT/DELETE /api/subs/admin/suggestions`
 - **DB**: migration 0009 — users.status, question_papers.content, suggestions, content_downloads (লোকাল + রিমোট প্রয়োগকৃত)
 - **Last Updated**: 2026-08-29
+
+## 🛠️ লোকাল রান ও রক্ষণাবেক্ষণ (সর্বশেষ অডিট আপডেট)
+
+**চালু করতে (লোকাল):**
+```bash
+npm install
+npm run dev      # http://localhost:3000 (Vite + Hono, SQLite অটো-মাইগ্রেশন)
+npm run build    # Cloudflare Pages ডিপ্লয়-রেডি dist তৈরি (tw.css অটো-রিবিল্ড)
+```
+
+**নোট:**
+- Node 20-তে `node:sqlite` না থাকলে অটোমেটিক `better-sqlite3` ফলব্যাক চালু হয় (কোনো কনফিগ লাগে না)।
+- ডিজাইন সিস্টেমের উৎস `tailwind.input.css` — কাস্টম ক্লাস বদলালে `npm run build:css` চালান।
+
+**২০২৬-০৯-০৯ অডিট ও পলিশ ফিক্স:**
+- ✅ ভাঙা মৃত React প্রোটোটাইপ ফাইল অপসারণ (Vite ডিপেন্ডেন্সি স্ক্যান ক্লিন)
+- ✅ গ্লোবাল ডিজাইন সিস্টেম CSS যুক্ত: scroll-reveal, stagger cards, card-hover, notice ticker, ফন্ট, স্ক্রলবার, focus-visible, reduced-motion সাপোর্ট
+- ✅ সার্ভিস ওয়ার্কার `/static/sw.js` থেকে রেজিস্টার (ডেভ সার্ভারে 404 ফিক্স, HMR অক্ষত)
+- ✅ রেজাল্ট প্রিন্ট/পিডিএফ: Tailwind CDN বাদ → স্বয়ংসম্পূর্ণ A4 প্রিন্ট স্টাইল (অফলাইনেও কাজ করে)
+- ✅ লিংক-স্ট্যাটাস চেকারে `www.` ভ্যারিয়েন্ট সাপোর্ট (গো. বোর্ড সাইটের মিথ্যা "ডাউন" ব্যাজ ফিক্স)
+- ✅ কনটেন্ট সিড (`0018_rich_content.sql`): ১০টি বাস্তব স্কলারশিপ + ২৬টি নতুন MCQ প্রশ্ন

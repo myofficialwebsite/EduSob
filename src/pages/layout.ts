@@ -23,7 +23,7 @@ export const HEAD_COMMON = `
 window.__edusobPwa = { deferredInstall: null };
 window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); window.__edusobPwa.deferredInstall = e; });
 document.addEventListener('DOMContentLoaded', function(){
-  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').catch(function(){}); }
+  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/static/sw.js').catch(function(){}); }
   var dismissed = localStorage.getItem('edusob_pwa_dismissed');
   // নতুন ব্যবহারকারীকে তৎক্ষণাৎ বিরক্ত না করে ৫ সেকেন্ড পর এবং শুধুমাত্র যদি আগে বরখাস্ত না করে থাকে
   if (!dismissed) {
@@ -557,6 +557,14 @@ function edusobTk(n){return '৳'+Number(n).toLocaleString('bn-BD')}
         }
         revealObserver.observe(el);
       }
+      // নিরাপত্তা ফলব্যাক: কোনো কারণে IntersectionObserver ফায়ার না করলেও কনটেন্ট চিরকাল লুকানো থাকবে না
+      setTimeout(function(){
+        var stuck = document.querySelectorAll('.reveal-on-scroll:not(.is-revealed), .stagger-cards:not(.is-revealed), .stagger-group:not(.is-revealed)');
+        for (var s = 0; s < stuck.length; s++) {
+          var r = stuck[s].getBoundingClientRect();
+          if (r.top < window.innerHeight + 60) stuck[s].classList.add('is-revealed');
+        }
+      }, 1200);
     } else {
       var allTargets = document.querySelectorAll('.reveal-on-scroll, .stagger-cards, .stagger-group, main > section, .dash-card-item');
       for (var k = 0; k < allTargets.length; k++) {

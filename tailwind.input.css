@@ -1,3 +1,124 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ============================================================
+   এডুসব গ্লোবাল ডিজাইন সিস্টেম — অ্যানিমেশন, টাইপোগ্রাফি, ইফেক্ট
+   (স্ক্রিপ্টে বানানো ক্লাসের জন্য প্লেইন CSS — পার্জ হয় না)
+   ============================================================ */
+
+/* ---------- বেস টাইপোগ্রাফি ও স্ক্রোল ---------- */
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Hind Siliguri', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: #f97316; color: #fff; }
+
+.font-display, h1.font-display, h2.font-display { font-family: 'Syne', 'Hind Siliguri', sans-serif; }
+.font-en { font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif; }
+
+/* ফোকাস ভিজিবিলিটি (Accessibility) */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid rgba(249, 115, 22, 0.7);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ---------- কাস্টম স্ক্রলবার ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0b0d12; }
+::-webkit-scrollbar-thumb { background: #2a3140; border-radius: 8px; border: 2px solid #0b0d12; }
+::-webkit-scrollbar-thumb:hover { background: #f97316; }
+* { scrollbar-width: thin; scrollbar-color: #2a3140 #0b0d12; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ---------- স্ক্রোল রিভিল অ্যানিমেশন ---------- */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-on-scroll.is-revealed { opacity: 1; transform: translateY(0); }
+
+/* স্ট্যাগার্ড কার্ড গ্রিড — চাইল্ডগুলো একে একে ওঠে */
+.stagger-cards > *, .stagger-group > * {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.stagger-cards.is-revealed > *, .stagger-group.is-revealed > * { opacity: 1; transform: translateY(0); }
+.stagger-cards.is-revealed > *:nth-child(1), .stagger-group.is-revealed > *:nth-child(1) { transition-delay: 0.04s; }
+.stagger-cards.is-revealed > *:nth-child(2), .stagger-group.is-revealed > *:nth-child(2) { transition-delay: 0.10s; }
+.stagger-cards.is-revealed > *:nth-child(3), .stagger-group.is-revealed > *:nth-child(3) { transition-delay: 0.16s; }
+.stagger-cards.is-revealed > *:nth-child(4), .stagger-group.is-revealed > *:nth-child(4) { transition-delay: 0.22s; }
+.stagger-cards.is-revealed > *:nth-child(5), .stagger-group.is-revealed > *:nth-child(5) { transition-delay: 0.28s; }
+.stagger-cards.is-revealed > *:nth-child(6), .stagger-group.is-revealed > *:nth-child(6) { transition-delay: 0.34s; }
+.stagger-cards.is-revealed > *:nth-child(7), .stagger-group.is-revealed > *:nth-child(7) { transition-delay: 0.40s; }
+.stagger-cards.is-revealed > *:nth-child(8), .stagger-group.is-revealed > *:nth-child(8) { transition-delay: 0.46s; }
+.stagger-cards.is-revealed > *:nth-child(9), .stagger-group.is-revealed > *:nth-child(9) { transition-delay: 0.52s; }
+.stagger-cards.is-revealed > *:nth-child(10), .stagger-group.is-revealed > *:nth-child(10) { transition-delay: 0.58s; }
+
+/* Reduced-motion ব্যবহারকারীর সম্মান */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll, .stagger-cards > *, .stagger-group > * {
+    opacity: 1 !important; transform: none !important; transition: none !important;
+  }
+  .marquee-track, .ticker-track { animation: none !important; }
+}
+
+/* ---------- কার্ড হোভার লিফট ---------- */
+.card-hover { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.4s ease, background-color 0.35s ease; }
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 44px -14px rgba(249, 115, 22, 0.22), 0 3px 14px -6px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- নোটিস টিকার ও মার্কি ---------- */
+@keyframes marquee-drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { animation: marquee-drift 42s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+.ticker-track { display: inline-flex; animation: ticker-drift 38s linear infinite; }
+.ticker-track:hover { animation-play-state: paused; }
+@keyframes ticker-drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------- পালস গ্লো (লাইভ ইন্ডিকেটর) ---------- */
+@keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+.pulse-soft { animation: pulse-soft 2.2s ease-in-out infinite; }
+
+/* ---------- হিরো গ্লো ও আউটলাইন টেক্সট ---------- */
+.hero-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 30% 15%, rgba(249, 115, 22, 0.14) 0%, rgba(6, 182, 212, 0.05) 45%, transparent 75%);
+}
+.text-outline { -webkit-text-stroke: 1px rgba(249, 115, 22, 0.55); color: transparent; }
+
+/* ---------- ফিল্ম গ্রেইন টেক্সচার ---------- */
+.grain::after {
+  content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- স্ক্রলড স্টিকি নেভার ---------- */
+header.sticky.scrolled-nav {
+  box-shadow: 0 8px 32px -12px rgba(0, 0, 0, 0.55);
+  border-bottom-color: rgba(249, 115, 22, 0.18);
+}
+
+/* ---------- শপ সাইনবোর্ড ---------- */
+.awning-stripe { background: repeating-linear-gradient(-45deg, #f97316 0 14px, #ffffff 14px 28px); }
+@keyframes sb-pop-in { from { transform: translateY(24px) scale(0.94); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+.sb-pop { animation: sb-pop-in 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* ---------- ড্যাশবোর্ড কার্ড ---------- */
+.dash-card-item { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease; }
+
+/* ---------- স্মুথ ফেড ইন ---------- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes float-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.float-up { animation: float-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }

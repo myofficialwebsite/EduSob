@@ -94,11 +94,18 @@ export async function initDatabase(): Promise<D1Database> {
   // Dynamic imports for local dev environment (avoiding Cloudflare Pages bundling errors)
   let fs: any, path: any, crypto: any, DatabaseSync: any
   try {
-    fs = await import('node:' + 'fs')
-    path = await import('node:' + 'path')
-    crypto = await import('node:' + 'crypto')
-    const sqlite = await import('node:' + 'sqlite')
-    DatabaseSync = sqlite.DatabaseSync
+    fs = await import(/* @vite-ignore */ 'node:' + 'fs')
+    path = await import(/* @vite-ignore */ 'node:' + 'path')
+    crypto = await import(/* @vite-ignore */ 'node:' + 'crypto')
+    // Node 22.5+-এ node:sqlite বিল্ট-ইন থাকে; পুরনো Node-এ better-sqlite3 ফলব্যাক (একই API)
+    try {
+      const sqlite = await import(/* @vite-ignore */ 'node:' + 'sqlite')
+      DatabaseSync = sqlite.DatabaseSync
+    } catch {
+      const bsqlite = await import(/* @vite-ignore */ 'better-' + 'sqlite3')
+      DatabaseSync = (bsqlite as any).default ?? bsqlite
+      console.log('[Database] node:sqlite পাওয়া যায়নি — better-sqlite3 ফলব্যাক চালু')
+    }
   } catch (e) {
     throw new Error('DatabaseSync is not available. Ensure you are running in a Node.js environment or provide env.DB')
   }
