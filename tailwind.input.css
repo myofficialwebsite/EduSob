@@ -122,3 +122,67 @@ header.sticky.scrolled-nav {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes float-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 .float-up { animation: float-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* ---------- বাংলা সেরিফ ডিসপ্লে হেডিং (প্রিমিয়াম এডিটরিয়াল লুক) ---------- */
+.font-serif-bn { font-family: 'Noto Serif Bengali', 'Hind Siliguri', serif; }
+
+/* ---------- হিরো গ্রেডিয়েন্ট শিমার হেডলাইন ---------- */
+@keyframes shimmer-slide { from { background-position: 200% center; } to { background-position: -200% center; } }
+.hero-shimmer {
+  background-size: 220% auto;
+  animation: shimmer-slide 6s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) { .hero-shimmer { animation: none; } }
+
+/* ---------- পেজ-লোডে স্মুথ ফেড ---------- */
+body { animation: pageIn 0.4s ease-out; }
+@keyframes pageIn { from { opacity: 0.4; } to { opacity: 1; } }
+
+/* ---------- কাউন্ট-আপ পরিসংখ্যান ---------- */
+.stat-num { font-variant-numeric: tabular-nums; }
+
+/* ---------- মোবাইল অ্যাপ-স্টাইল বটম নেভ ---------- */
+.mobile-app-nav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
+  display: flex; justify-content: space-between; align-items: stretch;
+  background: rgba(9, 11, 15, 0.92);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.mobile-app-nav a, .mobile-app-nav button {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 8px 4px 7px; font-size: 10px; font-weight: 600;
+  color: #94a3b8; text-decoration: none; background: none; border: none;
+  min-width: 0; flex: 1; transition: color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.mobile-app-nav a i, .mobile-app-nav button i { font-size: 17px; }
+.mobile-app-nav a.nav-active { color: #fb923c; }
+.mobile-app-nav a:active, .mobile-app-nav button:active { transform: scale(0.92); }
+@media (max-width: 1023px) {
+  body.landing-mobile-nav { padding-bottom: 66px; }
+  #edusobActionDock { bottom: 78px !important; }
+  #edusobAiPopup { bottom: 8.4rem !important; }
+}
+@media (min-width: 1024px) { .mobile-app-nav { display: none; } }
+@media (prefers-reduced-motion: reduce) { body { animation: none; } }
+
+/* ---------- এক্সাম-লেভেল কুইক চিপস ---------- */
+.level-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 999px; font-size: 12px; font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.12); color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.level-chip:hover {
+  border-color: rgba(249, 115, 22, 0.5); color: #fdba74;
+  background: rgba(249, 115, 22, 0.1); transform: translateY(-2px);
+  box-shadow: 0 8px 24px -10px rgba(249, 115, 22, 0.35);
+}
+
+/* ---------- হিরো ফ্লোটিং অ্যানিমেশন ---------- */
+@keyframes hero-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.hero-float { animation: hero-float 5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .hero-float { animation: none; } }

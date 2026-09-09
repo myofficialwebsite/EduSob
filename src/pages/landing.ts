@@ -196,7 +196,7 @@ export function landingPage(): string {
         <span class="mx-6">👨‍🏫 <strong>নতুন ফিচার:</strong> ১-অন-১ প্রিমিয়াম শিক্ষক ও মেন্টর সহায়তা — ১৫-৩০ মিনিটে স্টেপ-বাই-স্টেপ সমাধান নিন!</span>
         <span class="mx-6">📢 এডুসব রেজাল্ট হাব — জাতীয় ও সকল শিক্ষা বোর্ডের ফলাফল একাধিক ব্যাকআপ লিংকে লাইভ।</span>
         <span class="mx-6">🎓 প্রফেশনাল ১, ২ ও ৩ পেজ সিভি মেকার — ১৪টি স্ট্যান্ডার্ড টেমপ্লেটে পিডিএফ ডাউনলোড।</span>
-        <span class="mx-6">📚 ১০,০০০+ প্রশ্নব্যাংক ও প্রতিদিনের মডেল টেস্টে অংশ নিন সম্পূর্ণ ফ্রিতে।</span>
+        <span class="mx-6">📚 প্রশ্নব্যাংক ও ব্যাখ্যা প্রতিদিন বাড়ছে — প্রতিদিনের মডেল টেস্টে অংশ নিন সম্পূর্ণ ফ্রিতে।</span>
       </div>
     </div>
   </div>
@@ -214,13 +214,13 @@ export function landingPage(): string {
           <span>বাংলাদেশের শিক্ষার্থীদের একক ডিজিটাল শিক্ষা প্ল্যাটফর্ম</span>
         </div>
 
-        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-[1.2] tracking-tight">
-          পরীক্ষার প্রস্তুতি থেকে ক্যারিয়ার— <br>
-          <span class="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">সবকিছু এক ঠিকানায়</span>
+        <h1 class="font-serif-bn text-[2.6rem] sm:text-5xl lg:text-[3.6rem] font-bold text-white leading-[1.35] tracking-tight hero-float">
+          পরীক্ষার প্রস্তুতি থেকে ক্যারিয়ার —<br>
+          <span class="hero-shimmer bg-gradient-to-r from-orange-300 via-amber-200 to-orange-400 bg-clip-text text-transparent">সবকিছু এক ঠিকানায়</span>
         </h1>
 
         <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl">
-          বোর্ড পরীক্ষার দ্রুত ফলাফল, কলেজ ও বিশ্ববিদ্যালয়ের ভর্তি তথ্য, ১-অন-১ শিক্ষক সহায়তা, ১০,০০০+ প্রশ্নব্যাংক ও প্রফেশনাল সিভি মেকার—সব এক সমন্বিত সিস্টেমে।
+          বোর্ড পরীক্ষার দ্রুত ফলাফল, কলেজ ও বিশ্ববিদ্যালয়ের ভর্তি তথ্য, ১-অন-১ শিক্ষক সহায়তা, প্রতিদিন বাড়তে থাকা প্রশ্নব্যাংক ও প্রফেশনাল সিভি মেকার—সব এক সমন্বিত সিস্টেমে।
         </p>
 
         <div class="flex items-center gap-2 text-xs text-slate-400">
@@ -243,18 +243,27 @@ export function landingPage(): string {
           </a>
         </div>
 
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-[11px] font-bold text-slate-500 hidden sm:inline-flex items-center gap-1.5"><i class="fas fa-compass text-orange-400"></i> দ্রুত প্রবেশ:</span>
+          <a href="/results" class="level-chip"><i class="fas fa-medal text-orange-400 text-[11px]"></i> SSC / দাখিল</a>
+          <a href="/results" class="level-chip"><i class="fas fa-graduation-cap text-amber-400 text-[11px]"></i> HSC / আলিম</a>
+          <a href="/results" class="level-chip"><i class="fas fa-building-columns text-sky-400 text-[11px]"></i> ন্যাশনাল ইউনিভার্সিটি</a>
+          <a href="/mcq" class="level-chip"><i class="fas fa-briefcase text-purple-400 text-[11px]"></i> চাকরি প্রস্তুতি</a>
+          <a href="/admission" class="level-chip"><i class="fas fa-door-open text-orange-300 text-[11px]"></i> ভর্তি ২০২৬</a>
+        </div>
+
         <div class="bg-[#121620] border border-white/10 rounded-2xl p-4 flex flex-wrap sm:flex-nowrap items-center divide-y sm:divide-y-0 sm:divide-x divide-white/10">
           <div class="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">
-            <p class="font-display text-2xl font-extrabold text-white leading-tight">১০,০০০<span class="text-orange-500">+</span></p>
-            <p class="text-[11px] text-slate-500 font-medium mt-0.5">প্রশ্নব্যাংক ও রিসোর্স</p>
+            <p class="stat-num font-display text-2xl font-extrabold text-white leading-tight"><span data-stat="resources">৬৭</span><span class="text-orange-500">+</span></p>
+            <p class="text-[11px] text-slate-500 font-medium mt-0.5">অনুশীলন প্রশ্ন ও রিসোর্স</p>
           </div>
           <div class="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">
-            <p class="font-display text-2xl font-extrabold text-white leading-tight">সকল বোর্ড</p>
-            <p class="text-[11px] text-slate-500 font-medium mt-0.5">ফলাফল ও মার্কশিট সাপোর্ট</p>
+            <p class="stat-num font-display text-2xl font-extrabold text-white leading-tight"><span data-stat="cv_templates">২৪</span><span class="text-sky-400">টি</span></p>
+            <p class="text-[11px] text-slate-500 font-medium mt-0.5">সিভি ও বায়োডাটা টেমপ্লেট</p>
           </div>
           <div class="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">
-            <p class="font-display text-2xl font-extrabold text-orange-400 leading-tight">১০০% ফ্রি</p>
-            <p class="text-[11px] text-slate-500 font-medium mt-0.5">ডিজিটাল স্টাডি প্ল্যাটফর্ম</p>
+            <p class="stat-num font-display text-2xl font-extrabold text-amber-300 leading-tight"><span data-stat="scholarships">১০</span><span class="text-amber-400">+</span></p>
+            <p class="text-[11px] text-slate-500 font-medium mt-0.5">সক্রিয় স্কলারশিপ তালিকা</p>
           </div>
         </div>
       </div>
@@ -264,60 +273,63 @@ export function landingPage(): string {
 
           <div class="relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#090b0f]">
             <div id="slide-1" class="hero-slider-slide absolute inset-0 opacity-100 bg-gradient-to-br from-orange-950/60 via-[#121620] to-slate-950 flex flex-col justify-between p-6">
-              <div class="flex items-center justify-between">
+              <img src="/static/img/hero-students.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none">
+              <div class="relative flex items-center justify-between">
                 <span class="inline-flex items-center gap-1.5 bg-orange-500/15 text-orange-300 border border-orange-500/30 text-[11px] font-bold px-3 py-1 rounded-full">
                   <i class="fas fa-sparkles text-orange-400"></i> এডুসব লার্নিং হাব ২০২৬
                 </span>
                 <span class="text-2xl opacity-40">📚</span>
               </div>
-              <div class="my-auto text-center py-4">
+              <div class="relative my-auto text-center py-4">
                 <div class="w-14 h-14 mx-auto rounded-2xl bg-orange-500/15 border border-orange-500/30 flex items-center justify-center text-orange-300 text-2xl mb-3">
                   <i class="fas fa-graduation-cap"></i>
                 </div>
                 <h4 class="font-display text-lg font-bold text-white">স্মার্ট শিক্ষার্থী প্রস্তুতি প্ল্যাটফর্ম</h4>
                 <p class="text-xs text-slate-400 mt-1 max-w-xs mx-auto">বোর্ড পরীক্ষার ফলাফল, সিলেবাস, প্রশ্নব্যাংক ও স্কলারশিপ এক ছাতার নিচে</p>
               </div>
-              <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
+              <div class="relative border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
                 <span>১০০% ভেরিফাইড কারিকুলাম</span>
                 <span class="text-orange-400 font-bold">সারা দেশের শিক্ষার্থীদের বিশ্বস্ত হাব</span>
               </div>
             </div>
 
             <div id="slide-2" class="hero-slider-slide absolute inset-0 opacity-0 bg-gradient-to-br from-amber-950/60 via-[#121620] to-slate-950 flex flex-col justify-between p-6">
-              <div class="flex items-center justify-between">
+              <img src="/static/img/hero-exam.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none" loading="lazy">
+              <div class="relative flex items-center justify-between">
                 <span class="inline-flex items-center gap-1.5 bg-amber-500/15 text-amber-300 border border-amber-500/30 text-[11px] font-bold px-3 py-1 rounded-full">
                   <i class="fas fa-bolt text-amber-400"></i> লাইভ মডেল টেস্ট
                 </span>
                 <span class="text-2xl opacity-40">📝</span>
               </div>
-              <div class="my-auto text-center py-4">
+              <div class="relative my-auto text-center py-4">
                 <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-300 text-2xl mb-3">
                   <i class="fas fa-list-check"></i>
                 </div>
                 <h4 class="font-display text-lg font-bold text-white">স্মার্ট MCQ প্র্যাকটিস ও এনালাইসিস</h4>
                 <p class="text-xs text-slate-400 mt-1 max-w-xs mx-auto">ভুল প্রশ্ন ট্র্যাকিং ও তাৎক্ষণিক ব্যাখ্যা সহ শতভাগ পরীক্ষার প্রস্তুতি</p>
               </div>
-              <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
+              <div class="relative border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
                 <span>স্বয়ংক্রিয় মূল্যায়ন</span>
                 <span class="text-amber-400 font-bold">রিয়েল-টাইম স্কোর</span>
               </div>
             </div>
 
             <div id="slide-3" class="hero-slider-slide absolute inset-0 opacity-0 bg-gradient-to-br from-indigo-950/60 via-[#121620] to-slate-950 flex flex-col justify-between p-6">
-              <div class="flex items-center justify-between">
+              <img src="/static/img/hero-career.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none" loading="lazy">
+              <div class="relative flex items-center justify-between">
                 <span class="inline-flex items-center gap-1.5 bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 text-[11px] font-bold px-3 py-1 rounded-full">
                   <i class="fas fa-id-card text-indigo-400"></i> ক্যারিয়ার হাব
                 </span>
                 <span class="text-2xl opacity-40">💼</span>
               </div>
-              <div class="my-auto text-center py-4">
+              <div class="relative my-auto text-center py-4">
                 <div class="w-14 h-14 mx-auto rounded-2xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-300 text-2xl mb-3">
                   <i class="fas fa-file-lines"></i>
                 </div>
                 <h4 class="font-display text-lg font-bold text-white">১-ক্লিক প্রফেশনাল CV ও জব পোর্টাল</h4>
                 <p class="text-xs text-slate-400 mt-1 max-w-xs mx-auto">স্কলারশিপ সুযোগ, নোটিস বোর্ড ও ভেরিফাইড আবেদন সহায়তা</p>
               </div>
-              <div class="border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
+              <div class="relative border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
                 <span>আন্তর্জাতিক স্ট্যান্ডার্ড</span>
                 <span class="text-indigo-400 font-bold">PDF ডাউনলোড</span>
               </div>
@@ -1011,6 +1023,45 @@ setInterval(function() {
   currentSlide = (currentSlide + 1) % totalSlides;
   setSlide(currentSlide);
 }, 4500);
+
+// জীবন্ত পরিসংখ্যান কাউন্ট-আপ (ডাটাবেজের আসল সংখ্যা)
+(function(){
+  function toBn(n){ return Number(n).toLocaleString('bn-BD'); }
+  fetch('/api/stats/public').then(function(r){ return r.json(); }).then(function(d){
+    if (!d || !d.ok || !d.stats) return;
+    var els = document.querySelectorAll('[data-stat]');
+    for (var i = 0; i < els.length; i++) {
+      (function(el){
+        var target = Number(d.stats[el.getAttribute('data-stat')] || 0);
+        if (!target) return;
+        var t0 = performance.now(), dur = 1200;
+        function tick(t){
+          var p = Math.min(1, (t - t0) / dur);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = toBn(Math.round(target * eased));
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      })(els[i]);
+    }
+  }).catch(function(){});
+})();
+
+// লাইভ নিউজ টিকার — প্রথম আলো/শিক্ষা RSS থেকে আসল শিরোনাম (ফলব্যাকসহ সিমলেস লুপ)
+(function(){
+  var track = document.getElementById('ticker-track');
+  if (!track) return;
+  var fallback = track.innerHTML;
+  fetch('/api/feeds/news?cat=education').then(function(r){ return r.json(); }).then(function(d){
+    if (!d || !d.ok || !d.items || !d.items.length) { track.innerHTML = fallback + fallback; return; }
+    var esc = function(s){ var dv = document.createElement('div'); dv.textContent = String(s || ''); return dv.innerHTML; };
+    var news = d.items.slice(0, 6).map(function(n){
+      return '<a href="' + esc(n.link || '#') + '" target="_blank" rel="noopener" class="mx-6 hover:text-amber-300 transition">📰 ' + esc(n.title || '') + '</a>';
+    }).join('');
+    var half = news + fallback;
+    track.innerHTML = half + half;
+  }).catch(function(){ track.innerHTML = fallback + fallback; });
+})();
 
 // সার্ভিস ট্যাব ফিল্টার
 function filterServices(cat, btn) {

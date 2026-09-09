@@ -36,8 +36,8 @@ try { localStorage.removeItem('edusob_session_token'); } catch(e){}
 </script>`
 
 export function adminPage(isAdmin: boolean): string {
-  if (!isAdmin) return pageShell('এডমিন প্যানেল', 'bg-slate-950', lockScreen)
-  return pageShell('এডমিন কন্ট্রোল প্যানেল', 'bg-slate-100 min-h-screen', ADMIN_BODY + ADMIN_SCRIPT, DARK_PORTAL_CSS)
+  if (!isAdmin) return pageShell('এডমিন প্যানেল', 'bg-slate-950', lockScreen, '', false)
+  return pageShell('এডমিন কন্ট্রোল প্যানেল', 'bg-slate-100 min-h-screen', ADMIN_BODY + ADMIN_SCRIPT, DARK_PORTAL_CSS, false)
 }
 
 const ADMIN_BODY = `

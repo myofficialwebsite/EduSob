@@ -1499,5 +1499,5 @@ export function cvAdminPage(isAdmin: boolean): string {
   `}
 </main>`
 
-  return pageShell('CV টেমপ্লেট কাস্টমাইজার — এডুসব এডমিন', 'bg-slate-950 text-white min-h-screen', content)
+  return pageShell('CV টেমপ্লেট কাস্টমাইজার — এডুসব এডমিন', 'bg-slate-950 text-white min-h-screen', content, '', false)
 }

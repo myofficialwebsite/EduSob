@@ -318,4 +318,34 @@ api.get('/settings/public', async (c) => {
   })
 })
 
+// ---------- জীবন্ত পরিসংখ্যান API (ল্যান্ডিং হিরো — আসল সংখ্যা, কাল্পনিক নয়) ----------
+api.get('/stats/public', async (c) => {
+  const { DB } = c.env
+  const safe = async (sql: string): Promise<number> => {
+    try { const r: any = await DB.prepare(sql).first(); return Number(r?.n ?? 0) } catch { return 0 }
+  }
+  const [mcq, qpapers, templates, scholarships, teachers, newsItems, jobPosts] = await Promise.all([
+    safe('SELECT COUNT(*) n FROM mcq_questions WHERE is_active = 1'),
+    safe("SELECT COUNT(*) n FROM question_papers WHERE is_active = 1 OR is_active IS NULL").catch(() => 0),
+    safe('SELECT COUNT(*) n FROM cv_templates WHERE is_active = 1'),
+    safe('SELECT COUNT(*) n FROM scholarships WHERE is_active = 1'),
+    safe('SELECT COUNT(*) n FROM teachers WHERE is_active = 1'),
+    safe("SELECT COUNT(*) n FROM feed_cache WHERE updated_at > datetime('now', '-2 days')").catch(() => 0),
+    safe('SELECT COUNT(*) n FROM jobs WHERE is_active = 1')
+  ])
+  const resources = mcq + qpapers
+  c.header('Cache-Control', 'public, max-age=300')
+  return c.json({
+    ok: true,
+    stats: {
+      practice_questions: mcq,
+      resources,
+      cv_templates: templates,
+      scholarships,
+      mentors: teachers,
+      live_job_posts: jobPosts
+    }
+  })
+})
+
 export default api

@@ -716,5 +716,5 @@ function load(){
 }
 renderTabs();load();
 </script>`
-  return pageShell('এডমিন — শপ', 'bg-slate-100 min-h-screen text-slate-900', content, DARK_PORTAL_CSS)
+  return pageShell('এডমিন — শপ', 'bg-slate-100 min-h-screen text-slate-900', content, DARK_PORTAL_CSS, false)
 }

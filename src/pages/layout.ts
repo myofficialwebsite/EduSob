@@ -16,7 +16,7 @@ export const HEAD_COMMON = `
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
 <script>
 // এডুসব PWA: সার্ভিস ওয়ার্কার + ইনস্টল প্রম্পট + পুশ নোটিফিকেশন
@@ -580,10 +580,32 @@ function edusobTk(n){return '৳'+Number(n).toLocaleString('bn-BD')}
   }
 })();
 </script>
+<nav class="mobile-app-nav" aria-label="দ্রুত নেভিগেশন">
+  <a href="/" data-nav="home"><i class="fas fa-house"></i><span>হোম</span></a>
+  <a href="/results" data-nav="results"><i class="fas fa-medal"></i><span>রেজাল্ট</span></a>
+  <a href="/mcq" data-nav="mcq"><i class="fas fa-list-check"></i><span>MCQ</span></a>
+  <a href="/cv" data-nav="cv"><i class="fas fa-file-lines"></i><span>সিভি</span></a>
+  <button type="button" onclick="edusobMobileMore()" aria-label="পুরো মেনু খুলুন"><i class="fas fa-bars"></i><span>মেনু</span></button>
+</nav>
+<script>
+function edusobMobileMore(){
+  var d = document.getElementById('siteMobileDrawer') || document.getElementById('mobileNav');
+  if (d) { d.classList.toggle('hidden'); }
+  else { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+}
+(function(){
+  if (document.body) document.body.classList.add('landing-mobile-nav');
+  var map = { '/': 'home', '/results': 'results', '/board-challenge': 'results', '/mcq': 'mcq', '/cv': 'cv', '/cv-maker': 'cv' };
+  var key = map[location.pathname] || '';
+  if (!key) return;
+  var el = document.querySelector('.mobile-app-nav [data-nav="' + key + '"]');
+  if (el) el.classList.add('nav-active');
+})();
+</script>
 `
 }
 
-export function pageShell(title: string, bodyClass: string, content: string, extraHead = '', showFloating = false): string {
+export function pageShell(title: string, bodyClass: string, content: string, extraHead = '', showFloating = true): string {
   return `<!DOCTYPE html>
 <html lang="bn">
 <head>
