@@ -41,6 +41,23 @@ app.use('*', async (c, next) => {
   await next()
 })
 
+// সিকিউরিটি রেসপন্স হেডার
+// Pages-এর `_headers` ফাইল শুধু স্ট্যাটিক অ্যাসেটে লাগে — এই অ্যাপের সব পেইজ
+// SSR (ওয়ার্কার) থেকে আসে, তাই সেগুলোতে হেডার পৌঁছায় না। এখানে সেট করা হচ্ছে।
+// CSP দেওয়া হয়নি: অ্যাপে ১২০+ ইনলাইন <script> ব্লক আছে, কড়া CSP সব ভেঙে দেবে।
+app.use('*', async (c, next) => {
+  await next()
+  try {
+    const h = c.res.headers
+    h.set('X-Content-Type-Options', 'nosniff')
+    h.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+    h.set('X-Frame-Options', 'SAMEORIGIN')
+    h.set('Permissions-Policy', 'camera=(), microphone=(self), geolocation=(), interest-cohort=()')
+  } catch {
+    // রেসপন্স Immutable/Streaming হলে হেডার সেট করা যায় না — চুপচাপ এড়িয়ে যাই
+  }
+})
+
 // ---------- API ----------
 app.route('/api', api)
 app.route('/api/feeds', feeds)
