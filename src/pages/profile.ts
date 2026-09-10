@@ -1,5 +1,5 @@
 // এডুসব — প্রোফাইল পেজ: ফর্ম + কপি প্যানেল + ছবি/স্বাক্ষর অটো-রিসাইজ
-import { pageShell } from './layout'
+import {pageShell, escHtml} from './layout'
 import type { SessionUser } from '../lib/auth'
 
 export function profilePage(user: SessionUser): string {
@@ -25,8 +25,8 @@ export function profilePage(user: SessionUser): string {
       <section class="bg-slate-900 border border-white/10 rounded-2xl p-5">
         <h2 class="font-bold mb-4 text-orange-400"><i class="fas fa-user mr-2"></i>ব্যক্তিগত তথ্য</h2>
         <div class="grid sm:grid-cols-2 gap-3 text-sm">
-          <div><label class="text-xs text-slate-400">নাম (বাংলা)</label><input name="name_bn" value="${user.name_bn}" class="inp"></div>
-          <div><label class="text-xs text-slate-400">Name (English)</label><input name="name_en" value="${user.name_en ?? ''}" class="inp"></div>
+          <div><label class="text-xs text-slate-400">নাম (বাংলা)</label><input name="name_bn" value="${escHtml(user.name_bn)}" class="inp"></div>
+          <div><label class="text-xs text-slate-400">Name (English)</label><input name="name_en" value="${escHtml(user.name_en)}" class="inp"></div>
           <div><label class="text-xs text-slate-400">বর্তমান শিক্ষাস্তর <span class="text-orange-400">(পরিবর্তনযোগ্য)</span></label>
             <select name="education_level" class="inp">${[['ssc', 'SSC / সমমান'], ['hsc', 'HSC / সমমান'], ['nu', 'অনার্স / ডিগ্রি (NU)'], ['masters', 'মাস্টার্স'], ['other', 'অন্যান্য']].map(([v, l]) => `<option value="${v}"${(user as any).education_level === v ? ' selected' : ''}>${l}</option>`).join('')}</select></div>
           <div><label class="text-xs text-slate-400">পিতার নাম (বাংলা)</label><input name="father_bn" class="inp"></div>
@@ -40,7 +40,7 @@ export function profilePage(user: SessionUser): string {
             <select name="blood_group" class="inp"><option value="">—</option>${['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'].map(b => `<option>${b}</option>`).join('')}</select></div>
           <div><label class="text-xs text-slate-400">লিঙ্গ</label>
             <select name="gender" class="inp"><option value="">—</option><option value="male">পুরুষ</option><option value="female">নারী</option><option value="other">অন্যান্য</option></select></div>
-          <div><label class="text-xs text-slate-400">ইমেইল</label><input name="email" type="email" value="${user.email ?? ''}" class="inp"></div>
+          <div><label class="text-xs text-slate-400">ইমেইল</label><input name="email" type="email" value="${escHtml(user.email)}" class="inp"></div>
         </div>
       </section>
 

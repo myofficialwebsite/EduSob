@@ -112,31 +112,156 @@ const ALLOWED_STATUS_HOSTS = new Set([
   'barisalboard.gov.bd', 'sylhetboard.gov.bd', 'dinajpureducationboard.gov.bd',
   'mymensingheducationboard.gov.bd', 'bmeb.ebmeb.gov.bd', 'bteb.gov.bd'
 ])
+
+// কয়েকটি হোস্টের পরিচিত উপনাম — ব্যাচ ও সিঙ্গেল দুই জায়গাতেই ব্যবহৃত
+const KNOWN_HOST_ALIAS: Record<string, string> = {
+  'sonaliseba.nu.ac.bd': 'results.nu.ac.bd',
+  'bmeb.gov.bd': 'bmeb.ebmeb.gov.bd'
+}
+
+// হোস্ট অনুমোদিত কি না (www. সহ/ছাড়া, উপনামসহ)
+function isAllowedStatusHost(rawHost: string): boolean {
+  const host = String(rawHost || '').toLowerCase().replace(/^www\./, '')
+  const effective = KNOWN_HOST_ALIAS[host] || host
+  return ALLOWED_STATUS_HOSTS.has(effective) || ALLOWED_STATUS_HOSTS.has(String(rawHost || '').toLowerCase())
+}
+
+// দীর্ঘ URL-এর বদলে ছোট, স্টেবল ক্যাশ-কি (djb2 → base36)
+function linkCacheKey(url: string): string {
+  let h = 5381
+  for (let i = 0; i < url.length; i++) h = ((h << 5) + h + url.charCodeAt(i)) | 0
+  return 'link:' + (h >>> 0).toString(36) + ':' + url.length
+}
+
+// ---------- লিংক-স্ট্যাটাস ক্যাশ (৫ মিনিট) ----------
+// /results পেজে ২৭টি আলাদা কল হতো, প্রতিটি ৮–১২ সেকেন্ড টাইমআউট → ১২+ সেকেন্ড লোড।
+// এখন: ১টি ব্যাচ কল + ৫ মিনিট ক্যাশ + সীমিত কনকারেন্সি।
+const linkStatusCache = new Map<string, { up: boolean; at: number }>()
+const LINK_STATUS_TTL = 5 * 60 * 1000
+const LINK_STATUS_TIMEOUT = 3500
+const LINK_STATUS_CONCURRENCY = 8
+
+async function probeLink(url: string): Promise<boolean> {
+  try {
+    if (!isAllowedStatusHost(new URL(url).hostname)) return false
+    const ctrl = new AbortController()
+    const timer = setTimeout(() => ctrl.abort(), LINK_STATUS_TIMEOUT)
+    let res: Response | undefined
+    try {
+      res = await fetch(url, { method: 'HEAD', signal: ctrl.signal, redirect: 'follow' })
+    } catch {
+      // কিছু সার্ভার HEAD সাপোর্ট করে না — GET ফলব্যাক
+      res = await fetch(url, { method: 'GET', signal: ctrl.signal, redirect: 'follow' })
+    }
+    clearTimeout(timer)
+    return !!res && res.status < 500
+  } catch {
+    return false
+  }
+}
 app.get('/api/link-status', async (c) => {
   const url = c.req.query('url') || ''
   try {
     const rawHost = new URL(url).hostname.toLowerCase()
     // www. প্রিফিক্স ও ভ্যারিয়েন্ট স্বীকার — যেমন www.bteb.gov.bd ≡ bteb.gov.bd
     const host = rawHost.replace(/^www\./, '')
-    const knownAlias: Record<string, string> = {
-      'sonaliseba.nu.ac.bd': 'results.nu.ac.bd',
-      'bmeb.gov.bd': 'bmeb.ebmeb.gov.bd'
-    }
-    const effective = knownAlias[host] || host
+    const effective = KNOWN_HOST_ALIAS[host] || host
     if (!ALLOWED_STATUS_HOSTS.has(effective) && !ALLOWED_STATUS_HOSTS.has(rawHost)) {
       return c.json({ up: false, error: 'অননুমোদিত' }, 400)
     }
-    const ctrl = new AbortController()
-    const timer = setTimeout(() => ctrl.abort(), 8000)
-    const res = await fetch(url, { method: 'HEAD', signal: ctrl.signal, redirect: 'follow' }).catch(async () => {
-      // কিছু সার্ভার HEAD সাপোর্ট করে না — GET fallback
-      return fetch(url, { method: 'GET', signal: ctrl.signal, redirect: 'follow' })
-    })
-    clearTimeout(timer)
-    return c.json({ up: res.status < 500 })
+    // ক্যাশ হিট হলে সার্ভারে কোনো রিকোয়েস্টই যাবে না
+    const now0 = Date.now()
+    const hit0 = linkStatusCache.get(url)
+    if (hit0 && now0 - hit0.at < LINK_STATUS_TTL) return c.json({ up: hit0.up, cached: true })
+    const up0 = await probeLink(url)
+    linkStatusCache.set(url, { up: up0, at: Date.now() })
+    return c.json({ up: up0 })
   } catch {
     return c.json({ up: false })
   }
+})
+
+// ---------- ব্যাচ লিংক-স্ট্যাটাস (২৭ কল → ১ কল) ----------
+app.post('/api/link-status/batch', async (c) => {
+  const body = await c.req.json<any>().catch(() => null)
+  const urls: string[] = Array.isArray(body?.urls)
+    ? [...new Set((body.urls as unknown[]).map((u) => String(u || '')).filter(Boolean))].slice(0, 60)
+    : []
+  if (!urls.length) return c.json({ ok: true, results: {}, cached: 0, checked: 0 })
+
+  const db = (c.env as any).DB
+  const now = Date.now()
+  const results: Record<string, boolean> = {}
+  const todo: string[] = []
+  const keyOf = new Map<string, string>()
+
+  for (const u of urls) { keyOf.set(u, linkCacheKey(u)); todo.push(u) }
+
+  // স্তর ১: ইন-মেমোরি (একই isolate-এ অন্য রিকোয়েস্টের ফলাফল)
+  let pending: string[] = []
+  for (const u of todo) {
+    const hit = linkStatusCache.get(u)
+    if (hit && now - hit.at < LINK_STATUS_TTL) results[u] = hit.up
+    else pending.push(u)
+  }
+
+  // স্তর ২: D1 feed_cache — আগের isolate-এর ফলাফলও কাজে লাগে (প্রোডাকশনে আসল উইন)
+  if (pending.length && db) {
+    try {
+      const keys = pending.map((u) => keyOf.get(u)!)
+      const placeholders = keys.map(() => '?').join(',')
+      const rows = await db.prepare(
+        `SELECT cache_key, value, updated_at FROM feed_cache WHERE cache_key IN (${placeholders})`
+      ).bind(...keys).all()
+      const fresh = new Map<string, { up: boolean; at: number }>()
+      for (const r of (rows?.results || []) as any[]) {
+        if (now - Number(r.updated_at) < LINK_STATUS_TTL) {
+          try { fresh.set(String(r.cache_key), JSON.parse(String(r.value))) } catch {}
+        }
+      }
+      const stillPending: string[] = []
+      for (const u of pending) {
+        const f = fresh.get(keyOf.get(u)!)
+        if (f) { results[u] = f.up; linkStatusCache.set(u, { up: f.up, at: f.at }) }
+        else stillPending.push(u)
+      }
+      pending = stillPending
+    } catch (e) {
+      console.warn('[link-status cache read]', e)
+    }
+  }
+
+  const cachedCount = urls.length - pending.length
+
+  // সীমিত কনকারেন্সি — সব সাইটে একসাথে ঝাঁপিয়ে পড়া শিষ্টাচারবিরুদ্ধ
+  let cursor = 0
+  async function worker() {
+    while (cursor < pending.length) {
+      const u = pending[cursor++]
+      const up = await probeLink(u)
+      results[u] = up
+      const at = Date.now()
+      linkStatusCache.set(u, { up, at })
+    }
+  }
+  const lanes = Math.min(LINK_STATUS_CONCURRENCY, pending.length)
+  if (lanes > 0) await Promise.all(Array.from({ length: lanes }, worker))
+
+  // ফলাফল D1-এ সংরক্ষণ (পরবর্তী isolate/রিকোয়েস্টের জন্য)
+  const checked = pending.length
+  if (checked > 0 && db) {
+    try {
+      const nowMs = Date.now()
+      await db.batch(pending.map((u) => db.prepare(
+        'INSERT INTO feed_cache (cache_key, value, updated_at) VALUES (?, ?, ?) ' +
+        'ON CONFLICT(cache_key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at'
+      ).bind(keyOf.get(u)!, JSON.stringify({ up: !!results[u], at: nowMs }), nowMs)))
+    } catch (e) {
+      console.warn('[link-status cache write]', e)
+    }
+  }
+
+  return c.json({ ok: true, results, cached: cachedCount, checked })
 })
 
 // ---------- সেশন হেল্পার ----------

@@ -789,20 +789,23 @@ export async function ensureD1Schema(db: any): Promise<void> {
         INSERT INTO users (user_code, name_bn, name_en, email, phone, password_hash, salt, religion, education_level, role)
         VALUES ('EDU-2026-ADMIN', 'এডমিন', 'Admin', 'ab5353069@gmail.com', '01829486022', ?, ?, 'islam', 'masters', 'admin')
         ON CONFLICT(phone) DO UPDATE SET
-          password_hash = excluded.password_hash,
-          salt = excluded.salt,
-          role = 'admin',
-          email = 'ab5353069@gmail.com'
+          role = 'admin'  -- FIX(audit): password_hash/salt আর ওভাররাইট করা হয় না
       `).bind(hash, salt).run()
 
-      // যদি পুরনো এডমিন নম্বর 01835414122 থাকে তবে সেটিকে নতুন নম্বরে আপডেট
+      // FIX (audit): আগের WHERE শর্তে `(role='admin' AND phone != '01829486022')` থাকায়
+      // প্রতিবার ensureD1Schema() চলার সময়ই এডমিনের password_hash/salt হার্ডকোডেড
+      // মানে ফিরিয়ে আনা হতো — ফলে এডমিন প্যানেল থেকে পাসওয়ার্ড রিসেট করলেও তা টিকতো না।
+      // এখন শুধু লিগ্যাসি ফোন (01835414122) → নতুন ফোনে মাইগ্রেট, পাসওয়ার্ড অক্ষত।
       await db.prepare(`
-        UPDATE users SET phone = '01829486022', password_hash = ?, salt = ?, role = 'admin', email = 'ab5353069@gmail.com' 
-        WHERE phone = '01835414122' OR (role = 'admin' AND phone != '01829486022')
-      `).bind(hash, salt).run()
+        UPDATE users SET phone = '01829486022', role = 'admin'
+        WHERE phone = '01835414122'
+      `).run()
 
       // পুরনো সকল সেশন পরিষ্কার
-      await db.prepare('DELETE FROM sessions').run()
+      // ⚠️ FIX (audit): আগে এখানে `DELETE FROM sessions` ছিল।
+      // ensureD1Schema() প্রতিটি রিকোয়েস্টে চলে, তাই প্রোডাকশনে প্রতিবার নতুন
+      // Worker isolate উঠলে পুরো সাইটের সব ইউজার লগআউট হয়ে যেত।
+      // সেশন কখনোই স্কিমা-সিঙ্ক/মাইগ্রেশনের অংশ হয়ে মুছবে না।
     } catch (e) {
       console.warn('[ensureD1Schema admin sync note]:', e)
     }

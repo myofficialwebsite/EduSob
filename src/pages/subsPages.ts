@@ -347,7 +347,7 @@ function zoomText(delta){
 
 function copyViewerContent(){
   if(!CUR_ITEM) return;
-  var text = (CUR_ITEM.title || '') + '\n\n' + (CUR_ITEM.content || '');
+  var text = (CUR_ITEM.title || '') + '\\n\\n' + (CUR_ITEM.content || '');
   navigator.clipboard.writeText(text).then(function(){
     alert('প্রশ্নপত্র সফলভাবে কপি হয়েছে!');
   }).catch(function(){
@@ -553,14 +553,14 @@ function downloadOfficialPdf(){
 
 function downloadFileDoc(){
   if(!CUR_ITEM) return;
-  var content = "====================================================\n" +
-    CUR_ITEM.title + "\n" +
-    "স্তর: " + (LV[CUR_ITEM.level]||CUR_ITEM.level) + " | বিষয়: " + (CUR_ITEM.subject||'') + " | সাল: " + (CUR_ITEM.year||'') + "\n" +
-    "এডুসব ভেরিফাইড কোড: EDS-" + CUR_ITEM.id + " | edusob.com\n" +
-    "====================================================\n\n" +
-    CUR_ITEM.content + "\n\n" +
-    "----------------------------------------------------\n" +
-    "© এডুসব ডিজিটাল এডুকেশন পোর্টাল — edusob.com\n";
+  var content = "====================================================\\n" +
+    CUR_ITEM.title + "\\n" +
+    "স্তর: " + (LV[CUR_ITEM.level]||CUR_ITEM.level) + " | বিষয়: " + (CUR_ITEM.subject||'') + " | সাল: " + (CUR_ITEM.year||'') + "\\n" +
+    "এডুসব ভেরিফাইড কোড: EDS-" + CUR_ITEM.id + " | edusob.com\\n" +
+    "====================================================\\n\\n" +
+    CUR_ITEM.content + "\\n\\n" +
+    "----------------------------------------------------\\n" +
+    "© এডুসব ডিজিটাল এডুকেশন পোর্টাল — edusob.com\\n";
 
   var blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
   var a = document.createElement('a');

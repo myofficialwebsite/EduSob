@@ -1,5 +1,5 @@
 // এডুসব — পার্সোনাল স্টাডি হাব ও স্টুডেন্ট ড্যাশবোর্ড (Personal Study Hub & Student Dashboard)
-import { pageShell } from './layout'
+import { pageShell, escHtml } from './layout'
 import type { SessionUser } from '../lib/auth'
 import { religionInfo, toBn } from '../lib/dates'
 
@@ -14,6 +14,10 @@ export function dashboardPage(user: SessionUser): string {
   const info = religionInfo(user.religion)
   const t = THEMES[info.theme] ?? THEMES.orange
   const firstLetter = user.name_bn ? user.name_bn.charAt(0) : 'এ'
+  // FIX (audit): ইউজার-ডেটা সরাসরি HTML-ে বসালে stored XSS হতো — এস্কেপ করাই বাধ্যতামূলক
+  const safeName = escHtml(user.name_bn)
+  const safeCode = escHtml(user.user_code)
+  const levelLabel = ({ ssc: 'SSC', hsc: 'HSC', nu: 'অনার্স / ডিগ্রি', masters: 'মাস্টার্স', other: 'সাধারণ' } as any)[user.education_level ?? ''] ?? 'শিক্ষার্থী'
 
   const sidebarNav = `
     <div class="px-3 pb-2 text-[10px] uppercase tracking-wider font-bold text-slate-400">আমার স্টাডি স্পেস</div>
@@ -69,10 +73,10 @@ export function dashboardPage(user: SessionUser): string {
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/15 overflow-hidden flex items-center justify-center shrink-0">
           <span class="user-init font-bold text-white">${firstLetter}</span>
-          <img class="user-photo w-full h-full object-cover hidden" alt="${user.name_bn}">
+          <img class="user-photo w-full h-full object-cover hidden" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </div>
         <div class="flex-1 min-w-0">
-          <p class="text-xs font-bold text-white truncate">${user.name_bn}</p>
+          <p class="text-xs font-bold text-white truncate">${safeName}</p>
           <div class="flex items-center gap-2 mt-0.5">
             <span class="text-[10px] text-orange-400 font-mono">৳ <span class="wallet-val">০</span></span>
             <span class="text-[10px] text-slate-400">·</span>
@@ -152,86 +156,79 @@ export function dashboardPage(user: SessionUser): string {
         <!-- প্রোফাইল শর্টকাট -->
         <a href="/profile" class="w-8 h-8 rounded-lg ${t.accentBg} text-white font-bold flex items-center justify-center overflow-hidden border border-white/20 shadow-xs hover:opacity-90 transition" title="প্রোফাইল">
           <span class="user-init text-xs">${firstLetter}</span>
-          <img class="user-photo w-full h-full object-cover hidden" alt="${user.name_bn}">
+          <img class="user-photo w-full h-full object-cover hidden" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </a>
       </div>
     </header>
 
     <div class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-6">
 
-      <!-- ১. প্রিমিয়াম প্রোফাইল হিরো ও লাইভ মিনি স্ট্যাটস -->
-      <section class="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.08] via-white/[0.04] to-transparent p-4 sm:p-6">
-        <div style="position:absolute;top:-90px;right:-70px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(249,115,22,.25),transparent 70%);pointer-events:none"></div>
-        <div style="position:absolute;bottom:-110px;left:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.13),transparent 70%);pointer-events:none"></div>
+      <!-- ১. প্রিমিয়াম প্রোফাইল হিরো — ধর্ম-থিমড, একক প্রাইমারি অ্যাকশন -->
+      <section class="ds-hero ds-hero--${info.theme}">
+        <div class="ds-hero__glow" aria-hidden="true"></div>
+        <div class="ds-hero__watermark" aria-hidden="true">${info.watermark}</div>
 
-        <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-5">
-          <!-- বামে: স্টুডেন্ট আইডেন্টিটি ও গ্রিটিং -->
+        <div class="relative flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+          <!-- বামে: পরিচয় -->
           <div class="flex items-center gap-3.5 sm:gap-4 min-w-0">
-            <div class="relative shrink-0">
-              <div style="padding:3px;border-radius:1.2rem;background:linear-gradient(135deg,#fb923c,#f59e0b,#f97316);box-shadow:0 8px 24px -8px rgba(249,115,22,.45)">
-                <div class="w-[52px] h-[52px] sm:w-14 sm:h-14 ${t.accentBg} rounded-[1.05rem] flex items-center justify-center text-xl font-black overflow-hidden text-white">
-                  <span class="user-init">${firstLetter}</span>
-                  <img class="user-photo w-full h-full object-cover hidden" alt="${user.name_bn}">
-                </div>
-              </div>
-              <a href="/profile" class="absolute -bottom-1 -right-1 w-5 h-5 bg-slate-900 border border-white/25 text-white rounded-full flex items-center justify-center text-[9px] hover:bg-orange-600 transition" title="প্রোফাইল এডিট"><i class="fas fa-pen"></i></a>
+            <div class="ds-avatar ds-avatar--${info.theme}" onclick="location.href='/profile'" role="button" tabindex="0">
+              <span class="user-init">${firstLetter}</span>
+              <img class="user-photo w-full h-full object-cover hidden" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+              <span class="ds-avatar__edit" aria-hidden="true"><i class="fas fa-pen"></i></span>
             </div>
+
             <div class="min-w-0">
-              <div class="flex items-center gap-2 flex-wrap">
-                <h1 class="font-serif-bn text-xl sm:text-2xl font-bold text-white truncate">${info.greeting}, ${user.name_bn}</h1>
-                <span class="text-[10px] bg-orange-500/20 text-orange-300 border border-orange-400/30 px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse"></span> ভেরিফাইড
-                </span>
-                <a href="/subscription" id="userSubBadge" class="hidden"></a>
+              <p class="ds-hero__greeting">${info.greeting}</p>
+              <h1 class="ds-hero__name">${safeName}</h1>
+
+              <div class="ds-hero__meta">
+                <span class="ds-badge ds-badge-brand">${levelLabel}</span>
+                <span class="ds-hero__date">${info.dateLine}</span>
+                <span class="ds-hero__dot">·</span>
+                <span class="ds-hero__date">${info.gregLine}</span>
               </div>
-              <div class="flex items-center gap-2 mt-1.5 text-xs text-slate-400 flex-wrap">
-                <span class="inline-flex items-center gap-1 bg-white/5 border border-white/10 rounded-lg px-2 py-0.5 text-[11px] text-slate-300">${({ ssc: 'SSC (মাধ্যমিক)', hsc: 'HSC (উচ্চ মাধ্যমিক)', nu: 'অনার্স / ডিগ্রি', masters: 'মাস্টার্স', other: 'সাধারণ' } as any)[user.education_level ?? ''] ?? 'শিক্ষার্থী'}</span>
-                <span class="text-slate-400 text-[11px]">${info.dateLine}</span>
-              </div>
-              <div class="flex items-center gap-2 mt-2 flex-wrap">
-                <button onclick="copyText('${user.user_code}', 'আইডি কপি হয়েছে!')" class="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-orange-300 bg-black/40 border border-orange-500/30 hover:border-orange-400 rounded-lg px-2 py-0.5 transition" title="আইডি কপি করুন">
-                  <i class="fas fa-id-card text-[9px] opacity-70"></i> ${user.user_code} <i class="fas fa-copy text-[8px] opacity-50"></i>
+
+              <div class="ds-hero__chips">
+                <button onclick="copyText('${safeCode}', 'আইডি কপি হয়েছে!')" class="ds-chip ds-chip--mono" title="আইডি কপি করুন">
+                  <i class="fas fa-id-card"></i> ${safeCode} <i class="fas fa-copy"></i>
                 </button>
-                <div id="subIdChip" class="hidden items-center gap-1.5 text-xs">
-                  <a href="/subscription" class="font-mono font-bold text-amber-300 bg-black/40 px-2 py-0.5 rounded-lg border border-amber-500/30 hover:border-amber-400 transition flex items-center gap-1.5 text-[11px]" title="সাবস্ক্রিপশন বিবরণী">
-                    <i class="fas fa-crown text-[9px]"></i><span id="subIdText">#SUB-2026</span>
-                    <span id="subDaysLeftText" class="text-slate-400 font-sans text-[10px]"></span>
+                <a href="/subscription" id="userSubBadge" class="hidden"></a>
+                <div id="subIdChip" class="hidden items-center gap-1.5">
+                  <a href="/subscription" class="ds-chip ds-chip--gold" title="সাবস্ক্রিপশন বিবরণী">
+                    <i class="fas fa-crown"></i><span id="subIdText">#SUB-2026</span>
+                    <span id="subDaysLeftText" class="ds-caption"></span>
                   </a>
                 </div>
-                <button onclick="openAddMoneyModal()" class="text-[11px] font-bold text-orange-400 hover:text-orange-300 flex items-center gap-1 transition">
-                  <i class="fas fa-circle-plus text-[10px]"></i> ক্যাশ-ইন
-                </button>
               </div>
             </div>
           </div>
 
-          <!-- ডানে: লাইভ মিনি স্ট্যাট গ্রিড -->
-          <div class="grid grid-cols-2 gap-2.5 w-full md:w-auto md:min-w-[330px]">
-            <div onclick="openAddMoneyModal()" class="cursor-pointer group bg-black/30 hover:bg-black/50 border border-white/10 hover:border-orange-400/50 rounded-2xl p-3 transition">
-              <p class="text-[10px] text-slate-400 font-semibold flex items-center gap-1.5"><i class="fas fa-wallet text-orange-400"></i> ওয়ালেট ব্যালেন্স</p>
-              <p class="text-lg sm:text-xl font-black text-white mt-0.5">৳ <span class="wallet-val">০</span></p>
-              <p class="text-[10px] text-orange-400 font-bold mt-0.5 group-hover:underline">+ ক্যাশ-ইন করুন</p>
+          <!-- ডানে: ৩টি মেট্রিক + একক প্রাইমারি CTA -->
+          <div class="ds-hero__panel">
+            <div class="ds-hero__metrics">
+              <button onclick="openAddMoneyModal()" class="ds-metric ds-metric--action">
+                <span class="ds-metric__label"><i class="fas fa-wallet"></i> ওয়ালেট</span>
+                <span class="ds-metric__value">৳ <span class="wallet-val">০</span></span>
+                <span class="ds-metric__hint">টপ-আপ করুন →</span>
+              </button>
+
+              <button onclick="setDashTab('exams')" class="ds-metric ds-metric--action">
+                <span class="ds-metric__label"><i class="fas fa-bookmark"></i> সেভড রোল</span>
+                <span class="ds-metric__value"><span id="rollCount">০</span><span class="ds-metric__unit"> টি</span></span>
+                <span class="ds-metric__hint">১-ক্লিক রেজাল্ট →</span>
+              </button>
+
+              <a href="/profile" class="ds-metric ds-metric--action">
+                <span class="ds-metric__label"><i class="fas fa-id-card-clip"></i> প্রোফাইল</span>
+                <span class="ds-metric__value"><span id="profilePct">০%</span></span>
+                <span class="ds-progress"><span id="profileProgressBar" class="ds-progress__bar" style="width:0%"></span></span>
+              </a>
             </div>
-            <button onclick="setDashTab('exams')" class="text-left group bg-black/30 hover:bg-black/50 border border-white/10 hover:border-amber-400/50 rounded-2xl p-3 transition">
-              <p class="text-[10px] text-slate-400 font-semibold flex items-center gap-1.5"><i class="fas fa-bookmark text-amber-400"></i> সেভ করা রোল</p>
-              <p class="text-lg sm:text-xl font-black text-white mt-0.5"><span id="rollCount">০</span> টি</p>
-              <p class="text-[10px] text-amber-400 font-bold mt-0.5 group-hover:underline">১-ক্লিক রেজাল্ট →</p>
+
+            <!-- একক প্রাইমারি অ্যাকশন — ড্যাশবোর্ডে আর ৯টি সমান-ওজনের CTA নেই -->
+            <button onclick="openResultModal()" class="ds-btn ds-btn-primary ds-hero__cta">
+              <i class="fas fa-magnifying-glass"></i> রেজাল্ট দেখুন
             </button>
-            <button onclick="setDashTab('community')" class="text-left group bg-black/30 hover:bg-black/50 border border-white/10 hover:border-orange-400/50 rounded-2xl p-3 transition">
-              <p class="text-[10px] text-slate-400 font-semibold flex items-center gap-1.5"><i class="fas fa-gift text-orange-400"></i> রেফারেল বোনাস</p>
-              <p class="text-lg sm:text-xl font-black text-white mt-0.5"><span id="heroRefCount">০</span> জন</p>
-              <p class="text-[10px] text-orange-400 font-bold mt-0.5 group-hover:underline">বোনাস দেখুন →</p>
-            </button>
-            <a href="/profile" class="group bg-black/30 hover:bg-black/50 border border-white/10 hover:border-sky-400/50 rounded-2xl p-3 transition">
-              <div class="flex items-center justify-between">
-                <p class="text-[10px] text-slate-400 font-semibold flex items-center gap-1.5"><i class="fas fa-id-card-clip text-sky-400"></i> প্রোফাইল</p>
-                <span id="profilePct" class="text-[11px] font-mono font-bold text-sky-300">০%</span>
-              </div>
-              <div class="w-full bg-black/50 h-1.5 rounded-full overflow-hidden border border-white/10 mt-2">
-                <div id="profileProgressBar" class="bg-gradient-to-r from-sky-400 to-orange-400 h-full rounded-full transition-all duration-500" style="width:0%"></div>
-              </div>
-              <p class="text-[10px] text-sky-400 font-bold group-hover:underline mt-1.5">তথ্য সম্পূর্ণ করুন →</p>
-            </a>
           </div>
         </div>
       </section>
@@ -562,7 +559,7 @@ export function dashboardPage(user: SessionUser): string {
                 <h4 class="text-xs sm:text-sm font-bold text-white">রেফারেল প্রোগ্রাম — বন্ধুকে আমন্ত্রণ জানান</h4>
                 <p class="text-[11px] text-slate-400 mt-0.5">আপনার রেফারেল কোডে রেজিস্ট্রেশন করলে দুজনের ওয়ালেটেই ক্যাশব্যাক যোগ হবে।</p>
                 <div class="flex items-center gap-2 mt-2">
-                  <code class="bg-black/40 border border-white/15 px-2.5 py-0.5 rounded text-xs font-mono text-orange-400 font-bold">${user.user_code}</code>
+                  <code class="bg-black/40 border border-white/15 px-2.5 py-0.5 rounded text-xs font-mono text-orange-400 font-bold">${safeCode}</code>
                   <button onclick="copyRefLink()" class="px-2.5 py-1 rounded-lg bg-orange-500 hover:bg-orange-600 text-slate-950 font-bold text-xs transition flex items-center gap-1">
                     <i class="fas fa-link text-[9px]"></i> লিংক কপি
                   </button>

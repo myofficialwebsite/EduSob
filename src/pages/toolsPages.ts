@@ -889,7 +889,7 @@ function printCurrentSyllabus() {
 
 function copyCurrentSyllabus() {
   if (!activeModalSyllabus) return;
-  var text = activeModalSyllabus.title + '\n\nমানবণ্টন: ' + (activeModalSyllabus.marks_distribution || '') + '\nসোর্স: ' + (activeModalSyllabus.source || '') + '\n\n' + (activeModalSyllabus.content || activeModalSyllabus.description || '');
+  var text = activeModalSyllabus.title + '\\n\\nমানবণ্টন: ' + (activeModalSyllabus.marks_distribution || '') + '\\nসোর্স: ' + (activeModalSyllabus.source || '') + '\\n\\n' + (activeModalSyllabus.content || activeModalSyllabus.description || '');
   navigator.clipboard.writeText(text).then(function(){
     alert('সিলেবাস সফলভাবে কপি করা হয়েছে!');
   }).catch(function(){

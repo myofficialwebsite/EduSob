@@ -62,6 +62,13 @@ async function safeAll<T = any>(db: any, sql: string, params: any[] = []): Promi
   }
 }
 
+// ঢাকা সময় অনুযায়ী YYYY-MM-DD (ট্রেন্ড হিসাবের জন্য — সার্ভার UTC হলেও ঠিক থাকবে)
+function dhakaDateStr(offsetDays = 0): string {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Dhaka', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(new Date(Date.now() + offsetDays * 86400000))
+}
+
 // ---------- কমান্ড সেন্টার ড্যাশবোর্ড স্ট্যাটস ও রিয়েলটাইম মনিটরিং ----------
 admin.get('/stats', async (c) => {
   const { DB } = c.env
@@ -75,7 +82,9 @@ admin.get('/stats', async (c) => {
       pendingPay, pendingAssist, pendingTickets, pendingSlots,
       ordersCount, revenue, walletSpent,
       syncSourcesCount, lastSyncLog, recentLogs,
-      recentUsers, recentAudit
+      recentUsers, recentAudit,
+      usersToday, usersYesterday, ordersToday, ordersYesterday,
+      revenueToday, revenueYesterday, users7d
     ] = await Promise.all([
       safeCount(DB, 'SELECT COUNT(*) n FROM users'),
       safeCount(DB, "SELECT COUNT(*) n FROM users WHERE status != 'suspended'"),
@@ -102,7 +111,16 @@ admin.get('/stats', async (c) => {
       safeFirst(DB, 'SELECT created_at, source_name, status FROM sync_logs ORDER BY id DESC LIMIT 1'),
       safeAll(DB, 'SELECT * FROM sync_logs ORDER BY id DESC LIMIT 6'),
       safeAll(DB, 'SELECT id, user_code, name_bn, phone, role, status, created_at FROM users ORDER BY id DESC LIMIT 6'),
-      safeAll(DB, 'SELECT * FROM admin_audit_logs ORDER BY id DESC LIMIT 6')
+      safeAll(DB, 'SELECT * FROM admin_audit_logs ORDER BY id DESC LIMIT 6'),
+
+      // ---- ট্রেন্ড: আজ বনাম গতকাল (ঢাকা সময়) ----
+      safeCount(DB, "SELECT COUNT(*) n FROM users WHERE date(created_at, '+6 hours') = ?", [dhakaDateStr(0)]),
+      safeCount(DB, "SELECT COUNT(*) n FROM users WHERE date(created_at, '+6 hours') = ?", [dhakaDateStr(-1)]),
+      safeCount(DB, "SELECT COUNT(*) n FROM orders WHERE status NOT IN ('cancelled') AND date(created_at, '+6 hours') = ?", [dhakaDateStr(0)]),
+      safeCount(DB, "SELECT COUNT(*) n FROM orders WHERE status NOT IN ('cancelled') AND date(created_at, '+6 hours') = ?", [dhakaDateStr(-1)]),
+      safeSum(DB, "SELECT COALESCE(SUM(total),0) s FROM orders WHERE status NOT IN ('cancelled') AND date(created_at, '+6 hours') = ?", [dhakaDateStr(0)]),
+      safeSum(DB, "SELECT COALESCE(SUM(total),0) s FROM orders WHERE status NOT IN ('cancelled') AND date(created_at, '+6 hours') = ?", [dhakaDateStr(-1)]),
+      safeCount(DB, "SELECT COUNT(*) n FROM users WHERE created_at >= datetime('now', '-7 days')")
     ])
 
     return c.json({
@@ -134,6 +152,11 @@ admin.get('/stats', async (c) => {
           consultations: pendingSlots,
           payments: pendingPay,
           total_alerts: pendingAssist + pendingTickets + pendingPay
+        },
+        trends: {
+          users:  { today: usersToday,  yesterday: usersYesterday,  week: users7d,  delta: usersToday - usersYesterday },
+          orders: { today: ordersToday, yesterday: ordersYesterday, delta: ordersToday - ordersYesterday },
+          revenue:{ today: revenueToday, yesterday: revenueYesterday, delta: revenueToday - revenueYesterday }
         },
         finance: {
           orders: ordersCount,

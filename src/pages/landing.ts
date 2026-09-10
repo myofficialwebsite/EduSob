@@ -273,7 +273,7 @@ export function landingPage(): string {
 
           <div class="relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#090b0f]">
             <div id="slide-1" class="hero-slider-slide absolute inset-0 opacity-100 bg-gradient-to-br from-orange-950/60 via-[#121620] to-slate-950 flex flex-col justify-between p-6">
-              <img src="/static/img/hero-students.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none">
+              <picture><source type="image/webp" srcset="/static/img/hero-students-sm.webp 480w, /static/img/hero-students.webp 960w" sizes="(max-width: 640px) 480px, 960px"><img src="/static/img/hero-students.webp" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none" decoding="async">
               <div class="relative flex items-center justify-between">
                 <span class="inline-flex items-center gap-1.5 bg-orange-500/15 text-orange-300 border border-orange-500/30 text-[11px] font-bold px-3 py-1 rounded-full">
                   <i class="fas fa-sparkles text-orange-400"></i> এডুসব লার্নিং হাব ২০২৬
@@ -294,7 +294,7 @@ export function landingPage(): string {
             </div>
 
             <div id="slide-2" class="hero-slider-slide absolute inset-0 opacity-0 bg-gradient-to-br from-amber-950/60 via-[#121620] to-slate-950 flex flex-col justify-between p-6">
-              <img src="/static/img/hero-exam.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none" loading="lazy">
+              <picture><source type="image/webp" srcset="/static/img/hero-exam-sm.webp 480w, /static/img/hero-exam.webp 960w" sizes="(max-width: 640px) 480px, 960px"><img src="/static/img/hero-exam.webp" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none" decoding="async" loading="lazy">
               <div class="relative flex items-center justify-between">
                 <span class="inline-flex items-center gap-1.5 bg-amber-500/15 text-amber-300 border border-amber-500/30 text-[11px] font-bold px-3 py-1 rounded-full">
                   <i class="fas fa-bolt text-amber-400"></i> লাইভ মডেল টেস্ট
@@ -315,7 +315,7 @@ export function landingPage(): string {
             </div>
 
             <div id="slide-3" class="hero-slider-slide absolute inset-0 opacity-0 bg-gradient-to-br from-indigo-950/60 via-[#121620] to-slate-950 flex flex-col justify-between p-6">
-              <img src="/static/img/hero-career.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none" loading="lazy">
+              <picture><source type="image/webp" srcset="/static/img/hero-career-sm.webp 480w, /static/img/hero-career.webp 960w" sizes="(max-width: 640px) 480px, 960px"><img src="/static/img/hero-career.webp" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none" decoding="async" loading="lazy">
               <div class="relative flex items-center justify-between">
                 <span class="inline-flex items-center gap-1.5 bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 text-[11px] font-bold px-3 py-1 rounded-full">
                   <i class="fas fa-id-card text-indigo-400"></i> ক্যারিয়ার হাব

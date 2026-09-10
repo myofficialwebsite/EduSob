@@ -396,19 +396,37 @@ function render(){
   checkStatuses();
 }
 
-// লাইভ সার্ভার স্ট্যাটাস — সার্ভার-সাইড প্রক্সি চেক
+// লাইভ সার্ভার স্ট্যাটাস — ১টি ব্যাচ কল (আগে ২৭টি আলাদা কল → ১২+ সেকেন্ড লোড টাইম)
 async function checkStatuses(){
-  for (const s of SOURCES){
-    s.links.forEach(async (l, i) => {
-      try {
-        const r = await axios.get('/api/link-status', { params: { url: l.url }, timeout: 12000 });
-        const el = document.getElementById('st-'+s.id+'-'+i);
-        if (el) el.innerHTML = statusBadge(r.data.up ? 'up' : 'down');
-      } catch(e) {
-        const el = document.getElementById('st-'+s.id+'-'+i);
-        if (el) el.innerHTML = statusBadge('down');
-      }
+  const jobs = [];
+  SOURCES.forEach(function(s){
+    (s.links || []).forEach(function(l, i){ jobs.push({ id: 'st-'+s.id+'-'+i, url: l.url }); });
+  });
+  if (!jobs.length) return;
+
+  // ডুপ্লিকেট URL একাধিক বার চেক করার প্রয়োজন নেই
+  const uniq = jobs.map(function(j){ return j.url; }).filter(function(u, i, a){ return a.indexOf(u) === i; });
+
+  function paint(map){
+    jobs.forEach(function(j){
+      const el = document.getElementById(j.id);
+      if (el) el.innerHTML = statusBadge(map[j.url] ? 'up' : 'down');
     });
+  }
+
+  try {
+    const r = await axios.post('/api/link-status/batch', { urls: uniq }, { timeout: 20000 });
+    paint((r.data && r.data.results) || {});
+  } catch(e) {
+    // ব্যাচ ব্যর্থ হলে পুরনো (ধীর) পথে ফলব্যাক — তবে শুধু সিঙ্গেল কল, সবগুলো নয়
+    try {
+      const pairs = await Promise.all(uniq.slice(0, 12).map(async function(u){
+        try { const rr = await axios.get('/api/link-status', { params: { url: u }, timeout: 6000 }); return [u, !!rr.data.up]; }
+        catch(err){ return [u, false]; }
+      }));
+      const map = {}; pairs.forEach(function(p){ map[p[0]] = p[1]; });
+      paint(map);
+    } catch(e2){ paint({}); }
   }
 }
 

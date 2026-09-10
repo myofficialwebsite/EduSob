@@ -30,7 +30,8 @@ api.post('/auth/signup', async (c) => {
   const body = await c.req.json<any>().catch(() => null)
   if (!body) return c.json({ ok: false, error: 'ভুল অনুরোধ' }, 400)
 
-  const name_bn = String(body.name_bn || '').trim()
+  // FIX (audit): ফ্রি-টেক্সট নামে HTML/মার্কআপ ঢোকানো বন্ধ (defence in depth)
+  const name_bn = String(body.name_bn || '').replace(/[<>]/g, '').trim()
   const phone = String(body.phone || '').replace(/[^\d]/g, '')
   const password = String(body.password || '')
   const religion = ['islam', 'sanatan', 'buddhist', 'christian', 'other'].includes(body.religion) ? body.religion : 'other'

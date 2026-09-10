@@ -31,3 +31,13 @@ lerna-debug.log*
 
 # misc
 .DS_Store
+
+# ⚠️ সিকিউরিটি (audit): প্রোডাকশন ডেটাবেজ ও লাইভ সেশন টোকেন আর কমিট হবে না।
+# গিট হিস্টরি থেকে মুছতে: git filter-repo --path data/ --path cookies.txt --invert-paths
+data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite.bak
+cookies.txt
+.netrc

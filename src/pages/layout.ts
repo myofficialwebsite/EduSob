@@ -21,11 +21,16 @@ export const HEAD_COMMON = `
 <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
 <link href="/static/tw.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+<!-- ⚡ FIX(audit): FontAwesome CDN (৬৩১ KB ফন্ট + ~১০০ KB CSS) → ব্যবহৃত ২০০টি
+     আইকনের সেলফ-হোস্টেড সাবসেট (১৭ KB)। কোনো 3rd-party রিকোয়েস্ট নেই। -->
+<link href="/static/icons-fa/fontawesome.css" rel="stylesheet">
+<!-- ⚡ FIX(audit): Google Fonts CDN (৪ ফ্যামিলি, ৮০৯ KB) → সেলফ-হোস্টেড সাবসেটেড woff2 (১০১ KB)।
+     কোনো 3rd-party রিকোয়েস্ট নেই → preconnect-এর প্রয়োজনই নেই। -->
+<link rel="preload" href="/static/fonts/hind-siliguri-400-bengali.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/static/fonts/hind-siliguri-600-bengali.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/static/fonts/fonts.css" rel="stylesheet">
+<!-- ⚡ FIX(audit): axios CDN সরানো হয়েছে — নিচের fetch-ভিত্তিক shim-ই যথেষ্ট।
+     এর ফলে একটি render-blocking 3rd-party রিকোয়েস্ট কমলো। -->
 <script>
 // এডুসব PWA: সার্ভিস ওয়ার্কার + ইনস্টল প্রম্পট + পুশ নোটিফিকেশন
 window.__edusobPwa = { deferredInstall: null };
@@ -611,6 +616,19 @@ function edusobMobileMore(){
 })();
 </script>
 `
+}
+
+// ---------- XSS নিরাপত্তা: সার্ভার-সাইড HTML এস্কেপ (FIX — audit) ----------
+// ইউজার-সরবরাহকৃত যেকোনো মান (নাম, ইউজার কোড, ঠিকানা...) HTML-এ বসানোর আগে
+// অবশ্যই এটি দিয়ে এস্কেপ করতে হবে। ব্যবহার: ${escHtml(user.name_bn)}
+export function escHtml(value: unknown): string {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/`/g, '&#96;')
 }
 
 export function pageShell(title: string, bodyClass: string, content: string, extraHead = '', showFloating = true): string {

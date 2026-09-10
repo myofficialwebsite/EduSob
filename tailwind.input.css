@@ -3,6 +3,425 @@
 @tailwind utilities;
 
 /* ============================================================
+   এডুসব ডিজাইন সিস্টেম v2 — টোকেন ভিত্তিক
+   ------------------------------------------------------------
+   নীতি:
+   · সব মান টোকেন থেকে — ম্যাজিক নম্বর নেই
+   · টাইপ স্কেল: ১.২০ অনুপাত, বাংলার জন্য উদার line-height
+     (বাংলা লিপিতে মাত্রা/যুক্তাক্ষর থাকে → লাতিনের চেয়ে বেশি
+      line-height ও সামান্য বড় সাইজ দরকার)
+   · মোশন: ১টি easing curve, ৩টি ডিউরেশন — সবখানে সামঞ্জস্য
+   ============================================================ */
+
+:root {
+  /* ---------- ব্র্যান্ড ---------- */
+  --brand-50:#fff7ed;  --brand-100:#ffedd5; --brand-200:#fed7aa; --brand-300:#fdba74;
+  --brand-400:#fb923c; --brand-500:#f97316; --brand-600:#ea580c; --brand-700:#c2410c;
+  --brand-800:#9a3412; --brand-900:#7c2d12;
+
+  /* ---------- নিউট্রাল (স্লেট-ভিত্তিক ডার্ক সারফেস) ---------- */
+  --surface-0:#07090f;  /* সবচেয়ে গাঢ় — পেজ ব্যাকগ্রাউন্ড */
+  --surface-1:#0d1119;  /* কার্ড */
+  --surface-2:#141a24;  /* উত্থিত কার্ড / হেডার */
+  --surface-3:#1c242f;  /* ইনপুট / হোভার */
+  --line-subtle: rgba(255,255,255,.06);
+  --line:         rgba(255,255,255,.10);
+  --line-strong:  rgba(255,255,255,.16);
+
+  /* ---------- টেক্সট ---------- */
+  --text-primary:   #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-tertiary:  #94a3b8;
+  --text-muted:     #64748b;
+
+  /* ---------- সিমেন্টিক ---------- */
+  --success:#22c55e; --success-bg:rgba(34,197,94,.12);
+  --warning:#f59e0b; --warning-bg:rgba(245,158,11,.12);
+  --danger:#f43f5e;  --danger-bg:rgba(244,63,94,.12);
+  --info:#38bdf8;    --info-bg:rgba(56,189,248,.12);
+
+  /* ---------- স্পেসিং (৪px বেস) ---------- */
+  --sp-1:4px;  --sp-2:8px;  --sp-3:12px; --sp-4:16px;
+  --sp-5:20px; --sp-6:24px; --sp-8:32px; --sp-10:40px;
+  --sp-12:48px; --sp-16:64px; --sp-20:80px;
+
+  /* ---------- রেডিয়াস ---------- */
+  --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:20px; --r-2xl:24px; --r-full:999px;
+
+  /* ---------- শ্যাডো ---------- */
+  --sh-sm: 0 1px 2px rgba(0,0,0,.30);
+  --sh-md: 0 4px 16px -2px rgba(0,0,0,.40);
+  --sh-lg: 0 12px 32px -8px rgba(0,0,0,.50);
+  --sh-glow: 0 8px 28px -8px rgba(249,115,22,.45);
+
+  /* ---------- মোশন ---------- */
+  --ease: cubic-bezier(.16,1,.3,1);   /* easeOutExpo — সব ট্রানজিশনে একই */
+  --dur-fast: 140ms;
+  --dur:      220ms;
+  --dur-slow: 420ms;
+
+  /* ---------- লেআউট ---------- */
+  --sidebar-w: 264px;
+  --header-h: 60px;
+  --content-max: 1200px;
+}
+
+/* ---------- টাইপোগ্রাফি: বাংলা-অপটিমাইজড স্কেল ---------- */
+:root {
+  /* ডিসপ্লে (হেডলাইন) — Noto Serif Bengali */
+  --fs-display-1: clamp(2.0rem, 1.4rem + 2.6vw, 3.0rem);   /* 32→48 */
+  --fs-display-2: clamp(1.6rem, 1.2rem + 1.8vw, 2.25rem);  /* 26→36 */
+  --fs-display-3: clamp(1.3rem, 1.1rem + 1.0vw, 1.65rem);  /* 21→26 */
+  /* বডি / UI — Hind Siliguri */
+  --fs-xl: 1.25rem;  /* 20 */
+  --fs-lg: 1.125rem; /* 18 */
+  --fs-md: 1rem;     /* 16 */
+  --fs-sm: 0.9375rem;/* 15 */
+  --fs-xs: 0.875rem; /* 14 */
+  --fs-2xs: 0.8125rem;/* 13 */
+  --fs-3xs: 0.75rem; /* 12 */
+}
+
+/* হেডলাইন — সিরিফ, টাইট লিডিং, নেগেটিভ ট্র্যাকিং */
+.ds-h1, .ds-h2, .ds-h3 {
+  font-family: 'Noto Serif Bengali', 'Hind Siliguri', serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+.ds-h1 { font-size: var(--fs-display-2); line-height: 1.25; }
+.ds-h2 { font-size: var(--fs-display-3); line-height: 1.30; }
+.ds-h3 { font-family: 'Hind Siliguri', sans-serif; font-weight: 600; font-size: var(--fs-lg); line-height: 1.40; }
+
+/* বডি — বাংলার জন্য উদার line-height (১.৭) */
+.ds-body   { font-size: var(--fs-md); line-height: 1.70; color: var(--text-secondary); }
+.ds-body-sm{ font-size: var(--fs-xs); line-height: 1.65; color: var(--text-secondary); }
+.ds-label  { font-size: var(--fs-2xs); line-height: 1.4; font-weight: 600; color: var(--text-tertiary); }
+.ds-caption{ font-size: var(--fs-3xs); line-height: 1.5; color: var(--text-muted); }
+.ds-eyebrow{
+  font-size: var(--fs-3xs); font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--brand-400);
+}
+
+/* ---------- কার্ড ---------- */
+.ds-card {
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.ds-card-hover:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--sh-md);
+  transform: translateY(-2px);
+}
+
+/* ---------- বাটন ---------- */
+.ds-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2);
+  font-family: 'Hind Siliguri', sans-serif; font-weight: 600; font-size: var(--fs-xs);
+  line-height: 1; padding: 10px 16px; border-radius: var(--r-md); border: 1px solid transparent;
+  cursor: pointer; white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
+}
+.ds-btn:active { transform: scale(.975); }
+.ds-btn-primary {
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-400));
+  color: #1a1005; box-shadow: var(--sh-glow);
+}
+.ds-btn-primary:hover { filter: brightness(1.07); }
+.ds-btn-secondary {
+  background: var(--surface-2); color: var(--text-secondary); border-color: var(--line);
+}
+.ds-btn-secondary:hover { background: var(--surface-3); color: var(--text-primary); }
+.ds-btn-ghost { background: transparent; color: var(--text-tertiary); }
+.ds-btn-ghost:hover { background: var(--surface-2); color: var(--text-primary); }
+.ds-btn-sm { padding: 7px 12px; font-size: var(--fs-3xs); border-radius: var(--r-sm); }
+
+/* ---------- ব্যাজ / চিপ ---------- */
+.ds-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: var(--fs-3xs); font-weight: 700; line-height: 1;
+  padding: 5px 9px; border-radius: var(--r-full);
+}
+.ds-badge-success { background: var(--success-bg); color: #4ade80; }
+.ds-badge-warning { background: var(--warning-bg); color: #fbbf24; }
+.ds-badge-danger  { background: var(--danger-bg);  color: #fb7185; }
+.ds-badge-info    { background: var(--info-bg);    color: #7dd3fc; }
+.ds-badge-brand   { background: rgba(249,115,22,.14); color: var(--brand-300); }
+
+/* ---------- স্ট্যাট/কে-পি-আই ---------- */
+.ds-stat { background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--sp-4); }
+.ds-stat-value {
+  font-family: 'Hind Siliguri', sans-serif; font-weight: 700;
+  font-size: clamp(1.5rem, 1.2rem + .8vw, 2rem); line-height: 1.1;
+  color: var(--text-primary); font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
+}
+.ds-stat-delta { font-size: var(--fs-3xs); font-weight: 700; font-variant-numeric: tabular-nums; }
+.ds-stat-delta-up   { color: #4ade80; }
+.ds-stat-delta-down { color: #fb7185; }
+
+/* ---------- ইনপুট ---------- */
+.ds-input {
+  width: 100%; background: var(--surface-3); border: 1px solid var(--line);
+  border-radius: var(--r-md); padding: 10px 12px;
+  font-size: var(--fs-xs); color: var(--text-primary);
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.ds-input::placeholder { color: var(--text-muted); }
+.ds-input:focus { outline: none; border-color: var(--brand-500); box-shadow: 0 0 0 3px rgba(249,115,22,.15); }
+
+/* ---------- সেকশন হেডার ---------- */
+.ds-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-3); margin-bottom: var(--sp-3); }
+.ds-section-title { font-family: 'Hind Siliguri', sans-serif; font-weight: 700; font-size: var(--fs-lg); color: var(--text-primary); }
+
+/* ---------- ডিভাইডার ---------- */
+.ds-divider { height: 1px; background: var(--line); border: 0; }
+
+/* ---------- স্কেলিটন লোডিং ---------- */
+.ds-skeleton {
+  background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%);
+  background-size: 200% 100%; animation: ds-shimmer 1.4s infinite; border-radius: var(--r-sm);
+}
+@keyframes ds-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ---------- এম্পটি স্টেট ---------- */
+.ds-empty { text-align: center; padding: var(--sp-10) var(--sp-4); }
+.ds-empty-icon { font-size: 2rem; opacity: .35; margin-bottom: var(--sp-2); }
+
+/* ============================================================
+   ড্যাশবোর্ড হিরো — ধর্ম-থিমড (ইউজার ড্যাশবোর্ড)
+   ------------------------------------------------------------
+   থিম = অ্যাকসেন্ট রঙ + ওয়াটারমার্ক প্রতীক।
+   .ds-hero--orange | --saffron | --maroon | --blue
+   ============================================================ */
+.ds-hero {
+  --accent: #f97316;        /* ফলব্যাক */
+  --accent-soft: rgba(249,115,22,.14);
+  --accent-line: rgba(249,115,22,.32);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,.02) 45%, transparent 100%),
+    var(--surface-1);
+  padding: var(--sp-5) var(--sp-5);
+  box-shadow: var(--sh-md);
+}
+.ds-hero--orange { --accent:#f97316; --accent-soft:rgba(249,115,22,.14); --accent-line:rgba(249,115,22,.32); }
+.ds-hero--saffron{ --accent:#f59e0b; --accent-soft:rgba(245,158,11,.14); --accent-line:rgba(245,158,11,.32); }
+.ds-hero--maroon { --accent:#fb7185; --accent-soft:rgba(251,113,133,.14); --accent-line:rgba(251,113,133,.32); }
+.ds-hero--blue   { --accent:#38bdf8; --accent-soft:rgba(56,189,248,.14); --accent-line:rgba(56,189,248,.32); }
+
+/* অ্যাম্বিয়েন্ট গ্লো — থিম রঙে */
+.ds-hero__glow{
+  position:absolute; top:-120px; right:-80px; width:340px; height:340px; border-radius:50%;
+  background: radial-gradient(circle, var(--accent-soft), transparent 70%);
+  pointer-events:none;
+}
+/* ধর্মীয় প্রতীক জলছাপ */
+.ds-hero__watermark{
+  position:absolute; right:24px; bottom:-42px;
+  font-size:168px; line-height:1; opacity:.045; color:var(--accent);
+  pointer-events:none; user-select:none;
+}
+
+.ds-hero__greeting{
+  font-family:'Hind Siliguri',sans-serif; font-weight:600;
+  font-size: var(--fs-2xs); color: var(--accent); margin:0 0 2px;
+}
+.ds-hero__name{
+  font-family:'Noto Serif Bengali','Hind Siliguri',serif; font-weight:700;
+  font-size: clamp(1.4rem, 1.15rem + 1.1vw, 1.9rem); line-height:1.22;
+  letter-spacing:-.01em; color:var(--text-primary); margin:0;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.ds-hero__meta{ display:flex; align-items:center; gap:var(--sp-2); flex-wrap:wrap; margin-top:var(--sp-2); }
+.ds-hero__date{ font-size: var(--fs-3xs); color: var(--text-tertiary); }
+.ds-hero__dot{ color: var(--text-muted); font-size: var(--fs-3xs); }
+.ds-hero__chips{ display:flex; align-items:center; gap:var(--sp-2); flex-wrap:wrap; margin-top:var(--sp-3); }
+
+/* অ্যাভাতার — থিম-রঙের রিং */
+.ds-avatar{
+  position:relative; flex-shrink:0; cursor:pointer;
+  width:60px; height:60px; border-radius:18px; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, #f59e0b));
+  color:#0b0d12; font-weight:800; font-size:1.35rem;
+  box-shadow: 0 8px 24px -8px var(--accent-line);
+  transition: transform var(--dur) var(--ease);
+}
+.ds-avatar:hover{ transform: scale(1.04); }
+.ds-avatar .user-init,
+.ds-avatar .user-photo{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; object-fit:cover; }
+.ds-avatar__edit{
+  position:absolute; right:-2px; bottom:-2px;
+  width:19px; height:19px; border-radius:50%;
+  background:var(--surface-2); border:1px solid var(--line-strong); color:var(--text-secondary);
+  display:flex; align-items:center; justify-content:center; font-size:9px;
+}
+@media (min-width:640px){ .ds-avatar{ width:64px; height:64px; } }
+
+/* ডান প্যানেল: মেট্রিক + CTA */
+.ds-hero__panel{ display:flex; flex-direction:column; gap:var(--sp-3); width:100%; }
+@media (min-width:1024px){ .ds-hero__panel{ width:auto; min-width:340px; } }
+
+.ds-hero__metrics{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-2); }
+.ds-metric{
+  display:flex; flex-direction:column; gap:2px; text-align:left;
+  background: rgba(0,0,0,.28); border:1px solid var(--line);
+  border-radius: var(--r-md); padding: var(--sp-3);
+  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.ds-metric--action:hover{ border-color: var(--accent-line); background: rgba(0,0,0,.42); }
+.ds-metric__label{
+  display:flex; align-items:center; gap:5px;
+  font-size:11px; font-weight:600; color:var(--text-tertiary); white-space:nowrap;
+}
+.ds-metric__label i{ color: var(--accent); font-size:10px; }
+.ds-metric__value{
+  font-family:'Hind Siliguri',sans-serif; font-weight:700;
+  font-size: clamp(1.05rem, .95rem + .5vw, 1.35rem); line-height:1.15;
+  color:var(--text-primary); font-variant-numeric: tabular-nums; letter-spacing:-.02em;
+}
+.ds-metric__unit{ font-size:.72em; font-weight:600; color:var(--text-tertiary); }
+.ds-metric__hint{ font-size:11px; font-weight:700; color: var(--accent); }
+
+/* প্রগ্রেস বার */
+.ds-progress{
+  display:block; width:100%; height:4px; margin-top:4px;
+  background: rgba(0,0,0,.5); border-radius:999px; overflow:hidden;
+}
+.ds-progress__bar{
+  display:block; height:100%; border-radius:999px;
+  background: linear-gradient(90deg, var(--accent), #f59e0b);
+  transition: width var(--dur-slow) var(--ease);
+}
+
+.ds-hero__cta{ width:100%; padding: 12px 18px; font-size: var(--fs-sm); }
+
+/* চিপ (মনোস্পেস আইডি / গোল্ড সাবস্ক্রিপশন) */
+.ds-chip{
+  display:inline-flex; align-items:center; gap:6px;
+  background: rgba(0,0,0,.35); border:1px solid var(--accent-line);
+  border-radius: var(--r-sm); padding: 4px 8px;
+  font-size: var(--fs-3xs); font-weight:700; color: var(--accent);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.ds-chip:hover{ border-color: var(--accent); }
+.ds-chip--mono{ font-family: ui-monospace,'SF Mono',Menlo,monospace; }
+.ds-chip--mono i:last-child{ opacity:.5; font-size:9px; }
+.ds-chip--gold{ color:#fbbf24; border-color:rgba(251,191,36,.3); }
+
+/* ============================================================
+   এডমিন — "আজকের কাজ" বার ও ট্রেন্ড
+   পেন্ডিং কাজ সবার উপরে: ৩ ক্লিক → ১ ক্লিক
+   ============================================================ */
+.adm-today{
+  background: linear-gradient(135deg, #0f1622 0%, #0b1119 60%, #131a12 100%);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--sp-4) var(--sp-5);
+  box-shadow: var(--sh-md);
+}
+.adm-today__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-4); flex-wrap:wrap; }
+.adm-today__title{
+  font-family:'Noto Serif Bengali','Hind Siliguri',serif; font-weight:700;
+  font-size: clamp(1.25rem, 1.1rem + .8vw, 1.6rem); line-height:1.25;
+  color:#f8fafc; margin:0; letter-spacing:-.01em;
+}
+.adm-today__sub{ font-size: var(--fs-3xs); color: var(--text-tertiary); margin:2px 0 0; }
+.adm-today__chips{ display:flex; align-items:center; gap:var(--sp-2); flex-wrap:wrap; }
+
+.adm-chip{
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:'Hind Siliguri',sans-serif; font-size: var(--fs-3xs); font-weight:600;
+  padding: 6px 11px; border-radius: var(--r-full);
+  border:1px solid transparent; cursor:pointer; white-space:nowrap;
+  transition: transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.adm-chip:active{ transform: scale(.97); }
+.adm-chip b{ font-weight:800; font-size: var(--fs-xs); font-variant-numeric: tabular-nums; }
+.adm-chip__arrow{ font-size:9px; opacity:.6; }
+
+.adm-chip--alert{
+  background: rgba(244,63,94,.14); border-color: rgba(244,63,94,.35); color:#fda4af;
+}
+.adm-chip--alert:hover{ background: rgba(244,63,94,.24); }
+.adm-chip--clear{
+  background: rgba(34,197,94,.12); border-color: rgba(34,197,94,.3); color:#86efac; cursor:default;
+}
+
+/* ট্রেন্ড সারি */
+.adm-today__trends{
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  gap: var(--sp-3); margin-top: var(--sp-4);
+  padding-top: var(--sp-4); border-top:1px solid var(--line-subtle);
+}
+.adm-trend{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+.adm-trend__label{
+  font-size:11px; font-weight:600; color: var(--text-tertiary);
+  display:flex; align-items:center; gap:5px;
+}
+.adm-trend__label i{ color: var(--brand-400); font-size:10px; }
+.adm-trend__value{
+  font-family:'Hind Siliguri',sans-serif; font-weight:700;
+  font-size: clamp(1.1rem, .95rem + .7vw, 1.5rem); line-height:1.15;
+  color:#f8fafc; font-variant-numeric: tabular-nums; letter-spacing:-.02em;
+}
+.adm-trend__cmp{ color: var(--text-muted); font-weight:500; }
+
+@media (max-width: 640px){
+  .adm-today{ padding: var(--sp-4); }
+  .adm-today__trends{ gap: var(--sp-2); }
+}
+
+/* ---------- রেসপন্সিভ: মোবাইলে প্যাডিং কম ---------- */
+@media (max-width: 640px) {
+  .ds-card, .ds-stat { border-radius: var(--r-md); }
+  .ds-hero { padding: var(--sp-4); border-radius: var(--r-lg); }
+  .ds-hero__watermark{ font-size:120px; right:8px; bottom:-30px; }
+  .ds-hero__metrics{ gap: 6px; }
+  .ds-metric{ padding: 10px; }
+}
+
+/* ============================================================
+   মোবাইল হরিজন্টাল ওভারফ্লো প্রতিরোধ
+   ============================================================ */
+
+/* ১. CSS Grid-এর ডিফল্ট `min-width:auto` জনিত ওভারফ্লো
+      একটি whitespace-nowrap চাইল্ড (ব্যাজ/বাটন) পুরো গ্রিড কলামকে
+      কন্টেইনারের চেয়ে চওড়া করে দেয় → পেজে horizontal scroll।
+      এটিই /admission (+১৭২px) ও /results (+১২৬px)-এর মূল কারণ। */
+#adm-cards > *,
+#result-cards > *,
+.card-hover,
+.dash-card-item { min-width: 0; }
+
+/* গ্রিড/ফ্লেক্স আইটেমের ভেতরে লম্বা টেক্সট যেন কলাম না ফুলিয়ে দেয় */
+#adm-cards *, #result-cards *, .card-hover * { min-width: auto; }
+#adm-cards h2, #result-cards h2,
+#adm-cards p,  #result-cards p,
+.card-hover h2, .card-hover p { overflow-wrap: anywhere; }
+
+/* ২. নিরাপত্তা জাল — `clip` ব্যবহার (NOT `hidden`):
+      `hidden` স্ক্রল কন্টেইনার তৈরি করে position:sticky ভেঙে দেয়, `clip` করে না। */
+@media (max-width: 767px) {
+  html, body { overflow-x: clip; }
+}
+
+/* ৩. ট্যাব/চিপ সারি ভিউপোর্ট ছাড়িয়ে গেলে নিজের ভেতরেই স্ক্রল করবে, পেজ নয় */
+.no-scrollbar { max-width: 100%; }
+
+/* ---------- reduced-motion সাপোর্ট ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ============================================================
    এডুসব গ্লোবাল ডিজাইন সিস্টেম — অ্যানিমেশন, টাইপোগ্রাফি, ইফেক্ট
    (স্ক্রিপ্টে বানানো ক্লাসের জন্য প্লেইন CSS — পার্জ হয় না)
    ============================================================ */
@@ -10,14 +429,18 @@
 /* ---------- বেস টাইপোগ্রাফি ও স্ক্রোল ---------- */
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Hind Siliguri', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  /* FIX(audit): ৪ ফ্যামিলি → ২। Plus Jakarta Sans / Syne আর লোড করা হয় না
+     (৮০৯ KB → ১০১ KB)। সিস্টেম ফ্যামিলি ফলব্যাক রাখা হয়েছে। */
+  font-family: 'Hind Siliguri', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: var(--fs-md);
+  line-height: 1.70;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 ::selection { background: #f97316; color: #fff; }
 
-.font-display, h1.font-display, h2.font-display { font-family: 'Syne', 'Hind Siliguri', sans-serif; }
-.font-en { font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif; }
+.font-display, h1.font-display, h2.font-display { font-family: 'Noto Serif Bengali', 'Hind Siliguri', serif; }
+.font-en { font-family: 'Hind Siliguri', system-ui, sans-serif; }
 
 /* ফোকাস ভিজিবিলিটি (Accessibility) */
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {

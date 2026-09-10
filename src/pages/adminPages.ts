@@ -50,6 +50,20 @@ export function adminPage(isAdmin: boolean): string {
 const ADMIN_BODY = `
 ${renderAdminHeader()}
 
+<section class="adm-today" aria-label="আজকের কাজ">
+  <div class="adm-today__head">
+    <div class="min-w-0">
+      <h1 class="adm-today__title">অ্যাডমিন ওভারভিউ</h1>
+      <p class="adm-today__sub">অপেক্ষমান কাজ ও আজকের অবস্থা — এক নজরে</p>
+    </div>
+    <div id="todayWorkChips" class="adm-today__chips">
+      <span class="adm-today__loading"><span class="ds-skeleton" style="width:96px;height:26px;display:inline-block"></span></span>
+    </div>
+  </div>
+
+  <div id="todayTrendRow" class="adm-today__trends"></div>
+</section>
+
 <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
   <!-- ১. লাইভ ওভারভিউ ও মনিটরিং -->
   ${renderOverviewTab()}
@@ -692,6 +706,20 @@ function toBn(num){
 }
 
 var KPI_RAF = {};
+// ট্রেন্ড কার্ড: আজকের মান + গতকালের সাথে পার্থক্য (সংখ্যার প্রেক্ষাপট ছাড়া KPI অর্থহীন)
+function trendCard(label, t, isCount, icon){
+  var up = t.delta > 0, flat = t.delta === 0;
+  var sign = up ? '+' : (flat ? '±' : '');
+  var cls = up ? 'ds-stat-delta-up' : (flat ? '' : 'ds-stat-delta-down');
+  var val = isCount ? toBn(t.today) : ('৳' + toBn(t.today));
+  var cmp = isCount ? toBn(Math.abs(t.delta)) : ('৳' + toBn(Math.abs(t.delta)));
+  return '<div class="adm-trend">' +
+    '<span class="adm-trend__label"><i class="fas ' + icon + '"></i> ' + label + '</span>' +
+    '<span class="adm-trend__value">' + val + '</span>' +
+    '<span class="ds-stat-delta ' + cls + '">' + sign + cmp + ' <span class="adm-trend__cmp">গতকালের চেয়ে</span></span>' +
+  '</div>';
+}
+
 function setKpi(id, val){
   var el = document.getElementById(id);
   if(!el) return;
@@ -848,6 +876,46 @@ async function loadStats(){
     setKpi('alertPendingAssist', s.pending_action.assisted);
     setKpi('alertPendingTickets', s.pending_action.tickets);
     setKpi('alertPendingPayments', s.pending_action.payments);
+  }
+
+  // ---- আজকের কাজ বার (পেন্ডিং কাজ সরাসরি সামনে) ----
+  if(s.pending_action){
+    var pa = s.pending_action;
+    var chips = [
+      { key:'payments',  n: pa.payments,      label:'পেমেন্ট রিভিউ',  icon:'fa-money-bill-wave',  act: "location.href='/admin/shop'" },
+      { key:'assisted',  n: pa.assisted,      label:'অ্যাসিস্টেড কিউ', icon:'fa-clipboard-check',  act: "navigateToTab('assisted')" },
+      { key:'tickets',   n: pa.tickets,       label:'শিক্ষক টিকিট',    icon:'fa-comment-dots',     act: "navigateToTab('teacher')" },
+      { key:'consult',   n: pa.consultations, label:'কনসাল্টেশন',     icon:'fa-video',            act: "navigateToTab('teacher')" }
+    ];
+    var box = document.getElementById('todayWorkChips');
+    if(box){
+      var pending = chips.filter(function(c){ return c.n > 0; });
+      box.innerHTML = pending.length ? '' :
+        '<span class="adm-chip adm-chip--clear"><i class="fas fa-circle-check"></i> সব কাজ সম্পন্ন 🎉</span>';
+      // বেশি পেন্ডিং আগে
+      pending.sort(function(a,b){ return b.n - a.n; });
+      pending.forEach(function(c){
+        box.insertAdjacentHTML('beforeend',
+          '<button class="adm-chip adm-chip--alert" onclick="' + c.act + '" title="' + c.label + ' দেখুন">' +
+            '<i class="fas ' + c.icon + '"></i>' +
+            '<b>' + toBn(c.n) + '</b> ' + c.label +
+            '<i class="fas fa-arrow-right adm-chip__arrow"></i>' +
+          '</button>');
+      });
+    }
+  }
+
+  // ---- ট্রেন্ড: আজ বনাম গতকাল ----
+  if(s.trends){
+    var t = s.trends;
+    var tr = document.getElementById('todayTrendRow');
+    if(tr){
+      tr.innerHTML = [
+        trendCard('নতুন ইউজার', t.users, true, 'fa-user-plus'),
+        trendCard('অর্ডার', t.orders, true, 'fa-bag-shopping'),
+        trendCard('রেভিনিউ', t.revenue, false, 'fa-bangladeshi-taka-sign')
+      ].join('');
+    }
   }
 
   // সাম্প্রতিক ইউজার তালিকা
