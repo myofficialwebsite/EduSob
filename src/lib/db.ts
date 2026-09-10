@@ -530,6 +530,35 @@ export async function getD1Db(): Promise<D1Database> {
 
 let schemaEnsured = false
 
+
+// ---------- কলাম-ড্রিফট সেলফ-হিলিং ----------
+// CREATE TABLE IF NOT EXISTS দিয়ে বিদ্যমান টেবিলের কলাম-ঘাটতি কখনোই ঠিক হয় না।
+// প্রোডাকশনে ঠিক এই কারণেই তিনটি বাস্তব সমস্যা লুকিয়ে ছিল:
+//   * teachers-এ is_active নেই     -> /api/teacher-support/mentors ৫০০ (মেন্টর সাপোর্ট ডেড)
+//   * admissions/question_papers/scholarships-এ source নেই -> CRUD/লিস্ট কল ব্যর্থ
+// টেবিলগুলো মাইগ্রেশন দিয়ে তৈরি হলেও পরে কোডে কলাম যোগ হলে প্রোডাকশনে পৌঁছায়নি।
+// নিচের তালিকা দিয়ে ঘাটতি স্বয়ংক্রিয়ভাবে পূরণ হয় — বারবার চালালেও নিরাপদ (idempotent)।
+async function ensureD1Columns(db: any): Promise<void> {
+  const wanted: Array<[string, string, string]> = [
+    ['teachers', 'is_active', 'INTEGER NOT NULL DEFAULT 1'],
+    ['admissions', 'source', "TEXT DEFAULT ''"],
+    ['question_papers', 'source', "TEXT DEFAULT ''"],
+    ['scholarships', 'source', "TEXT DEFAULT ''"],
+  ]
+  for (const [table, col, def] of wanted) {
+    try {
+      const info: any = await db.prepare('PRAGMA table_info(' + table + ')').all()
+      const cols: string[] = ((info && info.results) || []).map((r: any) => String(r && r.name))
+      if (cols.length && cols.indexOf(col) === -1) {
+        await db.prepare('ALTER TABLE ' + table + ' ADD COLUMN ' + col + ' ' + def).run()
+        console.warn('[ensureD1Schema] added missing column: ' + table + '.' + col)
+      }
+    } catch (e) {
+      // টেবিল এখনো তৈরি হয়নি বা অন্য কারণে ব্যর্থ — পরের রিকোয়েস্টে আবার চেষ্টা হবে
+    }
+  }
+}
+
 export async function ensureD1Schema(db: any): Promise<void> {
   if (schemaEnsured || !db) return
 
@@ -811,6 +840,8 @@ export async function ensureD1Schema(db: any): Promise<void> {
     } catch (e) {
       console.warn('[ensureD1Schema admin sync note]:', e)
     }
+
+    await ensureD1Columns(db)
 
     schemaEnsured = true
   } catch (err) {
