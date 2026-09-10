@@ -30,6 +30,7 @@ import { admissionPage } from './pages/admissionPage'
 import { teacherSupportPage } from './pages/teacherSupportPage'
 import { boardChallengePage } from './pages/boardChallengePage'
 import { scholarshipsPage } from './pages/scholarshipsPage'
+import { makeNonce, cspHeader, injectScriptNonces } from './lib/csp'
 
 const app = new Hono<{ Bindings: Bindings }>()
 
@@ -39,6 +40,30 @@ app.use('*', async (c, next) => {
   if (!(c.env as any).DB) (c.env as any).DB = await getD1Db()
   await ensureD1Schema((c.env as any).DB)
   await next()
+})
+
+// ---------- Content-Security-Policy (nonce-ভিত্তিক) ----------
+// প্রতি রিকোয়েস্টে নতুন nonce; রেন্ডার শেষে HTML-এর সব ইনলাইন <script>-এ সেটি বসানো হয়।
+// ফলে ইনজেক্টেড <script> চলতে পারবে না (nonce নেই) এবং 3rd-party স্ক্রিপ্ট লোড বন্ধ।
+// খেয়াল রাখা হয়েছে: HTML নয় এমন রেসপন্স (JSON/রিডাইরেক্ট/স্ট্যাটিক) অবিকৃত থাকে।
+app.use('*', async (c, next) => {
+  const nonce = makeNonce()
+  await next()
+  try {
+    const ct = c.res.headers.get('content-type') || ''
+    if (!ct.includes('text/html')) return
+    const body = await c.res.text()
+    if (body.indexOf('<script') === -1) {
+      c.res.headers.set('Content-Security-Policy', cspHeader(nonce))
+      return
+    }
+    const patched = injectScriptNonces(body, nonce)
+    const res = new Response(patched, { status: c.res.status, statusText: c.res.statusText, headers: c.res.headers })
+    res.headers.set('Content-Security-Policy', cspHeader(nonce))
+    c.res = res
+  } catch {
+    // স্ট্রিমিং/ইমিউটেবল রেসপন্সে হেডার সেট করা যায় না — চুপচাপ এড়িয়ে যাই
+  }
 })
 
 // সিকিউরিটি রেসপন্স হেডার

@@ -319,12 +319,56 @@ CSRF গার্ড কিন্তু **stateless** — এটি সব জ�
 
 **খরচ:** প্রতি পেজে +১৯ DOM নোড (ড্যাশবোর্ড ৭২২ → ৭৪১)। নতুন কোনো 3rd-party রিকোয়েস্ট নেই।
 
-## ১১. পরের ধাপ (রোডম্যাপ)
+## ১১. অষ্টম রাউন্ড — nonce-ভিত্তিক Content-Security-Policy (সম্পন্ন)
 
-- **H3** CSP — ইনলাইন স্ক্রিপ্টগুলো nonce-ভিত্তিক করলে কড়া CSP চালু করা যাবে
+আগে `_headers`-এ লেখা ছিল: "অ্যাপে ১২০+ ইনলাইন `<script>` ব্লক আছে, তাই কড়া CSP সব
+ভেঙে দেবে"। সেই কারণটিই এখন দূর করা হয়েছে।
+
+**কীভাবে:** প্রতি রিকোয়েস্টে একটি নতুন nonce তৈরি হয় (`crypto.getRandomValues`),
+রেন্ডার শেষে রেসপন্স HTML-এর **প্রতিটি** `<script>` ট্যাগে `nonce="…"` বসানো হয়,
+এবং `Content-Security-Policy` হেডারে `'nonce-…'` পাঠানো হয়। রেন্ডার-পরবর্তী
+ইনজেকশন হওয়ায় **কোনো পেজ ফাইলেই হাত দিতে হয়নি** — ভবিষ্যতে নতুন পেজ যোগ হলেও
+সেটি নিজে থেকেই nonce পেয়ে যাবে।
+
+```
+default-src 'self';  script-src 'self' 'nonce-…';  script-src-attr 'unsafe-inline';
+style-src 'self' 'unsafe-inline';  img-src 'self' data: blob: https:;
+font-src 'self' data:;  connect-src 'self';  frame-src 'self' blob: data: about:;
+worker-src 'self';  manifest-src 'self';  base-uri 'self';  form-action 'self';
+frame-ancestors 'self';  object-src 'none';  upgrade-insecure-requests
+```
+
+**এতে কী বন্ধ হলো:** ইনজেক্টেড `<script>` ট্যাগ (XSS-এর প্রধান পথ) · 3rd-party
+স্ক্রিপ্ট লোড · `javascript:`-নয় এমন সব বাহ্যিক এক্সিকিউশন।
+
+### ⚠️ সৎ সীমাবদ্ধতা — যা এখনো রক্ষা করে না
+
+অ্যাপজুড়ে ইনলাইন ইভেন্ট-হ্যান্ডলার (`onclick="…"`) আছে — সেগুলো **nonce দিয়ে কভার করা
+যায় না**, তাই `script-src-attr 'unsafe-inline'` রাখতে হয়েছে। অর্থাৎ কেউ যদি কোনোভাবে
+একটি `on…` অ্যাট্রিবিউট ইনজেক্ট করতে পারে, এই CSP সেখানে বাধা দেবে না। মূল প্রতিরক্ষা
+তখনো `escHtml()`-ভিত্তিক সার্ভার-সাইড এস্কেপিং — যা চতুর্থ রাউন্ড থেকে কার্যকর
+(`xss-test.mjs` সবসময় পাস করে)। হ্যান্ডলারগুলো `addEventListener`-এ রূপান্তর করলে
+কেবল `script-src-attr`-ও সরানো যাবে।
+
+### যাচাই — `csp-test.mjs`
+
+* nonce প্রতি রিকোয়েস্টে বদলায় · সব `<script>` ট্যাগে nonce বসে (৬/৬ বা তার বেশি)
+* **৩০টি রুট** × প্লেয়ারাইট: CSP ভায়োলেশন **০**, JS এরর **০**, ইনলাইন স্ক্রিপ্ট সত্যিই চলছে
+* **নেগেটিভ কন্ট্রোল:** nonce ছাড়া `<script>` ইনজেক্ট করলে সেটি **চলে না** এবং ব্রাউজার
+  `script-src-elem ← inline` ভায়োলেশন রিপোর্ট করে — টেস্টটি অর্থহীন হয়ে যায় না
+* `https://example.com/...` স্ক্রিপ্ট লোড **ব্লক**
+* পিডিএফ ডাউনলোডের hidden `about:blank` iframe (`/qpapers`-এ সত্যিকারের ক্লিক দিয়ে পরীক্ষা)
+  — ভায়োলেশন ০
+
+```
+✅ ALL PASS
+```
+
+## ১২. পরের ধাপ (রোডম্যাপ)
+
 - **H3** টেকসই রেট-লিমিটিং — Cloudflare WAF rule বা Workers Rate Limiting binding
 
-## ১২. লোকাল প্রিভিউ
+## ১৩. লোকাল প্রিভিউ
 
 **http://localhost:3000** — `npx tsx server.ts` (চালু আছে)
 
