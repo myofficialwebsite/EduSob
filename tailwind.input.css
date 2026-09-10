@@ -609,3 +609,21 @@ body { animation: pageIn 0.4s ease-out; }
 @keyframes hero-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 .hero-float { animation: hero-float 5s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .hero-float { animation: none; } }
+
+/* ============================================================
+   CLS ফিক্স (perf-audit): Font Awesome আইকন ফন্টের জন্য আগেই জায়গা
+   ------------------------------------------------------------
+   সমস্যা: আইকন ফন্ট `font-display:block` ব্যবহার করে, আর <i class="fas ...">-এর
+   কোনো নির্দিষ্ট প্রস্থ ছিল না। ফলে ২ সেকেন্ডে ফন্ট লোড হওয়ার আগ পর্যন্ত
+   আইকনের প্রস্থ ০ থাকত, তারপর হঠাৎ প্রস্থ পেয়ে সারি নড়ে যেত —
+   /board-challenge-এ CLS ০.০৯৮ (Google-এর "Good" সীমা ০.১)।
+   মাপা: আইকন ফন্ট ব্লক করলে CLS ০.০৯৮ → ০.০০২।
+
+   `:where()` ব্যবহার করায় স্পেসিফিসিটি ০ — তাই Tailwind-এর w-4 / w-5 মতো
+   ক্লাস থাকলে সেটিই জিতে নেয়, আর না থাকলে 1em প্রস্থ বরাদ্দ হয়।
+   ============================================================ */
+:where(.fa, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands) {
+  width: 1em;
+  text-align: center;
+  flex-shrink: 0;
+}
