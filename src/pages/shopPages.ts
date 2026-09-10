@@ -253,7 +253,7 @@ axios.get('/api/shop/settings').then(function(r){COD_CHARGE=Number(r.data.settin
 if(LOGGED_IN)axios.get('/api/wallet').then(function(r){WALLET_BAL=r.data.balance||0;document.getElementById('wallet-bal').textContent='(ব্যালেন্স '+tk(WALLET_BAL)+')'}).catch(function(){});
 renderTabs();loadProducts();
 </script>`
-  return pageShell('শপ', 'bg-slate-50 min-h-screen text-slate-900', content, DARK_PORTAL_CSS)
+  return pageShell('শপ', 'bg-slate-50 min-h-screen text-slate-900', content, DARK_PORTAL_CSS, true, { description: 'এডুসব শপ — খাতা বান্ডেল, নোট ও প্রস্তুতি সামগ্রী। বিকাশ/নগদ ও ক্যাশ অন ডেলিভারিতে অর্ডার করুন, সারা বাংলাদেশে ডেলিভারি।', path: '/shop' })
 }
 
 // ============ ওয়ালেট পেজ (ব্যালেন্স + টপ-আপ + লেনদেন) ============
@@ -439,7 +439,7 @@ function startAutoTopup(){
 })();
 loadAll();
 </script>`
-  return pageShell('ওয়ালেট', 'bg-slate-50 min-h-screen text-slate-900', content, DARK_PORTAL_CSS)
+  return pageShell('ওয়ালেট', 'bg-slate-50 min-h-screen text-slate-900', content, DARK_PORTAL_CSS, true, { description: 'এডুসব ওয়ালেট — টপ-আপ ব্যালেন্স দিয়ে প্রিমিয়াম কনটেন্ট আনলক করুন। বিকাশ, নগদ ও রকেটে সহজ রিচার্জ।', path: '/wallet', noindex: true })
 }
 
 // ============ অ্যাসিস্টেড আবেদন পেজ ============
@@ -516,7 +516,7 @@ function loadAs(){
 }
 loadAs();
 </script>`
-  return pageShell('অ্যাসিস্টেড আবেদন', 'bg-slate-50 min-h-screen text-slate-900', content, DARK_PORTAL_CSS)
+  return pageShell('অ্যাসিস্টেড আবেদন', 'bg-slate-50 min-h-screen text-slate-900', content, DARK_PORTAL_CSS, true, { description: 'অ্যাসিস্টেড আবেদন — ভর্তি, স্কলারশিপ ও সরকারি ফর্ম আমাদের বিশেষজ্ঞ দল আপনার হয়ে পূরণ করে দেয়। ফি ও সময়সীমা জানুন।', path: '/assisted', noindex: true })
 }
 
 // ============ এডমিন শপ প্যানেল ============

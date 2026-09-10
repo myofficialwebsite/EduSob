@@ -353,5 +353,5 @@ document.getElementById('btnAutoProfile').addEventListener('click', function() {
 loadScholarships();
 </script>
 `
-  return pageShell('স্কলারশিপ অটো-যোগ্যতা ইঞ্জিন ও স্টাডি পাথফাইন্ডার', 'bg-slate-950 text-white min-h-screen', content)
+  return pageShell('স্কলারশিপ অটো-যোগ্যতা ইঞ্জিন ও স্টাডি পাথফাইন্ডার', 'bg-slate-950 text-white min-h-screen', content, '', true, { description: 'আপনার জিপিএ, পারিবারিক আয় ও কোটার ভিত্তিতে কোন বৃত্তিতে যোগ্য — সাথে সাথে জানুন। বাংলাদেশের সক্রিয় স্কলারশিপের তালিকা ও আবেদন লিংক।', path: '/scholarships' })
 }

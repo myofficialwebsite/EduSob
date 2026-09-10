@@ -385,7 +385,7 @@ function loadLeaderboard(){
 loadSubjects(); loadLeaderboard();
 if(LOGGED_IN){loadWrongBank();loadHistory();}
 </script>`
-  return pageShell('MCQ প্র্যাকটিস', 'bg-slate-950 text-white', content)
+  return pageShell('MCQ প্র্যাকটিস', 'bg-slate-950 text-white', content, '', true, { description: 'বিষয় ও অধ্যায়ভিত্তিক MCQ প্র্যাকটিস — সাথে সাথে সঠিক উত্তর ও ব্যাখ্যা। SSC, HSC ও ভর্তি পরীক্ষার প্রস্তুতির জন্য সম্পূর্ণ ফ্রি অনলাইন টেস্ট।', path: '/mcq' })
 }
 
 // ============ প্ল্যানার + নোট পেজ ============
@@ -497,7 +497,7 @@ document.getElementById('note-form').onsubmit=function(e){e.preventDefault();
 };
 loadTasks(); loadNotes();` : ''}
 </script>`
-  return pageShell('স্টাডি প্ল্যানার', 'bg-slate-950 text-white', content)
+  return pageShell('স্টাডি প্ল্যানার', 'bg-slate-950 text-white', content, '', true, { description: 'দৈনিক পড়ার রুটিন, টাস্ক ও নোট এক জায়গায় — পরীক্ষার আগে সময়কে সঠিকভাবে ব্যবহার করতে এডুসবের ফ্রি স্টাডি প্ল্যানার।', path: '/planner' })
 }
 
 // ============ CGPA ক্যালকুলেটর পেজ ============
@@ -649,7 +649,7 @@ window.calcTarget=function(){
   }
 };
 </script>`
-  return pageShell('CGPA ক্যালকুলেটর', 'bg-slate-950 text-white', content)
+  return pageShell('CGPA ক্যালকুলেটর', 'bg-slate-950 text-white', content, '', true, { description: 'সেমিস্টারভিত্তিক গ্রেড পয়েন্ট থেকে CGPA ও শতকরা নম্বর বের করুন। বিশ্ববিদ্যালয় ও কলেজের শিক্ষার্থীদের জন্য সম্পূর্ণ ফ্রি টুল।', path: '/cgpa' })
 }
 
 // ============ সিলেবাস পেজ (পূর্ণাঙ্গ অন-সাইট সিলেবাস ও পাঠ্যক্রম রিডার) ============
@@ -939,5 +939,5 @@ document.querySelectorAll('.s-tab').forEach(function(b){
 
 loadSyllabus();
 </script>`
-  return pageShell('সিলেবাস ও পাঠ্যক্রম', 'bg-slate-950 text-white', content)
+  return pageShell('সিলেবাস ও পাঠ্যক্রম', 'bg-slate-950 text-white', content, '', true, { description: 'SSC, HSC ও বিশ্ববিদ্যালয়ের পূর্ণাঙ্গ সিলেবাস — অধ্যায়ভিত্তিক তালিকা, পরীক্ষার রূপরেখা ও নম্বর বণ্টন এক জায়গায়।', path: '/syllabus' })
 }

@@ -7,7 +7,7 @@ export function signupPage(): string {
   <section id="signup-card" class="w-full max-w-lg bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
     <header class="text-center mb-6">
       <a href="/" class="inline-flex items-center gap-2 text-2xl font-bold"><span class="w-10 h-10 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center">📚</span> এডুসব</a>
-      <p class="text-orange-200 text-sm mt-2">ফ্রি অ্যাকাউন্ট খুলুন — শিক্ষার সব, এক ঠিকানায়!</p>
+      <h1 class="text-orange-200 text-lg font-bold mt-2">ফ্রি অ্যাকাউন্ট খুলুন — শিক্ষার সব, এক ঠিকানায়!</h1>
     </header>
     <form id="signupForm" class="space-y-4">
       <div class="grid grid-cols-2 gap-3">
@@ -85,7 +85,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
   btn.disabled = false; btn.innerHTML = '<i class="fas fa-user-plus mr-2"></i>ফ্রি অ্যাকাউন্ট খুলুন';
 });
 </script>
-`)
+`, '', true, { description: 'এডুসবে ফ্রি অ্যাকাউন্ট খুলুন — রেজাল্ট, প্রশ্নব্যাংক, CV মেকার ও স্কলারশিপ এক ঠিকানায়।', path: '/signup', noindex: true })
 }
 
 export function loginPage(): string {
@@ -94,7 +94,7 @@ export function loginPage(): string {
   <section id="login-card" class="w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 sm:p-8 shadow-2xl">
     <header class="text-center mb-6">
       <a href="/" class="inline-flex items-center gap-2 text-2xl font-bold"><span class="w-10 h-10 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center">📚</span> এডুসব</a>
-      <p class="text-orange-200 text-sm mt-2">আবার স্বাগতম! লগইন করুন</p>
+      <h1 class="text-orange-200 text-lg font-bold mt-2">আবার স্বাগতম! লগইন করুন</h1>
     </header>
     <form id="loginForm" class="space-y-4">
       <div>
@@ -157,5 +157,5 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   btn.disabled = false; btn.innerHTML = '<i class="fas fa-right-to-bracket mr-2"></i>লগইন করুন';
 });
 </script>
-`)
+`, '', true, { description: 'এডুসব অ্যাকাউন্টে লগইন করুন।', path: '/login', noindex: true })
 }

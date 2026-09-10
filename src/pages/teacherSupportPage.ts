@@ -953,6 +953,6 @@ function toggleStdVideoCam() {
 checkUserStatus();
 loadMentors();
 </script>
-`)
+`, '', true, { description: 'পড়ায় আটকে গেলে সরাসরি শিক্ষকের কাছে প্রশ্ন পাঠান — ১-অন-১ মেন্টর সহায়তা, টিকেট ভিত্তিক সমাধান ও লাইভ সেশন।', path: '/teacher-support' })
 }
 

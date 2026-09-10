@@ -1287,7 +1287,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
   `}
 </main>`
 
-  return pageShell('প্রফেশনাল CV ও বায়োডাটা মেকার — এডুসব', 'bg-slate-950 text-white min-h-screen', content)
+  return pageShell('প্রফেশনাল CV ও বায়োডাটা মেকার — এডুসব', 'bg-slate-950 text-white min-h-screen', content, '', true, { description: 'ফ্রি প্রফেশনাল CV ও বায়োডাটা মেকার — একাধিক টেমপ্লেট, বাংলা ও ইংরেজি, লাইভ প্রিভিউ ও PDF ডাউনলোড। শিক্ষার্থী ও চাকরিপ্রার্থীদের জন্য।', path: '/cv' })
 }
 
 // ============ এডমিন CV টেমপ্লেট কাস্টমাইজার ============

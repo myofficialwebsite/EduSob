@@ -670,5 +670,5 @@ async function loadRolls(){
 loadRolls().then(render);
 ` : 'render();'}
 </script>
-`)
+`, '', true, { description: 'SSC, HSC, JSC ও NU রেজাল্ট এক জায়গায় — সরকারি পোর্টালের সরাসরি লিংক, মার্কশিট ডাউনলোড ও যাচাইয়ের ধাপ। বাংলাদেশের শিক্ষার্থীদের জন্য সম্পূর্ণ ফ্রি।', path: '/results' })
 }

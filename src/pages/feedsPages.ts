@@ -105,7 +105,7 @@ async function loadNews(cat){
 }
 loadNews('latest');
 </script>
-`)
+`, '', true, { description: 'শিক্ষা সংবাদ — বাংলাদেশের শিক্ষাখাতের সর্বশেষ খবর, পরীক্ষার তারিখ, ফলাফল, নীতিমালা ও বোর্ড আপডেট এক জায়গায়।', path: '/news' })
 }
 
 // ---------- চাকরির খবর ----------
@@ -186,7 +186,7 @@ async function loadJobs(lv){
 }
 loadJobs(${JSON.stringify(userLevel)} && ['ssc','hsc','nu','masters'].includes(USER_LEVEL) ? USER_LEVEL : '');
 </script>
-`)
+`, '', true, { description: 'সরকারি ও বেসরকারি চাকরির বিজ্ঞপ্তি — নিয়োগ পরীক্ষার তারিখ, যোগ্যতা, আবেদনের শেষ সময় ও সরাসরি লিংক। বাংলাদেশের সর্বশেষ চাকরির সুযোগ।', path: '/jobs' })
 }
 
 // ---------- নোটিস বোর্ড ----------
@@ -259,5 +259,5 @@ async function loadNotices(cat){
 }
 loadNotices('');
 </script>
-`)
+`, '', true, { description: 'নোটিস বোর্ড — শিক্ষা প্রতিষ্ঠান, বোর্ড ও সরকারি দপ্তরের সর্বশেষ বিজ্ঞপ্তি, পরীক্ষার নোটিশ ও গুরুত্বপূর্ণ ঘোষণা এক জায়গায়।', path: '/notices' })
 }

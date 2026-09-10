@@ -1140,5 +1140,5 @@ function handleContact(e) {
 </script>
 `
 
-  return pageShell('হোম — শিক্ষার সব, এক ঠিকানায়', 'bg-[#0b0d12] text-slate-100 grain', html, extraHead, true)
+  return pageShell('হোম — শিক্ষার সব, এক ঠিকানায়', 'bg-[#0b0d12] text-slate-100 grain', html, extraHead, true, { description: 'এডুসব — বাংলাদেশের শিক্ষার্থীদের শিক্ষা সুপার-পোর্টাল: SSC/HSC/NU রেজাল্ট, ভর্তি তথ্য, MCQ প্র্যাকটিস, প্রশ্নব্যাংক, CV মেকার ও স্কলারশিপ — সব এক ঠিকানায়, ফ্রি।', path: '/' })
 }

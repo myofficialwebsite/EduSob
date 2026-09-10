@@ -13,6 +13,7 @@ import teacherSupport from './routes/teacherSupport'
 import scholarshipsRoutes from './routes/scholarships'
 import paymentsRoutes from './routes/payments'
 import pushRoutes from './routes/push'
+import seoRoutes from './routes/seo'
 import { Bindings, getCookie, getSessionUser } from './lib/auth'
 import { getD1Db, ensureD1Schema } from './lib/db'
 import { landingPage } from './pages/landing'
@@ -121,6 +122,9 @@ app.route('/api/teacher-support', teacherSupport)
 app.route('/api/scholarships', scholarshipsRoutes)
 app.route('/api/payments', paymentsRoutes)
 app.route('/api/push', pushRoutes)
+
+// ---------- SEO: robots.txt ও sitemap.xml ----------
+app.route('/', seoRoutes)
 
 // PWA: ম্যানিফেস্ট ও সার্ভিস ওয়ার্কার রুট স্কোপে সার্ভ
 app.get('/manifest.webmanifest', async (c) => {
@@ -482,10 +486,10 @@ app.get('/teacher-support', async (c) => {
   const user = await currentUser(c)
   return c.html(teacherSupportPage(!!user))
 })
-app.get('/teachers', async (c) => {
-  const user = await currentUser(c)
-  return c.html(teacherSupportPage(!!user))
-})
+// /teachers ছিল /teacher-support-এর হুবহু ডুপ্লিকেট (একই পেজ, দুই URL)।
+// সব অভ্যন্তরীণ লিংক /teacher-support-এ যায়, তাই এটিকে 301-এ রিডাইরেক্ট করা হলো —
+// ডুপ্লিকেট কনটেন্ট দূর হয় এবং পুরোনো লিংকের SEO মূল্য নতুন URL-এ পাওয়া যায়।
+app.get('/teachers', (c) => c.redirect('/teacher-support', 301))
 
 app.get('/profile', async (c) => {
   const user = await currentUser(c)

@@ -436,11 +436,52 @@ isolate-এর নিজস্ব। প্রোডাকশনে রিকো
 `audit-sweep` — **সব ALL PASS**, `audit-sweep` → `ISSUES: none`।
 `npm run build` → ১,৬৮৪.৪২ kB (gzip ৩৫৪.১৫ kB)।
 
-## ১৪. পরের ধাপ (রোডম্যাপ)
+## ১৪. একাদশ রাউন্ড — SEO ও শেয়ার ইনফ্রা (সম্পন্ন)
+
+নতুন টুল: `seo-audit.mjs` (robots/sitemap + ২০ রুটের মেটা যাচাই)।
+
+**আগে যা ছিল না — এখন আছে**
+
+| | আগে | এখন |
+|---|---|---|
+| `/robots.txt` | ৪০৪ | ২০০ (`/admin`, `/api` ও সব লগ-ইন পেজ Disallow) |
+| `/sitemap.xml` | ৪০৪ | ২০০ (১৭টি পাবলিক রুট, priority/changefreq সহ) |
+| `<link rel="canonical">` | অনুপস্থিত | প্রতি পেজে |
+| `og:url`, `og:locale`, `twitter:title/image` | অনুপস্থিত | প্রতি পেজে |
+| JSON-LD | অনুপস্থিত | হোমে `EducationalOrganization`+`WebSite`(`SearchAction`), বাকি পেজে `WebPage`+`BreadcrumbList` |
+| পেজের নিজস্ব description | **না — সব পেজে একই ১৮৭ অক্ষরের কপি** | ২০টি পেজে ২০টি ইউনিক description (≤১৬০ অক্ষর) |
+
+**কেন এটি গুরুত্বপূর্ণ:** description/og:title সব পেজে একই ছিল, তাই ফেসবুক বা
+WhatsApp-এ যেকোনো পেজের লিংক শেয়ার করলে **সবসময় হোমপেজের প্রিভিউ** যেত।
+
+**কাঠামোগত পরিবর্তন (`src/pages/layout.ts`)**
+- `HEAD_COMMON` ভেঙে দুটি অংশ: `headMeta(seo, pageTitle)` (পেজভিত্তিক মেটা) + `HEAD_ASSETS` (ফন্ট/CSS/PWA)।
+- `pageShell(title, bodyClass, content, extraHead, showFloating, seo?)` — নতুন ষষ্ঠ আর্গুমেন্ট।
+  `seo.path` দিলেই `canonical`, `og:url` ও JSON-LD নিজে থেকে তৈরি হয়ে যায় (প্রতি পেজে আলাদা করে
+  JSON-LD লিখতে হয়নি)। `noindex: true` দিলে `robots` নো-ইনডেক্স এবং JSON-LD বন্ধ।
+- `escMeta()` দিয়ে মেটা ভ্যালু এস্কেপ, `jsonLdBlock()`-এ `</script>` ইনজেকশন আটকানো (`<` → `\u003c`)।
+
+**অন্যান্য ঠিক করা ত্রুটি**
+- **`/teachers` ছিল `/teacher-support`-এর হুবহু ডুপ্লিকেট** (একই পেজ, দুই URL — ডুপ্লিকেট কনটেন্ট)।
+  সব অভ্যন্তরীণ লিংক `/teacher-support`-এ যায়, তাই `/teachers` এখন **৩০১ রিডাইরেক্ট**।
+- **`/login` ও `/signup`-এ কোনো `<h1>`-ই ছিল না** — শুধু লোগো লিংক ও ট্যাগলাইন `<p>`। ট্যাগলাইনটিই `h1` করা হয়েছে।
+
+**সচেতন সীমাবদ্ধতা**
+- সাইটম্যাপে ১৭টি রুট — কারণ এটিই সব পাবলিক, স্বতন্ত্র URL-ওয়ালা পেজ। নোটিস/চাকরি/প্রশ্নপত্রের
+  কোনো পার্মালিংক নেই (মডেলে খোলে), তাই ভুয়া URL বানিয়ে সাইটম্যাপ ফুলানো হয়নি।
+- `SITE_ORIGIN = 'https://edusob.pages.dev'` — কাস্টম ডোমেইন যুক্ত করলে এক জায়গায় বদলাতে হবে
+  (`src/routes/seo.ts` + `src/pages/layout.ts`)।
+
+**রিগ্রেশন:** `h1audit` · `scan-inline-js` (১৫০ ব্লক, ০ ভাঙা) · `sec-test` · `xss-test` ·
+`upsell-test` · `onboarding-test` · `cmd-palette-test` · `lazytab-test` · `csp-test` ·
+`ratelimit-test` · `seo-audit` · `a11y-sweep` · `audit-sweep` — **সব ALL PASS**, `audit-sweep` → `ISSUES: none`।
+`npm run build` → ১,৬৯৬.২৮ kB (gzip ৩৫৭.০১ kB)।
+
+## ১৫. পরের ধাপ (রোডম্যাপ)
 
 - **ঐচ্ছিক** Cloudflare WAF Rate Limiting rule (D1 কাউন্টারের সাথে যুক্ত করে আরও কড়া করতে পারেন)
 
-## ১৫. লোকাল প্রিভিউ
+## ১৬. লোকাল প্রিভিউ
 
 **http://localhost:3000** — `npx tsx server.ts` (চালু আছে)
 

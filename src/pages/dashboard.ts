@@ -1851,5 +1851,5 @@ function openNotificationsModal(){
   );
 }
 </script>
-`)
+`, '', true, { description: 'এডুসব ব্যক্তিগত ড্যাশবোর্ড।', path: '/dashboard', noindex: true })
 }

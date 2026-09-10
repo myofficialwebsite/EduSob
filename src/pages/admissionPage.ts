@@ -316,5 +316,5 @@ async function loadAdmissions(){
 }
 loadAdmissions();
 </script>
-`)
+`, '', true, { description: 'স্কুল, কলেজ ও বিশ্ববিদ্যালয় ভর্তির সব তথ্য — আবেদনের তারিখ, যোগ্যতা, ফি ও ফর্ম পূরণের নির্দেশিকা। সরাসরি আবেদনের লিংকসহ।', path: '/admission' })
 }

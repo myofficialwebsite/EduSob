@@ -60,7 +60,7 @@ function lazyTabPanes(html: string, activeTabId: string): string {
 
 export function adminPage(isAdmin: boolean): string {
   if (!isAdmin) return pageShell('এডমিন প্যানেল', 'bg-slate-950', lockScreen, '', false)
-  return pageShell('এডমিন কন্ট্রোল প্যানেল', 'bg-slate-100 min-h-screen', lazyTabPanes(ADMIN_BODY, 'overview') + ADMIN_SCRIPT, DARK_PORTAL_CSS + ADMIN_DASH_CSS, false)
+  return pageShell('এডমিন কন্ট্রোল প্যানেল', 'bg-slate-100 min-h-screen', lazyTabPanes(ADMIN_BODY, 'overview') + ADMIN_SCRIPT, DARK_PORTAL_CSS + ADMIN_DASH_CSS, false, { description: 'এডুসব অ্যাডমিন কন্ট্রোল প্যানেল।', path: '/admin', noindex: true })
 }
 
 const ADMIN_BODY = `

@@ -3,20 +3,117 @@
 // হালকা থিমের পেজগুলোকে ডার্ক পোর্টাল থিমে রূপান্তরের গ্লোবাল ওভাররাইড
 export const DARK_PORTAL_CSS = ``;
 
-export const HEAD_COMMON = `
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+// ---------------------------------------------------------------------------
+// SEO / শেয়ার মেটা — প্রতিটি পেজের নিজস্ব description, canonical, og:* ও JSON-LD
+// আগে HEAD_COMMON-এর মেটা অংশটি সব পেজে একই ছিল (একই description, একই og:title,
+// কোনো canonical বা og:url নেই) — ফেসবুক/WhatsApp-এ শেয়ার করলে ভুল প্রিভিউ যেত।
+// ---------------------------------------------------------------------------
+export const SITE_ORIGIN = 'https://edusob.pages.dev'
+export const SITE_BRAND = 'এডুসব | EduSob'
+
+const DEFAULT_DESCRIPTION =
+  'এডুসব — বাংলাদেশের শিক্ষার্থীদের ডিজিটাল শিক্ষা সুপার-পোর্টাল: SSC/HSC/NU রেজাল্ট, ভর্তি তথ্য, MCQ প্র্যাকটিস, প্রশ্নব্যাংক, CV মেকার ও স্কলারশিপ।'
+const DEFAULT_OG_DESCRIPTION =
+  'SSC · HSC · NU রেজাল্ট, ভর্তি তথ্য, MCQ, প্রশ্নব্যাংক, CV মেকার, স্কলারশিপ ও মেন্টর সহায়তা — সম্পূর্ণ ফ্রি, এক প্ল্যাটফর্মে।'
+const DEFAULT_OG_IMAGE = '/static/img/hero-students.jpg'
+const SITE_KEYWORDS =
+  'SSC result, HSC result, NU result, রেজাল্ট, ভর্তি, MCQ, CV maker, স্কলারশিপ, বাংলাদেশ শিক্ষা'
+
+export interface PageSeo {
+  /** <meta name="description"> — ১২০–১৬০ অক্ষর, প্রতি পেজে ইউনিক */
+  description?: string
+  /** ক্যানোনিকাল পাথ, যেমন '/results' — og:url-ও এ থেকেই বানানো হয় */
+  path?: string
+  ogTitle?: string
+  ogDescription?: string
+  ogImage?: string
+  keywords?: string
+  /** true হলে noindex, nofollow — লগইন/অ্যাডমিন/ব্যক্তিগত পেজে */
+  noindex?: boolean
+  /** JSON-LD স্ট্রাকচার্ড ডেটা (অবজেক্ট বা অ্যারে) */
+  jsonLd?: unknown
+}
+
+const escMeta = (v: unknown): string =>
+  String(v ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
+/** JSON-LD-কে <script>-এ বসানোর আগে </script> ইনজেকশন আটকানো */
+const jsonLdBlock = (data: unknown): string =>
+  `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`
+
+export function headMeta(seo: PageSeo = {}, pageTitle = ''): string {
+  const desc = seo.description || DEFAULT_DESCRIPTION
+  const ogTitle = seo.ogTitle || pageTitle || 'এডুসব — শিক্ষার সব, এক ঠিকানায়'
+  const ogDesc = seo.ogDescription || seo.description || DEFAULT_OG_DESCRIPTION
+  const ogImage = seo.ogImage || DEFAULT_OG_IMAGE
+  const url = SITE_ORIGIN + (seo.path || '/')
+  const robots = seo.noindex ? 'noindex, nofollow' : 'index, follow'
+  return `<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0b0d12">
-<meta name="description" content="এডুসব (EduSob) — বাংলাদেশের শিক্ষার্থীদের ডিজিটাল শিক্ষা সুপার-পোর্টাল: রেজাল্ট হাব, ভর্তি তথ্য, MCQ প্র্যাকটিস, প্রশ্নব্যাংক, CV মেকার, স্কলারশিপ ও মেন্টর সহায়তা — সব এক ঠিকানায়, ফ্রি।">
-<meta name="keywords" content="SSC result, HSC result, NU result, রেজাল্ট, ভর্তি, MCQ, CV maker, স্কলারশিপ, বাংলাদেশ শিক্ষা">
+<meta name="description" content="${escMeta(desc)}">
+<meta name="keywords" content="${escMeta(seo.keywords || SITE_KEYWORDS)}">
+<meta name="robots" content="${robots}">
+<link rel="canonical" href="${escMeta(url)}">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="এডুসব | EduSob">
-<meta property="og:title" content="এডুসব — শিক্ষার সব, এক ঠিকানায়">
-<meta property="og:description" content="SSC · HSC · NU রেজাল্ট, ভর্তি তথ্য, MCQ, প্রশ্নব্যাংক, CV মেকার, স্কলারশিপ ও মেন্টর সহায়তা — সম্পূর্ণ ফ্রি, এক প্ল্যাটফর্মে।">
-<meta property="og:image" content="/static/img/hero-students.jpg">
+<meta property="og:site_name" content="${SITE_BRAND}">
+<meta property="og:locale" content="bn_BD">
+<meta property="og:title" content="${escMeta(ogTitle)}">
+<meta property="og:description" content="${escMeta(ogDesc)}">
+<meta property="og:image" content="${escMeta(ogImage)}">
+<meta property="og:url" content="${escMeta(url)}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${escMeta(ogTitle)}">
+<meta name="twitter:description" content="${escMeta(ogDesc)}">
+<meta name="twitter:image" content="${escMeta(ogImage)}">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="এডুসব">
+${seo.jsonLd ? jsonLdBlock(seo.jsonLd) : ''}`
+}
+
+/** Organization + WebSite (সার্চ-অ্যাকশন সহ) — শুধু হোমপেজে */
+export function orgJsonLd(): unknown[] {
+  return [
+    {
+      '@context': 'https://schema.org', '@type': 'EducationalOrganization', name: 'এডুসব',
+      alternateName: 'EduSob', url: SITE_ORIGIN + '/', logo: SITE_ORIGIN + '/static/icons/icon-192.png',
+      description: DEFAULT_DESCRIPTION, inLanguage: 'bn',
+      areaServed: { '@type': 'Country', name: 'Bangladesh' },
+    },
+    {
+      '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_BRAND, url: SITE_ORIGIN + '/',
+      inLanguage: 'bn',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: SITE_ORIGIN + '/?q={search_term_string}' },
+        'query-input': 'required name=search_term_string',
+      },
+    },
+  ]
+}
+
+/** WebPage + BreadcrumbList — বাকি সব পাবলিক পেজে */
+export function pageJsonLd(name: string, description: string, path: string): unknown[] {
+  return [
+    {
+      '@context': 'https://schema.org', '@type': 'WebPage', name, description,
+      url: SITE_ORIGIN + path, inLanguage: 'bn',
+      isPartOf: { '@type': 'WebSite', name: SITE_BRAND, url: SITE_ORIGIN + '/' },
+    },
+    {
+      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'হোম', item: SITE_ORIGIN + '/' },
+        { '@type': 'ListItem', position: 2, name, item: SITE_ORIGIN + path },
+      ],
+    },
+  ]
+}
+
+// ---------------------------------------------------------------------------
+// স্ট্যাটিক অ্যাসেট, ফন্ট, PWA স্ক্রিপ্ট (সব পেজে একই)
+// ---------------------------------------------------------------------------
+export const HEAD_ASSETS = `
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
@@ -147,6 +244,9 @@ function pwaEnablePush(){
 })();
 </script>
 `
+
+/** @deprecated pageShell() নিজেই headMeta() + HEAD_ASSETS ব্যবহার করে — এটি শুধু ব্যাকওয়ার্ড কম্প্যাটিবিলিটির জন্য */
+export const HEAD_COMMON = `${headMeta()}${HEAD_ASSETS}`
 
 // ============ ইউনিফাইড সাইট হেডার (Unified Header System) ============
 export interface SiteHeaderOptions {
@@ -888,12 +988,25 @@ export function escHtml(value: unknown): string {
     .replace(/`/g, '&#96;')
 }
 
-export function pageShell(title: string, bodyClass: string, content: string, extraHead = '', showFloating = true): string {
+export function pageShell(
+  title: string,
+  bodyClass: string,
+  content: string,
+  extraHead = '',
+  showFloating = true,
+  seo: PageSeo = {},
+): string {
+  // JSON-LD আলাদা করে না দিলে title + description + path থেকে নিজেই বানিয়ে নেয়
+  // noindex পেজে JSON-LD দেওয়ার কোনো মানে হয় না (সার্চ ইঞ্জিন সেটি ইনডেক্স করবে না)
+  const jsonLd = seo.noindex
+    ? undefined
+    : seo.jsonLd ?? (seo.path ? (seo.path === '/' ? orgJsonLd() : pageJsonLd(title, seo.description || '', seo.path)) : undefined)
   return `<!DOCTYPE html>
 <html lang="bn">
 <head>
-<title>${title} — এডুসব | EduSob</title>
-${HEAD_COMMON}
+<title>${escHtml(title)} — এডুসব | EduSob</title>
+${headMeta({ ...seo, jsonLd }, title)}
+${HEAD_ASSETS}
 ${extraHead}
 </head>
 <body class="${bodyClass}">

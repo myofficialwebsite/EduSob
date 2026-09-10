@@ -501,5 +501,5 @@ async function loadMyRollsForBc() {
 // প্রারম্ভিক ইনিট
 updateBcSms();
 </script>
-`)
+`, '', true, { description: 'রেজাল্টে ভুল বা অসঙ্গতি পেলে বোর্ড চ্যালেঞ্জ ও খাতা পুনর্নিরীক্ষণে আবেদনের ধাপ — SMS ফরম্যাট, ফি, সময়সীমা ও প্রয়োজনীয় কাগজপত্র।', path: '/board-challenge' })
 }

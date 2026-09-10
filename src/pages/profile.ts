@@ -284,5 +284,5 @@ document.getElementById('profileForm').addEventListener('submit', async (e) => {
   setTimeout(() => msg.classList.add('hidden'), 4000);
 });
 </script>
-`)
+`, '', true, { description: 'এডুসব প্রোফাইল।', path: '/profile', noindex: true })
 }
