@@ -1,7 +1,11 @@
 import { chromium } from 'playwright-core'
 
-const TOKEN = process.argv[2]
-const BASE = 'http://localhost:3000'
+const BASE = process.env.BASE || 'http://localhost:3000'
+const TOKEN = await fetch(BASE + '/api/auth/login', {
+  method: 'POST', headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ identifier: '01829486022', password: 'Ab52944820@' }),
+}).then((r) => r.json()).then((d) => d.token)
+if (!TOKEN) { console.error('admin login failed'); process.exit(1) }
 
 const routes = ['/', '/results', '/admission', '/scholarships', '/mcq', '/cv', '/shop',
   '/subscription', '/qpapers', '/teacher-support', '/news', '/jobs', '/notices',
@@ -17,7 +21,7 @@ for (const path of routes) {
     const ctx = await browser.newContext({
       viewport: { width: w, height: h }, isMobile: vp === 'mobile', hasTouch: vp === 'mobile',
     })
-    await ctx.addCookies([{ name: 'edusob_session', value: TOKEN, domain: 'localhost', path: '/', sameSite: 'Lax', secure: false }])
+    await ctx.addCookies([{ name: 'edusob_session', value: TOKEN, url: BASE, sameSite: 'Lax', secure: false }])
     const page = await ctx.newPage()
     const errs = []
     page.on('console', m => { if (m.type() === 'error') errs.push(m.text().slice(0, 120)) })

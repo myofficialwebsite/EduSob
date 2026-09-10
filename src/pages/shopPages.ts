@@ -262,6 +262,10 @@ export function walletPage(loggedIn: boolean): string {
 ${shopHeader('wallet', loggedIn)}
 <main class="max-w-3xl mx-auto px-4 py-8 space-y-6">
   <div id="pay-banner" class="hidden rounded-2xl px-5 py-4 text-sm font-bold"></div>
+  <header>
+    <h1 class="font-serif-bn text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">💰 আমার ওয়ালেট</h1>
+    <p class="text-slate-500 text-sm mt-1">টপ-আপ করুন, লেনদেন দেখুন এবং রিওয়ার্ড ব্যালেন্স ব্যবহার করুন</p>
+  </header>
   <section id="wallet-balance-card" class="bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-2xl p-6 shadow-xl">
     <p class="text-orange-100 text-sm">আপনার ওয়ালেট ব্যালেন্স</p>
     <p id="w-balance" class="text-4xl font-bold mt-1">—</p>
@@ -538,6 +542,10 @@ export function shopAdminPage(isAdmin: boolean): string {
   </nav>
 </header>
 <main class="max-w-6xl mx-auto px-4 py-6">
+  <header class="mb-4">
+    <h1 class="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">🛍️ শপ ম্যানেজমেন্ট</h1>
+    <p class="text-sm text-slate-500 mt-0.5">প্রোডাক্ট, অর্ডার, পেমেন্ট রিভিউ ও অ্যাসিস্টেড রিকোয়েস্ট</p>
+  </header>
   <nav id="admin-tabs" class="flex gap-2 overflow-x-auto pb-3 mb-5 text-sm"></nav>
   <section id="tab-content"></section>
 </main>

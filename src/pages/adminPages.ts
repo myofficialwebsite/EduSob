@@ -694,7 +694,7 @@ var CATEGORIES_DATA = ${JSON.stringify(ADMIN_CATEGORIES)};
 function toastMsg(msg){
   var el = document.createElement('div');
   el.className = 'fixed bottom-5 right-5 z-50 bg-slate-900 text-white border border-orange-400/40 text-xs font-bold px-4 py-2.5 rounded-xl shadow-2xl transition transform translate-y-2 opacity-0 flex items-center gap-2';
-  el.innerHTML = '<span class="text-orange-400">✓</span> ' + msg;
+  el.innerHTML = '<span class="text-orange-400">✓</span> ' + esc(msg);
   document.body.appendChild(el);
   requestAnimationFrame(function(){ el.classList.remove('translate-y-2','opacity-0'); });
   setTimeout(function(){ el.classList.add('translate-y-2','opacity-0'); setTimeout(function(){ el.remove(); }, 300); }, 3000);
@@ -736,6 +736,32 @@ function setKpi(id, val){
 }
 function tk(amt){ return toBn(amt || 0) + ' ৳'; }
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// JS-স্ট্রিং কনটেক্সট (যেমন onclick="openRoleModalById(1, \'<নাম>\', ...)")।
+// এখানে শুধু HTML-এস্কেপ যথেষ্ট নয়: ব্রাউজার আগে অ্যাট্রিবিউটটি HTML-ডিকোড করে,
+// এরপর JS পার্স করে — তখন একটি সাধারণ (\') দিয়েই স্ট্রিং ভেঙে কোড ইনজেক্ট করা যায়।
+// তাই ব্যাকস্ল্যাশ ও (\') কে আগে JS-এস্কেপ করে, এরপর অ্যাট্রিবিউট ভাঙা আটকাতে
+// HTML-এস্কেপ করতে হয়। নিচে String.fromCharCode ব্যবহার করা হয়েছে — সোর্সে কোনো
+// ব্যাকস্ল্যাশ লিটারেল নেই, ফলে এমবেডেড স্ট্রিং-এর এস্কেপ-নিয়মে জটিলতা হয় না।
+var CH_BS = String.fromCharCode(92);
+var CH_SQ = String.fromCharCode(39);
+var CH_CR = String.fromCharCode(13);
+var CH_LF = String.fromCharCode(10);
+function jsq(s){
+  var t = String(s==null?\'\':s);
+  t = t.split(CH_BS).join(CH_BS+CH_BS);
+  t = t.split(CH_SQ).join(CH_BS+CH_SQ);
+  t = t.split(CH_CR).join(\'\');
+  t = t.split(CH_LF).join(CH_BS+\'n\');
+  return esc(t);
+}
+
+// href/src-এর জন্য: esc() দিয়ে "javascript:" স্কিম আটকানো যায় না
+// (<a href="javascript:alert(1)"> বৈধ HTML) — তাই অনুমোদিত স্কিম ছাড়া সব বন্ধ।
+function safeUrl(u){
+  var s = String(u==null?\'\':u).trim();
+  return /^(https?:|mailto:|tel:)/i.test(s) ? s : \'\';
+}
 
 async function api(method, url, data){
   try {
@@ -926,7 +952,7 @@ async function loadStats(){
       return '<div class="py-2.5 flex items-center justify-between gap-2">'+
         '<div><p class="font-bold text-slate-900">'+esc(u.name_bn||'শিক্ষার্থী')+'</p><p class="text-slate-400 text-[10px]">'+esc(u.phone)+' • '+esc(u.user_code)+'</p></div>'+
         '<div class="flex items-center gap-1.5">'+roleBadge+
-          '<button onclick="openRoleModalById('+u.id+', \\''+esc(u.name_bn||'')+'\\', \\''+esc(u.phone)+'\\', \\''+u.role+'\\')" class="text-[10px] px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded font-semibold text-slate-700">রোল</button>'+
+          '<button onclick="openRoleModalById('+u.id+', \\''+jsq(u.name_bn||'')+'\\', \\''+jsq(u.phone)+'\\', \\''+u.role+'\\')" class="text-[10px] px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded font-semibold text-slate-700">রোল</button>'+
         '</div>'+
       '</div>';
     }).join('') || '<p class="text-slate-400 py-3">কোনো ইউজার নেই</p>';
@@ -1012,10 +1038,10 @@ async function loadUsers(){
       '</td>'+
       '<td class="py-2.5 px-3 text-right">'+
         '<div class="flex items-center justify-end gap-1">'+
-          '<button onclick="openRoleModalById('+u.id+', \\''+esc(u.name_bn||'')+'\\', \\''+esc(u.phone)+'\\', \\''+u.role+'\\')" class="text-[10px] px-2 py-1 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 rounded-lg font-bold" title="রোল পরিবর্তন"><i class="fas fa-shield-halved"></i> রোল</button>'+
-          '<button onclick="openPasswordModal('+u.id+', \\''+esc(u.name_bn||'')+'\\', \\''+esc(u.phone)+'\\')" class="text-[10px] px-2 py-1 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 rounded-lg font-bold" title="পাসওয়ার্ড রিসেট"><i class="fas fa-key"></i></button>'+
-          '<button onclick="openWalletModal('+u.id+', \\''+esc(u.name_bn||'')+'\\', '+u.balance+')" class="text-[10px] px-2 py-1 bg-orange-50 hover:bg-orange-100 text-orange-800 border border-orange-200 rounded-lg font-bold" title="ব্যালেন্স"><i class="fas fa-wallet"></i> +/-</button>'+
-          '<button onclick="grantPlanForUser(\\''+esc(u.phone)+'\\')" class="text-[10px] px-2 py-1 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 rounded-lg font-bold" title="প্ল্যান দিন">👑 প্ল্যান</button>'+
+          '<button onclick="openRoleModalById('+u.id+', \\''+jsq(u.name_bn||'')+'\\', \\''+jsq(u.phone)+'\\', \\''+u.role+'\\')" class="text-[10px] px-2 py-1 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 rounded-lg font-bold" title="রোল পরিবর্তন"><i class="fas fa-shield-halved"></i> রোল</button>'+
+          '<button onclick="openPasswordModal('+u.id+', \\''+jsq(u.name_bn||'')+'\\', \\''+jsq(u.phone)+'\\')" class="text-[10px] px-2 py-1 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 rounded-lg font-bold" title="পাসওয়ার্ড রিসেট"><i class="fas fa-key"></i></button>'+
+          '<button onclick="openWalletModal('+u.id+', \\''+jsq(u.name_bn||'')+'\\', '+u.balance+')" class="text-[10px] px-2 py-1 bg-orange-50 hover:bg-orange-100 text-orange-800 border border-orange-200 rounded-lg font-bold" title="ব্যালেন্স"><i class="fas fa-wallet"></i> +/-</button>'+
+          '<button onclick="grantPlanForUser(\\''+jsq(u.phone)+'\\')" class="text-[10px] px-2 py-1 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 rounded-lg font-bold" title="প্ল্যান দিন">👑 প্ল্যান</button>'+
         '</div>'+
       '</td>'+
     '</tr>';
@@ -1167,7 +1193,7 @@ async function loadSyncSources(){
     return '<tr class="hover:bg-slate-50 transition">'+
       '<td class="py-3 px-3">'+
         '<p class="font-bold text-slate-900">'+esc(s.name)+'</p>'+
-        '<a href="'+esc(s.source_url)+'" target="_blank" class="text-[10px] text-sky-600 hover:underline flex items-center gap-1">'+
+        '<a href="'+esc(safeUrl(s.source_url))+'" target="_blank" class="text-[10px] text-sky-600 hover:underline flex items-center gap-1">'+
           '<i class="fas fa-arrow-up-right-from-square text-[9px]"></i> '+esc(s.source_url)+
         '</a>'+
       '</td>'+
@@ -1211,7 +1237,7 @@ async function triggerForceSync(sourceKey){
   var logBox = document.getElementById('autoCollectLogs');
   var now = new Date().toLocaleTimeString('bn-BD');
   if(logBox){
-    logBox.innerHTML += '<p class="text-amber-400">⚡ ['+now+'] "' + sourceKey + '" ফোর্স সিঙ্ক শুরু হচ্ছে...</p>';
+    logBox.innerHTML += '<p class="text-amber-400">⚡ ['+now+'] "' + esc(sourceKey) + '" ফোর্স সিঙ্ক শুরু হচ্ছে...</p>';
     logBox.scrollTop = logBox.scrollHeight;
   }
 
@@ -1220,7 +1246,7 @@ async function triggerForceSync(sourceKey){
     toastMsg(res.message || 'সিঙ্ক সম্পন্ন হয়েছে ✓');
     if(logBox && res.diagnostics){
       var d = res.diagnostics;
-      logBox.innerHTML += '<p class="text-orange-400">✅ ['+new Date().toLocaleTimeString('bn-BD')+'] ' + res.message + '</p>';
+      logBox.innerHTML += '<p class="text-orange-400">✅ ['+new Date().toLocaleTimeString('bn-BD')+'] ' + esc(res.message) + '</p>';
       logBox.innerHTML += '<p class="text-slate-300">» স্ক্যানকৃত: '+toBn(d.total_scanned)+' | নতুন যুক্ত: +'+toBn(d.new_added)+' | ফিল্টার্ড: '+toBn(d.duplicates_prevented)+' ('+toBn(d.duration_ms)+'ms)</p>';
       logBox.scrollTop = logBox.scrollHeight;
     }
@@ -1687,7 +1713,7 @@ function renderFilteredCrudList(t) {
 
   listEl.innerHTML = filtered.map(function(it) {
     var isLive = it.is_active === 1 || it.is_active === true || it.is_active == null;
-    var srcUrl = it.source || it.link || it.apply_link || '';
+    var srcUrl = safeUrl(it.source || it.link || it.apply_link || '');
     return '<div class="py-3 flex items-start justify-between gap-3 border-b border-slate-100 last:border-0">' +
       '<div class="min-w-0 flex-1">' +
         cfg.row(it) +
@@ -1871,7 +1897,7 @@ async function loadTeacherTickets(status){
       '<p class="text-xs text-slate-700 bg-slate-50 p-2 rounded-xl"><b>প্রশ্ন:</b> '+esc(tk.question)+'</p>'+
       '<div class="flex items-center justify-between text-[11px] pt-1">'+
         '<span class="text-slate-400">শিক্ষার্থী: '+esc(tk.student_name)+'</span>'+
-        '<button onclick="openTicketChat('+tk.id+', \\''+esc(tk.ticket_code)+'\\', \\''+esc(tk.student_name)+'\\')" class="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-xs">💬 লাইভ সমাধান চ্যাট</button>'+
+        '<button onclick="openTicketChat('+tk.id+', \\''+jsq(tk.ticket_code)+'\\', \\''+jsq(tk.student_name)+'\\')" class="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-xs">💬 লাইভ সমাধান চ্যাট</button>'+
       '</div>'+
     '</div>';
   }).join('') || '<div class="py-8 text-center text-slate-400">কোনো টিকেট পাওয়া যায়নি</div>';
@@ -1954,7 +1980,7 @@ async function triggerAutoCollection(type){
   var now = new Date().toLocaleTimeString('bn-BD');
   if(timeSpan) timeSpan.textContent = 'চলছে... ' + now;
   if(logBox){
-    logBox.innerHTML += '<p class="text-amber-400">⚡ ['+now+'] ' + type + ' অটো-কালেকশন ও ডেটা মাইনিং শুরু হচ্ছে...</p>';
+    logBox.innerHTML += '<p class="text-amber-400">⚡ ['+now+'] ' + esc(type) + ' অটো-কালেকশন ও ডেটা মাইনিং শুরু হচ্ছে...</p>';
     logBox.scrollTop = logBox.scrollHeight;
   }
 
@@ -1967,7 +1993,7 @@ async function triggerAutoCollection(type){
       var resNow = new Date().toLocaleTimeString('bn-BD');
       if(timeSpan) timeSpan.textContent = 'সম্পন্ন ✓ ' + resNow;
       if(logBox){
-        logBox.innerHTML += '<p class="text-orange-400 font-bold">✅ ['+resNow+'] ' + (res.message || 'কালেকশন সফলভাবে সম্পন্ন হয়েছে') + '</p>';
+        logBox.innerHTML += '<p class="text-orange-400 font-bold">✅ ['+resNow+'] ' + esc(res.message || 'কালেকশন সফলভাবে সম্পন্ন হয়েছে') + '</p>';
         var c = res.collected || res.counts || {};
         logBox.innerHTML += '<p class="text-slate-200 font-semibold">» লাইভ ডাটাবেজ কন্টেন্ট: স্কলারশিপ ('+toBn(c.scholarships||0)+'টি), প্রশ্নপত্র ('+toBn(c.question_papers||c.qpapers||0)+'টি), সিলেবাস ('+toBn(c.syllabus||0)+'টি), MCQ ('+toBn(c.mcq||0)+'টি), চাকরি ('+toBn(c.jobs||8)+'টি), ভর্তি ('+toBn(c.admissions||3)+'টি)</p>';
         if(res.total_active || res.scanned){
@@ -1982,7 +2008,7 @@ async function triggerAutoCollection(type){
     }
   } catch(e) {
     if(logBox){
-      logBox.innerHTML += '<p class="text-rose-400">❌ কালেকশন ত্রুটি: ' + (e.message || 'অজানা সমস্যা') + '</p>';
+      logBox.innerHTML += '<p class="text-rose-400">❌ কালেকশন ত্রুটি: ' + esc(e.message || 'অজানা সমস্যা') + '</p>';
       logBox.scrollTop = logBox.scrollHeight;
     }
     toastMsg('কালেকশন ত্রুটি');
