@@ -1,0 +1,65 @@
+# ক্লাউডফ্লেয়ার পেজেস ডিপ্লয় (GitHub Actions) — টেমপ্লেট
+#
+# ⚠️  এই ফাইলটি সরাসরি কাজ করে না। ব্যবহার করতে হলে একে ঠিক এই পাথে রাখতে হবে:
+#         .github/workflows/deploy.yml
+#     (.github/workflows/-এর নিচে না রাখলে GitHub একে ওয়ার্কফ্লো হিসেবে চালাবে না।)
+#
+# ⚠️  আরও একটি শর্ত: `.github/workflows/**` পুশ করতে গেলে PAT-এ `workflow`
+#     স্কোপ থাকতে হবে। এই স্কোপ ছাড়া পুশ GitHub বাতিল করে দেয় — তাই ফাইলটি
+#     এখন docs/-এ টেমপ্লেট হিসেবে রাখা হয়েছে, যাতে সাধারণ পুশ আটকে না যায়।
+#
+# কেন দরকার: ২০২৬-০৯-১০-এ দেখা গেল Cloudflare Pages-এর git-connected
+# বিল্ড ট্রিগার বন্ধ হয়ে গেছে — GitHub-এ main ব্রাঞ্চে পুশ ঠিকঠাক যাচ্ছে
+# (commit be49246), কিন্তু Cloudflare সেই পুশের জন্য কোনো বিল্ডই শুরু করছে না।
+# ফলে প্রোডাকশন পুরনো কোডে আটকে থাকে, আর কেউ টেরই পায় না।
+#
+# এই ওয়ার্কফ্লো সেই নির্ভরতা সরিয়ে দেয়: main-এ যেকোনো পুশ সরাসরি
+# `wrangler pages deploy` চালিয়ে প্রোডাকশনে আপডেট পাঠায়।
+#
+# ⚙️  একবার সেটআপ করতে হবে (GitHub → Settings → Secrets and variables → Actions):
+#       CLOUDFLARE_API_TOKEN   = Cloudflare API টোকেন (Pages:Edit + D1:Edit)
+#       CLOUDFLARE_ACCOUNT_ID  = 6cd806a3439dfb6fd67f5b504fbd3360
+#
+# ℹ️  যদি Cloudflare-এর git-connected GitHub App আবার চালু হয়, তখন এই
+#     ফাইলটি মুছে দেবেন — নাহলে এক পুশে দুইবার ডিপ্লয় হবে।
+
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name edusob --branch main --commit-dirty=true

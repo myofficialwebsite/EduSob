@@ -1,0 +1,29 @@
+# ক্লাউডফ্লেয়ার পেজেস — রেসপন্স হেডার কনফিগ
+# ডক: https://developers.cloudflare.com/pages/platform/headers/
+#
+# নোট: HSTS ও CSP ইচ্ছে করে দেওয়া হয়নি —
+#   * HSTS একবার সেট করলে সহজে ফেরানো যায় না (পেজেস নিজেই http→https রিডাইরেক্ট করে)।
+#   * এই অ্যাপে ১২০+ ইনলাইন <script> ব্লক আছে, তাই কড়া CSP সব কিছু ভেঙে দেবে।
+#     ইনলাইন স্ক্রিপ্টগুলো nonce-ভিত্তিক করা হলে এরপর CSP যোগ করা যাবে।
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(self), geolocation=(), interest-cohort=()
+  Cross-Origin-Resource-Policy: same-origin
+
+# স্ট্যাটিক অ্যাসেট — ৭ দিন ক্যাশ (ফন্ট/আইকন/ছবির নাম স্থায়ী)
+/static/fonts/*
+  Cache-Control: public, max-age=604800
+
+/static/icons-fa/*
+  Cache-Control: public, max-age=604800
+
+/static/img/*
+  Cache-Control: public, max-age=604800
+
+# tw.css কনটেন্ট-হ্যাশড নয়, তাই immutable দেওয়া ঠিক হবে না —
+# বদলের পর পুরনো সিএসএস আটকে থাকবে। তাই শুধু revalidate।
+/static/tw.css
+  Cache-Control: public, max-age=0, must-revalidate
