@@ -344,7 +344,7 @@ ${shopHeader('wallet', loggedIn)}
 ${shopHelpersJs}
 var SS_DATA=null;
 var ST_BN={pending:'⏳ পেন্ডিং',approved:'✅ অ্যাপ্রুভড',rejected:'❌ বাতিল',confirmed:'✅ কনফার্মড',shipped:'🚚 পাঠানো হয়েছে',delivered:'📬 ডেলিভারড',cancelled:'❌ বাতিল'};
-var TX_BN={manual_topup:'💳 টপ-আপ',gateway_topup:'⚡ অটো টপ-আপ',purchase:'🛒 কেনাকাটা',refund:'↩️ রিফান্ড',referral:'🎁 রেফারেল'};
+var TX_BN={manual_topup:'💳 টপ-আপ',gateway_topup:'⚡ অটো টপ-আপ',purchase:'🛒 কেনাকাটা',refund:'↩️ রিফান্ড',referral:'🎁 রেফারেল',onboarding:'🎁 অনবোর্ডিং বোনাস'};
 
 document.getElementById('tp-ss').addEventListener('change',function(e){
   var f=e.target.files[0];if(!f)return;

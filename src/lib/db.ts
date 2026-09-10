@@ -185,7 +185,23 @@ export async function initDatabase(): Promise<D1Database> {
       );
       CREATE INDEX IF NOT EXISTS idx_scholarships_level ON scholarships(target_level, is_active);
       CREATE INDEX IF NOT EXISTS idx_scholarships_deadline ON scholarships(deadline);
+
     `)
+
+    // রাউন্ড ৬: অনবোর্ডিং চেকলিস্ট + ওয়ালেট বোনাস — (user_id, step_key) UNIQUE মানে ডবল-ক্রেডিট অসম্ভব
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS onboarding_rewards (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        step_key TEXT NOT NULL,
+        amount INTEGER NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE (user_id, step_key),
+        FOREIGN KEY (user_id) REFERENCES users(id)
+      );
+      CREATE INDEX IF NOT EXISTS idx_onboarding_rewards_user ON onboarding_rewards(user_id);
+    `)
+
 
     const pragmaTeachers = db.prepare("PRAGMA table_info(teachers)").all() as any[]
     const existingCols = new Set(pragmaTeachers.map((c: any) => c.name))
@@ -753,6 +769,18 @@ export async function ensureD1Schema(db: any): Promise<void> {
           is_active INTEGER NOT NULL DEFAULT 1,
           created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         );
+
+        CREATE TABLE IF NOT EXISTS onboarding_rewards (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          user_id INTEGER NOT NULL,
+          step_key TEXT NOT NULL,
+          amount INTEGER NOT NULL,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          UNIQUE (user_id, step_key),
+          FOREIGN KEY (user_id) REFERENCES users(id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_onboarding_rewards_user ON onboarding_rewards(user_id);
+
 
         CREATE TABLE IF NOT EXISTS suggestions (
           id INTEGER PRIMARY KEY AUTOINCREMENT,

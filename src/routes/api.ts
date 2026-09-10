@@ -6,6 +6,8 @@ import {
   sessionCookie, clearSessionCookie, SessionUser
 } from '../lib/auth'
 import { religionInfo } from '../lib/dates'
+import { getOnboardingState, claimOnboardingSteps } from '../lib/onboarding'
+// ---------- রেফারেল স্ট্যাট ----------
 
 type Env = { Bindings: Bindings; Variables: { user: SessionUser | null } }
 
@@ -273,6 +275,31 @@ api.get('/wallet', requireAuth, async (c) => {
   const { results } = await c.env.DB.prepare('SELECT * FROM wallet_transactions WHERE user_id = ? ORDER BY id DESC LIMIT 20').bind(user.id).all()
   return c.json({ ok: true, balance: (wallet as any)?.balance ?? 0, transactions: results })
 })
+
+
+// ---------- অনবোর্ডিং চেকলিস্ট + ওয়ালেট বোনাস (রাউন্ড ৬) ----------
+api.get('/onboarding', requireAuth, async (c) => {
+  const user = c.get('user')!
+  try {
+    const state = await getOnboardingState(c.env.DB, user.id)
+    return c.json({ ok: true, ...state })
+  } catch (e) {
+    return c.json({ ok: false, error: 'অনবোর্ডিং অবস্থা লোড করা যায়নি' }, 500)
+  }
+})
+
+api.post('/onboarding/claim', requireAuth, async (c) => {
+  const user = c.get('user')!
+  const body = await c.req.json<any>().catch(() => null)
+  const keys = Array.isArray(body?.keys) ? body.keys.map((k: any) => String(k)).slice(0, 20) : undefined
+  try {
+    const res = await claimOnboardingSteps(c.env.DB, user.id, keys)
+    return c.json({ ok: true, granted: res.granted, skipped: res.skipped, balance: res.balance, state: res.state })
+  } catch (e) {
+    return c.json({ ok: false, error: 'বোনাস ক্লেইম করা যায়নি' }, 500)
+  }
+})
+
 
 // ---------- রেফারেল স্ট্যাট ----------
 api.get('/referrals', requireAuth, async (c) => {

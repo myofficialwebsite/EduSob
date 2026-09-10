@@ -233,6 +233,47 @@ export function dashboardPage(user: SessionUser): string {
         </div>
       </section>
 
+      <!-- ১.৫ শুরুর ৫ ধাপ — অনবোর্ডিং চেকলিস্ট + ওয়ালেট বোনাস (রাউন্ড ৬) -->
+      <section id="onboarding-card" class="hidden">
+        <div class="relative overflow-hidden rounded-2xl border border-amber-400/25 bg-gradient-to-br from-amber-500/10 via-white/[0.04] to-transparent">
+          <div class="pointer-events-none absolute -top-20 -right-12 w-56 h-56 bg-amber-400/20 rounded-full blur-3xl"></div>
+
+          <div class="relative p-4 sm:p-5">
+            <header class="flex items-start justify-between gap-3">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <span class="w-9 h-9 rounded-xl bg-amber-400/15 border border-amber-400/30 text-amber-300 flex items-center justify-center shrink-0">
+                  <i class="fas fa-gift"></i>
+                </span>
+                <div class="min-w-0">
+                  <h2 class="text-sm sm:text-base font-extrabold text-white leading-tight">শুরুর ৫ ধাপ — শেষ করুন, পান ৳<span id="obTotalBonus">৭০</span> বোনাস</h2>
+                  <p class="text-[11px] text-slate-400 mt-0.5">প্রোফাইল ও প্রথম ব্যবহার শেষ করলে বোনাস সাথে সাথে ওয়ালেটে যোগ হবে।</p>
+                </div>
+              </div>
+              <button type="button" onclick="dismissOnboarding()" title="এখন নয়" class="shrink-0 w-7 h-7 rounded-lg text-slate-500 hover:text-white hover:bg-white/10 flex items-center justify-center transition text-xs">
+                <i class="fas fa-xmark"></i>
+              </button>
+            </header>
+
+            <div class="mt-3 flex items-center gap-3">
+              <div class="flex-1 h-1.5 bg-black/40 border border-white/10 rounded-full overflow-hidden">
+                <div id="obBar" class="h-full rounded-full bg-gradient-to-r from-amber-400 via-orange-400 to-emerald-400 transition-all duration-500" style="width:0%"></div>
+              </div>
+              <span id="obCount" class="text-[11px] font-mono text-amber-300 font-bold shrink-0">০/৫</span>
+              <span id="obEarned" class="hidden sm:inline text-[11px] text-emerald-300 font-semibold shrink-0"></span>
+            </div>
+
+            <ul id="obSteps" class="mt-3 grid gap-1.5 sm:grid-cols-2"></ul>
+
+            <div id="obFooter" class="mt-3 hidden">
+              <button type="button" id="obClaimBtn" onclick="claimOnboarding()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-amber-500/20 hover:opacity-90 active:scale-[0.99] transition">
+                <i class="fas fa-gift"></i> ৳<span id="obPending">০</span> বোনাস ক্লেইম করুন
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       <!-- ২. “আজ কী করব?” — আজকের পড়ার লক্ষ্য ও মিশন (Daily Study Goals & Priority Hub) -->
       <section id="daily-study-deck" class="space-y-3">
         <div class="flex items-center justify-between">
@@ -864,6 +905,135 @@ function updateDailyDeckUI(cnt){
 }
 initDailyTasks();
 
+// ---------- অনবোর্ডিং চেকলিস্ট + ওয়ালেট বোনাস (রাউন্ড ৬) ----------
+// সব হিসাব সার্ভারের — ক্লায়েন্ট শুধু রেন্ডার করে ও ক্লেইম পাঠায়।
+var OB_STATE = null;
+
+function obDismissed(){
+  try { return localStorage.getItem('edusob.ob.dismissed') === '1' } catch(e) { return false }
+}
+function dismissOnboarding(){
+  try { localStorage.setItem('edusob.ob.dismissed', '1') } catch(e) {}
+  var c = document.getElementById('onboarding-card');
+  if (c) c.classList.add('hidden');
+}
+
+function obRow(s){
+  var li = document.createElement('li');
+  li.className = 'flex items-center gap-3 min-w-0 rounded-xl border px-3 py-2 transition ' +
+    (s.claimed ? 'border-emerald-500/25 bg-emerald-500/5'
+     : s.done ? 'border-amber-400/40 bg-amber-400/10'
+     : 'border-white/10 bg-white/5 hover:bg-white/[0.07]');
+
+  var iconCls = s.claimed
+    ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/30'
+    : s.done ? 'bg-amber-400/20 text-amber-300 border-amber-400/40'
+    : 'bg-white/5 text-slate-400 border-white/10';
+  var icon = '<span class="w-8 h-8 rounded-lg border flex items-center justify-center text-xs shrink-0 ' + iconCls + '">' +
+             '<i class="fas ' + (s.claimed ? 'fa-check' : s.icon) + '"></i></span>';
+
+  var action = s.claimed
+    ? '<span class="text-[10px] text-emerald-300 font-bold whitespace-nowrap">পেয়েছেন ✓</span>'
+    : s.done
+      ? '<button type="button" data-ob-key="' + escH(s.key) + '" class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 text-[10px] font-black transition">ক্লেইম</button>'
+      : '<a href="' + escH(s.href) + '" class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 text-[10px] font-bold transition inline-flex items-center gap-1">' + escH(s.cta) + ' <i class="fas fa-arrow-right text-[9px]"></i></a>';
+
+  li.innerHTML = icon +
+    '<div class="min-w-0 flex-1">' +
+      '<p class="text-xs font-bold truncate ' + (s.claimed ? 'text-slate-400 line-through' : 'text-white') + '">' + escH(s.label) + '</p>' +
+      '<p class="text-[10px] text-slate-400 truncate">' + escH(s.hint) + '</p>' +
+    '</div>' +
+    '<div class="flex items-center gap-2 shrink-0">' +
+      '<span class="text-[10px] font-black font-mono ' + (s.claimed ? 'text-emerald-400/70' : 'text-amber-300') + '">৳' + BN(s.bonus) + '</span>' +
+      action +
+    '</div>';
+  return li;
+}
+
+function renderOnboarding(st){
+  if (!st) return;
+  OB_STATE = st;
+  var card = document.getElementById('onboarding-card');
+  if (!card) return;
+
+  var tb = document.getElementById('obTotalBonus');
+  if (tb) tb.textContent = BN(st.bonus_total || 0);
+
+  var pct = st.total ? Math.round((st.claimed_count / st.total) * 100) : 0;
+  var bar = document.getElementById('obBar');
+  if (bar) bar.style.width = pct + '%';
+  var cnt = document.getElementById('obCount');
+  if (cnt) cnt.textContent = BN(st.done_count) + '/' + BN(st.total);
+  var earnedEl = document.getElementById('obEarned');
+  if (earnedEl) earnedEl.textContent = st.earned ? '৳' + BN(st.earned) + ' পেয়েছেন' : '';
+
+  var ul = document.getElementById('obSteps');
+  if (ul) {
+    ul.innerHTML = '';
+    (st.steps || []).forEach(function(s){ ul.appendChild(obRow(s)) });
+    if (!ul.dataset.obBound) {
+      ul.dataset.obBound = '1';
+      ul.addEventListener('click', function(e){
+        var t = e.target;
+        var btn = t && t.closest ? t.closest('button[data-ob-key]') : null;
+        if (btn) claimOnboarding(btn.getAttribute('data-ob-key'));
+      });
+    }
+  }
+
+  var foot = document.getElementById('obFooter');
+  var pend = document.getElementById('obPending');
+  if (foot && pend) {
+    if (st.pending > 0) { pend.textContent = BN(st.pending); foot.classList.remove('hidden') }
+    else foot.classList.add('hidden');
+  }
+
+  var wasDone = obDismissed();
+
+  // সব ধাপ শেষ ও সব বোনাস ক্লেইম — কার্ডটি আর জায়গা নেবে না
+  if (st.done_count === st.total && st.pending === 0) {
+    card.classList.add('hidden');
+    if (!wasDone) {
+      try { localStorage.setItem('edusob.ob.dismissed', '1') } catch(e) {}
+      if (st.claimed_count === st.total) showToast('🏅 সব ধাপ শেষ — ৳' + BN(st.bonus_total || 0) + ' বোনাস পেয়েছেন!');
+    }
+    return;
+  }
+
+  // অপেক্ষমাণ বোনাস থাকলে ডিসমিস করলেও কার্ড ফিরে আসবে (টাকা হাতছাড়া হওয়া ঠিক নয়)
+  if (st.pending > 0 || !wasDone) card.classList.remove('hidden');
+  else card.classList.add('hidden');
+}
+
+async function loadOnboarding(){
+  try {
+    var r = await axios.get('/api/onboarding');
+    if (r.data && r.data.ok) renderOnboarding(r.data);
+  } catch(e) { /* নেটওয়ার্ক ত্রুটিতে কার্ড লুকিয়েই থাকবে */ }
+}
+
+async function claimOnboarding(key){
+  var keys = key ? [String(key)] : null;
+  var btn = document.getElementById('obClaimBtn');
+  var oldHtml = btn ? btn.innerHTML : '';
+  if (!keys && btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> যোগ হচ্ছে...' }
+  try {
+    var r = await axios.post('/api/onboarding/claim', keys ? { keys: keys } : {});
+    var d = r.data || {};
+    if (!d.ok) throw { response: { data: d } };
+    if (d.balance !== undefined && d.balance !== null) {
+      document.querySelectorAll('.wallet-val').forEach(function(el){ el.textContent = BN(d.balance) });
+    }
+    var amt = (d.granted || []).reduce(function(n, g){ return n + (g.amount || 0) }, 0);
+    showToast(amt > 0 ? '🎉 ৳' + BN(amt) + ' বোনাস ওয়ালেটে যোগ হয়েছে!' : 'এই মুহূর্তে ক্লেইম করার মতো বোনাস নেই');
+    renderOnboarding(d.state);
+  } catch(err) {
+    showToast((err.response && err.response.data && err.response.data.error) || 'বোনাস ক্লেইম করা যায়নি — আবার চেষ্টা করুন');
+    if (!keys && btn) { btn.disabled = false; btn.innerHTML = oldHtml }
+  }
+}
+
+
 // কোর ডাটা লোডার
 async function loadDashboardCore(){
   try {
@@ -872,7 +1042,8 @@ async function loadDashboardCore(){
       axios.get('/api/saved-rolls'),
       axios.get('/api/profile'),
       axios.get('/api/referrals'),
-      axios.get('/api/subs/my-plan')
+      axios.get('/api/subs/my-plan'),
+      axios.get('/api/onboarding')
     ]);
 
     if (results[0].status === 'fulfilled' && results[0].value.data.ok) {
@@ -917,6 +1088,11 @@ async function loadDashboardCore(){
       if (earn) earn.textContent = BN(d.total_earned || 0);
       const hRef = document.getElementById('heroRefCount');
       if (hRef) hRef.textContent = BN((d.referrals || []).length);
+    }
+
+    // ৬. অনবোর্ডিং চেকলিস্ট + ওয়ালেট বোনাস
+    if (results[5] && results[5].status === 'fulfilled' && results[5].value.data.ok) {
+      renderOnboarding(results[5].value.data);
     }
 
     // ৫. সাবস্ক্রিপশন আইডি ও মেম্বারশিপ স্ট্যাটাস
