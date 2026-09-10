@@ -75,6 +75,34 @@ function stepDone(key: string, p: any, savedRolls: number, mcqAttempts: number):
   }
 }
 
+// ---------- টেবিল সেলফ-হিলিং ----------
+// পঞ্চম রাউন্ডে দেখা গেছে: ensureD1Schema()-এর এক বড় db.exec()-এর ভেতরে কোনো
+// স্টেটমেন্ট ফেল করলে তার পরের সব স্টেটমেন্ট স্কিপ হয় — তাই প্রোডাকশনে টেবিলই
+// তৈরি হয়নি। এখানে CREATE TABLE আলাদা try/catch-এ, তাই মূল ব্লক ব্যর্থ হলেও
+// অনবোর্ডিং টেবিল নিজেই তৈরি হয়ে যায়।
+let obTableChecked = false
+
+export async function ensureOnboardingTable(db: any): Promise<void> {
+  if (obTableChecked || !db || typeof db.exec !== 'function') return
+  try {
+    await db.exec(`
+      CREATE TABLE IF NOT EXISTS onboarding_rewards (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        step_key TEXT NOT NULL,
+        amount INTEGER NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE (user_id, step_key),
+        FOREIGN KEY (user_id) REFERENCES users(id)
+      );
+      CREATE INDEX IF NOT EXISTS idx_onboarding_rewards_user ON onboarding_rewards(user_id);
+    `)
+    obTableChecked = true
+  } catch {
+    // ব্যর্থ হলে পরের রিকোয়েস্টে আবার চেষ্টা করবে
+  }
+}
+
 async function one(db: any, sql: string, bind: any[] = []): Promise<any> {
   try {
     return await db.prepare(sql).bind(...bind).first()

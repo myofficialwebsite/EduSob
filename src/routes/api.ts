@@ -6,7 +6,7 @@ import {
   sessionCookie, clearSessionCookie, SessionUser
 } from '../lib/auth'
 import { religionInfo } from '../lib/dates'
-import { getOnboardingState, claimOnboardingSteps } from '../lib/onboarding'
+import { getOnboardingState, claimOnboardingSteps, ensureOnboardingTable } from '../lib/onboarding'
 // ---------- রেফারেল স্ট্যাট ----------
 
 type Env = { Bindings: Bindings; Variables: { user: SessionUser | null } }
@@ -281,6 +281,7 @@ api.get('/wallet', requireAuth, async (c) => {
 api.get('/onboarding', requireAuth, async (c) => {
   const user = c.get('user')!
   try {
+    await ensureOnboardingTable(c.env.DB)
     const state = await getOnboardingState(c.env.DB, user.id)
     return c.json({ ok: true, ...state })
   } catch (e) {
@@ -293,6 +294,7 @@ api.post('/onboarding/claim', requireAuth, async (c) => {
   const body = await c.req.json<any>().catch(() => null)
   const keys = Array.isArray(body?.keys) ? body.keys.map((k: any) => String(k)).slice(0, 20) : undefined
   try {
+    await ensureOnboardingTable(c.env.DB)
     const res = await claimOnboardingSteps(c.env.DB, user.id, keys)
     return c.json({ ok: true, granted: res.granted, skipped: res.skipped, balance: res.balance, state: res.state })
   } catch (e) {
