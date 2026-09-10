@@ -207,6 +207,31 @@ document.querySelectorAll('.lvl-btn').forEach(function(b){
   };
 });
 
+function showQuizNotice(msg, withLoginCta){
+  var box = document.getElementById('quiz-notice');
+  if(!box){
+    box = document.createElement('div');
+    box.id = 'quiz-notice';
+    var startBtn = document.getElementById('start-btn');
+    if(startBtn && startBtn.parentNode) startBtn.parentNode.insertBefore(box, startBtn);
+    else return;
+  }
+  box.innerHTML = '';
+  var card = document.createElement('div');
+  card.className = 'mb-3 p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-sm flex items-center justify-between gap-3 flex-wrap';
+  var txt = document.createElement('span');
+  txt.textContent = msg;
+  card.appendChild(txt);
+  if(withLoginCta){
+    var a = document.createElement('a');
+    a.href = '/login?next=' + encodeURIComponent(location.pathname);
+    a.className = 'font-bold underline whitespace-nowrap';
+    a.textContent = 'লগইন করুন';
+    card.appendChild(a);
+  }
+  box.appendChild(card);
+}
+
 document.getElementById('start-btn').onclick = function(){
   var btn = document.getElementById('start-btn');
   btn.disabled = true;
@@ -214,8 +239,10 @@ document.getElementById('start-btn').onclick = function(){
   btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> প্রশ্ন প্রস্তুত হচ্ছে...';
   fetch('/api/tools/mcq/quiz?level='+curLevel+'&subject='+encodeURIComponent(curSubject)+'&count=10')
     .then(function(r){
-      if(!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
+      return r.json().catch(function(){ return null; }).then(function(d){
+        if(!r.ok){ var e = new Error('HTTP ' + r.status); e.status = r.status; e.data = d; throw e; }
+        return d;
+      });
     })
     .then(function(d){
       quizQs = (d && d.questions) || [];
@@ -233,6 +260,12 @@ document.getElementById('start-btn').onclick = function(){
     .catch(function(err){
       btn.disabled = false;
       btn.innerHTML = origHtml;
+      // ৪২৯ = দৈনিক কোটা শেষ। জেনেরিক "সমস্যা হয়েছে" দেখালে ইউজার কী করতে হবে বুঝবে না,
+      // তাই সার্ভারের বার্তা + লগইন CTA দেখাই (কনভার্শন-ফ্রেন্ডলি)।
+      if(err && err.status === 429 && err.data && err.data.error){
+        showQuizNotice(err.data.error, true);
+        return;
+      }
       alert('পরীক্ষা শুরু করতে সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।');
     });
 };

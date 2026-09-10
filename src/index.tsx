@@ -58,6 +58,30 @@ app.use('*', async (c, next) => {
   }
 })
 
+// ---------- CSRF সুরক্ষা ----------
+// সেশন কুকি `SameSite=None` — অর্থাৎ ক্রস-সাইট POST/PUT/DELETE-এও কুকি পাঠানো হয়।
+// তাই শুধু SameSite-এর উপর ভরসা করা যায় না; Origin যাচাই বাধ্যতামূলক।
+// ব্রাউজার state-changing রিকোয়েস্টে সবসময় Origin পাঠায়, তাই Origin থাকলে অবশ্যই
+// Host-এর সাথে মিলতে হবে। সার্ভার-টু-সার্ভার কলে (গেটওয়ে IPN, curl) Origin থাকে না —
+// সেগুলো ছাড় দেওয়া হয় (bKash কলব্যাক GET, তাই সেটিও প্রভাবিত নয়)।
+const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS'])
+app.use('*', async (c, next) => {
+  if (SAFE_METHODS.has(c.req.method)) return next()
+  const origin = c.req.header('Origin')
+  if (!origin) return next()
+  let originHost: string
+  try {
+    originHost = new URL(origin).host
+  } catch {
+    return c.json({ ok: false, error: 'অবৈধ Origin' }, 403)
+  }
+  const host = c.req.header('Host') || new URL(c.req.url).host
+  if (originHost !== host) {
+    return c.json({ ok: false, error: 'ক্রস-সাইট অনুরোধ অনুমোদিত নয় (CSRF)' }, 403)
+  }
+  return next()
+})
+
 // ---------- API ----------
 app.route('/api', api)
 app.route('/api/feeds', feeds)

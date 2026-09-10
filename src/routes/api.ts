@@ -24,6 +24,36 @@ const requireAuth = async (c: any, next: any) => {
   await next()
 }
 
+// ---------- লগইন রেট-লিমিট (ব্রুট-ফোর্স প্রতিরোধ) ----------
+// সীমাবদ্ধতা: এটি isolate-ভিত্তিক ইন-মেমোরি, তাই বেস্ট-এফোর্ট — একই IP বারবার
+// একই কলো/isolate-এ গেলেই কার্যকর। টেকসইভাবে আটকাতে Cloudflare WAF
+// Rate Limiting rule ব্যবহার করুন (DEPLOY_STATUS.md-এ নির্দেশ আছে)।
+const loginAttempts = new Map<string, { n: number; first: number }>()
+const LOGIN_MAX_ATTEMPTS = 8
+const LOGIN_WINDOW_MS = 10 * 60 * 1000
+
+function clientIp(c: any): string {
+  return c.req.header('CF-Connecting-IP') || c.req.header('X-Forwarded-For') || 'unknown'
+}
+function loginKey(c: any, identifier: string): string {
+  return clientIp(c) + '|' + String(identifier || '').toLowerCase()
+}
+function loginBlocked(key: string, now: number): boolean {
+  const rec = loginAttempts.get(key)
+  if (!rec) return false
+  if (now - rec.first >= LOGIN_WINDOW_MS) { loginAttempts.delete(key); return false }
+  return rec.n >= LOGIN_MAX_ATTEMPTS
+}
+function loginFail(key: string, now: number): void {
+  // মেমোরি ফাঁস আটকাতে মাঝে মাঝে পুরনো এন্ট্রি পরিষ্কার
+  if (loginAttempts.size > 5000) {
+    for (const [k, v] of loginAttempts) if (now - v.first >= LOGIN_WINDOW_MS) loginAttempts.delete(k)
+  }
+  const rec = loginAttempts.get(key)
+  if (!rec || now - rec.first >= LOGIN_WINDOW_MS) loginAttempts.set(key, { n: 1, first: now })
+  else rec.n++
+}
+
 // ---------- সাইন-আপ ----------
 api.post('/auth/signup', async (c) => {
   const { DB } = c.env
@@ -106,6 +136,13 @@ api.post('/auth/login', async (c) => {
     return c.json({ ok: false, error: 'মোবাইল নম্বর / ইমেইল / ইউজার আইডি ও পাসওয়ার্ড দিন' }, 400)
   }
 
+  // ব্রুট-ফোর্স গার্ড
+  const rlKey = loginKey(c, identifier)
+  const rlNow = Date.now()
+  if (loginBlocked(rlKey, rlNow)) {
+    return c.json({ ok: false, error: 'খুব বেশি ভুল চেষ্টা করেছেন। ১০ মিনিট পর আবার চেষ্টা করুন।' }, 429)
+  }
+
   const cleanPhone = identifier.replace(/[^\d]/g, '')
   let row = await DB.prepare(`
     SELECT id, user_code, email, phone, password_hash, salt, status, role FROM users 
@@ -119,18 +156,19 @@ api.post('/auth/login', async (c) => {
     row = await DB.prepare("SELECT id, user_code, email, phone, password_hash, salt, status, role FROM users WHERE role = 'admin' LIMIT 1").first<any>()
   }
 
-  if (!row) return c.json({ ok: false, error: 'এই নম্বর বা আইডিতে কোনো অ্যাকাউন্ট পাওয়া যায়নি' }, 404)
+  if (!row) { loginFail(rlKey, rlNow); return c.json({ ok: false, error: 'এই নম্বর বা আইডিতে কোনো অ্যাকাউন্ট পাওয়া যায়নি' }, 404) }
   
   let okPass = await verifyPassword(password, row.salt, row.password_hash)
   if (!okPass && trimmedPassword !== password) {
     okPass = await verifyPassword(trimmedPassword, row.salt, row.password_hash)
   }
-  if (!okPass) return c.json({ ok: false, error: 'ভুল পাসওয়ার্ড' }, 401)
+  if (!okPass) { loginFail(rlKey, rlNow); return c.json({ ok: false, error: 'ভুল পাসওয়ার্ড' }, 401) }
   if (row.status === 'suspended') return c.json({ ok: false, error: '⛔ আপনার অ্যাকাউন্টটি সাসপেন্ড করা হয়েছে। সহায়তার জন্য যোগাযোগ করুন।' }, 403)
 
   const token = await createSession(DB, row.id)
   c.header('Set-Cookie', sessionCookie(token))
   const redirect = row.role === 'admin' ? '/admin' : '/dashboard'
+  loginAttempts.delete(rlKey)
   return c.json({ ok: true, redirect, role: row.role, token })
 })
 

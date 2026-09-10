@@ -16,6 +16,19 @@ const requireAuth = async (c: any, next: any) => {
   await next()
 }
 
+// ---------- MCQ কোটা (প্রশ্নব্যাংক বাল্ক-স্ক্র্যাপিং বন্ধ) ----------
+// আগে এই এন্ডপয়েন্টে কোনো অথ-গার্ড বা সীমা ছিল না — যে কেউ ২০টি করে প্রশ্ন তুলে
+// পুরো প্রশ্নব্যাংক স্ক্র্যাপ করতে পারতো (correct ফিল্ড বাদ থাকলেও)।
+// অনামা ভিজিটরের ফ্রি টেস্টার অক্ষুণ্ণ রেখে শুধু দৈনিক সীমা দেওয়া হলো:
+//   অতিথি ৪০ প্রশ্ন/দিন (১০/রিকোয়েস্ট) · লগইনকৃত ৪০০ প্রশ্ন/দিন (২০/রিকোয়েস্ট)
+// নোট: ইন-মেমোরি ও isolate-ভিত্তিক — বেস্ট-এফোর্ট।
+const MCQ_ANON_DAILY = 40
+const MCQ_USER_DAILY = 400
+const mcqQuota = new Map<string, { n: number; day: string }>()
+function dhakaDay(): string {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Dhaka' }).format(new Date())
+}
+
 // ---------- MCQ: বিষয় তালিকা ----------
 tools.get('/mcq/subjects', async (c) => {
   const level = c.req.query('level') || ''
@@ -29,7 +42,28 @@ tools.get('/mcq/subjects', async (c) => {
 tools.get('/mcq/quiz', async (c) => {
   const level = c.req.query('level') || 'ssc'
   const subject = c.req.query('subject') || ''
-  const count = Math.min(parseInt(c.req.query('count') || '10') || 10, 20)
+  const user = c.get('user')
+  const cap = user ? 20 : 10
+  const count = Math.min(parseInt(c.req.query('count') || '10') || 10, cap)
+
+  // দৈনিক কোটা
+  const qKey = user ? ('u' + (user as any).id) : ('ip' + (c.req.header('CF-Connecting-IP') || c.req.header('X-Forwarded-For') || 'unknown'))
+  const day = dhakaDay()
+  const limit = user ? MCQ_USER_DAILY : MCQ_ANON_DAILY
+  const rec = mcqQuota.get(qKey)
+  const used = rec && rec.day === day ? rec.n : 0
+  if (mcqQuota.size > 5000) {
+    for (const [k, v] of mcqQuota) if (v.day !== day) mcqQuota.delete(k)
+  }
+  if (used + count > limit) {
+    return c.json({
+      ok: false,
+      error: user ? 'আজকের MCQ সীমা শেষ — কাল আবার চেষ্টা করুন'
+                  : 'অতিথি হিসেবে আজকের সীমা শেষ। লগইন করলে আরও প্রশ্ন পাবেন।',
+      quota: { limit: limit, used: used, remaining: Math.max(0, limit - used) }
+    }, 429)
+  }
+  mcqQuota.set(qKey, { n: used + count, day: day })
   const rows = subject
     ? await c.env.DB.prepare('SELECT id, level, subject, chapter, question, option_a, option_b, option_c, option_d FROM mcq_questions WHERE is_active=1 AND level=? AND subject=? ORDER BY RANDOM() LIMIT ?').bind(level, subject, count).all()
     : await c.env.DB.prepare('SELECT id, level, subject, chapter, question, option_a, option_b, option_c, option_d FROM mcq_questions WHERE is_active=1 AND level=? ORDER BY RANDOM() LIMIT ?').bind(level, count).all()
