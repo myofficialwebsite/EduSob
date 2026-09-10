@@ -176,7 +176,7 @@ function loadPlans(){
         btn = '<button onclick="subscribe(\\'' + p.slug + '\\',' + p.price + ')" class="w-full py-3 rounded-xl bg-gradient-to-r ' + (p.slug === 'premium' ? 'from-amber-400 to-orange-500 text-slate-950' : 'from-orange-500 to-amber-500 text-white') + ' font-black text-xs hover:opacity-90 transition shadow">সাবস্ক্রাইব করুন →</button>';
       }
 
-      return '<div class="relative bg-slate-900/90 border ' + ring + ' rounded-2xl p-6 flex flex-col justify-between space-y-4">' + popular +
+      return '<div id="plan-card-' + p.slug + '" class="relative bg-slate-900/90 border ' + ring + ' rounded-2xl p-6 flex flex-col justify-between space-y-4">' + popular +
         '<div>' +
           '<div class="flex items-center justify-between">' +
             '<p class="text-lg font-black ' + (p.slug === 'premium' ? 'text-amber-300' : p.slug === 'standard' ? 'text-orange-300' : 'text-slate-200') + '">' + esc(p.name_bn) + '</p>' +
@@ -194,6 +194,29 @@ function loadPlans(){
         '<div>' + btn + '</div>' +
       '</div>';
     }).join('');
+    // ?plan=standard|premium — কনটেক্সচুয়াল আপসেল
+    // /qpapers বা /syllabus-এ লকড কার্ড থেকে এলে ওই প্ল্যানটিই হাইলাইট ও স্ক্রল করা হয়,
+    // যাতে ইউজার ঠিক কোন প্ল্যানটা নিতে হবে তা সরাসরি দেখতে পায়।
+    var wantPlan = new URLSearchParams(location.search).get('plan');
+    if(wantPlan){
+      var target = document.getElementById('plan-card-' + wantPlan);
+      if(target){
+        target.classList.add('ring-2','ring-orange-400','ring-offset-2','ring-offset-slate-950');
+        setTimeout(function(){ target.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 400);
+        // ACCESS কনস্ট্যান্টটি শুধু /qpapers পেইজে আছে, এখানে নেই — লোকাল ম্যাপ
+        var PLAN_BN = { free: 'ফ্রি', standard: 'স্ট্যান্ডার্ড', premium: 'প্রিমিয়াম' };
+        var nm = PLAN_BN[wantPlan] || wantPlan;
+        var box = document.createElement('div');
+        box.className = 'mb-5 p-4 rounded-2xl bg-orange-500/10 border border-orange-400/30 text-orange-200 text-sm flex items-start gap-3';
+        var ic = document.createElement('i');
+        ic.className = 'fas fa-lock-open mt-0.5';
+        var sp = document.createElement('span');
+        sp.textContent = 'আপনি যে কনটেন্টটি দেখছিলেন সেটি ' + nm + ' প্যাকেজে পাবেন — নিচে হাইলাইট করা প্ল্যানটি দেখুন।';
+        box.appendChild(ic); box.appendChild(sp);
+        var gridEl = document.getElementById('plansGrid');
+        if(gridEl && gridEl.parentNode) gridEl.parentNode.insertBefore(box, gridEl);
+      }
+    }
   });
 }
 
@@ -362,11 +385,27 @@ function switchKind(k){
   load(CUR_LV);
 }
 
+// লকড কনটেন্টের জন্য কনটেক্সচুয়াল আপসেল CTA।
+// আগে সব লকড আইটেমে একই জেনেরিক "আনলক" লিংক ছিল — ইউজার বুঝতেই পারতো না
+// কোন প্ল্যান নিলে এই কনটেন্টটি খুলবে। এখন প্রয়োজনীয় প্ল্যানের নাম বলা হয়
+// এবং /subscription-এ ওই প্ল্যানটিই হাইলাইট করে পাঠানো হয়।
+function lockCta(access, from){
+  var slug = (access === 'premium' || access === 'standard') ? access : 'standard';
+  var label = ACCESS[slug] ? ACCESS[slug][0] : 'স্ট্যান্ডার্ড';
+  var tone = slug === 'premium'
+    ? 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border-amber-500/40'
+    : 'bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 border-sky-400/40';
+  return '<a href="/subscription?plan=' + slug + '&from=' + encodeURIComponent(from || '') + '" '
+    + 'class="shrink-0 ' + tone + ' border text-xs font-bold px-4 py-2 rounded-xl transition flex items-center gap-1.5" '
+    + 'title="' + label + ' প্যাকেজে এই কনটেন্টটি আনলক হয়">'
+    + '<i class="fas fa-lock text-[10px]"></i>' + label + ' দিয়ে আনলক</a>';
+}
+
 function card(p, icon){
   var a=ACCESS[p.access]||ACCESS.free;
   var btn=p.unlocked
     ?'<button onclick="openItem('+p.id+')" class="shrink-0 bg-gradient-to-r from-orange-500 to-amber-500 hover:opacity-90 text-slate-950 text-xs font-black px-4 py-2 rounded-xl transition shadow flex items-center gap-1.5"><i class="fas fa-file-lines"></i> পড়ুন ও PDF</button>'
-    :'<a href="/subscription" class="shrink-0 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-bold px-4 py-2 rounded-xl transition flex items-center gap-1"><i class="fas fa-lock text-[10px]"></i> আনলক</a>';
+    :lockCta(p.access, 'qp');
 
   return '<div class="bg-slate-900 border border-white/10 hover:border-orange-500/40 rounded-2xl p-5 flex items-start gap-4 transition shadow-md group">'+
     '<div class="w-10 h-10 rounded-xl bg-slate-800 border border-white/10 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition">'+icon+'</div>'+
