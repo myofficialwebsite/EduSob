@@ -34,9 +34,9 @@ for (let i = 1; i <= 10; i++) {
   last = { status: r.status, body: await r.json() }
   if (r.status === 429 && blockedAt === null) blockedAt = i
 }
-// ক্লাউডফ্লেয়ারে রিকোয়েস্ট একাধিক isolate-এ ছড়িয়ে পড়ে এবং এই কাউন্টার ইন-মেমোরি,
-// তাই ব্লক ৯ম বা ১০ম চেষ্টায় হতে পারে — ঠিক কোনটিতে তা নিশ্চিত নয়।
-log(blockedAt !== null && blockedAt <= 10, `blocked on attempt #${blockedAt} (limit 8, tolerate 9-10: multi-isolate in-memory counter)`)
+// কাউন্টার এখন D1-ভিত্তিক (isolate-নিরপেক্ষ), তাই সীমা সব জায়গায় একই:
+// ৮ বার ভুল চেষ্টা সহ্য করা হয়, ৯ম চেষ্টাতেই ৪২৯।
+log(blockedAt === 9, `blocked exactly on attempt #${blockedAt} (limit 8 — durable D1 counter, was 9-10 with in-memory)`)
 log(last.status === 429, `still blocked at attempt 10 -> HTTP ${last.status}: ${last.body.error}`)
 
 // ভিন্ন আইডেন্টিফায়ারে কাজ করছে (একটার লক সব আটকায়নি)

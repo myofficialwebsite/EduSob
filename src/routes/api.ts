@@ -7,6 +7,7 @@ import {
 } from '../lib/auth'
 import { religionInfo } from '../lib/dates'
 import { getOnboardingState, claimOnboardingSteps, ensureOnboardingTable } from '../lib/onboarding'
+import { checkRateLimit, recordRateLimitFail, resetRateLimit, ensureRateLimitTable, RATE_LIMIT_MAX } from '../lib/rateLimit'
 // ---------- রেফারেল স্ট্যাট ----------
 
 type Env = { Bindings: Bindings; Variables: { user: SessionUser | null } }
@@ -30,30 +31,22 @@ const requireAuth = async (c: any, next: any) => {
 // সীমাবদ্ধতা: এটি isolate-ভিত্তিক ইন-মেমোরি, তাই বেস্ট-এফোর্ট — একই IP বারবার
 // একই কলো/isolate-এ গেলেই কার্যকর। টেকসইভাবে আটকাতে Cloudflare WAF
 // Rate Limiting rule ব্যবহার করুন (DEPLOY_STATUS.md-এ নির্দেশ আছে)।
-const loginAttempts = new Map<string, { n: number; first: number }>()
-const LOGIN_MAX_ATTEMPTS = 8
-const LOGIN_WINDOW_MS = 10 * 60 * 1000
-
+// D1-ভিত্তিক কাউন্টার — সব Worker isolate একই টেবিল দেখে, তাই সীমা সর্বত্র সমান।
+// (আগের ইন-মেমোরি সংস্করণ isolate-ভিত্তিক হওয়ায় প্রোডাকশনে সীমা দ্বিগুণ/তিনগুণ হয়ে যেত।)
 function clientIp(c: any): string {
-  return c.req.header('CF-Connecting-IP') || c.req.header('X-Forwarded-For') || 'unknown'
+  // CF-Connecting-IP ক্লাউডফ্লেয়ার নিজে সেট করে — ক্লায়েন্ট বানিয়ে পাঠাতে পারে না।
+  // X-Forwarded-For স্পুফ করা যায় (এবং CF সবার শেষে আসল IP জোড়ে), তাই শেষ এন্ট্রি নিচ্ছি।
+  const cf = c.req.header('CF-Connecting-IP')
+  if (cf) return cf.trim()
+  const xff = c.req.header('X-Forwarded-For')
+  if (xff) {
+    const parts = xff.split(',').map((x: string) => x.trim()).filter(Boolean)
+    if (parts.length) return parts[parts.length - 1]
+  }
+  return 'unknown'
 }
 function loginKey(c: any, identifier: string): string {
-  return clientIp(c) + '|' + String(identifier || '').toLowerCase()
-}
-function loginBlocked(key: string, now: number): boolean {
-  const rec = loginAttempts.get(key)
-  if (!rec) return false
-  if (now - rec.first >= LOGIN_WINDOW_MS) { loginAttempts.delete(key); return false }
-  return rec.n >= LOGIN_MAX_ATTEMPTS
-}
-function loginFail(key: string, now: number): void {
-  // মেমোরি ফাঁস আটকাতে মাঝে মাঝে পুরনো এন্ট্রি পরিষ্কার
-  if (loginAttempts.size > 5000) {
-    for (const [k, v] of loginAttempts) if (now - v.first >= LOGIN_WINDOW_MS) loginAttempts.delete(k)
-  }
-  const rec = loginAttempts.get(key)
-  if (!rec || now - rec.first >= LOGIN_WINDOW_MS) loginAttempts.set(key, { n: 1, first: now })
-  else rec.n++
+  return 'login:' + clientIp(c) + '|' + String(identifier || '').toLowerCase()
 }
 
 // ---------- সাইন-আপ ----------
@@ -138,10 +131,11 @@ api.post('/auth/login', async (c) => {
     return c.json({ ok: false, error: 'মোবাইল নম্বর / ইমেইল / ইউজার আইডি ও পাসওয়ার্ড দিন' }, 400)
   }
 
-  // ব্রুট-ফোর্স গার্ড
+  // ব্রুট-ফোর্স গার্ড (D1 — isolate-নিরপেক্ষ)
   const rlKey = loginKey(c, identifier)
-  const rlNow = Date.now()
-  if (loginBlocked(rlKey, rlNow)) {
+  await ensureRateLimitTable(DB)
+  const verdict = await checkRateLimit(DB, rlKey)
+  if (verdict.blocked) {
     return c.json({ ok: false, error: 'খুব বেশি ভুল চেষ্টা করেছেন। ১০ মিনিট পর আবার চেষ্টা করুন।' }, 429)
   }
 
@@ -158,19 +152,19 @@ api.post('/auth/login', async (c) => {
     row = await DB.prepare("SELECT id, user_code, email, phone, password_hash, salt, status, role FROM users WHERE role = 'admin' LIMIT 1").first<any>()
   }
 
-  if (!row) { loginFail(rlKey, rlNow); return c.json({ ok: false, error: 'এই নম্বর বা আইডিতে কোনো অ্যাকাউন্ট পাওয়া যায়নি' }, 404) }
+  if (!row) { await recordRateLimitFail(DB, rlKey); return c.json({ ok: false, error: 'এই নম্বর বা আইডিতে কোনো অ্যাকাউন্ট পাওয়া যায়নি' }, 404) }
   
   let okPass = await verifyPassword(password, row.salt, row.password_hash)
   if (!okPass && trimmedPassword !== password) {
     okPass = await verifyPassword(trimmedPassword, row.salt, row.password_hash)
   }
-  if (!okPass) { loginFail(rlKey, rlNow); return c.json({ ok: false, error: 'ভুল পাসওয়ার্ড' }, 401) }
+  if (!okPass) { await recordRateLimitFail(DB, rlKey); return c.json({ ok: false, error: 'ভুল পাসওয়ার্ড' }, 401) }
   if (row.status === 'suspended') return c.json({ ok: false, error: '⛔ আপনার অ্যাকাউন্টটি সাসপেন্ড করা হয়েছে। সহায়তার জন্য যোগাযোগ করুন।' }, 403)
 
   const token = await createSession(DB, row.id)
   c.header('Set-Cookie', sessionCookie(token))
   const redirect = row.role === 'admin' ? '/admin' : '/dashboard'
-  loginAttempts.delete(rlKey)
+  await resetRateLimit(DB, rlKey)
   return c.json({ ok: true, redirect, role: row.role, token })
 })
 

@@ -189,6 +189,16 @@ export async function initDatabase(): Promise<D1Database> {
     `)
 
     // রাউন্ড ৬: অনবোর্ডিং চেকলিস্ট + ওয়ালেট বোনাস — (user_id, step_key) UNIQUE মানে ডবল-ক্রেডিট অসম্ভব
+    // রাউন্ড ৯: টেকসই রেট-লিমিটিং — D1-ভিত্তিক কাউন্টার (isolate-নিরপেক্ষ)
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS rate_limits (
+        bucket_key TEXT PRIMARY KEY,
+        count INTEGER NOT NULL DEFAULT 0,
+        window_start INTEGER NOT NULL,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      );
+      CREATE INDEX IF NOT EXISTS idx_rate_limits_window ON rate_limits(window_start);
+    `)
     db.exec(`
       CREATE TABLE IF NOT EXISTS onboarding_rewards (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -769,6 +779,14 @@ export async function ensureD1Schema(db: any): Promise<void> {
           is_active INTEGER NOT NULL DEFAULT 1,
           created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         );
+
+        CREATE TABLE IF NOT EXISTS rate_limits (
+          bucket_key TEXT PRIMARY KEY,
+          count INTEGER NOT NULL DEFAULT 0,
+          window_start INTEGER NOT NULL,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+        CREATE INDEX IF NOT EXISTS idx_rate_limits_window ON rate_limits(window_start);
 
         CREATE TABLE IF NOT EXISTS onboarding_rewards (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
