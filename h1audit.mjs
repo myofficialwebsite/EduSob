@@ -1,4 +1,6 @@
 // H1 অডিট: প্রতিটি পেইজ রুটে ঠিক একটি <h1> আছে কি না
+// লোকাল ডেভ DB-এর টেস্ট পাসওয়ার্ড — প্রোডাকশনের পাসওয়ার্ড আলাদা ও রিপোতে নেই।
+// প্রোডাকশনের বিপরীতে চালাতে: EDUSOB_ADMIN_PASS=... BASE=https://edusob.pages.dev node <script>
 const BASE = process.env.BASE || 'http://127.0.0.1:3000'
 
 const ROUTES = [
@@ -13,7 +15,7 @@ const ROUTES = [
 const login = await fetch(`${BASE}/api/auth/login`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ identifier: '01829486022', password: 'Ab52944820@' }),
+  body: JSON.stringify({ identifier: '01829486022', password: process.env.EDUSOB_ADMIN_PASS || 'Ab52944820@' }),
 })
 const j = await login.json()
 if (!j.ok) { console.error('login failed', j); process.exit(1) }

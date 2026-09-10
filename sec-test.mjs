@@ -1,4 +1,6 @@
 // তিনটি সিকিউরিটি ফিক্স যাচাই: CSRF, লগইন রেট-লিমিট, MCQ কোটা
+// লোকাল ডেভ DB-এর টেস্ট পাসওয়ার্ড — প্রোডাকশনের পাসওয়ার্ড আলাদা ও রিপোতে নেই।
+// প্রোডাকশনের বিপরীতে চালাতে: EDUSOB_ADMIN_PASS=... BASE=https://edusob.pages.dev node <script>
 const BASE = process.env.BASE || 'http://127.0.0.1:3000'
 let fail = 0
 const log = (ok, m) => { console.log(`${ok ? '  ok ' : '  FAIL'} ${m}`); if (!ok) fail++ }
@@ -7,13 +9,13 @@ const log = (ok, m) => { console.log(`${ok ? '  ok ' : '  FAIL'} ${m}`); if (!ok
 console.log('\n[CSRF — Origin check]')
 const r1 = await fetch(`${BASE}/api/auth/login`, {
   method: 'POST', headers: { 'Content-Type': 'application/json', Origin: 'https://evil.example.com' },
-  body: JSON.stringify({ identifier: '01829486022', password: 'Ab52944820@' }),
+  body: JSON.stringify({ identifier: '01829486022', password: process.env.EDUSOB_ADMIN_PASS || 'Ab52944820@' }),
 })
 log(r1.status === 403, `foreign Origin blocked -> HTTP ${r1.status} ${JSON.stringify(await r1.json()).slice(0, 60)}`)
 
 const r2 = await fetch(`${BASE}/api/auth/login`, {
   method: 'POST', headers: { 'Content-Type': 'application/json', Origin: BASE },
-  body: JSON.stringify({ identifier: '01829486022', password: 'Ab52944820@' }),
+  body: JSON.stringify({ identifier: '01829486022', password: process.env.EDUSOB_ADMIN_PASS || 'Ab52944820@' }),
 })
 const j2 = await r2.json()
 log(r2.status === 200 && !!j2.token, `same Origin allowed -> HTTP ${r2.status}`)
@@ -65,7 +67,7 @@ if (quotaHit) console.log('       ->', quotaHit.body.error, JSON.stringify(quota
 // লগইনকৃত ইউজারের কোটা বেশি
 const li = await fetch(`${BASE}/api/auth/login`, {
   method: 'POST', headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ identifier: '01829486022', password: 'Ab52944820@' }),
+  body: JSON.stringify({ identifier: '01829486022', password: process.env.EDUSOB_ADMIN_PASS || 'Ab52944820@' }),
 }).then((r) => r.json())
 const rl = await fetch(`${BASE}/api/tools/mcq/quiz?level=ssc&count=20`, { headers: { Cookie: `edusob_session=${li.token}` } })
 log(rl.status === 200, `logged-in user not blocked -> HTTP ${rl.status}`)

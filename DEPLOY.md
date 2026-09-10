@@ -100,7 +100,7 @@ curl -sI https://edusob.pages.dev/static/img/hero-students.webp | head -1
 ### 🔴 অবিলম্বে (সিকিউরিটি)
 
 1. **এডমিন পাসওয়ার্ড বদল**
-   `Ab52944820@` গিট হিস্ট্রিতে পাবলিক (`migrations/0010_admin_account.sql` + `src/lib/db.ts` + `src/routes/api.ts`)।
+   ~~গিট হিস্ট্রিতে পাবলিক~~ — ✅ সম্পন্ন (২০২৬-০৯-১১): পাসওয়ার্ড ঘোরানো, `migrations/0010_admin_account.sql` ও `src/lib/db.ts` থেকে প্লেইনটেক্সট সরানো, মাইগ্রেশন আর পাসওয়ার্ড রিসেট করে না।
    আমার ফিক্সের ফলে এখন রিসেট **টিকবে** (আগে টিকতো না)।
    → লগইন → `/admin` → Users → Reset Password
 

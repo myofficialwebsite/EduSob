@@ -341,8 +341,10 @@ export async function initDatabase(): Promise<D1Database> {
   // Seed admin user (fresh DB only) — পাসওয়ার্ড রোটেট করতে হলে migrations/0010_admin_account.sql ও এই ব্লক একসাথে বদলাতে হবে
   try {
     const salt = 'edusob_admin_salt_2026'
-    const newAdminPass = 'Ab52944820@'
-    const hash = crypto.pbkdf2Sync(newAdminPass, salt, 100000, 32, 'sha256').toString('hex')
+    // ⚠️ সিকিউরিটি (audit): আগে এখানে পাসওয়ার্ডটি প্লেইনটেক্সট-এ ছিল — রিপোটি
+    // পাবলিক হওয়ায় সেই পাসওয়ার্ড সবার জন্য পড়া যেত। এখন শুধু PBKDF2 হ্যাশ
+    // (কেবল ফ্রেশ ডেটাবেজে বুটস্ট্র্যাপ হিসেবে) — প্লেইনটেক্সট কোথাও নেই।
+    const hash = 'bef5882d335800a4809b49fd0ae9247e20132fca325b599d31d06a3f128c4be1'
 
     const existing = db.prepare("SELECT id FROM users WHERE phone = '01829486022' OR phone = '01835414122' OR email = 'ab5353069@gmail.com' OR role = 'admin'").get() as any
     if (!existing) {
@@ -858,10 +860,11 @@ export async function ensureD1Schema(db: any): Promise<void> {
       }
     } catch (e) {}
 
-    // Cloudflare D1 Admin user auto-migration & sync (Phone: 01829486022, Pass: Ab52944820@)
+    // Cloudflare D1 Admin user auto-migration & sync (Phone: 01829486022)
+    // ⚠️ পাসওয়ার্ড এখানে নেই — শুধু বুটস্ট্র্যাপ হ্যাশ; বিদ্যমান অ্যাডমিনের পাসওয়ার্ড কখনোই ওভাররাইট করা হয় না।
     try {
       const salt = 'edusob_admin_salt_2026'
-      const hash = '1832ba446f677ffe11a2b017c895fed84e85bcf0cb05df1f9c2dbc8f7e85c075'
+      const hash = 'bef5882d335800a4809b49fd0ae9247e20132fca325b599d31d06a3f128c4be1'
       await db.prepare(`
         INSERT INTO users (user_code, name_bn, name_en, email, phone, password_hash, salt, religion, education_level, role)
         VALUES ('EDU-2026-ADMIN', 'এডমিন', 'Admin', 'ab5353069@gmail.com', '01829486022', ?, ?, 'islam', 'masters', 'admin')

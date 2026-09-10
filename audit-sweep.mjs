@@ -1,9 +1,11 @@
 import { chromium } from 'playwright-core'
 
+// লোকাল ডেভ DB-এর টেস্ট পাসওয়ার্ড — প্রোডাকশনের পাসওয়ার্ড আলাদা ও রিপোতে নেই।
+// প্রোডাকশনের বিপরীতে চালাতে: EDUSOB_ADMIN_PASS=... BASE=https://edusob.pages.dev node <script>
 const BASE = process.env.BASE || 'http://localhost:3000'
 const TOKEN = await fetch(BASE + '/api/auth/login', {
   method: 'POST', headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ identifier: '01829486022', password: 'Ab52944820@' }),
+  body: JSON.stringify({ identifier: '01829486022', password: process.env.EDUSOB_ADMIN_PASS || 'Ab52944820@' }),
 }).then((r) => r.json()).then((d) => d.token)
 if (!TOKEN) { console.error('admin login failed'); process.exit(1) }
 

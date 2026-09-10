@@ -1,12 +1,14 @@
 // অ্যাডমিন ট্যাব লেজি-হাইড্রেশন: DOM নোড কমছে কি না + সব ট্যাব এখনও কাজ করে কি না
 import { chromium } from 'playwright-core'
+// লোকাল ডেভ DB-এর টেস্ট পাসওয়ার্ড — প্রোডাকশনের পাসওয়ার্ড আলাদা ও রিপোতে নেই।
+// প্রোডাকশনের বিপরীতে চালাতে: EDUSOB_ADMIN_PASS=... BASE=https://edusob.pages.dev node <script>
 const BASE = process.env.BASE || 'http://127.0.0.1:3000'
 let fail = 0
 const log = (ok, m) => { console.log(`${ok ? '  ok ' : '  FAIL'} ${m}`); if (!ok) fail++ }
 
 const li = await fetch(`${BASE}/api/auth/login`, {
   method: 'POST', headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ identifier: '01829486022', password: 'Ab52944820@' }),
+  body: JSON.stringify({ identifier: '01829486022', password: process.env.EDUSOB_ADMIN_PASS || 'Ab52944820@' }),
 }).then((r) => r.json())
 log(!!li.token, 'admin login')
 
