@@ -42,9 +42,25 @@ const ADMIN_DASH_CSS = `<style>
 </style>
 `
 
+// ---------- ট্যাব-পেইন লেজি হাইড্রেশন ----------
+// আগে ১৮টি পেইনই সার্ভার থেকে DOM-এ বসানো হতো (১,১০০+ নোড একসাথে), যদিও
+// ইউজার এক সময়ে একটিই দেখে। এখন শুধু অ্যাকটিভ পেইন DOM-এ থাকে; বাকিগুলো
+// <template>-এ ইনার্ট থাকে — <template> পার্স হলেও DOM-নোড তৈরি হয় না।
+// প্রথমবার ওই ট্যাবে গেলে ensureTabPane() সেটিকে DOM-এ আনে।
+// (পেইনগুলোর ভেতরে nested <section> নেই, তাই নন-গ্রিডি ম্যাচ নিরাপদ।)
+function lazyTabPanes(html: string, activeTabId: string): string {
+  return html.replace(
+    /<section id="tab-([a-zA-Z0-9_-]+)"([^>]*)>([\s\S]*?)<\/section>/g,
+    (m: string, id: string, attrs: string, inner: string) =>
+      id === activeTabId
+        ? m
+        : '<template id="tpl-tab-' + id + '"><section id="tab-' + id + '"' + attrs + '>' + inner + '</section></template>',
+  )
+}
+
 export function adminPage(isAdmin: boolean): string {
   if (!isAdmin) return pageShell('এডমিন প্যানেল', 'bg-slate-950', lockScreen, '', false)
-  return pageShell('এডমিন কন্ট্রোল প্যানেল', 'bg-slate-100 min-h-screen', ADMIN_BODY + ADMIN_SCRIPT, DARK_PORTAL_CSS + ADMIN_DASH_CSS, false)
+  return pageShell('এডমিন কন্ট্রোল প্যানেল', 'bg-slate-100 min-h-screen', lazyTabPanes(ADMIN_BODY, 'overview') + ADMIN_SCRIPT, DARK_PORTAL_CSS + ADMIN_DASH_CSS, false)
 }
 
 const ADMIN_BODY = `
@@ -802,8 +818,23 @@ function switchAdminCategory(catId, targetTabId){
   switchAdminTab(tabToOpen);
 }
 
+// <template>-এ ইনার্ট হয়ে থাকা পেইন প্রথমবার প্রয়োজনে DOM-এ আনয়ন।
+// টেমপ্লেটের ঠিক আগেই ঢোকানো হয়, ফলে ডকুমেন্ট-অর্ডার অটুট থাকে।
+function ensureTabPane(tabId){
+  var pane = document.getElementById('tab-' + tabId);
+  if(pane) return pane;
+  var tpl = document.getElementById('tpl-tab-' + tabId);
+  if(tpl && tpl.content && tpl.parentNode){
+    tpl.parentNode.insertBefore(tpl.content.cloneNode(true), tpl);
+    return document.getElementById('tab-' + tabId);
+  }
+  return null;
+}
+
 function switchAdminTab(tabId){
   ACTIVE_TAB = tabId;
+  ensureTabPane(tabId);
+  bindGrantForm(); // লেজি পেইন হাইড্রেট হলে ফর্ম-লিসেনার বাঁধা হয়
   document.querySelectorAll('.tab-pane').forEach(function(p){ p.classList.add('hidden'); });
   var activePane = document.getElementById('tab-' + tabId);
   if(activePane) activePane.classList.remove('hidden');
@@ -1798,16 +1829,24 @@ async function loadSubsTab(){
   }
 }
 
-document.getElementById('grantForm').addEventListener('submit', async function(e){
-  e.preventDefault();
-  var data = Object.fromEntries(new FormData(e.target));
-  var d = await api('post', '/api/subs/admin/grant', { user_id: data.user_id, plan: data.plan, days: Number(data.days) });
-  if(d && d.ok){
-    toastMsg('প্ল্যান প্রদান সফল হয়েছে ✓');
-    e.target.reset();
-    loadSubsTab();
-  }
-});
+// grantForm থাকে tab-subs-এর ভেতরে, যা এখন লেজি <template>-এ পার্ক করা —
+// তাই পেইজ-লোডে getElementById null দেয়। হাইড্রেট হওয়ার সময় bind করা হয়,
+// dataset দিয়ে নিশ্চিত করা হয় যে একবারের বেশি বাঁধা না পড়ে।
+function bindGrantForm(){
+  var el = document.getElementById('grantForm');
+  if(!el || el.getAttribute('data-grant-bound') === '1') return;
+  el.setAttribute('data-grant-bound', '1');
+  el.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var data = Object.fromEntries(new FormData(e.target));
+    var d = await api('post', '/api/subs/admin/grant', { user_id: data.user_id, plan: data.plan, days: Number(data.days) });
+    if(d && d.ok){
+      toastMsg('প্ল্যান প্রদান সফল হয়েছে ✓');
+      e.target.reset();
+      loadSubsTab();
+    }
+  });
+}
 
 async function loadFeatures(){
   var d = await api('get', '/api/subs/admin/features');
