@@ -256,6 +256,12 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
 
     <!-- ৩. ডানপাশের অ্যাকশন গ্রুপ ও অথেনটিকেশন (Consistent Action Group) -->
     <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+      <button type="button" onclick="edusobOpenCommandPalette()" aria-label="খুঁজুন — Ctrl/⌘ + K" title="খুঁজুন — Ctrl/⌘ + K"
+        class="flex items-center gap-2 p-2 sm:px-2.5 sm:py-1.5 rounded-xl border ${isDark ? 'border-white/10 text-slate-300 hover:text-white hover:bg-white/10' : 'border-slate-200 text-slate-700 hover:bg-slate-100'} transition">
+        <i class="fas fa-magnifying-glass text-sm"></i>
+        <span class="hidden xl:inline text-xs font-semibold">খুঁজুন</span>
+        <kbd class="hidden xl:inline text-[10px] font-black ${isDark ? 'text-slate-400 bg-white/5 border-white/10' : 'text-slate-500 bg-slate-100 border-slate-200'} border rounded px-1.5 py-0.5">⌘K</kbd>
+      </button>
       ${loggedIn ? `
         <a href="/wallet" title="আমার ওয়ালেট" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl ${isDark ? 'bg-slate-900 hover:bg-slate-800 text-amber-300 border border-amber-400/20' : 'bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200'} text-xs font-bold transition">
           <i class="fas fa-wallet text-amber-400"></i>
@@ -618,6 +624,257 @@ function edusobMobileMore(){
 `
 }
 
+// ============ ⌘K কমান্ড প্যালেট (Command Palette) ============
+// যেকোনো পেজ থেকে Ctrl/⌘ + K — পেজ, টুল ও কাজ এক জায়গায় খোঁজা যায়।
+export function commandPalette(): string {
+  return `
+<div id="cmdRoot" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-label="কমান্ড প্যালেট">
+  <div id="cmdBackdrop" class="absolute inset-0 bg-slate-950/75 backdrop-blur-sm"></div>
+  <div class="absolute inset-x-0 top-0 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 sm:top-[8vh] sm:w-full sm:max-w-xl sm:px-4">
+    <div class="bg-slate-900 border border-white/10 shadow-2xl sm:rounded-2xl overflow-hidden">
+      <div class="flex items-center gap-3 px-4 h-14 border-b border-white/10">
+        <i class="fas fa-magnifying-glass text-slate-400 text-sm shrink-0"></i>
+        <input id="cmdInput" type="text" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true"
+               aria-controls="cmdList" aria-autocomplete="list" placeholder="পেজ, টুল বা কাজ খুঁজুন…"
+               class="flex-1 min-w-0 bg-transparent text-[16px] sm:text-sm text-white placeholder-slate-500 outline-none border-0">
+        <kbd class="hidden sm:inline-flex text-[10px] font-black text-slate-400 bg-white/5 border border-white/10 rounded px-1.5 py-0.5 shrink-0">ESC</kbd>
+      </div>
+      <ul id="cmdList" role="listbox" aria-label="কমান্ড" class="max-h-[65vh] sm:max-h-[52vh] overflow-y-auto py-1.5"></ul>
+      <div class="flex items-center gap-3 px-4 py-2 border-t border-white/10 text-[10px] text-slate-500">
+        <span>↑↓ চলুন</span><span>↵ নির্বাচন</span><span>Esc বন্ধ</span>
+        <span class="ml-auto hidden sm:inline">Ctrl/⌘ + K</span>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+// ============ ⌘K কমান্ড প্যালেট (Command Palette) ============
+// যেকোনো পেজ থেকে Ctrl/⌘ + K — পেজ, টুল ও কাজ এক জায়গায়।
+// প্রথমবার খোলার সময় /api/me দিয়ে বুঝি ইউজার লগইন / অ্যাডমিন কি না (ফলব্যাক: শুধু পেজ কমান্ড)।
+
+const CMDS = [
+  { t: 'হোম পেজ', h: 'এডুসব প্রথম পাতা', g: 'পেজ', i: 'fa-home', u: '/', k: 'home হোম প্রথম' },
+  { t: 'রেজাল্ট হাব', h: 'SSC · HSC · NU ফলাফল ও মার্কশিট', g: 'পেজ', i: 'fa-graduation-cap', u: '/results', k: 'result results রেজাল্ট ফলাফল marksheet' },
+  { t: 'MCQ পরীক্ষা', h: 'বিষয়ভিত্তিক প্র্যাকটিস টেস্ট', g: 'পেজ', i: 'fa-list-check', u: '/mcq', k: 'mcq quiz টেস্ট পরীক্ষা প্রশ্ন' },
+  { t: 'ভর্তি হাব', h: 'কলেজ ও বিশ্ববিদ্যালয়ে ভর্তি তথ্য', g: 'পেজ', i: 'fa-door-open', u: '/admission', k: 'admission ভর্তি এডমিশন' },
+  { t: 'স্কলারশিপ ও বৃত্তি', h: 'AI ম্যাচিং সহ বৃত্তির খোঁজ', g: 'পেজ', i: 'fa-award', u: '/scholarships', k: 'scholarship স্কলারশিপ বৃত্তি' },
+  { t: 'প্রশ্নব্যাংক PDF', h: 'বিগত বছরের প্রশ্ন ও সমাধান', g: 'পেজ', i: 'fa-file-pdf', u: '/qpapers', k: 'qpapers question paper প্রশ্নব্যাংক' },
+  { t: 'সিলেবাস', h: 'নতুন কারিকুলামের পূর্ণ সিলেবাস', g: 'পেজ', i: 'fa-book-open', u: '/syllabus', k: 'syllabus সিলেবাস পাঠ্যক্রম' },
+  { t: 'নোটিস বোর্ড', h: 'বোর্ড ও শিক্ষা মন্ত্রণালয়ের নোটিশ', g: 'পেজ', i: 'fa-bullhorn', u: '/notices', k: 'notice নোটিশ বিজ্ঞপ্তি' },
+  { t: 'চাকরির খবর', h: 'সরকারি ও বেসরকারি চাকরি', g: 'পেজ', i: 'fa-briefcase', u: '/jobs', k: 'job চাকরি নিয়োগ সার্কুলার' },
+  { t: 'শিক্ষা সংবাদ', h: 'শিক্ষাজগতের সর্বশেষ খবর', g: 'পেজ', i: 'fa-newspaper', u: '/news', k: 'news খবর সংবাদ' },
+  { t: 'শিক্ষক ও মেন্টর সহায়তা', h: '১৫-৩০ মিনিটে প্রশ্নের উত্তর', g: 'পেজ', i: 'fa-chalkboard-user', u: '/teacher-support', k: 'teacher মেন্টর শিক্ষক প্রশ্ন' },
+  { t: 'প্রফেশনাল CV মেকার', h: 'বায়োডাটা তৈরি ও ডাউনলোড', g: 'পেজ', i: 'fa-file-invoice', u: '/cv', k: 'cv resume বায়োডাটা সিভি' },
+  { t: 'স্টাডি প্ল্যানার', h: 'রুটিন, টাস্ক ও সিলেবাস ট্র্যাকার', g: 'পেজ', i: 'fa-calendar-check', u: '/planner', k: 'planner রুটিন প্ল্যানার টাস্ক' },
+  { t: 'CGPA ক্যালকুলেটর', h: 'ভার্সিটি ও কলেজ গ্রেড হিসাব', g: 'পেজ', i: 'fa-calculator', u: '/cgpa', k: 'cgpa gpa গ্রেড হিসাব' },
+  { t: 'বোর্ড চ্যালেঞ্জ গাইড', h: 'খাতা পুনঃনিরীক্ষণ নির্দেশিকা', g: 'পেজ', i: 'fa-scale-balanced', u: '/board-challenge', k: 'challenge বোর্ড চ্যালেঞ্জ পুনঃনিরীক্ষণ' },
+  { t: 'আবেদন সহায়তা', h: 'ফর্ম পূরণে আমাদের সহায়তা', g: 'পেজ', i: 'fa-hands-helping', u: '/assisted', k: 'assisted আবেদন সহায়তা ফর্ম' },
+  { t: 'এডুসব শপ', h: 'বই, নোট ও স্টাডি গ্যাজেট', g: 'পেজ', i: 'fa-store', u: '/shop', k: 'shop বই নোট গ্যাজেট' },
+  { t: 'প্রশাসন', h: 'এডমিন কন্ট্রোল সেন্টার', g: 'প্রশাসন', i: 'fa-shield-halved', u: '/admin', k: 'admin প্রশাসন কন্ট্রোল', admin: true },
+  { t: 'আমার ড্যাশবোর্ড', h: 'স্টাডি হাব, লক্ষ্য ও মিশন', g: 'আমার অ্যাকাউন্ট', i: 'fa-compass', u: '/dashboard', k: 'dashboard ড্যাশবোর্ড হাব', auth: true },
+  { t: 'আমার প্রোফাইল', h: 'তথ্য, ছবি ও শিক্ষা বিবরণ', g: 'আমার অ্যাকাউন্ট', i: 'fa-id-card', u: '/profile', k: 'profile প্রোফাইল তথ্য ছবি', auth: true },
+  { t: 'আমার ওয়ালেট', h: 'ব্যালেন্স, টপ-আপ ও লেনদেন', g: 'আমার অ্যাকাউন্ট', i: 'fa-wallet', u: '/wallet', k: 'wallet ওয়ালেট টাকা টপআপ ব্যালেন্স', auth: true },
+  { t: 'সাবস্ক্রিপশন', h: 'প্ল্যান ও মেম্বারশিপ বিস্তারিত', g: 'আমার অ্যাকাউন্ট', i: 'fa-crown', u: '/subscription', k: 'subscription সাবস্ক্রিপশন প্ল্যান মেম্বারশিপ', auth: true },
+  { t: 'লগইন', h: 'অ্যাকাউন্টে ঢুকুন', g: 'অ্যাকাউন্ট', i: 'fa-right-to-bracket', u: '/login', k: 'login লগইন সাইনইন', guest: true },
+  { t: 'ফ্রি সাইন-আপ', h: 'নতুন অ্যাকাউন্ট খুলুন', g: 'অ্যাকাউন্ট', i: 'fa-user-plus', u: '/signup', k: 'signup সাইনআপ রেজিস্ট্রেশন নতুন', guest: true },
+  { t: 'রেজাল্ট দেখুন', h: 'রোল ও রেজি. দিয়ে ফলাফল', g: 'কাজ', i: 'fa-magnifying-glass', a: 'result', k: 'result রেজাল্ট ফলাফল দেখুন' },
+  { t: 'সংরক্ষিত রোল', h: 'সেভ করা রোল ও রেজি.', g: 'কাজ', i: 'fa-bookmark', a: 'saved', k: 'saved roll সেভ রোল সংরক্ষিত' },
+  { t: 'ওয়ালেটে টাকা যোগ করুন', h: 'ক্যাশ-ইন ও টপ-আপ রিকোয়েস্ট', g: 'কাজ', i: 'fa-money-bill-transfer', a: 'addmoney', k: 'add money টপআপ ক্যাশইন টাকা যোগ' },
+  { t: 'অনবোর্ডিং বোনাস ক্লেইম', h: 'শুরুর ধাপ শেষ করে ৳৭০ পর্যন্ত', g: 'কাজ', i: 'fa-gift', a: 'bonus', k: 'bonus বোনাস অনবোর্ডিং ক্লেইম gift', auth: true },
+  { t: 'রেফারেল লিংক কপি', h: 'বন্ধুকে আমন্ত্রণ জানান', g: 'কাজ', i: 'fa-users-rays', a: 'refcopy', k: 'referral রেফারেল লিংক কপি আমন্ত্রণ', auth: true },
+  { t: 'লগআউট', h: 'এই ডিভাইস থেকে বের হোন', g: 'অ্যাকাউন্ট', i: 'fa-right-from-bracket', a: 'logout', k: 'logout লগআউট বের', auth: true }
+]
+
+function cmdScore(q, c) {
+  if (!q) return 1
+  const t = c.t.toLowerCase()
+  const hay = (c.t + ' ' + c.h + ' ' + (c.k || '')).toLowerCase()
+  if (t.indexOf(q) === 0) return 100
+  if (t.indexOf(q) > -1) return 80
+  if (hay.indexOf(q) > -1) return 50
+  let i = 0
+  for (let n = 0; n < hay.length; n++) { if (hay[n] === q[i]) i++; if (i === q.length) return 20 }
+  return 0
+}
+
+function cmdGo(u) { window.location.href = u }
+
+const CMD_ACTIONS = {
+  result: function () {
+    if (typeof window.openResultModal === 'function') window.openResultModal()
+    else cmdGo('/results')
+  },
+  saved: function () {
+    if (typeof window.setDashTab === 'function') { try { sessionStorage.setItem('edusob.dash.tab', 'exams') } catch (e) {} cmdGo('/dashboard') }
+    else cmdGo('/results')
+  },
+  addmoney: function () {
+    if (typeof window.openAddMoneyModal === 'function') window.openAddMoneyModal()
+    else cmdGo('/wallet')
+  },
+  bonus: function () {
+    if (typeof window.claimOnboarding === 'function') window.claimOnboarding()
+    else cmdGo('/dashboard')
+  },
+  refcopy: function () {
+    if (typeof window.copyRefLink === 'function') window.copyRefLink()
+    else cmdGo('/dashboard')
+  },
+  logout: function () {
+    fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' } })
+      .then(function () { window.location.href = '/' })
+      .catch(function () { window.location.href = '/' })
+  }
+}
+
+var CMD_STATE = { open: false, items: [], idx: 0, lastFocus: null, me: null, meLoaded: false }
+
+function cmdVisible(c) {
+  if (c.admin) return !!(CMD_STATE.me && CMD_STATE.me.user && CMD_STATE.me.user.role === 'admin')
+  if (c.auth) return !!(CMD_STATE.me && CMD_STATE.me.user)
+  if (c.guest) return !(CMD_STATE.me && CMD_STATE.me.user)
+  return true
+}
+
+function cmdRender() {
+  const input = document.getElementById('cmdInput')
+  const list = document.getElementById('cmdList')
+  if (!input || !list) return
+  const q = (input.value || '').trim().toLowerCase()
+  const scored = []
+  for (let i = 0; i < CMDS.length; i++) {
+    const c = CMDS[i]
+    if (!cmdVisible(c)) continue
+    const sc = cmdScore(q, c)
+    if (sc > 0) scored.push({ c: c, sc: sc, n: i })
+  }
+  scored.sort(function (a, b) { return b.sc - a.sc || a.n - b.n })
+  CMD_STATE.items = scored.slice(0, 40)
+  if (CMD_STATE.idx >= CMD_STATE.items.length) CMD_STATE.idx = 0
+
+  if (!CMD_STATE.items.length) {
+    list.innerHTML = '<li class="px-4 py-8 text-center text-xs text-slate-400">কিছু পাওয়া যায়নি — অন্য কিছু লিখে চেষ্টা করুন</li>'
+    return
+  }
+  let html = ''
+  let lastGroup = ''
+  for (let i = 0; i < CMD_STATE.items.length; i++) {
+    const it = CMD_STATE.items[i]
+    if (it.c.g !== lastGroup) {
+      lastGroup = it.c.g
+      html += '<li class="px-4 pt-2.5 pb-1 text-[10px] font-black uppercase tracking-wider text-slate-500"></li>'
+    }
+    html += '<li role="option" id="cmd-opt-' + i + '" data-idx="' + i + '" aria-selected="' + (i === CMD_STATE.idx) + '"' +
+      ' class="mx-1.5 flex items-center gap-3 px-2.5 py-2.5 rounded-xl cursor-pointer ' +
+      (i === CMD_STATE.idx ? 'bg-orange-500/15 text-white' : 'text-slate-200 hover:bg-white/5') + '">' +
+      '<span class="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] shrink-0 ' +
+      (i === CMD_STATE.idx ? 'bg-orange-500/25 text-orange-300' : 'bg-white/5 text-slate-400') + '"><i class="fas ' + it.c.i + '"></i></span>' +
+      '<span class="min-w-0 flex-1"><span class="block text-[13px] font-semibold truncate"></span>' +
+      '<span class="block text-[11px] text-slate-400 truncate"></span></span>' +
+      (it.c.u ? '<i class="fas fa-arrow-right text-[10px] text-slate-500 shrink-0"></i>' : '<span class="text-[9px] font-black text-slate-500 shrink-0">ENTER</span>') +
+      '</li>'
+  }
+  list.innerHTML = html
+  // টেক্সট textContent দিয়ে বসাই — ইউজার-ডেটা বা কোটেশন দিয়ে HTML ভাঙার কোনো সুযোগ নেই
+  for (let i = 0; i < CMD_STATE.items.length; i++) {
+    const li = list.querySelector('li[data-idx="' + i + '"]')
+    if (!li) continue
+    const spans = li.querySelectorAll('span.min-w-0 > span')
+    if (spans.length === 2) { spans[0].textContent = CMD_STATE.items[i].c.t; spans[1].textContent = CMD_STATE.items[i].c.h }
+  }
+  const heads = list.querySelectorAll('li.uppercase')
+  const groups = []
+  for (let i = 0; i < CMD_STATE.items.length; i++) if (groups.indexOf(CMD_STATE.items[i].c.g) === -1) groups.push(CMD_STATE.items[i].c.g)
+  for (let i = 0; i < heads.length && i < groups.length; i++) heads[i].textContent = groups[i]
+
+  const active = list.querySelector('li[data-idx="' + CMD_STATE.idx + '"]')
+  if (active) {
+    input.setAttribute('aria-activedescendant', active.id)
+    const lb = list.getBoundingClientRect(), ab = active.getBoundingClientRect()
+    if (ab.bottom > lb.bottom) list.scrollTop += ab.bottom - lb.bottom
+    else if (ab.top < lb.top) list.scrollTop -= lb.top - ab.top
+  }
+}
+
+function cmdRun(i) {
+  const it = CMD_STATE.items[i]
+  if (!it) return
+  edusobCloseCommandPalette()
+  if (it.c.a && CMD_ACTIONS[it.c.a]) CMD_ACTIONS[it.c.a]()
+  else if (it.c.u) cmdGo(it.c.u)
+}
+
+function edusobOpenCommandPalette() {
+  if (CMD_STATE.open) return
+  const root = document.getElementById('cmdRoot')
+  const input = document.getElementById('cmdInput')
+  if (!root || !input) return
+  CMD_STATE.open = true
+  CMD_STATE.lastFocus = document.activeElement
+  root.classList.remove('hidden')
+  document.body.style.overflow = 'hidden'
+  input.value = ''
+  CMD_STATE.idx = 0
+  cmdRender()
+  setTimeout(function () { input.focus() }, 10)
+  if (!CMD_STATE.meLoaded) {
+    CMD_STATE.meLoaded = true
+    fetch('/api/me', { credentials: 'same-origin' })
+      .then(function (r) { return r.json() })
+      .then(function (d) { CMD_STATE.me = d || null; if (CMD_STATE.open) cmdRender() })
+      .catch(function () {})
+  }
+}
+
+function edusobCloseCommandPalette() {
+  if (!CMD_STATE.open) return
+  CMD_STATE.open = false
+  const root = document.getElementById('cmdRoot')
+  if (root) root.classList.add('hidden')
+  document.body.style.overflow = ''
+  if (CMD_STATE.lastFocus && CMD_STATE.lastFocus.focus) CMD_STATE.lastFocus.focus()
+}
+
+document.addEventListener('keydown', function (e) {
+  const k = (e.key || '').toLowerCase()
+  if ((e.ctrlKey || e.metaKey) && k === 'k') { e.preventDefault(); edusobOpenCommandPalette(); return }
+  if (!CMD_STATE.open) {
+    const ae = document.activeElement
+    const typing = ae && (/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName) || ae.isContentEditable)
+    if (k === '/' && !typing) { e.preventDefault(); edusobOpenCommandPalette() }
+    return
+  }
+  if (k === 'escape') { e.preventDefault(); edusobCloseCommandPalette(); return }
+  if (k === 'arrowdown') { e.preventDefault(); if (CMD_STATE.items.length) { CMD_STATE.idx = (CMD_STATE.idx + 1) % CMD_STATE.items.length; cmdRender() } return }
+  if (k === 'arrowup') { e.preventDefault(); if (CMD_STATE.items.length) { CMD_STATE.idx = (CMD_STATE.idx - 1 + CMD_STATE.items.length) % CMD_STATE.items.length; cmdRender() } return }
+  if (k === 'enter') { e.preventDefault(); cmdRun(CMD_STATE.idx); return }
+  if (k === 'tab') {
+    const f = document.getElementById('cmdRoot').querySelectorAll('input, li[role="option"]')
+    if (f.length) { e.preventDefault(); f[0].focus() }
+  }
+})
+
+document.addEventListener('DOMContentLoaded', function () {
+  const input = document.getElementById('cmdInput')
+  const list = document.getElementById('cmdList')
+  const root = document.getElementById('cmdRoot')
+  if (!input || !list || !root) return
+  input.addEventListener('input', function () { CMD_STATE.idx = 0; cmdRender() })
+  list.addEventListener('mousemove', function (e) {
+    const li = e.target.closest ? e.target.closest('li[data-idx]') : null
+    if (li) { const i = Number(li.getAttribute('data-idx')); if (i !== CMD_STATE.idx) { CMD_STATE.idx = i; cmdRender() } }
+  })
+  list.addEventListener('click', function (e) {
+    const li = e.target.closest ? e.target.closest('li[data-idx]') : null
+    if (li) cmdRun(Number(li.getAttribute('data-idx')))
+  })
+  root.addEventListener('mousedown', function (e) { if (e.target.id === 'cmdRoot' || e.target.id === 'cmdBackdrop') edusobCloseCommandPalette() })
+})
+
+</script>
+`
+}
+
 // ---------- XSS নিরাপত্তা: সার্ভার-সাইড HTML এস্কেপ (FIX — audit) ----------
 // ইউজার-সরবরাহকৃত যেকোনো মান (নাম, ইউজার কোড, ঠিকানা...) HTML-এ বসানোর আগে
 // অবশ্যই এটি দিয়ে এস্কেপ করতে হবে। ব্যবহার: ${escHtml(user.name_bn)}
@@ -642,6 +899,7 @@ ${extraHead}
 <body class="${bodyClass}">
 ${content}
 ${showFloating ? floatingButtons() : ''}
+${commandPalette()}
 </body>
 </html>`
 }

@@ -115,6 +115,12 @@ export function dashboardPage(user: SessionUser): string {
     <header class="sticky top-0 z-30 ${t.side} backdrop-blur-xl border-b border-white/10 px-4 sm:px-6 py-2.5 flex items-center justify-between gap-3">
       <div class="flex items-center gap-3 min-w-0">
         <button onclick="toggleDrawer(true)" class="lg:hidden w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 flex items-center justify-center shrink-0" aria-label="মেনু"><i class="fas fa-bars text-sm"></i></button>
+        <button type="button" onclick="edusobOpenCommandPalette()" aria-label="খুঁজুন — Ctrl/⌘ + K" title="খুঁজুন — Ctrl/⌘ + K"
+          class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white border border-white/10 transition shrink-0">
+          <i class="fas fa-magnifying-glass text-[11px]"></i>
+          <span class="hidden lg:inline text-[11px] font-semibold">খুঁজুন</span>
+          <kbd class="hidden lg:inline text-[9px] font-black text-slate-500 border border-white/10 rounded px-1 py-0.5">⌘K</kbd>
+        </button>
         <div class="flex items-center gap-2 min-w-0 text-xs">
           <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse shrink-0"></span>
           <span class="text-slate-200 font-semibold truncate hidden sm:inline">আমার স্টাডি স্পেস</span>

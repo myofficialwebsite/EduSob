@@ -100,6 +100,10 @@ export function renderAdminHeader(): string {
         <input id="quickModuleSearch" placeholder="যেকোনো মডিউল খুঁজুন (যেমন: mcq, job, শিক্ষক)..." oninput="filterAdminModules(this.value)" class="bg-slate-800/90 border border-slate-700/80 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-orange-400 w-56 lg:w-64 transition">
         <div id="quickSearchResults" class="absolute left-0 right-0 top-full mt-1 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl p-2 hidden z-50 text-xs space-y-1"></div>
       </div>
+      <button type="button" onclick="edusobOpenCommandPalette()" aria-label="খুঁজুন — Ctrl/⌘ + K" title="খুঁজুন — Ctrl/⌘ + K"
+        class="bg-slate-800 hover:bg-slate-700 border border-slate-700 px-2.5 py-1.5 rounded-xl font-medium transition flex items-center gap-1.5">
+        <i class="fas fa-magnifying-glass text-slate-400 text-xs"></i><kbd class="text-[10px] font-black text-slate-500">⌘K</kbd>
+      </button>
       <a href="/admin/shop" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 px-3 py-1.5 rounded-xl font-medium transition flex items-center gap-1.5">
         <i class="fas fa-store text-amber-400"></i><span>শপ ও পেমেন্ট</span>
       </a>
