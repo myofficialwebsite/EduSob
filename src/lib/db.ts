@@ -312,7 +312,7 @@ export async function initDatabase(): Promise<D1Database> {
     console.warn('[Database] Column upgrade note:', e)
   }
 
-  // Seed / Update admin user with secure credentials (pass: Ab52944820@)
+  // Seed admin user (fresh DB only) — পাসওয়ার্ড রোটেট করতে হলে migrations/0010_admin_account.sql ও এই ব্লক একসাথে বদলাতে হবে
   try {
     const salt = 'edusob_admin_salt_2026'
     const newAdminPass = 'Ab52944820@'
@@ -331,9 +331,11 @@ export async function initDatabase(): Promise<D1Database> {
         db.prepare('INSERT OR IGNORE INTO profiles (user_id) VALUES (?)').run(userRow.id)
       }
     } else {
+      // P0 সিকিউরিটি: বিদ্যমান অ্যাডমিনের পাসওয়ার্ড/ইমেইল আর কখনোই ওভাররাইট করা হবে না।
+      // আগের কোড প্রতিবার বুটে `WHERE role='admin'` দিয়ে সব অ্যাডমিনের পাসওয়ার্ড রিসেট করতো।
       db.prepare(`
-        UPDATE users SET phone = '01829486022', password_hash = ?, salt = ?, role = 'admin', email = 'ab5353069@gmail.com' WHERE id = ? OR role = 'admin'
-      `).run(hash, salt, existing.id)
+        UPDATE users SET role = 'admin' WHERE id = ?
+      `).run(existing.id)
     }
   } catch (e) {
     console.warn('[Database] Seed admin notice:', e)
