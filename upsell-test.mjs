@@ -7,7 +7,7 @@ const log = (ok, m) => { console.log(`${ok ? '  ok ' : '  FAIL'} ${m}`); if (!ok
 // ফ্রি-প্ল্যান ইউজার (লকড কনটেন্ট দেখতে হবে)
 const li = await fetch(`${BASE}/api/auth/login`, {
   method: 'POST', headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ identifier: '01911000001', password: 'test1234' }),
+  body: JSON.stringify({ identifier: process.env.TEST_PHONE || '01911000001', password: process.env.TEST_PASS || 'test1234' }),
 }).then((r) => r.json())
 log(!!li.token, `free user login (${li.role || 'user'})`)
 
