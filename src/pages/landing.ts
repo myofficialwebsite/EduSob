@@ -43,14 +43,14 @@ export function landingPage(): string {
 <div class="bg-[#090b0f] text-slate-400 text-xs border-b border-white/5 select-none">
   <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-between gap-2">
     <div class="flex items-center gap-4 flex-wrap justify-center md:justify-start">
-      <a href="tel:+8801835414122" class="hover:text-orange-400 flex items-center gap-1.5 transition">
+      <a href="tel:+8801835414122" class="hover:text-orange-400 flex items-center gap-1.5 transition py-1.5">
         <i class="fas fa-headset text-orange-400"></i> হেল্পলাইন: <span class="font-en font-semibold text-slate-100">+88 01835414122</span>
       </a>
-      <span class="text-slate-700 hidden sm:inline">•</span>
-      <a href="mailto:support@edusob.com" class="hover:text-orange-400 flex items-center gap-1.5 transition">
+      <span class="text-slate-400 hidden sm:inline">•</span>
+      <a href="mailto:support@edusob.com" class="hover:text-orange-400 flex items-center gap-1.5 transition py-1.5">
         <i class="fas fa-envelope text-slate-500"></i> support@edusob.com
       </a>
-      <span class="text-slate-700 hidden sm:inline">•</span>
+      <span class="text-slate-400 hidden sm:inline">•</span>
       <span class="flex items-center gap-1.5 text-amber-400 font-medium">
         <span class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_2px_rgba(251,191,36,0.6)]"></span> প্রতিদিন সকাল ৯টা – রাত ১০টা
       </span>
@@ -58,7 +58,7 @@ export function landingPage(): string {
 
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full border border-white/10 text-[11px] text-slate-300">
-        <span class="bg-orange-500 text-white font-bold px-1.5 py-0.2 rounded text-[10px]">আপডেট</span>
+        <span class="bg-orange-500 text-slate-950 font-bold px-1.5 py-0.2 rounded text-[10px]">আপডেট</span>
         <span class="truncate max-w-xs sm:max-w-md">২০২৬ সেশনের ভর্তি, রেজাল্ট ও প্রশ্নব্যাংক লাইভ</span>
       </div>
     </div>
@@ -69,7 +69,7 @@ export function landingPage(): string {
 <header class="sticky top-0 z-40 bg-[#0b0d12]/85 backdrop-blur-xl border-b border-white/10">
   <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
     <a href="/" class="flex items-center gap-3 group">
-      <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(249,115,22,0.35)] group-hover:scale-105 transition-transform">
+      <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center text-slate-950 shadow-[0_0_20px_rgba(249,115,22,0.35)] group-hover:scale-105 transition-transform">
         <i class="fas fa-graduation-cap text-lg"></i>
       </div>
       <div class="flex flex-col">
@@ -77,7 +77,7 @@ export function landingPage(): string {
           <span class="font-display text-xl font-bold text-white tracking-tight">এডুসব</span>
           <span class="text-[10px] font-bold px-2 py-0.5 bg-orange-500/10 text-orange-300 border border-orange-500/30 rounded-full font-en">EduSob</span>
         </div>
-        <span class="text-[11px] text-slate-500 -mt-0.5 font-medium">শিক্ষার সব, এক ঠিকানায়</span>
+        <span class="text-[11px] text-slate-400 -mt-0.5 font-medium">শিক্ষার সব, এক ঠিকানায়</span>
       </div>
     </a>
 
@@ -87,7 +87,7 @@ export function landingPage(): string {
       <a href="/admission" class="px-3.5 py-2 rounded-xl hover:text-orange-300 hover:bg-white/5 transition">ভর্তি হাব</a>
       <a href="/cv" class="px-3.5 py-2 rounded-xl hover:text-orange-300 hover:bg-white/5 transition">সিভি মেকার</a>
       <a href="/scholarships" class="px-3.5 py-2 rounded-xl text-amber-300 hover:text-amber-200 bg-amber-400/10 hover:bg-amber-400/15 border border-amber-400/20 transition flex items-center gap-1.5">
-        <i class="fas fa-award text-amber-400 text-xs"></i> স্কলারশিপ <span class="text-[9px] bg-amber-400/20 text-amber-200 px-1.5 py-0.2 rounded font-bold">AI</span>
+        <i class="fas fa-award text-amber-400 text-xs"></i> স্কলারশিপ <span class="text-[10px] bg-amber-400/20 text-amber-200 px-1.5 py-0.2 rounded font-bold">AI</span>
       </a>
 
       <div class="relative group">
@@ -150,7 +150,7 @@ export function landingPage(): string {
       <a href="/login" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl border border-white/15 text-slate-300 hover:bg-white/5 hover:border-orange-500/40 transition">
         <i class="fas fa-arrow-right-to-bracket text-xs"></i> লগইন
       </a>
-      <a href="/signup" class="inline-flex items-center gap-1.5 text-xs font-extrabold px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white transition shadow-[0_0_20px_rgba(249,115,22,0.4)] hover:shadow-[0_0_30px_rgba(249,115,22,0.55)]">
+      <a href="/signup" class="inline-flex items-center gap-1.5 text-xs font-extrabold px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-slate-950 transition shadow-[0_0_20px_rgba(249,115,22,0.4)] hover:shadow-[0_0_30px_rgba(249,115,22,0.55)]">
         <span>ফ্রি রেজিস্ট্রেশন</span>
         <i class="fas fa-arrow-right text-[10px]"></i>
       </a>
@@ -180,7 +180,7 @@ export function landingPage(): string {
     <a href="/cgpa" class="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/5"><i class="fas fa-calculator text-sky-400"></i> CGPA ক্যালকুলেটর</a>
     <div class="pt-3 border-t border-white/5 flex gap-2">
       <a href="/login" class="flex-1 text-center py-2.5 rounded-xl border border-white/15 text-xs font-bold text-slate-300">লগইন</a>
-      <a href="/signup" class="flex-1 text-center py-2.5 rounded-xl bg-orange-500 text-white text-xs font-bold">রেজিস্ট্রেশন</a>
+      <a href="/signup" class="flex-1 text-center py-2.5 rounded-xl bg-orange-500 text-slate-950 text-xs font-bold">রেজিস্ট্রেশন</a>
     </div>
   </div>
 </header>
@@ -188,7 +188,7 @@ export function landingPage(): string {
 <!-- ৩. রিয়েলটাইম নোটিস টিকার -->
 <div class="bg-orange-500/[0.06] border-b border-orange-500/20 py-2 select-none overflow-hidden">
   <div class="max-w-7xl mx-auto px-4 flex items-center gap-3">
-    <span class="bg-orange-500 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shrink-0 flex items-center gap-1 uppercase tracking-wider">
+    <span class="bg-orange-500 text-slate-950 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shrink-0 flex items-center gap-1 uppercase tracking-wider">
       <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> লাইভ নোটিস
     </span>
     <div class="overflow-hidden relative w-full">
@@ -229,7 +229,7 @@ export function landingPage(): string {
         </div>
 
         <div class="flex flex-wrap items-center gap-3 pt-1">
-          <a href="/signup" class="px-6 py-3 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-extrabold text-sm shadow-[0_0_24px_rgba(249,115,22,0.4)] hover:shadow-[0_0_36px_rgba(249,115,22,0.6)] transition flex items-center gap-2">
+          <a href="/signup" class="px-6 py-3 rounded-full bg-orange-500 hover:bg-orange-600 text-slate-950 font-extrabold text-sm shadow-[0_0_24px_rgba(249,115,22,0.4)] hover:shadow-[0_0_36px_rgba(249,115,22,0.6)] transition flex items-center gap-2">
             <span>ফ্রি রেজিস্ট্রেশন করুন</span>
             <i class="fas fa-arrow-right text-xs"></i>
           </a>
@@ -239,12 +239,12 @@ export function landingPage(): string {
           </a>
           <a href="/teacher-support" class="px-5 py-3 rounded-full bg-amber-400/10 hover:bg-amber-400/15 text-amber-300 font-bold text-sm border border-amber-400/25 transition flex items-center gap-2">
             <span>👨‍🏫 শিক্ষক সহায়তা</span>
-            <span class="text-[9px] bg-amber-400/20 text-amber-200 px-1.5 py-0.5 rounded font-black">NEW</span>
+            <span class="text-[10px] bg-amber-400/20 text-amber-200 px-1.5 py-0.5 rounded font-black">NEW</span>
           </a>
         </div>
 
         <div class="flex flex-wrap items-center gap-2">
-          <span class="text-[11px] font-bold text-slate-500 hidden sm:inline-flex items-center gap-1.5"><i class="fas fa-compass text-orange-400"></i> দ্রুত প্রবেশ:</span>
+          <span class="text-[11px] font-bold text-slate-400 hidden sm:inline-flex items-center gap-1.5"><i class="fas fa-compass text-orange-400"></i> দ্রুত প্রবেশ:</span>
           <a href="/results" class="level-chip"><i class="fas fa-medal text-orange-400 text-[11px]"></i> SSC / দাখিল</a>
           <a href="/results" class="level-chip"><i class="fas fa-graduation-cap text-amber-400 text-[11px]"></i> HSC / আলিম</a>
           <a href="/results" class="level-chip"><i class="fas fa-building-columns text-sky-400 text-[11px]"></i> ন্যাশনাল ইউনিভার্সিটি</a>
@@ -255,15 +255,15 @@ export function landingPage(): string {
         <div class="bg-[#121620] border border-white/10 rounded-2xl p-4 flex flex-wrap sm:flex-nowrap items-center divide-y sm:divide-y-0 sm:divide-x divide-white/10">
           <div class="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">
             <p class="stat-num font-display text-2xl font-extrabold text-white leading-tight"><span data-stat="resources">৬৭</span><span class="text-orange-500">+</span></p>
-            <p class="text-[11px] text-slate-500 font-medium mt-0.5">অনুশীলন প্রশ্ন ও রিসোর্স</p>
+            <p class="text-[11px] text-slate-400 font-medium mt-0.5">অনুশীলন প্রশ্ন ও রিসোর্স</p>
           </div>
           <div class="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">
             <p class="stat-num font-display text-2xl font-extrabold text-white leading-tight"><span data-stat="cv_templates">২৪</span><span class="text-sky-400">টি</span></p>
-            <p class="text-[11px] text-slate-500 font-medium mt-0.5">সিভি ও বায়োডাটা টেমপ্লেট</p>
+            <p class="text-[11px] text-slate-400 font-medium mt-0.5">সিভি ও বায়োডাটা টেমপ্লেট</p>
           </div>
           <div class="w-full sm:w-1/3 py-2 sm:py-0 sm:px-4 text-center sm:text-left">
             <p class="stat-num font-display text-2xl font-extrabold text-amber-300 leading-tight"><span data-stat="scholarships">১০</span><span class="text-amber-400">+</span></p>
-            <p class="text-[11px] text-slate-500 font-medium mt-0.5">সক্রিয় স্কলারশিপ তালিকা</p>
+            <p class="text-[11px] text-slate-400 font-medium mt-0.5">সক্রিয় স্কলারশিপ তালিকা</p>
           </div>
         </div>
       </div>
@@ -284,7 +284,7 @@ export function landingPage(): string {
                 <div class="w-14 h-14 mx-auto rounded-2xl bg-orange-500/15 border border-orange-500/30 flex items-center justify-center text-orange-300 text-2xl mb-3">
                   <i class="fas fa-graduation-cap"></i>
                 </div>
-                <h4 class="font-display text-lg font-bold text-white">স্মার্ট শিক্ষার্থী প্রস্তুতি প্ল্যাটফর্ম</h4>
+                <h2 class="font-display text-lg font-bold text-white">স্মার্ট শিক্ষার্থী প্রস্তুতি প্ল্যাটফর্ম</h2>
                 <p class="text-xs text-slate-400 mt-1 max-w-xs mx-auto">বোর্ড পরীক্ষার ফলাফল, সিলেবাস, প্রশ্নব্যাংক ও স্কলারশিপ এক ছাতার নিচে</p>
               </div>
               <div class="relative border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
@@ -305,7 +305,7 @@ export function landingPage(): string {
                 <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-300 text-2xl mb-3">
                   <i class="fas fa-list-check"></i>
                 </div>
-                <h4 class="font-display text-lg font-bold text-white">স্মার্ট MCQ প্র্যাকটিস ও এনালাইসিস</h4>
+                <h3 class="font-display text-lg font-bold text-white">স্মার্ট MCQ প্র্যাকটিস ও এনালাইসিস</h3>
                 <p class="text-xs text-slate-400 mt-1 max-w-xs mx-auto">ভুল প্রশ্ন ট্র্যাকিং ও তাৎক্ষণিক ব্যাখ্যা সহ শতভাগ পরীক্ষার প্রস্তুতি</p>
               </div>
               <div class="relative border-t border-white/10 pt-3 flex items-center justify-between text-xs text-slate-400">
@@ -336,9 +336,9 @@ export function landingPage(): string {
             </div>
 
             <div class="absolute bottom-3 right-4 flex gap-1.5 z-10">
-              <button onclick="setSlide(0)" id="dot-0" class="w-2.5 h-2.5 rounded-full bg-white transition-all"></button>
-              <button onclick="setSlide(1)" id="dot-1" class="w-2.5 h-2.5 rounded-full bg-white/50 transition-all"></button>
-              <button onclick="setSlide(2)" id="dot-2" class="w-2.5 h-2.5 rounded-full bg-white/50 transition-all"></button>
+              <button type="button" onclick="setSlide(0)" id="dot-0" aria-label="1 নম্বর স্লাইডে যান" class="w-6 h-6 flex items-center justify-center group"><span class="w-2.5 h-2.5 rounded-full bg-white transition-all group-hover:scale-125"></span></button>
+              <button type="button" onclick="setSlide(1)" id="dot-1" aria-label="2 নম্বর স্লাইডে যান" class="w-6 h-6 flex items-center justify-center group"><span class="w-2.5 h-2.5 rounded-full bg-white/50 transition-all group-hover:scale-125"></span></button>
+              <button type="button" onclick="setSlide(2)" id="dot-2" aria-label="3 নম্বর স্লাইডে যান" class="w-6 h-6 flex items-center justify-center group"><span class="w-2.5 h-2.5 rounded-full bg-white/50 transition-all group-hover:scale-125"></span></button>
             </div>
           </div>
 
@@ -347,7 +347,7 @@ export function landingPage(): string {
               <span class="w-2 h-2 rounded-full bg-orange-400"></span>
               <span>এডুসব একাডেমি ও ট্যালেন্ট হাব</span>
             </div>
-            <a href="/signup" class="text-orange-400 font-bold hover:underline flex items-center gap-1">
+            <a href="/signup" class="text-orange-400 font-bold hover:underline flex items-center gap-1 py-1.5">
               <span>অংশ নিন</span> <i class="fas fa-arrow-right text-[10px]"></i>
             </a>
           </div>
@@ -617,7 +617,7 @@ export function landingPage(): string {
 
       <div class="step-node card-hover relative z-10 bg-[#121620] border border-white/[0.08] rounded-2xl p-4.5 flex flex-col justify-between hover:border-orange-500/40 transition-colors">
         <div>
-          <div class="w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xs flex items-center justify-center shadow-[0_0_14px_rgba(249,115,22,0.4)] mb-3">০১</div>
+          <div class="w-10 h-10 rounded-full bg-orange-500 text-slate-950 font-bold text-xs flex items-center justify-center shadow-[0_0_14px_rgba(249,115,22,0.4)] mb-3">০১</div>
           <h3 class="font-bold text-sm text-white mb-1">প্রোফাইল রেজিস্ট্রেশন</h3>
           <p class="text-slate-500 text-[11px] leading-relaxed">
             নাম, ফোন নম্বর ও শিক্ষাগত স্তর দিয়ে ৩০ সেকেন্ডে ফ্রি অ্যাকাউন্ট খুলুন।
@@ -628,7 +628,7 @@ export function landingPage(): string {
 
       <div class="step-node relative z-10 bg-[#121620] border border-white/[0.08] rounded-2xl p-4.5 flex flex-col justify-between hover:border-amber-400/40 transition-colors">
         <div>
-          <div class="w-10 h-10 rounded-full bg-amber-500 text-white font-bold text-xs flex items-center justify-center mb-3">০২</div>
+          <div class="w-10 h-10 rounded-full bg-amber-500 text-slate-950 font-bold text-xs flex items-center justify-center mb-3">০২</div>
           <h3 class="font-bold text-sm text-white mb-1">পারসোনালাইজড ড্যাশবোর্ড</h3>
           <p class="text-slate-500 text-[11px] leading-relaxed">
             ধর্ম ও ক্লাস অনুযায়ী বিশেষ ক্যালেন্ডার, নোটিস ও ড্যাশবোর্ড সক্রিয়করণ।
@@ -650,7 +650,7 @@ export function landingPage(): string {
 
       <div class="step-node relative z-10 bg-[#121620] border border-white/[0.08] rounded-2xl p-4.5 flex flex-col justify-between hover:border-amber-400/40 transition-colors">
         <div>
-          <div class="w-10 h-10 rounded-full bg-amber-500 text-white font-bold text-xs flex items-center justify-center mb-3">০৪</div>
+          <div class="w-10 h-10 rounded-full bg-amber-500 text-slate-950 font-bold text-xs flex items-center justify-center mb-3">০৪</div>
           <h3 class="font-bold text-sm text-white mb-1">রেজাল্ট ও মার্কশিট</h3>
           <p class="text-slate-500 text-[11px] leading-relaxed">
             একাধিক সার্ভার থেকে দ্রুততম সময়ে ফলাফল যাচাই ও রোল সংরক্ষণ।
@@ -829,7 +829,7 @@ export function landingPage(): string {
           </div>
         </div>
 
-        <a href="/signup" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-full text-center block text-xs transition shadow-[0_0_20px_rgba(249,115,22,0.35)]">
+        <a href="/signup" class="w-full bg-orange-500 hover:bg-orange-600 text-slate-950 font-bold py-3 rounded-full text-center block text-xs transition shadow-[0_0_20px_rgba(249,115,22,0.35)]">
           এখনই ফ্রি অ্যাকাউন্ট খুলুন →
         </a>
       </div>
@@ -885,7 +885,7 @@ export function landingPage(): string {
             <input type="number" id="c_captcha" required placeholder="ফলাফল লিখুন" class="w-28 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-center font-bold text-white focus:outline-none focus:border-orange-500/60">
           </div>
 
-          <button type="submit" id="c_btn" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-full transition shadow-[0_0_20px_rgba(249,115,22,0.35)] flex items-center justify-center gap-2">
+          <button type="submit" id="c_btn" class="w-full bg-orange-500 hover:bg-orange-600 text-slate-950 font-bold py-3 rounded-full transition shadow-[0_0_20px_rgba(249,115,22,0.35)] flex items-center justify-center gap-2">
             <span>বার্তা পাঠান</span> <i class="fas fa-paper-plane text-xs"></i>
           </button>
         </form>
@@ -949,13 +949,13 @@ export function landingPage(): string {
 
       <div class="col-span-2">
         <a href="/" class="flex items-center gap-2.5 mb-3">
-          <div class="w-9 h-9 bg-orange-500 rounded-xl flex items-center justify-center text-white font-bold">🎓</div>
+          <div class="w-9 h-9 bg-orange-500 rounded-xl flex items-center justify-center text-slate-950 font-bold">🎓</div>
           <span class="font-display text-lg font-bold text-white tracking-tight">এডুসব <span class="text-xs text-orange-400 font-normal font-en">EduSob</span></span>
         </a>
-        <p class="text-slate-500 text-xs leading-relaxed max-w-sm mb-4">
+        <p class="text-slate-400 text-xs leading-relaxed max-w-sm mb-4">
           বাংলাদেশের শিক্ষার্থীদের জন্য একক সমন্বিত প্ল্যাটফর্ম। পরীক্ষার রেজাল্ট, ভর্তি প্রস্তুতি, ১-৩ পেজ সিভি মেকার ও আধুনিক স্টাডি টুলস।
         </p>
-        <p class="text-[11px] text-slate-600 font-en">হেল্পলাইন: +88 01835414122 · ইমেইল: support@edusob.com</p>
+        <p class="text-[11px] text-slate-400 font-en">হেল্পলাইন: +88 01835414122 · ইমেইল: support@edusob.com</p>
       </div>
 
       <div>
@@ -996,7 +996,7 @@ export function landingPage(): string {
       <p class="font-display text-center text-[18vw] lg:text-[10rem] font-extrabold leading-none tracking-tight text-white/[0.04]">EDUSOB</p>
     </div>
 
-    <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-600">
+    <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
       <p>© ২০২৬ এডুসব (EduSob) — সর্বস্বত্ব সংরক্ষিত।</p>
       <p>বাংলাদেশের সকল শিক্ষার্থীর ডিজিটাল শিক্ষা ও ক্যারিয়ার সঙ্গী 🇧🇩</p>
     </div>
@@ -1014,8 +1014,11 @@ function setSlide(idx) {
     var dt = document.getElementById('dot-' + i);
     if (sl) sl.style.opacity = (i === idx) ? '1' : '0';
     if (dt) {
-      dt.style.backgroundColor = (i === idx) ? '#f97316' : 'rgba(255,255,255,0.3)';
-      dt.style.width = (i === idx) ? '20px' : '10px';
+      // ভিজ্যুয়াল ডটটি এখন বোতামের ভেতরের span — ট্যাপ এরিয়া ২৪×২৪ রেখে রং/প্রস্থ সেখানেই
+      var dotEl = dt.firstElementChild || dt;
+      dotEl.style.backgroundColor = (i === idx) ? '#f97316' : 'rgba(255,255,255,0.3)';
+      dotEl.style.width = (i === idx) ? '20px' : '10px';
+      dt.setAttribute('aria-current', i === idx ? 'true' : 'false');
     }
   }
 }
@@ -1056,7 +1059,7 @@ setInterval(function() {
     if (!d || !d.ok || !d.items || !d.items.length) { track.innerHTML = fallback + fallback; return; }
     var esc = function(s){ var dv = document.createElement('div'); dv.textContent = String(s || ''); return dv.innerHTML; };
     var news = d.items.slice(0, 6).map(function(n){
-      return '<a href="' + esc(n.link || '#') + '" target="_blank" rel="noopener" class="mx-6 hover:text-amber-300 transition">📰 ' + esc(n.title || '') + '</a>';
+      return '<a href="' + esc(n.link || '#') + '" target="_blank" rel="noopener" class="mx-6 hover:text-amber-300 transition py-1.5">📰 ' + esc(n.title || '') + '</a>';
     }).join('');
     var half = news + fallback;
     track.innerHTML = half + half;

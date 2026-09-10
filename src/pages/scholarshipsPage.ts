@@ -206,9 +206,9 @@ function renderCards(items, isEvaluated = false) {
         (s.status_text ? '<div class="p-2.5 rounded-xl text-xs border font-semibold ' + s.status_badge + '">' + esc(s.status_text) + '</div>' : '') +
 
         '<div class="grid grid-cols-2 gap-2 text-xs bg-slate-950/60 p-3 rounded-2xl border border-white/5">' +
-          '<div><span class="text-slate-500">ন্যূনতম জিপিএ:</span> <b class="text-slate-200">' + (s.min_gpa > 0 ? toBn(s.min_gpa) : 'উন্মুক্ত') + '</b></div>' +
-          '<div><span class="text-slate-500">আয় সীমা:</span> <b class="text-slate-200">' + (s.max_family_income > 0 ? '৳' + toBn(s.max_family_income) : 'সীমাহীন') + '</b></div>' +
-          '<div class="col-span-2"><span class="text-slate-500">বৃত্তি সুবিধা:</span> <b class="text-orange-400">' + esc(s.stipend_amount || 'নির্ধারিত নয়') + '</b></div>' +
+          '<div><span class="text-slate-400">ন্যূনতম জিপিএ:</span> <b class="text-slate-200">' + (s.min_gpa > 0 ? toBn(s.min_gpa) : 'উন্মুক্ত') + '</b></div>' +
+          '<div><span class="text-slate-400">আয় সীমা:</span> <b class="text-slate-200">' + (s.max_family_income > 0 ? '৳' + toBn(s.max_family_income) : 'সীমাহীন') + '</b></div>' +
+          '<div class="col-span-2"><span class="text-slate-400">বৃত্তি সুবিধা:</span> <b class="text-orange-400">' + esc(s.stipend_amount || 'নির্ধারিত নয়') + '</b></div>' +
           '<div class="col-span-2 text-slate-400"><i class="fas fa-clock mr-1 text-slate-500"></i>' + esc(s.deadline || 'নিয়মিত আপডেট') + '</div>' +
         '</div>' +
       '</div>' +
@@ -222,7 +222,7 @@ function renderCards(items, isEvaluated = false) {
           '<button onclick="viewDetails(' + s.id + ')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold rounded-xl text-xs transition border border-white/10 flex items-center gap-1">' +
             '<i class="fas fa-eye"></i> বিস্তারিত ও পথরেখা' +
           '</button>' +
-          (s.apply_link ? '<a href="' + esc(s.apply_link) + '" target="_blank" class="px-4 py-2 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl text-xs transition shadow flex items-center gap-1">' +
+          (s.apply_link ? '<a href="' + esc(s.apply_link) + '" target="_blank" class="px-4 py-2 bg-orange-600 hover:bg-orange-500 text-slate-950 font-bold rounded-xl text-xs transition shadow flex items-center gap-1">' +
             'আবেদন পোর্টাল <i class="fas fa-external-link text-[10px]"></i></a>' : '') +
         '</div>' +
       '</div>' +

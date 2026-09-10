@@ -31,7 +31,7 @@ ${siteHeader({ activeKey: 'admission', loggedIn, theme: 'dark' })}
 
     <!-- ক্যাটাগরি ফিল্টার চিপস -->
     <div class="flex flex-wrap gap-2 justify-center" id="lvTabs">
-      <button onclick="setTab('')" data-lv="" class="lv-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-orange-500 text-white transition shadow-sm">সকল আবেদন ও ভর্তি</button>
+      <button onclick="setTab('')" data-lv="" class="lv-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-orange-500 text-slate-950 transition shadow-sm">সকল আবেদন ও ভর্তি</button>
       <button onclick="setTab('nu')" data-lv="nu" class="lv-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 transition">জাতীয় বিশ্ববিদ্যালয় (NU ডিগ্রি/অনার্স/মাস্টার্স)</button>
       <button onclick="setTab('hsc')" data-lv="hsc" class="lv-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 transition">একাদশ (XI) শ্রেণি</button>
       <button onclick="setTab('job')" data-lv="job" class="lv-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 transition">💼 সরকারি চাকরি ও NTRCA</button>
@@ -122,7 +122,7 @@ function setTab(lv) {
   curLv = lv;
   document.querySelectorAll('.lv-tab').forEach(b => {
     if (b.dataset.lv === lv) {
-      b.className = 'lv-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-orange-500 text-white transition shadow-sm';
+      b.className = 'lv-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-orange-500 text-slate-950 transition shadow-sm';
     } else {
       b.className = 'lv-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 transition';
     }

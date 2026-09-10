@@ -234,7 +234,7 @@ ${siteHeader({ activeKey: 'results', loggedIn, theme: 'dark' })}
         <label class="text-xs text-slate-400 font-semibold">রেজিস্ট্রেশন নম্বর</label>
         <input name="reg" id="ckReg" inputmode="numeric" class="w-full mt-1 bg-slate-800 border border-white/15 rounded-xl px-3 py-2.5 text-sm focus:border-orange-400 focus:outline-none" placeholder="যেমন: 1234567890" required>
       </div>
-      <button type="submit" id="ckBtn" class="col-span-2 md:col-span-5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white font-bold py-3 rounded-xl transition shadow-lg">
+      <button type="submit" id="ckBtn" class="col-span-2 md:col-span-5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg">
         <i class="fas fa-magnifying-glass mr-1"></i> রেজাল্ট অনুসন্ধান করুন
       </button>
     </form>
@@ -254,7 +254,7 @@ ${siteHeader({ activeKey: 'results', loggedIn, theme: 'dark' })}
 
     <!-- ক্যাটাগরি ট্যাবসমূহ -->
     <div class="flex flex-wrap gap-2" id="catTabs">
-      <button onclick="setResultCategory('')" data-cat="" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-orange-500 text-white transition shadow-sm">সব ফলাফল</button>
+      <button onclick="setResultCategory('')" data-cat="" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-orange-500 text-slate-950 transition shadow-sm">সব ফলাফল</button>
       <button onclick="setResultCategory('board')" data-cat="board" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 transition">স্কুল ও বোর্ড (SSC/HSC)</button>
       <button onclick="setResultCategory('university')" data-cat="university" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 transition">বিশ্ববিদ্যালয় (NU/BOU/BTEB)</button>
       <button onclick="setResultCategory('admission')" data-cat="admission" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 transition">ভর্তি পরীক্ষা (Medical/Nursing)</button>
@@ -297,7 +297,7 @@ ${loggedIn ? `
         <input name="reg" class="w-full mt-1 bg-slate-800 border border-white/15 rounded-xl px-3 py-2.5 text-sm focus:border-orange-400 focus:outline-none" placeholder="1234567890"></div>
       <div><label class="text-xs text-slate-400">পাসের/পরীক্ষার সন</label>
         <input name="exam_year" class="w-full mt-1 bg-slate-800 border border-white/15 rounded-xl px-3 py-2.5 text-sm focus:border-orange-400 focus:outline-none" placeholder="2026"></div>
-      <button type="submit" class="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold py-2.5 rounded-xl transition shadow-md">সেভ করুন</button>
+      <button type="submit" class="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 font-bold py-2.5 rounded-xl transition shadow-md">সেভ করুন</button>
     </form>
   </div>
 </div>` : ''}
@@ -318,7 +318,7 @@ function setResultCategory(cat) {
   curCategory = cat;
   document.querySelectorAll('.cat-btn').forEach(b => {
     if (b.dataset.cat === cat) {
-      b.className = 'cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-orange-500 text-white transition shadow-sm';
+      b.className = 'cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-orange-500 text-slate-950 transition shadow-sm';
     } else {
       b.className = 'cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 transition';
     }
@@ -371,7 +371,7 @@ function render(){
           <div class="flex items-center gap-2 bg-white/5 border border-white/5 rounded-xl px-3 py-2">
             <div class="flex-1 min-w-0">
               <p class="text-xs font-semibold text-slate-200 truncate">\${i===0?'🥇':'🥈'} \${l.name}</p>
-              <p class="text-[10px] text-slate-400 truncate">\${l.note}</p>
+              <p class="text-[11px] text-slate-400 truncate">\${l.note}</p>
             </div>
             <span id="st-\${s.id}-\${i}">\${statusBadge('checking')}</span>
             <a href="\${l.url}" target="_blank" rel="noopener" class="text-xs bg-\${s.color}-500/20 hover:bg-\${s.color}-500/40 text-\${s.color}-300 px-3 py-1.5 rounded-lg transition font-semibold whitespace-nowrap">সরাসরি যান <i class="fas fa-arrow-up-right-from-square text-[10px] ml-0.5"></i></a>

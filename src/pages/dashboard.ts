@@ -21,7 +21,7 @@ export function dashboardPage(user: SessionUser): string {
 
   const sidebarNav = `
     <div class="px-3 pb-2 text-[10px] uppercase tracking-wider font-bold text-slate-400">আমার স্টাডি স্পেস</div>
-    <a href="/dashboard" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl ${t.accentBg} text-white font-bold shadow-sm transition"><i class="fas fa-compass w-4"></i> <span>স্টুডেন্ট ড্যাশবোর্ড</span></a>
+    <a href="/dashboard" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl ${t.accentBg} text-slate-950 font-bold shadow-sm transition"><i class="fas fa-compass w-4"></i> <span>স্টুডেন্ট ড্যাশবোর্ড</span></a>
     <a href="/results" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-semibold transition"><i class="fas fa-graduation-cap w-4 text-amber-400"></i> <span>রেজাল্ট হাব</span></a>
     <a href="/profile" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-semibold transition"><i class="fas fa-id-card w-4 text-amber-400"></i> <span>আমার প্রোফাইল</span></a>
 
@@ -32,7 +32,7 @@ export function dashboardPage(user: SessionUser): string {
     <a href="/planner" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-calendar-check w-4 text-purple-400"></i> <span>স্টাডি প্ল্যানার</span></a>
 
     <div class="pt-4 px-3 pb-2 text-[10px] uppercase tracking-wider font-bold text-slate-400">স্টুডেন্ট টুলস</div>
-    <a href="/teacher-support" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-amber-300 hover:bg-amber-500/20 font-semibold transition text-xs bg-amber-500/10 border border-amber-400/20"><i class="fas fa-chalkboard-user w-4 text-amber-400"></i> <span>শিক্ষক সহায়তা</span> <span class="text-[9px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.5 rounded-full ml-auto">LIVE</span></a>
+    <a href="/teacher-support" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-amber-300 hover:bg-amber-500/20 font-semibold transition text-xs bg-amber-500/10 border border-amber-400/20"><i class="fas fa-chalkboard-user w-4 text-amber-400"></i> <span>শিক্ষক সহায়তা</span> <span class="text-[10px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.5 rounded-full ml-auto">LIVE</span></a>
     <a href="/cv" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-file-lines w-4 text-sky-400"></i> <span>CV মেকার</span></a>
     <a href="/wallet" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-wallet w-4 text-amber-400"></i> <span>ওয়ালেট</span></a>
     <a href="/assisted" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 font-medium transition text-xs"><i class="fas fa-hands-helping w-4 text-rose-400"></i> <span>আবেদন সহায়তা</span></a>
@@ -55,7 +55,7 @@ export function dashboardPage(user: SessionUser): string {
   <aside id="sidebar" class="hidden lg:flex flex-col w-64 shrink-0 ${t.side} backdrop-blur-2xl border-r border-white/10 sticky top-0 h-screen overflow-hidden z-20">
     <div class="p-5 border-b border-white/10">
       <a href="/" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl flex items-center justify-center text-white text-lg shadow-md shadow-orange-500/20 group-hover:scale-105 transition">
+        <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl flex items-center justify-center text-slate-950 text-lg shadow-md shadow-orange-500/20 group-hover:scale-105 transition">
           <i class="fas fa-graduation-cap"></i>
         </div>
         <div class="flex flex-col">
@@ -93,7 +93,7 @@ export function dashboardPage(user: SessionUser): string {
     <aside class="absolute left-0 top-0 h-full w-72 max-w-[85vw] ${t.side} backdrop-blur-2xl border-r border-white/10 p-5 overflow-y-auto flex flex-col z-10 shadow-2xl">
       <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
         <a href="/" class="flex items-center gap-2.5">
-          <span class="w-8 h-8 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center text-white text-sm"><i class="fas fa-graduation-cap"></i></span>
+          <span class="w-8 h-8 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center text-slate-950 text-sm"><i class="fas fa-graduation-cap"></i></span>
           <span class="font-extrabold text-white text-base">এডুসব</span>
         </a>
         <button onclick="toggleDrawer(false)" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 flex items-center justify-center"><i class="fas fa-xmark"></i></button>
@@ -119,7 +119,7 @@ export function dashboardPage(user: SessionUser): string {
           class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white border border-white/10 transition shrink-0">
           <i class="fas fa-magnifying-glass text-[11px]"></i>
           <span class="hidden lg:inline text-[11px] font-semibold">খুঁজুন</span>
-          <kbd class="hidden lg:inline text-[9px] font-black text-slate-500 border border-white/10 rounded px-1 py-0.5">⌘K</kbd>
+          <kbd class="hidden lg:inline text-[10px] font-black text-slate-500 border border-white/10 rounded px-1 py-0.5">⌘K</kbd>
         </button>
         <div class="flex items-center gap-2 min-w-0 text-xs">
           <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse shrink-0"></span>
@@ -138,7 +138,7 @@ export function dashboardPage(user: SessionUser): string {
         <!-- নোটিফিকেশন বেল -->
         <button onclick="openNotificationsModal()" class="relative w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 text-slate-200 flex items-center justify-center border border-white/10 transition" title="নোটিফিকেশন সেন্টার">
           <i class="fas fa-bell text-amber-400 text-xs"></i>
-          <span id="notifBadge" class="hidden absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 text-[9px] font-bold text-white flex items-center justify-center">১</span>
+          <span id="notifBadge" class="hidden absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-600 text-[10px] font-bold text-white flex items-center justify-center">১</span>
         </button>
 
         <!-- পুশ অ্যালার্ট টগল -->
@@ -160,7 +160,7 @@ export function dashboardPage(user: SessionUser): string {
         </a>
 
         <!-- প্রোফাইল শর্টকাট -->
-        <a href="/profile" class="w-8 h-8 rounded-lg ${t.accentBg} text-white font-bold flex items-center justify-center overflow-hidden border border-white/20 shadow-xs hover:opacity-90 transition" title="প্রোফাইল">
+        <a href="/profile" class="w-8 h-8 rounded-lg ${t.accentBg} text-slate-950 font-bold flex items-center justify-center overflow-hidden border border-white/20 shadow-xs hover:opacity-90 transition" title="প্রোফাইল">
           <span class="user-init text-xs">${firstLetter}</span>
           <img class="user-photo w-full h-full object-cover hidden" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </a>
@@ -292,7 +292,7 @@ export function dashboardPage(user: SessionUser): string {
           <div class="flex items-center gap-2 text-xs">
             <span id="deckTaskSummary" class="text-slate-400 font-mono text-[11px]">০/৪ লক্ষ্য সম্পন্ন</span>
             <span class="text-slate-600">·</span>
-            <button onclick="initDailyTasks()" class="text-[11px] text-slate-400 hover:text-white" title="রিলোড"><i class="fas fa-rotate-right"></i></button>
+            <button onclick="initDailyTasks()" class="text-[11px] text-slate-400 hover:text-white p-2 -m-2" title="রিলোড"><i class="fas fa-rotate-right"></i></button>
           </div>
         </div>
 
@@ -307,7 +307,7 @@ export function dashboardPage(user: SessionUser): string {
               </span>
               <div class="min-w-0">
                 <div class="flex items-center gap-2">
-                  <span class="text-[9px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.2 rounded uppercase">জরুরি আপডেট</span>
+                  <span class="text-[10px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.2 rounded uppercase">জরুরি আপডেট</span>
                   <span id="urgentNoticeTitle" class="text-xs sm:text-sm font-bold text-white truncate">জরুরি নোটিস ও সময়সূচি চেক</span>
                 </div>
                 <p id="urgentNoticeDesc" class="text-[11px] text-slate-300 mt-0.5 truncate">বোর্ড পরীক্ষা, ভর্তি আবেদন ও স্কলারশিপের ডেডলাইন সক্রিয় রয়েছে।</p>
@@ -339,25 +339,25 @@ export function dashboardPage(user: SessionUser): string {
               <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition border border-transparent hover:border-white/5">
                 <input type="checkbox" onchange="toggleTask(0)" id="task_0" class="w-4 h-4 rounded text-orange-500 bg-slate-900 border-white/20">
                 <span id="task_text_0" class="text-xs text-slate-200 flex-1 select-none transition-all">২০টি বিষয়ভিত্তিক MCQ অনুশীলন</span>
-                <a href="/mcq" class="text-[10px] text-orange-400 font-bold hover:underline shrink-0" onclick="event.stopPropagation()">টেস্ট দিন →</a>
+                <a href="/mcq" class="text-[10px] text-orange-400 font-bold hover:underline shrink-0 py-1.5" onclick="event.stopPropagation()">টেস্ট দিন →</a>
               </label>
 
               <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition border border-transparent hover:border-white/5">
                 <input type="checkbox" onchange="toggleTask(1)" id="task_1" class="w-4 h-4 rounded text-orange-500 bg-slate-900 border-white/20">
                 <span id="task_text_1" class="text-xs text-slate-200 flex-1 select-none transition-all">বিগত বছরের ১টি প্রশ্ন সমাধান</span>
-                <a href="/qpapers" class="text-[10px] text-amber-400 font-bold hover:underline shrink-0" onclick="event.stopPropagation()">PDF →</a>
+                <a href="/qpapers" class="text-[10px] text-amber-400 font-bold hover:underline shrink-0 py-1.5" onclick="event.stopPropagation()">PDF →</a>
               </label>
 
               <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition border border-transparent hover:border-white/5">
                 <input type="checkbox" onchange="toggleTask(2)" id="task_2" class="w-4 h-4 rounded text-orange-500 bg-slate-900 border-white/20">
                 <span id="task_text_2" class="text-xs text-slate-200 flex-1 select-none transition-all">নতুন স্কলারশিপ বা উপবৃত্তি যোগ্যতা চেক</span>
-                <a href="/scholarships" class="text-[10px] text-yellow-400 font-bold hover:underline shrink-0" onclick="event.stopPropagation()">যাচাই →</a>
+                <a href="/scholarships" class="text-[10px] text-yellow-400 font-bold hover:underline shrink-0 py-1.5" onclick="event.stopPropagation()">যাচাই →</a>
               </label>
 
               <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition border border-transparent hover:border-white/5">
                 <input type="checkbox" onchange="toggleTask(3)" id="task_3" class="w-4 h-4 rounded text-orange-500 bg-slate-900 border-white/20">
                 <span id="task_text_3" class="text-xs text-slate-200 flex-1 select-none transition-all">আজকের বোর্ড নোটিস ও রুটিন দেখা</span>
-                <a href="/notices" class="text-[10px] text-sky-400 font-bold hover:underline shrink-0" onclick="event.stopPropagation()">নোটিস →</a>
+                <a href="/notices" class="text-[10px] text-sky-400 font-bold hover:underline shrink-0 py-1.5" onclick="event.stopPropagation()">নোটিস →</a>
               </label>
             </div>
           </div>
@@ -368,7 +368,7 @@ export function dashboardPage(user: SessionUser): string {
               <span class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
                 <i class="fas fa-copy text-amber-400"></i> ১-ক্লিক ফরম ফিলিং ক্লিপবোর্ড
               </span>
-              <a href="/profile" class="text-[11px] text-orange-400 hover:underline">প্রোফাইল এডিট</a>
+              <a href="/profile" class="text-[11px] text-orange-400 hover:underline py-1.5">প্রোফাইল এডিট</a>
             </div>
             <div id="quickCopyStrip" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
               <div class="text-[11px] text-slate-400 animate-pulse">প্রোফাইল চিপস লোড হচ্ছে...</div>
@@ -386,7 +386,7 @@ export function dashboardPage(user: SessionUser): string {
             <div id="compactVerseBox" class="flex items-center gap-2 text-[11px] text-slate-300 italic min-w-0 truncate md:max-w-md">
               <i class="fas fa-quote-left text-amber-400 shrink-0"></i>
               <span id="compactVerseText" class="truncate">অনুপ্রেরণা লোড হচ্ছে...</span>
-              <button onclick="copyVerseText()" class="text-orange-400 hover:underline shrink-0 not-italic ml-1" title="কপি"><i class="fas fa-copy"></i></button>
+              <button onclick="copyVerseText()" class="text-orange-400 hover:underline shrink-0 not-italic ml-1 p-2 -m-2" title="কপি"><i class="fas fa-copy"></i></button>
             </div>
           </div>
 
@@ -608,7 +608,7 @@ export function dashboardPage(user: SessionUser): string {
                 <div class="flex items-center gap-2 mt-2">
                   <code class="bg-black/40 border border-white/15 px-2.5 py-0.5 rounded text-xs font-mono text-orange-400 font-bold">${safeCode}</code>
                   <button onclick="copyRefLink()" class="px-2.5 py-1 rounded-lg bg-orange-500 hover:bg-orange-600 text-slate-950 font-bold text-xs transition flex items-center gap-1">
-                    <i class="fas fa-link text-[9px]"></i> লিংক কপি
+                    <i class="fas fa-link text-[10px]"></i> লিংক কপি
                   </button>
                 </div>
               </div>
@@ -638,35 +638,35 @@ export function dashboardPage(user: SessionUser): string {
                 <i class="fab fa-facebook-f text-blue-400 text-sm"></i>
                 <div class="min-w-0">
                   <p class="font-bold text-white truncate text-[11px]">ফেসবুক</p>
-                  <p class="text-[9px] text-slate-400 truncate">গ্রুপ ডিসকাশন</p>
+                  <p class="text-[10px] text-slate-400 truncate">গ্রুপ ডিসকাশন</p>
                 </div>
               </a>
               <a id="linkYoutube" href="https://youtube.com/@edusob_official" target="_blank" rel="noopener" class="p-2.5 rounded-xl bg-white/5 hover:bg-red-600/20 border border-white/5 hover:border-red-400/40 text-left transition flex items-center gap-2.5">
                 <i class="fab fa-youtube text-red-400 text-sm"></i>
                 <div class="min-w-0">
                   <p class="font-bold text-white truncate text-[11px]">ইউটিউব</p>
-                  <p class="text-[9px] text-slate-400 truncate">ভিডিও ক্লাস</p>
+                  <p class="text-[10px] text-slate-400 truncate">ভিডিও ক্লাস</p>
                 </div>
               </a>
               <a id="linkWhatsapp" href="https://chat.whatsapp.com/edusob-study-hub" target="_blank" rel="noopener" class="p-2.5 rounded-xl bg-white/5 hover:bg-orange-600/20 border border-white/5 hover:border-orange-400/40 text-left transition flex items-center gap-2.5">
                 <i class="fab fa-whatsapp text-orange-400 text-sm"></i>
                 <div class="min-w-0">
                   <p class="font-bold text-white truncate text-[11px]">হোয়াটসঅ্যাপ</p>
-                  <p class="text-[9px] text-slate-400 truncate">গ্রুপ আপডেট</p>
+                  <p class="text-[10px] text-slate-400 truncate">গ্রুপ আপডেট</p>
                 </div>
               </a>
               <a id="linkTelegram" href="https://t.me/edusob_channel" target="_blank" rel="noopener" class="p-2.5 rounded-xl bg-white/5 hover:bg-sky-600/20 border border-white/5 hover:border-sky-400/40 text-left transition flex items-center gap-2.5">
                 <i class="fab fa-telegram text-sky-400 text-sm"></i>
                 <div class="min-w-0">
                   <p class="font-bold text-white truncate text-[11px]">টেলিগ্রাম</p>
-                  <p class="text-[9px] text-slate-400 truncate">বই ও নোটিস</p>
+                  <p class="text-[10px] text-slate-400 truncate">বই ও নোটিস</p>
                 </div>
               </a>
               <a id="linkHelpline" href="tel:01835414122" class="col-span-2 sm:col-span-1 p-2.5 rounded-xl bg-white/5 hover:bg-amber-600/20 border border-white/5 hover:border-amber-400/40 text-left transition flex items-center gap-2.5">
                 <i class="fas fa-phone text-amber-400 text-sm"></i>
                 <div class="min-w-0">
                   <p class="font-bold text-white truncate text-[11px]">হেল্পলাইন</p>
-                  <p id="helplineText" class="text-[9px] text-slate-400 truncate">০১৮৩৫৪১৪১২২</p>
+                  <p id="helplineText" class="text-[10px] text-slate-400 truncate">০১৮৩৫৪১৪১২২</p>
                 </div>
               </a>
             </div>
@@ -942,7 +942,7 @@ function obRow(s){
     ? '<span class="text-[10px] text-emerald-300 font-bold whitespace-nowrap">পেয়েছেন ✓</span>'
     : s.done
       ? '<button type="button" data-ob-key="' + escH(s.key) + '" class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 text-[10px] font-black transition">ক্লেইম</button>'
-      : '<a href="' + escH(s.href) + '" class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 text-[10px] font-bold transition inline-flex items-center gap-1">' + escH(s.cta) + ' <i class="fas fa-arrow-right text-[9px]"></i></a>';
+      : '<a href="' + escH(s.href) + '" class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 text-[10px] font-bold transition inline-flex items-center gap-1">' + escH(s.cta) + ' <i class="fas fa-arrow-right text-[10px]"></i></a>';
 
   li.innerHTML = icon +
     '<div class="min-w-0 flex-1">' +
@@ -1117,9 +1117,9 @@ async function loadDashboardCore(){
         // ১. নামের পাশে ডিস্টিঙ্কট মেম্বারশিপ ব্যাজ
         if (subBadge) {
           subBadge.className = isPrem
-            ? 'inline-flex text-[10px] font-black px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 items-center gap-1 shadow-sm hover:opacity-90 transition'
-            : 'inline-flex text-[10px] font-black px-2.5 py-0.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-400/40 items-center gap-1 hover:bg-orange-500/30 transition';
-          subBadge.innerHTML = (isPrem ? '<i class="fas fa-crown text-[9px]"></i>' : '<i class="fas fa-bolt text-[9px]"></i>') + ' ' + (isPrem ? 'প্রিমিয়াম প্রো' : 'স্ট্যান্ডার্ড');
+            ? 'inline-flex text-[10px] font-black px-2.5 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 items-center gap-1 shadow-sm hover:opacity-90 transition'
+            : 'inline-flex text-[10px] font-black px-2.5 py-1.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-400/40 items-center gap-1 hover:bg-orange-500/30 transition';
+          subBadge.innerHTML = (isPrem ? '<i class="fas fa-crown text-[10px]"></i>' : '<i class="fas fa-bolt text-[10px]"></i>') + ' ' + (isPrem ? 'প্রিমিয়াম প্রো' : 'স্ট্যান্ডার্ড');
           subBadge.title = 'সাবস্ক্রিপশন আইডি: ' + (sub.subscription_id || '') + ' — বিস্তারিত দেখতে ক্লিক করুন';
         }
 
@@ -1145,7 +1145,7 @@ async function loadDashboardCore(){
       } else {
         // নন-সাবস্ক্রাইবার
         if (subBadge) {
-          subBadge.className = 'inline-flex text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/5 text-slate-400 hover:text-slate-200 border border-white/10 items-center gap-1 transition';
+          subBadge.className = 'inline-flex text-[10px] font-semibold px-2.5 py-1.5 rounded-full bg-white/5 text-slate-400 hover:text-slate-200 border border-white/10 items-center gap-1 transition';
           subBadge.innerHTML = '<i class="fas fa-arrow-up-right-from-square text-[8px]"></i> ফ্রি প্ল্যান';
           subBadge.title = 'ক্লিক করে মেম্বারশিপ আপগ্রেড করুন';
         }
@@ -1179,7 +1179,7 @@ function renderQuickCopyStrip(prof){
     return '<button onclick="copyPillDirect(this, \\''+escH(c.val)+'\\', \\''+escH(c.label)+'\\')" class="copy-chip-btn px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-slate-200 text-[11px] whitespace-nowrap transition inline-flex items-center gap-1.5 active:scale-95 group">' +
       '<span class="text-slate-400">'+escH(c.label)+':</span>' +
       '<span class="font-mono font-bold text-white">'+escH(c.val)+'</span>' +
-      '<i class="copy-icon fas fa-copy text-[9px] text-orange-400 group-hover:scale-110"></i>' +
+      '<i class="copy-icon fas fa-copy text-[10px] text-orange-400 group-hover:scale-110"></i>' +
     '</button>';
   }).join('');
 }
@@ -1189,8 +1189,8 @@ function copyPillDirect(btn, val, label){
   navigator.clipboard.writeText(val).then(() => {
     const icon = btn.querySelector('.copy-icon');
     if (icon) {
-      icon.className = 'copy-icon fas fa-check text-[9px] text-orange-300 animate-bounce';
-      setTimeout(() => { icon.className = 'copy-icon fas fa-copy text-[9px] text-orange-400 group-hover:scale-110'; }, 1500);
+      icon.className = 'copy-icon fas fa-check text-[10px] text-orange-300 animate-bounce';
+      setTimeout(() => { icon.className = 'copy-icon fas fa-copy text-[10px] text-orange-400 group-hover:scale-110'; }, 1500);
     }
     showToast(label + ' কপি হয়েছে ✓');
   }).catch(() => {
@@ -1229,7 +1229,7 @@ function renderSavedRolls(rolls){
       '</div>' +
       '<div class="flex items-center gap-1.5 shrink-0">' +
         '<button onclick="quickCheckSpecificRoll(\\''+x.exam_type+'\\', \\''+x.exam_year+'\\', \\''+x.board+'\\', \\''+x.roll+'\\', \\''+x.reg+'\\')" class="text-xs bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 px-2.5 py-1 rounded-lg font-bold transition flex items-center gap-1">' +
-          '<i class="fas fa-search text-[9px]"></i> রেজাল্ট' +
+          '<i class="fas fa-search text-[10px]"></i> রেজাল্ট' +
         '</button>' +
         '<button onclick="deleteSavedRoll('+x.id+')" class="w-7 h-7 rounded-lg bg-rose-500/10 hover:bg-rose-500/25 text-rose-400 transition flex items-center justify-center" title="মুছে ফেলুন">' +
           '<i class="fas fa-trash-can text-[10px]"></i>' +
@@ -1367,12 +1367,12 @@ async function loadAnnouncementsFeed(){
           '<div class="flex items-start justify-between gap-3 p-2.5 rounded-xl hover:bg-white/5 transition">' +
             '<div class="min-w-0">' +
               '<div class="flex items-center gap-2 mb-0.5">' +
-                '<span class="text-[9px] bg-amber-500/20 text-amber-300 px-1.5 py-0.2 rounded font-bold uppercase">' + (a.pinned ? '📌 পিন্ড' : (a.type || 'নোটিস')) + '</span>' +
-                '<h5 class="text-xs font-bold text-white truncate">' + escH(a.title) + '</h5>' +
+                '<span class="text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.2 rounded font-bold uppercase">' + (a.pinned ? '📌 পিন্ড' : (a.type || 'নোটিস')) + '</span>' +
+                '<h4 class="text-xs font-bold text-white truncate">' + escH(a.title) + '</h4>' +
               '</div>' +
               '<p class="text-[11px] text-slate-300 line-clamp-1">' + escH(a.body || '') + '</p>' +
             '</div>' +
-            (a.link ? '<a href="'+a.link+'" '+(a.link.startsWith('http') ? 'target="_blank" rel="noopener"' : '')+' class="text-[10px] text-orange-400 font-bold hover:underline shrink-0">দেখুন →</a>' : '<button onclick="openNotificationsModal()" class="text-[10px] text-amber-400 font-bold hover:underline shrink-0">পড়ুন</button>') +
+            (a.link ? '<a href="'+a.link+'" '+(a.link.startsWith('http') ? 'target="_blank" rel="noopener"' : '')+' class="text-[10px] text-orange-400 font-bold hover:underline shrink-0 py-1.5">দেখুন →</a>' : '<button onclick="openNotificationsModal()" class="text-[10px] text-amber-400 font-bold hover:underline shrink-0 py-1.5">পড়ুন</button>') +
           '</div>'
         ).join('');
       }
@@ -1839,7 +1839,7 @@ function openNotificationsModal(){
       ALL_ANNOUNCEMENTS.map(a =>
         '<div class="bg-white/5 rounded-xl p-3 border border-white/10 space-y-1">' +
           '<div class="flex items-center justify-between gap-2">' +
-            '<span class="text-[9px] bg-amber-500/20 text-amber-300 px-1.5 py-0.2 rounded font-bold uppercase">' + (a.type || 'নোটিস') + '</span>' +
+            '<span class="text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.2 rounded font-bold uppercase">' + (a.type || 'নোটিস') + '</span>' +
             '<span class="text-[10px] text-slate-400">' + (a.created_at ? a.created_at.slice(0,10) : '') + '</span>' +
           '</div>' +
           '<h4 class="font-bold text-white text-xs sm:text-sm">' + escH(a.title) + '</h4>' +

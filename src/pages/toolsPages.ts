@@ -417,7 +417,7 @@ ${toolsHeader('planner', loggedIn)}
       </div>
       <form id="task-form" class="flex flex-col sm:flex-row gap-2">
         <input id="t-title" placeholder="কী পড়বেন? যেমন: পদার্থ বিজ্ঞান অধ্যায় ৩" class="w-full sm:flex-1 min-w-0 bg-slate-800 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-400 outline-none focus:border-orange-400 transition" required>
-        <input id="t-date" type="date" class="w-full sm:w-auto bg-slate-800 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-slate-100 outline-none focus:border-orange-400 transition">
+        <input id="t-date" type="date" aria-label="কাজের তারিখ" class="w-full sm:w-auto bg-slate-800 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-slate-100 outline-none focus:border-orange-400 transition">
         <button class="w-full sm:w-auto px-4 py-2.5 bg-orange-500 hover:bg-orange-400 text-slate-950 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 shrink-0 shadow">
           <span>+ যোগ</span>
         </button>
@@ -460,7 +460,7 @@ function loadTasks(){
   fetch('/api/tools/planner').then(r=>r.json()).then(function(d){
     var el = document.getElementById('task-list');
     var ts = d.tasks||[];
-    if(!ts.length){el.innerHTML='<p class="text-slate-500">কোনো কাজ নেই — উপরে যোগ করুন!</p>';document.getElementById('task-progress').textContent='';return}
+    if(!ts.length){el.innerHTML='<p class="text-slate-400">কোনো কাজ নেই — উপরে যোগ করুন!</p>';document.getElementById('task-progress').textContent='';return}
     var done = ts.filter(function(t){return t.status==='done'}).length;
     document.getElementById('task-progress').textContent = 'অগ্রগতি: '+toBn(done)+'/'+toBn(ts.length)+' সম্পন্ন ('+toBn(Math.round(done/ts.length*100))+'%)';
     el.innerHTML = ts.map(function(t){
@@ -482,7 +482,7 @@ function loadNotes(){
   fetch('/api/tools/notes').then(r=>r.json()).then(function(d){
     var el = document.getElementById('note-list');
     var ns = d.notes||[];
-    if(!ns.length){el.innerHTML='<p class="text-slate-500">কোনো নোট নেই।</p>';return}
+    if(!ns.length){el.innerHTML='<p class="text-slate-400">কোনো নোট নেই।</p>';return}
     el.innerHTML = ns.map(function(n){
       return '<details class="bg-slate-800/60 rounded-xl p-3"><summary class="cursor-pointer font-semibold">'+(n.subject?'<span class="text-[10px] bg-orange-500/20 text-orange-300 px-2 py-0.5 rounded-full mr-1.5">'+esc(n.subject)+'</span>':'')+esc(n.title)+'</summary>'+
       '<p class="mt-2 whitespace-pre-wrap text-slate-300">'+esc(n.content||'(খালি)')+'</p>'+
@@ -609,7 +609,7 @@ function rowHtml(){
   return '<div class="course-row flex gap-2"><input placeholder="কোর্স (ঐচ্ছিক)" class="c-name flex-1 bg-slate-800 rounded-xl px-3 py-2 text-sm outline-none">'+
   '<input type="number" placeholder="ক্রেডিট" min="0.5" step="0.5" value="3" class="c-credit w-20 bg-slate-800 rounded-xl px-3 py-2 text-sm outline-none">'+
   '<select class="c-grade bg-slate-800 rounded-xl px-2 py-2 text-sm outline-none">'+GRADES.map(function(g){return '<option value="'+g[1]+'">'+g[0]+'</option>'}).join('')+'</select>'+
-  '<button onclick="this.parentElement.remove()" class="text-rose-400 px-1">✕</button></div>';
+  '<button onclick="this.parentElement.remove()" class="text-rose-400 px-2">✕</button></div>';
 }
 window.addRow=function(){document.getElementById('course-rows').insertAdjacentHTML('beforeend', rowHtml())};
 for(var i=0;i<4;i++) addRow();
@@ -743,17 +743,17 @@ ${toolsHeader('syllabus', loggedIn)}
 
       <!-- অধ্যায় তালিকা -->
       <div id="sylModalChaptersWrapper" class="hidden">
-        <h4 class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+        <h3 class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <i class="fas fa-list-check"></i> পাঠ্যসূচির মূল অধ্যায়সমূহ
-        </h4>
+        </h3>
         <div id="sylModalChapters" class="grid sm:grid-cols-2 gap-2 text-xs"></div>
       </div>
 
       <!-- মূল সিলেবাস টেক্সট -->
       <div>
-        <h4 class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+        <h3 class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <i class="fas fa-file-lines"></i> বিস্তারিত সিলেবাস ও পরীক্ষার রূপরেখা
-        </h4>
+        </h3>
         <div id="sylModalBody" class="bg-black/40 border border-white/10 rounded-xl p-4 text-xs sm:text-sm font-mono whitespace-pre-wrap leading-relaxed text-slate-200"></div>
       </div>
     </div>
@@ -763,7 +763,7 @@ ${toolsHeader('syllabus', loggedIn)}
       <span class="flex items-center gap-1.5">
         <i class="fas fa-circle-check text-orange-400"></i> এডুসব অনুমোদিত কারিকুলাম
       </span>
-      <button onclick="closeSylModal()" class="px-4 py-1.5 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-lg transition">
+      <button onclick="closeSylModal()" class="px-4 py-1.5 bg-orange-600 hover:bg-orange-500 text-slate-950 font-bold rounded-lg transition">
         সম্পন্ন
       </button>
     </div>
@@ -781,7 +781,7 @@ function loadSyllabus() {
   document.querySelectorAll('.s-tab').forEach(function(b){
     var isActive = b.dataset.lvl === currentLevel;
     b.className = 's-tab px-4 py-2.5 rounded-xl text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-1.5 ' + 
-      (isActive ? 'bg-orange-500 text-white font-bold shadow-lg shadow-orange-500/20' : 'bg-slate-900 text-slate-300 hover:bg-slate-800 font-semibold');
+      (isActive ? 'bg-orange-500 text-slate-950 font-bold shadow-lg shadow-orange-500/20' : 'bg-slate-900 text-slate-300 hover:bg-slate-800 font-semibold');
   });
 
   var listEl = document.getElementById('syllabus-list');
@@ -818,12 +818,12 @@ function renderSyllabusList(items) {
           '<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30 uppercase">'+esc(s.level)+'</span>'+
           (s.source ? '<span class="text-[11px] text-sky-400 font-medium truncate max-w-[180px] sm:max-w-xs"><i class="fas fa-building-columns mr-1"></i>'+esc(s.source)+'</span>' : '')+
         '</div>'+
-        '<h3 class="font-bold text-white text-base leading-snug group-hover:text-orange-300 transition mb-2">'+esc(s.title)+'</h3>'+
+        '<h2 class="font-bold text-white text-base leading-snug group-hover:text-orange-300 transition mb-2">'+esc(s.title)+'</h2>'+
         (s.description ? '<p class="text-xs text-slate-400 line-clamp-2 mb-3 leading-relaxed">'+esc(s.description)+'</p>' : '')+
         (s.marks_distribution ? '<div class="text-[11px] bg-white/5 border border-white/5 rounded-lg px-2.5 py-1.5 text-amber-300/90 mb-3"><i class="fas fa-calculator mr-1"></i> '+esc(s.marks_distribution)+'</div>' : '')+
       '</div>'+
       '<div class="pt-3 border-t border-white/10 flex items-center justify-between gap-2 mt-2">'+
-        '<button onclick="openSylModal('+idx+')" class="flex-1 py-2 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md">'+
+        '<button onclick="openSylModal('+idx+')" class="flex-1 py-2 rounded-xl bg-orange-600 hover:bg-orange-500 text-slate-950 font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md">'+
           '<i class="fas fa-eye"></i> সিলেবাস পড়ুন ও প্রিন্ট'+
         '</button>'+
         (s.link ? '<a href="'+esc(s.link)+'" target="_blank" rel="noopener" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 text-xs transition" title="অফিসিয়াল সাইট"><i class="fas fa-external-link"></i></a>' : '')+

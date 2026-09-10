@@ -85,7 +85,7 @@ export function renderAdminHeader(): string {
       <a href="/dashboard" class="flex items-center gap-2 font-black text-lg tracking-tight">
         <span class="w-8 h-8 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center text-slate-950 font-bold shadow-md">📚</span>
         <span>এডুসব</span>
-        <span class="text-[11px] font-extrabold bg-gradient-to-r from-rose-500 to-amber-500 text-white px-2.5 py-0.5 rounded-full shadow-sm uppercase tracking-wider">এডমিন প্যানেল</span>
+        <span class="text-[11px] font-extrabold bg-gradient-to-r from-rose-500 to-amber-500 text-slate-950 px-2.5 py-0.5 rounded-full shadow-sm uppercase tracking-wider">এডমিন প্যানেল</span>
       </a>
       <span class="hidden md:inline-flex items-center gap-1.5 text-xs text-slate-400 bg-slate-800/80 border border-slate-700/60 px-2.5 py-1 rounded-lg">
         <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></span>
@@ -102,7 +102,7 @@ export function renderAdminHeader(): string {
       </div>
       <button type="button" onclick="edusobOpenCommandPalette()" aria-label="খুঁজুন — Ctrl/⌘ + K" title="খুঁজুন — Ctrl/⌘ + K"
         class="bg-slate-800 hover:bg-slate-700 border border-slate-700 px-2.5 py-1.5 rounded-xl font-medium transition flex items-center gap-1.5">
-        <i class="fas fa-magnifying-glass text-slate-400 text-xs"></i><kbd class="text-[10px] font-black text-slate-500">⌘K</kbd>
+        <i class="fas fa-magnifying-glass text-slate-400 text-xs"></i><kbd class="text-[10px] font-black text-slate-400">⌘K</kbd>
       </button>
       <a href="/admin/shop" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 px-3 py-1.5 rounded-xl font-medium transition flex items-center gap-1.5">
         <i class="fas fa-store text-amber-400"></i><span>শপ ও পেমেন্ট</span>

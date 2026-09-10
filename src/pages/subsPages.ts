@@ -41,7 +41,7 @@ ${NAV(loggedIn)}
       <p class="font-bold text-white flex items-center gap-2">
         <i class="fas fa-shield-halved text-orange-400"></i> ১০০% নিরাপদ ও স্বচ্ছ মেম্বারশিপ নীতি
       </p>
-      <a href="/wallet" class="text-xs text-orange-400 hover:text-orange-300 font-bold flex items-center gap-1">
+      <a href="/wallet" class="text-xs text-orange-400 hover:text-orange-300 font-bold flex items-center gap-1 py-1.5">
         <i class="fas fa-wallet"></i> ওয়ালেট ব্যালেন্স চেক করুন →
       </a>
     </div>
@@ -173,7 +173,7 @@ function loadPlans(){
       } else if(rank[cur] > rank[p.slug]) {
         btn = '<span class="block text-center py-3 rounded-xl bg-white/5 text-slate-500 font-semibold text-xs">বর্তমান প্ল্যানের অন্তর্ভুক্ত</span>';
       } else {
-        btn = '<button onclick="subscribe(\\'' + p.slug + '\\',' + p.price + ')" class="w-full py-3 rounded-xl bg-gradient-to-r ' + (p.slug === 'premium' ? 'from-amber-400 to-orange-500 text-slate-950' : 'from-orange-500 to-amber-500 text-white') + ' font-black text-xs hover:opacity-90 transition shadow">সাবস্ক্রাইব করুন →</button>';
+        btn = '<button onclick="subscribe(\\'' + p.slug + '\\',' + p.price + ')" class="w-full py-3 rounded-xl bg-gradient-to-r ' + (p.slug === 'premium' ? 'from-amber-400 to-orange-500 text-slate-950' : 'from-orange-500 to-amber-500 text-slate-950') + ' font-black text-xs hover:opacity-90 transition shadow">সাবস্ক্রাইব করুন →</button>';
       }
 
       return '<div id="plan-card-' + p.slug + '" class="relative bg-slate-900/90 border ' + ring + ' rounded-2xl p-6 flex flex-col justify-between space-y-4">' + popular +
@@ -300,7 +300,7 @@ ${NAV(loggedIn)}
     <div class="flex items-center justify-between gap-3 px-6 py-4 border-b border-white/10 bg-slate-950/70">
       <div class="min-w-0">
         <span id="viewerBadge" class="text-[10px] bg-orange-500/20 text-orange-300 border border-orange-400/30 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">OFFICIAL EXAM SHEET</span>
-        <h3 id="viewerTitle" class="font-extrabold text-white text-base sm:text-lg truncate mt-1"></h3>
+        <h2 id="viewerTitle" class="font-extrabold text-white text-base sm:text-lg truncate mt-1"></h2>
       </div>
       <div class="flex items-center gap-2 shrink-0 flex-wrap">
         <button onclick="zoomText(1)" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold text-slate-200 transition" title="ফন্ট বড় করুন">A+</button>
@@ -417,10 +417,10 @@ function card(p, icon){
         (p.board?'<span>• '+esc(p.board)+'</span>':'')+
         (p.year?'<span>• '+esc(p.year)+'</span>':'')+
       '</p>'+
-      (p.description?'<p class="text-xs text-slate-500 mt-1 line-clamp-2">'+esc(p.description)+'</p>':'')+
+      (p.description?'<p class="text-xs text-slate-400 mt-1 line-clamp-2">'+esc(p.description)+'</p>':'')+
       '<div class="flex items-center gap-2 mt-3">'+
         '<span class="text-[10px] border px-2 py-0.5 rounded-full font-semibold '+a[1]+'">'+a[0]+'</span>'+
-        '<span class="text-[11px] text-slate-500 flex items-center gap-1"><i class="fas fa-download text-[10px]"></i> '+toBn(p.downloads||0)+' ডাউনলোড</span>'+
+        '<span class="text-[11px] text-slate-400 flex items-center gap-1"><i class="fas fa-download text-[10px]"></i> '+toBn(p.downloads||0)+' ডাউনলোড</span>'+
       '</div>'+
     '</div>'+
     btn+

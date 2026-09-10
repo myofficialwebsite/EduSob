@@ -56,7 +56,7 @@ export function signupPage(): string {
         <input name="referral_code" id="refCodeInput" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400 uppercase" placeholder="EDU-2026-00001">
       </div>
       <p id="signupError" class="hidden text-rose-300 text-sm bg-rose-500/20 rounded-xl px-4 py-2"></p>
-      <button type="submit" id="signupBtn" class="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white font-bold py-3 rounded-xl shadow-lg transition">
+      <button type="submit" id="signupBtn" class="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-bold py-3 rounded-xl shadow-lg transition">
         <i class="fas fa-user-plus mr-2"></i>ফ্রি অ্যাকাউন্ট খুলুন
       </button>
     </form>
@@ -113,7 +113,7 @@ export function loginPage(): string {
         </div>
       </div>
       <p id="loginError" class="hidden text-rose-300 text-sm bg-rose-500/20 rounded-xl px-4 py-2"></p>
-      <button type="submit" id="loginBtn" class="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white font-bold py-3 rounded-xl shadow-lg transition cursor-pointer">
+      <button type="submit" id="loginBtn" class="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-bold py-3 rounded-xl shadow-lg transition cursor-pointer">
         <i class="fas fa-right-to-bracket mr-2"></i>লগইন করুন
       </button>
     </form>

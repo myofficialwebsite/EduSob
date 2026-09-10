@@ -17,7 +17,7 @@ const lockScreen = `
     </div>
     <div>
       <h1 class="text-2xl font-black text-white">এডমিন অনুমতি প্রয়োজন</h1>
-      <p class="text-xs text-slate-400 mt-2 leading-relaxed">এই সেন্ট্রাল কনসোলটি শুধুমাত্র প্ল্যাটফর্মের অনুমোদিত এডমিনদের জন্য সংরক্ষিত। অনুগ্রহ করে আপনার এডমিন ক্রেডেনশিয়াল ব্যবহার করে লগইন করুন।</p>
+      <p class="text-xs text-slate-500 mt-2 leading-relaxed">এই সেন্ট্রাল কনসোলটি শুধুমাত্র প্ল্যাটফর্মের অনুমোদিত এডমিনদের জন্য সংরক্ষিত। অনুগ্রহ করে আপনার এডমিন ক্রেডেনশিয়াল ব্যবহার করে লগইন করুন।</p>
     </div>
 
     <div class="space-y-3 pt-2">
@@ -133,7 +133,7 @@ ${renderAdminHeader()}
             </tr>
           </thead>
           <tbody id="userRows" class="divide-y divide-slate-100">
-            <tr><td colspan="7" class="text-center py-8 text-slate-400">ইউজার তালিকা লোড হচ্ছে...</td></tr>
+            <tr><td colspan="7" class="text-center py-8 text-slate-500">ইউজার তালিকা লোড হচ্ছে...</td></tr>
           </tbody>
         </table>
       </div>
@@ -262,7 +262,7 @@ ${renderAdminHeader()}
       <div class="space-y-5">
         <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 space-y-4">
           <h2 class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
-            <i class="fas fa-gift text-orange-600"></i> সরাসরি প্ল্যান প্রদান (ম্যানুয়াল গ্রান্ট)
+            <i class="fas fa-gift text-orange-700"></i> সরাসরি প্ল্যান প্রদান (ম্যানুয়াল গ্রান্ট)
           </h2>
           <form id="grantForm" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             <label class="block text-slate-600 sm:col-span-2 font-semibold">
@@ -280,11 +280,11 @@ ${renderAdminHeader()}
               মেয়াদ (দিন)
               <input name="days" type="number" value="30" min="1" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs">
             </label>
-            <button class="sm:col-span-2 bg-orange-600 hover:bg-orange-500 text-white font-extrabold py-2.5 rounded-xl transition shadow">
+            <button class="sm:col-span-2 bg-orange-600 hover:bg-orange-500 text-slate-950 font-extrabold py-2.5 rounded-xl transition shadow">
               সরাসরি প্ল্যান দিন
             </button>
           </form>
-          <p class="text-[11px] text-slate-400">💡 টিপ: ইউজার তালিকা থেকে যেকোনো ইউজারের নামের পাশে <b>👑 প্ল্যান</b> বাটনে ক্লিক করলে স্বয়ংক্রিয়ভাবে এখানে আইডি বসে যাবে।</p>
+          <p class="text-[11px] text-slate-500">💡 টিপ: ইউজার তালিকা থেকে যেকোনো ইউজারের নামের পাশে <b>👑 প্ল্যান</b> বাটনে ক্লিক করলে স্বয়ংক্রিয়ভাবে এখানে আইডি বসে যাবে।</p>
         </div>
         <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 space-y-3">
           <h2 class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
@@ -304,8 +304,8 @@ ${renderAdminHeader()}
   <!-- ১৭. ফিচার টগল -->
   <section id="tab-features" class="tab-pane hidden">
     <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 max-w-2xl space-y-3">
-      <h2 class="font-extrabold text-slate-800 text-sm flex items-center gap-2"><i class="fas fa-toggle-on text-orange-600"></i> প্ল্যাটফর্ম ফিচার অন/অফ</h2>
-      <p class="text-xs text-slate-400">বন্ধ করলে সংশ্লিষ্ট মডিউল সাধারণ শিক্ষার্থীদের কাছে লুকানো থাকবে</p>
+      <h2 class="font-extrabold text-slate-800 text-sm flex items-center gap-2"><i class="fas fa-toggle-on text-orange-700"></i> প্ল্যাটফর্ম ফিচার অন/অফ</h2>
+      <p class="text-xs text-slate-500">বন্ধ করলে সংশ্লিষ্ট মডিউল সাধারণ শিক্ষার্থীদের কাছে লুকানো থাকবে</p>
       <div id="featureList" class="divide-y divide-slate-100 text-xs"></div>
     </div>
   </section>
@@ -320,11 +320,11 @@ ${renderAdminHeader()}
           <div>
             <span class="text-xs font-bold text-orange-800 bg-orange-100 px-3 py-1 rounded-full">সেন্ট্রাল কন্ট্রোল আর্কিটেকচার</span>
             <h2 class="text-xl font-extrabold text-slate-900 mt-1 flex items-center gap-2">
-              <i class="fas fa-sliders text-orange-600"></i> এডমিন মাস্টার কন্ট্রোল, ভিজিবিলিটি ও প্ল্যাটফর্ম সেটিংস
+              <i class="fas fa-sliders text-orange-700"></i> এডমিন মাস্টার কন্ট্রোল, ভিজিবিলিটি ও প্ল্যাটফর্ম সেটিংস
             </h2>
             <p class="text-xs text-slate-500 mt-0.5">মডিউল অন/অফ, পাবলিক ড্যাশবোর্ড কার্ড ফিল্টারিং, সোশ্যাল চ্যানেল লিংক ও পেমেন্ট রেট নিয়ন্ত্রণ করুন।</p>
           </div>
-          <button type="button" onclick="document.getElementById('ratesFormSubmitBtn').click()" class="bg-orange-600 hover:bg-orange-500 text-white font-extrabold px-6 py-2 rounded-xl text-xs transition shadow flex items-center gap-1.5">
+          <button type="button" onclick="document.getElementById('ratesFormSubmitBtn').click()" class="bg-orange-600 hover:bg-orange-500 text-slate-950 font-extrabold px-6 py-2 rounded-xl text-xs transition shadow flex items-center gap-1.5">
             <i class="fas fa-check"></i> সেটিংস সংরক্ষণ করুন
           </button>
         </div>
@@ -348,7 +348,7 @@ ${renderAdminHeader()}
                 <p class="font-bold text-slate-900 text-xs">🛍️ এডুসব শপ</p>
                 <p class="text-[10px] text-slate-500">বই, গ্যাজেট ও কার্ট</p>
               </div>
-              <input type="checkbox" name="shop_enabled" class="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 cursor-pointer">
+              <input type="checkbox" name="shop_enabled" class="w-4 h-4 rounded text-orange-700 focus:ring-orange-500 cursor-pointer">
             </label>
 
             <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-orange-300 transition">
@@ -356,7 +356,7 @@ ${renderAdminHeader()}
                 <p class="font-bold text-slate-900 text-xs">👨‍🏫 শিক্ষক সহায়তা</p>
                 <p class="text-[10px] text-slate-500">মেন্টর ডাউট সলভ</p>
               </div>
-              <input type="checkbox" name="teacher_support_enabled" class="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 cursor-pointer">
+              <input type="checkbox" name="teacher_support_enabled" class="w-4 h-4 rounded text-orange-700 focus:ring-orange-500 cursor-pointer">
             </label>
 
             <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-orange-300 transition">
@@ -364,7 +364,7 @@ ${renderAdminHeader()}
                 <p class="font-bold text-slate-900 text-xs">🤝 আবেদন সেবা</p>
                 <p class="text-[10px] text-slate-500">অ্যাসিস্টেড অ্যাডমিশন/জব</p>
               </div>
-              <input type="checkbox" name="assisted_service_enabled" class="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 cursor-pointer">
+              <input type="checkbox" name="assisted_service_enabled" class="w-4 h-4 rounded text-orange-700 focus:ring-orange-500 cursor-pointer">
             </label>
 
             <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-orange-300 transition">
@@ -372,7 +372,7 @@ ${renderAdminHeader()}
                 <p class="font-bold text-slate-900 text-xs">💳 ওয়ালেট রিচার্জ</p>
                 <p class="text-[10px] text-slate-500">অ্যাড মানি ও ব্যালেন্স</p>
               </div>
-              <input type="checkbox" name="wallet_recharge_enabled" class="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 cursor-pointer">
+              <input type="checkbox" name="wallet_recharge_enabled" class="w-4 h-4 rounded text-orange-700 focus:ring-orange-500 cursor-pointer">
             </label>
 
             <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer hover:border-orange-300 transition">
@@ -380,7 +380,7 @@ ${renderAdminHeader()}
                 <p class="font-bold text-slate-900 text-xs">⚡ বিকাশ অটো পেমেন্ট</p>
                 <p class="text-[10px] text-slate-500">টোকেনাইজড চেকআউট টপ-আপ</p>
               </div>
-              <input type="checkbox" name="bkash_auto_enabled" class="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 cursor-pointer">
+              <input type="checkbox" name="bkash_auto_enabled" class="w-4 h-4 rounded text-orange-700 focus:ring-orange-500 cursor-pointer">
             </label>
           </div>
         </div>
@@ -389,10 +389,10 @@ ${renderAdminHeader()}
         <div class="p-4 bg-slate-50/80 border border-slate-200/90 rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <h3 class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2">
-              <i class="fas fa-users-rays text-amber-600"></i> ২. সোশ্যাল মিডিয়া ও অফিসিয়াল কমিউনিটি চ্যানেল
+              <i class="fas fa-users-rays text-amber-700"></i> ২. সোশ্যাল মিডিয়া ও অফিসিয়াল কমিউনিটি চ্যানেল
             </h3>
             <label class="inline-flex items-center gap-1.5 cursor-pointer text-[11px] font-bold text-slate-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200">
-              <input type="checkbox" name="card_social_hub" class="w-3.5 h-3.5 rounded text-amber-600">
+              <input type="checkbox" name="card_social_hub" class="w-3.5 h-3.5 rounded text-amber-700">
               <span>মাস্টার সোশ্যাল স্ট্রিপ সক্রিয়</span>
             </label>
           </div>
@@ -404,7 +404,7 @@ ${renderAdminHeader()}
               <div class="flex items-center justify-between">
                 <span class="font-bold text-orange-700 flex items-center gap-1.5"><i class="fab fa-whatsapp text-orange-500"></i> হোয়াটসঅ্যাপ গ্রুপ</span>
                 <label class="inline-flex items-center gap-1 cursor-pointer text-[10px] font-semibold text-slate-600">
-                  <input type="checkbox" name="card_community_wa" class="w-3.5 h-3.5 rounded text-orange-600"> অন
+                  <input type="checkbox" name="card_community_wa" class="w-3.5 h-3.5 rounded text-orange-700"> অন
                 </label>
               </div>
               <input name="whatsapp_group" placeholder="https://chat.whatsapp.com/..." class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs">
@@ -447,9 +447,9 @@ ${renderAdminHeader()}
           <!-- হেল্পলাইন ও কন্টাক্ট নম্বর -->
           <div class="bg-white p-3 border border-slate-200 rounded-xl space-y-2">
             <div class="flex items-center justify-between">
-              <span class="font-bold text-amber-800 flex items-center gap-1.5"><i class="fas fa-headset text-amber-600"></i> সরাসরি হেল্পলাইন ও সাপোর্ট সাপোর্ট বক্স</span>
+              <span class="font-bold text-amber-800 flex items-center gap-1.5"><i class="fas fa-headset text-amber-700"></i> সরাসরি হেল্পলাইন ও সাপোর্ট সাপোর্ট বক্স</span>
               <label class="inline-flex items-center gap-1 cursor-pointer text-[10px] font-semibold text-slate-600">
-                <input type="checkbox" name="card_community_help" class="w-3.5 h-3.5 rounded text-amber-600"> অন
+                <input type="checkbox" name="card_community_help" class="w-3.5 h-3.5 rounded text-amber-700"> অন
               </label>
             </div>
             <div class="grid sm:grid-cols-3 gap-2.5">
@@ -535,7 +535,7 @@ ${renderAdminHeader()}
         <div class="p-4 bg-slate-50/80 border border-slate-200/90 rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <h3 class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2">
-              <i class="fas fa-bangladeshi-taka-sign text-orange-600"></i> ৪. পেমেন্ট নম্বর, ডেলিভারি ও বোনাস রেট
+              <i class="fas fa-bangladeshi-taka-sign text-orange-700"></i> ৪. পেমেন্ট নম্বর, ডেলিভারি ও বোনাস রেট
             </h3>
             <span class="text-[10px] text-slate-500">আর্থিক কনফিগারেশন</span>
           </div>
@@ -569,13 +569,13 @@ ${renderAdminHeader()}
         <div class="p-4 bg-orange-50/50 border border-orange-200/80 rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <h3 class="font-extrabold text-orange-900 text-xs sm:text-sm flex items-center gap-2">
-              <i class="fas fa-sitemap text-orange-600"></i> ৫. EduSob কন্ট্রোল দায়িত্ব বণ্টন ম্যাট্রিক্স (Responsibility Matrix)
+              <i class="fas fa-sitemap text-orange-700"></i> ৫. EduSob কন্ট্রোল দায়িত্ব বণ্টন ম্যাট্রিক্স (Responsibility Matrix)
             </h3>
             <span class="text-[10px] bg-orange-100 text-orange-800 font-bold px-2 py-0.5 rounded-full">সিস্টেম ব্লুপ্রিন্ট</span>
           </div>
           <div class="grid md:grid-cols-3 gap-3 text-[11px] text-slate-700">
             <div class="p-3 bg-white rounded-xl border border-orange-100 space-y-1">
-              <p class="font-bold text-orange-800 flex items-center gap-1.5"><i class="fas fa-user-shield text-orange-600"></i> এডমিন কন্ট্রোল (Manual Policy)</p>
+              <p class="font-bold text-orange-800 flex items-center gap-1.5"><i class="fas fa-user-shield text-orange-700"></i> এডমিন কন্ট্রোল (Manual Policy)</p>
               <ul class="list-disc list-inside text-[10px] space-y-0.5 text-slate-600">
                 <li>শপ ও শিক্ষক মডিউল অন/অফ</li>
                 <li>সোশ্যাল লিংক ও কার্ড ভিজিবিলিটি</li>
@@ -595,7 +595,7 @@ ${renderAdminHeader()}
               </ul>
             </div>
             <div class="p-3 bg-white rounded-xl border border-amber-100 space-y-1">
-              <p class="font-bold text-amber-800 flex items-center gap-1.5"><i class="fas fa-user-graduate text-amber-600"></i> ইউজার ও মেন্টর (Self-Service)</p>
+              <p class="font-bold text-amber-800 flex items-center gap-1.5"><i class="fas fa-user-graduate text-amber-700"></i> ইউজার ও মেন্টর (Self-Service)</p>
               <ul class="list-disc list-inside text-[10px] space-y-0.5 text-slate-600">
                 <li>স্টুডেন্ট নিজের রোল ও তথ্য সংরক্ষণ</li>
                 <li>দৈনিক মিশন সম্পন্ন টিক দেওয়া</li>
@@ -609,7 +609,7 @@ ${renderAdminHeader()}
 
         <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
           <span class="text-[11px] text-slate-500">যেকোনো পরিবর্তন সাথে সাথে পাবলিক সাইট ও ড্যাশবোর্ডে প্রযোজ্য হবে।</span>
-          <button id="ratesFormSubmitBtn" type="submit" class="bg-orange-600 hover:bg-orange-500 text-white font-extrabold px-6 py-2.5 rounded-xl text-xs transition shadow flex items-center gap-1.5">
+          <button id="ratesFormSubmitBtn" type="submit" class="bg-orange-600 hover:bg-orange-500 text-slate-950 font-extrabold px-6 py-2.5 rounded-xl text-xs transition shadow flex items-center gap-1.5">
             <i class="fas fa-check"></i> সেটিংস সংরক্ষণ করুন
           </button>
         </div>
@@ -628,7 +628,7 @@ ${renderSecurityModals()}
       <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
         <i class="fas fa-chalkboard-user text-amber-500"></i> <span id="tf_modal_title">নতুন শিক্ষক যোগ করুন</span>
       </h3>
-      <button onclick="closeTeacherModal()" class="text-slate-400 hover:text-slate-700 text-lg font-bold">✕</button>
+      <button onclick="closeTeacherModal()" class="text-slate-500 hover:text-slate-700 text-lg font-bold">✕</button>
     </div>
     <form id="teacherForm" onsubmit="return saveTeacherForm(event)" class="space-y-3 text-xs text-slate-700">
       <input type="hidden" name="teacher_id" id="tf_id">
@@ -655,7 +655,7 @@ ${renderSecurityModals()}
         </label>
       </div>
       <div class="p-3 bg-amber-50/70 border border-amber-200/80 rounded-2xl space-y-2">
-        <label class="font-bold text-amber-900 flex items-center gap-1.5"><i class="fas fa-key text-amber-600"></i>শিক্ষক লগইন আইডি (ফোন) ও পাসওয়ার্ড</label>
+        <label class="font-bold text-amber-900 flex items-center gap-1.5"><i class="fas fa-key text-amber-700"></i>শিক্ষক লগইন আইডি (ফোন) ও পাসওয়ার্ড</label>
         <div class="grid sm:grid-cols-2 gap-2.5">
           <input name="phone" id="tf_phone" placeholder="01XXXXXXXXX" class="w-full border border-slate-300 rounded-xl px-3 py-1.5 text-xs bg-white">
           <input name="password" id="tf_password" type="password" placeholder="পাসওয়ার্ড" class="w-full border border-slate-300 rounded-xl px-3 py-1.5 text-xs bg-white">
@@ -663,10 +663,10 @@ ${renderSecurityModals()}
       </div>
       <div class="flex items-center gap-4 py-1">
         <label class="inline-flex items-center gap-1.5 cursor-pointer font-semibold">
-          <input type="checkbox" name="is_online" id="tf_online" checked class="w-4 h-4 rounded text-orange-600"> 🟢 সরাসরি অনলাইন আছেন
+          <input type="checkbox" name="is_online" id="tf_online" checked class="w-4 h-4 rounded text-orange-700"> 🟢 সরাসরি অনলাইন আছেন
         </label>
         <label class="inline-flex items-center gap-1.5 cursor-pointer font-semibold">
-          <input type="checkbox" name="is_active" id="tf_active" checked class="w-4 h-4 rounded text-orange-600"> ✓ সক্রিয় প্রোফাইল
+          <input type="checkbox" name="is_active" id="tf_active" checked class="w-4 h-4 rounded text-orange-700"> ✓ সক্রিয় প্রোফাইল
         </label>
       </div>
       <div class="flex gap-2 pt-2 border-t border-slate-100">
@@ -685,7 +685,7 @@ ${renderSecurityModals()}
         <h3 id="chatModalTitle" class="font-bold text-sm">শিক্ষার্থীর সাথে লাইভ সমাধান চ্যাট</h3>
         <p id="chatModalSub" class="text-[11px] text-slate-300">টিকেট #...</p>
       </div>
-      <button onclick="closeTicketChat()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+      <button onclick="closeTicketChat()" class="text-slate-500 hover:text-white text-lg font-bold">✕</button>
     </div>
     <div id="chatMessagesBox" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50 text-xs"></div>
     <form onsubmit="return sendTicketChatMsg(event)" class="p-3 bg-white border-t border-slate-200 flex gap-2 items-center">
@@ -809,7 +809,7 @@ function switchAdminCategory(catId, targetTabId){
     chipsBox.innerHTML = cat.tabs.map(function(t){
       return '<button onclick="switchAdminTab(\\''+t.id+'\\')" id="chip-'+t.id+'" class="admin-chip px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition flex items-center gap-1.5 text-slate-300 hover:bg-slate-800">'+
         '<i class="fas '+t.icon+' text-[11px]"></i><span>'+t.label+'</span>'+
-        (t.badge ? ' <span class="text-[9px] bg-orange-500/20 text-orange-300 px-1.5 py-0.5 rounded-full font-bold">'+t.badge+'</span>' : '')+
+        (t.badge ? ' <span class="text-[10px] bg-orange-500/20 text-orange-300 px-1.5 py-0.5 rounded-full font-bold">'+t.badge+'</span>' : '')+
       '</button>';
     }).join('');
   }
@@ -888,11 +888,11 @@ function filterAdminModules(q){
   });
 
   if(!matched.length){
-    box.innerHTML = '<p class="text-slate-400 p-2 text-center">কোনো মডিউল মেলেনি</p>';
+    box.innerHTML = '<p class="text-slate-500 p-2 text-center">কোনো মডিউল মেলেনি</p>';
   } else {
     box.innerHTML = matched.slice(0, 6).map(function(m){
       return '<button onclick="navigateToTab(\\''+m.tabId+'\\'); document.getElementById(\\'quickSearchResults\\').classList.add(\\'hidden\\');" class="w-full text-left p-2 rounded-lg hover:bg-slate-800 transition flex items-center justify-between text-slate-200">'+
-        '<span class="font-bold">'+m.label+'</span><span class="text-[10px] text-slate-400 font-normal">'+m.catLabel+'</span>'+
+        '<span class="font-bold">'+m.label+'</span><span class="text-[10px] text-slate-500 font-normal">'+m.catLabel+'</span>'+
       '</button>';
     }).join('');
   }
@@ -981,12 +981,12 @@ async function loadStats(){
     ruBox.innerHTML = d.recent_users.map(function(u){
       var roleBadge = u.role === 'admin' ? '<span class="bg-rose-100 text-rose-800 font-bold px-1.5 py-0.5 rounded text-[10px]">👑 এডমিন</span>' : (u.role === 'teacher' ? '<span class="bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded text-[10px]">👨‍🏫 শিক্ষক</span>' : '<span class="bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded text-[10px]">ইউজার</span>');
       return '<div class="py-2.5 flex items-center justify-between gap-2">'+
-        '<div><p class="font-bold text-slate-900">'+esc(u.name_bn||'শিক্ষার্থী')+'</p><p class="text-slate-400 text-[10px]">'+esc(u.phone)+' • '+esc(u.user_code)+'</p></div>'+
+        '<div><p class="font-bold text-slate-900">'+esc(u.name_bn||'শিক্ষার্থী')+'</p><p class="text-slate-500 text-[10px]">'+esc(u.phone)+' • '+esc(u.user_code)+'</p></div>'+
         '<div class="flex items-center gap-1.5">'+roleBadge+
           '<button onclick="openRoleModalById('+u.id+', \\''+jsq(u.name_bn||'')+'\\', \\''+jsq(u.phone)+'\\', \\''+u.role+'\\')" class="text-[10px] px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded font-semibold text-slate-700">রোল</button>'+
         '</div>'+
       '</div>';
-    }).join('') || '<p class="text-slate-400 py-3">কোনো ইউজার নেই</p>';
+    }).join('') || '<p class="text-slate-500 py-3">কোনো ইউজার নেই</p>';
   }
 
   // টাইমলাইন ফিড
@@ -1005,18 +1005,18 @@ async function loadStats(){
       items.push({
         time: a.created_at || 'কিছুক্ষণ আগে',
         icon: 'fa-shield',
-        color: 'text-orange-600 bg-orange-50',
+        color: 'text-orange-700 bg-orange-50',
         text: '<b>' + esc(a.admin_name||'এডমিন') + '</b>: ' + esc(a.details||a.action)
       });
     });
 
     if(!items.length){
-      tlBox.innerHTML = '<p class="text-slate-400 py-4 text-center">কোনো সাম্প্রতিক অ্যাক্টিভিটি নেই</p>';
+      tlBox.innerHTML = '<p class="text-slate-500 py-4 text-center">কোনো সাম্প্রতিক অ্যাক্টিভিটি নেই</p>';
     } else {
       tlBox.innerHTML = items.slice(0, 8).map(function(it){
         return '<div class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-50 transition">'+
           '<div class="w-6 h-6 rounded-lg flex items-center justify-center shrink-0 text-xs '+it.color+'"><i class="fas '+it.icon+'"></i></div>'+
-          '<div class="flex-1 min-w-0 text-[11px]"><p class="text-slate-700 leading-snug">'+it.text+'</p><p class="text-slate-400 text-[9px] mt-0.5">'+it.time+'</p></div>'+
+          '<div class="flex-1 min-w-0 text-[11px]"><p class="text-slate-700 leading-snug">'+it.text+'</p><p class="text-slate-500 text-[10px] mt-0.5">'+it.time+'</p></div>'+
         '</div>';
       }).join('');
     }
@@ -1047,7 +1047,7 @@ async function loadUsers(){
   if(!tbody) return;
 
   if(!USERS_CACHE.length){
-    tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8 text-slate-400">কোনো ইউজার পাওয়া যায়নি</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8 text-slate-500">কোনো ইউজার পাওয়া যায়নি</td></tr>';
     return;
   }
 
@@ -1057,9 +1057,9 @@ async function loadUsers(){
     var isSuspended = u.status === 'suspended';
 
     return '<tr class="hover:bg-slate-50 transition border-b border-slate-100">'+
-      '<td class="py-2.5 px-3"><b>'+esc(u.name_bn||'শিক্ষার্থী')+'</b><div class="text-[10px] text-slate-400">'+esc(u.user_code)+'</div></td>'+
+      '<td class="py-2.5 px-3"><b>'+esc(u.name_bn||'শিক্ষার্থী')+'</b><div class="text-[10px] text-slate-500">'+esc(u.user_code)+'</div></td>'+
       '<td class="py-2.5 px-3 font-mono">'+esc(u.phone)+'</td>'+
-      '<td class="py-2.5 px-3 font-bold '+(u.balance>0?'text-orange-600':'text-slate-500')+'">'+tk(u.balance)+'</td>'+
+      '<td class="py-2.5 px-3 font-bold '+(u.balance>0?'text-orange-700':'text-slate-500')+'">'+tk(u.balance)+'</td>'+
       '<td class="py-2.5 px-3 text-slate-500">'+toBn(u.referrals||0)+' জন</td>'+
       '<td class="py-2.5 px-3 text-center">'+roleBadge+'</td>'+
       '<td class="py-2.5 px-3 text-center">'+
@@ -1225,21 +1225,21 @@ async function loadSyncSources(){
       '<td class="py-3 px-3">'+
         '<p class="font-bold text-slate-900">'+esc(s.name)+'</p>'+
         '<a href="'+esc(safeUrl(s.source_url))+'" target="_blank" class="text-[10px] text-sky-600 hover:underline flex items-center gap-1">'+
-          '<i class="fas fa-arrow-up-right-from-square text-[9px]"></i> '+esc(s.source_url)+
+          '<i class="fas fa-arrow-up-right-from-square text-[10px]"></i> '+esc(s.source_url)+
         '</a>'+
       '</td>'+
       '<td class="py-3 px-3"><span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono text-[10px]">'+esc(s.category)+'</span></td>'+
       '<td class="py-3 px-3 text-slate-500">'+esc(s.last_synced_at || 'এখনো সিঙ্ক হয়নি')+'</td>'+
       '<td class="py-3 px-3 text-center font-bold text-slate-800">'+toBn(s.total_fetched || 0)+'</td>'+
-      '<td class="py-3 px-3 text-center font-bold text-orange-600">+'+toBn(s.new_added || 0)+'</td>'+
-      '<td class="py-3 px-3 text-center text-slate-400">'+toBn(s.duplicates_count || 0)+'</td>'+
+      '<td class="py-3 px-3 text-center font-bold text-orange-700">+'+toBn(s.new_added || 0)+'</td>'+
+      '<td class="py-3 px-3 text-center text-slate-500">'+toBn(s.duplicates_count || 0)+'</td>'+
       '<td class="py-3 px-3 text-center">'+
         '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold '+(isLive?'bg-orange-100 text-orange-800':'bg-amber-100 text-amber-800')+'">'+
           (isLive ? '🟢 সক্রিয়' : 'অপেক্ষমান')+
         '</span>'+
       '</td>'+
       '<td class="py-3 px-3 text-right">'+
-        '<button onclick="triggerForceSync(\\''+s.key+'\\')" class="px-2.5 py-1.5 bg-orange-600 hover:bg-orange-500 text-white rounded-xl font-extrabold text-[10px] transition shadow flex items-center gap-1 ml-auto">'+
+        '<button onclick="triggerForceSync(\\''+s.key+'\\')" class="px-2.5 py-1.5 bg-orange-600 hover:bg-orange-500 text-slate-950 rounded-xl font-extrabold text-[10px] transition shadow flex items-center gap-1 ml-auto">'+
           '<i class="fas fa-bolt"></i> ফোর্স সিঙ্ক'+
         '</button>'+
       '</td>'+
@@ -1296,15 +1296,15 @@ async function loadSyncLogs(){
   tbody.innerHTML = (d.logs || []).map(function(l){
     var isSuccess = l.status === 'success';
     return '<tr class="hover:bg-slate-50 transition">'+
-      '<td class="py-2 px-3 text-slate-400">'+esc(l.created_at)+'</td>'+
+      '<td class="py-2 px-3 text-slate-500">'+esc(l.created_at)+'</td>'+
       '<td class="py-2 px-3 font-semibold text-slate-800">'+esc(l.source_name)+'</td>'+
       '<td class="py-2 px-3 text-center">'+
         '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold '+(isSuccess?'bg-orange-100 text-orange-800':'bg-rose-100 text-rose-800')+'">'+
           (isSuccess ? '✓ সফল' : '✕ ত্রুটি')+
         '</span>'+
       '</td>'+
-      '<td class="py-2 px-3 text-center font-bold text-orange-600">+'+toBn(l.new_count||0)+'</td>'+
-      '<td class="py-2 px-3 text-center text-slate-400">'+toBn(l.duration_ms||0)+'ms</td>'+
+      '<td class="py-2 px-3 text-center font-bold text-orange-700">+'+toBn(l.new_count||0)+'</td>'+
+      '<td class="py-2 px-3 text-center text-slate-500">'+toBn(l.duration_ms||0)+'ms</td>'+
       '<td class="py-2 px-3 text-slate-500">'+esc(l.triggered_by||'এডমিন')+'</td>'+
     '</tr>';
   }).join('');
@@ -1330,12 +1330,12 @@ function renderAuditRows(list){
   var tbody = document.getElementById('auditLogsTableBody');
   if(!tbody) return;
   if(!list.length){
-    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-slate-400">কোনো অডিট লগ রেকর্ড নেই</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-slate-500">কোনো অডিট লগ রেকর্ড নেই</td></tr>';
     return;
   }
   tbody.innerHTML = list.map(function(a){
     return '<tr class="hover:bg-slate-50 transition">'+
-      '<td class="py-2.5 px-3 text-slate-400">'+esc(a.created_at)+'</td>'+
+      '<td class="py-2.5 px-3 text-slate-500">'+esc(a.created_at)+'</td>'+
       '<td class="py-2.5 px-3 font-mono font-bold text-amber-800"><span class="bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">'+esc(a.action)+'</span></td>'+
       '<td class="py-2.5 px-3 font-semibold text-slate-800">'+esc(a.admin_name||'এডমিন')+'</td>'+
       '<td class="py-2.5 px-3 font-mono text-slate-500">'+esc(a.target_type)+' #'+esc(a.target_id)+'</td>'+
@@ -1397,7 +1397,7 @@ async function loadMentorOverview(){
   var compBox = document.getElementById('admComplaintsList');
   if(compBox){
     if(!d.complaints || !d.complaints.length){
-      compBox.innerHTML = '<div class="py-8 text-center text-slate-400 bg-slate-50 rounded-2xl">কোনো কমপ্লেন বা নেগেটিভ ফিডব্যাক নেই ✓</div>';
+      compBox.innerHTML = '<div class="py-8 text-center text-slate-500 bg-slate-50 rounded-2xl">কোনো কমপ্লেন বা নেগেটিভ ফিডব্যাক নেই ✓</div>';
     } else {
       compBox.innerHTML = d.complaints.map(function(c){
         return '<div class="border border-rose-200 bg-rose-50/40 rounded-2xl p-4 space-y-2">'+
@@ -1419,12 +1419,12 @@ async function loadMentorOverview(){
   var payBox = document.getElementById('admPayoutsList');
   if(payBox){
     if(!d.payouts || !d.payouts.length){
-      payBox.innerHTML = '<p class="text-slate-400 py-6 text-center">কোনো পূর্ববর্তী পেআউট রেকর্ড নেই</p>';
+      payBox.innerHTML = '<p class="text-slate-500 py-6 text-center">কোনো পূর্ববর্তী পেআউট রেকর্ড নেই</p>';
     } else {
       payBox.innerHTML = d.payouts.map(function(p){
         return '<div class="py-2.5 px-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">'+
-          '<div><p class="font-bold text-slate-900">'+esc(p.mentor_name)+'</p><p class="text-[10px] text-slate-400">'+esc(p.note)+' • '+esc(p.created_at)+'</p></div>'+
-          '<div class="text-right font-bold text-orange-600 text-sm">'+tk(p.amount)+'</div>'+
+          '<div><p class="font-bold text-slate-900">'+esc(p.mentor_name)+'</p><p class="text-[10px] text-slate-500">'+esc(p.note)+' • '+esc(p.created_at)+'</p></div>'+
+          '<div class="text-right font-bold text-orange-700 text-sm">'+tk(p.amount)+'</div>'+
         '</div>';
       }).join('');
     }
@@ -1474,7 +1474,7 @@ async function loadAssistedApps(status){
   if(!box) return;
 
   if(!ASSISTED_CACHE.length){
-    box.innerHTML = '<div class="py-12 text-center text-slate-400 bg-slate-50 rounded-2xl">কোনো আবেদন পাওয়া যায়নি</div>';
+    box.innerHTML = '<div class="py-12 text-center text-slate-500 bg-slate-50 rounded-2xl">কোনো আবেদন পাওয়া যায়নি</div>';
     return;
   }
 
@@ -1536,7 +1536,7 @@ var CRUD_CONFIG = {
       ['apply_url','অনলাইন আবেদন লিংক','text'],
       ['details','বিস্তারিত বিবরণ ও যোগ্যতা','textarea']
     ],
-    row: function(j){ return '<b>'+esc(j.title)+'</b> <span class="text-xs text-slate-400">['+esc(j.org)+'] ডেডলাইন: '+esc(j.deadline||'—')+'</span>'; }
+    row: function(j){ return '<b>'+esc(j.title)+'</b> <span class="text-xs text-slate-500">['+esc(j.org)+'] ডেডলাইন: '+esc(j.deadline||'—')+'</span>'; }
   },
   admissions: {
     title: '🎓 ভর্তি তথ্য ও পোর্টাল', api: '/api/admin/admissions', key: 'admissions',
@@ -1549,7 +1549,7 @@ var CRUD_CONFIG = {
       ['fee','আবেদন ফি','text'],
       ['details','বিস্তারিত সার্কুলার','textarea']
     ],
-    row: function(a){ return '<b>'+esc(a.title)+'</b> <span class="text-xs text-slate-400">['+esc(a.org)+'] শেষ: '+esc(a.deadline||'—')+'</span>'; }
+    row: function(a){ return '<b>'+esc(a.title)+'</b> <span class="text-xs text-slate-500">['+esc(a.org)+'] শেষ: '+esc(a.deadline||'—')+'</span>'; }
   },
   notices: {
     title: '📢 নোটিস বোর্ড', api: '/api/admin/notices', key: 'notices',
@@ -1559,7 +1559,7 @@ var CRUD_CONFIG = {
       ['source','সোর্স ও কর্তৃপক্ষ','text'],
       ['body','বিস্তারিত বিবরণ','textarea']
     ],
-    row: function(n){ return '<b>'+esc(n.title)+'</b> <span class="text-xs text-slate-400">['+esc(n.category)+']</span>'; }
+    row: function(n){ return '<b>'+esc(n.title)+'</b> <span class="text-xs text-slate-500">['+esc(n.category)+']</span>'; }
   },
   mcq: {
     title: '❓ MCQ ও কুইজ প্রশ্নব্যাংক', api: '/api/admin/mcq', key: 'questions',
@@ -1575,7 +1575,7 @@ var CRUD_CONFIG = {
       ['level','শিক্ষাস্তর','text'],
       ['source','বোর্ড / পরীক্ষার নাম ও সাল','text']
     ],
-    row: function(m){ return '<b>'+esc(m.question)+'</b> <span class="text-xs text-slate-400">উত্তর: '+esc(m.answer)+' • '+esc(m.source||'')+'</span>'; }
+    row: function(m){ return '<b>'+esc(m.question)+'</b> <span class="text-xs text-slate-500">উত্তর: '+esc(m.answer)+' • '+esc(m.source||'')+'</span>'; }
   },
   syllabus: {
     title: '📖 সিলেবাস হাব', api: '/api/admin/syllabus', key: 'syllabus',
@@ -1587,7 +1587,7 @@ var CRUD_CONFIG = {
       ['source','সোর্স (NCTB / NU)','text'],
       ['content','সংক্ষিপ্ত সিলেবাস আউটলাইন','textarea']
     ],
-    row: function(s){ return '<b>'+esc(s.title)+'</b> <span class="text-xs text-slate-400">['+esc(s.level)+' - '+esc(s.subject)+']</span>'; }
+    row: function(s){ return '<b>'+esc(s.title)+'</b> <span class="text-xs text-slate-500">['+esc(s.level)+' - '+esc(s.subject)+']</span>'; }
   },
   qpapers: {
     title: '📜 বিগত বছরের প্রশ্নপত্র (২০১৭-২৪)', api: '/api/admin/qpapers', key: 'qpapers',
@@ -1600,7 +1600,7 @@ var CRUD_CONFIG = {
       ['pdf_url','প্রশ্ন ও উত্তরের PDF লিংক','text'],
       ['source','অফিসিয়াল সোর্স','text']
     ],
-    row: function(q){ return '<b>'+esc(q.title)+'</b> <span class="text-xs text-slate-400">['+esc(q.year)+' • '+esc(q.board||'All')+']</span>'; }
+    row: function(q){ return '<b>'+esc(q.title)+'</b> <span class="text-xs text-slate-500">['+esc(q.year)+' • '+esc(q.board||'All')+']</span>'; }
   },
   suggestions: {
     title: '💡 সাজেশন ও মডেল টেস্ট', api: '/api/admin/suggestions', key: 'suggestions',
@@ -1610,7 +1610,7 @@ var CRUD_CONFIG = {
       ['subject','বিষয় *','text'],
       ['content','সাজেশন ও কমন উপযোগী প্রশ্নমালা','textarea']
     ],
-    row: function(sg){ return '<b>'+esc(sg.title)+'</b> <span class="text-xs text-slate-400">['+esc(sg.level)+' • '+esc(sg.subject)+']</span>'; }
+    row: function(sg){ return '<b>'+esc(sg.title)+'</b> <span class="text-xs text-slate-500">['+esc(sg.level)+' • '+esc(sg.subject)+']</span>'; }
   },
   scholarships: {
     title: '🎓 স্কলারশিপ ও অনুদান', api: '/api/admin/scholarships', key: 'scholarships',
@@ -1625,7 +1625,7 @@ var CRUD_CONFIG = {
       ['source','অফিসিয়াল গেজেট লিংক (shed.gov.bd)','text'],
       ['tips_guideline','টিপস ও গাইডলাইন','textarea']
     ],
-    row: function(sc){ return '<b>'+esc(sc.title)+'</b> <span class="text-xs text-slate-400">['+esc(sc.provider)+'] বৃত্তি: '+esc(sc.stipend_amount)+'</span>'; }
+    row: function(sc){ return '<b>'+esc(sc.title)+'</b> <span class="text-xs text-slate-500">['+esc(sc.provider)+'] বৃত্তি: '+esc(sc.stipend_amount)+'</span>'; }
   },
   announce: {
     title: '🔔 পুশ নোটিস ও ঘোষণা', api: '/api/admin/announcements', key: 'announcements',
@@ -1635,7 +1635,7 @@ var CRUD_CONFIG = {
       ['target_role','টার্গেট ইউজার (all, premium, free)','text'],
       ['badge','হাইলাইট ব্যাজ (যেমন: জরুরি, নতুন)','text']
     ],
-    row: function(an){ return '<b>'+esc(an.title)+'</b> <span class="text-xs text-slate-400">['+esc(an.target_role||'all')+']</span>'; }
+    row: function(an){ return '<b>'+esc(an.title)+'</b> <span class="text-xs text-slate-500">['+esc(an.target_role||'all')+']</span>'; }
   }
 };
 var CRUD = CRUD_CONFIG;
@@ -1671,14 +1671,14 @@ function renderCrud(t){
       '<form id="form-'+t+'" class="space-y-3">'+formInputs+
         '<div class="flex gap-2 pt-2">'+
           '<button type="button" onclick="toggleManualCrudForm(\\''+t+'\\')" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 rounded-xl text-xs">বাতিল</button>'+
-          '<button type="submit" class="flex-1 bg-orange-600 hover:bg-orange-500 text-white font-extrabold py-2 rounded-xl text-xs transition shadow">সংরক্ষণ করুন</button>'+
+          '<button type="submit" class="flex-1 bg-orange-600 hover:bg-orange-500 text-slate-950 font-extrabold py-2 rounded-xl text-xs transition shadow">সংরক্ষণ করুন</button>'+
         '</div>'+
       '</form>'+
     '</div>'+
     '<div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 space-y-3">'+
       '<div class="flex items-center justify-between pb-2 border-b border-slate-100">'+
         '<h3 class="font-extrabold text-slate-900 text-sm">তালিকা ও ভেরিফিকেশন স্ট্যাটাস</h3>'+
-        '<span class="text-xs text-slate-400" id="crudCount-'+t+'">আইটেম লোড হচ্ছে...</span>'+
+        '<span class="text-xs text-slate-500" id="crudCount-'+t+'">আইটেম লোড হচ্ছে...</span>'+
       '</div>'+
       '<div id="list-'+t+'" class="divide-y divide-slate-100 text-xs max-h-[34rem] overflow-y-auto"></div>'+
     '</div>';
@@ -1738,7 +1738,7 @@ function renderFilteredCrudList(t) {
   if (!listEl) return;
 
   if (!filtered.length) {
-    listEl.innerHTML = '<p class="text-slate-400 py-6 text-center">এই ফিল্টারে কোনো কন্টেন্ট নেই</p>';
+    listEl.innerHTML = '<p class="text-slate-500 py-6 text-center">এই ফিল্টারে কোনো কন্টেন্ট নেই</p>';
     return;
   }
 
@@ -1752,11 +1752,11 @@ function renderFilteredCrudList(t) {
           '<span class="text-[10px] px-2 py-0.5 rounded-full font-bold ' + (isLive ? 'bg-orange-100 text-orange-800' : 'bg-amber-100 text-amber-800') + '">' +
             (isLive ? '🟢 লাইভ ও অনুমোদিত' : '🟡 অপেক্ষমান যাচাই') +
           '</span>' +
-          (srcUrl ? '<a href="' + esc(srcUrl) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[10px] text-sky-600 hover:text-sky-800 hover:underline font-medium"><i class="fas fa-external-link-alt text-[9px]"></i>সোর্স যাচাই ↗</a>' : '') +
+          (srcUrl ? '<a href="' + esc(srcUrl) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[10px] text-sky-600 hover:text-sky-800 hover:underline font-medium"><i class="fas fa-external-link-alt text-[10px]"></i>সোর্স যাচাই ↗</a>' : '') +
         '</div>' +
       '</div>' +
       '<div class="flex items-center gap-1.5 shrink-0">' +
-        '<button onclick="toggleContentStatus(\\'' + t + '\\', ' + it.id + ', ' + (isLive ? 0 : 1) + ')" class="text-[10px] font-bold px-2.5 py-1 rounded-lg transition-colors ' + (isLive ? 'bg-slate-100 text-slate-700 hover:bg-amber-100 hover:text-amber-800' : 'bg-orange-600 text-white hover:bg-orange-700 shadow-sm') + '">' +
+        '<button onclick="toggleContentStatus(\\'' + t + '\\', ' + it.id + ', ' + (isLive ? 0 : 1) + ')" class="text-[10px] font-bold px-2.5 py-1 rounded-lg transition-colors ' + (isLive ? 'bg-slate-100 text-slate-700 hover:bg-amber-100 hover:text-amber-800' : 'bg-orange-600 text-slate-950 hover:bg-orange-700 shadow-sm') + '">' +
           (isLive ? 'হাইড' : '✓ পাবলিশ') +
         '</button>' +
         '<button onclick="deleteCrudItem(\\'' + t + '\\', ' + it.id + ')" class="text-[10px] font-bold px-2 py-1 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-100">মুছুন</button>' +
@@ -1824,8 +1824,8 @@ async function loadSubsTab(){
   var s = await api('get', '/api/subs/admin/subscribers');
   if(s && s.subscribers){
     document.getElementById('subsList').innerHTML = (s.subscribers||[]).map(function(x){
-      return '<div class="py-2 flex items-center justify-between"><span><b>'+esc(x.name_bn)+'</b> ('+esc(x.phone)+')</span><span class="font-bold text-orange-600">'+esc(x.plan_slug)+'</span></div>';
-    }).join('') || '<p class="text-slate-400 py-3">কোনো সাবস্ক্রাইবার নেই</p>';
+      return '<div class="py-2 flex items-center justify-between"><span><b>'+esc(x.name_bn)+'</b> ('+esc(x.phone)+')</span><span class="font-bold text-orange-700">'+esc(x.plan_slug)+'</span></div>';
+    }).join('') || '<p class="text-slate-500 py-3">কোনো সাবস্ক্রাইবার নেই</p>';
   }
 }
 
@@ -1852,7 +1852,7 @@ async function loadFeatures(){
   var d = await api('get', '/api/subs/admin/features');
   if(!d) return;
   document.getElementById('featureList').innerHTML = (d.features||[]).map(function(f){
-    return '<div class="py-3 flex items-center justify-between gap-3"><div><p class="font-bold">'+esc(f.name_bn)+'</p><p class="text-[10px] text-slate-400">'+esc(f.key)+'</p></div>'+
+    return '<div class="py-3 flex items-center justify-between gap-3"><div><p class="font-bold">'+esc(f.name_bn)+'</p><p class="text-[10px] text-slate-500">'+esc(f.key)+'</p></div>'+
       '<button onclick="toggleFeature(\\''+f.key+'\\','+(f.is_enabled?0:1)+')" class="px-3 py-1 rounded-full text-[10px] font-bold '+(f.is_enabled?'bg-orange-100 text-orange-800':'bg-slate-200 text-slate-500')+'">'+(f.is_enabled?'✓ চালু':'✕ বন্ধ')+'</button></div>';
   }).join('');
 }
@@ -1909,15 +1909,15 @@ async function loadAdminTeachers(){
     return '<div class="border border-slate-200 rounded-2xl p-4 bg-white shadow-sm space-y-2">'+
       '<div class="flex items-center gap-2.5">'+
         '<div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-900 font-bold flex items-center justify-center text-sm">👨‍🏫</div>'+
-        '<div><p class="font-bold text-slate-900 text-xs">'+esc(t.name)+'</p><p class="text-[10px] text-slate-400">'+esc(t.designation)+'</p></div>'+
+        '<div><p class="font-bold text-slate-900 text-xs">'+esc(t.name)+'</p><p class="text-[10px] text-slate-500">'+esc(t.designation)+'</p></div>'+
       '</div>'+
       '<p class="text-[11px] text-slate-600">বিষয়: <b>'+esc(t.subject)+'</b> • স্তর: '+esc(t.education_level||'all')+'</p>'+
       '<div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-100">'+
         '<span>⭐ '+toBn(t.rating||4.9)+' • '+esc(t.response_time||'১৫ মিনিট')+'</span>'+
-        '<span class="font-bold '+(isOnline?'text-orange-600':'text-slate-400')+'">'+(isOnline?'🟢 সরাসরি অনলাইন':'অফলাইন')+'</span>'+
+        '<span class="font-bold '+(isOnline?'text-orange-700':'text-slate-500')+'">'+(isOnline?'🟢 সরাসরি অনলাইন':'অফলাইন')+'</span>'+
       '</div>'+
     '</div>';
-  }).join('') || '<div class="col-span-full py-8 text-center text-slate-400">কোনো শিক্ষক পাওয়া যায়নি</div>';
+  }).join('') || '<div class="col-span-full py-8 text-center text-slate-500">কোনো শিক্ষক পাওয়া যায়নি</div>';
 }
 
 async function loadTeacherTickets(status){
@@ -1935,11 +1935,11 @@ async function loadTeacherTickets(status){
       '</span></div>'+
       '<p class="text-xs text-slate-700 bg-slate-50 p-2 rounded-xl"><b>প্রশ্ন:</b> '+esc(tk.question)+'</p>'+
       '<div class="flex items-center justify-between text-[11px] pt-1">'+
-        '<span class="text-slate-400">শিক্ষার্থী: '+esc(tk.student_name)+'</span>'+
+        '<span class="text-slate-500">শিক্ষার্থী: '+esc(tk.student_name)+'</span>'+
         '<button onclick="openTicketChat('+tk.id+', \\''+jsq(tk.ticket_code)+'\\', \\''+jsq(tk.student_name)+'\\')" class="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-xs">💬 লাইভ সমাধান চ্যাট</button>'+
       '</div>'+
     '</div>';
-  }).join('') || '<div class="py-8 text-center text-slate-400">কোনো টিকেট পাওয়া যায়নি</div>';
+  }).join('') || '<div class="py-8 text-center text-slate-500">কোনো টিকেট পাওয়া যায়নি</div>';
 }
 
 function openNewTeacherModal(){
@@ -1971,7 +1971,7 @@ async function saveTeacherForm(e){
 function openTicketChat(id, code, studentName){
   document.getElementById('chatActiveTicketId').value = id;
   document.getElementById('chatModalSub').textContent = 'টিকেট #' + code + ' • শিক্ষার্থী: ' + studentName;
-  document.getElementById('chatMessagesBox').innerHTML = '<div class="text-center py-6 text-slate-400">মেসেজ লোড হচ্ছে...</div>';
+  document.getElementById('chatMessagesBox').innerHTML = '<div class="text-center py-6 text-slate-500">মেসেজ লোড হচ্ছে...</div>';
   document.getElementById('admChatModal').classList.remove('hidden');
   document.getElementById('admChatModal').classList.add('flex');
   loadTicketMessages(id);
@@ -1992,7 +1992,7 @@ async function loadTicketMessages(id){
         '<p class="mt-0.5">'+esc(m.message)+'</p>'+
       '</div>'+
     '</div>';
-  }).join('') || '<p class="text-center py-6 text-slate-400">এখনো কোনো মেসেজ নেই</p>';
+  }).join('') || '<p class="text-center py-6 text-slate-500">এখনো কোনো মেসেজ নেই</p>';
   box.scrollTop = box.scrollHeight;
 }
 async function sendTicketChatMsg(e){
@@ -2036,7 +2036,7 @@ async function triggerAutoCollection(type){
         var c = res.collected || res.counts || {};
         logBox.innerHTML += '<p class="text-slate-200 font-semibold">» লাইভ ডাটাবেজ কন্টেন্ট: স্কলারশিপ ('+toBn(c.scholarships||0)+'টি), প্রশ্নপত্র ('+toBn(c.question_papers||c.qpapers||0)+'টি), সিলেবাস ('+toBn(c.syllabus||0)+'টি), MCQ ('+toBn(c.mcq||0)+'টি), চাকরি ('+toBn(c.jobs||8)+'টি), ভর্তি ('+toBn(c.admissions||3)+'টি)</p>';
         if(res.total_active || res.scanned){
-          logBox.innerHTML += '<p class="text-slate-400">» সর্বমোট স্ক্যান ও যাচাইকৃত: '+toBn(res.total_active||res.scanned)+'টি | নতুন সংগৃহীত: +'+toBn(res.new_added||1)+'টি ('+toBn(res.duration_ms||150)+'ms)</p>';
+          logBox.innerHTML += '<p class="text-slate-500">» সর্বমোট স্ক্যান ও যাচাইকৃত: '+toBn(res.total_active||res.scanned)+'টি | নতুন সংগৃহীত: +'+toBn(res.new_added||1)+'টি ('+toBn(res.duration_ms||150)+'ms)</p>';
         }
         logBox.scrollTop = logBox.scrollHeight;
       }

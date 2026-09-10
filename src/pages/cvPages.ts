@@ -148,7 +148,7 @@ function projectSectionHtml(cfg, projects, lang) {
       + '<span style="font-weight:700;font-size:11.5px;color:'+cfg.primary+';">🚀 '+esc(p.name||p.title||'')+'</span>'
       + (p.year || p.period ? '<span style="font-size:9.5px;color:#64748b;">'+esc(p.year||p.period)+'</span>' : '')
       + '</div>'
-      + (p.tech ? '<div style="font-size:10px;color:#0284c7;font-weight:600;margin:1px 0;">🛠️ '+esc(p.tech)+'</div>' : '')
+      + (p.tech ? '<div style="font-size:10px;color:#0369a1;font-weight:600;margin:1px 0;">🛠️ '+esc(p.tech)+'</div>' : '')
       + (p.description ? '<div style="font-size:10px;color:#475569;margin-top:2px;line-height:1.4;">'+esc(p.description)+'</div>' : '')
       + (p.link ? '<div style="font-size:9.5px;margin-top:2px;"><a href="'+esc(p.link)+'" target="_blank" style="color:'+cfg.primary+';text-decoration:underline;">🔗 '+esc(p.link)+'</a></div>' : '')
       + '</div>';
@@ -302,12 +302,12 @@ function photoBox(d, withPhoto, shape, size) {
   if (d.photo) {
     return '<img src="'+d.photo+'" style="width:'+size+';height:'+size+';object-fit:cover;border-radius:'+radius+';border:2px solid #ffffffaa;box-shadow:0 2px 8px rgba(0,0,0,0.15);" alt="ছবি">';
   }
-  return '<div style="width:'+size+';height:'+size+';border:1.5px dashed #94a3b8;border-radius:'+radius+';display:flex;align-items:center;justify-content:center;font-size:9px;color:#94a3b8;text-align:center;background:#f8fafc;">ছবি আপলোড<br>করুন</div>';
+  return '<div style="width:'+size+';height:'+size+';border:1.5px dashed #94a3b8;border-radius:'+radius+';display:flex;align-items:center;justify-content:center;font-size:9px;color:#64748b;text-align:center;background:#f8fafc;">ছবি আপলোড<br>করুন</div>';
 }
 
 function contactItems(d, isDark) {
   var col = isDark ? '#cbd5e1' : '#475569';
-  var iconCol = isDark ? '#38bdf8' : '#0284c7';
+  var iconCol = isDark ? '#38bdf8' : '#0369a1';
   var items = [];
   if (d.phone) items.push('<span><span style="color:'+iconCol+';">📞</span> '+esc(d.phone)+'</span>');
   if (d.email) items.push('<span><span style="color:'+iconCol+';">✉️</span> '+esc(d.email)+'</span>');
@@ -450,7 +450,7 @@ function renderCV(cfg, d, withPhoto, lang, isFree, options) {
       + '</div>';
   }
 
-  var wm = (cfg.watermark && isFree) ? '<div style="position:absolute;bottom:8px;right:12px;font-size:9px;color:#94a3b8;letter-spacing:.3px;">তৈরি: এডুসব CV মেকার — edusob.com</div>' : '';
+  var wm = (cfg.watermark && isFree) ? '<div style="position:absolute;bottom:8px;right:12px;font-size:9px;color:#64748b;letter-spacing:.3px;">তৈরি: এডুসব CV মেকার — edusob.com</div>' : '';
 
   return '<div class="cv-page-sheet" style="position:relative;background:#ffffff;color:#1e293b;font-family:\\''+(cfg.font||'Hind Siliguri')+'\\',sans-serif;font-size:'+st.fontSize+';line-height:'+st.lineHeight+';padding:'+st.padding+';min-height:297mm;box-sizing:border-box;">'
     + header + body + wm + '</div>';
@@ -525,19 +525,19 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <!-- ক্যাটাগরি ফিল্টার -->
       <div class="flex flex-wrap items-center gap-1.5 text-xs" id="cat-filters">
         <span class="text-slate-400 font-semibold mr-1">ফিল্টার:</span>
-        <button onclick="filterTpl('all')" class="cat-btn active px-3 py-1 bg-orange-500 text-slate-950 rounded-lg font-bold">সব (All)</button>
-        <button onclick="filterTpl('Monogram')" class="cat-btn px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">মনোগ্রাম (Monogram)</button>
-        <button onclick="filterTpl('Sidebar')" class="cat-btn px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">সাইডবার (Sidebar)</button>
-        <button onclick="filterTpl('Executive')" class="cat-btn px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">এক্সিকিউটিভ (Executive)</button>
-        <button onclick="filterTpl('ATS Clean')" class="cat-btn px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">ATS ক্লিন</button>
-        <button onclick="filterTpl('BD Standard')" class="cat-btn px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">বিডি স্ট্যান্ডার্ড বায়োডাটা</button>
+        <button onclick="filterTpl('all')" class="cat-btn active px-3 py-1.5 bg-orange-500 text-slate-950 rounded-lg font-bold">সব (All)</button>
+        <button onclick="filterTpl('Monogram')" class="cat-btn px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">মনোগ্রাম (Monogram)</button>
+        <button onclick="filterTpl('Sidebar')" class="cat-btn px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">সাইডবার (Sidebar)</button>
+        <button onclick="filterTpl('Executive')" class="cat-btn px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">এক্সিকিউটিভ (Executive)</button>
+        <button onclick="filterTpl('ATS Clean')" class="cat-btn px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">ATS ক্লিন</button>
+        <button onclick="filterTpl('BD Standard')" class="cat-btn px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-medium">বিডি স্ট্যান্ডার্ড বায়োডাটা</button>
       </div>
 
       <!-- পেজ ও লেআউট কন্ট্রোল -->
       <div class="flex flex-wrap items-center gap-3 text-xs">
         <div class="flex items-center gap-1.5 bg-slate-800 border border-white/10 px-2.5 py-1 rounded-xl">
           <span class="text-slate-400">📄 পেজ মোড:</span>
-          <select id="cv-page-mode" onchange="refresh()" class="bg-transparent text-orange-400 font-bold focus:outline-none cursor-pointer">
+          <select id="cv-page-mode" onchange="refresh()" class="bg-transparent text-orange-400 font-bold focus:outline-none cursor-pointer py-0.5">
             <option value="auto">স্বাভাবিক (Auto)</option>
             <option value="1">১ পেজ ফিট (Compact 1-Page)</option>
             <option value="2">২ পেজ স্ট্যান্ডার্ড (2-Page Standard)</option>
@@ -547,7 +547,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
 
         <div class="flex items-center gap-1.5 bg-slate-800 border border-white/10 px-2.5 py-1 rounded-xl">
           <span class="text-slate-400">🌐 ভাষা:</span>
-          <select id="cv-lang" onchange="refresh()" class="bg-transparent text-slate-200 font-semibold focus:outline-none cursor-pointer">
+          <select id="cv-lang" onchange="refresh()" class="bg-transparent text-slate-200 font-semibold focus:outline-none cursor-pointer py-0.5">
             <option value="bn">বাংলা</option>
             <option value="en">English</option>
           </select>
@@ -568,14 +568,14 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <div class="flex items-center gap-2">
         <span class="text-slate-400">🎨 থিম কালার:</span>
         <div class="flex items-center gap-1.5" id="color-palettes">
-          <button onclick="setThemeColor('#4a443c','#a89f91')" title="Trusted Taupe" class="w-5 h-5 rounded-full border border-white/30" style="background:#4a443c"></button>
-          <button onclick="setThemeColor('#0f2444','#2563eb')" title="Loyal Navy" class="w-5 h-5 rounded-full border border-white/30" style="background:#0f2444"></button>
-          <button onclick="setThemeColor('#0f766e','#14b8a6')" title="Team Teal" class="w-5 h-5 rounded-full border border-white/30" style="background:#0f766e"></button>
-          <button onclick="setThemeColor('#065f46','#10b981')" title="Creative Emerald" class="w-5 h-5 rounded-full border border-white/30" style="background:#065f46"></button>
-          <button onclick="setThemeColor('#991b1b','#ef4444')" title="Ambitious Red" class="w-5 h-5 rounded-full border border-white/30" style="background:#991b1b"></button>
-          <button onclick="setThemeColor('#581c87','#a855f7')" title="Royal Purple" class="w-5 h-5 rounded-full border border-white/30" style="background:#581c87"></button>
-          <button onclick="setThemeColor('#854d0e','#f59e0b')" title="Creative Marigold" class="w-5 h-5 rounded-full border border-white/30" style="background:#854d0e"></button>
-          <button onclick="setThemeColor('#18181b','#52525b')" title="Assertive Asphalt" class="w-5 h-5 rounded-full border border-white/30" style="background:#18181b"></button>
+          <button onclick="setThemeColor('#4a443c','#a89f91')" title="Trusted Taupe" class="w-6 h-6 rounded-full border border-white/30" style="background:#4a443c"></button>
+          <button onclick="setThemeColor('#0f2444','#2563eb')" title="Loyal Navy" class="w-6 h-6 rounded-full border border-white/30" style="background:#0f2444"></button>
+          <button onclick="setThemeColor('#0f766e','#14b8a6')" title="Team Teal" class="w-6 h-6 rounded-full border border-white/30" style="background:#0f766e"></button>
+          <button onclick="setThemeColor('#065f46','#10b981')" title="Creative Emerald" class="w-6 h-6 rounded-full border border-white/30" style="background:#065f46"></button>
+          <button onclick="setThemeColor('#991b1b','#ef4444')" title="Ambitious Red" class="w-6 h-6 rounded-full border border-white/30" style="background:#991b1b"></button>
+          <button onclick="setThemeColor('#581c87','#a855f7')" title="Royal Purple" class="w-6 h-6 rounded-full border border-white/30" style="background:#581c87"></button>
+          <button onclick="setThemeColor('#854d0e','#f59e0b')" title="Creative Marigold" class="w-6 h-6 rounded-full border border-white/30" style="background:#854d0e"></button>
+          <button onclick="setThemeColor('#18181b','#52525b')" title="Assertive Asphalt" class="w-6 h-6 rounded-full border border-white/30" style="background:#18181b"></button>
         </div>
       </div>
       <div class="flex items-center gap-3 text-slate-400">
@@ -605,19 +605,19 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
     <section class="lg:col-span-5 bg-slate-900 border border-white/10 rounded-2xl p-5 space-y-4 max-h-[85vh] overflow-y-auto scrollbar-thin">
       <div class="flex items-center justify-between pb-2 border-b border-white/10">
         <h2 class="font-bold text-sm text-slate-200 flex items-center gap-2"><i class="fas fa-edit text-orange-400"></i>CV তথ্য এডিটর</h2>
-        <button onclick="prefill()" class="text-xs bg-amber-600 hover:bg-amber-500 text-white font-semibold px-3 py-1.5 rounded-lg transition flex items-center gap-1"><i class="fas fa-sparkles text-amber-300"></i>প্রোফাইল থেকে আনো</button>
+        <button onclick="prefill()" class="text-xs bg-amber-600 hover:bg-amber-500 text-slate-950 font-semibold px-3 py-1.5 rounded-lg transition flex items-center gap-1"><i class="fas fa-sparkles text-amber-300"></i>প্রোফাইল থেকে আনো</button>
       </div>
 
       <!-- ছবি আপলোড ও বেসিক তথ্য -->
       <div class="space-y-3">
         <div class="flex items-center gap-3 bg-slate-800/80 p-3 rounded-xl border border-white/5">
-          <div id="photo-preview-wrap" class="w-14 h-14 bg-slate-700 rounded-xl overflow-hidden flex items-center justify-center text-slate-400 text-xs border border-white/10 shrink-0">
+          <div id="photo-preview-wrap" class="w-14 h-14 bg-slate-700 rounded-xl overflow-hidden flex items-center justify-center text-slate-300 text-xs border border-white/10 shrink-0">
             <span id="photo-ph">ছবি নেই</span>
           </div>
           <div class="flex-1 space-y-1">
             <label class="block text-xs font-semibold text-slate-300">প্রোফাইল ছবি (CV-র জন্য)</label>
             <div class="flex items-center gap-2">
-              <label class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1">
+              <label class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-slate-950 px-2.5 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1">
                 <i class="fas fa-upload text-[10px]"></i> আপলোড
                 <input type="file" id="photo-file" accept="image/*" class="hidden" onchange="handlePhotoUpload(this)">
               </label>
@@ -1400,8 +1400,8 @@ export function cvAdminPage(isAdmin: boolean): string {
     var cfg = t.config;
     var orderChips = (cfg.sectionOrder || SECTIONS).map(function(k, i){
       return '<span class="inline-flex items-center gap-1 bg-slate-800 border border-white/10 rounded px-1.5 py-0.5 text-[10px]">'+(SEC_BN[k]||k)
-        +'<button onclick="moveSec(\\''+t.slug+'\\','+i+',-1)" class="text-slate-400 hover:text-white cursor-pointer">◀</button>'
-        +'<button onclick="moveSec(\\''+t.slug+'\\','+i+',1)" class="text-slate-400 hover:text-white cursor-pointer">▶</button></span>';
+        +'<button onclick="moveSec(\\''+t.slug+'\\','+i+',-1)" class="text-slate-400 hover:text-white cursor-pointer px-3 py-1.5">◀</button>'
+        +'<button onclick="moveSec(\\''+t.slug+'\\','+i+',1)" class="text-slate-400 hover:text-white cursor-pointer px-3 py-1.5">▶</button></span>';
     }).join(' ');
 
     return '<article class="bg-slate-900 border '+(selSlug===t.slug?'border-orange-500/80 ring-1 ring-orange-500/50':'border-white/10')+' rounded-2xl p-4 transition" id="card-'+t.slug+'">'

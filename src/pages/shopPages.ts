@@ -3,7 +3,7 @@ import { pageShell, DARK_PORTAL_CSS } from './layout'
 
 function shopHeader(active: string, loggedIn: boolean): string {
   const link = (href: string, label: string, key: string) =>
-    `<a href="${href}" class="${active === key ? 'text-amber-600 font-bold' : 'text-slate-600 hover:text-slate-900'} transition">${label}</a>`
+    `<a href="${href}" class="inline-block px-1.5 py-1.5 ${active === key ? 'text-amber-700 font-bold' : 'text-slate-600 hover:text-slate-900'} transition">${label}</a>`
   return `
 <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm shop-header">
   <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
@@ -18,9 +18,9 @@ function shopHeader(active: string, loggedIn: boolean): string {
     </div>
     <div class="flex items-center gap-2 text-sm shrink-0">
       ${loggedIn
-        ? `<a href="/dashboard" class="bg-amber-500 hover:bg-amber-400 text-white px-4 py-2 rounded-xl font-semibold transition">ড্যাশবোর্ড</a>`
+        ? `<a href="/dashboard" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-4 py-2 rounded-xl font-semibold transition">ড্যাশবোর্ড</a>`
         : `<a href="/login" class="px-3 py-2 text-slate-600 hover:text-slate-900 transition">লগইন</a>
-           <a href="/signup" class="bg-amber-500 hover:bg-amber-400 text-white px-4 py-2 rounded-xl font-semibold transition">ফ্রি সাইন-আপ</a>`}
+           <a href="/signup" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-4 py-2 rounded-xl font-semibold transition">ফ্রি সাইন-আপ</a>`}
     </div>
   </nav>
   <div class="md:hidden flex gap-4 px-4 pb-2 text-xs overflow-x-auto">
@@ -49,12 +49,12 @@ ${shopHeader('shop', loggedIn)}
   <nav id="cat-tabs" class="flex gap-2 overflow-x-auto pb-2 mb-5 text-sm"></nav>
 
   <section id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></section>
-  <p id="shop-empty" class="hidden text-center text-slate-400 py-16">এই ক্যাটাগরিতে কোনো প্রোডাক্ট নেই</p>
+  <p id="shop-empty" class="hidden text-center text-slate-500 py-16">এই ক্যাটাগরিতে কোনো প্রোডাক্ট নেই</p>
 </main>
 
 <!-- কার্ট ফ্লোটিং বাটন -->
 <button id="cart-btn" onclick="openCart()" class="hidden fixed bottom-6 left-6 z-50 bg-slate-900 text-white px-5 py-3 rounded-full shadow-2xl font-semibold text-sm flex items-center gap-2 hover:scale-105 transition">
-  <i class="fas fa-shopping-basket"></i> কার্ট <span id="cart-count" class="bg-amber-500 text-white text-xs font-bold px-2 py-0.5 rounded-full"></span>
+  <i class="fas fa-shopping-basket"></i> কার্ট <span id="cart-count" class="bg-amber-500 text-slate-950 text-xs font-bold px-2 py-0.5 rounded-full"></span>
 </button>
 
 <!-- কার্ট/চেকআউট ড্রয়ার -->
@@ -62,14 +62,14 @@ ${shopHeader('shop', loggedIn)}
   <aside class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col">
     <header class="px-5 py-4 border-b flex items-center justify-between">
       <p class="font-bold text-lg">🧺 আপনার কার্ট</p>
-      <button onclick="closeCart()" class="text-slate-400 hover:text-slate-700 text-2xl leading-none">&times;</button>
+      <button onclick="closeCart()" class="text-slate-500 hover:text-slate-700 text-2xl leading-none">&times;</button>
     </header>
     <div id="cart-items" class="flex-1 overflow-y-auto px-5 py-4 space-y-3"></div>
     <footer class="border-t px-5 py-4 space-y-3">
       <div class="flex justify-between text-sm"><span>সাবটোটাল</span><b id="cart-subtotal"></b></div>
       <div id="cod-charge-row" class="flex justify-between text-sm text-slate-500"><span>ডেলিভারি চার্জ (COD)</span><span id="cod-charge"></span></div>
-      <div class="flex justify-between font-bold text-lg"><span>মোট</span><span id="cart-total" class="text-amber-600"></span></div>
-      <button onclick="showCheckout()" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold py-3 rounded-xl hover:opacity-90 transition">চেকআউট করুন →</button>
+      <div class="flex justify-between font-bold text-lg"><span>মোট</span><span id="cart-total" class="text-amber-700"></span></div>
+      <button onclick="showCheckout()" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 font-bold py-3 rounded-xl hover:opacity-90 transition">চেকআউট করুন →</button>
     </footer>
   </aside>
 </div>
@@ -79,7 +79,7 @@ ${shopHeader('shop', loggedIn)}
   <form id="checkout-form" onsubmit="return submitOrder(event)" class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 space-y-4 my-8">
     <div class="flex items-center justify-between">
       <h2 class="font-bold text-lg">📦 ডেলিভারি তথ্য</h2>
-      <button type="button" onclick="closeCheckout()" class="text-slate-400 hover:text-slate-700 text-2xl leading-none">&times;</button>
+      <button type="button" onclick="closeCheckout()" class="text-slate-500 hover:text-slate-700 text-2xl leading-none">&times;</button>
     </div>
     <div>
       <label class="text-sm font-semibold text-slate-600">নাম *</label>
@@ -104,13 +104,13 @@ ${shopHeader('shop', loggedIn)}
           <input type="radio" name="paymethod" value="cod" checked onchange="updateTotals()"> <span class="text-sm font-semibold">🚚 ক্যাশ অন ডেলিভারি</span>
         </label>
         <label id="wallet-option" class="border rounded-xl px-3 py-2.5 flex items-center gap-2 cursor-pointer has-[:checked]:border-amber-500 has-[:checked]:bg-amber-50">
-          <input type="radio" name="paymethod" value="wallet" onchange="updateTotals()"> <span class="text-sm font-semibold">💰 ওয়ালেট <span id="wallet-bal" class="text-xs text-slate-400"></span></span>
+          <input type="radio" name="paymethod" value="wallet" onchange="updateTotals()"> <span class="text-sm font-semibold">💰 ওয়ালেট <span id="wallet-bal" class="text-xs text-slate-500"></span></span>
         </label>
       </div>
       <p id="wallet-login-hint" class="hidden text-xs text-red-500 mt-1">ওয়ালেট পেমেন্টের জন্য <a href="/login" class="underline">লগইন</a> করুন</p>
     </div>
-    <div class="flex justify-between font-bold text-lg border-t pt-3"><span>মোট</span><span id="co-total" class="text-amber-600"></span></div>
-    <button id="co-submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold py-3 rounded-xl hover:opacity-90 transition">অর্ডার নিশ্চিত করুন ✓</button>
+    <div class="flex justify-between font-bold text-lg border-t pt-3"><span>মোট</span><span id="co-total" class="text-amber-700"></span></div>
+    <button id="co-submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 font-bold py-3 rounded-xl hover:opacity-90 transition">অর্ডার নিশ্চিত করুন ✓</button>
   </form>
 </div>
 
@@ -119,7 +119,7 @@ ${shopHeader('shop', loggedIn)}
   <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-8 text-center space-y-3">
     <p class="text-5xl">🎉</p>
     <h2 class="font-bold text-xl">অর্ডার সফল!</h2>
-    <p class="text-slate-600 text-sm">অর্ডার নম্বর: <b id="success-oid" class="text-amber-600"></b></p>
+    <p class="text-slate-600 text-sm">অর্ডার নম্বর: <b id="success-oid" class="text-amber-700"></b></p>
     <p id="success-msg" class="text-slate-500 text-sm"></p>
     <button onclick="document.getElementById('success-modal').classList.add('hidden')" class="bg-slate-900 text-white px-6 py-2.5 rounded-xl font-semibold">ঠিক আছে</button>
   </div>
@@ -138,7 +138,7 @@ function renderCartBtn(){
 }
 function renderTabs(){
   document.getElementById('cat-tabs').innerHTML=CATS.map(function(c){
-    return '<button onclick="setCat(\\''+c[0]+'\\')" class="shrink-0 px-4 py-2 rounded-full border '+(CURCAT===c[0]?'bg-amber-500 text-white border-amber-500 font-bold':'bg-white text-slate-600 hover:border-amber-400')+'">'+c[1]+'</button>'
+    return '<button onclick="setCat(\\''+c[0]+'\\')" class="shrink-0 px-4 py-2 rounded-full border '+(CURCAT===c[0]?'bg-amber-500 text-slate-950 border-amber-500 font-bold':'bg-white text-slate-600 hover:border-amber-400')+'">'+c[1]+'</button>'
   }).join('')
 }
 function setCat(c){CURCAT=c;renderTabs();renderProducts()}
@@ -148,15 +148,15 @@ function renderProducts(){
   document.getElementById('product-grid').innerHTML=list.map(function(p){
     var out=p.stock<=0;
     var offer=p.offer_price?'<span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full rotate-[-4deg]">অফার!</span>':'';
-    var price=p.offer_price?'<span class="line-through text-slate-400 text-xs mr-1">'+tk(p.price)+'</span><span class="text-red-600 font-bold">'+tk(p.offer_price)+'</span>':'<span class="font-bold text-slate-800">'+tk(p.price)+'</span>';
+    var price=p.offer_price?'<span class="line-through text-slate-500 text-xs mr-1">'+tk(p.price)+'</span><span class="text-red-600 font-bold">'+tk(p.offer_price)+'</span>':'<span class="font-bold text-slate-800">'+tk(p.price)+'</span>';
     var img=(p.image_url||'').indexOf('http')===0?'<img src="'+esc(p.image_url)+'" class="h-24 object-contain mx-auto" alt="'+esc(p.name_bn)+'">':'<span class="text-6xl">'+esc(p.image_url||'📦')+'</span>';
     return '<article class="relative bg-white rounded-2xl border border-slate-200 p-4 flex flex-col card-hover">'+offer+
       '<div class="h-24 flex items-center justify-center mb-3">'+img+'</div>'+
-      '<h3 class="text-sm font-semibold text-slate-800 leading-snug flex-1">'+esc(p.name_bn)+'</h3>'+
-      (p.description?'<p class="text-xs text-slate-400 mt-1 line-clamp-2">'+esc(p.description)+'</p>':'')+
+      '<h2 class="text-sm font-semibold text-slate-800 leading-snug flex-1">'+esc(p.name_bn)+'</h2>'+
+      (p.description?'<p class="text-xs text-slate-500 mt-1 line-clamp-2">'+esc(p.description)+'</p>':'')+
       '<div class="mt-2 text-sm">'+price+'</div>'+
-      '<p class="text-[11px] '+(out?'text-red-500':'text-slate-400')+' mt-0.5">'+(out?'স্টক শেষ':'স্টকে '+toBn(p.stock)+'টি')+'</p>'+
-      '<button '+(out?'disabled':'')+' onclick="addCart('+p.id+')" class="mt-3 w-full '+(out?'bg-slate-200 text-slate-400 cursor-not-allowed':'bg-amber-500 hover:bg-amber-400 text-white')+' text-sm font-bold py-2 rounded-xl transition">'+(out?'অনুপলব্ধ':'🛒 কার্টে যোগ')+'</button></article>'
+      '<p class="text-[11px] '+(out?'text-red-500':'text-slate-500')+' mt-0.5">'+(out?'স্টক শেষ':'স্টকে '+toBn(p.stock)+'টি')+'</p>'+
+      '<button '+(out?'disabled':'')+' onclick="addCart('+p.id+')" class="mt-3 w-full '+(out?'bg-slate-200 text-slate-500 cursor-not-allowed':'bg-amber-500 hover:bg-amber-400 text-slate-950')+' text-sm font-bold py-2 rounded-xl transition">'+(out?'অনুপলব্ধ':'🛒 কার্টে যোগ')+'</button></article>'
   }).join('')
 }
 function addCart(id){
@@ -189,7 +189,7 @@ function renderCart(){
       '<span class="text-2xl">'+((l.p.image_url||'').indexOf('http')===0?'📦':esc(l.p.image_url||'📦'))+'</span>'+
       '<div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">'+esc(l.p.name_bn)+'</p><p class="text-xs text-slate-500">'+tk(l.unit)+' × '+toBn(l.qty)+'</p></div>'+
       '<div class="flex items-center gap-1.5"><button onclick="chQty('+l.p.id+',-1)" class="w-7 h-7 bg-white border rounded-lg font-bold">−</button><b class="w-5 text-center text-sm">'+toBn(l.qty)+'</b><button onclick="chQty('+l.p.id+',1)" class="w-7 h-7 bg-white border rounded-lg font-bold">+</button></div></div>'
-  }).join(''):'<p class="text-center text-slate-400 py-10">কার্ট খালি 🧺</p>';
+  }).join(''):'<p class="text-center text-slate-500 py-10">কার্ট খালি 🧺</p>';
   document.getElementById('cart-subtotal').textContent=tk(sub);
   document.getElementById('cod-charge').textContent=COD_CHARGE?tk(COD_CHARGE):'ফ্রি';
   document.getElementById('cart-total').textContent=tk(sub+COD_CHARGE);
@@ -266,7 +266,7 @@ ${shopHeader('wallet', loggedIn)}
     <h1 class="font-serif-bn text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">💰 আমার ওয়ালেট</h1>
     <p class="text-slate-500 text-sm mt-1">টপ-আপ করুন, লেনদেন দেখুন এবং রিওয়ার্ড ব্যালেন্স ব্যবহার করুন</p>
   </header>
-  <section id="wallet-balance-card" class="bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-2xl p-6 shadow-xl">
+  <section id="wallet-balance-card" class="bg-gradient-to-r from-orange-600 to-amber-600 text-slate-950 rounded-2xl p-6 shadow-xl">
     <p class="text-orange-100 text-sm">আপনার ওয়ালেট ব্যালেন্স</p>
     <p id="w-balance" class="text-4xl font-bold mt-1">—</p>
     <p class="text-orange-100 text-xs mt-2">💡 বিকাশ/নগদে টাকা পাঠিয়ে নিচের ফর্মে জমা দিন — এডমিন অ্যাপ্রুভ করলেই ব্যালেন্স যোগ হবে</p>
@@ -285,11 +285,11 @@ ${shopHeader('wallet', loggedIn)}
     <h2 class="font-bold text-lg mb-1">💳 টাকা যোগ করুন (ম্যানুয়াল টপ-আপ)</h2>
     <div id="pay-numbers" class="grid grid-cols-2 gap-3 my-4">
       <div class="bg-pink-50 border border-pink-200 rounded-xl p-3 text-center">
-        <p class="text-xs text-pink-500 font-semibold">বিকাশ (পার্সোনাল)</p>
+        <p class="text-xs text-pink-700 font-semibold">বিকাশ (পার্সোনাল)</p>
         <p id="bkash-num" class="font-bold text-slate-800 mt-0.5">শীঘ্রই যুক্ত হবে</p>
       </div>
       <div class="bg-orange-50 border border-orange-200 rounded-xl p-3 text-center">
-        <p class="text-xs text-orange-500 font-semibold">নগদ (পার্সোনাল)</p>
+        <p class="text-xs text-orange-700 font-semibold">নগদ (পার্সোনাল)</p>
         <p id="nagad-num" class="font-bold text-slate-800 mt-0.5">শীঘ্রই যুক্ত হবে</p>
       </div>
     </div>
@@ -318,9 +318,9 @@ ${shopHeader('wallet', loggedIn)}
       </div>
       <div>
         <label class="text-sm font-semibold text-slate-600">স্ক্রিনশট (ঐচ্ছিক)</label>
-        <input id="tp-ss" type="file" accept="image/*" class="w-full mt-1 text-sm text-slate-500 file:mr-3 file:px-4 file:py-2 file:rounded-xl file:border-0 file:bg-orange-100 file:text-orange-700 file:font-semibold">
+        <input id="tp-ss" type="file" accept="image/*" class="w-full mt-1 text-sm text-slate-500 file:mr-3 file:px-4 file:py-2 file:rounded-xl file:border-0 file:bg-orange-100 file:text-orange-700 file:font-semibold" aria-label="পেমেন্টের স্ক্রিনশট">
       </div>
-      <button id="tp-submit" class="w-full bg-gradient-to-r from-orange-600 to-amber-600 text-white font-bold py-3 rounded-xl hover:opacity-90 transition">জমা দিন ✓</button>
+      <button id="tp-submit" class="w-full bg-gradient-to-r from-orange-600 to-amber-600 text-slate-950 font-bold py-3 rounded-xl hover:opacity-90 transition">জমা দিন ✓</button>
     </form>
   </section>
 
@@ -381,21 +381,21 @@ function loadAll(){
     document.getElementById('w-balance').textContent=tk(r.data.balance||0);
     var tx=r.data.transactions||[];
     document.getElementById('tx-list').innerHTML=tx.length?tx.map(function(t){
-      return '<div class="flex justify-between items-center bg-slate-50 rounded-xl px-4 py-2.5"><span>'+(TX_BN[t.type]||t.type)+(t.note?' <span class="text-slate-400 text-xs">— '+esc(t.note)+'</span>':'')+'</span><b class="'+(t.amount>=0?'text-orange-600':'text-red-500')+'">'+(t.amount>=0?'+':'')+tk(Math.abs(t.amount))+'</b></div>'
-    }).join(''):'<p class="text-slate-400 text-center py-4">কোনো লেনদেন নেই</p>'
+      return '<div class="flex justify-between items-center bg-slate-50 rounded-xl px-4 py-2.5"><span>'+(TX_BN[t.type]||t.type)+(t.note?' <span class="text-slate-500 text-xs">— '+esc(t.note)+'</span>':'')+'</span><b class="'+(t.amount>=0?'text-orange-700':'text-red-500')+'">'+(t.amount>=0?'+':'')+tk(Math.abs(t.amount))+'</b></div>'
+    }).join(''):'<p class="text-slate-500 text-center py-4">কোনো লেনদেন নেই</p>'
   });
   axios.get('/api/shop/payments/mine').then(function(r){
     var ps=r.data.payments||[];
     document.getElementById('tp-list').innerHTML=ps.length?ps.map(function(p){
-      return '<div class="flex justify-between items-center bg-slate-50 rounded-xl px-4 py-2.5"><span>'+(p.method==='bkash'?'বিকাশ':'নগদ')+' — '+tk(p.amount)+' <span class="text-slate-400 text-xs">TrxID: '+esc(p.trx_id)+'</span>'+(p.admin_note?'<span class="block text-xs text-red-400">'+esc(p.admin_note)+'</span>':'')+'</span><span class="text-xs font-semibold shrink-0">'+(ST_BN[p.status]||p.status)+'</span></div>'
-    }).join(''):'<p class="text-slate-400 text-center py-4">কোনো রিকোয়েস্ট নেই</p>'
+      return '<div class="flex justify-between items-center bg-slate-50 rounded-xl px-4 py-2.5"><span>'+(p.method==='bkash'?'বিকাশ':'নগদ')+' — '+tk(p.amount)+' <span class="text-slate-500 text-xs">TrxID: '+esc(p.trx_id)+'</span>'+(p.admin_note?'<span class="block text-xs text-red-400">'+esc(p.admin_note)+'</span>':'')+'</span><span class="text-xs font-semibold shrink-0">'+(ST_BN[p.status]||p.status)+'</span></div>'
+    }).join(''):'<p class="text-slate-500 text-center py-4">কোনো রিকোয়েস্ট নেই</p>'
   });
   axios.get('/api/shop/orders/mine').then(function(r){
     var os=r.data.orders||[];
     document.getElementById('order-list').innerHTML=os.length?os.map(function(o){
       var items=(o.items||[]).map(function(i){return esc(i.product_name)+' ×'+toBn(i.qty)}).join(', ');
       return '<div class="bg-slate-50 rounded-xl px-4 py-2.5"><div class="flex justify-between"><b>অর্ডার #'+toBn(o.id)+'</b><span class="text-xs font-semibold">'+(ST_BN[o.status]||o.status)+'</span></div><p class="text-xs text-slate-500 mt-0.5">'+items+'</p><p class="text-xs mt-0.5">'+(o.payment_method==='wallet'?'💰 ওয়ালেট':'🚚 COD')+' — মোট <b>'+tk(o.total)+'</b></p></div>'
-    }).join(''):'<p class="text-slate-400 text-center py-4">কোনো অর্ডার নেই</p>'
+    }).join(''):'<p class="text-slate-500 text-center py-4">কোনো অর্ডার নেই</p>'
   });
 }
 axios.get('/api/shop/settings').then(function(r){
@@ -465,7 +465,7 @@ ${shopHeader('assisted', loggedIn)}
         </select>
       </div>
       <div>
-        <label class="text-sm font-semibold text-slate-600">বিস্তারিত * <span class="text-slate-400 font-normal">(কোন আবেদন, ওয়েবসাইট লিংক, ডেডলাইন, আপনার তথ্য)</span></label>
+        <label class="text-sm font-semibold text-slate-600">বিস্তারিত * <span class="text-slate-500 font-normal">(কোন আবেদন, ওয়েবসাইট লিংক, ডেডলাইন, আপনার তথ্য)</span></label>
         <textarea id="as-details" required rows="4" maxlength="2000" class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-indigo-400" placeholder="যেমন: ঢাকা বিশ্ববিদ্যালয় ক-ইউনিট ভর্তি আবেদন করতে চাই। ডেডলাইন ১৫ তারিখ। আমার SSC রোল..."></textarea>
       </div>
       <button id="as-submit" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold py-3 rounded-xl hover:opacity-90 transition">রিকোয়েস্ট পাঠান →</button>
@@ -511,7 +511,7 @@ function loadAs(){
     document.getElementById('as-list').innerHTML=rs.length?rs.map(function(a){
       var pay=a.status==='quoted'&&a.fee?'<button onclick="payAssisted('+a.id+')" class="mt-2 bg-indigo-600 text-white text-xs font-bold px-4 py-1.5 rounded-lg">💰 ওয়ালেট থেকে '+tk(a.fee)+' পরিশোধ</button>':'';
       return '<div class="bg-slate-50 rounded-xl px-4 py-3"><div class="flex justify-between"><b>'+(AS_TYPE[a.service_type]||a.service_type)+' #'+toBn(a.id)+'</b><span class="text-xs font-semibold">'+(AS_ST[a.status]||a.status)+'</span></div><p class="text-xs text-slate-500 mt-1">'+esc(a.details).slice(0,200)+'</p>'+(a.fee?'<p class="text-xs mt-1">ফি: <b>'+tk(a.fee)+'</b></p>':'')+(a.admin_note?'<p class="text-xs text-indigo-500 mt-1">💬 এডমিন: '+esc(a.admin_note)+'</p>':'')+pay+'</div>'
-    }).join(''):'<p class="text-slate-400 text-center py-4">কোনো রিকোয়েস্ট নেই</p>'
+    }).join(''):'<p class="text-slate-500 text-center py-4">কোনো রিকোয়েস্ট নেই</p>'
   })
 }
 loadAs();
@@ -537,14 +537,14 @@ export function shopAdminPage(isAdmin: boolean): string {
     <div class="flex gap-3 text-sm">
       <a href="/admin" class="text-slate-300 hover:text-white">মূল প্যানেল</a>
       <a href="/admin/cv-templates" class="text-slate-300 hover:text-white">CV টেমপ্লেট</a>
-      <a href="/dashboard" class="bg-amber-500 px-3 py-1.5 rounded-lg font-semibold">ড্যাশবোর্ড</a>
+      <a href="/dashboard" class="bg-amber-500 px-3 py-1.5 rounded-lg font-semibold text-slate-950">ড্যাশবোর্ড</a>
     </div>
   </nav>
 </header>
 <main class="max-w-6xl mx-auto px-4 py-6">
   <header class="mb-4">
     <h1 class="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">🛍️ শপ ম্যানেজমেন্ট</h1>
-    <p class="text-sm text-slate-500 mt-0.5">প্রোডাক্ট, অর্ডার, পেমেন্ট রিভিউ ও অ্যাসিস্টেড রিকোয়েস্ট</p>
+    <p class="text-sm text-slate-600 mt-0.5">প্রোডাক্ট, অর্ডার, পেমেন্ট রিভিউ ও অ্যাসিস্টেড রিকোয়েস্ট</p>
   </header>
   <nav id="admin-tabs" class="flex gap-2 overflow-x-auto pb-3 mb-5 text-sm"></nav>
   <section id="tab-content"></section>
@@ -583,7 +583,7 @@ function prodForm(p){
       '<label class="flex items-center gap-1.5"><input id="pf-sb" type="checkbox"'+(p.is_signboard?' checked':'')+'> 🪧 সাইনবোর্ড পপ-আপ (সর্বোচ্চ ৫)</label>'+
     '</div>'+
     '<div class="md:col-span-2 flex gap-2">'+
-      '<button class="bg-orange-600 text-white font-bold px-5 py-2.5 rounded-xl">'+(p.id?'আপডেট ✓':'যোগ করুন +')+'</button>'+
+      '<button class="bg-orange-600 text-slate-950 font-bold px-5 py-2.5 rounded-xl">'+(p.id?'আপডেট ✓':'যোগ করুন +')+'</button>'+
       (p.id?'<button type="button" onclick="load()" class="bg-slate-200 px-5 py-2.5 rounded-xl font-semibold">বাতিল</button>':'')+
     '</div></form>'
 }
@@ -620,10 +620,10 @@ function renderProducts(list){
     '<div class="space-y-2">'+list.map(function(p){
       return '<div class="bg-white border rounded-xl px-4 py-3 flex items-center gap-3 text-sm">'+
         '<span class="text-2xl">'+((p.image_url||'').indexOf('http')===0?'🖼️':esc(p.image_url||'📦'))+'</span>'+
-        '<div class="flex-1 min-w-0"><b>'+esc(p.name_bn)+'</b>'+(p.is_signboard?' <span class="bg-red-100 text-red-600 text-[10px] font-bold px-1.5 py-0.5 rounded">🪧 সাইনবোর্ড</span>':'')+(p.is_active?'':' <span class="bg-slate-200 text-slate-500 text-[10px] px-1.5 py-0.5 rounded">নিষ্ক্রিয়</span>')+
-        '<p class="text-xs text-slate-400">'+tk(p.offer_price||p.price)+(p.offer_price?' <s>'+tk(p.price)+'</s>':'')+' • স্টক '+toBn(p.stock)+'</p></div>'+
-        '<button onclick="editProd('+p.id+')" class="text-blue-600 px-2">✏️</button>'+
-        '<button onclick="delProd('+p.id+')" class="text-red-500 px-2">🗑️</button></div>'
+        '<div class="flex-1 min-w-0"><b>'+esc(p.name_bn)+'</b>'+(p.is_signboard?' <span class="bg-red-100 text-red-700 text-[10px] font-bold px-1.5 py-0.5 rounded">🪧 সাইনবোর্ড</span>':'')+(p.is_active?'':' <span class="bg-slate-200 text-slate-500 text-[10px] px-1.5 py-0.5 rounded">নিষ্ক্রিয়</span>')+
+        '<p class="text-xs text-slate-500">'+tk(p.offer_price||p.price)+(p.offer_price?' <s>'+tk(p.price)+'</s>':'')+' • স্টক '+toBn(p.stock)+'</p></div>'+
+        '<button onclick="editProd('+p.id+')" class="text-blue-700 px-2 py-1">✏️</button>'+
+        '<button onclick="delProd('+p.id+')" class="text-red-600 px-2 py-1">🗑️</button></div>'
     }).join('')+'</div>'
 }
 
@@ -632,7 +632,7 @@ function setOrderStatus(id,st){
   axios.put('/api/shop/admin/orders/'+id,{status:st}).then(function(){toastMsg('স্ট্যাটাস আপডেট',true);load()}).catch(apiErr)
 }
 function renderOrders(list){
-  if(!list.length)return '<p class="text-center text-slate-400 py-10">কোনো অর্ডার নেই</p>';
+  if(!list.length)return '<p class="text-center text-slate-500 py-10">কোনো অর্ডার নেই</p>';
   return '<div class="space-y-3">'+list.map(function(o){
     var items=(o.items||[]).map(function(i){return esc(i.product_name)+' ×'+toBn(i.qty)+' ('+tk(i.unit_price)+')'}).join('<br>');
     var opts=['pending','confirmed','shipped','delivered','cancelled'].map(function(s){return '<option value="'+s+'"'+(o.status===s?' selected':'')+'>'+ST_BN[s]+'</option>'}).join('');
@@ -641,7 +641,7 @@ function renderOrders(list){
       '<select onchange="setOrderStatus('+o.id+',this.value)" class="border rounded-lg px-2 py-1 text-xs">'+opts+'</select></div>'+
       '<p class="mt-1">'+esc(o.customer_name)+' — <a href="tel:'+esc(o.customer_phone)+'" class="text-blue-600">'+toBn(o.customer_phone)+'</a>'+(o.user_id?'':' <span class="text-[10px] bg-slate-100 px-1.5 rounded">গেস্ট</span>')+'</p>'+
       '<p class="text-xs text-slate-500">'+esc(o.address)+'</p>'+
-      (o.note?'<p class="text-xs text-amber-600">নোট: '+esc(o.note)+'</p>':'')+
+      (o.note?'<p class="text-xs text-amber-700">নোট: '+esc(o.note)+'</p>':'')+
       '<p class="text-xs mt-1.5 text-slate-500">'+items+'</p>'+
       '<p class="mt-1">'+(o.payment_method==='wallet'?'💰 ওয়ালেট (পরিশোধিত)':'🚚 COD')+' — মোট <b>'+tk(o.total)+'</b></p></div>'
   }).join('')+'</div>'
@@ -664,11 +664,11 @@ function renderPayments(list){
     return '<button onclick="setPaySt(\\''+s+'\\')" class="px-3 py-1.5 rounded-lg text-xs font-semibold '+(PAY_ST===s?'bg-slate-900 text-white':'bg-white border')+'">'+({pending:'পেন্ডিং',approved:'অ্যাপ্রুভড',rejected:'বাতিল'})[s]+'</button>'
   }).join(' ');
   var body=list.length?list.map(function(p){
-    var ss=p.screenshot_data?'<img src="'+p.screenshot_data+'" class="mt-2 max-h-48 rounded-lg border cursor-pointer" onclick="window.open(this.src)" alt="স্ক্রিনশট">':'<p class="text-xs text-slate-400 mt-1">স্ক্রিনশট নেই</p>';
-    var acts=p.status==='pending'?'<div class="flex gap-2 mt-2"><button onclick="approvePay('+p.id+')" class="bg-orange-600 text-white text-xs font-bold px-4 py-1.5 rounded-lg">✓ অ্যাপ্রুভ</button><button onclick="rejectPay('+p.id+')" class="bg-red-500 text-white text-xs font-bold px-4 py-1.5 rounded-lg">✗ বাতিল</button></div>':'';
+    var ss=p.screenshot_data?'<img src="'+p.screenshot_data+'" class="mt-2 max-h-48 rounded-lg border cursor-pointer" onclick="window.open(this.src)" alt="স্ক্রিনশট">':'<p class="text-xs text-slate-500 mt-1">স্ক্রিনশট নেই</p>';
+    var acts=p.status==='pending'?'<div class="flex gap-2 mt-2"><button onclick="approvePay('+p.id+')" class="bg-orange-600 text-slate-950 text-xs font-bold px-4 py-1.5 rounded-lg">✓ অ্যাপ্রুভ</button><button onclick="rejectPay('+p.id+')" class="bg-red-500 text-white text-xs font-bold px-4 py-1.5 rounded-lg">✗ বাতিল</button></div>':'';
     return '<div class="bg-white border rounded-xl p-4 text-sm"><div class="flex justify-between"><b>'+(p.method==='bkash'?'বিকাশ':'নগদ')+' — '+tk(p.amount)+'</b><span class="text-xs">'+esc(p.created_at||'')+'</span></div>'+
       '<p class="text-xs mt-1">ইউজার: '+esc(p.user_name)+' ('+toBn(p.user_phone)+') • প্রেরক: '+toBn(p.sender_number)+' • TrxID: <b>'+esc(p.trx_id)+'</b></p>'+ss+acts+'</div>'
-  }).join(''):'<p class="text-center text-slate-400 py-10">কিছু নেই</p>';
+  }).join(''):'<p class="text-center text-slate-500 py-10">কিছু নেই</p>';
   return '<div class="flex gap-2 mb-3">'+tabs+'</div><div class="space-y-3">'+body+'</div>'
 }
 
@@ -678,7 +678,7 @@ function updateAs(id){
   axios.put('/api/shop/admin/assisted/'+id,{fee:fee?Number(fee):undefined,status:st,admin_note:note}).then(function(){toastMsg('আপডেট হয়েছে',true);load()}).catch(apiErr)
 }
 function renderAssisted(list){
-  if(!list.length)return '<p class="text-center text-slate-400 py-10">কোনো রিকোয়েস্ট নেই</p>';
+  if(!list.length)return '<p class="text-center text-slate-500 py-10">কোনো রিকোয়েস্ট নেই</p>';
   var TYPES={admission:'🎓 ভর্তি',job_application:'💼 চাকরি',form_fillup:'📋 ফর্ম',other:'অন্যান্য'};
   return '<div class="space-y-3">'+list.map(function(a){
     var opts=['requested','quoted','paid','processing','done','cancelled'].map(function(s){return '<option value="'+s+'"'+(a.status===s?' selected':'')+'>'+AS_ST[s]+'</option>'}).join('');
@@ -710,12 +710,12 @@ function renderSettings(s){
     '<div><label class="font-semibold text-slate-600">নগদ নম্বর (পার্সোনাল)</label><input id="st-nagad" maxlength="11" value="'+esc(s.nagad_number||'')+'" placeholder="01XXXXXXXXX" class="w-full mt-1 border rounded-xl px-3 py-2.5"></div>'+
     '<div><label class="font-semibold text-slate-600">হোয়াটসঅ্যাপ নম্বর</label><input id="st-wa" maxlength="11" value="'+esc(s.whatsapp_number||'')+'" placeholder="01XXXXXXXXX" class="w-full mt-1 border rounded-xl px-3 py-2.5"></div>'+
     '<div><label class="font-semibold text-slate-600">COD ডেলিভারি চার্জ (টাকা)</label><input id="st-cod" type="number" min="0" value="'+esc(s.cod_charge||'0')+'" class="w-full mt-1 border rounded-xl px-3 py-2.5"></div>'+
-    '<button class="w-full bg-orange-600 text-white font-bold py-3 rounded-xl">সেভ করুন ✓</button></form>'
+    '<button class="w-full bg-orange-600 text-slate-950 font-bold py-3 rounded-xl">সেভ করুন ✓</button></form>'
 }
 
 function load(){
   var el=document.getElementById('tab-content');
-  el.innerHTML='<p class="text-center text-slate-400 py-10">লোড হচ্ছে...</p>';
+  el.innerHTML='<p class="text-center text-slate-500 py-10">লোড হচ্ছে...</p>';
   if(TAB==='products')axios.get('/api/shop/admin/products').then(function(r){el.innerHTML=renderProducts(r.data.products||[])}).catch(apiErr);
   else if(TAB==='orders')axios.get('/api/shop/admin/orders').then(function(r){el.innerHTML=renderOrders(r.data.orders||[])}).catch(apiErr);
   else if(TAB==='payments')axios.get('/api/shop/admin/payments?status='+PAY_ST).then(function(r){el.innerHTML=renderPayments(r.data.payments||[])}).catch(apiErr);

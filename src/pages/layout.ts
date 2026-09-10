@@ -183,15 +183,15 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
     <!-- ১. ব্র‍্যান্ড লোগো (Consistent Identity) -->
     <a href="/" class="flex items-center gap-2.5 sm:gap-3 group shrink-0" aria-label="এডুসব হোম">
-      <div class="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+      <div class="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center text-slate-950 shadow-md group-hover:scale-105 transition-transform">
         <i class="fas fa-graduation-cap text-base sm:text-lg"></i>
       </div>
       <div class="flex flex-col">
         <div class="flex items-center gap-1.5">
           <span class="text-lg sm:text-xl font-black ${isDark ? 'text-white' : 'text-slate-900'} tracking-tight">এডুসব</span>
-          <span class="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 ${isDark ? 'bg-orange-500/20 text-orange-300 border border-orange-500/30' : 'bg-orange-100 text-orange-800'} rounded-full font-en">EduSob</span>
+          <span class="text-[10px] font-bold px-1.5 py-0.5 ${isDark ? 'bg-orange-500/20 text-orange-300 border border-orange-500/30' : 'bg-orange-100 text-orange-800'} rounded-full font-en">EduSob</span>
         </div>
-        <span class="hidden sm:block text-[10px] ${isDark ? 'text-slate-300' : 'text-slate-500'} -mt-0.5 font-medium">শিক্ষার সব, এক ঠিকানায়</span>
+        <span class="hidden sm:block text-[11px] ${isDark ? 'text-slate-300' : 'text-slate-500'} -mt-0.5 font-medium">শিক্ষার সব, এক ঠিকানায়</span>
       </div>
     </a>
 
@@ -201,7 +201,7 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
       <a href="/admission" class="${navClass('admission', '')}">ভর্তি হাব</a>
       <a href="/scholarships" class="${navClass('scholarships', '')} flex items-center gap-1.5">
         <i class="fas fa-award text-amber-400 text-xs"></i> স্কলারশিপ
-        <span class="text-[9px] ${isDark ? 'bg-amber-400/20 text-amber-300 border border-amber-400/30' : 'bg-amber-200 text-amber-950'} px-1.5 py-0.2 rounded font-bold">AI</span>
+        <span class="text-[10px] ${isDark ? 'bg-amber-400/20 text-amber-300 border border-amber-400/30' : 'bg-amber-200 text-amber-950'} px-1.5 py-0.2 rounded font-bold">AI</span>
       </a>
       <a href="/cv" class="${navClass('cv', '')} flex items-center gap-1.5">
         <i class="fas fa-file-invoice text-cyan-400 text-xs"></i> সিভি মেকার Pro
@@ -352,16 +352,16 @@ export function floatingButtons(): string {
     <span class="w-px h-3.5 bg-white/15"></span>
 
     <!-- শপ বাটন (স্মার্ট ব্যাজসহ) -->
-    <a id="edusob-shop-btn" href="/shop" title="এডুসব শপ — প্রোডাক্ট ও অফার" aria-label="এডুসব শপ" class="relative flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-full text-amber-300 hover:text-white hover:bg-amber-600/30 transition">
+    <a id="edusob-shop-btn" href="/shop" title="এডুসব শপ — প্রোডাক্ট ও অফার" aria-label="এডুসব শপ" class="relative flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-full text-amber-300 hover:text-slate-950 hover:bg-amber-600/30 transition">
       <i class="fas fa-store text-amber-400"></i>
       <span class="hidden md:inline">শপ</span>
-      <span id="edusob-shop-badge" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-slate-950"></span>
+      <span id="edusob-shop-badge" class="hidden absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-slate-950"></span>
     </a>
 
     <span class="w-px h-3.5 bg-white/15"></span>
 
     <!-- WhatsApp বাটন -->
-    <a id="edusob-wa" href="#" onclick="return edusobWa()" title="সরাসরি WhatsApp সহায়তা" aria-label="WhatsApp সাপোর্ট" class="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-full text-orange-300 hover:text-white hover:bg-orange-600/30 transition">
+    <a id="edusob-wa" href="#" onclick="return edusobWa()" title="সরাসরি WhatsApp সহায়তা" aria-label="WhatsApp সাপোর্ট" class="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-full text-orange-300 hover:text-slate-950 hover:bg-orange-600/30 transition">
       <i class="fab fa-whatsapp text-orange-400 text-sm"></i>
       <span class="hidden md:inline">হেল্প</span>
     </a>
@@ -385,7 +385,7 @@ export function floatingButtons(): string {
       <button onclick="edusobSbClose()" class="text-slate-400 hover:text-slate-700 text-xl leading-none">&times;</button>
     </div>
     <div id="edusobSbList" class="px-5 pb-4 space-y-2 max-h-72 overflow-y-auto"></div>
-    <a href="/shop" class="block bg-gradient-to-r from-amber-500 to-orange-600 text-white text-center font-bold py-3 hover:opacity-90 transition">সব প্রোডাক্ট দেখুন →</a>
+    <a href="/shop" class="block bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 text-center font-bold py-3 hover:opacity-90 transition">সব প্রোডাক্ট দেখুন →</a>
   </div>
 </div>
 
@@ -766,12 +766,12 @@ function cmdRender() {
     }
     html += '<li role="option" id="cmd-opt-' + i + '" data-idx="' + i + '" aria-selected="' + (i === CMD_STATE.idx) + '"' +
       ' class="mx-1.5 flex items-center gap-3 px-2.5 py-2.5 rounded-xl cursor-pointer ' +
-      (i === CMD_STATE.idx ? 'bg-orange-500/15 text-white' : 'text-slate-200 hover:bg-white/5') + '">' +
+      (i === CMD_STATE.idx ? 'bg-orange-500/15 text-slate-950' : 'text-slate-200 hover:bg-white/5') + '">' +
       '<span class="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] shrink-0 ' +
       (i === CMD_STATE.idx ? 'bg-orange-500/25 text-orange-300' : 'bg-white/5 text-slate-400') + '"><i class="fas ' + it.c.i + '"></i></span>' +
       '<span class="min-w-0 flex-1"><span class="block text-[13px] font-semibold truncate"></span>' +
       '<span class="block text-[11px] text-slate-400 truncate"></span></span>' +
-      (it.c.u ? '<i class="fas fa-arrow-right text-[10px] text-slate-500 shrink-0"></i>' : '<span class="text-[9px] font-black text-slate-500 shrink-0">ENTER</span>') +
+      (it.c.u ? '<i class="fas fa-arrow-right text-[10px] text-slate-500 shrink-0"></i>' : '<span class="text-[10px] font-black text-slate-500 shrink-0">ENTER</span>') +
       '</li>'
   }
   list.innerHTML = html

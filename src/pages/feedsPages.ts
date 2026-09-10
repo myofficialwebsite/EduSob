@@ -4,7 +4,7 @@ import { pageShell } from './layout'
 // কমন পাবলিক হেডার
 function publicHeader(active: string, loggedIn: boolean): string {
   const link = (href: string, label: string, key: string) =>
-    `<a href="${href}" class="${active === key ? 'text-orange-400 font-bold' : 'text-slate-300 hover:text-white'} transition">${label}</a>`
+    `<a href="${href}" class="inline-block px-1.5 py-1.5 ${active === key ? 'text-orange-400 font-bold' : 'text-slate-300 hover:text-white'} transition">${label}</a>`
   return `
 <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-xl border-b border-white/10">
   <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
@@ -19,9 +19,9 @@ function publicHeader(active: string, loggedIn: boolean): string {
     </div>
     <div class="flex items-center gap-2 text-sm shrink-0">
       ${loggedIn
-        ? `<a href="/dashboard" class="bg-orange-500 hover:bg-orange-400 px-4 py-2 rounded-xl font-semibold transition">ড্যাশবোর্ড</a>`
+        ? `<a href="/dashboard" class="bg-orange-500 hover:bg-orange-400 text-slate-950 px-4 py-2 rounded-xl font-semibold transition">ড্যাশবোর্ড</a>`
         : `<a href="/login" class="px-3 py-2 text-slate-300 hover:text-white transition">লগইন</a>
-           <a href="/signup" class="bg-orange-500 hover:bg-orange-400 px-4 py-2 rounded-xl font-semibold transition">ফ্রি সাইন-আপ</a>`}
+           <a href="/signup" class="bg-orange-500 hover:bg-orange-400 text-slate-950 px-4 py-2 rounded-xl font-semibold transition">ফ্রি সাইন-আপ</a>`}
     </div>
   </nav>
   <div class="md:hidden flex gap-4 px-4 pb-2 text-xs overflow-x-auto">
@@ -63,7 +63,7 @@ ${publicHeader('news', loggedIn)}
   </section>
 
   <div id="news-tabs" class="flex gap-2 mb-6 overflow-x-auto">
-    <button onclick="loadNews('latest')" data-cat="latest" class="tab-btn bg-orange-500 text-white px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap">🔥 সর্বশেষ</button>
+    <button onclick="loadNews('latest')" data-cat="latest" class="tab-btn bg-orange-500 text-slate-950 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap">🔥 সর্বশেষ</button>
     <button onclick="loadNews('education')" data-cat="education" class="tab-btn bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition">🎓 শিক্ষা</button>
     <button onclick="loadNews('jobs')" data-cat="jobs" class="tab-btn bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition">💼 চাকরি</button>
   </div>
@@ -77,7 +77,7 @@ ${publicHeader('news', loggedIn)}
 ${timeAgoJs}
 async function loadNews(cat){
   document.querySelectorAll('.tab-btn').forEach(b=>{
-    if(b.dataset.cat===cat){b.className='tab-btn bg-orange-500 text-white px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap'}
+    if(b.dataset.cat===cat){b.className='tab-btn bg-orange-500 text-slate-950 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap'}
     else{b.className='tab-btn bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition'}
   });
   const list = document.getElementById('newsList');
@@ -91,11 +91,11 @@ async function loadNews(cat){
         <div class="flex items-start gap-3">
           <span class="text-orange-400 font-bold text-lg w-8 shrink-0 text-center">\${BN(i+1)}</span>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold leading-snug">\${esc(n.title)}</h3>
+            <h2 class="font-semibold leading-snug">\${esc(n.title)}</h2>
             <p class="text-xs text-slate-400 mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
               <span class="bg-orange-500/15 text-orange-300 px-2 py-0.5 rounded-full font-semibold"><i class="fas fa-newspaper mr-1"></i>সূত্র: \${esc(n.source)}</span>
               <span><i class="fas fa-clock mr-1"></i>\${timeAgo(n.pubDate)}</span>
-              <span class="text-slate-500">\${fmtNewsDate(n.pubDate)}</span>
+              <span class="text-slate-400">\${fmtNewsDate(n.pubDate)}</span>
             </p>
           </div>
           <i class="fas fa-arrow-up-right-from-square text-slate-500 text-xs mt-1"></i>
@@ -120,7 +120,7 @@ ${publicHeader('jobs', loggedIn)}
   </section>
 
   <div id="job-filters" class="flex gap-2 mb-6 overflow-x-auto">
-    <button onclick="loadJobs('')" data-lv="" class="lv-btn bg-orange-500 text-white px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap">সব</button>
+    <button onclick="loadJobs('')" data-lv="" class="lv-btn bg-orange-500 text-slate-950 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap">সব</button>
     <button onclick="loadJobs('ssc')" data-lv="ssc" class="lv-btn bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition">SSC পাস</button>
     <button onclick="loadJobs('hsc')" data-lv="hsc" class="lv-btn bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition">HSC পাস</button>
     <button onclick="loadJobs('nu')" data-lv="nu" class="lv-btn bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition">স্নাতক</button>
@@ -150,7 +150,7 @@ function matchBadge(m){
 }
 async function loadJobs(lv){
   document.querySelectorAll('.lv-btn').forEach(b=>{
-    if(b.dataset.lv===lv){b.className='lv-btn bg-orange-500 text-white px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap'}
+    if(b.dataset.lv===lv){b.className='lv-btn bg-orange-500 text-slate-950 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap'}
     else{b.className='lv-btn bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition'}
   });
   const list = document.getElementById('jobsList');
@@ -166,7 +166,7 @@ async function loadJobs(lv){
       <div class="card-hover bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div class="flex-1 min-w-0 w-full">
-            <h3 class="font-bold text-base sm:text-lg leading-snug">\${esc(j.title)}</h3>
+            <h2 class="font-bold text-base sm:text-lg leading-snug">\${esc(j.title)}</h2>
             <p class="text-sm text-slate-400 mt-1"><i class="fas fa-building mr-1"></i>\${esc(j.org||'')}</p>
             <p class="text-xs text-slate-400 mt-2 leading-relaxed">\${esc(j.description||'')}</p>
             <div class="flex flex-wrap gap-1.5 sm:gap-2 mt-3 text-xs">
@@ -200,7 +200,7 @@ ${publicHeader('notices', loggedIn)}
   </section>
 
   <div id="notice-tabs" class="flex gap-2 mb-6 overflow-x-auto">
-    <button onclick="loadNotices('')" data-cat="" class="nt-btn bg-orange-500 text-white px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap">সব</button>
+    <button onclick="loadNotices('')" data-cat="" class="nt-btn bg-orange-500 text-slate-950 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap">সব</button>
     <button onclick="loadNotices('nu')" data-cat="nu" class="nt-btn bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition">জাতীয় বিশ্ববিদ্যালয়</button>
     <button onclick="loadNotices('board')" data-cat="board" class="nt-btn bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition">শিক্ষা বোর্ড</button>
     <button onclick="loadNotices('dshe')" data-cat="dshe" class="nt-btn bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition">DSHE/মন্ত্রণালয়</button>
@@ -228,7 +228,7 @@ function toggleBody(id, btn){
 const NCOLOR = { nu:'bg-blue-500/15 text-blue-300', board:'bg-orange-500/15 text-orange-300', dshe:'bg-purple-500/15 text-purple-300', ntrca:'bg-amber-500/15 text-amber-300', college:'bg-amber-500/15 text-amber-300', general:'bg-slate-500/15 text-slate-300' };
 async function loadNotices(cat){
   document.querySelectorAll('.nt-btn').forEach(b=>{
-    if(b.dataset.cat===cat){b.className='nt-btn bg-orange-500 text-white px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap'}
+    if(b.dataset.cat===cat){b.className='nt-btn bg-orange-500 text-slate-950 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap'}
     else{b.className='nt-btn bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition'}
   });
   const list = document.getElementById('noticesList');
@@ -242,7 +242,7 @@ async function loadNotices(cat){
         <div class="flex items-start gap-3">
           <span class="w-10 h-10 rounded-xl \${(NCOLOR[n.category]||NCOLOR.general).split(' ')[0]} flex items-center justify-center shrink-0"><i class="fas fa-file-lines"></i></span>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold leading-snug">\${esc(n.title)}</h3>
+            <h2 class="font-semibold leading-snug">\${esc(n.title)}</h2>
             <p class="text-xs mt-1.5">
               <span class="\${NCOLOR[n.category]||NCOLOR.general} px-2 py-0.5 rounded-full">\${NCAT[n.category]||n.category}</span>
               \${n.published_at ? '<span class="text-slate-400 ml-2"><i class="fas fa-calendar-day mr-1"></i>'+fmtNoticeDate(n.published_at)+'</span>' : ''}

@@ -143,7 +143,7 @@ export function renderMentorControlTab(): string {
             <input type="text" id="payoutNote" required placeholder="যেমন: ফেব্রুয়ারি মাসের টিকেট সমাধান বিল" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-orange-500">
           </label>
 
-          <button type="submit" class="w-full py-2.5 bg-orange-600 hover:bg-orange-500 text-white font-extrabold rounded-xl text-xs transition shadow">
+          <button type="submit" class="w-full py-2.5 bg-orange-600 hover:bg-orange-500 text-slate-950 font-extrabold rounded-xl text-xs transition shadow">
             বিল সেটেল ও ওয়ালেট ক্রেডিট করুন
           </button>
         </form>

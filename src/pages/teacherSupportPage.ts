@@ -82,7 +82,7 @@ ${NAV(loggedIn)}
 
   <!-- প্রধান ন্যাভিগেশন ট্যাব -->
   <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 border-b border-white/10 no-scrollbar">
-    <button onclick="switchMainTab('mentors')" id="tab-btn-mentors" class="main-tab-btn px-5 py-2.5 rounded-xl bg-orange-500 text-white font-bold text-sm whitespace-nowrap transition flex items-center gap-2">
+    <button onclick="switchMainTab('mentors')" id="tab-btn-mentors" class="main-tab-btn px-5 py-2.5 rounded-xl bg-orange-500 text-slate-950 font-bold text-sm whitespace-nowrap transition flex items-center gap-2">
       <i class="fas fa-chalkboard-user"></i> শিক্ষক প্যানেল
     </button>
     <button onclick="switchMainTab('my-tickets')" id="tab-btn-my-tickets" class="main-tab-btn px-5 py-2.5 rounded-xl bg-white/5 text-slate-300 hover:bg-white/10 font-bold text-sm whitespace-nowrap transition flex items-center gap-2">
@@ -136,7 +136,7 @@ ${NAV(loggedIn)}
         </h2>
         <p class="text-xs sm:text-sm text-slate-400">শিক্ষক উত্তর প্রদান করলে আপনি এখানে বিস্তারিত সমাধান ও সূত্র পাবেন</p>
       </div>
-      <button onclick="openAskModal()" class="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl font-bold text-sm text-white hover:opacity-90 transition">
+      <button onclick="openAskModal()" class="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl font-bold text-sm text-slate-950 hover:opacity-90 transition">
         <i class="fas fa-plus mr-1"></i> নতুন প্রশ্ন করুন
       </button>
     </div>
@@ -214,7 +214,7 @@ ${NAV(loggedIn)}
             <textarea id="consNote" rows="2" placeholder="নির্দিষ্ট কোনো চ্যাপ্টার বা বইয়ের কথা লিখে রাখতে পারেন..." class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-orange-400"></textarea>
           </div>
 
-          <button type="submit" id="consSubmitBtn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-extrabold text-sm shadow-lg hover:brightness-110 transition">
+          <button type="submit" id="consSubmitBtn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 font-extrabold text-sm shadow-lg hover:brightness-110 transition">
             <i class="fas fa-calendar-plus mr-1"></i> সেশন বুকিং রিকোয়েস্ট পাঠান
           </button>
         </form>
@@ -374,7 +374,7 @@ ${NAV(loggedIn)}
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <button id="stdChatVideoBtn" class="px-3 py-1.5 rounded-lg bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs transition flex items-center gap-1"><i class="fas fa-video"></i> ভিডিও রুম</button>
+        <button id="stdChatVideoBtn" class="px-3 py-1.5 rounded-lg bg-orange-600 hover:bg-orange-500 text-slate-950 font-bold text-xs transition flex items-center gap-1"><i class="fas fa-video"></i> ভিডিও রুম</button>
         <button onclick="closeStudentChat()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
       </div>
     </div>
@@ -491,7 +491,7 @@ function renderMentors(list) {
   grid.innerHTML = list.map(function(m){
     var avatarHtml = m.avatar && m.avatar.indexOf('unsplash.com') === -1
       ? '<img src="'+esc(m.avatar)+'" alt="'+esc(m.name)+'" class="w-16 h-16 rounded-2xl object-cover border-2 border-white/20 group-hover:border-orange-400 transition">'
-      : '<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-600 to-amber-800 border-2 border-white/20 flex items-center justify-center text-white text-xl font-bold shadow-md group-hover:border-orange-400 transition"><span>'+esc((m.name||'শি').charAt(0))+'</span></div>';
+      : '<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-600 to-amber-800 border-2 border-white/20 flex items-center justify-center text-slate-950 text-xl font-bold shadow-md group-hover:border-orange-400 transition"><span>'+esc((m.name||'শি').charAt(0))+'</span></div>';
 
     return '<div class="bg-white/5 border border-white/10 hover:border-orange-400/40 rounded-3xl p-6 transition-all duration-200 flex flex-col justify-between group">'+
       '<div>'+
@@ -658,7 +658,7 @@ function loadMyTickets() {
             '<button onclick="openStudentChat('+t.id+', \\''+esc(t.topic || t.subject)+'\\')" class="px-3.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 font-bold transition flex items-center gap-1"><i class="fas fa-comments"></i> 💬 চ্যাট / SMS</button>'+
             '<button onclick="joinStudentVideoRoom('+t.id+', \\''+esc(t.topic || t.subject)+'\\')" class="px-3.5 py-1.5 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 border border-orange-400/40 font-bold transition flex items-center gap-1"><i class="fas fa-video"></i> 📹 ১-অন-১ ভিডিও রুম</button>'+
             (isAnswered
-              ? '<button onclick="viewSolution('+t.id+')" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold hover:shadow-lg transition flex items-center gap-1.5"><i class="fas fa-eye"></i> সম্পূর্ণ সমাধান</button>'
+              ? '<button onclick="viewSolution('+t.id+')" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 font-bold hover:shadow-lg transition flex items-center gap-1.5"><i class="fas fa-eye"></i> সম্পূর্ণ সমাধান</button>'
               : '<span class="text-amber-400/90 text-xs italic">শিক্ষক সমাধান করছেন</span>')+
           '</div>'+
         '</div>'+
@@ -821,7 +821,7 @@ function loadMyConsultations() {
           '<span>⏰ '+esc(c.preferred_time)+'</span>'+
         '</div>'+
         (c.meeting_link
-          ? '<a href="'+esc(c.meeting_link)+'" target="_blank" class="inline-block mt-2 px-3 py-1.5 rounded-xl bg-orange-500 text-white font-bold text-xs hover:bg-orange-400 transition"><i class="fas fa-video mr-1"></i> গুগল মিট লিংকে প্রবেশ করুন</a>'
+          ? '<a href="'+esc(c.meeting_link)+'" target="_blank" class="inline-block mt-2 px-3 py-1.5 rounded-xl bg-orange-500 text-slate-950 font-bold text-xs hover:bg-orange-400 transition"><i class="fas fa-video mr-1"></i> গুগল মিট লিংকে প্রবেশ করুন</a>'
           : '')+
       '</div>';
     }).join('');
@@ -880,7 +880,7 @@ function loadStudentMessages(ticketId, silent) {
           '<span class="font-bold '+(isMe?'text-amber-400':'text-orange-400')+'">'+(isMe?'🎓 আপনি':'👨‍🏫 '+esc(m.sender_name||'শিক্ষক'))+'</span>'+
           '<span>'+esc(String(m.created_at||'').slice(11,16))+'</span>'+
         '</div>'+
-        '<div class="max-w-[80%] rounded-2xl px-4 py-2.5 text-xs '+(isMe?'bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-medium rounded-tr-none shadow-md':'bg-slate-800 text-white border border-white/10 rounded-tl-none shadow-sm')+' leading-relaxed whitespace-pre-wrap">'+
+        '<div class="max-w-[80%] rounded-2xl px-4 py-2.5 text-xs '+(isMe?'bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-medium rounded-tr-none shadow-md':'bg-slate-800 text-slate-950 border border-white/10 rounded-tl-none shadow-sm')+' leading-relaxed whitespace-pre-wrap">'+
           esc(m.message)+
         '</div>'+
       '</div>';

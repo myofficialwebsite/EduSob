@@ -64,7 +64,7 @@ export function boardChallengePage(loggedIn: boolean): string {
     <div class="absolute -right-16 -top-16 w-56 h-56 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
     <div class="flex items-center justify-between flex-wrap gap-4 mb-6 pb-4 border-b border-white/10">
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center text-white text-xl shadow-lg shadow-orange-500/20">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center text-slate-950 text-xl shadow-lg shadow-orange-500/20">
           <i class="fas fa-calculator"></i>
         </div>
         <div>
@@ -116,7 +116,7 @@ export function boardChallengePage(loggedIn: boolean): string {
           <div class="relative">
             <input type="text" id="bcSubjects" value="101,102" oninput="updateBcSms()" placeholder="যেমন: 101,102,107,108" class="w-full bg-slate-800 border border-white/15 rounded-xl px-3 py-2.5 text-sm focus:border-orange-400 focus:outline-none font-mono">
           </div>
-          <p class="text-[11px] text-slate-500 mt-1">
+          <p class="text-[11px] text-slate-400 mt-1">
             ⚠️ <span class="text-amber-400/90 font-semibold">দ্বিপত্র বিশিষ্ট বিষয়:</span> বাংলা ও ইংরেজি বিষয়ের ক্ষেত্রে ১ম ও ২য় পত্র উভয় বিষয়ের আবেদন করতে হয় (যেমন: বাংলা ১০১, ১০২ — ২টি বিষয় হিসেবে ফি প্রযোজ্য)।
           </p>
         </div>
@@ -184,11 +184,11 @@ export function boardChallengePage(loggedIn: boolean): string {
             </div>
             <div class="relative bg-slate-900 border border-white/15 rounded-xl p-3 font-mono text-xs text-orange-300 break-all select-all flex items-center justify-between">
               <span id="bcSms1">RSC DHA 123456 101,102</span>
-              <button onclick="copyText('bcSms1')" class="ml-2 px-2.5 py-1 bg-white/10 hover:bg-white/20 text-white rounded-lg transition text-[11px] shrink-0">
+              <button onclick="copyText('bcSms1')" aria-label="SMS কপি করুন" title="SMS কপি করুন" class="ml-2 px-2.5 py-1 bg-white/10 hover:bg-white/20 text-white rounded-lg transition text-[11px] shrink-0">
                 <i class="fas fa-copy"></i>
               </button>
             </div>
-            <a id="bcSms1Link" href="sms:16222?body=RSC DHA 123456 101,102" class="w-full text-center block bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md">
+            <a id="bcSms1Link" href="sms:16222?body=RSC DHA 123456 101,102" class="w-full text-center block bg-orange-600 hover:bg-orange-500 text-slate-950 text-xs font-bold py-2.5 rounded-xl transition shadow-md">
               <i class="fas fa-paper-plane mr-1.5"></i> মোবাইলে ১-ক্লিকে SMS পাঠান
             </a>
           </div>
@@ -201,17 +201,17 @@ export function boardChallengePage(loggedIn: boolean): string {
             </div>
             <div class="relative bg-slate-900 border border-white/15 rounded-xl p-3 font-mono text-xs text-amber-300 break-all select-all flex items-center justify-between">
               <span id="bcSms2">RSC YES 12345678 01712345678</span>
-              <button onclick="copyText('bcSms2')" class="ml-2 px-2.5 py-1 bg-white/10 hover:bg-white/20 text-white rounded-lg transition text-[11px] shrink-0">
+              <button onclick="copyText('bcSms2')" aria-label="SMS কপি করুন" title="SMS কপি করুন" class="ml-2 px-2.5 py-1 bg-white/10 hover:bg-white/20 text-white rounded-lg transition text-[11px] shrink-0">
                 <i class="fas fa-copy"></i>
               </button>
             </div>
-            <a id="bcSms2Link" href="sms:16222?body=RSC YES 12345678 01712345678" class="w-full text-center block bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md">
+            <a id="bcSms2Link" href="sms:16222?body=RSC YES 12345678 01712345678" class="w-full text-center block bg-amber-600 hover:bg-amber-500 text-slate-950 text-xs font-bold py-2.5 rounded-xl transition shadow-md">
               <i class="fas fa-check-double mr-1.5"></i> মোবাইলে কনফার্মেশন SMS পাঠান
             </a>
           </div>
         </div>
 
-        <p class="text-[10px] text-slate-500 mt-4 text-center">
+        <p class="text-[10px] text-slate-400 mt-4 text-center">
           * টেলিটক প্রি-পেইড সিমে পর্যাপ্ত ব্যালেন্স থাকতে হবে।
         </p>
       </div>

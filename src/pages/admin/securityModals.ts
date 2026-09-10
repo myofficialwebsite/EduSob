@@ -61,7 +61,7 @@ export function renderSecurityModals(): string {
 
       <div class="flex gap-2 pt-2 border-t border-slate-100">
         <button type="button" onclick="closeRoleModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 font-bold py-2.5 rounded-xl transition text-slate-700">বাতিল</button>
-        <button type="submit" id="btnSubmitRole" class="flex-1 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-extrabold py-2.5 rounded-xl transition shadow">রোল নিশ্চিত করুন</button>
+        <button type="submit" id="btnSubmitRole" class="flex-1 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-extrabold py-2.5 rounded-xl transition shadow">রোল নিশ্চিত করুন</button>
       </div>
     </form>
   </div>
@@ -125,7 +125,7 @@ export function renderSecurityModals(): string {
 
       <div class="flex gap-2 pt-2 border-t border-slate-100">
         <button type="button" onclick="closeWalletModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 font-bold py-2.5 rounded-xl transition text-slate-700">বাতিল</button>
-        <button type="submit" class="flex-1 bg-orange-600 hover:bg-orange-500 text-white font-bold py-2.5 rounded-xl transition shadow">ব্যালেন্স আপডেট করুন</button>
+        <button type="submit" class="flex-1 bg-orange-600 hover:bg-orange-500 text-slate-950 font-bold py-2.5 rounded-xl transition shadow">ব্যালেন্স আপডেট করুন</button>
       </div>
     </form>
   </div>
@@ -155,7 +155,7 @@ export function renderSecurityModals(): string {
       </a>
       <div class="flex gap-2">
         <button onclick="closeContentPreviewModal()" class="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs">বন্ধ করুন</button>
-        <button id="cpModalApproveBtn" class="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-extrabold text-xs shadow">
+        <button id="cpModalApproveBtn" class="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-500 text-slate-950 font-extrabold text-xs shadow">
           <i class="fas fa-check mr-1"></i> পাবলিশ অনুমোদন করুন
         </button>
       </div>
