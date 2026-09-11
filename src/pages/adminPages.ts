@@ -1902,22 +1902,28 @@ async function loadRates(){
 async function loadAdminTeachers(){
   var d = await api('get', '/api/teacher-support/mentors');
   if(!d) return;
+  window.__admTeachers = d.mentors || [];   // সম্পাদনা মোডালে ব্যবহার হবে
   var grid = document.getElementById('admTeachersGrid');
   if(!grid) return;
   grid.innerHTML = (d.mentors||[]).map(function(t){
     var isOnline = t.is_online === 1 || t.is_online === true;
     return '<div class="border border-slate-200 rounded-2xl p-4 bg-white shadow-sm space-y-2">'+
       '<div class="flex items-center gap-2.5">'+
-        '<div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-900 font-bold flex items-center justify-center text-sm">👨‍🏫</div>'+
-        '<div><p class="font-bold text-slate-900 text-xs">'+esc(t.name)+'</p><p class="text-[10px] text-slate-500">'+esc(t.designation)+'</p></div>'+
+        teacherAvatar(t, 'w-10 h-10 text-sm')+
+        '<div class="min-w-0 flex-1"><p class="font-bold text-slate-900 text-xs truncate">'+esc(t.name)+'</p><p class="text-[10px] text-slate-500 truncate">'+esc(t.designation)+'</p></div>'+
       '</div>'+
       '<p class="text-[11px] text-slate-600">বিষয়: <b>'+esc(t.subject)+'</b> • স্তর: '+esc(t.education_level||'all')+'</p>'+
       '<div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-100">'+
         '<span>⭐ '+toBn(t.rating||4.9)+' • '+esc(t.response_time||'১৫ মিনিট')+'</span>'+
         '<span class="font-bold '+(isOnline?'text-orange-700':'text-slate-500')+'">'+(isOnline?'🟢 সরাসরি অনলাইন':'অফলাইন')+'</span>'+
       '</div>'+
+      '<div class="flex gap-1.5 pt-2 border-t border-slate-100">'+
+        '<button type="button" onclick="openEditTeacherModal('+t.id+')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-bold transition"><i class="fas fa-pen mr-1"></i>সম্পাদনা</button>'+
+        '<button type="button" onclick="deleteTeacher('+t.id+', \\''+esc(t.name)+'\\')" class="flex-1 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-[10px] font-bold transition"><i class="fas fa-trash mr-1"></i>মুছুন</button>'+
+      '</div>'+
     '</div>';
   }).join('') || '<div class="col-span-full py-8 text-center text-slate-500">কোনো শিক্ষক পাওয়া যায়নি</div>';
+  bindTeacherAvatarFallback(grid);
 }
 
 async function loadTeacherTickets(status){
@@ -1942,6 +1948,70 @@ async function loadTeacherTickets(status){
   }).join('') || '<div class="py-8 text-center text-slate-500">কোনো টিকেট পাওয়া যায়নি</div>';
 }
 
+/** শিক্ষকের ছবি — থাকলে <img>, না থাকলে নামের আদ্যক্ষর (কোনো ভাঙা ছবি নয়) */
+function teacherAvatar(t, cls){
+  var size = cls || 'w-10 h-10 text-sm';
+  var url = (t && t.avatar) ? String(t.avatar).trim() : '';
+  var name = (t && t.name) ? String(t.name).trim() : '';
+  if (!url) return teacherInitials(name, size);
+  /* ⚠️ ইনলাইন onerror-এ নেস্টেড কোট লিখতে গিয়ে আগে পুরো অ্যাডমিন স্ক্রিপ্টের
+     সিনট্যাক্স ভেঙে যাচ্ছিল ("Unexpected token 'this'") — ফলে অ্যাডমিন
+     প্যানেলই কাজ বন্ধ করে দিচ্ছিল। তাই onerror এখানে নয়; রেন্ডারের পর
+     bindTeacherAvatarFallback() দিয়ে জুড়ে দেওয়া হয় (কোনো এস্কেপিং ঝুঁকি নেই)। */
+  return '<img src="' + esc(url) + '" alt="" loading="lazy" data-tav="1"'
+    + ' data-initial="' + esc(name.charAt(0) || '?') + '" data-size="' + esc(size) + '"'
+    + ' class="' + size + ' rounded-xl object-cover bg-amber-100 flex-shrink-0">';
+}
+
+/** ছবি লোড ব্যর্থ হলে ভাঙা ছবির বদলে নামের আদ্যক্ষর দেখাও */
+function bindTeacherAvatarFallback(scope){
+  (scope || document).querySelectorAll('img[data-tav]').forEach(function(img){
+    if (img.dataset.bound) return;
+    img.dataset.bound = '1';
+    img.addEventListener('error', function(){
+      var d = document.createElement('div');
+      d.className = (img.dataset.size || 'w-10 h-10 text-sm')
+        + ' rounded-xl bg-amber-100 text-amber-900 font-bold flex items-center justify-center flex-shrink-0';
+      d.textContent = img.dataset.initial || '?';
+      img.replaceWith(d);
+    });
+  });
+}
+function teacherInitials(name, size){
+  var ch = (name || '?').trim().charAt(0) || '?';
+  return '<div class="'+size+' rounded-xl bg-amber-100 text-amber-900 font-bold flex items-center justify-center flex-shrink-0">'+esc(ch)+'</div>';
+}
+
+/** শিক্ষক সম্পাদনা — ফর্মটি পূর্বের তথ্যে ভরে দেওয়া হয় */
+function openEditTeacherModal(id){
+  var t = (window.__admTeachers||[]).find(function(x){ return String(x.id)===String(id); });
+  if (!t) { toastMsg('শিক্ষকের তথ্য পাওয়া যায়নি'); return; }
+  document.getElementById('teacherForm').reset();
+  document.getElementById('tf_id').value = t.id;
+  document.getElementById('tf_name').value = t.name || '';
+  document.getElementById('tf_designation').value = t.designation || '';
+  document.getElementById('tf_subject').value = t.subject || '';
+  document.getElementById('tf_level').value = t.education_level || 'all';
+  document.getElementById('tf_avatar').value = t.avatar || '';
+  document.getElementById('tf_exp').value = t.experience_years || 5;
+  document.getElementById('tf_phone').value = t.phone || '';
+  document.getElementById('tf_password').value = '';
+  document.getElementById('tf_online').checked = (t.is_online===1||t.is_online===true);
+  document.getElementById('tf_active').checked = (t.is_active===1||t.is_active===true);
+  document.getElementById('tf_modal_title').textContent = '✏️ শিক্ষক সম্পাদনা: ' + (t.name||'');
+  document.getElementById('admTeacherModal').classList.remove('hidden');
+  document.getElementById('admTeacherModal').classList.add('flex');
+}
+
+/** শিক্ষক মুছে ফেলা — দুই ধাপে নিশ্চিতকরণ (ধ্বংসাত্মক কাজ) */
+async function deleteTeacher(id, name){
+  var msg = '"' + (name || 'এই শিক্ষক') + '" কে মুছে ফেলবেন? এই শিক্ষকের সাথে সংযুক্ত প্রশ্ন ও টিকেট অক্ষত থাকবে, শুধু প্রোফাইলটি মুছে যাবে।';
+  if (!window.confirm(msg)) return;
+  if (!window.confirm('নিশ্চিত? এই কাজটি আর ফেরানো যাবে না।')) return;
+  var res = await api('delete', '/api/teacher-support/admin/teacher/' + id);
+  if (res && res.ok) { toastMsg('শিক্ষক মুছে ফেলা হয়েছে'); loadAdminTeachers(); }
+}
+
 function openNewTeacherModal(){
   document.getElementById('teacherForm').reset();
   document.getElementById('tf_id').value = '';
@@ -1958,10 +2028,18 @@ async function saveTeacherForm(e){
   var data = Object.fromEntries(new FormData(e.target));
   data.is_online = document.getElementById('tf_online').checked ? 1 : 0;
   data.is_active = document.getElementById('tf_active').checked ? 1 : 0;
+  var id = document.getElementById('tf_id').value;
 
-  var res = await api('post', '/api/teacher-support/mentors', data);
+  // ⚠️ আগে সবসময় POST /api/teacher-support/mentors-এ যেত — কিন্তু সেই
+  //    রুটে শুধু GET আছে, POST/PUT নেই। ফলে শিক্ষক যোগ করা-ই কাজ করতো না
+  //    (api() শুধু একটি টোস্ট দেখাতো)। এখন: নতুন → /admin/teacher-create,
+  //    সম্পাদনা → PUT /admin/teacher/:id।
+  var res = id
+    ? await api('put', '/api/teacher-support/admin/teacher/'+id, data)
+    : await api('post', '/api/teacher-support/admin/teacher-create', data);
+
   if(res && res.ok){
-    toastMsg('শিক্ষক প্রোফাইল সংরক্ষিত হয়েছে ✓');
+    toastMsg(id ? 'শিক্ষক প্রোফাইল আপডেট হয়েছে ✓' : 'শিক্ষক প্রোফাইল সংরক্ষিত হয়েছে ✓');
     closeTeacherModal();
     loadAdminTeachers();
   }
