@@ -85,7 +85,7 @@ export function renderSecurityModals(): string {
       <label class="block font-semibold">
         নতুন পাসওয়ার্ড লিখুন (কমপক্ষে ৬ অক্ষর) *
         <div class="relative mt-1">
-          <input type="text" id="passNewValue" required minlength="6" placeholder="যেমন: edusob1234" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs focus:border-sky-500 focus:outline-none">
+          <input type="text" id="passNewValue" autocomplete="new-password" required minlength="6" placeholder="যেমন: edusob1234" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs focus:border-sky-500 focus:outline-none">
           <button type="button" onclick="generateRandomPass()" class="absolute right-2 top-1.5 px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-[10px] font-bold">র‍্যান্ডম পিন</button>
         </div>
       </label>

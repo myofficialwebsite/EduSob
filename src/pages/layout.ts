@@ -121,6 +121,14 @@ export const HEAD_ASSETS = `
 <!-- ⚡ FIX(audit): FontAwesome CDN (৬৩১ KB ফন্ট + ~১০০ KB CSS) → ব্যবহৃত ২০০টি
      আইকনের সেলফ-হোস্টেড সাবসেট (১৭ KB)। কোনো 3rd-party রিকোয়েস্ট নেই। -->
 <link href="/static/icons-fa/fontawesome.css" rel="stylesheet">
+<!-- ⚡ FIX(perf): আইকন ফন্ট font-display:block ব্যবহার করে — অর্থাৎ ফন্ট না
+     আসা পর্যন্ত ব্রাউজার আইকন *এঁকেই* দেখায় না (৩ সেকেন্ড পর্যন্ত অপেক্ষা)।
+     হিরোতে আইকন থাকায় LCP-ও আটকে যায়। ১৭ KB-এর এই তিনটি সাবসেট আগেই
+     প্রিলোড করলে LCP ২১৫০ms → ১৫৫০ms (মোবাইল CPU×৪ + Fast 3G, ১০ বার)।
+     পরিমাপেই দেখা গেছে CLS-এ কোনো প্রভাব নেই। -->
+<link rel="preload" href="/static/icons-fa/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/static/icons-fa/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/static/icons-fa/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
 <!-- ⚡ FIX(audit): Google Fonts CDN (৪ ফ্যামিলি, ৮০৯ KB) → সেলফ-হোস্টেড সাবসেটেড woff2 (১০১ KB)।
      কোনো 3rd-party রিকোয়েস্ট নেই → preconnect-এর প্রয়োজনই নেই। -->
 <link rel="preload" href="/static/fonts/hind-siliguri-400-bengali.woff2" as="font" type="font/woff2" crossorigin>

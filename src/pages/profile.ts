@@ -25,32 +25,32 @@ export function profilePage(user: SessionUser): string {
       <section class="bg-slate-900 border border-white/10 rounded-2xl p-5">
         <h2 class="font-bold mb-4 text-orange-400"><i class="fas fa-user mr-2"></i>ব্যক্তিগত তথ্য</h2>
         <div class="grid sm:grid-cols-2 gap-3 text-sm">
-          <div><label class="text-xs text-slate-400">নাম (বাংলা)</label><input name="name_bn" value="${escHtml(user.name_bn)}" class="inp" aria-label="নাম (বাংলা)"></div>
-          <div><label class="text-xs text-slate-400">Name (English)</label><input name="name_en" value="${escHtml(user.name_en)}" class="inp" aria-label="নাম (English)"></div>
+          <div><label class="text-xs text-slate-400">নাম (বাংলা)</label><input name="name_bn" value="${escHtml(user.name_bn)}" class="inp" aria-label="নাম (বাংলা)" autocomplete="name"></div>
+          <div><label class="text-xs text-slate-400">Name (English)</label><input name="name_en" value="${escHtml(user.name_en)}" class="inp" aria-label="নাম (English)" autocomplete="name"></div>
           <div><label class="text-xs text-slate-400">বর্তমান শিক্ষাস্তর <span class="text-orange-400">(পরিবর্তনযোগ্য)</span></label>
-            <select name="education_level" class="inp">${[['ssc', 'SSC / সমমান'], ['hsc', 'HSC / সমমান'], ['nu', 'অনার্স / ডিগ্রি (NU)'], ['masters', 'মাস্টার্স'], ['other', 'অন্যান্য']].map(([v, l]) => `<option value="${v}"${(user as any).education_level === v ? ' selected' : ''}>${l}</option>`).join('')}</select></div>
+            <select name="education_level" class="inp" aria-label="শিক্ষাস্তর">${[['ssc', 'SSC / সমমান'], ['hsc', 'HSC / সমমান'], ['nu', 'অনার্স / ডিগ্রি (NU)'], ['masters', 'মাস্টার্স'], ['other', 'অন্যান্য']].map(([v, l]) => `<option value="${v}"${(user as any).education_level === v ? ' selected' : ''}>${l}</option>`).join('')}</select></div>
           <div><label class="text-xs text-slate-400">পিতার নাম (বাংলা)</label><input name="father_bn" aria-label="পিতার নাম (বাংলা)" class="inp"></div>
           <div><label class="text-xs text-slate-400">Father's Name (English)</label><input name="father_en" class="inp" aria-label="Father's Name (English)"></div>
           <div><label class="text-xs text-slate-400">মাতার নাম (বাংলা)</label><input name="mother_bn" class="inp" aria-label="মাতার নাম (বাংলা)"></div>
           <div><label class="text-xs text-slate-400">Mother's Name (English)</label><input name="mother_en" class="inp" aria-label="Mother's Name (English)"></div>
-          <div><label class="text-xs text-slate-400">জন্ম তারিখ</label><input name="dob" type="date" class="inp" aria-label="জন্ম তারিখ"></div>
-          <div><label class="text-xs text-slate-400">NID নম্বর</label><input name="nid" class="inp" aria-label="NID নম্বর"></div>
-          <div><label class="text-xs text-slate-400">জন্ম নিবন্ধন নম্বর</label><input name="birth_reg" class="inp" aria-label="জন্ম নিবন্ধন নম্বর"></div>
+          <div><label class="text-xs text-slate-400">জন্ম তারিখ</label><input name="dob" type="date" class="inp" aria-label="জন্ম তারিখ" autocomplete="bday"></div>
+          <div><label class="text-xs text-slate-400">NID নম্বর</label><input name="nid" class="inp" aria-label="NID নম্বর" autocomplete="off"></div>
+          <div><label class="text-xs text-slate-400">জন্ম নিবন্ধন নম্বর</label><input name="birth_reg" class="inp" aria-label="জন্ম নিবন্ধন নম্বর" autocomplete="off"></div>
           <div><label class="text-xs text-slate-400">রক্তের গ্রুপ</label>
-            <select name="blood_group" class="inp"><option value="">—</option>${['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'].map(b => `<option>${b}</option>`).join('')}</select></div>
+            <select name="blood_group" class="inp" aria-label="রক্তের গ্রুপ"><option value="">—</option>${['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'].map(b => `<option>${b}</option>`).join('')}</select></div>
           <div><label class="text-xs text-slate-400">লিঙ্গ</label>
-            <select name="gender" class="inp"><option value="">—</option><option value="male">পুরুষ</option><option value="female">নারী</option><option value="other">অন্যান্য</option></select></div>
-          <div><label class="text-xs text-slate-400">ইমেইল</label><input name="email" type="email" value="${escHtml(user.email)}" class="inp" aria-label="ইমেইল"></div>
+            <select name="gender" class="inp" aria-label="লিঙ্গ"><option value="">—</option><option value="male">পুরুষ</option><option value="female">নারী</option><option value="other">অন্যান্য</option></select></div>
+          <div><label class="text-xs text-slate-400">ইমেইল</label><input name="email" type="email" value="${escHtml(user.email)}" class="inp" aria-label="ইমেইল" autocomplete="email"></div>
         </div>
       </section>
 
       <section class="bg-slate-900 border border-white/10 rounded-2xl p-5">
         <h2 class="font-bold mb-4 text-orange-400"><i class="fas fa-location-dot mr-2"></i>ঠিকানা</h2>
         <div class="grid sm:grid-cols-2 gap-3 text-sm">
-          <div><label class="text-xs text-slate-400">গ্রাম/মহল্লা</label><input name="village" class="inp" aria-label="গ্রাম/মহল্লা"></div>
-          <div><label class="text-xs text-slate-400">ডাকঘর</label><input name="post_office" class="inp" aria-label="ডাকঘর"></div>
-          <div><label class="text-xs text-slate-400">উপজেলা</label><input name="upazila" class="inp" aria-label="উপজেলা"></div>
-          <div><label class="text-xs text-slate-400">জেলা</label><input name="district" class="inp" aria-label="জেলা"></div>
+          <div><label class="text-xs text-slate-400">গ্রাম/মহল্লা</label><input name="village" class="inp" aria-label="গ্রাম/মহল্লা" autocomplete="address-line1"></div>
+          <div><label class="text-xs text-slate-400">ডাকঘর</label><input name="post_office" class="inp" aria-label="ডাকঘর" autocomplete="address-line2"></div>
+          <div><label class="text-xs text-slate-400">উপজেলা</label><input name="upazila" class="inp" aria-label="উপজেলা" autocomplete="address-level3"></div>
+          <div><label class="text-xs text-slate-400">জেলা</label><input name="district" class="inp" aria-label="জেলা" autocomplete="address-level2"></div>
         </div>
       </section>
 
@@ -58,8 +58,8 @@ export function profilePage(user: SessionUser): string {
         <h2 class="font-bold mb-4 text-orange-400"><i class="fas fa-graduation-cap mr-2"></i>শিক্ষাগত তথ্য</h2>
         <div class="grid sm:grid-cols-2 gap-3 text-sm">
           <div class="sm:col-span-2 grid grid-cols-2 gap-3">
-            <div><label class="text-xs text-slate-400">স্কুলের নাম</label><input name="school_name" class="inp" aria-label="স্কুলের নাম"></div>
-            <div><label class="text-xs text-slate-400">কলেজের নাম</label><input name="college_name" class="inp" aria-label="কলেজের নাম"></div>
+            <div><label class="text-xs text-slate-400">স্কুলের নাম</label><input name="school_name" class="inp" aria-label="স্কুলের নাম" autocomplete="organization"></div>
+            <div><label class="text-xs text-slate-400">কলেজের নাম</label><input name="college_name" class="inp" aria-label="কলেজের নাম" autocomplete="organization"></div>
           </div>
           <fieldset class="border border-white/10 rounded-xl p-3">
             <legend class="text-xs text-orange-300 px-2">SSC</legend>
@@ -140,7 +140,7 @@ export function profilePage(user: SessionUser): string {
             <input id="cw" type="number" placeholder="প্রস্থ" class="inp !mt-0 w-full text-center">
             <span class="text-slate-400">×</span>
             <input id="ch" type="number" placeholder="উচ্চতা" class="inp !mt-0 w-full text-center">
-            <select id="ctype" class="inp !mt-0"><option value="photo">ছবি</option><option value="sign">সাইন</option></select>
+            <select id="ctype" class="inp !mt-0" aria-label="আপলোডের ধরন"><option value="photo">ছবি</option><option value="sign">সাইন</option></select>
             <button type="button" onclick="customResize()" class="bg-orange-500 text-slate-950 px-3 py-2 rounded-lg font-bold whitespace-nowrap">যান</button>
           </div>
         </div>

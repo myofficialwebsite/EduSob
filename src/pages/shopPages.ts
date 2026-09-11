@@ -83,15 +83,15 @@ ${shopHeader('shop', loggedIn)}
     </div>
     <div>
       <label class="text-sm font-semibold text-slate-600">নাম *</label>
-      <input id="co-name" required maxlength="100" class="w-full mt-1 border rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-amber-400 outline-none" placeholder="আপনার পুরো নাম">
+      <input id="co-name" autocomplete="name" required maxlength="100" class="w-full mt-1 border rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-amber-400 outline-none" placeholder="আপনার পুরো নাম">
     </div>
     <div>
       <label class="text-sm font-semibold text-slate-600">মোবাইল নম্বর *</label>
-      <input id="co-phone" required maxlength="11" class="w-full mt-1 border rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-amber-400 outline-none" placeholder="01XXXXXXXXX">
+      <input id="co-phone" type="tel" inputmode="numeric" autocomplete="tel" required maxlength="11" class="w-full mt-1 border rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-amber-400 outline-none" placeholder="01XXXXXXXXX">
     </div>
     <div>
       <label class="text-sm font-semibold text-slate-600">সম্পূর্ণ ঠিকানা *</label>
-      <textarea id="co-address" required maxlength="500" rows="2" class="w-full mt-1 border rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-amber-400 outline-none" placeholder="বাসা/হোল্ডিং, রোড, থানা, জেলা"></textarea>
+      <textarea id="co-address" autocomplete="street-address" required maxlength="500" rows="2" class="w-full mt-1 border rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-amber-400 outline-none" placeholder="বাসা/হোল্ডিং, রোড, থানা, জেলা"></textarea>
     </div>
     <div>
       <label class="text-sm font-semibold text-slate-600">নোট (ঐচ্ছিক)</label>
@@ -297,7 +297,7 @@ ${shopHeader('wallet', loggedIn)}
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="text-sm font-semibold text-slate-600">মাধ্যম *</label>
-          <select id="tp-method" class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-orange-400">
+          <select id="tp-method" aria-label="পেমেন্ট মাধ্যম" class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-orange-400">
             <option value="bkash">বিকাশ</option><option value="nagad">নগদ</option>
           </select>
         </div>
@@ -457,7 +457,7 @@ ${shopHeader('assisted', loggedIn)}
     <form id="assisted-form" onsubmit="return submitAssisted(event)" class="space-y-3">
       <div>
         <label class="text-sm font-semibold text-slate-600">সেবার ধরন *</label>
-        <select id="as-type" class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-indigo-400">
+        <select id="as-type" aria-label="আবেদনের ধরন" class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-indigo-400">
           <option value="admission">🎓 ভর্তি আবেদন</option>
           <option value="job_application">💼 চাকরির আবেদন</option>
           <option value="form_fillup">📋 ফর্ম ফিলাপ</option>
@@ -571,9 +571,9 @@ function prodForm(p){
   p=p||{};
   var cats=CATS.map(function(c){return '<option value="'+c[0]+'"'+(p.category===c[0]?' selected':'')+'>'+c[1]+'</option>'}).join('');
   return '<form onsubmit="return saveProd(event,'+(p.id||0)+')" class="bg-white border rounded-2xl p-5 grid md:grid-cols-2 gap-3 mb-5">'+
-    '<input id="pf-name" required maxlength="150" placeholder="প্রোডাক্টের নাম *" value="'+esc(p.name_bn||'')+'" class="border rounded-xl px-3 py-2.5 md:col-span-2">'+
+    '<input id="pf-name" autocomplete="off" required maxlength="150" placeholder="প্রোডাক্টের নাম *" value="'+esc(p.name_bn||'')+'" class="border rounded-xl px-3 py-2.5 md:col-span-2">'+
     '<input id="pf-desc" maxlength="500" placeholder="বর্ণনা" value="'+esc(p.description||'')+'" class="border rounded-xl px-3 py-2.5 md:col-span-2">'+
-    '<select id="pf-cat" class="border rounded-xl px-3 py-2.5">'+cats+'</select>'+
+    '<select id="pf-cat" aria-label="পণ্যের ক্যাটাগরি" class="border rounded-xl px-3 py-2.5">'+cats+'</select>'+
     '<input id="pf-img" maxlength="300" placeholder="ইমোজি বা ছবির URL" value="'+esc(p.image_url||'📦')+'" class="border rounded-xl px-3 py-2.5">'+
     '<input id="pf-price" required type="number" min="1" placeholder="দাম (টাকা) *" value="'+(p.price||'')+'" class="border rounded-xl px-3 py-2.5">'+
     '<input id="pf-offer" type="number" min="1" placeholder="অফার দাম (ঐচ্ছিক)" value="'+(p.offer_price||'')+'" class="border rounded-xl px-3 py-2.5">'+

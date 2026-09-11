@@ -43,15 +43,15 @@ export function landingPage(): string {
 <div class="bg-[#090b0f] text-slate-400 text-xs border-b border-white/5 select-none">
   <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-between gap-2">
     <div class="flex items-center gap-4 flex-wrap justify-center md:justify-start">
-      <a href="tel:+8801835414122" class="hover:text-orange-400 flex items-center gap-1.5 transition py-1.5">
+      <a href="tel:+8801835414122" class="hover:text-orange-400 flex items-center gap-1.5 transition py-1.5 whitespace-nowrap">
         <i class="fas fa-headset text-orange-400"></i> হেল্পলাইন: <span class="font-en font-semibold text-slate-100">+88 01835414122</span>
       </a>
       <span class="text-slate-400 hidden sm:inline">•</span>
-      <a href="mailto:support@edusob.com" class="hover:text-orange-400 flex items-center gap-1.5 transition py-1.5">
+      <a href="mailto:support@edusob.com" class="hover:text-orange-400 hidden sm:flex items-center gap-1.5 transition py-1.5 whitespace-nowrap">
         <i class="fas fa-envelope text-slate-500"></i> support@edusob.com
       </a>
       <span class="text-slate-400 hidden sm:inline">•</span>
-      <span class="flex items-center gap-1.5 text-amber-400 font-medium">
+      <span class="hidden sm:flex items-center gap-1.5 text-amber-400 font-medium whitespace-nowrap">
         <span class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_2px_rgba(251,191,36,0.6)]"></span> প্রতিদিন সকাল ৯টা – রাত ১০টা
       </span>
     </div>
@@ -191,8 +191,8 @@ export function landingPage(): string {
     <span class="bg-orange-500 text-slate-950 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shrink-0 flex items-center gap-1 uppercase tracking-wider">
       <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> লাইভ নোটিস
     </span>
-    <div class="overflow-hidden relative w-full">
-      <div id="ticker-track" class="flex whitespace-nowrap ticker-track text-xs font-medium text-orange-200/90">
+    <div class="overflow-hidden relative w-full h-7">
+      <div id="ticker-track" class="flex whitespace-nowrap ticker-track text-xs font-medium text-orange-200/90 leading-7">
         <span class="mx-6">👨‍🏫 <strong>নতুন ফিচার:</strong> ১-অন-১ প্রিমিয়াম শিক্ষক ও মেন্টর সহায়তা — ১৫-৩০ মিনিটে স্টেপ-বাই-স্টেপ সমাধান নিন!</span>
         <span class="mx-6">📢 এডুসব রেজাল্ট হাব — জাতীয় ও সকল শিক্ষা বোর্ডের ফলাফল একাধিক ব্যাকআপ লিংকে লাইভ।</span>
         <span class="mx-6">🎓 প্রফেশনাল ১, ২ ও ৩ পেজ সিভি মেকার — ১৪টি স্ট্যান্ডার্ড টেমপ্লেটে পিডিএফ ডাউনলোড।</span>

@@ -502,7 +502,7 @@ export function dashboardPage(user: SessionUser): string {
               <form onsubmit="handleQuickResultSubmit(event)" class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 text-xs">
                 <div>
                   <label class="block text-[10px] text-slate-400 mb-0.5">পরীক্ষা</label>
-                  <select id="qrExam" class="w-full bg-slate-900 border border-white/15 rounded-xl px-2.5 py-1.5 text-white font-semibold">
+                  <select id="qrExam" aria-label="পরীক্ষা" class="w-full bg-slate-900 border border-white/15 rounded-xl px-2.5 py-1.5 text-white font-semibold">
                     <option value="ssc">SSC / দাখিল</option>
                     <option value="hsc">HSC / আলিম</option>
                     <option value="jsc">JSC / JDC</option>
@@ -510,7 +510,7 @@ export function dashboardPage(user: SessionUser): string {
                 </div>
                 <div>
                   <label class="block text-[10px] text-slate-400 mb-0.5">সাল</label>
-                  <select id="qrYear" class="w-full bg-slate-900 border border-white/15 rounded-xl px-2.5 py-1.5 text-white font-semibold">
+                  <select id="qrYear" aria-label="সাল" class="w-full bg-slate-900 border border-white/15 rounded-xl px-2.5 py-1.5 text-white font-semibold">
                     <option value="2024">২০২৪</option>
                     <option value="2023">২০২৩</option>
                     <option value="2022">২০২২</option>
@@ -518,7 +518,7 @@ export function dashboardPage(user: SessionUser): string {
                 </div>
                 <div>
                   <label class="block text-[10px] text-slate-400 mb-0.5">বোর্ড</label>
-                  <select id="qrBoard" class="w-full bg-slate-900 border border-white/15 rounded-xl px-2.5 py-1.5 text-white font-semibold">
+                  <select id="qrBoard" aria-label="বোর্ড" class="w-full bg-slate-900 border border-white/15 rounded-xl px-2.5 py-1.5 text-white font-semibold">
                     <option value="dhaka">ঢাকা</option>
                     <option value="chittagong">চট্টগ্রাম</option>
                     <option value="rajshahi">রাজশাহী</option>
@@ -534,7 +534,7 @@ export function dashboardPage(user: SessionUser): string {
                 </div>
                 <div>
                   <label class="block text-[10px] text-slate-400 mb-0.5">রোল</label>
-                  <input type="text" id="qrRoll" placeholder="রোল নম্বর" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-2.5 py-1.5 text-white font-mono">
+                  <input type="text" id="qrRoll" inputmode="numeric" autocomplete="off" placeholder="রোল নম্বর" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-2.5 py-1.5 text-white font-mono">
                 </div>
                 <div>
                   <label class="block text-[10px] text-slate-400 mb-0.5">রেজি নম্বর</label>

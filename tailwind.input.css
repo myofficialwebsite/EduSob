@@ -84,7 +84,7 @@
 
 /* হেডলাইন — সিরিফ, টাইট লিডিং, নেগেটিভ ট্র্যাকিং */
 .ds-h1, .ds-h2, .ds-h3 {
-  font-family: 'Noto Serif Bengali', 'Hind Siliguri', serif;
+  font-family:'Noto Serif Bengali', 'Noto Serif Bengali Fallback', 'Hind Siliguri', serif;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--text-primary);
@@ -234,7 +234,7 @@
   font-size: var(--fs-2xs); color: var(--accent); margin:0 0 2px;
 }
 .ds-hero__name{
-  font-family:'Noto Serif Bengali','Hind Siliguri',serif; font-weight:700;
+  font-family:'Noto Serif Bengali', 'Noto Serif Bengali Fallback', 'Hind Siliguri', serif; font-weight:700;
   font-size: clamp(1.4rem, 1.15rem + 1.1vw, 1.9rem); line-height:1.22;
   letter-spacing:-.01em; color:var(--text-primary); margin:0;
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
@@ -329,7 +329,7 @@
 }
 .adm-today__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-4); flex-wrap:wrap; }
 .adm-today__title{
-  font-family:'Noto Serif Bengali','Hind Siliguri',serif; font-weight:700;
+  font-family:'Noto Serif Bengali', 'Noto Serif Bengali Fallback', 'Hind Siliguri', serif; font-weight:700;
   font-size: clamp(1.25rem, 1.1rem + .8vw, 1.6rem); line-height:1.25;
   color:#f8fafc; margin:0; letter-spacing:-.01em;
 }
@@ -439,7 +439,7 @@ body {
 }
 ::selection { background: #f97316; color: #fff; }
 
-.font-display, h1.font-display, h2.font-display { font-family: 'Noto Serif Bengali', 'Hind Siliguri', serif; }
+.font-display, h1.font-display, h2.font-display { font-family:'Noto Serif Bengali', 'Noto Serif Bengali Fallback', 'Hind Siliguri', serif; }
 .font-en { font-family: 'Hind Siliguri', system-ui, sans-serif; }
 
 /* ফোকাস ভিজিবিলিটি (Accessibility) */
@@ -547,7 +547,21 @@ header.sticky.scrolled-nav {
 .float-up { animation: float-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
 /* ---------- বাংলা সেরিফ ডিসপ্লে হেডিং (প্রিমিয়াম এডিটরিয়াল লুক) ---------- */
-.font-serif-bn { font-family: 'Noto Serif Bengali', 'Hind Siliguri', serif; }
+.font-serif-bn {
+  font-family:'Noto Serif Bengali', 'Noto Serif Bengali Fallback', 'Hind Siliguri', serif;
+  /* FIX(cls): ডিসপ্লে ফন্টের কনটেন্ট-এরিয়া (ascent+descent) ≈ ১.৫৯–১.৬২em, যা
+     leading-snug(১.৩৭৫)/leading-[1.35]-এর চেয়ে বড়। তখন লাইনের উচ্চতা
+     line-height দিয়ে নয়, *ফন্টের* মেট্রিক দিয়ে ঠিক হয় → ফন্ট বদলালেই
+     লাইন-বক্স ৪৬px↔৬৭px নেচে ওঠে এবং পুরো হিরো সরে যায় (CLS ০.১৩)।
+     ১.৬৫ > সব ফন্টের কনটেন্ট-এরিয়া → লাইন-বক্স সবসময় line-height-এর
+     সমান, ফন্ট আসুক বা না আসুক। */
+  line-height: 1.65;
+}
+/* নির্দিষ্টতা দ্বিগুণ (0,2,0): Tailwind-এর sm:/lg: টেক্সট-সাইজ ইউটিলিটি
+   (যেমন .sm:text-5xl{line-height:1}) পরে আসায় সাধারণ .font-serif-bn (0,1,0)
+   হেরে যায় — ডেস্কটপে লাইন-হাইট ১ হয়ে বাংলা হেডিং গাদাগাদি দেখাতো
+   (৩ লাইন ২৭৫px → ১৭৩px)। ক্লাস দ্বিগুণ করলে !important ছাড়াই জেতা যায়। */
+.font-serif-bn.font-serif-bn { line-height: 1.65; }
 
 /* ---------- হিরো গ্রেডিয়েন্ট শিমার হেডলাইন ---------- */
 @keyframes shimmer-slide { from { background-position: 200% center; } to { background-position: -200% center; } }
@@ -623,7 +637,30 @@ body { animation: pageIn 0.4s ease-out; }
    ক্লাস থাকলে সেটিই জিতে নেয়, আর না থাকলে 1em প্রস্থ বরাদ্দ হয়।
    ============================================================ */
 :where(.fa, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands) {
-  width: 1em;
-  text-align: center;
-  flex-shrink: 0;
+    width: 1em; text-align: center; flex-shrink: 0;
+    /* FIX(cls): আইকন ফন্টের ascent/descent সাধারণ টেক্সটের চেয়ে বড়।
+       ফন্ট লোড হওয়ার *আগে* <i class="fas">-এর লাইন-বক্স ফলে যায় (৪০px),
+       লোড হলে নেমে আসে (২৮px) → পুরো সারি ১২px নড়ে, নিচের সবকিছু টেনে নেয়।
+       line-height:1 দিলে আইকন নিজের লাইন-বক্সেই থাকে, বাইরের লেআউট
+       কখনো প্রভাবিত হয় না — ফন্ট আসুক বা না আসুক। */
+    line-height: 1;
+  }
+
+/* ============================================================
+   iOS অটো-জুম ফিক্স (form-audit)
+   ------------------------------------------------------------
+   iOS Safari-তে ফোকাস করা ইনপুটের font-size ১৬px-এর কম হলে ব্রাউজার
+   আপনাআপনি পেজ জুম করে ফেলে — ফর্ম পূরণ করতে গিয়ে ব্যবহারকারীর
+   লেআউট নষ্ট হয়, আর জুম ফিরিয়ে আনা কষ্টকর। বাংলাদেশে ট্রাফিকের
+   বড় অংশ মোবাইল থেকে, তাই এটি কনভার্শনে সরাসরি প্রভাব ফেলে।
+
+   শুধু <768px (মোবাইল/ট্যাবলেট পোর্ট্রেট)-এ প্রযোজ্য — ডেস্কটপের
+   ঘন লেআউট (অ্যাডমিন টেবিল, CV এডিটর) অক্ষত থাকে।
+   `:where()` + `!important` ব্যবহার করায় Tailwind-এর text-xs/text-[11px]
+   ক্লাস থাকলেও মোবাইলে ১৬px-ই জিতে নেয়।
+   ============================================================ */
+@media (max-width: 767px) {
+  :where(input, select, textarea):not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']):not([type='file']) {
+    font-size: 16px !important;
+  }
 }

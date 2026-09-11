@@ -608,7 +608,7 @@ var GRADES = [['A+ (4.00)',4],['A (3.75)',3.75],['A- (3.50)',3.5],['B+ (3.25)',3
 function rowHtml(){
   return '<div class="course-row flex gap-2"><input placeholder="কোর্স (ঐচ্ছিক)" class="c-name flex-1 bg-slate-800 rounded-xl px-3 py-2 text-sm outline-none">'+
   '<input type="number" placeholder="ক্রেডিট" min="0.5" step="0.5" value="3" class="c-credit w-20 bg-slate-800 rounded-xl px-3 py-2 text-sm outline-none">'+
-  '<select class="c-grade bg-slate-800 rounded-xl px-2 py-2 text-sm outline-none">'+GRADES.map(function(g){return '<option value="'+g[1]+'">'+g[0]+'</option>'}).join('')+'</select>'+
+  '<select aria-label="গ্রেড" class="c-grade bg-slate-800 rounded-xl px-2 py-2 text-sm outline-none">'+GRADES.map(function(g){return '<option value="'+g[1]+'">'+g[0]+'</option>'}).join('')+'</select>'+
   '<button onclick="this.parentElement.remove()" class="text-rose-400 px-2">✕</button></div>';
 }
 window.addRow=function(){document.getElementById('course-rows').insertAdjacentHTML('beforeend', rowHtml())};

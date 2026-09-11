@@ -54,6 +54,39 @@
   src:url('/static/fonts/noto-serif-bengali-700-bengali.woff2') format('woff2');
   unicode-range:U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
 }
+/* ═══════════════════════════════════════════════════════════════════
+   ডিসপ্লে ফন্টের "মেট্রিক-ম্যাচড" ফলব্যাক (CLS নির্মূল)
+   -------------------------------------------------------------------
+   সমস্যা: Noto Serif Bengali ৭০০ (৪৫ KB) সাধারণত ফার্স্ট পেইন্টের *পরে*
+   পৌঁছায়। ততক্ষণে হেডলাইন অন্য ফন্টে (সিস্টেম সেরিফ) রেন্ডার হয়ে যায়,
+   আর ফন্ট বদলালে টেক্সটের প্রস্থ বদলে লাইন ভেঙে যায় → হিরো লাফ দেয়
+   (পরিমাপে / ও /subscription-এ CLS ০.২৮–০.৩২)।
+
+   সমাধান: Hind Siliguri ৬০০ (৭.৮ KB — আগেই প্রিলোড করা, কোনো অতিরিক্ত
+   বাইট নয়) কে এমনভাবে স্কেল করা যাতে এর গ্লিফ-প্রস্থ ও উচ্চতা Noto Serif
+   Bengali ৭০০-এর সাথে হুবহু মিলে যায়। তখন ফন্ট বদলালেও টেক্সট একই
+   জায়গা দখল করে → কোনো লেআউট শিফট নয়।
+
+   গণনা (fontTools দিয়ে বাংলা ব্লক U+0980–09FF-এর ৯২টি গ্লিফ):
+     Noto Serif ৭০০ : গড় প্রস্থ ৫৪১.৫/১০০০ · ascent ১০৯২ · descent ৫০২
+     Hind Siliguri ৬০০: গড় প্রস্থ ৫৫৮.৫/১০০০
+     size-adjust      = ৫৪১.৫/৫৫৮.৫        = ৯৬.৯৬%
+     ascent-override  = ১০৯২/(১০০০×০.৯৬৯৬) = ১১২.৬৩%
+     descent-override =  ৫০২/(১০০০×০.৯৬৯৬) =  ৫১.৭৮%
+   যাচাই: ১১২.৬৩% × ০.৯৬৯৬ = ১০৯.২% ✓ · ৫৫৮.৫ × ০.৯৬৯৬ = ৫৪১.৬ ✓
+   ═══════════════════════════════════════════════════════════════════ */
+@font-face{
+  font-family:'Noto Serif Bengali Fallback';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url('/static/fonts/hind-siliguri-600-bengali.woff2') format('woff2');
+  unicode-range:U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
+  size-adjust:96.96%;
+  ascent-override:112.63%;
+  descent-override:51.78%;
+  line-gap-override:0%;
+}
 @font-face{
   font-family:'Noto Serif Bengali';
   font-style:normal;

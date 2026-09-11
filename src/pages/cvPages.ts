@@ -537,7 +537,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <div class="flex flex-wrap items-center gap-3 text-xs">
         <div class="flex items-center gap-1.5 bg-slate-800 border border-white/10 px-2.5 py-1 rounded-xl">
           <span class="text-slate-400">📄 পেজ মোড:</span>
-          <select id="cv-page-mode" onchange="refresh()" class="bg-transparent text-orange-400 font-bold focus:outline-none cursor-pointer py-0.5">
+          <select id="cv-page-mode" aria-label="পেজ মোড" onchange="refresh()" class="bg-transparent text-orange-400 font-bold focus:outline-none cursor-pointer py-0.5">
             <option value="auto">স্বাভাবিক (Auto)</option>
             <option value="1">১ পেজ ফিট (Compact 1-Page)</option>
             <option value="2">২ পেজ স্ট্যান্ডার্ড (2-Page Standard)</option>
@@ -547,7 +547,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
 
         <div class="flex items-center gap-1.5 bg-slate-800 border border-white/10 px-2.5 py-1 rounded-xl">
           <span class="text-slate-400">🌐 ভাষা:</span>
-          <select id="cv-lang" onchange="refresh()" class="bg-transparent text-slate-200 font-semibold focus:outline-none cursor-pointer py-0.5">
+          <select id="cv-lang" aria-label="ভাষা" onchange="refresh()" class="bg-transparent text-slate-200 font-semibold focus:outline-none cursor-pointer py-0.5">
             <option value="bn">বাংলা</option>
             <option value="en">English</option>
           </select>
@@ -627,11 +627,11 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
         </div>
 
         <div class="grid grid-cols-2 gap-2.5">
-          <input id="f-name" placeholder="পূর্ণ নাম *" class="cv-in col-span-2 font-semibold text-orange-300">
+          <input id="f-name" autocomplete="name" placeholder="পূর্ণ নাম *" class="cv-in col-span-2 font-semibold text-orange-300">
           <input id="f-desig" placeholder="পদ / প্রফেশনাল পরিচয় (যেমন: সফটওয়্যার ইঞ্জিনিয়ার / অনার্স শিক্ষার্থী)" class="cv-in col-span-2">
-          <input id="f-phone" placeholder="মোবাইল নম্বর *" class="cv-in">
-          <input id="f-email" placeholder="ইমেইল অ্যাড্রেস *" class="cv-in">
-          <input id="f-address" placeholder="বর্তমান / স্থায়ী ঠিকানা" class="cv-in col-span-2">
+          <input id="f-phone" type="tel" inputmode="numeric" autocomplete="tel" aria-label="মোবাইল নম্বর" placeholder="মোবাইল নম্বর *" class="cv-in">
+          <input id="f-email" type="email" autocomplete="email" aria-label="ইমেইল অ্যাড্রেস" placeholder="ইমেইল অ্যাড্রেস *" class="cv-in">
+          <input id="f-address" autocomplete="street-address" placeholder="বর্তমান / স্থায়ী ঠিকানা" class="cv-in col-span-2">
           <input id="f-linkedin" placeholder="LinkedIn প্রোফাইল / ইউজারনেম" class="cv-in">
           <input id="f-github" placeholder="GitHub / পোর্টফোলিও লিংক" class="cv-in">
         </div>
@@ -641,7 +641,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       <div class="space-y-1.5 pt-2 border-t border-white/5">
         <div class="flex items-center justify-between">
           <label class="text-xs font-bold text-orange-400 flex items-center gap-1"><i class="fas fa-bullseye"></i>ক্যারিয়ার অবজেক্টিভ / সারাংশ</label>
-          <select onchange="applyPreset(this.value)" class="bg-slate-800 border border-white/10 text-orange-400 rounded-lg px-2 py-0.5 text-[11px] cursor-pointer">
+          <select aria-label="প্রিসেট টেমপ্লেট" onchange="applyPreset(this.value)" class="bg-slate-800 border border-white/10 text-orange-400 rounded-lg px-2 py-0.5 text-[11px] cursor-pointer">
             <option value="">+ তৈরি প্রিসেট বসান</option>
             <option value="fresher">ফ্রেশ গ্র্যাজুয়েট (Bangla)</option>
             <option value="fresher_en">Fresh Graduate (English)</option>

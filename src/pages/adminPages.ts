@@ -634,7 +634,7 @@ ${renderSecurityModals()}
       <input type="hidden" name="teacher_id" id="tf_id">
       <div class="grid sm:grid-cols-2 gap-3">
         <label class="block font-semibold">শিক্ষকের নাম *
-          <input name="name" id="tf_name" required placeholder="যেমন: ড. রফিকুল ইসলাম" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs">
+          <input name="name" id="tf_name" autocomplete="off" required placeholder="যেমন: ড. রফিকুল ইসলাম" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs">
         </label>
         <label class="block font-semibold">পদবি ও শিক্ষাগত যোগ্যতা *
           <input name="designation" id="tf_designation" required placeholder="সহকারী অধ্যাপক / ৩৮তম বিসিএস ক্যাডার" class="w-full mt-1 border border-slate-300 rounded-xl px-3 py-2 text-xs">
@@ -657,8 +657,8 @@ ${renderSecurityModals()}
       <div class="p-3 bg-amber-50/70 border border-amber-200/80 rounded-2xl space-y-2">
         <label class="font-bold text-amber-900 flex items-center gap-1.5"><i class="fas fa-key text-amber-700"></i>শিক্ষক লগইন আইডি (ফোন) ও পাসওয়ার্ড</label>
         <div class="grid sm:grid-cols-2 gap-2.5">
-          <input name="phone" id="tf_phone" placeholder="01XXXXXXXXX" class="w-full border border-slate-300 rounded-xl px-3 py-1.5 text-xs bg-white">
-          <input name="password" id="tf_password" type="password" placeholder="পাসওয়ার্ড" class="w-full border border-slate-300 rounded-xl px-3 py-1.5 text-xs bg-white">
+          <input name="phone" id="tf_phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="01XXXXXXXXX" class="w-full border border-slate-300 rounded-xl px-3 py-1.5 text-xs bg-white">
+          <input name="password" id="tf_password" type="password" autocomplete="new-password" placeholder="পাসওয়ার্ড" class="w-full border border-slate-300 rounded-xl px-3 py-1.5 text-xs bg-white">
         </div>
       </div>
       <div class="flex items-center gap-4 py-1">

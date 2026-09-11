@@ -106,7 +106,7 @@ ${NAV(loggedIn)}
         <p class="text-xs sm:text-sm text-slate-400">যেকোনো শিক্ষকের প্রোফাইল দেখে সরাসরি তাঁর কাছে প্রশ্ন করতে পারেন</p>
       </div>
       <div class="flex items-center gap-2 w-full sm:w-auto">
-        <select id="mentorSubjectFilter" onchange="filterMentors()" class="w-full sm:w-48 bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-orange-400">
+        <select id="mentorSubjectFilter" aria-label="বিষয়" onchange="filterMentors()" class="w-full sm:w-48 bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-orange-400">
           <option value="">সকল বিষয়</option>
           <option value="গণিত">গণিত ও ক্যালকুলাস</option>
           <option value="পদার্থ">পদার্থবিজ্ঞান</option>
@@ -187,7 +187,7 @@ ${NAV(loggedIn)}
         <form id="consultationForm" onsubmit="submitConsultation(event)" class="space-y-4 pt-2">
           <div>
             <label class="block text-xs font-bold text-slate-300 mb-1">পছন্দের শিক্ষক / মেন্টর</label>
-            <select id="consTeacherSelect" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-orange-400"></select>
+            <select id="consTeacherSelect" aria-label="শিক্ষক নির্বাচন" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-orange-400"></select>
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-300 mb-1">যে বিষয়ে আলোচনা করতে চান</label>
@@ -196,11 +196,11 @@ ${NAV(loggedIn)}
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="block text-xs font-bold text-slate-300 mb-1">পছন্দের তারিখ</label>
-              <input type="date" id="consDate" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-400">
+              <input type="date" id="consDate" aria-label="তারিখ" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-400">
             </div>
             <div>
               <label class="block text-xs font-bold text-slate-300 mb-1">পছন্দের সময়</label>
-              <select id="consTime" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-400">
+              <select id="consTime" aria-label="সময়" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-400">
                 <option value="বিকাল ০৪:০০ - ০৪:৩০">বিকাল ০৪:০০ - ০৪:৩০</option>
                 <option value="সন্ধ্যা ০৬:০০ - ০৬:৩০">সন্ধ্যা ০৬:০০ - ০৬:৩০</option>
                 <option value="রাত ০৮:০০ - ০৮:৩০">রাত ০৮:০০ - ০৮:৩০</option>
@@ -250,7 +250,7 @@ ${NAV(loggedIn)}
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-bold text-slate-300 mb-1">বিষয় নির্বাচন করুন *</label>
-          <select id="askSubject" required class="w-full bg-slate-950 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+          <select id="askSubject" aria-label="বিষয়" required class="w-full bg-slate-950 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
             <option value="গণিত">গণিত / উচ্চতর গণিত</option>
             <option value="পদার্থবিজ্ঞান">পদার্থবিজ্ঞান</option>
             <option value="রসায়ন">রসায়ন</option>
@@ -264,7 +264,7 @@ ${NAV(loggedIn)}
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-300 mb-1">নির্দিষ্ট শিক্ষক (ঐচ্ছিক)</label>
-          <select id="askTeacher" class="w-full bg-slate-950 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+          <select id="askTeacher" aria-label="শিক্ষক" class="w-full bg-slate-950 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
             <option value="">স্বয়ংক্রিয়ভাবে বিশেষজ্ঞ শিক্ষককে দেওয়া হবে</option>
           </select>
         </div>

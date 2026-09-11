@@ -13,25 +13,25 @@ export function signupPage(): string {
       <div class="grid grid-cols-2 gap-3">
         <div class="col-span-2 sm:col-span-1">
           <label class="text-xs text-orange-200">নাম (বাংলা) *</label>
-          <input name="name_bn" required class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400" placeholder="যেমন: রাকিব হাসান">
+          <input name="name_bn" required autocomplete="name" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400" placeholder="যেমন: রাকিব হাসান">
         </div>
         <div class="col-span-2 sm:col-span-1">
           <label class="text-xs text-orange-200">Name (English)</label>
-          <input name="name_en" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400" placeholder="Rakib Hasan">
+          <input name="name_en" autocomplete="name" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400" placeholder="Rakib Hasan">
         </div>
       </div>
       <div>
         <label class="text-xs text-orange-200">মোবাইল নম্বর *</label>
-        <input name="phone" required pattern="01[3-9][0-9]{8}" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400" placeholder="01XXXXXXXXX">
+        <input name="phone" type="tel" inputmode="numeric" required pattern="01[3-9][0-9]{8}" autocomplete="tel" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400" placeholder="01XXXXXXXXX">
       </div>
       <div>
         <label class="text-xs text-orange-200">পাসওয়ার্ড * (কমপক্ষে ৬ অক্ষর)</label>
-        <input name="password" type="password" required minlength="6" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400" placeholder="••••••">
+        <input name="password" type="password" required minlength="6" autocomplete="new-password" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400" placeholder="••••••">
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="text-xs text-orange-200">ধর্ম * <span class="opacity-60">(আপনার ড্যাশবোর্ড থিম)</span></label>
-          <select name="religion" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-orange-400 [&>option]:text-slate-900">
+          <select name="religion" aria-label="ধর্ম" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-orange-400 [&>option]:text-slate-900">
             <option value="islam">ইসলাম</option>
             <option value="sanatan">সনাতন</option>
             <option value="buddhist">বৌদ্ধ</option>
@@ -41,7 +41,7 @@ export function signupPage(): string {
         </div>
         <div>
           <label class="text-xs text-orange-200">শিক্ষাস্তর</label>
-          <select name="education_level" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-orange-400 [&>option]:text-slate-900">
+          <select name="education_level" aria-label="শিক্ষাস্তর" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-orange-400 [&>option]:text-slate-900">
             <option value="">নির্বাচন করুন</option>
             <option value="ssc">SSC / সমমান</option>
             <option value="hsc">HSC / সমমান</option>
@@ -99,14 +99,14 @@ export function loginPage(): string {
     <form id="loginForm" class="space-y-4">
       <div>
         <label class="text-xs text-orange-200">মোবাইল নম্বর / ইমেইল / ইউজার আইডি</label>
-        <input name="phone" id="loginPhoneInput" required class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400 text-sm" placeholder="01XXXXXXXXX অথবা admin@edusob.com">
+        <input name="phone" id="loginPhoneInput" required autocomplete="username" class="w-full mt-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-orange-400 text-sm" placeholder="01XXXXXXXXX অথবা admin@edusob.com">
       </div>
       <div>
         <div class="flex items-center justify-between">
           <label class="text-xs text-orange-200">পাসওয়ার্ড</label>
         </div>
         <div class="relative mt-1">
-          <input name="password" id="loginPassInput" type="password" required class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 pr-10 text-white placeholder-white/40 focus:outline-none focus:border-orange-400 text-sm" placeholder="••••••••">
+          <input name="password" id="loginPassInput" type="password" required autocomplete="current-password" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 pr-10 text-white placeholder-white/40 focus:outline-none focus:border-orange-400 text-sm" placeholder="••••••••">
           <button type="button" id="togglePassBtn" onclick="togglePassVisibility()" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-orange-200/70 hover:text-white transition cursor-pointer" title="পাসওয়ার্ড দেখুন">
             <i id="togglePassIcon" class="fas fa-eye text-xs"></i>
           </button>
