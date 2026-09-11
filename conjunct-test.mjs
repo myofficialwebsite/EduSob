@@ -1,18 +1,25 @@
 /**
- * যুক্তবর্ণ পরীক্ষা (`node conjunct-test.mjs`).
+ * যুক্তবর্ণ পরীক্ষা (`node conjunct-test.mjs [--prod]`)
  *
- * বাংলায় যুক্তবর্ণ (যেমন ক + ্ + ত = ক্ত) জোড়া লাগার সময় "ত" নিচে বসে যায়,
- * তাই পুরো জোড়াটির প্রস্থ **কমে** যায়। আর ভেঙে গেলে হসন্ত (্) দৃশ্যমান হয়ে
- * ফাঁকা তৈরি করে, ফলে প্রস্থ **বাড়ে**।
+ * বাংলায় যুক্তবর্ণ (ক + ্ + ত = ক্ত) জোড়া লাগলে "ত" নিচে বসে, ফলে
+ * পুরো জোড়ার প্রস্থ **কমে** যায়। ভেঙে গেলে হসন্ত আলাদা জায়গা নেয় ও
+ * প্রস্থ **বাড়ে**। তাই:  প্রস্থ(ক্ত) < প্রস্থ(কত)  → যুক্তবর্ণ টিকেছে।
  *
- * পরীক্ষা: "ক্ত"-এর প্রস্থ < "কত"-এর প্রস্থ → যুক্তবর্ণ টিকে আছে ✅
- *          "ক্ত"-এর প্রস্থ ≈ বা > "কত"      → ভেঙে গেছে ❌
+ * ⚠️  জরুরি সতর্কতা (এটিই আগের সংস্করণের ভুল)
+ * ─────────────────────────────────────────
+ * `page.setContent()` দিয়ে পেজ বানালে তার origin আলাদা হয়, আর
+ * **ওয়েবফন্ট লোড করতে CORS লাগে**। তখন `fonts.css` ঠিক লোড হলেও
+ * woff2 ফাইলটি CORS-এ ব্লক হয়ে যায় → ব্রাউজার সিস্টেম ফন্টে ফেরত
+ * যায় → যুক্তবর্ণ ভাঙা দেখায়। ফলাফল: ০/২০ "ভেঙেছে" — সম্পূর্ণ মিথ্যা।
  *
- * letter-spacing-এর প্রভাব আলাদা করে মাপা হয় (বাংলায় এটিই প্রধান সন্দেহভাজন)।
+ * সমাধান: সরাসরি **প্রকৃত পেজে** naviggate করতে হবে, যাতে ফন্ট
+ * একই origin থেকে লোড হয়। মাপার আগে `document.fonts.ready`-ও
+ * অপেক্ষা করতে হবে এবং লোডেড ফন্টের তালিকা ছাপিয়ে যাচাই করতে হবে।
  */
 import { chromium } from 'playwright'
 
-const FONT = "'Hind Siliguri', sans-serif"
+const PROD  = process.argv.includes('--prod')
+const BASE  = PROD ? 'https://edusob.pages.dev' : 'http://127.0.0.1:3000'
 const PAIRS = [
   ['ক্ত', 'কত'], ['ন্ত', 'নত'], ['স্প', 'সপ'], ['ষ্ক', 'ষক'], ['ন্দ্র', 'নদর'],
 ]
@@ -25,50 +32,55 @@ const SPACINGS = [
 
 const browser = await chromium.launch()
 const page = await (await browser.newContext()).newPage()
-await page.goto('http://127.0.0.1:3000/static/fonts/fonts.css').catch(() => {})
-await page.setContent(`<html><head>
-<link rel="stylesheet" href="http://127.0.0.1:3000/static/fonts/fonts.css">
-<style>body{margin:0}span{font-family:${FONT};font-size:64px;white-space:pre}</style>
-</head><body></body></html>`, { waitUntil: 'load' })
-await page.evaluate(() => document.fonts.ready)
 
-const results = await page.evaluate(({ PAIRS, SPACINGS }) => {
-  const out = []
-  for (const [label, ls] of SPACINGS) {
-    for (const [conj, plain] of PAIRS) {
-      const mk = (t) => {
-        const s = document.createElement('span')
-        s.style.letterSpacing = ls
-        s.textContent = t
-        document.body.appendChild(s)
-        const w = s.getBoundingClientRect().width
-        s.remove()
-        return w
-      }
-      const wc = mk(conj), wp = mk(plain)
-      out.push({ ls: label, conj, plain, wc: +wc.toFixed(1), wp: +wp.toFixed(1), diff: +(wc - wp).toFixed(1) })
-    }
+/* setContent() নয় — প্রকৃত রুট। ফন্ট একই origin থেকে লোড হবে। */
+await page.goto(BASE + '/', { waitUntil: 'load' })
+await page.evaluate(() => document.fonts.ready)
+await page.waitForTimeout(1200)
+
+const { rows, loaded } = await page.evaluate(({ PAIRS, SPACINGS }) => {
+  const mk = (t, ls) => {
+    const s = document.createElement('span')
+    s.style.cssText = `position:absolute;left:-9999px;white-space:pre;` +
+      `font-family:'Hind Siliguri',sans-serif;font-size:64px;letter-spacing:${ls}`
+    s.textContent = t
+    document.body.appendChild(s)
+    const w = s.getBoundingClientRect().width
+    s.remove()
+    return w
   }
-  return out
+  const rows = []
+  for (const [label, ls] of SPACINGS)
+    for (const [conj, plain] of PAIRS)
+      rows.push({ label, conj, plain, wc: mk(conj, ls), wp: mk(plain, ls) })
+  return {
+    rows,
+    loaded: [...document.fonts].filter(f => f.status === 'loaded')
+      .map(f => `${f.family} ${f.weight}`),
+  }
 }, { PAIRS, SPACINGS })
 
-await browser.close()
+console.log(`\n===== যুক্তবর্ণ পরীক্ষা (${PROD ? 'প্রোডাকশন' : 'স্থানীয়'}: ${BASE}) =====\n`)
 
-console.log('\n===== যুক্তবর্ণ পরীক্ষা (Hind Siliguri, 64px) =====\n')
-console.log('  letter-spacing      যুক্ত  সাধারণ   পার্থক্য   অবস্থা')
-console.log('  ' + '─'.repeat(54))
-let broken = 0, total = 0
-let cur = ''
-for (const r of results) {
-  if (r.ls !== cur) { cur = r.ls; console.log(`  [${cur}]`) }
+/* ফন্ট না লোড হলে পুরো পরীক্ষাই অর্থহীন — আগেই জানিয়ে দেওয়া হচ্ছে */
+const hasHind = loaded.some(f => f.startsWith('Hind Siliguri'))
+console.log(`  হিন্দ সিলিগুরি লোড: ${hasHind ? '✅' : '❌ না — ফলাফল বিশ্বাসযোগ্য নয়!'}`)
+console.log(`  লোডেড: ${[...new Set(loaded)].join(' | ')}\n`)
+
+let cur = '', pass = 0, total = 0
+console.log('  যুক্তবর্ণ   প্রস্থ   সাধারণ   প্রস্থ   রায়')
+console.log('  ' + '─'.repeat(52))
+for (const r of rows) {
+  if (r.label !== cur) { cur = r.label; console.log(`  [${cur}]`) }
+  const ok = r.wc < r.wp
+  if (ok) pass++
   total++
-  // যুক্তবর্ণ টিকে থাকলে প্রস্থ কম (নেতিবাচক পার্থক্য)
-  const ok = r.diff < -1
-  if (!ok) broken++
-  console.log(`     ${r.conj.padEnd(5)} ${String(r.wc).padStart(7)} ${String(r.wp).padStart(8)} ${String(r.diff).padStart(9)}   ${ok ? '✅ টিকে আছে' : '❌ ভেঙেছে'}`)
+  console.log(`     ${r.conj.padEnd(5)}  ${Math.round(r.wc).toString().padStart(4)}     ${r.plain.padEnd(4)}  ${Math.round(r.wp).toString().padStart(4)}    ${ok ? '✅ টিকেছে' : '❌ ভেঙেছে'}`)
 }
-console.log('\n' + '='.repeat(58))
-console.log(broken === 0
-  ? `✅ সব ${total}টি ক্ষেত্রেই যুক্তবর্ণ সঠিকভাবে গঠিত হচ্ছে`
-  : `❌ ${total}-এর মধ্যে ${broken}টিতে যুক্তবর্ণ ভেঙেছে`)
-console.log('='.repeat(58) + '\n')
+
+console.log('\n' + '='.repeat(56))
+console.log(hasHind && pass === total
+  ? `✅ ${pass}/${total} — সব যুক্তবর্ণ টিকে আছে`
+  : `❌ ${pass}/${total} — সমস্যা আছে`)
+console.log('='.repeat(56) + '\n')
+await browser.close()
