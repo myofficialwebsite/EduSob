@@ -92,6 +92,51 @@ teacherSupport.get('/ticket/:id', requireAuth, async (c) => {
   return c.json({ ok: true, ticket: row, messages: msgs.results || [] })
 })
 
+// ৩.ক শিক্ষকের নিজের ইনবক্স — যেসব প্রশ্ন/চ্যাট এই শিক্ষকের কাছে বরাদ্দ
+//
+// আগে `/my-tickets` ছিল, কিন্তু সেটি `WHERE t.user_id = ?` — অর্থাৎ শুধু
+// **ছাত্রের** নিজের পাঠানো প্রশ্ন। শিক্ষকের নিজের কাছে বরাদ্দ হওয়া চ্যাট
+// দেখার কোনো এন্ডপয়েন্টই ছিল না, তাই শিক্ষকের ড্যাশবোর্ড বানানো সম্ভব ছিল না।
+teacherSupport.get('/teacher/inbox', requireAuth, async (c) => {
+  const user = c.get('user')!
+
+  // এই ইউজারের সাথে যুক্ত শিক্ষক-প্রোফাইল (teachers.user_id)
+  const teacher: any = await c.env.DB.prepare(
+    'SELECT id, name, avatar, subject, designation FROM teachers WHERE user_id = ?'
+  ).bind(user.id).first()
+
+  // অ্যাডমিনরাও এই পেজ দেখতে পারবেন — তখন সব টিকেট দেখানো হয়
+  const isAdmin = user.role === 'admin'
+  if (!teacher && !isAdmin) {
+    return c.json({ ok: true, isTeacher: false, tickets: [], teacher: null })
+  }
+
+  const sql = `
+    SELECT t.id, t.ticket_code, t.subject, t.education_level, t.topic, t.question,
+           t.status, t.urgency, t.created_at, t.user_id, t.teacher_id,
+           u.name_bn as student_name, u.phone as student_phone,
+           m.name as teacher_name,
+           (SELECT COUNT(*) FROM teacher_messages tm WHERE tm.ticket_id = t.id) as message_count,
+           (SELECT tm.message FROM teacher_messages tm WHERE tm.ticket_id = t.id ORDER BY tm.id DESC LIMIT 1) as last_message,
+           (SELECT tm.sender_type FROM teacher_messages tm WHERE tm.ticket_id = t.id ORDER BY tm.id DESC LIMIT 1) as last_sender,
+           (SELECT tm.id FROM teacher_messages tm WHERE tm.ticket_id = t.id ORDER BY tm.id DESC LIMIT 1) as last_message_id
+    FROM teacher_tickets t
+    JOIN users u ON t.user_id = u.id
+    LEFT JOIN teachers m ON t.teacher_id = m.id
+  `
+  const rows: any = teacher
+    ? await c.env.DB.prepare(sql + ' WHERE t.teacher_id = ? ORDER BY t.id DESC').bind(teacher.id).all()
+    : await c.env.DB.prepare(sql + ' ORDER BY t.id DESC').all()
+
+  return c.json({
+    ok: true,
+    isTeacher: !!teacher,
+    isAdmin: isAdmin,
+    teacher: teacher ? { id: teacher.id, name: teacher.name, avatar: teacher.avatar, subject: teacher.subject, designation: teacher.designation } : null,
+    tickets: rows.results || []
+  })
+})
+
 // ৪. নতুন প্রশ্ন / ডাউট জমা দেওয়া (Ask Question)
 teacherSupport.post('/ask', requireAuth, async (c) => {
   const user = c.get('user')!

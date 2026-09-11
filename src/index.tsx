@@ -31,6 +31,7 @@ import { privacyPage, termsPage, refundPage } from './pages/policyPages'
 import { notFoundPage } from './pages/errorPage'
 import { admissionPage } from './pages/admissionPage'
 import { teacherSupportPage } from './pages/teacherSupportPage'
+import { teacherDashPage } from './pages/teacherDash'
 import { boardChallengePage } from './pages/boardChallengePage'
 import { scholarshipsPage } from './pages/scholarshipsPage'
 import { makeNonce, cspHeader, injectScriptNonces } from './lib/csp'
@@ -503,6 +504,13 @@ app.get('/scholarship', async (c) => {
 app.get('/teacher-support', async (c) => {
   const user = await currentUser(c)
   return c.html(teacherSupportPage(!!user))
+})
+
+// শিক্ষকের নিজস্ব ড্যাশবোর্ড — বরাদ্দ হওয়া চ্যাটের উত্তর + নতুন বার্তায় বিজ্ঞপ্তি।
+// আগে এমন কোনো পেজই ছিল না (শিক্ষকের ইনবক্স দেখার উপায় ছিল না)।
+app.get('/teacher', async (c) => {
+  const user = await currentUser(c)
+  return c.html(teacherDashPage(!!user))
 })
 // /teachers ছিল /teacher-support-এর হুবহু ডুপ্লিকেট (একই পেজ, দুই URL)।
 // সব অভ্যন্তরীণ লিংক /teacher-support-এ যায়, তাই এটিকে 301-এ রিডাইরেক্ট করা হলো —
