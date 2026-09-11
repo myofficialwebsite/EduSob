@@ -191,8 +191,8 @@ export function landingPage(): string {
     <span class="bg-orange-500 text-slate-950 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shrink-0 flex items-center gap-1 uppercase tracking-wider">
       <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> লাইভ নোটিস
     </span>
-    <div class="overflow-hidden relative w-full h-7">
-      <div id="ticker-track" class="flex whitespace-nowrap ticker-track text-xs font-medium text-orange-200/90 leading-7">
+    <div class="overflow-hidden relative w-full h-10">
+      <div id="ticker-track" class="flex whitespace-nowrap ticker-track text-xs font-medium text-orange-200/90 leading-10">
         <span class="mx-6">👨‍🏫 <strong>নতুন ফিচার:</strong> ১-অন-১ প্রিমিয়াম শিক্ষক ও মেন্টর সহায়তা — ১৫-৩০ মিনিটে স্টেপ-বাই-স্টেপ সমাধান নিন!</span>
         <span class="mx-6">📢 এডুসব রেজাল্ট হাব — জাতীয় ও সকল শিক্ষা বোর্ডের ফলাফল একাধিক ব্যাকআপ লিংকে লাইভ।</span>
         <span class="mx-6">🎓 প্রফেশনাল ১, ২ ও ৩ পেজ সিভি মেকার — ১৪টি স্ট্যান্ডার্ড টেমপ্লেটে পিডিএফ ডাউনলোড।</span>

@@ -133,6 +133,9 @@ export const HEAD_ASSETS = `
      কোনো 3rd-party রিকোয়েস্ট নেই → preconnect-এর প্রয়োজনই নেই। -->
 <link rel="preload" href="/static/fonts/hind-siliguri-400-bengali.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/static/fonts/hind-siliguri-600-bengali.woff2" as="font" type="font/woff2" crossorigin>
+<!-- বোল্ড (<strong>/font-bold) টেক্সটের জন্য — এটি না থাকলে ৭০০-ওজনের
+     টেক্সট দেরিতে লোড হয়ে প্রস্থ বদলে টিকার/হেডিং-এ CLS তৈরি করত। ৭.৬ KB। -->
+<link rel="preload" href="/static/fonts/hind-siliguri-700-bengali.woff2" as="font" type="font/woff2" crossorigin>
 <link href="/static/fonts/fonts.css" rel="stylesheet">
 <!-- ⚡ FIX(audit): axios CDN সরানো হয়েছে — নিচের fetch-ভিত্তিক shim-ই যথেষ্ট।
      এর ফলে একটি render-blocking 3rd-party রিকোয়েস্ট কমলো। -->
