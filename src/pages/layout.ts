@@ -559,12 +559,6 @@ function edusobWa(){
   window.open('https://wa.me/8801835414122','_blank');return false;
 }
 function edusobSbClose(){document.getElementById('edusobSignboard').classList.add('hidden')}
-function edusobFabToggle(){
-  var items=document.getElementById('edusobFabItems'),icon=document.getElementById('edusobFabIcon');
-  var open=items.classList.contains('hidden');
-  if(open){items.classList.remove('hidden');items.classList.add('flex');icon.style.transform='rotate(45deg)'}
-  else{items.classList.add('hidden');items.classList.remove('flex');icon.style.transform=''}
-}
 function edusobTk(n){return '৳'+Number(n).toLocaleString('bn-BD')}
 (function(){
   fetch('/api/settings/public').then(function(r){return r.json()}).then(function(d){
@@ -613,8 +607,6 @@ function edusobTk(n){return '৳'+Number(n).toLocaleString('bn-BD')}
           if(!sd.ok||!sd.products||!sd.products.length)return;
           var badge=document.getElementById('edusob-shop-badge');
           if(badge){badge.textContent=sd.products.length;badge.classList.remove('hidden')}
-          var fb=document.getElementById('edusob-fab-badge');
-          if(fb){fb.textContent=sd.products.length;fb.classList.remove('hidden')}
           // নোটিফিকেশন ব্যাজ আপডেট হবে, তবে ব্যবহারকারীকে জোরপূর্বক পপআপ দেখিয়ে রিডিং ব্যাহত করা হবে না
           var list=document.getElementById('edusobSbList');
           if(!list) return;
