@@ -311,6 +311,10 @@ let curCategory = '';
 function statusBadge(state){
   if(state==='up') return '<span class="flex items-center gap-1 text-[11px] text-orange-400 bg-orange-500/10 px-2 py-0.5 rounded-full border border-orange-500/20"><span class="w-1.5 h-1.5 bg-orange-400 rounded-full pulse-soft"></span> সচল</span>';
   if(state==='down') return '<span class="flex items-center gap-1 text-[11px] text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-full border border-rose-500/20"><span class="w-1.5 h-1.5 bg-rose-400 rounded-full"></span> ডাউন</span>';
+  /* 'unknown' = যাচাই করতেই পারিনি। আগে এই ক্ষেত্রেও 'down' (লাল) দেখানো হতো,
+     যা মিথ্যা দাবি: শিক্ষা বোর্ডের সাইট বন্ধ নয় — আমরা চেক করতে পারিনি।
+     তাই আলাদা, নিরপেক্ষ (ধূসর) অবস্থা। */
+  if(state==='unknown') return '<span class="flex items-center gap-1 text-[11px] text-slate-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10"><span class="w-1.5 h-1.5 bg-slate-500 rounded-full"></span> যাচাই করা যায়নি</span>';
   return '<span class="flex items-center gap-1 text-[11px] text-slate-400 bg-white/5 px-2 py-0.5 rounded-full"><span class="w-1.5 h-1.5 bg-slate-400 rounded-full pulse-soft"></span> চেক হচ্ছে</span>';
 }
 
@@ -407,10 +411,21 @@ async function checkStatuses(){
   // ডুপ্লিকেট URL একাধিক বার চেক করার প্রয়োজন নেই
   const uniq = jobs.map(function(j){ return j.url; }).filter(function(u, i, a){ return a.indexOf(u) === i; });
 
-  function paint(map){
+  /* okFlag === false মানে যাচাই-প্রক্রিয়াটিই ব্যর্থ — তখন 'unknown' দেখাতে হবে,
+     'down' নয় (সব লিংককে "বন্ধ" দেখানো একটি মিথ্যা দাবি)। */
+  function paint(map, okFlag){
     jobs.forEach(function(j){
       const el = document.getElementById(j.id);
-      if (el) el.innerHTML = statusBadge(map[j.url] ? 'up' : 'down');
+      if (!el) return;
+      if (okFlag === false) { el.innerHTML = statusBadge('unknown'); return; }
+      const v = map && map[j.url];
+      /* পার্থক্য জরুরি:
+           true  → সচল (নিশ্চিত)
+           false → বন্ধ (নিশ্চিত)
+           null/undefined → অজানা (যাচাই করতেই পারিনি)
+         আগে null-ও false ধরা হতো, ফলে সার্ভার ডাউন থাকলে সব লিংক
+         "বন্ধ" দেখাত — একটি মিথ্যা দাবি। */
+      el.innerHTML = statusBadge(v === null || v === undefined ? 'unknown' : (v ? 'up' : 'down'));
     });
   }
 
@@ -422,11 +437,13 @@ async function checkStatuses(){
     try {
       const pairs = await Promise.all(uniq.slice(0, 12).map(async function(u){
         try { const rr = await axios.get('/api/link-status', { params: { url: u }, timeout: 6000 }); return [u, !!rr.data.up]; }
-        catch(err){ return [u, false]; }
+        /* চেকটি ব্যর্থ → null (অজানা)। false দিলে "বন্ধ" দেখাবে,
+           যা মিথ্যা: সাইট বন্ধ নয়, আমরা যাচাই করতে পারিনি। */
+        catch(err){ return [u, null]; }
       }));
       const map = {}; pairs.forEach(function(p){ map[p[0]] = p[1]; });
       paint(map);
-    } catch(e2){ paint({}); }
+    } catch(e2){ paint(null, false); }
   }
 }
 

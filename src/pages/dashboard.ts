@@ -1081,6 +1081,11 @@ async function loadDashboardCore(){
       if (pBar) pBar.style.width = pct + '%';
 
       renderQuickCopyStrip(prof);
+    } else {
+      /* axios non-2xx-এ reject করে, তাই results[2].status === 'rejected' হয়।
+         else-শাখা না থাকায় renderQuickCopyStrip() কখনো ডাকা হতো না এবং
+         "প্রোফাইল চিপস লোড হচ্ছে..." টেক্সটটি চিরকাল ঘুরতে থাকত। */
+      renderQuickCopyStripError();
     }
 
     if (results[3].status === 'fulfilled' && results[3].value.data.ok) {
@@ -1181,6 +1186,20 @@ function renderQuickCopyStrip(prof){
   }).join('');
 }
 
+function renderQuickCopyStripError(){
+  const strip = document.getElementById('quickCopyStrip');
+  if (!strip) return;
+  strip.innerHTML = ''
+    + '<div class="flex items-center gap-2 shrink-0">'
+    +   '<span class="text-[11px] text-red-300 flex items-center gap-1.5">'
+    +     '<i class="fas fa-triangle-exclamation"></i>প্রোফাইল লোড করা যায়নি'
+    +   '</span>'
+    +   '<button onclick="loadDashboardCore()" class="text-[11px] px-2 py-0.5 rounded-md bg-white/10 hover:bg-white/20 text-amber-300 font-bold transition-colors">'
+    +     '<i class="fas fa-rotate-right mr-1"></i>আবার'
+    +   '</button>'
+    + '</div>';
+}
+
 function copyPillDirect(btn, val, label){
   if (!val) return;
   navigator.clipboard.writeText(val).then(() => {
@@ -1273,7 +1292,13 @@ async function loadFeedsAndTimelines(){
                 order.map(k => '<span class="bg-black/30 px-1.5 py-0.5 rounded">'+NAMES[k]+': '+BN(t[k])+'</span>').join('') +
               '</div>';
           }
-        } catch(e){}
+        } catch(e){
+          /* ফাঁকা catch থাকায় ব্যর্থ হলে "দৈনিক শিডিউল লোড হচ্ছে..."
+             টেক্সটটি চিরকাল ঘুরতে থাকত। এটি সাজসজ্জামূলক কনটেন্ট,
+             তাই এরর-বার্তা নয় — নিরপেক্ষ একটি পতন-পথ যথেষ্ট। */
+          prayerBox.innerHTML = '<i class="fas fa-calendar-day text-slate-500 text-sm shrink-0"></i>'
+            + '<span class="text-slate-500 text-xs">আজকের সময়সূচি পাওয়া যায়নি</span>';
+        }
       } else if (USER_RELIGION === 'sanatan' || USER_RELIGION === 'buddhist') {
         try {
           const r = await axios.get('/api/feeds/panchang');
@@ -1282,7 +1307,10 @@ async function loadFeedsAndTimelines(){
               '<i class="fas fa-om text-amber-400 text-sm shrink-0"></i>' +
               '<span class="text-slate-300">আজকের তিথি: <b class="text-amber-300">' + escH(r.data.panchang.tithi || 'শুক্লা') + '</b></span>';
           }
-        } catch(e){}
+        } catch(e){
+          prayerBox.innerHTML = '<i class="fas fa-calendar-day text-slate-500 text-sm shrink-0"></i>'
+            + '<span class="text-slate-500 text-xs">আজকের পঞ্জিকা পাওয়া যায়নি</span>';
+        }
       } else {
         prayerBox.innerHTML = '<i class="fas fa-compass text-sky-400"></i> <span class="text-slate-300">প্রতিদিন নতুন উদ্যমে নিজের লক্ষ্য অর্জন করুন!</span>';
       }
@@ -1296,7 +1324,10 @@ async function loadFeedsAndTimelines(){
         const vt = document.getElementById('compactVerseText');
         if (vt) vt.textContent = '“' + vRes.data.verse.text + '”';
       }
-    } catch(e){}
+    } catch(e){
+      const vt = document.getElementById('compactVerseText');
+      if (vt) vt.textContent = 'আজকের বাণী পাওয়া যায়নি';
+    }
 
     // ৩. নোটিস ও ঘোষণা
     loadAnnouncementsFeed();

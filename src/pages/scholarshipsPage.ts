@@ -153,14 +153,32 @@ async function loadScholarships(cat = '') {
   try {
     var url = '/api/scholarships/list' + (cat ? '?category=' + cat : '');
     var res = await fetch(url);
+    /* fetch() শুধুমাত্র নেটওয়ার্ক-ব্যর্থতায় reject করে — HTTP ৪xx/৫xx-এ নয়।
+       তাই !res.ok পরীক্ষা না দিলে ৫০০-এর ক্ষেত্রে res.json() সফল হয়,
+       d.ok মিথ্যা হয়, আর গ্রিডে লোডিং-স্পিনার চিরকাল ঘুরতে থাকে।
+       (সাবধান: এই স্ক্রিপ্ট একটি টেমপ্লেট-লিটারেলের ভেতরে আছে,
+        তাই এখানে ব্যাকটিক ব্যবহার করা যাবে না — পুরো স্ট্রিং ভেঙে যায়।) */
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     var d = await res.json();
     if (d && d.ok) {
       SCHOLARSHIPS_DATA = d.scholarships || [];
       document.getElementById('countAll').textContent = toBn(SCHOLARSHIPS_DATA.length);
       renderCards(SCHOLARSHIPS_DATA);
+    } else {
+      throw new Error((d && d.error) || 'অজানা ত্রুটি');
     }
   } catch (e) {
     console.error(e);
+    var grid = document.getElementById('scholarshipsGrid');
+    if (grid) grid.innerHTML = ''
+      + '<div class="col-span-full text-center py-12 text-slate-400 bg-slate-900/50 rounded-2xl border border-red-500/20">'
+      +   '<i class="fas fa-triangle-exclamation text-3xl text-red-400 mb-3"></i>'
+      +   '<p class="text-slate-300 font-bold mb-1">স্কলারশিপের তালিকা লোড করা যায়নি</p>'
+      +   '<p class="text-xs text-slate-500 mb-4">ইন্টারনেট সংযোগ বা সার্ভারে সমস্যা হতে পারে।</p>'
+      +   '<button onclick="loadScholarships(ACTIVE_CAT)" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition-colors">'
+      +     '<i class="fas fa-rotate-right mr-1.5"></i>আবার চেষ্টা করুন'
+      +   '</button>'
+      + '</div>';
   }
 }
 

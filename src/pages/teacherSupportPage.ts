@@ -449,6 +449,21 @@ function loadMentors() {
     mentorsList = res.data.mentors || [];
     renderMentors(mentorsList);
     populateTeacherDropdowns(mentorsList);
+  }).catch(function(err){
+    /* .catch() না থাকায় HTTP ৫০০-এ promise অপরিচালিত থেকে যেত এবং
+       "শিক্ষকদের তথ্য লোড হচ্ছে..." স্পিনারটি চিরকাল ঘুরত —
+       ব্যবহারকারী কোনো বার্তাই পেতেন না। */
+    console.error('loadMentors:', err);
+    var grid = document.getElementById('mentorsGrid');
+    if (grid) grid.innerHTML = ''
+      + '<div class="col-span-full py-12 text-center text-slate-400">'
+      +   '<i class="fas fa-triangle-exclamation text-3xl text-red-400 mb-2"></i>'
+      +   '<p class="text-slate-300 font-bold mb-1">শিক্ষকদের তালিকা লোড করা যায়নি</p>'
+      +   '<p class="text-xs text-slate-500 mb-4">ইন্টারনেট সংযোগ বা সার্ভারে সমস্যা হতে পারে।</p>'
+      +   '<button onclick="loadMentors()" class="px-5 py-2.5 bg-orange-500 hover:bg-orange-400 text-slate-950 font-bold rounded-xl text-sm transition-colors">'
+      +     '<i class="fas fa-rotate-right mr-1.5"></i>আবার চেষ্টা করুন'
+      +   '</button>'
+      + '</div>';
   });
 }
 

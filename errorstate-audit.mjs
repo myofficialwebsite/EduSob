@@ -35,11 +35,22 @@ for(const r of routes){
   const bd=new Set(bad.split('\n').map(s=>s.trim()).filter(s=>s.length>2))
   const lost=[...g].filter(x=>!bd.has(x))
   const added=[...bd].filter(x=>!g.has(x))
-  const errish=added.filter(x=>/ত্রুটি|এরর|সমস্যা|ব্যর্থ|আবার চেষ্টা|রিট্রাই|লোড|error/i.test(x))
-  const verdict = lost.length===0 ? '✅ কিছুই হারায়নি'
+  const errish=added.filter(x=>/ত্রুটি|এরর|সমস্যা|ব্যর্থ|আবার চেষ্টা|রিট্রাই|লোড|যায়নি|যায়নি|পাওয়া যায়নি|যাচাই|error/i.test(x))
+  /* তৃতীয় যাচাই (মূল): API ব্যর্থ হওয়ার **পরেও** "লোড হচ্ছে" টেক্সট
+     টিকে থাকলে ব্যবহারকারী চিরকাল স্পিনারের দিকে তাকিয়ে থাকেন —
+     কোনো এরর-বার্তা আসে না, কোনো কনটেন্টও আসে না। এটাই সবচেয়ে খারাপ
+     অবস্থা, কিন্তু `lost.length===0` হওয়ায় আগের সংস্করণ একে "✅" দেখাত। */
+  /* "লোড হচ্ছে…" = চলমান (আটকে গেছে) · "লোড করা যায়নি" = শেষ (সঠিক এরর)।
+     তাই কেবল **চলমান** রূপটিই ধরা হবে, তাও অবশ্যই "…" সহ — নইলে
+     "দ্রুত লোডিং ব্যাকআপ রেজাল্ট পোর্টাল"-এর মতো স্থির মার্কেটিং-কপি
+     মিথ্যা পজিটিভ দেয় (এটিই প্রথম সংস্করণের ভুল)। */
+  const stuck=[...bd].filter(x=>/লোড হচ্ছে\.\.\.|লোড হচ্ছে…|লোডিং\.\.\.|আসছে\.\.\./.test(x))
+  const verdict = stuck.length ? `❌ আটকে গেছে: "${stuck[0].slice(0,42)}"`
+    : lost.length===0 ? '✅ কিছুই হারায়নি'
     : errish.length ? `✅ এরর-বার্তা: "${errish[0].slice(0,42)}"`
     : `❌ ${lost.length}টি লাইন নীরবে উধাও`
   console.log(`  ${r.padEnd(18)} ${verdict}`)
   if(lost.length && !errish.length) for(const l of lost.slice(0,3)) console.log(`       └ হারিয়েছে: "${l.slice(0,56)}"`)
 }
+console.log('\n  (❌ = ঠিক করতে হবে · ✅ = ব্যবহারকারী বার্তা পাচ্ছেন)\n')
 await b.close()
