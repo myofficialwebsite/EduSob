@@ -123,21 +123,46 @@ shop.post('/orders', async (c) => {
   }
 
   // অর্ডার ইনসার্ট
-  const ores = await c.env.DB.prepare(
-    'INSERT INTO orders (user_id, customer_name, customer_phone, address, payment_method, total, note, status) VALUES (?,?,?,?,?,?,?,?)'
-  ).bind(user?.id ?? null, name, phone, address, method, total, note, method === 'wallet' ? 'confirmed' : 'pending').run()
-  const orderId = ores.meta.last_row_id
+  // ⚠️ ওয়ালেট-কর্তন (ওপরে) ও অর্ডার-তৈরি (এখানে) দুইটি আলাদা কমিট — মাঝখানে
+  // কোনো একটি ব্যর্থ হলে টাকা কেটে যাবে কিন্তু অর্ডার তৈরি হবে না, ফলে টাকা
+  // হারিয়ে যাবে এবং খোঁজও পাওয়া যাবে না (লেনদেন-ইতিহাসেই কিছু থাকবে না)।
+  // তাই নিচের অংশ try-তে রেখে ব্যর্থ হলে ক্ষতিপূরণমূলক (compensating) ফেরত
+  // দেওয়া হচ্ছে — যাতে ভয়ঙ্কর পরিস্থিতিতে অন্তত টাকাটা নিরাপদ থাকে।
+  let orderId: number
+  try {
+    const ores = await c.env.DB.prepare(
+      'INSERT INTO orders (user_id, customer_name, customer_phone, address, payment_method, total, note, status) VALUES (?,?,?,?,?,?,?,?)'
+    ).bind(user?.id ?? null, name, phone, address, method, total, note, method === 'wallet' ? 'confirmed' : 'pending').run()
+    orderId = Number(ores.meta.last_row_id)
 
-  // আইটেম + স্টক + ট্রানজেকশন — এক ব্যাচে
-  const batch: any[] = []
-  for (const l of lines) {
-    batch.push(c.env.DB.prepare('INSERT INTO order_items (order_id, product_id, product_name, unit_price, qty) VALUES (?,?,?,?,?)').bind(orderId, l.pid, l.name, l.unit, l.qty))
-    batch.push(c.env.DB.prepare('UPDATE products SET stock=MAX(0, stock-?) WHERE id=?').bind(l.qty, l.pid))
+    // আইটেম + স্টক + ট্রানজেকশন — এক ব্যাচে
+    const batch: any[] = []
+    for (const l of lines) {
+      batch.push(c.env.DB.prepare('INSERT INTO order_items (order_id, product_id, product_name, unit_price, qty) VALUES (?,?,?,?,?)').bind(orderId, l.pid, l.name, l.unit, l.qty))
+      batch.push(c.env.DB.prepare('UPDATE products SET stock=MAX(0, stock-?) WHERE id=?').bind(l.qty, l.pid))
+    }
+    if (method === 'wallet') {
+      batch.push(c.env.DB.prepare("INSERT INTO wallet_transactions (user_id, amount, type, note) VALUES (?,?,'purchase',?)").bind(user!.id, -total, `অর্ডার #${orderId} — শপ কেনাকাটা`))
+    }
+    await c.env.DB.batch(batch)
+  } catch (e) {
+    // টাকা কেটে নেওয়া হয়েছে কিন্তু অর্ডার রেকর্ড হয়নি — কাটা টাকা ফেরত দিন
+    if (method === 'wallet') {
+      try {
+        await c.env.DB.batch([
+          c.env.DB.prepare('UPDATE wallets SET balance=balance+? WHERE user_id=?').bind(total, user!.id),
+          c.env.DB.prepare("INSERT INTO wallet_transactions (user_id, amount, type, note) VALUES (?,?,'refund',?)").bind(user!.id, total, 'ব্যর্থ অর্ডার — স্বয়ংক্রিয় ফেরত'),
+        ])
+        console.error('[shop] অর্ডার ব্যর্থ, টাকা ফেরত দেওয়া হয়েছে:', e)
+        return c.json({ ok: false, error: 'অর্ডার তৈরি করা যায়নি। আপনার ওয়ালেট থেকে কাটা টাকা ফেরত দেওয়া হয়েছে।' }, 500)
+      } catch (e2) {
+        // ফেরত দেওয়ার চেষ্টাও ব্যর্থ — টাকা আটকে গেছে, ম্যানুয়াল হস্তক্ষেপ দরকার
+        console.error('[shop] জরুরি: অর্ডার ও ফেরত দুটোই ব্যর্থ, ম্যানুয়াল রিভিউ দরকার:', e, e2)
+      }
+    }
+    console.error('[shop] অর্ডার তৈরি ব্যর্থ:', e)
+    return c.json({ ok: false, error: 'অর্ডার তৈরি করা যায়নি। আবার চেষ্টা করুন।' }, 500)
   }
-  if (method === 'wallet') {
-    batch.push(c.env.DB.prepare("INSERT INTO wallet_transactions (user_id, amount, type, note) VALUES (?,?,'purchase',?)").bind(user!.id, -total, `অর্ডার #${orderId} — শপ কেনাকাটা`))
-  }
-  await c.env.DB.batch(batch)
 
   return c.json({ ok: true, order_id: orderId, total, cod_charge: codCharge, status: method === 'wallet' ? 'confirmed' : 'pending' })
 })
@@ -235,7 +260,17 @@ shop.post('/assisted/:id/pay', requireAuth, async (c) => {
     return c.json({ ok: false, error: `ওয়ালেটে পর্যাপ্ত ব্যালেন্স নেই (দরকার ৳${req.fee})` }, 400)
   }
 
-  await c.env.DB.prepare("INSERT INTO wallet_transactions (user_id, amount, type, note) VALUES (?,?,'purchase',?)").bind(user.id, -req.fee, `অ্যাসিস্টেড আবেদন #${id} ফি`).run()
+  // ওয়ালেট-কর্তন (ওপরে) সফল হওয়ার *পর* লেজার-এন্ট্রি লেখা হয় — এটি ব্যর্থ হলে
+  // টাকা কেটে যাবে কিন্তু লেনদেন-ইতিহাসে কোনো চিহ্ন থাকবে না (টাকা কোথায় গেল,
+  // বোঝাই যাবে না)। তাই ব্যর্থ হলে কর্তন ফেরত দিয়ে স্ট্যাটাস আগের অবস্থায় নেওয়া হয়।
+  try {
+    await c.env.DB.prepare("INSERT INTO wallet_transactions (user_id, amount, type, note) VALUES (?,?,'purchase',?)").bind(user.id, -req.fee, `অ্যাসিস্টেড আবেদন #${id} ফি`).run()
+  } catch (e) {
+    console.error('[shop] অ্যাসিস্টেড ফি লেজার ব্যর্থ, কর্তন ফেরত দেওয়া হচ্ছে:', e)
+    await c.env.DB.prepare('UPDATE wallets SET balance=balance+? WHERE user_id=?').bind(req.fee, user.id).run().catch(() => {})
+    await c.env.DB.prepare("UPDATE assisted_requests SET status='quoted' WHERE id=?").bind(id).run().catch(() => {})
+    return c.json({ ok: false, error: 'ফি পরিশোধ সম্পন্ন করা যায়নি। কাটা টাকা ফেরত দেওয়া হয়েছে।' }, 500)
+  }
   return c.json({ ok: true })
 })
 
