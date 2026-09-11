@@ -681,6 +681,14 @@ export function dashboardPage(user: SessionUser): string {
 <!-- ৫. ফ্লোটিং FAB অপসারিত — গ্লোবাল ডক (layout floatingButtons) দ্বারা প্রতিস্থাপিত -->
 
 <!-- ৬. ক্লায়েন্ট স্ক্রিপ্ট ও ইন্টারঅ্যাকশন -->
+<!-- ৫. স্ক্রল-টু-টপ: দীর্ঘ ড্যাশবোর্ডে (বিশেষ করে মোবাইলে) শীর্ষে ফেরার সুবিধা।
+     দৃশ্যমানতা initScrollTopWatcher() নিয়ন্ত্রণ করে — ২০০px-এর নিচে hidden + opacity-0,
+     ওপরে flex + opacity-100। z-40 টোস্টের (z-[70]) নিচে, তাই ধাক্কা লাগবে না। -->
+<button id="dashScrollTopBtn" type="button" onclick="dashScrollToTop()" aria-label="পেজের শীর্ষে যান" title="উপরে যান"
+  class="hidden fixed bottom-6 right-4 z-40 h-11 w-11 items-center justify-center rounded-full bg-slate-900/90 text-slate-300 shadow-lg shadow-black/40 ring-1 ring-white/10 backdrop-blur transition-all duration-300 opacity-0 translate-y-2 pointer-events-none hover:bg-slate-800 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400">
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</button>
+
 <script>
 const USER_RELIGION = ${JSON.stringify(user.religion)};
 const USER_LEVEL = ${JSON.stringify(user.education_level ?? '')};
@@ -702,19 +710,6 @@ function toggleDrawer(show){
     document.body.style.overflow = show ? 'hidden' : '';
   }
 }
-
-let isFabOpen = false;
-function toggleFab(force){
-  isFabOpen = typeof force === 'boolean' ? force : !isFabOpen;
-  const m = document.getElementById('fabMenu');
-  const icon = document.getElementById('fabIcon');
-  if (m) m.classList.toggle('hidden', !isFabOpen);
-  if (icon) icon.className = isFabOpen ? 'fas fa-xmark' : 'fas fa-bolt';
-}
-document.addEventListener('click', e => {
-  const fab = document.getElementById('dashFab');
-  if (fab && !fab.contains(e.target) && isFabOpen) toggleFab(false);
-});
 
 // ১-ক্লিকে পৃষ্ঠার শীর্ষে নিয়ে যাওয়ার আদর্শ সিস্টেম
 function dashScrollToTop(){
