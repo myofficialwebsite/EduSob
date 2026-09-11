@@ -374,7 +374,6 @@ ${NAV(loggedIn)}
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <button id="stdChatVideoBtn" class="px-3 py-1.5 rounded-lg bg-orange-600 hover:bg-orange-500 text-slate-950 font-bold text-xs transition flex items-center gap-1"><i class="fas fa-video"></i> ভিডিও রুম</button>
         <button onclick="closeStudentChat()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
       </div>
     </div>
@@ -394,34 +393,6 @@ ${NAV(loggedIn)}
 </div>
 
 <!-- শিক্ষার্থীর ১-অন-১ লাইভ ভিডিও কল রুম মোডাল -->
-<div id="studentVideoModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
-  <div class="bg-slate-900 border border-white/20 rounded-3xl max-w-4xl w-full h-[88vh] flex flex-col shadow-2xl overflow-hidden">
-    <div class="p-4 bg-slate-950 text-white flex items-center justify-between border-b border-white/10">
-      <div class="flex items-center gap-2.5">
-        <span class="w-3 h-3 bg-rose-500 rounded-full animate-ping"></span>
-        <h3 id="stdVideoModalTitle" class="font-bold text-sm">🔴 লাইভ ১-অন-১ মেন্টরিং ভিডিও কল রুম</h3>
-      </div>
-      <div class="flex items-center gap-2">
-        <span id="stdVideoRoomCodeBadge" class="text-xs font-mono bg-white/10 px-2.5 py-1 rounded-lg text-amber-300">রুম আইডি: ...</span>
-        <button onclick="closeStudentVideoModal()" class="px-3 py-1 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs rounded-lg transition">লিভ নিন</button>
-      </div>
-    </div>
-
-    <div class="flex-1 relative bg-slate-950 flex flex-col items-center justify-center p-6 text-center text-white">
-      <div class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-amber-400 via-orange-400 to-amber-400 text-slate-950 text-4xl font-extrabold flex items-center justify-center shadow-2xl mb-4">
-        🎓
-      </div>
-      <h2 class="text-xl font-bold mb-1">শিক্ষকের সাথে লাইভ ভিডিও সেশন</h2>
-      <p class="text-xs text-slate-300 max-w-md mb-6">আপনি সফলভাবে ১-অন-১ লাইভ মেন্টরিং রুমে প্রবেশ করেছেন। শিক্ষক আপনার ডাউট স্টেপ-বাই-স্টেপ সমাধান করে দিচ্ছেন।</p>
-      
-      <div class="flex gap-3 flex-wrap justify-center">
-        <button onclick="toggleStdVideoMic()" id="stdVMicBtn" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition flex items-center gap-1.5"><i class="fas fa-microphone"></i> মাইক অন</button>
-        <button onclick="toggleStdVideoCam()" id="stdVCamBtn" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition flex items-center gap-1.5"><i class="fas fa-video"></i> ক্যামেরা অন</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
 var loggedIn = ${loggedIn ? 'true' : 'false'};
 var userPlan = 'free';
@@ -656,7 +627,6 @@ function loadMyTickets() {
           '<div>জমা দেওয়ার সময়: '+esc(t.created_at ? t.created_at.slice(0, 16) : '')+'</div>'+
           '<div class="flex items-center gap-2 flex-wrap">'+
             '<button onclick="openStudentChat('+t.id+', \\''+esc(t.topic || t.subject)+'\\')" class="px-3.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 font-bold transition flex items-center gap-1"><i class="fas fa-comments"></i> 💬 চ্যাট / SMS</button>'+
-            '<button onclick="joinStudentVideoRoom('+t.id+', \\''+esc(t.topic || t.subject)+'\\')" class="px-3.5 py-1.5 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 border border-orange-400/40 font-bold transition flex items-center gap-1"><i class="fas fa-video"></i> 📹 ১-অন-১ ভিডিও রুম</button>'+
             (isAnswered
               ? '<button onclick="viewSolution('+t.id+')" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 font-bold hover:shadow-lg transition flex items-center gap-1.5"><i class="fas fa-eye"></i> সম্পূর্ণ সমাধান</button>'
               : '<span class="text-amber-400/90 text-xs italic">শিক্ষক সমাধান করছেন</span>')+
@@ -840,7 +810,6 @@ function openStudentChat(ticketId, topic) {
   document.getElementById('stdChatActiveTicketId').value = ticketId;
   document.getElementById('stdChatModalTitle').textContent = 'শিক্ষকের সাথে সরাসরি চ্যাট: ' + (topic || 'টিকেট #' + ticketId);
   document.getElementById('stdChatModalSub').textContent = 'টিকেট #' + ticketId + ' • অভিজ্ঞ মেন্টর সাপোর্ট';
-  document.getElementById('stdChatVideoBtn').onclick = function(){ joinStudentVideoRoom(ticketId, topic); };
 
   document.getElementById('studentChatModal').classList.remove('hidden');
   document.getElementById('studentChatModal').classList.add('flex');
@@ -906,48 +875,6 @@ function sendStudentChatMsg(e) {
   });
   return false;
 }
-
-// ==========================================
-// ---------- শিক্ষার্থীর লাইভ ভিডিও রুম ----------
-// ==========================================
-function joinStudentVideoRoom(ticketId, topic) {
-  if (!loggedIn) { location.href = '/login'; return; }
-  axios.post('/api/teacher-support/tickets/' + ticketId + '/video-room').then(function(res){
-    if (!res.data.ok || !res.data.room) return;
-    document.getElementById('stdVideoModalTitle').textContent = '🔴 লাইভ ভিডিও রুম: ' + (topic || 'টিকেট #' + ticketId);
-    document.getElementById('stdVideoRoomCodeBadge').textContent = 'রুম কোড: ' + res.data.room.room_code;
-    document.getElementById('studentVideoModal').classList.remove('hidden');
-    document.getElementById('studentVideoModal').classList.add('flex');
-  });
-}
-
-function closeStudentVideoModal() {
-  document.getElementById('studentVideoModal').classList.add('hidden');
-  document.getElementById('studentVideoModal').classList.remove('flex');
-}
-
-function toggleStdVideoMic() {
-  var btn = document.getElementById('stdVMicBtn');
-  btn.classList.toggle('bg-orange-600');
-  alert('মাইক্রোফোন টগল হয়েছে');
-}
-function toggleStdVideoCam() {
-  var btn = document.getElementById('stdVCamBtn');
-  btn.classList.toggle('bg-orange-600');
-  alert('ক্যামেরা টগল হয়েছে');
-}
-
-// Auto join if ?room= parameter exists in URL
-(function checkUrlVideoRoom(){
-  var params = new URLSearchParams(window.location.search);
-  var room = params.get('room');
-  if (room) {
-    document.getElementById('stdVideoModalTitle').textContent = '🔴 লাইভ মেন্টরিং রুম: ' + room;
-    document.getElementById('stdVideoRoomCodeBadge').textContent = 'রুম কোড: ' + room;
-    document.getElementById('studentVideoModal').classList.remove('hidden');
-    document.getElementById('studentVideoModal').classList.add('flex');
-  }
-})();
 
 // Initial Calls
 checkUserStatus();

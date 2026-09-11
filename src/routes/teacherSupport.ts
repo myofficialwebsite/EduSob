@@ -55,8 +55,7 @@ teacherSupport.get('/my-tickets', requireAuth, async (c) => {
            t.urgency, t.status, t.answer, t.answered_by_name, t.answered_at, t.rating, t.user_feedback, t.created_at,
            t.teacher_id,
            m.name as teacher_name, m.avatar as teacher_avatar, m.designation as teacher_designation, m.phone as teacher_phone,
-           (SELECT COUNT(*) FROM teacher_messages tm WHERE tm.ticket_id = t.id) as message_count,
-           (SELECT room_code FROM teacher_video_rooms vr WHERE vr.ticket_id = t.id AND vr.status = 'active' ORDER BY vr.id DESC LIMIT 1) as active_video_room
+           (SELECT COUNT(*) FROM teacher_messages tm WHERE tm.ticket_id = t.id) as message_count
     FROM teacher_tickets t
     LEFT JOIN teachers m ON t.teacher_id = m.id
     WHERE t.user_id = ?
@@ -73,8 +72,7 @@ teacherSupport.get('/ticket/:id', requireAuth, async (c) => {
   const id = Number(c.req.param('id'))
   const row: any = await c.env.DB.prepare(`
     SELECT t.*, m.name as teacher_name, m.avatar as teacher_avatar, m.designation as teacher_designation, m.phone as teacher_phone,
-           u.name_bn as student_name, u.phone as student_phone, u.user_code as student_code,
-           (SELECT room_code FROM teacher_video_rooms vr WHERE vr.ticket_id = t.id AND vr.status = 'active' ORDER BY vr.id DESC LIMIT 1) as active_video_room
+           u.name_bn as student_name, u.phone as student_phone, u.user_code as student_code
     FROM teacher_tickets t
     JOIN users u ON t.user_id = u.id
     LEFT JOIN teachers m ON t.teacher_id = m.id
@@ -218,8 +216,7 @@ teacherSupport.post('/book-consultation', requireAuth, async (c) => {
 teacherSupport.get('/my-consultations', requireAuth, async (c) => {
   const user = c.get('user')!
   const rows = await c.env.DB.prepare(`
-    SELECT c.*, t.name as teacher_name, t.avatar as teacher_avatar, t.designation as teacher_designation, t.subject as teacher_subject,
-           (SELECT room_code FROM teacher_video_rooms vr WHERE vr.consultation_id = c.id AND vr.status = 'active' ORDER BY vr.id DESC LIMIT 1) as active_video_room
+    SELECT c.*, t.name as teacher_name, t.avatar as teacher_avatar, t.designation as teacher_designation, t.subject as teacher_subject
     FROM teacher_consultations c
     JOIN teachers t ON c.teacher_id = t.id
     WHERE c.user_id = ?
@@ -287,69 +284,6 @@ teacherSupport.get('/tickets/:id/messages', requireAuth, handleGetTicketMessages
 teacherSupport.post('/ticket/:id/messages', requireAuth, handlePostTicketMessage)
 teacherSupport.post('/tickets/:id/messages', requireAuth, handlePostTicketMessage)
 teacherSupport.post('/tickets/:id/message', requireAuth, handlePostTicketMessage)
-
-// ৯. লাইভ ভিডিও কল রুম তৈরি ও ম্যানেজমেন্ট (Live 1-on-1 Video Room)
-teacherSupport.post('/room/create', requireAuth, async (c) => {
-  const user = c.get('user')!
-  const body = await c.req.json<any>().catch(() => null)
-  const ticketId = body?.ticket_id ? Number(body.ticket_id) : null
-  const consultationId = body?.consultation_id ? Number(body.consultation_id) : null
-  const title = String(body?.title || '১-অন-১ লাইভ শিক্ষক সমাধান সেশন').trim()
-
-  let targetUserId = user.id
-  let targetUserName = user.name_bn
-  let teacherId = null
-  let teacherName = user.name_bn
-
-  if (ticketId) {
-    const t: any = await c.env.DB.prepare(`
-      SELECT t.user_id, t.teacher_id, t.subject, t.topic, u.name_bn as student_name
-      FROM teacher_tickets t
-      JOIN users u ON t.user_id = u.id
-      WHERE t.id = ?
-    `).bind(ticketId).first()
-    if (t) {
-      targetUserId = t.user_id
-      targetUserName = t.student_name
-      teacherId = t.teacher_id
-    }
-  }
-
-  // ইউনিক রুম কোড জেনারেট
-  const roomCode = `edu-call-${Math.random().toString(36).substring(2, 9)}`
-
-  await c.env.DB.prepare(`
-    INSERT INTO teacher_video_rooms (room_code, ticket_id, consultation_id, teacher_id, teacher_name, user_id, user_name, title, status)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active')
-  `).bind(roomCode, ticketId, consultationId, teacherId, teacherName, targetUserId, targetUserName, title).run()
-
-  // টিকিট বা কনসাল্টেশনে মিটিং লিংক সিঙ্ক
-  if (consultationId) {
-    await c.env.DB.prepare(`
-      UPDATE teacher_consultations SET meeting_link = ?, status = 'approved' WHERE id = ?
-    `).bind(`/teacher-support?room=${roomCode}`, consultationId).run()
-  }
-
-  return c.json({ ok: true, room_code: roomCode, room_url: `/teacher-support?room=${roomCode}` })
-})
-
-teacherSupport.get('/room/:code', async (c) => {
-  const code = c.req.param('code')
-  const room: any = await c.env.DB.prepare(`
-    SELECT * FROM teacher_video_rooms WHERE room_code = ?
-  `).bind(code).first()
-
-  if (!room) return c.json({ ok: false, error: 'ভিডিও রুম পাওয়া যায়নি' }, 404)
-  return c.json({ ok: true, room })
-})
-
-teacherSupport.post('/room/:code/end', requireAuth, async (c) => {
-  const code = c.req.param('code')
-  await c.env.DB.prepare(`
-    UPDATE teacher_video_rooms SET status = 'ended', ended_at = datetime('now') WHERE room_code = ?
-  `).bind(code).run()
-  return c.json({ ok: true, message: 'ভিডিও কল সফলভাবে সমাপ্ত হয়েছে।' })
-})
 
 // ১০. সলভড প্রবলেমস ব্যাংক / পাবলিক লাইব্রেরি
 teacherSupport.get('/public-solutions', async (c) => {
@@ -523,8 +457,7 @@ const handleGetAdminTickets = async (c: any) => {
   let query = `
     SELECT t.*, u.name_bn as user_name, u.phone as user_phone, u.user_code,
            m.name as teacher_name, m.avatar as teacher_avatar,
-           (SELECT COUNT(*) FROM teacher_messages tm WHERE tm.ticket_id = t.id) as message_count,
-           (SELECT room_code FROM teacher_video_rooms vr WHERE vr.ticket_id = t.id AND vr.status = 'active' ORDER BY vr.id DESC LIMIT 1) as active_video_room
+           (SELECT COUNT(*) FROM teacher_messages tm WHERE tm.ticket_id = t.id) as message_count
     FROM teacher_tickets t
     JOIN users u ON t.user_id = u.id
     LEFT JOIN teachers m ON t.teacher_id = m.id
