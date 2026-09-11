@@ -1031,7 +1031,13 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
   };
 
   function loadTemplates(){
-    fetch('/api/cv/templates').then(r=>r.json()).then(function(d){
+    // ⚠️ fetch() HTTP ৪xx/৫xx-এ reject করে না — শুধু নেটওয়ার্ক ব্যর্থতায়।
+    //    তাই r.ok চেক না করলে .catch() কখনোই জ্বলে না এবং এরর-বার্তা
+    //    দেখানোই হয় না (axios ভিন্ন: সে non-2xx-এ reject করে)।
+    fetch('/api/cv/templates').then(function(r){
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r.json();
+    }).then(function(d){
       if(!d.ok) return;
       templates = d.templates;
       document.getElementById('tpl-list').innerHTML = templates.map(function(t){
@@ -1045,8 +1051,19 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
           +'<div class="flex items-center justify-between mt-1"><span class="text-[10px] text-slate-400">'+esc(badge)+'</span><span class="text-[10px] '+(t.price===0?'text-orange-400 font-bold':'text-amber-400')+'">'+(t.price===0?'ফ্রি':'৳'+toBn(t.price))+'</span></div></button>';
       }).join('');
       pickTpl(templates[0].slug);
+    })
+    .catch(function(){
+      // আগে এখানে .catch() ছিল না — ফেচ ব্যর্থ হলে টেমপ্লেট তালিকা
+      // নীরবে ফাঁকা থাকতো, কোনো ব্যাখ্যা বা রিট্রাই ছাড়াই।
+      var el = document.getElementById('tpl-list');
+      if (!el) return;
+      el.innerHTML = '<div class="shrink-0 w-28 rounded-xl border border-rose-500/30 bg-rose-500/5 p-3 text-center">'
+        + '<div class="text-[11px] leading-snug text-rose-300 mb-2">টেমপ্লেট লোড করা যায়নি</div>'
+        + '<button onclick="loadTemplates()" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-[10px] font-bold text-slate-200 transition">আবার চেষ্টা</button>'
+        + '</div>';
     });
   }
+  window.loadTemplates = loadTemplates;   // রিট্রাই বোতামের জন্য গ্লোবাল প্রয়োজন
 
   window.prefill = function(){
     fetch('/api/cv/prefill').then(r=>r.json()).then(function(d){

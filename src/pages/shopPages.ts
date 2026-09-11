@@ -252,6 +252,18 @@ function loadProducts(){
     }
     PRODUCTS=r.data.products||[];renderProducts();renderCartBtn()
   })
+  .catch(function(){
+    // আগে .catch() ছিল না — নেটওয়ার্ক ব্যর্থ হলে দোকান সম্পূর্ণ ফাঁকা
+    // দেখাতো, কোনো ব্যাখ্যা বা রিট্রাই ছাড়াই (রূপান্তরের বড় ক্ষতি)।
+    var grid = document.getElementById('product-grid');
+    if (!grid) return;
+    grid.classList.remove('hidden');
+    grid.innerHTML = '<div class="col-span-full rounded-2xl border border-rose-500/30 bg-rose-500/5 p-6 text-center">'
+      + '<div class="text-sm font-bold text-rose-300 mb-1">পণ্য লোড করা যায়নি</div>'
+      + '<div class="text-xs text-slate-400 mb-3">সংযোগে সমস্যা হতে পারে। আবার চেষ্টা করে দেখুন।</div>'
+      + '<button onclick="loadProducts()" class="px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-400 text-slate-950 text-xs font-bold transition">আবার চেষ্টা করুন</button>'
+      + '</div>';
+  });
 }
 axios.get('/api/shop/settings').then(function(r){COD_CHARGE=Number(r.data.settings.cod_charge)||0});
 if(LOGGED_IN)axios.get('/api/wallet').then(function(r){WALLET_BAL=r.data.balance||0;document.getElementById('wallet-bal').textContent='(ব্যালেন্স '+tk(WALLET_BAL)+')'}).catch(function(){});
