@@ -88,7 +88,7 @@ export function renderOverviewTab(): string {
           <p class="text-base font-black text-slate-900"><span id="alertPendingAssist">০</span> টি আবেদন</p>
         </div>
       </div>
-      <span class="text-xs text-rose-700 font-bold bg-rose-50 px-2 py-1 rounded-lg">যাচাই করুন →</span>
+      <span class="text-xs text-rose-700 font-bold bg-rose-50 px-2 py-1 rounded-lg">যাচাই করুন <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
     </div>
 
     <!-- ২. অনুত্তরিত ডাউট টিকিট -->
@@ -102,7 +102,7 @@ export function renderOverviewTab(): string {
           <p class="text-base font-black text-slate-900"><span id="alertPendingTickets">০</span> টি প্রশ্ন</p>
         </div>
       </div>
-      <span class="text-xs text-amber-700 font-bold bg-amber-50 px-2 py-1 rounded-lg">অ্যাসাইন করুন →</span>
+      <span class="text-xs text-amber-700 font-bold bg-amber-50 px-2 py-1 rounded-lg">অ্যাসাইন করুন <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
     </div>
 
     <!-- ৩. পেমেন্ট রিকোয়েস্ট -->
@@ -116,7 +116,7 @@ export function renderOverviewTab(): string {
           <p class="text-base font-black text-slate-900"><span id="alertPendingPayments">০</span> টি অনুরোধ</p>
         </div>
       </div>
-      <span class="text-xs text-orange-700 font-bold bg-orange-50 px-2 py-1 rounded-lg">সেটেল করুন →</span>
+      <span class="text-xs text-orange-700 font-bold bg-orange-50 px-2 py-1 rounded-lg">সেটেল করুন <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
     </div>
   </div>
 
@@ -239,7 +239,7 @@ export function renderOverviewTab(): string {
           <i class="fas fa-user-plus text-orange-700"></i> সাম্প্রতিক ইউজার তালিকা
         </h3>
         <button onclick="navigateToTab('users')" class="text-xs text-orange-700 hover:text-orange-700 font-bold py-1.5">
-          সব ইউজার দেখুন →
+          সব ইউজার দেখুন <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </button>
       </div>
       <div id="recentUsers" class="divide-y divide-slate-100 text-xs">
@@ -254,7 +254,7 @@ export function renderOverviewTab(): string {
           <i class="fas fa-clock-rotate-left text-sky-700"></i> লাইভ অ্যাক্টিভিটি ও সিঙ্ক টাইমলাইন
         </h3>
         <button onclick="navigateToTab('autocollect')" class="text-xs text-sky-700 hover:text-sky-700 font-bold inline-flex items-center py-3 px-2 -mx-2 -my-3">
-          সিঙ্ক সেন্টার →
+          সিঙ্ক সেন্টার <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </button>
       </div>
       <div id="recentActivityTimeline" class="space-y-2.5 text-xs max-h-96 overflow-y-auto pr-1">

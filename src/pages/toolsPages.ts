@@ -322,7 +322,7 @@ window.submitQuiz = function(){
     var guestBanner = d.guest ? 
       '<div class="bg-amber-500/10 border border-amber-400/20 rounded-xl p-3 text-xs text-amber-300 mt-3 flex items-center justify-between flex-wrap gap-2">' +
       '<span>🌟 আপনার স্কোর সেভ রাখতে ও লিডারবোর্ডে নাম দেখতে ফ্রি অ্যাকাউন্ট খুলুন!</span>' +
-      '<a href="/signup" class="px-3 py-1 bg-amber-500 text-slate-950 font-bold rounded-lg hover:bg-amber-400 transition">অ্যাকাউন্ট খুলুন →</a>' +
+      '<a href="/signup" class="px-3 py-1 bg-amber-500 text-slate-950 font-bold rounded-lg hover:bg-amber-400 transition">অ্যাকাউন্ট খুলুন <i class="fas fa-arrow-right" aria-hidden="true"></i></a>' +
       '</div>' : '';
 
     res.innerHTML = '<div class="bg-slate-900 border border-'+color+'-500/40 rounded-2xl p-6 text-center shadow-xl mb-4">'+
@@ -594,7 +594,7 @@ ${toolsHeader('cgpa', loggedIn)}
           <input id="tg-target" type="number" step="0.01" min="0" max="4" placeholder="যেমন: 3.50" class="w-full bg-slate-800 border border-white/10 rounded-xl px-3.5 py-2.5 text-slate-100 outline-none focus:border-amber-400 transition">
         </div>
         <button onclick="calcTarget()" class="w-full px-5 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl font-black transition shadow text-xs sm:text-sm">
-          🎯 প্রয়োজনীয় টার্গেট হিসাব করুন
+          <i class="fas fa-bullseye"></i> প্রয়োজনীয় টার্গেট হিসাব করুন
         </button>
       </div>
       <div id="target-result" class="hidden mt-4 rounded-2xl p-5 text-center shadow-lg"></div>

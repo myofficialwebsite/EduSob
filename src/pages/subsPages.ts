@@ -42,7 +42,7 @@ ${NAV(loggedIn)}
         <i class="fas fa-shield-halved text-orange-400"></i> ১০০% নিরাপদ ও স্বচ্ছ মেম্বারশিপ নীতি
       </p>
       <a href="/wallet" class="text-xs text-orange-400 hover:text-orange-300 font-bold flex items-center gap-1 py-1.5">
-        <i class="fas fa-wallet"></i> ওয়ালেট ব্যালেন্স চেক করুন →
+        <i class="fas fa-wallet"></i> ওয়ালেট ব্যালেন্স চেক করুন <i class="fas fa-arrow-right" aria-hidden="true"></i>
       </a>
     </div>
     <ul class="grid sm:grid-cols-3 gap-3 text-xs text-slate-400">
@@ -173,7 +173,7 @@ function loadPlans(){
       } else if(rank[cur] > rank[p.slug]) {
         btn = '<span class="block text-center py-3 rounded-xl bg-white/5 text-slate-500 font-semibold text-xs">বর্তমান প্ল্যানের অন্তর্ভুক্ত</span>';
       } else {
-        btn = '<button onclick="subscribe(\\'' + p.slug + '\\',' + p.price + ')" class="w-full py-3 rounded-xl bg-gradient-to-r ' + (p.slug === 'premium' ? 'from-amber-400 to-orange-500 text-slate-950' : 'from-orange-500 to-amber-500 text-slate-950') + ' font-black text-xs hover:opacity-90 transition shadow">সাবস্ক্রাইব করুন →</button>';
+        btn = '<button onclick="subscribe(\\'' + p.slug + '\\',' + p.price + ')" class="w-full py-3 rounded-xl bg-gradient-to-r ' + (p.slug === 'premium' ? 'from-amber-400 to-orange-500 text-slate-950' : 'from-orange-500 to-amber-500 text-slate-950') + ' font-black text-xs hover:opacity-90 transition shadow">সাবস্ক্রাইব করুন <i class="fas fa-arrow-right" aria-hidden="true"></i></button>';
       }
 
       return '<div id="plan-card-' + p.slug + '" class="relative bg-slate-900/90 border ' + ring + ' rounded-2xl p-6 flex flex-col justify-between space-y-4">' + popular +

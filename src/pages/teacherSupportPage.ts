@@ -613,7 +613,7 @@ function loadMyTickets() {
         '<p class="text-base font-semibold text-white">আপনার কোনো সক্রিয় প্রশ্ন বা ডাউট নেই</p>'+
         '<p class="text-xs text-slate-400">পড়াশোনায় যেকোনো সমস্যা থাকলে এখনই প্রশ্ন করুন।</p>'+
         '<button onclick="openAskModal()" class="px-5 py-2.5 bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-bold text-xs rounded-xl shadow">'+
-          'প্রথম প্রশ্নটি করুন →'+
+          'প্রথম প্রশ্নটি করুন <i class="fas fa-arrow-right" aria-hidden="true"></i>'+
         '</button>'+
       '</div>';
       return;

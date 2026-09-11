@@ -195,10 +195,10 @@ export function landingPage(): string {
     </span>
     <div class="overflow-hidden relative w-full h-10">
       <div id="ticker-track" class="flex whitespace-nowrap ticker-track text-xs font-medium text-orange-200/90 leading-10">
-        <span class="mx-6">👨‍🏫 <strong>নতুন ফিচার:</strong> ১-অন-১ প্রিমিয়াম শিক্ষক ও মেন্টর সহায়তা — ১৫-৩০ মিনিটে স্টেপ-বাই-স্টেপ সমাধান নিন!</span>
-        <span class="mx-6">📢 এডুসব রেজাল্ট হাব — জাতীয় ও সকল শিক্ষা বোর্ডের ফলাফল একাধিক ব্যাকআপ লিংকে লাইভ।</span>
-        <span class="mx-6">🎓 প্রফেশনাল ১, ২ ও ৩ পেজ সিভি মেকার — ১৪টি স্ট্যান্ডার্ড টেমপ্লেটে পিডিএফ ডাউনলোড।</span>
-        <span class="mx-6">📚 প্রশ্নব্যাংক ও ব্যাখ্যা প্রতিদিন বাড়ছে — প্রতিদিনের মডেল টেস্টে অংশ নিন সম্পূর্ণ ফ্রিতে।</span>
+        <span class="mx-6"><i class="fas fa-chalkboard-user"></i> <strong>নতুন ফিচার:</strong> ১-অন-১ প্রিমিয়াম শিক্ষক ও মেন্টর সহায়তা — ১৫-৩০ মিনিটে স্টেপ-বাই-স্টেপ সমাধান নিন!</span>
+        <span class="mx-6"><i class="fas fa-bullhorn"></i> এডুসব রেজাল্ট হাব — জাতীয় ও সকল শিক্ষা বোর্ডের ফলাফল একাধিক ব্যাকআপ লিংকে লাইভ।</span>
+        <span class="mx-6"><i class="fas fa-graduation-cap"></i> প্রফেশনাল ১, ২ ও ৩ পেজ সিভি মেকার — ১৪টি স্ট্যান্ডার্ড টেমপ্লেটে পিডিএফ ডাউনলোড।</span>
+        <span class="mx-6"><i class="fas fa-book-open"></i> প্রশ্নব্যাংক ও ব্যাখ্যা প্রতিদিন বাড়ছে — প্রতিদিনের মডেল টেস্টে অংশ নিন সম্পূর্ণ ফ্রিতে।</span>
       </div>
     </div>
   </div>
@@ -832,7 +832,7 @@ export function landingPage(): string {
         </div>
 
         <a href="/signup" class="w-full bg-orange-500 hover:bg-orange-600 text-slate-950 font-bold py-3 rounded-full text-center block text-xs transition shadow-[0_0_20px_rgba(249,115,22,0.35)]">
-          এখনই ফ্রি অ্যাকাউন্ট খুলুন →
+          এখনই ফ্রি অ্যাকাউন্ট খুলুন <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
 
@@ -1064,7 +1064,7 @@ setInterval(function() {
     if (!d || !d.ok || !d.items || !d.items.length) { track.innerHTML = fallback + fallback; return; }
     var esc = function(s){ var dv = document.createElement('div'); dv.textContent = String(s || ''); return dv.innerHTML; };
     var news = d.items.slice(0, 6).map(function(n){
-      return '<a href="' + esc(n.link || '#') + '" target="_blank" rel="noopener" class="mx-6 hover:text-amber-300 transition py-1.5">📰 ' + esc(n.title || '') + '</a>';
+      return '<a href="' + esc(n.link || '#') + '" target="_blank" rel="noopener" class="mx-6 hover:text-amber-300 transition py-1.5"><i class="fas fa-newspaper"></i> ' + esc(n.title || '') + '</a>';
     }).join('');
     var half = news + fallback;
     track.innerHTML = half + half;
@@ -1135,7 +1135,7 @@ function handleContact(e) {
 
   setTimeout(function() {
     alertBox.className = 'p-3 rounded-xl text-xs font-bold text-center mt-3 bg-orange-500/20 text-orange-300 border border-orange-500/30';
-    alertBox.innerHTML = '✓ আপনার বার্তাটি সফলভাবে জমা হয়েছে! হেল্পডেস্ক টিম শীঘ্রই আপনার সাথে যোগাযোগ করবে।<br><a href="https://wa.me/8801835414122?text=' + encodeURIComponent('এডুসব হেল্পডেস্ক: নাম: ' + name + ', বিষয়: ' + sub + ' - ' + msg) + '" target="_blank" class="inline-block mt-2 underline text-white font-extrabold">দ্রুত হোয়াটসঅ্যাপে বার্তা পাঠান →</a>';
+    alertBox.innerHTML = '✓ আপনার বার্তাটি সফলভাবে জমা হয়েছে! হেল্পডেস্ক টিম শীঘ্রই আপনার সাথে যোগাযোগ করবে।<br><a href="https://wa.me/8801835414122?text=' + encodeURIComponent('এডুসব হেল্পডেস্ক: নাম: ' + name + ', বিষয়: ' + sub + ' - ' + msg) + '" target="_blank" class="inline-block mt-2 underline text-white font-extrabold">দ্রুত হোয়াটসঅ্যাপে বার্তা পাঠান <i class="fas fa-arrow-right" aria-hidden="true"></i></a>';
     document.getElementById('contactForm').reset();
     btn.disabled = false;
     btn.innerHTML = '<span>বার্তা পাঠান</span> <i class="fas fa-paper-plane text-xs"></i>';

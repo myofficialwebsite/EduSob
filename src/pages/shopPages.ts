@@ -42,7 +42,7 @@ export function shopPage(loggedIn: boolean): string {
 ${shopHeader('shop', loggedIn)}
 <main class="max-w-6xl mx-auto px-4 py-8">
   <section id="shop-hero" class="mb-6">
-    <h1 class="text-2xl md:text-3xl font-bold text-slate-800">🛍️ এডুসব শপ</h1>
+    <h1 class="text-2xl md:text-3xl font-bold text-slate-800"><i class="fas fa-store"></i> এডুসব শপ</h1>
     <p class="text-slate-500 text-sm mt-1">বই, স্টেশনারি, ইলেকট্রনিক্স — ক্যাশ অন ডেলিভারি অথবা ওয়ালেটে পেমেন্ট</p>
   </section>
 
@@ -69,7 +69,7 @@ ${shopHeader('shop', loggedIn)}
       <div class="flex justify-between text-sm"><span>সাবটোটাল</span><b id="cart-subtotal"></b></div>
       <div id="cod-charge-row" class="flex justify-between text-sm text-slate-500"><span>ডেলিভারি চার্জ (COD)</span><span id="cod-charge"></span></div>
       <div class="flex justify-between font-bold text-lg"><span>মোট</span><span id="cart-total" class="text-amber-700"></span></div>
-      <button onclick="showCheckout()" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 font-bold py-3 rounded-xl hover:opacity-90 transition">চেকআউট করুন →</button>
+      <button onclick="showCheckout()" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 font-bold py-3 rounded-xl hover:opacity-90 transition">চেকআউট করুন <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
     </footer>
   </aside>
 </div>
@@ -132,7 +132,7 @@ ${shopHeader('shop', loggedIn)}
 <script>
 ${shopHelpersJs}
 var PRODUCTS=[],CART=JSON.parse(localStorage.getItem('edusob_cart')||'[]'),COD_CHARGE=0,LOGGED_IN=${loggedIn ? 'true' : 'false'},WALLET_BAL=0,CURCAT='';
-var CATS=[['','সব'],['books','📚 বই'],['stationery','✏️ স্টেশনারি'],['electronics','🔌 ইলেকট্রনিক্স'],['package','🎁 প্যাকেজ'],['other','অন্যান্য']];
+var CATS=[['','সব'],['books','<i class="fas fa-book"></i> বই'],['stationery','<i class="fas fa-pen"></i> স্টেশনারি'],['electronics','<i class="fas fa-bolt"></i> ইলেকট্রনিক্স'],['package','<i class="fas fa-gift"></i> প্যাকেজ'],['other','<i class="fas fa-ellipsis"></i> অন্যান্য']];
 
 function saveCart(){localStorage.setItem('edusob_cart',JSON.stringify(CART));renderCartBtn()}
 function cartQty(){return CART.reduce(function(a,c){return a+c.qty},0)}
@@ -160,7 +160,7 @@ function renderProducts(){
       (p.description?'<p class="text-xs text-slate-500 mt-1 line-clamp-2">'+esc(p.description)+'</p>':'')+
       '<div class="mt-2 text-sm">'+price+'</div>'+
       '<p class="text-[11px] '+(out?'text-red-500':'text-slate-500')+' mt-0.5">'+(out?'স্টক শেষ':'স্টকে '+toBn(p.stock)+'টি')+'</p>'+
-      '<button '+(out?'disabled':'')+' onclick="addCart('+p.id+')" class="mt-3 w-full '+(out?'bg-slate-200 text-slate-500 cursor-not-allowed':'bg-amber-500 hover:bg-amber-400 text-slate-950')+' text-sm font-bold py-2 rounded-xl transition">'+(out?'অনুপলব্ধ':'🛒 কার্টে যোগ')+'</button></article>'
+      '<button '+(out?'disabled':'')+' onclick="addCart('+p.id+')" class="mt-3 w-full '+(out?'bg-slate-200 text-slate-500 cursor-not-allowed':'bg-amber-500 hover:bg-amber-400 text-slate-950')+' text-sm font-bold py-2 rounded-xl transition">'+(out?'অনুপলব্ধ':'<i class="fas fa-cart-plus"></i> কার্টে যোগ')+'</button></article>'
   }).join('')
 }
 function addCart(id){
@@ -348,7 +348,7 @@ ${shopHeader('wallet', loggedIn)}
         <p class="text-slate-600">① ফর্মটি জমা দিন → ② অ্যাডমিন আপনার TrxID যাচাই করবেন → ③ ব্যালেন্স যোগ হয়ে গেলে ওয়ালেটে দেখা যাবে।</p>
         <p class="text-slate-600"><strong class="text-slate-700">খেয়াল রাখুন:</strong> TrxID ভুল হলে ব্যালেন্স যোগ করা সম্ভব হবে না — পাঠানোর পর নম্বরটি মিলিয়ে নিন।</p>
         <p class="text-slate-600">কোনো সমস্যায় কল করুন: <a href="tel:+8801835414122" class="text-orange-700 font-bold hover:underline">📞 +88 01835414122</a> <span class="text-slate-500">(সকাল ৯টা – রাত ১০টা)</span></p>
-        <p class="border-t border-slate-200 pt-1.5 text-xs text-slate-500">টাকা ফেরত কোথায় পাবেন? <a href="/refund" class="font-semibold text-orange-700 hover:underline">পেমেন্ট ও রিফান্ড নীতিমালা →</a></p>
+        <p class="border-t border-slate-200 pt-1.5 text-xs text-slate-500">টাকা ফেরত কোথায় পাবেন? <a href="/refund" class="font-semibold text-orange-700 hover:underline">পেমেন্ট ও রিফান্ড নীতিমালা <i class="fas fa-arrow-right" aria-hidden="true"></i></a></p>
       </div>
       <button id="tp-submit" class="w-full bg-gradient-to-r from-orange-600 to-amber-600 text-slate-950 font-bold py-3 rounded-xl hover:opacity-90 transition">জমা দিন ✓</button>
     </form>
@@ -511,7 +511,7 @@ ${shopHeader('assisted', loggedIn)}
         <label class="text-sm font-semibold text-slate-600">বিস্তারিত * <span class="text-slate-500 font-normal">(কোন আবেদন, ওয়েবসাইট লিংক, ডেডলাইন, আপনার তথ্য)</span></label>
         <textarea id="as-details" required rows="4" maxlength="2000" class="w-full mt-1 border rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-indigo-400" placeholder="যেমন: ঢাকা বিশ্ববিদ্যালয় ক-ইউনিট ভর্তি আবেদন করতে চাই। ডেডলাইন ১৫ তারিখ। আমার SSC রোল..."></textarea>
       </div>
-      <button id="as-submit" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold py-3 rounded-xl hover:opacity-90 transition">রিকোয়েস্ট পাঠান →</button>
+      <button id="as-submit" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold py-3 rounded-xl hover:opacity-90 transition">রিকোয়েস্ট পাঠান <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
     </form>
   </section>
 
@@ -537,7 +537,7 @@ function submitAssisted(e){
     document.getElementById('assisted-form').reset();loadAs()
   }).catch(function(err){
     toastMsg((err.response&&err.response.data&&err.response.data.error)||'ব্যর্থ হয়েছে',false)
-  }).finally(function(){btn.disabled=false;btn.textContent='রিকোয়েস্ট পাঠান →'});
+  }).finally(function(){btn.disabled=false;btn.innerHTML='রিকোয়েস্ট পাঠান <i class="fas fa-arrow-right" aria-hidden="true"></i>'});
   return false
 }
 function payAssisted(id){

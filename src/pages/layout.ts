@@ -496,7 +496,7 @@ export function floatingButtons(): string {
       <button onclick="edusobSbClose()" class="text-slate-400 hover:text-slate-700 text-xl leading-none">&times;</button>
     </div>
     <div id="edusobSbList" class="px-5 pb-4 space-y-2 max-h-72 overflow-y-auto"></div>
-    <a href="/shop" class="block bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 text-center font-bold py-3 hover:opacity-90 transition">সব প্রোডাক্ট দেখুন →</a>
+    <a href="/shop" class="block bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 text-center font-bold py-3 hover:opacity-90 transition">সব প্রোডাক্ট দেখুন <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
   </div>
 </div>
 
@@ -544,7 +544,7 @@ function edusobAiSend(e){
     .then(function(r){return r.json()})
     .then(function(d){
       var html=edusobAiEsc(d.answer||'সমস্যা হয়েছে, আবার চেষ্টা করুন');
-      if(d.link)html+='<br><a href="'+d.link+'" class="inline-block mt-1.5 bg-violet-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full hover:opacity-90">'+edusobAiEsc(d.link_text||'দেখুন')+' →</a>';
+      if(d.link)html+='<br><a href="'+d.link+'" class="inline-block mt-1.5 bg-violet-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full hover:opacity-90">'+edusobAiEsc(d.link_text||'দেখুন')+' <i class="fas fa-arrow-right" aria-hidden="true"></i></a>';
       typing.innerHTML=html;
     })
     .catch(function(){typing.innerHTML='নেটওয়ার্ক সমস্যা — আবার চেষ্টা করুন 😅'})

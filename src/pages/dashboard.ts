@@ -217,13 +217,13 @@ export function dashboardPage(user: SessionUser): string {
               <button onclick="openAddMoneyModal()" class="ds-metric ds-metric--action">
                 <span class="ds-metric__label"><i class="fas fa-wallet"></i> ওয়ালেট</span>
                 <span class="ds-metric__value">৳ <span class="wallet-val">০</span></span>
-                <span class="ds-metric__hint">টপ-আপ করুন →</span>
+                <span class="ds-metric__hint">টপ-আপ করুন <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
               </button>
 
               <button onclick="setDashTab('exams')" class="ds-metric ds-metric--action">
                 <span class="ds-metric__label"><i class="fas fa-bookmark"></i> সেভড রোল</span>
                 <span class="ds-metric__value"><span id="rollCount">০</span><span class="ds-metric__unit"> টি</span></span>
-                <span class="ds-metric__hint">১-ক্লিক রেজাল্ট →</span>
+                <span class="ds-metric__hint">১-ক্লিক রেজাল্ট <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
               </button>
 
               <a href="/profile" class="ds-metric ds-metric--action">
@@ -341,25 +341,25 @@ export function dashboardPage(user: SessionUser): string {
               <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition border border-transparent hover:border-white/5">
                 <input type="checkbox" onchange="toggleTask(0)" id="task_0" class="w-4 h-4 rounded text-orange-500 bg-slate-900 border-white/20">
                 <span id="task_text_0" class="text-xs text-slate-200 flex-1 select-none transition-all">২০টি বিষয়ভিত্তিক MCQ অনুশীলন</span>
-                <a href="/mcq" class="text-[10px] text-orange-400 font-bold hover:underline shrink-0 py-1.5" onclick="event.stopPropagation()">টেস্ট দিন →</a>
+                <a href="/mcq" class="text-[10px] text-orange-400 font-bold hover:underline shrink-0 py-1.5" onclick="event.stopPropagation()">টেস্ট দিন <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
               </label>
 
               <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition border border-transparent hover:border-white/5">
                 <input type="checkbox" onchange="toggleTask(1)" id="task_1" class="w-4 h-4 rounded text-orange-500 bg-slate-900 border-white/20">
                 <span id="task_text_1" class="text-xs text-slate-200 flex-1 select-none transition-all">বিগত বছরের ১টি প্রশ্ন সমাধান</span>
-                <a href="/qpapers" class="text-[10px] text-amber-400 font-bold hover:underline shrink-0 py-1.5" onclick="event.stopPropagation()">PDF →</a>
+                <a href="/qpapers" class="text-[10px] text-amber-400 font-bold hover:underline shrink-0 py-1.5" onclick="event.stopPropagation()">PDF <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
               </label>
 
               <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition border border-transparent hover:border-white/5">
                 <input type="checkbox" onchange="toggleTask(2)" id="task_2" class="w-4 h-4 rounded text-orange-500 bg-slate-900 border-white/20">
                 <span id="task_text_2" class="text-xs text-slate-200 flex-1 select-none transition-all">নতুন স্কলারশিপ বা উপবৃত্তি যোগ্যতা চেক</span>
-                <a href="/scholarships" class="text-[10px] text-yellow-400 font-bold hover:underline shrink-0 py-1.5" onclick="event.stopPropagation()">যাচাই →</a>
+                <a href="/scholarships" class="text-[10px] text-yellow-400 font-bold hover:underline shrink-0 py-1.5" onclick="event.stopPropagation()">যাচাই <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
               </label>
 
               <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition border border-transparent hover:border-white/5">
                 <input type="checkbox" onchange="toggleTask(3)" id="task_3" class="w-4 h-4 rounded text-orange-500 bg-slate-900 border-white/20">
                 <span id="task_text_3" class="text-xs text-slate-200 flex-1 select-none transition-all">আজকের বোর্ড নোটিস ও রুটিন দেখা</span>
-                <a href="/notices" class="text-[10px] text-sky-400 font-bold hover:underline shrink-0 py-1.5" onclick="event.stopPropagation()">নোটিস →</a>
+                <a href="/notices" class="text-[10px] text-sky-400 font-bold hover:underline shrink-0 py-1.5" onclick="event.stopPropagation()">নোটিস <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
               </label>
             </div>
           </div>
@@ -561,7 +561,7 @@ export function dashboardPage(user: SessionUser): string {
               <h3 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
                 <i class="fas fa-bullhorn text-amber-400"></i> জরুরি ঘোষণা ও নোটিস
               </h3>
-              <a href="/notices" class="text-xs text-amber-400 hover:underline">সকল নোটিস →</a>
+              <a href="/notices" class="text-xs text-amber-400 hover:underline">সকল নোটিস <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
             <div id="announceListTimeline" class="space-y-2 text-xs">
               <p class="text-slate-400 text-center py-4 text-xs animate-pulse">ঘোষণা লোড হচ্ছে...</p>
@@ -576,7 +576,7 @@ export function dashboardPage(user: SessionUser): string {
                 <h4 class="text-xs font-bold text-white flex items-center gap-2">
                   <i class="fas fa-newspaper text-sky-400"></i> শিক্ষা সংবাদ
                 </h4>
-                <a href="/news" class="text-[11px] text-sky-400 hover:underline">সকল খবর →</a>
+                <a href="/news" class="text-[11px] text-sky-400 hover:underline">সকল খবর <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
               </div>
               <div id="newsPreviewTimeline" class="divide-y divide-white/5 space-y-2 pt-1 text-xs">
                 <p class="text-slate-400 text-center py-3 text-xs animate-pulse">খবর লোড হচ্ছে...</p>
@@ -589,7 +589,7 @@ export function dashboardPage(user: SessionUser): string {
                 <h4 class="text-xs font-bold text-white flex items-center gap-2">
                   <i class="fas fa-briefcase text-amber-400"></i> নতুন চাকরির সার্কুলার
                 </h4>
-                <a href="/jobs" class="text-[11px] text-amber-400 hover:underline">সকল চাকরি →</a>
+                <a href="/jobs" class="text-[11px] text-amber-400 hover:underline">সকল চাকরি <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
               </div>
               <div id="jobsPreviewTimeline" class="divide-y divide-white/5 space-y-2 pt-1 text-xs">
                 <p class="text-slate-400 text-center py-3 text-xs animate-pulse">চাকরি লোড হচ্ছে...</p>
@@ -1400,7 +1400,7 @@ async function loadAnnouncementsFeed(){
               '</div>' +
               '<p class="text-[11px] text-slate-300 line-clamp-1">' + escH(a.body || '') + '</p>' +
             '</div>' +
-            (a.link ? '<a href="'+a.link+'" '+(a.link.startsWith('http') ? 'target="_blank" rel="noopener"' : '')+' class="text-[10px] text-orange-400 font-bold hover:underline shrink-0 py-1.5">দেখুন →</a>' : '<button onclick="openNotificationsModal()" class="text-[10px] text-amber-400 font-bold hover:underline shrink-0 py-1.5">পড়ুন</button>') +
+            (a.link ? '<a href="'+a.link+'" '+(a.link.startsWith('http') ? 'target="_blank" rel="noopener"' : '')+' class="text-[10px] text-orange-400 font-bold hover:underline shrink-0 py-1.5">দেখুন <i class="fas fa-arrow-right" aria-hidden="true"></i></a>' : '<button onclick="openNotificationsModal()" class="text-[10px] text-amber-400 font-bold hover:underline shrink-0 py-1.5">পড়ুন</button>') +
           '</div>'
         ).join('');
       }
@@ -1623,7 +1623,7 @@ async function handleModalResultSubmit(e){
             '<span class="text-xs bg-orange-500 text-slate-950 font-black px-2 py-0.5 rounded">GPA: ' + (r.gpa || 'Passed') + '</span>' +
           '</div>' +
           '<p class="text-slate-300 text-xs">রোল: ' + roll + ' · বোর্ড: ' + board.toUpperCase() + ' · ফলাফল: ' + (r.status || 'উত্তীর্ণ') + '</p>' +
-          '<a href="/results" class="inline-block pt-1 text-xs text-orange-400 font-bold hover:underline">পূর্ণাঙ্গ মার্কশিট হাব →</a>' +
+          '<a href="/results" class="inline-block pt-1 text-xs text-orange-400 font-bold hover:underline">পূর্ণাঙ্গ মার্কশিট হাব <i class="fas fa-arrow-right" aria-hidden="true"></i></a>' +
         '</div>';
     } else {
       out.innerHTML = '<p class="text-rose-400 text-xs text-center py-2">' + (res.data?.error || 'রেজাল্ট পাওয়া যায়নি') + '</p>';
@@ -1850,7 +1850,7 @@ function openAddMoneyModal(){
         '<p class="text-[10px] text-slate-400">টাকা পাঠিয়ে ট্রানজেকশন আইডি ওয়ালেট পেজে সাবমিট করুন।</p>' +
       '</div>' +
       '<a href="/wallet" class="block text-center w-full py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-slate-950 font-black transition shadow-lg">' +
-        'ওয়ালেট ড্যাশবোর্ডে যান →' +
+        'ওয়ালেট ড্যাশবোর্ডে যান <i class="fas fa-arrow-right" aria-hidden="true"></i>' +
       '</a>' +
     '</div>'
   );
@@ -1872,7 +1872,7 @@ function openNotificationsModal(){
           '</div>' +
           '<h4 class="font-bold text-white text-xs sm:text-sm">' + escH(a.title) + '</h4>' +
           '<p class="text-[11px] text-slate-300">' + escH(a.body || '') + '</p>' +
-          (a.link ? '<a href="'+a.link+'" target="_blank" class="inline-block pt-1 text-orange-400 font-bold text-xs hover:underline">বিস্তারিত →</a>' : '') +
+          (a.link ? '<a href="'+a.link+'" target="_blank" class="inline-block pt-1 text-orange-400 font-bold text-xs hover:underline">বিস্তারিত <i class="fas fa-arrow-right" aria-hidden="true"></i></a>' : '') +
         '</div>'
       ).join('') +
     '</div>'
