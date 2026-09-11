@@ -172,7 +172,9 @@ export function dashboardPage(user: SessionUser): string {
       <!-- ১. প্রিমিয়াম প্রোফাইল হিরো — ধর্ম-থিমড, একক প্রাইমারি অ্যাকশন -->
       <section class="ds-hero ds-hero--${info.theme}">
         <div class="ds-hero__glow" aria-hidden="true"></div>
-        <div class="ds-hero__watermark" aria-hidden="true">${info.watermark}</div>
+        <!-- ওয়াটারমার্ক: SVG থাকলে SVG (ফন্ট-নিরপেক্ষ, সব ডিভাইসে একই রূপ),
+             নইলে ইউনিকোড অক্ষর — যেমন 'other' ধর্মের 📚 ইমোজি। -->
+        <div class="ds-hero__watermark" aria-hidden="true">${info.watermarkSvg || info.watermark}</div>
 
         <div class="relative flex flex-col lg:flex-row lg:items-center justify-between gap-5">
           <!-- বামে: পরিচয় -->

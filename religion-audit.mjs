@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs'
 /**
  * ধর্ম-ভিত্তিক ড্যাশবোর্ড অডিট (`node religion-audit.mjs`).
  *
@@ -21,7 +22,14 @@ const EXPECT = {
   christian:{ greeting: 'শুভেচ্ছা ও শান্তি', theme: 'blue',   watermark: '✝' },
   other:    { greeting: 'শুভেচ্ছা',        theme: 'orange',  watermark: '📚' },
 }
-
+/* ধর্মীয় প্রতীক এখন SVG-পাথ — ফন্ট নির্বিশেষে সব ডিভাইসে একই রূপ।
+   প্রত্যাশা-টেবিলটি সরাসরি মডিউল থেকে পড়া হয়, হার্ড-কোড করা নয়। */
+const MOD = readFileSync('src/lib/religionWatermarks.ts', 'utf8')
+const SVG_EXPECT = {}
+for (const m of MOD.matchAll(/^  (\w+):\n    '([^']+)',$/gm)) SVG_EXPECT[m[1]] = m[2]
+if (Object.keys(SVG_EXPECT).length !== 4) {
+  console.log('  ❌ religionWatermarks.ts থেকে ৪টি পাথ পড়া যায়নি'); process.exit(1)
+}
 const results = []
 const check = (name, ok, got = '') => {
   results.push({ name, ok })
@@ -67,10 +75,15 @@ for (const [rel, exp] of Object.entries(EXPECT)) {
   const h = dash.text || ''
   const greetingOk = h.includes(exp.greeting)
   const themeOk = h.includes(`ds-hero--${exp.theme}`)
-  const markOk = h.includes(exp.watermark)
+  // SVG থাকলে: সেই <div>-এর ভেতরে সঠিক পাথ আছে কি; নইলে: ইমোজি আছে কি
+  const boxM = h.match(/<div class="ds-hero__watermark"[^>]*>([\s\S]*?)<\/div>/)
+  const inner = boxM ? boxM[1] : ''
+  const markOk = SVG_EXPECT[rel]
+    ? inner.includes('<svg') && inner.includes(`d="${SVG_EXPECT[rel]}"`)
+    : inner.includes(exp.watermark)
   check(`${rel.padEnd(9)} অভিবাদন "${exp.greeting}"`, greetingOk)
   check(`${rel.padEnd(9)} থিম ${exp.theme}`, themeOk)
-  check(`${rel.padEnd(9)} ওয়াটারমার্ক ${exp.watermark}`, markOk)
+  check(`${rel.padEnd(9)} ওয়াটারমার্ক ${exp.watermark}${SVG_EXPECT[rel] ? ' (SVG)' : ' (ইমোজি)'}`, markOk)
 }
 
 /* ৩. অবৈধ মান প্রত্যাখ্যাত হবে */

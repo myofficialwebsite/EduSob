@@ -85,22 +85,25 @@ export type ReligionInfo = {
   dateLine: string       // ধর্মের নিজস্ব সন
   gregLine: string       // সাথে খ্রিস্টাব্দও
   theme: string          // থিম কী
-  watermark: string
+  watermark: string      // ইউনিকোড অক্ষর (টেক্সট-প্রসঙ্গে)
+  watermarkSvg: string   // SVG মার্কআপ — সব ডিভাইসে একই রূপ (ফন্ট-নিরপেক্ষ)
 }
+
+import { watermarkSvg } from './religionWatermarks'
 
 export function religionInfo(religion: string, now = new Date()): ReligionInfo {
   const greg = toGregorianBn(now).formatted
   const bn = toBanglaDate(now)
   switch (religion) {
     case 'islam':
-      return { greeting: 'আসসালামু আলাইকুম', dateLine: toHijriDate(now).formatted, gregLine: greg, theme: 'orange', watermark: '☪' }
+      return { greeting: 'আসসালামু আলাইকুম', dateLine: toHijriDate(now).formatted, gregLine: greg, theme: 'orange', watermark: '☪', watermarkSvg: watermarkSvg('islam') }
     case 'sanatan':
-      return { greeting: 'হরেকৃষ্ণ', dateLine: bn.formatted, gregLine: greg, theme: 'saffron', watermark: 'ॐ' }
+      return { greeting: 'হরেকৃষ্ণ', dateLine: bn.formatted, gregLine: greg, theme: 'saffron', watermark: 'ॐ', watermarkSvg: watermarkSvg('sanatan') }
     case 'buddhist':
-      return { greeting: 'নমো বুদ্ধায়', dateLine: toBuddhistDate(now).formatted, gregLine: greg, theme: 'maroon', watermark: '☸' }
+      return { greeting: 'নমো বুদ্ধায়', dateLine: toBuddhistDate(now).formatted, gregLine: greg, theme: 'maroon', watermark: '☸', watermarkSvg: watermarkSvg('buddhist') }
     case 'christian':
-      return { greeting: 'শুভেচ্ছা ও শান্তি', dateLine: greg, gregLine: bn.formatted, theme: 'blue', watermark: '✝' }
+      return { greeting: 'শুভেচ্ছা ও শান্তি', dateLine: greg, gregLine: bn.formatted, theme: 'blue', watermark: '✝', watermarkSvg: watermarkSvg('christian') }
     default:
-      return { greeting: 'শুভেচ্ছা', dateLine: bn.formatted, gregLine: greg, theme: 'orange', watermark: '📚' }
+      return { greeting: 'শুভেচ্ছা', dateLine: bn.formatted, gregLine: greg, theme: 'orange', watermark: '📚', watermarkSvg: '' }
   }
 }

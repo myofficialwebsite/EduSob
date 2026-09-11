@@ -228,6 +228,11 @@
   font-size:168px; line-height:1; opacity:.045; color:var(--accent);
   pointer-events:none; user-select:none;
 }
+/* SVG ওয়াটারমার্ক (☪ ॐ ☸ ✝) — font-size দিয়ে নিয়ন্ত্রিত হয় না,
+   তাই সরাসরি আকার দিতে হয়। viewBox বর্গাকার, তাই w=h। */
+.ds-hero__watermark svg{
+  display:block; width:168px; height:168px; fill:currentColor;
+}
 
 .ds-hero__greeting{
   font-family:'Hind Siliguri',sans-serif; font-weight:600;
@@ -384,6 +389,8 @@
   .ds-card, .ds-stat { border-radius: var(--r-md); }
   .ds-hero { padding: var(--sp-4); border-radius: var(--r-lg); }
   .ds-hero__watermark{ font-size:120px; right:8px; bottom:-30px; }
+  /* SVG-এ font-size কাজ করে না — আকার আলাদাভাবে দিতে হবে */
+  .ds-hero__watermark svg{ width:120px; height:120px; }
   .ds-hero__metrics{ gap: 6px; }
   .ds-metric{ padding: 10px; }
 }
