@@ -371,7 +371,7 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
         class="flex items-center gap-2 p-2 sm:px-2.5 sm:py-1.5 rounded-xl border ${isDark ? 'border-white/10 text-slate-300 hover:text-white hover:bg-white/10' : 'border-slate-200 text-slate-700 hover:bg-slate-100'} transition">
         <i class="fas fa-magnifying-glass text-sm"></i>
         <span class="hidden xl:inline text-xs font-semibold">খুঁজুন</span>
-        <kbd class="hidden xl:inline text-[10px] font-black ${isDark ? 'text-slate-400 bg-white/5 border-white/10' : 'text-slate-500 bg-slate-100 border-slate-200'} border rounded px-1.5 py-0.5">⌘K</kbd>
+        <kbd class="hidden xl:inline text-[10px] font-black ${isDark ? 'text-slate-400 bg-white/5 border-white/10' : 'text-slate-600 bg-slate-100 border-slate-200'} border rounded px-1.5 py-0.5">⌘K</kbd>
       </button>
       ${loggedIn ? `
         <a href="/wallet" title="আমার ওয়ালেট" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl ${isDark ? 'bg-slate-900 hover:bg-slate-800 text-amber-300 border border-amber-400/20' : 'bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200'} text-xs font-bold transition">

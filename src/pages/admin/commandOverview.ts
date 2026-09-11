@@ -253,7 +253,7 @@ export function renderOverviewTab(): string {
         <h3 class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
           <i class="fas fa-clock-rotate-left text-sky-700"></i> লাইভ অ্যাক্টিভিটি ও সিঙ্ক টাইমলাইন
         </h3>
-        <button onclick="navigateToTab('autocollect')" class="text-xs text-sky-700 hover:text-sky-700 font-bold">
+        <button onclick="navigateToTab('autocollect')" class="text-xs text-sky-700 hover:text-sky-700 font-bold inline-flex items-center py-3 px-2 -mx-2 -my-3">
           সিঙ্ক সেন্টার →
         </button>
       </div>

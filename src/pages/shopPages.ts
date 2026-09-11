@@ -347,8 +347,8 @@ ${shopHeader('wallet', loggedIn)}
         <p class="font-bold text-slate-800">এরপর কী হবে?</p>
         <p class="text-slate-600">① ফর্মটি জমা দিন → ② অ্যাডমিন আপনার TrxID যাচাই করবেন → ③ ব্যালেন্স যোগ হয়ে গেলে ওয়ালেটে দেখা যাবে।</p>
         <p class="text-slate-600"><strong class="text-slate-700">খেয়াল রাখুন:</strong> TrxID ভুল হলে ব্যালেন্স যোগ করা সম্ভব হবে না — পাঠানোর পর নম্বরটি মিলিয়ে নিন।</p>
-        <p class="text-slate-600">কোনো সমস্যায় কল করুন: <a href="tel:+8801835414122" class="text-orange-600 font-bold hover:underline">📞 +88 01835414122</a> <span class="text-slate-500">(সকাল ৯টা – রাত ১০টা)</span></p>
-        <p class="border-t border-slate-200 pt-1.5 text-xs text-slate-500">টাকা ফেরত কোথায় পাবেন? <a href="/refund" class="font-semibold text-orange-600 hover:underline">পেমেন্ট ও রিফান্ড নীতিমালা →</a></p>
+        <p class="text-slate-600">কোনো সমস্যায় কল করুন: <a href="tel:+8801835414122" class="text-orange-700 font-bold hover:underline">📞 +88 01835414122</a> <span class="text-slate-500">(সকাল ৯টা – রাত ১০টা)</span></p>
+        <p class="border-t border-slate-200 pt-1.5 text-xs text-slate-500">টাকা ফেরত কোথায় পাবেন? <a href="/refund" class="font-semibold text-orange-700 hover:underline">পেমেন্ট ও রিফান্ড নীতিমালা →</a></p>
       </div>
       <button id="tp-submit" class="w-full bg-gradient-to-r from-orange-600 to-amber-600 text-slate-950 font-bold py-3 rounded-xl hover:opacity-90 transition">জমা দিন ✓</button>
     </form>
@@ -411,7 +411,7 @@ function loadAll(){
     document.getElementById('w-balance').textContent=tk(r.data.balance||0);
     var tx=r.data.transactions||[];
     document.getElementById('tx-list').innerHTML=tx.length?tx.map(function(t){
-      return '<div class="flex justify-between items-center bg-slate-50 rounded-xl px-4 py-2.5"><span>'+(TX_BN[t.type]||t.type)+(t.note?' <span class="text-slate-500 text-xs">— '+esc(t.note)+'</span>':'')+'</span><b class="'+(t.amount>=0?'text-orange-700':'text-red-500')+'">'+(t.amount>=0?'+':'')+tk(Math.abs(t.amount))+'</b></div>'
+      return '<div class="flex justify-between items-center bg-slate-50 rounded-xl px-4 py-2.5"><span>'+(TX_BN[t.type]||t.type)+(t.note?' <span class="text-slate-500 text-xs">— '+esc(t.note)+'</span>':'')+'</span><b class="'+(t.amount>=0?'text-orange-700':'text-red-600')+'">'+(t.amount>=0?'+':'')+tk(Math.abs(t.amount))+'</b></div>'
     }).join(''):'<p class="text-slate-500 text-center py-4">কোনো লেনদেন নেই</p>'
   });
   axios.get('/api/shop/payments/mine').then(function(r){
