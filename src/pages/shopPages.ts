@@ -110,6 +110,10 @@ ${shopHeader('shop', loggedIn)}
       <p id="wallet-login-hint" class="hidden text-xs text-red-500 mt-1">ওয়ালেট পেমেন্টের জন্য <a href="/login" class="underline">লগইন</a> করুন</p>
     </div>
     <div class="flex justify-between font-bold text-lg border-t pt-3"><span>মোট</span><span id="co-total" class="text-amber-700"></span></div>
+    <!-- কনভার্শন: অর্ডারের শেষ মুহূর্তে ছোট কিন্তু নির্ণায়ক আশ্বাস —
+         COD-এর অর্থই হলো "পণ্য হাতে পাওয়ার পর টাকা", সেটিই এখানে স্পষ্ট করে
+         বলা হলো। কোনো ডেলিভারি-সময়ের প্রতিশ্রুতি দেওয়া হয়নি (কোডে নেই)। -->
+    <p class="text-xs text-slate-500 leading-relaxed">🚚 <strong class="text-slate-600">ক্যাশ অন ডেলিভারি:</strong> পণ্য হাতে পাওয়ার পরই টাকা দিন। যেকোনো প্রশ্নে কল করুন <a href="tel:+8801835414122" class="text-amber-600 font-bold hover:underline">+88 01835414122</a> <span class="text-slate-400">(সকাল ৯টা – রাত ১০টা)</span>।</p>
     <button id="co-submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 font-bold py-3 rounded-xl hover:opacity-90 transition">অর্ডার নিশ্চিত করুন ✓</button>
   </form>
 </div>
@@ -319,6 +323,19 @@ ${shopHeader('wallet', loggedIn)}
       <div>
         <label class="text-sm font-semibold text-slate-600">স্ক্রিনশট (ঐচ্ছিক)</label>
         <input id="tp-ss" type="file" accept="image/*" class="w-full mt-1 text-sm text-slate-500 file:mr-3 file:px-4 file:py-2 file:rounded-xl file:border-0 file:bg-orange-100 file:text-orange-700 file:font-semibold" aria-label="পেমেন্টের স্ক্রিনশট">
+      </div>
+      <!-- ═══ বিশ্বাস ও সহায়তা (কনভার্শন) ══════════════════════════════
+           টাকা পাঠানোর মুহূর্তটি সবচেয়ে বেশি দ্বিধার — মানুষ জানতে চায়
+           "এরপর কী হবে?" আর "সমস্যা হলে কোথায় যাব?"। তাই CTA-এর ঠিক
+           ওপরে এই ব্লক। এখানে কোনো সময়ের প্রতিশ্রুতি দেওয়া হয়নি (যেমন
+           "১ ঘণ্টায়") — কারণ কোডে/নীতিমালায় কোথাও নির্দিষ্ট সময় নেই;
+           কাল্পনিক প্রতিশ্রুতি পরে বিশ্বাস নষ্ট করে।
+           নম্বর ও সময়সীমা হোমপেজের ইউটিলিটি বারের সাথে হুবহু মিল রেখে নেওয়া। -->
+      <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm space-y-1.5">
+        <p class="font-bold text-slate-800">এরপর কী হবে?</p>
+        <p class="text-slate-600">① ফর্মটি জমা দিন → ② অ্যাডমিন আপনার TrxID যাচাই করবেন → ③ ব্যালেন্স যোগ হয়ে গেলে ওয়ালেটে দেখা যাবে।</p>
+        <p class="text-slate-600"><strong class="text-slate-700">খেয়াল রাখুন:</strong> TrxID ভুল হলে ব্যালেন্স যোগ করা সম্ভব হবে না — পাঠানোর পর নম্বরটি মিলিয়ে নিন।</p>
+        <p class="text-slate-600">কোনো সমস্যায় কল করুন: <a href="tel:+8801835414122" class="text-orange-600 font-bold hover:underline">📞 +88 01835414122</a> <span class="text-slate-500">(সকাল ৯টা – রাত ১০টা)</span></p>
       </div>
       <button id="tp-submit" class="w-full bg-gradient-to-r from-orange-600 to-amber-600 text-slate-950 font-bold py-3 rounded-xl hover:opacity-90 transition">জমা দিন ✓</button>
     </form>

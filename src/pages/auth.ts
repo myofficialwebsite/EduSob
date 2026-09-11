@@ -69,6 +69,32 @@ export function signupPage(): string {
   var ref = new URLSearchParams(location.search).get('ref');
   if (ref) document.getElementById('refCodeInput').value = ref.toUpperCase();
 })();
+// ── বাংলায় ভ্যালিডেশন বার্তা ──────────────────────────────────────
+// ব্রাউজারের নিজস্ব বার্তা ইংরেজিতে আসে ("Please match the requested format.")।
+// একটি বাংলা সাইটে সেটি বিসঙ্গতি — তাই প্রতিটি ক্ষেত্রের জন্য নিজস্ব বার্তা।
+// setCustomValidity('') দিয়ে শুরুতে পরিষ্কার করি, নাহলে ফিল্ড চিরতরে
+// অবৈধ হয়ে থাকবে; 'invalid' ইভেন্টে শর্ত অনুযায়ী বার্তা বসাই।
+(function(){
+  var msgs = {
+    name_bn:     'অনুগ্রহ করে আপনার নাম (বাংলায়) লিখুন',
+    phone:       'সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন — যেমন: 01XXXXXXXXX',
+    password:    'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে'
+  };
+  var form = document.getElementById('signupForm');
+  if (!form) return;
+  Array.prototype.forEach.call(form.querySelectorAll('input,select'), function(el){
+    var key = el.getAttribute('name') || el.id;
+    el.addEventListener('input', function(){ el.setCustomValidity(''); });
+    el.addEventListener('change', function(){ el.setCustomValidity(''); });
+    el.addEventListener('invalid', function(){
+      var v = el.validity, msg = msgs[key];
+      if (!msg) { if (v.valueMissing) msg = 'এই ঘরটি পূরণ করা বাধ্যতামূলক'; else return; }
+      if (v.valueMissing && key !== 'password') msg = msgs[key] || 'এই ঘরটি পূরণ করা বাধ্যতামূলক';
+      if (v.tooShort) msg = msgs[key] || 'এটি আরও বড় হতে হবে';
+      el.setCustomValidity(msg);
+    });
+  });
+})();
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.getElementById('signupBtn'), err = document.getElementById('signupError');
