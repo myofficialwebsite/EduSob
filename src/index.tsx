@@ -28,6 +28,7 @@ import { shopPage, walletPage, assistedPage, shopAdminPage } from './pages/shopP
 import { adminPage } from './pages/adminPages'
 import { subscriptionPage, qpapersPage } from './pages/subsPages'
 import { privacyPage, termsPage, refundPage } from './pages/policyPages'
+import { notFoundPage } from './pages/errorPage'
 import { admissionPage } from './pages/admissionPage'
 import { teacherSupportPage } from './pages/teacherSupportPage'
 import { boardChallengePage } from './pages/boardChallengePage'
@@ -512,6 +513,18 @@ app.get('/profile', async (c) => {
   const user = await currentUser(c)
   if (!user) return c.redirect('/login')
   return c.html(profilePage(user))
+})
+
+// ═══ ৪০৪ — ডিজাইন করা "পাওয়া যায়নি" পেজ ═══════════════════════════════════
+// এর আগে এখানে কিছুই ছিল না, তাই অজানা লিংকে হোনো-এর ডিফল্ট `404 Not Found`
+// (১৩ বাইট প্লেইন-টেক্সট) চলে আসত। ভুল লিংকে আসা মানুষ কোনো পথ না পেয়ে চলে
+// যেতেন। এখন ব্র্যান্ডেড পেজে জনপ্রিয় গন্তব্য ও খোঁজার পথ দেখানো হয়।
+//
+// ⚠️ রিকোয়েস্ট করা URL ইচ্ছে করে পেজে দেখানো হয় না — তাতে reflected XSS বা
+//    ওপেন-রিডাইরেক্টের মতো ঝুঁকি তৈরি হতে পারে।
+app.notFound(async (c) => {
+  const user = await currentUser(c)
+  return c.html(notFoundPage(!!user), 404)
 })
 
 export default app

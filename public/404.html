@@ -3,22 +3,89 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0b0d12" />
-    <title>হোম — শিক্ষার সব, এক ঠিকানায় — এডুসব | EduSob</title>
-    <meta name="description" content="বাংলাদেশের শিক্ষার্থীদের একক ডিজিটাল শিক্ষা প্ল্যাটফর্ম — বোর্ড পরীক্ষার ফলাফল, ভর্তি তথ্য, ১-অন-১ শিক্ষক সহায়তা, প্রশ্নব্যাংক ও সিভি মেকার।" />
-    <meta property="og:title" content="হোম — শিক্ষার সব, এক ঠিকানায় — এডুসব | EduSob" />
-    <meta property="og:description" content="বাংলাদেশের শিক্ষার্থীদের একক ডিজিটাল শিক্ষা প্ল্যাটফর্ম — বোর্ড পরীক্ষার ফলাফল, ভর্তি তথ্য, ১-অন-১ শিক্ষক সহায়তা, প্রশ্নব্যাংক ও সিভি মেকার।" />
-    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#020617" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>পেজটি পাওয়া যায়নি — এডুসব | EduSob</title>
+    <meta name="description" content="এডুসবে এই পেজটি পাওয়া যায়নি। হোম পেজে ফিরে যান।" />
+
+    <!--
+      ⚠️ এখানে আগে গুগল ফন্টস (fonts.googleapis.com) থেকে ৪টি ফন্ট family লোড
+      করা হতো — যা সাইটের গোপনীয়তা নীতির সরাসরি পরিপন্থী ("কোনো তৃতীয়-পক্ষ
+      স্ক্রিপ্ট লোড করা হয় না — ফন্ট, আইকন, সবকিছু আমাদের নিজস্ব সার্ভারে")।
+      এটি ছাড়াও ফাইলটি আসলে পুরোনো Vite/React যুগের জীর্ণ শেল ছিল
+      (<div id="root"> + /src/index.jsx), যা আর অস্তিত্বেই নেই — ফলে ফাঁকা পেজ আসত।
+
+      এখন: কোনো বাইরের রিকোয়েস্ট নেই, সবকিছু সেলফ-হোস্টেড। বাকি রুটগুলোর
+      ৪০৪ সার্ভার (src/pages/errorPage.ts) সুন্দর করে সাজিয়ে দেয় — এটি কেবল
+      Worker-এর বাইরে পড়া স্ট্যাটিক মিসের ব্যাকআপ।
+    -->
+    <link rel="stylesheet" href="/static/fonts/fonts.css" />
+    <link rel="stylesheet" href="/static/tw.css" />
+    <style>
+      body { font-family: 'Hind Siliguri', sans-serif; }
+      .nf-404 {
+        font-size: clamp(5rem, 22vw, 11rem); font-weight: 900; line-height: 0.85; letter-spacing: -0.05em;
+        background: linear-gradient(135deg, #fbbf24 0%, #f97316 45%, #ea580c 100%);
+        -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      }
+      .nf-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.10); border-radius: 1rem; transition: border-color .18s, background-color .18s; }
+      .nf-card:hover { border-color: rgba(251,146,60,.5); background: rgba(251,146,60,.08); }
+    </style>
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23f97316'/%3E%3Ctext x='50' y='52' font-size='58' text-anchor='middle' dominant-baseline='central'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-[#0b0d12] text-slate-100 antialiased">
-    <div id="root"></div>
-    <script type="module" src="/src/index.jsx"></script>
+  <body class="bg-slate-950 text-white antialiased">
+    <main class="min-h-screen">
+      <div class="mx-auto max-w-2xl px-4 py-14 sm:py-20 text-center">
+        <p class="nf-404 select-none" aria-hidden="true">৪০৪</p>
+
+        <h1 class="mt-5 text-2xl sm:text-3xl font-extrabold tracking-tight">এই পেজটি পাওয়া যায়নি</h1>
+        <p class="mx-auto mt-3 max-w-md text-sm sm:text-base leading-relaxed text-slate-400">
+          আপনি যে লিংকে এসেছেন সেটি হয়তো সরিয়ে দেওয়া হয়েছে বা ঠিকানা বদলেছে।
+          চিন্তার কিছু নেই — নিচে থেকে যা খুঁজছেন সেটি বেছে নিন।
+        </p>
+
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-2.5">
+          <a href="/" class="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-slate-900 hover:bg-slate-200 transition">
+            <i class="fas fa-house text-xs"></i> হোমে যান
+          </a>
+          <a href="/results" class="inline-flex items-center gap-2 rounded-xl border border-white/20 px-4 py-2.5 text-sm font-bold text-white hover:bg-white/10 transition">
+            <i class="fas fa-award text-xs"></i> রেজাল্ট হাব
+          </a>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 gap-2.5 text-left sm:grid-cols-2">
+          <a href="/admission" class="nf-card flex items-start gap-3 p-3.5">
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-amber-500/15 text-amber-400"><i class="fas fa-building-columns text-sm"></i></span>
+            <span><span class="block text-sm font-bold text-white">ভর্তি হাব</span><span class="block text-[11px] text-slate-400">বিশ্ববিদ্যালয় ভর্তি তথ্য</span></span>
+          </a>
+          <a href="/mcq" class="nf-card flex items-start gap-3 p-3.5">
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-amber-500/15 text-amber-400"><i class="fas fa-list-check text-sm"></i></span>
+            <span><span class="block text-sm font-bold text-white">MCQ মডেল টেস্ট</span><span class="block text-[11px] text-slate-400">অনুশীলন ও প্রস্তুতি</span></span>
+          </a>
+          <a href="/cgpa" class="nf-card flex items-start gap-3 p-3.5">
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-amber-500/15 text-amber-400"><i class="fas fa-calculator text-sm"></i></span>
+            <span><span class="block text-sm font-bold text-white">CGPA ক্যালকুলেটর</span><span class="block text-[11px] text-slate-400">ক্রেডিট-ভিত্তিক হিসাব</span></span>
+          </a>
+          <a href="/teacher-support" class="nf-card flex items-start gap-3 p-3.5">
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-amber-500/15 text-amber-400"><i class="fas fa-chalkboard-user text-sm"></i></span>
+            <span><span class="block text-sm font-bold text-white">শিক্ষক সহায়তা</span><span class="block text-[11px] text-slate-400">১-অন-১ প্রশ্নের উত্তর</span></span>
+          </a>
+        </div>
+
+        <div class="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+          <p class="text-sm font-bold text-white">সাহায্য দরকার?</p>
+          <p class="mt-1 text-xs leading-relaxed text-slate-400">যেকোনো প্রশ্নে সরাসরি কল করুন — আমরা নিজেরাই উত্তর দিই।</p>
+          <div class="mt-3.5 flex flex-wrap justify-center gap-2.5">
+            <a href="tel:+8801835414122" class="inline-flex items-center gap-2 rounded-xl bg-amber-500 px-4 py-2.5 text-sm font-bold text-slate-950 hover:bg-amber-400 transition">
+              <i class="fas fa-phone text-xs"></i> +88 01835414122
+            </a>
+          </div>
+          <p class="mt-3 text-[11px] text-slate-500">সকাল ৯টা – রাত ১০টা</p>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
