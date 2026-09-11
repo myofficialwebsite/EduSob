@@ -217,6 +217,22 @@ function loadPlans(){
         if(gridEl && gridEl.parentNode) gridEl.parentNode.insertBefore(box, gridEl);
       }
     }
+  }).catch(function(e){
+    /* .catch() না থাকায় HTTP ৫০০-এ promise অপরিচালিত থেকে যেত এবং
+       প্ল্যান-কার্ডগুলো (পেজের ~৬২%) নীরবে উধাও হতো — ব্যবহারকারী
+       ফাঁকা পেজ দেখতেন, কোনো বার্তা ছাড়াই। এটি একটি টাকার পেজ,
+       তাই নীরব ব্যর্থতা বিশেষভাবে ক্ষতিকর। */
+    console.error('loadPlans:', e);
+    var g = document.getElementById('plansGrid');
+    if (g) g.innerHTML = ''
+      + '<div class="col-span-full text-center py-12 text-slate-400 bg-slate-900/50 rounded-2xl border border-red-500/20">'
+      +   '<i class="fas fa-triangle-exclamation text-3xl text-red-400 mb-3"></i>'
+      +   '<p class="text-slate-300 font-bold mb-1">প্যাকেজগুলো লোড করা যায়নি</p>'
+      +   '<p class="text-xs text-slate-500 mb-4">ইন্টারনেট সংযোগ বা সার্ভারে সমস্যা হতে পারে।</p>'
+      +   '<button onclick="loadPlans()" class="px-5 py-2.5 bg-orange-500 hover:bg-orange-400 text-slate-950 font-bold rounded-xl text-sm transition-colors">'
+      +     '<i class="fas fa-rotate-right mr-1.5"></i>আবার চেষ্টা করুন'
+      +   '</button>'
+      + '</div>';
   });
 }
 

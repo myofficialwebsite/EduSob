@@ -1505,13 +1505,34 @@ export function cvAdminPage(isAdmin: boolean): string {
     });
   };
 
-  fetch('/api/cv/admin/templates').then(r=>r.json()).then(function(d){
-    if(!d.ok) return;
-    tpls = d.templates;
-    selSlug = tpls[0].slug;
-    renderList();
-    preview();
-  });
+  function adminTplErr(){
+    /* #admin-tpl-list একটি ফাঁকা <div> — কোনো লোডিং-টেক্সট নেই। তাই
+       ব্যর্থ হলে পুরো প্যানেল (৯৯% কনটেন্ট) নীরবে ফাঁকা হয়ে যেত।
+       fetch()-এর !r.ok পরীক্ষাও ছিল না, তাই HTTP ৫০০-এ reject হতো না। */
+    var box=document.getElementById('admin-tpl-list');
+    if(box) box.innerHTML='<div class="text-center py-8 text-slate-400">'
+      +'<i class="fas fa-triangle-exclamation text-2xl text-red-400 mb-2"></i>'
+      +'<p class="text-slate-300 font-bold mb-1">টেমপ্লেট লোড করা যায়নি</p>'
+      +'<button onclick="location.reload()" class="mt-2 px-4 py-2 bg-orange-500 hover:bg-orange-400 text-slate-950 font-bold rounded-xl text-xs transition-colors">'
+      +'<i class="fas fa-rotate-right mr-1.5"></i>আবার চেষ্টা করুন</button></div>';
+    var pv=document.getElementById('admin-preview');
+    if(pv) pv.innerHTML='<p class="text-center text-slate-500 py-6 text-sm">প্রিভিউ দেখানো যায়নি</p>';
+  }
+
+  fetch('/api/cv/admin/templates')
+    .then(function(r){
+      /* fetch() শুধু নেটওয়ার্ক-ব্যর্থতায় reject করে — HTTP ৫০০-এ নয়। */
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(d){
+      if(!d.ok || !d.templates || !d.templates.length) throw new Error('কোনো টেমপ্লেট নেই');
+      tpls = d.templates;
+      selSlug = tpls[0].slug;
+      renderList();
+      preview();
+    })
+    .catch(function(e){ console.error(e); adminTplErr(); });
   </script>
   `}
 </main>`

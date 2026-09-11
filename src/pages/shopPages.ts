@@ -413,7 +413,20 @@ function loadAll(){
     document.getElementById('tx-list').innerHTML=tx.length?tx.map(function(t){
       return '<div class="flex justify-between items-center bg-slate-50 rounded-xl px-4 py-2.5"><span>'+(TX_BN[t.type]||t.type)+(t.note?' <span class="text-slate-500 text-xs">— '+esc(t.note)+'</span>':'')+'</span><b class="'+(t.amount>=0?'text-orange-700':'text-red-600')+'">'+(t.amount>=0?'+':'')+tk(Math.abs(t.amount))+'</b></div>'
     }).join(''):'<p class="text-slate-500 text-center py-4">কোনো লেনদেন নেই</p>'
-  });
+  }).catch(function(e){
+    /* .catch() না থাকায় ব্যর্থ হলে ব্যালেন্স ও লেনদেন-তালিকা দুটোই
+       নীরবে আগের অবস্থায় থাকত। এটি একটি টাকার পেজ — ব্যবহারকারী
+       পুরনো/ভুল ব্যালেন্স দেখে সিদ্ধান্ত নিতে পারেন, তাই স্পষ্ট
+       বার্তা জরুরি। "কোনো লেনদেন নেই" দেখানো যাবে না: লেনদেন
+       থাকতেও পারে, আমরা কেবল লোড করতে পারিনি — মিথ্যা দাবি হতো। */
+    console.error('loadAll:', e);
+    var bal=document.getElementById('w-balance'), tl=document.getElementById('tx-list');
+    if(bal) bal.textContent='—';
+    if(tl) tl.innerHTML='<div class="text-center py-4">'
+      +'<i class="fas fa-triangle-exclamation text-red-400 mb-1.5"></i>'
+      +'<p class="text-slate-600 font-bold text-sm">লেনদেন লোড করা যায়নি</p>'
+      +'<button onclick="loadAll()" class="mt-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl text-xs transition-colors">'
+      +'<i class="fas fa-rotate-right mr-1.5"></i>আবার চেষ্টা করুন</button></div>';
   axios.get('/api/shop/payments/mine').then(function(r){
     var ps=r.data.payments||[];
     document.getElementById('tp-list').innerHTML=ps.length?ps.map(function(p){
@@ -743,14 +756,29 @@ function renderSettings(s){
     '<button class="w-full bg-orange-600 text-slate-950 font-bold py-3 rounded-xl">সেভ করুন ✓</button></form>'
 }
 
+/* লোড-ব্যর্থতায় শুধু টোস্ট যথেষ্ট নয়: টোস্ট মিলিয়ে গেলে প্যানেলে
+   চিরকাল "লোড হচ্ছে..." দেখা যায়। তাই লোড-এর জন্য আলাদা হ্যান্ডলার —
+   টোস্ট + প্যানেলে এরর-বার্তা + রিট্রাই বোতাম। */
+function loadErr(err){
+  apiErr(err);
+  var el=document.getElementById('tab-content');
+  if(!el) return;
+  el.innerHTML='<div class="text-center py-10">'
+    +'<i class="fas fa-triangle-exclamation text-2xl text-red-400 mb-2"></i>'
+    +'<p class="text-slate-600 font-bold mb-1">তথ্য লোড করা যায়নি</p>'
+    +'<p class="text-xs text-slate-500 mb-3">ইন্টারনেট সংযোগ বা সার্ভারে সমস্যা হতে পারে।</p>'
+    +'<button onclick="load()" class="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl text-xs transition-colors">'
+    +'<i class="fas fa-rotate-right mr-1.5"></i>আবার চেষ্টা করুন</button></div>';
+}
+
 function load(){
   var el=document.getElementById('tab-content');
   el.innerHTML='<p class="text-center text-slate-500 py-10">লোড হচ্ছে...</p>';
-  if(TAB==='products')axios.get('/api/shop/admin/products').then(function(r){el.innerHTML=renderProducts(r.data.products||[])}).catch(apiErr);
-  else if(TAB==='orders')axios.get('/api/shop/admin/orders').then(function(r){el.innerHTML=renderOrders(r.data.orders||[])}).catch(apiErr);
-  else if(TAB==='payments')axios.get('/api/shop/admin/payments?status='+PAY_ST).then(function(r){el.innerHTML=renderPayments(r.data.payments||[])}).catch(apiErr);
-  else if(TAB==='assisted')axios.get('/api/shop/admin/assisted').then(function(r){el.innerHTML=renderAssisted(r.data.requests||[])}).catch(apiErr);
-  else if(TAB==='settings')axios.get('/api/shop/admin/settings').then(function(r){el.innerHTML=renderSettings(r.data.settings||{})}).catch(apiErr);
+  if(TAB==='products')axios.get('/api/shop/admin/products').then(function(r){el.innerHTML=renderProducts(r.data.products||[])}).catch(loadErr);
+  else if(TAB==='orders')axios.get('/api/shop/admin/orders').then(function(r){el.innerHTML=renderOrders(r.data.orders||[])}).catch(loadErr);
+  else if(TAB==='payments')axios.get('/api/shop/admin/payments?status='+PAY_ST).then(function(r){el.innerHTML=renderPayments(r.data.payments||[])}).catch(loadErr);
+  else if(TAB==='assisted')axios.get('/api/shop/admin/assisted').then(function(r){el.innerHTML=renderAssisted(r.data.requests||[])}).catch(loadErr);
+  else if(TAB==='settings')axios.get('/api/shop/admin/settings').then(function(r){el.innerHTML=renderSettings(r.data.settings||{})}).catch(loadErr);
 }
 renderTabs();load();
 </script>`

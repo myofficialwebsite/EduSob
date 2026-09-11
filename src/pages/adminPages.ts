@@ -902,9 +902,29 @@ function filterAdminModules(q){
 // ============================================================
 // ২. কমান্ড সেন্টার ওভারভিউ ও স্ট্যাটস
 // ============================================================
+function admLoadErr(boxId, msg){
+  /* api() টোস্ট দেখায় বটে, কিন্তু লোডিং-placeholder-গুলো অটুট থাকত —
+     অ্যাডমিন টোস্ট মিস করলে চিরকাল "লোড হচ্ছে..." দেখতেন। */
+  var el = document.getElementById(boxId);
+  if (!el) return;
+  el.innerHTML = '<div class="py-4 text-center text-slate-400">'
+    + '<i class="fas fa-triangle-exclamation text-red-400 mb-1.5"></i>'
+    + '<p class="text-slate-600 font-bold text-xs">' + msg + '</p>'
+    + '<button onclick="loadStats()" class="mt-2 text-[10px] px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg transition-colors">'
+    + '<i class="fas fa-rotate-right mr-1"></i>আবার চেষ্টা</button></div>';
+}
+
 async function loadStats(){
   var d = await api('get', '/api/admin/stats');
-  if(!d || !d.stats) return;
+  if(!d || !d.stats){
+    /* api() ইতোমধ্যে টোস্ট দিয়েছে; এখন **সব** placeholder সরাতে হবে।
+       প্রথমে শুধু recentUsers সরিয়েছিলাম — তখন টাইমলাইনের
+       "টাইমলাইন লোড হচ্ছে..." অটুট থেকে গিয়েছিল, কারণ নিচের
+       টাইমলাইন-ব্লকটি এই return-এর কারণে আর চলেই না। */
+    admLoadErr('recentUsers', 'ইউজার লোড করা যায়নি');
+    admLoadErr('recentActivityTimeline', 'টাইমলাইন লোড করা যায়নি');
+    return;
+  }
 
   var s = d.stats;
   // মেট্রিক্স গ্রিড
@@ -977,7 +997,8 @@ async function loadStats(){
 
   // সাম্প্রতিক ইউজার তালিকা
   var ruBox = document.getElementById('recentUsers');
-  if(ruBox && d.recent_users){
+  if(ruBox && !d.recent_users){ admLoadErr('recentUsers', 'ইউজার লোড করা যায়নি'); }
+  else if(ruBox && d.recent_users){
     ruBox.innerHTML = d.recent_users.map(function(u){
       var roleBadge = u.role === 'admin' ? '<span class="bg-rose-100 text-rose-800 font-bold px-1.5 py-0.5 rounded text-[10px]">👑 এডমিন</span>' : (u.role === 'teacher' ? '<span class="bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded text-[10px]">👨‍🏫 শিক্ষক</span>' : '<span class="bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded text-[10px]">ইউজার</span>');
       return '<div class="py-2.5 flex items-center justify-between gap-2">'+

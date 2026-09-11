@@ -203,10 +203,36 @@ function tchEsc(s) {
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
+function tchShowLoadError() {
+  /* আগে !d.ok হলে সরাসরি return করা হতো, ফলে "লোড হচ্ছে..." টেক্সট
+     চিরকাল দেখাত — ব্যবহারকারী কোনো বার্তাই পেতেন না। */
+  var list = document.getElementById('tchList');
+  if (list) list.innerHTML = ''
+    + '<div class="p-6 text-center text-slate-400">'
+    +   '<i class="fas fa-triangle-exclamation text-2xl text-red-400 mb-2"></i>'
+    +   '<p class="text-slate-300 font-bold mb-1">চ্যাট লোড করা যায়নি</p>'
+    +   '<button onclick="tchLoad(false)" class="mt-3 px-4 py-2 bg-orange-500 hover:bg-orange-400 text-slate-950 font-bold rounded-lg text-xs transition-colors">'
+    +     '<i class="fas fa-rotate-right mr-1"></i>আবার চেষ্টা করুন'
+    +   '</button>'
+    + '</div>';
+  var sub = document.getElementById('tchSub');
+  if (sub) sub.textContent = 'চ্যাট লোড করা যায়নি';
+}
+
 async function tchLoad(isPoll) {
-  var res = await fetch('/api/teacher-support/teacher/inbox');
-  var d = await res.json().catch(function () { return { ok: false }; });
-  if (!d.ok) return;
+  var res, d;
+  try {
+    res = await fetch('/api/teacher-support/teacher/inbox');
+    /* fetch() শুধু নেটওয়ার্ক-ব্যর্থতায় reject করে — HTTP ৫০০-এ নয়।
+       তাই !res.ok পরীক্ষা না করলে res.json() সফল হয় ও d.ok মিথ্যা হয়। */
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    d = await res.json();
+  } catch (e) {
+    console.error('tchLoad:', e);
+    if (!isPoll) tchShowLoadError();
+    return;   // পোলিং-এর সময় নীরব — বারবার এরর-বার্তা দেখানো ঠিক নয়
+  }
+  if (!d.ok) { if (!isPoll) tchShowLoadError(); return; }
 
   if (!d.isTeacher && !d.isAdmin) {
     document.getElementById('tchGate').classList.remove('hidden');
@@ -374,7 +400,7 @@ if (tchSound) {
 }
 
 if (tchLoggedIn) {
-  tchLoad(false);
+  tchLoad(false).catch(function (e) { console.error(e); tchShowLoadError(); });
   // প্রতি ১০ সেকেন্ডে নতুন বার্তা খোঁজা — পেজ ফোকাসে থাকলেই
   setInterval(function () {
     if (document.visibilityState === 'visible') tchLoad(true);
