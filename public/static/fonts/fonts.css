@@ -95,3 +95,37 @@
   src:url('/static/fonts/noto-serif-bengali-700-latin.woff2') format('woff2');
   unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+/* ── UI প্রতীক ──────────────────────────────────────────────────────────
+   → ← ↩ ⌘ ⚠ ✍ ✓ ✕ — এগুলো হিন্দ সিলিগুড়িতে **আদৌ নেই** (গুগলের ৯টি
+   সাবসেটেই যাচাই করে দেখা হয়েছে)। তাই বাংলার মাঝে এগুলো সিস্টেমের ডিফল্ট
+   ফন্টে (প্রায়ই DejaVu Sans) পড়ে যেত — ওজন ও বেসলাইন ভিন্ন দেখাত।
+
+   সমাধান: নিচের @font-face এই ৮টি কোডপয়েন্টের জন্য local() সিম্বল ফন্টকে
+   প্রাধান্য দেয় — কোনো ডাউনলোড নেই, শূন্য ঝুঁকি। পাওয়া না গেলে আগের মতো
+   ব্রাউজারের ডিফল্টেই যাবে (কিছুই ভাঙবে না)।
+   ──────────────────────────────────────────────────────────────── */
+@font-face{
+  font-family:'Hind Siliguri';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:local('Segoe UI Symbol'), local('Apple Symbols'), local('Noto Sans Symbols 2'), local('Noto Sans Symbols'), local('Segoe UI Historic'), local('Symbola'), local('DejaVu Sans');
+  unicode-range:U+2190, U+2192, U+21A9, U+2318, U+26A0, U+270D, U+2713, U+2715;
+}
+@font-face{
+  font-family:'Hind Siliguri';
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+  src:local('Segoe UI Symbol'), local('Apple Symbols'), local('Noto Sans Symbols 2'), local('Noto Sans Symbols'), local('Segoe UI Historic'), local('Symbola'), local('DejaVu Sans');
+  unicode-range:U+2190, U+2192, U+21A9, U+2318, U+26A0, U+270D, U+2713, U+2715;
+}
+@font-face{
+  font-family:'Hind Siliguri';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:local('Segoe UI Symbol'), local('Apple Symbols'), local('Noto Sans Symbols 2'), local('Noto Sans Symbols'), local('Segoe UI Historic'), local('Symbola'), local('DejaVu Sans');
+  unicode-range:U+2190, U+2192, U+21A9, U+2318, U+26A0, U+270D, U+2713, U+2715;
+}
