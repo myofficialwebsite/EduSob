@@ -222,7 +222,14 @@ api.put('/profile', requireAuth, async (c) => {
     if (f in body) { sets.push(`${f} = ?`); vals.push(body[f] === '' ? null : body[f]) }
   }
   const eduLevel = ['ssc', 'hsc', 'nu', 'masters', 'other'].includes(body.education_level) ? body.education_level : null
-  const hasUserFields = !!(body.name_bn || body.name_en || body.email || eduLevel)
+  // 🔧 ধর্ম — আগে এটি শুধু সাইনআপেই সেট হতো, এরপর বদলানোর কোনো পথই ছিল না
+  //    (ইউজার বা এডমিন—কেউই)। `UPDATE users SET` কোথাও religion ছোঁয় না।
+  //    ফলে সাইনআপে ভুল নির্বাচন করলে বা স্কিপ করলে মানুষ চিরতরে 'other'
+  //    থিমে (সাধারণ "শুভেচ্ছা" + 📚) আটকে থাকতেন — অথচ ধর্মভিত্তিক ড্যাশবোর্ড
+  //    এই সাইটের একটি প্রধান বৈশিষ্ট্য। এখন প্রোফাইল থেকে বদলানো যায়।
+  //    ভ্যালিডেশন সাইনআপের (api.ts:62) সাথে হুবহু মিল রেখে করা হয়েছে।
+  const religion = ['islam', 'sanatan', 'buddhist', 'christian', 'other'].includes(body.religion) ? body.religion : null
+  const hasUserFields = !!(body.name_bn || body.name_en || body.email || eduLevel || religion)
   if (!sets.length && !hasUserFields) return c.json({ ok: false, error: 'কিছু পরিবর্তন নেই' }, 400)
   if (sets.length) {
     sets.push(`updated_at = CURRENT_TIMESTAMP`)
@@ -232,8 +239,8 @@ api.put('/profile', requireAuth, async (c) => {
 
   // ইউজার টেবিলের নাম ও শিক্ষাস্তরও আপডেট করা যাবে
   if (hasUserFields) {
-    await c.env.DB.prepare('UPDATE users SET name_bn = COALESCE(?, name_bn), name_en = COALESCE(?, name_en), email = COALESCE(?, email), education_level = COALESCE(?, education_level) WHERE id = ?')
-      .bind(body.name_bn || null, body.name_en || null, body.email || null, eduLevel, user.id).run()
+    await c.env.DB.prepare('UPDATE users SET name_bn = COALESCE(?, name_bn), name_en = COALESCE(?, name_en), email = COALESCE(?, email), education_level = COALESCE(?, education_level), religion = COALESCE(?, religion) WHERE id = ?')
+      .bind(body.name_bn || null, body.name_en || null, body.email || null, eduLevel, religion, user.id).run()
   }
   return c.json({ ok: true })
 })

@@ -29,6 +29,12 @@ export function profilePage(user: SessionUser): string {
           <div><label class="text-xs text-slate-400">Name (English)</label><input name="name_en" value="${escHtml(user.name_en)}" class="inp" aria-label="নাম (English)" autocomplete="name"></div>
           <div><label class="text-xs text-slate-400">বর্তমান শিক্ষাস্তর <span class="text-orange-400">(পরিবর্তনযোগ্য)</span></label>
             <select name="education_level" class="inp" aria-label="শিক্ষাস্তর">${[['ssc', 'SSC / সমমান'], ['hsc', 'HSC / সমমান'], ['nu', 'অনার্স / ডিগ্রি (NU)'], ['masters', 'মাস্টার্স'], ['other', 'অন্যান্য']].map(([v, l]) => `<option value="${v}"${(user as any).education_level === v ? ' selected' : ''}>${l}</option>`).join('')}</select></div>
+          <div><label class="text-xs text-slate-400">ধর্ম <span class="text-orange-400">(পরিবর্তনযোগ্য)</span> <span class="text-slate-400">— ড্যাশবোর্ড থিম</span></label>
+            <select name="religion" class="inp" aria-label="ধর্ম">
+              ${[['islam','ইসলাম'],['sanatan','সনাতন'],['buddhist','বৌদ্ধ'],['christian','খ্রিস্টান'],['other','অন্যান্য']]
+                .map(([v,l]) => `<option value="${v}"${(user as any).religion === v ? ' selected' : ''}>${l}</option>`).join('')}
+            </select>
+            <p class="mt-1 text-[11px] text-slate-400"><i class="fas fa-circle-info"></i> আপনার ড্যাশবোর্ডের অভিবাদন, তারিখ ও থিম এখান থেকে নির্ধারিত হয়।</p></div>
           <div><label class="text-xs text-slate-400">পিতার নাম (বাংলা)</label><input name="father_bn" aria-label="পিতার নাম (বাংলা)" class="inp"></div>
           <div><label class="text-xs text-slate-400">Father's Name (English)</label><input name="father_en" class="inp" aria-label="Father's Name (English)"></div>
           <div><label class="text-xs text-slate-400">মাতার নাম (বাংলা)</label><input name="mother_bn" class="inp" aria-label="মাতার নাম (বাংলা)"></div>

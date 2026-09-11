@@ -129,3 +129,65 @@
   src:local('Segoe UI Symbol'), local('Apple Symbols'), local('Noto Sans Symbols 2'), local('Noto Sans Symbols'), local('Segoe UI Historic'), local('Symbola'), local('DejaVu Sans');
   unicode-range:U+2190, U+2192, U+21A9, U+2318, U+26A0, U+270D, U+2713, U+2715;
 }
+
+/* ── ধর্ম-ভিত্তিক ড্যাশবোর্ডের ওয়াটারমার্ক ──────────────────────────────
+   ড্যাশবোর্ডের হিরো-তে ধর্ম অনুযায়ী একটি বড় (১৬৮px) ওয়াটারমার্ক থাকে:
+     ইসলাম ☪ U+262A · সনাতন ॐ U+0950 · বৌদ্ধ ☸ U+2638 · খ্রিস্টান ✝ U+271D
+   CDP দিয়ে যাচাইয়ে দেখা গেছে — চারটিই সিস্টেমের ডিফল্ট ফন্টে (DejaVu Sans /
+   FreeSans) পড়ে যাচ্ছে, কারণ হিন্দ সিলিগুড়িতে এগুলো নেই। Noto Sans Symbols 2-তেও
+   U+262A / U+2638 / U+271D নেই (রেঞ্জে ফাঁকা), তাই সাবসেট বানিয়েও সমাধান নেই।
+
+   নিচের local() চেইন ওএস-ভেদে যথাযথ সিম্বল/দেবনাগরী ফন্টকে প্রাধান্য দেয় —
+   এতে আকার অবিকৃত থাকে, শুধু 'কোন ফন্ট ব্যবহার হবে' সেটি নির্ভরযোগ্য হয়
+   (যে সিস্টেমে গ্লিফ নেই, সেখানে ফাঁকা বাক্স □ দেখার ঝুঁকি কমে)।
+   ⚠️ চূড়ান্ত সমাধান SVG — কিন্তু পবিত্র প্রতীক হাতে এঁকে ভুল করার ঝুঁকি না নিয়ে
+      সেটি আলাদা করে, আপনার অনুমোদন নিয়ে করা হবে।
+   ─────────────────────────────────────────────────────────────────────── */
+@font-face{
+  font-family:'Hind Siliguri';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:local('Segoe UI Symbol'), local('Apple Symbols'), local('Noto Sans Symbols 2'), local('Symbola');
+  unicode-range:U+262A, U+2638, U+271D;
+}
+@font-face{
+  font-family:'Hind Siliguri';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:local('Nirmala UI'), local('Noto Sans Devanagari'), local('Kohinoor Devanagari'), local('Devanagari Sangam MN');
+  unicode-range:U+0950;
+}
+@font-face{
+  font-family:'Hind Siliguri';
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+  src:local('Segoe UI Symbol'), local('Apple Symbols'), local('Noto Sans Symbols 2'), local('Symbola');
+  unicode-range:U+262A, U+2638, U+271D;
+}
+@font-face{
+  font-family:'Hind Siliguri';
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+  src:local('Nirmala UI'), local('Noto Sans Devanagari'), local('Kohinoor Devanagari'), local('Devanagari Sangam MN');
+  unicode-range:U+0950;
+}
+@font-face{
+  font-family:'Hind Siliguri';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:local('Segoe UI Symbol'), local('Apple Symbols'), local('Noto Sans Symbols 2'), local('Symbola');
+  unicode-range:U+262A, U+2638, U+271D;
+}
+@font-face{
+  font-family:'Hind Siliguri';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:local('Nirmala UI'), local('Noto Sans Devanagari'), local('Kohinoor Devanagari'), local('Devanagari Sangam MN');
+  unicode-range:U+0950;
+}
