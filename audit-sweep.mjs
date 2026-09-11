@@ -12,7 +12,8 @@ if (!TOKEN) { console.error('admin login failed'); process.exit(1) }
 const routes = ['/', '/results', '/admission', '/scholarships', '/mcq', '/cv', '/shop',
   '/subscription', '/qpapers', '/teacher-support', '/news', '/jobs', '/notices',
   '/planner', '/cgpa', '/syllabus', '/board-challenge',
-  '/dashboard', '/profile', '/wallet', '/assisted', '/admin', '/admin/shop', '/admin/cv-templates']
+  '/dashboard', '/profile', '/wallet', '/assisted', '/admin', '/admin/shop', '/admin/cv-templates',
+  '/privacy', '/terms', '/refund']
 
 const browser = await chromium.launch({ args: ['--no-sandbox'] })
 const rows = []

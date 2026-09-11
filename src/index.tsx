@@ -27,6 +27,7 @@ import { cvMakerPage, cvAdminPage } from './pages/cvPages'
 import { shopPage, walletPage, assistedPage, shopAdminPage } from './pages/shopPages'
 import { adminPage } from './pages/adminPages'
 import { subscriptionPage, qpapersPage } from './pages/subsPages'
+import { privacyPage, termsPage, refundPage } from './pages/policyPages'
 import { admissionPage } from './pages/admissionPage'
 import { teacherSupportPage } from './pages/teacherSupportPage'
 import { boardChallengePage } from './pages/boardChallengePage'
@@ -457,6 +458,22 @@ app.get('/syllabus', async (c) => {
 app.get('/subscription', async (c) => {
   const user = await currentUser(c)
   return c.html(subscriptionPage(!!user))
+})
+
+// --- নীতিমালা (পেমেন্ট পৃষ্ঠা থেকে লিংক করা হয় — বিশ্বাস ও আইনি সম্মতি) ---
+app.get('/privacy', async (c) => {
+  const user = await currentUser(c)
+  return c.html(privacyPage(!!user))
+})
+
+app.get('/terms', async (c) => {
+  const user = await currentUser(c)
+  return c.html(termsPage(!!user))
+})
+
+app.get('/refund', async (c) => {
+  const user = await currentUser(c)
+  return c.html(refundPage(!!user))
 })
 
 app.get('/qpapers', async (c) => {

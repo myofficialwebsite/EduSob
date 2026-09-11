@@ -113,7 +113,7 @@ ${shopHeader('shop', loggedIn)}
     <!-- কনভার্শন: অর্ডারের শেষ মুহূর্তে ছোট কিন্তু নির্ণায়ক আশ্বাস —
          COD-এর অর্থই হলো "পণ্য হাতে পাওয়ার পর টাকা", সেটিই এখানে স্পষ্ট করে
          বলা হলো। কোনো ডেলিভারি-সময়ের প্রতিশ্রুতি দেওয়া হয়নি (কোডে নেই)। -->
-    <p class="text-xs text-slate-500 leading-relaxed">🚚 <strong class="text-slate-600">ক্যাশ অন ডেলিভারি:</strong> পণ্য হাতে পাওয়ার পরই টাকা দিন। যেকোনো প্রশ্নে কল করুন <a href="tel:+8801835414122" class="text-amber-600 font-bold hover:underline">+88 01835414122</a> <span class="text-slate-400">(সকাল ৯টা – রাত ১০টা)</span>।</p>
+    <p class="text-xs text-slate-500 leading-relaxed">🚚 <strong class="text-slate-600">ক্যাশ অন ডেলিভারি:</strong> পণ্য হাতে পাওয়ার পরই টাকা দিন। যেকোনো প্রশ্নে কল করুন <a href="tel:+8801835414122" class="text-amber-600 font-bold hover:underline">+88 01835414122</a> <span class="text-slate-400">(সকাল ৯টা – রাত ১০টা)</span>। <a href="/refund" class="font-bold text-amber-600 hover:underline">রিফান্ড নীতিমালা</a></p>
     <button id="co-submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 font-bold py-3 rounded-xl hover:opacity-90 transition">অর্ডার নিশ্চিত করুন ✓</button>
   </form>
 </div>
@@ -336,6 +336,7 @@ ${shopHeader('wallet', loggedIn)}
         <p class="text-slate-600">① ফর্মটি জমা দিন → ② অ্যাডমিন আপনার TrxID যাচাই করবেন → ③ ব্যালেন্স যোগ হয়ে গেলে ওয়ালেটে দেখা যাবে।</p>
         <p class="text-slate-600"><strong class="text-slate-700">খেয়াল রাখুন:</strong> TrxID ভুল হলে ব্যালেন্স যোগ করা সম্ভব হবে না — পাঠানোর পর নম্বরটি মিলিয়ে নিন।</p>
         <p class="text-slate-600">কোনো সমস্যায় কল করুন: <a href="tel:+8801835414122" class="text-orange-600 font-bold hover:underline">📞 +88 01835414122</a> <span class="text-slate-500">(সকাল ৯টা – রাত ১০টা)</span></p>
+        <p class="border-t border-slate-200 pt-1.5 text-xs text-slate-500">টাকা ফেরত কোথায় পাবেন? <a href="/refund" class="font-semibold text-orange-600 hover:underline">পেমেন্ট ও রিফান্ড নীতিমালা →</a></p>
       </div>
       <button id="tp-submit" class="w-full bg-gradient-to-r from-orange-600 to-amber-600 text-slate-950 font-bold py-3 rounded-xl hover:opacity-90 transition">জমা দিন ✓</button>
     </form>

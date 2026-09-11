@@ -987,6 +987,9 @@ export function landingPage(): string {
           <li><a href="#faq-section" class="hover:text-orange-400 transition">সাধারণ জিজ্ঞাসা (FAQ)</a></li>
           <li><a href="#guide-section" class="hover:text-orange-400 transition">আবেদন নির্দেশিকা</a></li>
           <li><a href="#contact-section" class="hover:text-orange-400 transition">যোগাযোগ ও হেল্পডেস্ক</a></li>
+          <li><a href="/privacy" class="hover:text-orange-400 transition">গোপনীয়তা নীতিমালা</a></li>
+          <li><a href="/terms" class="hover:text-orange-400 transition">ব্যবহারের শর্তাবলী</a></li>
+          <li><a href="/refund" class="hover:text-orange-400 transition">পেমেন্ট ও রিফান্ড</a></li>
           <li><a href="/login" class="hover:text-orange-400 transition">এডমিন / ইউজার লগইন</a></li>
         </ul>
       </div>

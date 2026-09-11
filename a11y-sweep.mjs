@@ -15,7 +15,8 @@ const BASE = process.env.BASE || 'http://127.0.0.1:3000'
 const ROUTES = ['/', '/results', '/admission', '/scholarships', '/mcq', '/cv', '/shop',
   '/subscription', '/qpapers', '/teacher-support', '/news', '/jobs', '/notices',
   '/planner', '/cgpa', '/syllabus', '/board-challenge',
-  '/dashboard', '/profile', '/wallet', '/assisted', '/admin', '/admin/shop', '/admin/cv-templates']
+  '/dashboard', '/profile', '/wallet', '/assisted', '/admin', '/admin/shop', '/admin/cv-templates',
+  '/privacy', '/terms', '/refund']
 
 const li = await fetch(`${BASE}/api/auth/login`, {
   method: 'POST', headers: { 'Content-Type': 'application/json' },

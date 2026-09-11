@@ -18,6 +18,7 @@ const PUBLIC = [
   '/subscription', '/qpapers', '/teacher-support', '/news', '/jobs', '/notices',
   '/planner', '/cgpa', '/syllabus', '/board-challenge', '/teachers',
   '/login', '/signup',
+  '/privacy', '/terms', '/refund',
 ]
 
 // যেগুলো সার্চ ইঞ্জিনে আসা উচিত নয়
