@@ -1318,7 +1318,7 @@ export function cvAdminPage(isAdmin: boolean): string {
     <div class="flex gap-3 text-sm items-center">
       <a href="/admin" class="text-slate-300 hover:text-white transition">মূল এডমিন প্যানেল</a>
       <a href="/cv" class="text-orange-400 hover:text-orange-300 font-semibold transition">CV মেকার</a>
-      <a href="/dashboard" class="bg-orange-500 hover:bg-orange-400 text-slate-950 px-4 py-2 rounded-xl font-bold transition">ড্যাশবোর্ড</a>
+      <a href="/dashboard" class="tap-cta bg-orange-500 hover:bg-orange-400 text-slate-950 px-4 rounded-xl font-bold transition">ড্যাশবোর্ড</a>
     </div>
   </nav>
 </header>

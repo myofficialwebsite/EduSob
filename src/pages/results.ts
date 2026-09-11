@@ -372,7 +372,7 @@ function render(){
         <!-- সরাসরি লিংকসমূহ -->
         <div class="space-y-2 mb-3">
           \${s.links.map((l, i) => \`
-          <div class="flex items-center gap-2 bg-white/5 border border-white/5 rounded-xl px-3 py-2">
+          <div class="flex flex-wrap items-center gap-2 bg-white/5 border border-white/5 rounded-xl px-3 py-2">
             <div class="flex-1 min-w-0">
               <p class="text-xs font-semibold text-slate-200 truncate">\${i===0?'🥇':'🥈'} \${l.name}</p>
               <p class="text-[11px] text-slate-400 truncate">\${l.note}</p>

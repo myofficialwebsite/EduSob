@@ -596,6 +596,11 @@ body { animation: pageIn 0.4s ease-out; }
 }
 .mobile-app-nav a, .mobile-app-nav button {
   display: flex; flex-direction: column; align-items: center; gap: 3px;
+  /* min-height জরুরি: প্যাডিং + ১৭px আইকন + ১০px লেখা দিয়ে উচ্চতা
+     নির্দিষ্ট হতো না, ফলে কিছু ভিউপোর্টে ট্যাপ-টার্গেট ২৮px-এ নেমে
+     যেত (WCAG ২.৫.৮-এর ন্যূনতম ২৪px, সুপারিশকৃত ৪৪-৪৮px)।
+     ৪৮px = অ্যাপল HIG ও ম্যাটেরিয়াল-এর নিচের-ন্যাভ মান। */
+  min-height: 48px; justify-content: center;
   padding: 8px 4px 7px; font-size: 10px; font-weight: 600;
   color: #94a3b8; text-decoration: none; background: none; border: none;
   min-width: 0; flex: 1; transition: color 0.2s ease;
@@ -685,4 +690,67 @@ body { animation: pageIn 0.4s ease-out; }
   display: inline-flex;
   align-items: center;
   height: 2.5rem;
+}
+
+/* ── ট্যাপ-টার্গেট ইউটিলিটি ─────────────────────────────────────────
+   px-4/py-2 দিয়ে বানানো CTA বোতাম লেখার আকারের ওপর ভিত্তি করে
+   ২৮-৩২px উঁচু হয় — মোবাইলে আঙুল দিয়ে টাপ করার জন্য যথেষ্ট নয়
+   (WCAG ২.৫.৫/অ্যাপল HIG: অন্তত ৪৪px)। এই ক্লাসটি যোগ করলে
+   রূপরেখা অটুট রেখে ন্যূনতম উচ্চতা নিশ্চিত হয়। */
+.tap-cta {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 640px) { .tap-cta { min-height: 40px } }
+
+/* ── মোবাইলে আঙুল-বান্ধব ট্যাপ-টার্গেট (সাধারণ CTA ধরণ) ─────────────
+   `px-4 py-2` = ৩৮px (লক্ষ্য ৪০px-এর ২px কম)। display না ছুঁয়ে শুধু
+   প্রতিসম প্যাডিং বাড়ানো হয়েছে — তাই লেখা মাঝেই থাকে ও রূপরেখা
+   একই থাকে। নির্দিষ্টভাবে a/button/label-এই সীমাবদ্ধ, যাতে
+   অলঙ্করণমূলক div-এর প্যাডিং না বাড়ে। */
+@media (max-width: 639px) {
+  a.px-4.py-2, button.px-4.py-2, label.px-4.py-2 {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+  }
+  a.px-4.py-2\.5, button.px-4.py-2\.5, label.px-4.py-2\.5,
+  a.px-5.py-2\.5, button.px-5.py-2\.5 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+  /* বিভাগ-বোতাম ও নোটিশ-ট্যাব: এদের নিজস্ব ক্লাস আছে */
+  .cat-btn, .nt-btn {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ── ফ্লোটিং পিল (AI / শপ / WhatsApp) ─────────────────────────────────
+   মোবাইলে <span class="hidden md:inline"> দিয়ে লেখা লুকানো থাকে, ফলে
+   শুধু আইকন থাকে ও লক্ষ্য ২৭x২৮px-এ নেমে যায় — আঙুল দিয়ে টাপ করা কঠিন।
+   শুধু মোবাইলে ন্যূনতম ৪০x৪০px নিশ্চিত করা হয়েছে; ডেস্কটপে লেখাসহ
+   কমপ্যাক্ট রূপ অটুট থাকে। */
+@media (max-width: 639px) {
+  .ds-fab-pill > a,
+  .ds-fab-pill > button {
+    min-height: 40px;
+    min-width: 40px;
+    justify-content: center;
+  }
+}
+
+/* ── মোবাইল সাব-ন্যাভ (রেজাল্ট/নিউজ/চাকরি · শপ/ওয়ালেট) ──────────────
+   `px-1.5 py-1.5` + text-xs = ২৮px। অনুভূমিকভাবে স্ক্রল হওয়া এই সারিতে
+   প্রতিটি লিংককেই আঙুল দিয়ে টাপ করা যায় — তাই মোবাইলে ৪০px।
+   ডেস্কটপে (md:hidden) এটি দেখাই যায় না। */
+@media (max-width: 767px) {
+  .mob-subnav-link {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
 }

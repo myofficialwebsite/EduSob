@@ -9,7 +9,7 @@ export function boardChallengePage(loggedIn: boolean): string {
     <div class="flex items-center gap-2 text-sm">
       <a href="/results" class="px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition flex items-center gap-1.5"><i class="fas fa-award text-amber-400"></i> রেজাল্ট হাব</a>
       ${loggedIn
-        ? '<a href="/dashboard" class="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 font-semibold">ড্যাশবোর্ড</a>'
+        ? '<a href="/dashboard" class="tap-cta px-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 font-semibold">ড্যাশবোর্ড</a>'
         : '<a href="/login" class="px-4 py-2 rounded-xl border border-white/20 hover:bg-white/10 transition">লগইন</a><a href="/signup" class="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 font-semibold">সাইন-আপ</a>'}
     </div>
   </nav>

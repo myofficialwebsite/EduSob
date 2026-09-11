@@ -4,7 +4,7 @@ import { pageShell } from './layout'
 // কমন পাবলিক হেডার
 function publicHeader(active: string, loggedIn: boolean): string {
   const link = (href: string, label: string, key: string) =>
-    `<a href="${href}" class="inline-block px-1.5 py-1.5 ${active === key ? 'text-orange-400 font-bold' : 'text-slate-300 hover:text-white'} transition">${label}</a>`
+    `<a href="${href}" class="mob-subnav-link px-1.5 ${active === key ? 'text-orange-400 font-bold' : 'text-slate-300 hover:text-white'} transition">${label}</a>`
   return `
 <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-xl border-b border-white/10">
   <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
@@ -19,7 +19,7 @@ function publicHeader(active: string, loggedIn: boolean): string {
     </div>
     <div class="flex items-center gap-2 text-sm shrink-0">
       ${loggedIn
-        ? `<a href="/dashboard" class="bg-orange-500 hover:bg-orange-400 text-slate-950 px-4 py-2 rounded-xl font-semibold transition">ড্যাশবোর্ড</a>`
+        ? `<a href="/dashboard" class="tap-cta bg-orange-500 hover:bg-orange-400 text-slate-950 px-4 rounded-xl font-semibold transition">ড্যাশবোর্ড</a>`
         : `<a href="/login" class="px-3 py-2 text-slate-300 hover:text-white transition">লগইন</a>
            <a href="/signup" class="bg-orange-500 hover:bg-orange-400 text-slate-950 px-4 py-2 rounded-xl font-semibold transition">ফ্রি সাইন-আপ</a>`}
     </div>

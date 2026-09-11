@@ -293,7 +293,7 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
 <header class="sticky top-0 z-40 ${bgStyle} transition-all duration-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
     <!-- ১. ব্র‍্যান্ড লোগো (Consistent Identity) -->
-    <a href="/" class="flex items-center gap-2.5 sm:gap-3 group shrink-0" aria-label="এডুসব হোম">
+    <a href="/" class="flex items-center gap-2.5 sm:gap-3 group shrink-0 min-h-11" aria-label="এডুসব হোম">
       <div class="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center text-slate-950 shadow-md group-hover:scale-105 transition-transform">
         <i class="fas fa-graduation-cap text-base sm:text-lg"></i>
       </div>
@@ -368,7 +368,7 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
     <!-- ৩. ডানপাশের অ্যাকশন গ্রুপ ও অথেনটিকেশন (Consistent Action Group) -->
     <div class="flex items-center gap-2 sm:gap-3 shrink-0">
       <button type="button" onclick="edusobOpenCommandPalette()" aria-label="খুঁজুন — Ctrl/⌘ + K" title="খুঁজুন — Ctrl/⌘ + K"
-        class="flex items-center gap-2 p-2 sm:px-2.5 sm:py-1.5 rounded-xl border ${isDark ? 'border-white/10 text-slate-300 hover:text-white hover:bg-white/10' : 'border-slate-200 text-slate-700 hover:bg-slate-100'} transition">
+        class="flex items-center gap-2 p-2 min-h-10 min-w-10 justify-center sm:min-h-0 sm:min-w-0 sm:px-2.5 sm:py-1.5 rounded-xl border ${isDark ? 'border-white/10 text-slate-300 hover:text-white hover:bg-white/10' : 'border-slate-200 text-slate-700 hover:bg-slate-100'} transition">
         <i class="fas fa-magnifying-glass text-sm"></i>
         <span class="hidden xl:inline text-xs font-semibold">খুঁজুন</span>
         <kbd class="hidden xl:inline text-[10px] font-black ${isDark ? 'text-slate-400 bg-white/5 border-white/10' : 'text-slate-600 bg-slate-100 border-slate-200'} border rounded px-1.5 py-0.5">⌘K</kbd>
@@ -378,7 +378,7 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
           <i class="fas fa-wallet text-amber-400"></i>
           <span>ওয়ালেট</span>
         </a>
-        <a href="/dashboard" class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-1.5">
+        <a href="/dashboard" class="tap-cta px-3.5 sm:px-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-1.5">
           <i class="fas fa-user-graduate text-xs"></i>
           <span>ড্যাশবোর্ড</span>
         </a>
@@ -429,7 +429,7 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
     ${loggedIn ? `
       <div class="pt-2 border-t ${isDark ? 'border-white/10' : 'border-slate-200'} flex gap-2">
         <a href="/wallet" class="flex-1 text-center py-2 rounded-xl bg-amber-500/20 text-amber-300 font-bold text-xs border border-amber-500/30">ওয়ালেট</a>
-        <a href="/dashboard" class="flex-1 text-center py-2 rounded-xl bg-orange-500 text-slate-950 font-bold text-xs">ড্যাশবোর্ড</a>
+        <a href="/dashboard" class="flex-1 inline-flex items-center justify-center min-h-11 px-3 rounded-xl bg-orange-500 text-slate-950 font-bold text-xs">ড্যাশবোর্ড</a>
       </div>
     ` : `
       <div class="pt-2 border-t ${isDark ? 'border-white/10' : 'border-slate-200'} flex gap-2">
@@ -453,7 +453,7 @@ export function floatingButtons(): string {
   return `
 <!-- এডুসব স্লিক ফ্লোটিং ডক: স্ক্রিন বা কনটেন্ট ব্লক করে না -->
 <aside id="edusobActionDock" aria-label="দ্রুত সেবা ও সহায়তা" class="fixed bottom-4 right-4 sm:bottom-5 sm:right-6 z-40 transition-all duration-300">
-  <div class="inline-flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-full bg-slate-950/85 hover:bg-slate-950/95 backdrop-blur-xl border border-white/15 shadow-xl transition-all group">
+  <div class="ds-fab-pill inline-flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-full bg-slate-950/85 hover:bg-slate-950/95 backdrop-blur-xl border border-white/15 shadow-xl transition-all group">
     <!-- AI সহকারী বাটন -->
     <button onclick="edusobToggleAI()" title="এডুসব AI সহকারী" aria-label="AI সহকারী" class="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-full text-violet-300 hover:text-white hover:bg-violet-600/30 transition">
       <i class="fas fa-sparkles text-violet-400"></i>
