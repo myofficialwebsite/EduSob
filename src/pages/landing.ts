@@ -4,7 +4,9 @@ import { pageShell } from './layout'
 export function landingPage(): string {
   const extraHead = `
 <style>
-.font-display { font-family: 'Syne', 'Hind Siliguri', sans-serif; }
+/* 'Syne' সরানো হয়েছে — কোনো @font-face ছিল না, তাই সবসময় Hind Siliguri-তেই
+   পড়তো। মৃত রেফারেন্স মুছে দেওয়া হলো; দৃশ্যমান কোনো পরিবর্তন নেই। */
+.font-display { font-family: 'Hind Siliguri', sans-serif; }
 .tab-active { background-color: #f97316 !important; color: #ffffff !important; border-color: #f97316 !important; }
 .service-tab-active { background-color: #f97316 !important; color: #ffffff !important; border-color: #f97316 !important; }
 .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease; }

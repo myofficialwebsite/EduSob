@@ -324,14 +324,14 @@ api.get('/settings/public', async (c) => {
   return c.json({
     ok: true,
     social: {
-      facebook: map.facebook_url !== undefined ? map.facebook_url : 'https://facebook.com/groups/edusob.community',
-      youtube: map.youtube_url !== undefined ? map.youtube_url : 'https://youtube.com/@edusob_official',
-      whatsapp_number: map.whatsapp_number !== undefined ? map.whatsapp_number : '01835414122',
-      whatsapp_group: map.whatsapp_group !== undefined ? map.whatsapp_group : 'https://chat.whatsapp.com/edusob-study-hub',
-      telegram: map.telegram_url !== undefined ? map.telegram_url : 'https://t.me/edusob_channel',
-      support_phone: map.support_phone !== undefined ? map.support_phone : '01835414122',
-      support_email: map.support_email !== undefined ? map.support_email : 'support@edusob.com',
-      notice_marquee: map.notice_marquee !== undefined ? map.notice_marquee : 'এডুসব ডিজিটাল শিক্ষা প্ল্যাটফর্মে স্বাগতম — সকল পরীক্ষার রেজাল্ট, প্রশ্নব্যাংক ও স্কলারশিপ তথ্য এক ঠিকানায়!'
+      facebook: map.facebook_url || 'https://facebook.com/groups/edusob.community',
+      youtube: map.youtube_url || 'https://youtube.com/@edusob_official',
+      whatsapp_number: map.whatsapp_number || '01835414122',
+      whatsapp_group: map.whatsapp_group || 'https://chat.whatsapp.com/edusob-study-hub',
+      telegram: map.telegram_url || 'https://t.me/edusob_channel',
+      support_phone: map.support_phone || '01835414122',
+      support_email: map.support_email || 'support@edusob.com',
+      notice_marquee: map.notice_marquee || 'এডুসব ডিজিটাল শিক্ষা প্ল্যাটফর্মে স্বাগতম — সকল পরীক্ষার রেজাল্ট, প্রশ্নব্যাংক ও স্কলারশিপ তথ্য এক ঠিকানায়!'
     },
     features: {
       shop_enabled: map.shop_enabled !== '0',
