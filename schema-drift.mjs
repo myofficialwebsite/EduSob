@@ -4,14 +4,23 @@ import { execFileSync } from 'node:child_process'
 import sqlite3 from 'better-sqlite3'
 
 const NODE = '/tmp/node-v22.14.0-linux-x64/bin/node'
-const WRANGLER = process.env.HOME + '/.npm/_npx'
+// স্থানীয় wrangler-এর CLI — `npx wrangler@4` ব্যবহার করলে নেটওয়ার্ক থেকে
+// আলাদা সংস্করণ ডাকা হতো; বদলে ইনস্টল করা wrangler-টিই Node ২২ দিয়ে চালাই
+const WRANGLER_BIN = new URL('./node_modules/wrangler/bin/wrangler.js', import.meta.url).pathname
 const ACC = process.env.CLOUDFLARE_ACCOUNT_ID
 const TOK = process.env.CLOUDFLARE_API_TOKEN
 
+// ⚠️ দুই ভিন্ন নোড দরকার:
+//   • wrangler চালাতে Node ≥২২ (NODE-এর পথ নিচে PATH-এ সামনে বসানো হয়)
+//   • better-sqlite3 এখন Node ২০-এর জন্য কম্পাইল করা (NODE_MODULE_VERSION
+//     ১১৫), তাই এই স্ক্রিপ্টটি নিজে Node ২০-এ চলতে হবে।
+// আগে `process.env.PATH.startsWith('/tmp/node') ? 'npx' : 'npx'` লেখা ছিল —
+// দুই শাখাই 'npx', তাই NODE কখনো ব্যবহারই হতো না এবং wrangler Node ২০-এ
+// চলতে গিয়ে ব্যর্থ হতো।
 function d1(sql) {
   const out = execFileSync(
-    process.env.PATH.startsWith('/tmp/node') ? 'npx' : 'npx',
-    ['wrangler@4', 'd1', 'execute', 'edusob-production', '--remote', '--json', '--command', sql],
+    NODE,
+    [WRANGLER_BIN, 'd1', 'execute', 'edusob-production', '--remote', '--json', '--command', sql],
     { encoding: 'utf8', env: { ...process.env, CLOUDFLARE_API_TOKEN: TOK, CLOUDFLARE_ACCOUNT_ID: ACC, PATH: '/tmp/node-v22.14.0-linux-x64/bin:' + process.env.PATH } },
   )
   const i = out.indexOf('[')
