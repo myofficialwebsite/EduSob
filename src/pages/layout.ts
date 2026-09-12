@@ -368,7 +368,7 @@ export function siteHeader(options: SiteHeaderOptions = {}): string {
     <!-- ৩. ডানপাশের অ্যাকশন গ্রুপ ও অথেনটিকেশন (Consistent Action Group) -->
     <div class="flex items-center gap-2 sm:gap-3 shrink-0">
       <button type="button" onclick="edusobOpenCommandPalette()" aria-label="খুঁজুন — Ctrl/⌘ + K" title="খুঁজুন — Ctrl/⌘ + K"
-        class="flex items-center gap-2 p-2 min-h-10 min-w-10 justify-center sm:min-h-0 sm:min-w-0 sm:px-2.5 sm:py-1.5 rounded-xl border ${isDark ? 'border-white/10 text-slate-300 hover:text-white hover:bg-white/10' : 'border-slate-200 text-slate-700 hover:bg-slate-100'} transition">
+        class="flex items-center gap-2 p-2 min-h-11 min-w-11 justify-center sm:min-h-0 sm:min-w-0 sm:px-2.5 sm:py-1.5 rounded-xl border ${isDark ? 'border-white/10 text-slate-300 hover:text-white hover:bg-white/10' : 'border-slate-200 text-slate-700 hover:bg-slate-100'} transition">
         <i class="fas fa-magnifying-glass text-sm"></i>
         <span class="hidden xl:inline text-xs font-semibold">খুঁজুন</span>
         <kbd class="hidden xl:inline text-[10px] font-black ${isDark ? 'text-slate-400 bg-white/5 border-white/10' : 'text-slate-600 bg-slate-100 border-slate-200'} border rounded px-1.5 py-0.5">⌘K</kbd>

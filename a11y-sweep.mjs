@@ -67,7 +67,7 @@ const AUDIT = () => {
     return { color: base }
   }
 
-  const out = { contrast: [], tap: [], keyboard: [], unnamed: [], noAlt: [], headings: [], tiny: [] }
+  const out = { contrast: [], tapAA: [], tapRec: [], keyboard: [], unnamed: [], noAlt: [], headings: [], tiny: [] }
   const sel = (el) => {
     let s = el.tagName.toLowerCase()
     if (el.id) s += '#' + el.id
@@ -136,12 +136,26 @@ const AUDIT = () => {
     }
     if (!name) out.unnamed.push({ el: sel(el), tag, html: el.outerHTML.slice(0, 70) })
 
-    // ট্যাপ টার্গেট (মোবাইল ভিউপোর্টে)
+    /* ট্যাপ টার্গেট (মোবাইল ভিউপোর্টে)।
+       ⚠️  আগের সংস্করণটি মিথ্যা পাস দিত: এটি <২৪px মাপতো, কিন্তু সারাংশে
+           "<৪০px" ছাপা হতো — অর্থাৎ যা মাপা হয়নি, তা-ই দাবি করা হতো।
+           এখন দুটি আলাদা স্তর আলাদা নামে রিপোর্ট হয়:
+             tapAA  — WCAG ২.২ (২.৫.৮, AA) লঙ্ঘন: ২৪×২৪-এর নিচে
+             tapRec — সুপারিশকৃত ৪৪×৪৪-এর নিচে (AA পাস কিন্তু AAA নয়)
+       আর যে এলিমেন্টের কোনো ক্লিকযোগ্য পূর্বপুরুষ আছে (যেমন <i> একটি
+       <button>-এর ভেতরে), তাকে গোনা হয় না — আসল লক্ষ্য সেই পূর্বপুরুষ। */
     if (window.innerWidth < 500 && tag !== 'input') {
       const inline = cs.display === 'inline' || (el.tagName === 'A' && el.closest('p, li, td') !== null)
-      // WCAG 2.2 (2.5.8 Target Size Minimum, AA): ২৪×২৪ CSS px; ইনলাইন লিংক অব্যাহতি
-      if (!inline && (r.height < 24 || r.width < 24)) {
-        out.tap.push({ el: sel(el), text: label(el), w: Math.round(r.width), h: Math.round(r.height) })
+      if (!inline) {
+        const clickable = (n) => n.tagName === 'BUTTON' || n.tagName === 'A' ||
+          n.onclick || getComputedStyle(n).cursor === 'pointer'
+        let a = el.parentElement, hasAnc = false
+        while (a && a !== document.body) { if (clickable(a)) { hasAnc = true; break } a = a.parentElement }
+        if (!hasAnc) {
+          const w = Math.round(r.width), h = Math.round(r.height)
+          if (h < 24 || w < 24) out.tapAA.push({ el: sel(el), text: label(el), w, h })
+          else if (h < 44 || w < 44) out.tapRec.push({ el: sel(el), text: label(el), w, h })
+        }
       }
     }
 
@@ -174,7 +188,7 @@ const AUDIT = () => {
 }
 
 const b = await chromium.launch()
-const all = { contrast: [], tap: [], keyboard: [], unnamed: [], noAlt: [], headings: [], tiny: [] }
+const all = { contrast: [], tapAA: [], tapRec: [], keyboard: [], unnamed: [], noAlt: [], headings: [], tiny: [] }
 for (const vp of [{ width: 1440, height: 900, name: 'desktop' }, { width: 390, height: 844, name: 'mobile' }]) {
   const ctx = await b.newContext({ viewport: { width: vp.width, height: vp.height } })
   await ctx.addCookies([{ name: 'edusob_session', value: li.token, url: BASE }])
@@ -206,9 +220,14 @@ const c = uniq(all.contrast, (x) => x.route + x.el + x.text).sort((a, b2) => a.r
 console.log(`🔤 কনট্রাস্ট কম (WCAG AA-এর নিচে): ${c.length}`)
 for (const x of c.slice(0, 60)) console.log(`   ${String(x.ratio).padStart(5)}:1 (দরকার ${x.need})  ${x.fg} on ${x.bg}  ${x.route} [${x.vp}] ${x.el}  "${x.text}"`)
 
-const t = uniq(all.tap, (x) => x.route + x.el + x.text)
-console.log(`\n🎯 ছোট ট্যাপ টার্গেট (<৪০px, মোবাইল): ${t.length}`)
-for (const x of t.slice(0, 20)) console.log(`   ${x.w}×${x.h}  ${x.route} ${x.el}  "${x.text}"`)
+const tAA = uniq(all.tapAA, (x) => x.route + x.el + x.text)
+const tRec = uniq(all.tapRec, (x) => x.route + x.el + x.text)
+console.log(`\n🎯 ট্যাপ টার্গেট (মোবাইল):`)
+console.log(`   ❌ WCAG ২.৫.৮ (AA) লঙ্ঘন — ২৪×২৪-এর নিচে: ${tAA.length}`)
+console.log(`   ⚠️  সুপারিশকৃত ৪৪×৪৪-এর নিচে (AA পাস, AAA নয়): ${tRec.length}`)
+for (const x of tAA.slice(0, 20)) console.log(`   ${x.w}×${x.h}  ${x.route} ${x.el}  "${x.text}"`)
+if (tRec.length) console.log(`   ── ৪৪×৪৪-এর নিচে (প্রথম ২০টি):`)
+for (const x of tRec.slice(0, 20)) console.log(`   ${x.w}×${x.h}  ${x.route} ${x.el}  "${x.text}"`)
 
 const k = uniq(all.keyboard, (x) => x.route + x.el + x.text)
 console.log(`\n⌨️  কীবোর্ড-অ্যাক্সেস নেই (onclick কিন্তু tabindex/role নেই): ${k.length}`)

@@ -697,7 +697,7 @@ body { animation: pageIn 0.4s ease-out; }
    ২৮-৩২px উঁচু হয় — মোবাইলে আঙুল দিয়ে টাপ করার জন্য যথেষ্ট নয়
    (WCAG ২.৫.৫/অ্যাপল HIG: অন্তত ৪৪px)। এই ক্লাসটি যোগ করলে
    রূপরেখা অটুট রেখে ন্যূনতম উচ্চতা নিশ্চিত হয়। */
-.tap-cta {
+.tap-cta:not(.hidden) {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -721,7 +721,7 @@ body { animation: pageIn 0.4s ease-out; }
     padding-bottom: 0.75rem;
   }
   /* বিভাগ-বোতাম ও নোটিশ-ট্যাব: এদের নিজস্ব ক্লাস আছে */
-  .cat-btn, .nt-btn {
+.cat-btn:not(.hidden), .nt-btn:not(.hidden) {
     min-height: 40px;
     display: inline-flex;
     align-items: center;
@@ -748,8 +748,95 @@ body { animation: pageIn 0.4s ease-out; }
    প্রতিটি লিংককেই আঙুল দিয়ে টাপ করা যায় — তাই মোবাইলে ৪০px।
    ডেস্কটপে (md:hidden) এটি দেখাই যায় না। */
 @media (max-width: 767px) {
-  .mob-subnav-link {
+.mob-subnav-link:not(.hidden) {
     min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* ── মোবাইলে আঙুল-বান্ধব লক্ষ্য: ৪৪×৪৪px ────────────────────────────
+   WCAG ২.৫.৮ (AA) সর্বনিম্ন ২৪px দাবি করে; ৪৪px হলো WCAG ২.৫.৫ (AAA)
+   ও অ্যাপল HIG-এর মান — "মোবাইলে সেরা" হতে হলে এটিই লক্ষ্য।
+   নির্দিষ্ট ক্লাসেই সীমাবদ্ধ (সব a/button নয়), যাতে অলঙ্করণমূলক
+   উপাদানের রূপরেখা নষ্ট না হয়। w-full বোতাম ব্লক-স্তরে থাকে। */
+@media (max-width: 767px) {
+  a.px-4, button.px-4, label.px-4,
+  a.px-3, button.px-3,
+  a.px-2\.5, button.px-2\.5,
+  a.px-2, button.px-2,
+  /* px- ছাড়াও শুধু py-* দিয়ে বানানো বোতাম (যেমন flex-1 text-xs py-2) */
+  a.py-1, button.py-1, a.py-1\.5, button.py-1\.5,
+  a.py-2, button.py-2, a.py-2\.5, button.py-2\.5,
+  .cat-btn, .nt-btn, .lv-tab, .sub-chip, .level-chip,
+.tap-cta:not(.hidden), .mob-subnav-link:not(.hidden), .ds-fab-pill > a:not(.hidden), .ds-fab-pill > button:not(.hidden) {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* p-* দিয়ে বানানো আইকন-বোতাম */
+  a.p-2, button.p-2, a.p-2\.5, button.p-2\.5 { min-height: 44px; min-width: 44px }
+  /* আইকন-মাত্রের বর্গাকার বোতাম (w-7/w-8): ধারক ৪৪px, আইকন মাঝে থাকে */
+  button.w-7, a.w-7, button.w-8, a.w-8 { width: 44px; height: 44px }
+  /* সিভি থিম-রঙের সোয়াচ: ২৪px → ৪৪px। ৮টি × ৪৪px = ৩৫২px (+ফাঁক)
+     ৩৯০px স্ক্রিনে এক সারিতে ধরে না — তাই প্যালেট মোড়ানো হয়
+     (flex-wrap), ফলে রঙ-গ্রিডের মতো দেখায় ও উপচে পড়ে না। */
+  #color-palettes { flex-wrap: wrap }
+  #color-palettes button { width: 44px; height: 44px }
+  /* ডিজাইন-সিস্টেমের চিপ/বোতাম */
+.ds-chip:not(.hidden), .ds-btn:not(.hidden), .ds-hero__cta:not(.hidden) { min-height: 44px; display: inline-flex; align-items: center; justify-content: center }
+  /* ব্যাকগ্রাউন্ড-যুক্ত = বোতাম-সদৃশ (প্রস্থ যাই হোক) */
+a[class*="bg-"]:not(.hidden), button[class*="bg-"]:not(.hidden) {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* লোগো-লিংক */
+a.font-bold.text-xl:not(.hidden), a.text-xl:not(.hidden) { min-height: 44px; display: inline-flex; align-items: center }
+  /* পূর্ণ-প্রস্থ বোতাম ব্লক-স্তরে */
+a.w-full:not(.hidden), button.w-full:not(.hidden) { display: flex; min-height: 44px; align-items: center; justify-content: center }
+  /* ৪০px-এর w-10/w-11 ধরণের উপাদান ৪৪px-এ */
+  button.w-10, a.w-10 { width: 44px; height: 44px; min-width: 44px }
+a.px-1\.5:not(.hidden), button.px-1\.5:not(.hidden) { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center }
+  /* বোতাম-সদৃশ লেবেল (যেমন "ছবি আপলোড") — ৪৪px */
+label.cursor-pointer:not(.hidden) {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* ফর্ম ইনপুট */
+  input.inp, select.inp, textarea.inp { min-height: 44px }
+  input.w-full, select.w-full, textarea.w-full { min-height: 44px }
+  select, input[type="text"], input[type="tel"], input[type="number"], input[type="email"] { min-height: 44px }
+  /* পূর্ণ-প্রস্থ বোতাম ব্লক-স্তরে থাকবে, ইনলাইন নয় */
+a.px-4.w-full:not(.hidden), button.px-4.w-full:not(.hidden), a.w-full:not(.hidden), button.w-full:not(.hidden) {
+    display: flex;
+    width: 100%;
+  }
+  /* ক্যারোজেল/স্লাইডার ডট: বোতামটি ২৪px হলেও এর ভেতরে ১০px-এর
+     দৃশ্যমান গোলক (<span>) আলাদা — তাই বোতাম ৪৪px করলে রূপ একই
+     থাকে ও টাপ-এলাকা ৪৪px হয়।
+     ⚠️  ::after দিয়ে হিট-এরিয়া বাড়ানোর কৌশল এখানে বাতিল: ডটগুলো
+         ~৩০px দূরে থাকায় ৪৪px ::after পরস্পরের ওপর পড়ে প্রতিবেশী
+         ডটে ভুল-টাপ ঘটাত (পরীক্ষায় দেখা গেছে)। */
+  button[id^="dot-"] { width: 44px; height: 44px }
+}
+
+/* ── ফুটার ────────────────────────────────────────────────────────────
+   ফুটারের লোগো-লিংক পূর্ণ ৪৪px পায় (একটি মাত্র লিংক, কোনো ক্ষতি নেই)।
+   কিন্তু লিংক-তালিকায় (<li><a>) প্রতিটিকে ৪৪px করলে ফুটারের উচ্চতা
+   দ্বিগুণেরও বেশি হয়ে যায় ও নিচে বিশাল ফাঁকা জায়গা তৈরি হয় — তাই
+   সেখানে WCAG ২.৫.৮ (AA)-এর বাধ্যতামূলক সর্বনিম্ন ২৪px মানা হয়েছে,
+   ৪৪px (AAA, অ্যাপল HIG) নয়। এটি ইচ্ছাকৃত বিচ্যুতি, ত্রুটি নয়। */
+@media (max-width: 767px) {
+  footer a.flex.items-center.gap-2\.5 { min-height: 44px }
+footer li a:not(.hidden) {
+    min-height: 28px;
     display: inline-flex;
     align-items: center;
   }
