@@ -54,7 +54,18 @@ cv.post('/save', requireAuth, async (c) => {
   const slug = String(body.template_slug || 'sorol-bangla').slice(0, 50)
   const lang = body.lang === 'en' ? 'en' : 'bn'
   const withPhoto = body.with_photo ? 1 : 0
-  const dataStr = JSON.stringify(body.data).slice(0, 60000)
+  // 🔧 আগে `.slice(0, 60000)` দিয়ে JSON মাঝপথে কেটে দেওয়া হতো → ভাঙা JSON
+  //    সংরক্ষিত হতো। সেভ তখন ২০০ (সফল) দেখাতো, কিন্তু লোডে JSON.parse ব্যর্থ
+  //    হয়ে ৫০০ আসতো — অর্থাৎ ফোনের ছবি দিলে CV চিরতরে খোলা যেত না, অথচ
+  //    ব্যবহারকারী "সংরক্ষিত হয়েছে" দেখতো। এখন ভাঙা ডেটা সংরক্ষণ না করে
+  //    স্পষ্টভাবে জানানো হয়।
+  const dataStr = JSON.stringify(body.data)
+  if (dataStr.length > 60000) {
+    return c.json({
+      ok: false,
+      error: 'CV-এর তথ্য খুব বড় (সর্বোচ্চ ৬০,০০০ অক্ষর)। অনুগ্রহ করে ছবিটি ছোট করে আবার চেষ্টা করুন।',
+    }, 400)
+  }
   const id = Number(body.id) || 0
 
   if (id) {

@@ -900,13 +900,39 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
     }
   };
 
+  // 🔧 আগে ছবিটি সরাসরি readAsDataURL দিয়ে পড়া হতো — কোনো ছাঁটাই ছিল না।
+  //    ফোনের ২-৮ মেগাবাইটের ছবি base64-এ ৩-১১ মেগাবাইট হয়, যা সার্ভারের
+  //    ৬০,০০০ অক্ষরের সীমার অনেক বেশি — CV সেভ হতো কিন্তু আর খোলা যেত না।
+  //    এখন ক্যানভাস দিয়ে সর্বোচ্চ ৪০০x৪০০ পিক্সেলে ছাঁটাই ও JPEG-এ রূপান্তর
+  //    করা হয় (মান ০.৮৫) — CV-তে ব্যবহৃত আকারের চেয়েও বড়, কিন্তু ফাইল
+  //    সাধারণত ১৫-৪০ কিলোবাইটেই থাকে।
   window.handlePhotoUpload = function(input){
     if(input.files && input.files[0]) {
       var reader = new FileReader();
       reader.onload = function(e){
-        window._photo = e.target.result;
-        updatePhotoPreview();
-        refresh();
+        var img = new Image();
+        img.onload = function(){
+          var MAX = 400;
+          var w = img.width, h = img.height;
+          var sc = Math.min(1, MAX / Math.max(w, h));
+          var cw = Math.max(1, Math.round(w * sc));
+          var ch = Math.max(1, Math.round(h * sc));
+          var cv = document.createElement('canvas');
+          cv.width = cw; cv.height = ch;
+          var cx = cv.getContext('2d');
+          cx.fillStyle = '#ffffff';
+          cx.fillRect(0, 0, cw, ch);
+          cx.drawImage(img, 0, 0, cw, ch);
+          window._photo = cv.toDataURL('image/jpeg', 0.85);
+          updatePhotoPreview();
+          refresh();
+        };
+        img.onerror = function(){
+          // ছবি পড়তে ব্যর্থ হলে (অসমর্থিত ফরম্যাট) নীরবে কিছুই না করা ভালো
+          // না যে ব্যবহারকারী বুঝতে পারে — সতর্কবার্তা দেখানো হয়।
+          alert('ছবিটি পড়া যায়নি। JPEG বা PNG ফরম্যাটে চেষ্টা করুন।');
+        };
+        img.src = e.target.result;
       };
       reader.readAsDataURL(input.files[0]);
     }
