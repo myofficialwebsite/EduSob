@@ -22,7 +22,22 @@ PORT="${PORT:-3000}"
   tar xf /tmp/n22.tar.xz -C /tmp
 }
 [ -f dist/_worker.js ] || { echo "→ বিল্ড ..."; npm run build >/tmp/rt-build.log 2>&1; }
-[ -d /home/user/.cache/ms-playwright ] || : # ব্রাউজার দরকার হলে টেস্ট নিজে বার্তা দেবে
+
+# Playwright: ব্রাউজার-নির্ভর টেস্ট (cv-builder, cgpa, resizer) চললে লাগে।
+# .cache স্ন্যাপশট থেকে বাদ, তাই প্রতি রিসেটে ব্রাউজার ও সিস্টেম-লাইব্রেরি
+# মুছে যায় — এখানেই স্বয়ংক্রিয়ভাবে পুনরায় বসানো হয়।
+if grep -lq "from 'playwright'" "$@" 2>/dev/null; then
+  node -e "require.resolve('playwright')" 2>/dev/null || {
+    echo "→ playwright প্যাকেজ ..."; npm install --no-save playwright >/tmp/rt-pw.log 2>&1
+  }
+  if [ ! -x /home/user/.cache/ms-playwright/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell ]; then
+    echo "→ Chromium ডাউনলোড ..."; npx playwright install chromium >/tmp/rt-pw.log 2>&1
+  fi
+  # সিস্টেম-লাইব্রেরি (libnspr4 ইত্যাদি) — অনুপস্থিত থাকলে ব্রাউজার চলবে না
+  ldd /home/user/.cache/ms-playwright/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell 2>/dev/null | grep -q "not found" && {
+    echo "→ সিস্টেম-লাইব্রেরি ..."; npx playwright install-deps chromium >/tmp/rt-pwdeps.log 2>&1
+  }
+fi
 
 # ── ২) AI বাইন্ডিং সাময়িকভাবে সরানো (remote হলে টোকেন দাবি করে) ──────
 python3 - <<'PY'
