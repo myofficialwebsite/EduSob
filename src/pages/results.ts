@@ -177,7 +177,7 @@ ${siteHeader({ activeKey: 'results', loggedIn, theme: 'dark' })}
             <h2 class="font-extrabold text-lg sm:text-xl text-amber-200">⚖️ বোর্ড চ্যালেঞ্জ / খাতা পুনর্নিরীক্ষণ হাব</h2>
             <span class="text-[10px] bg-amber-400 text-black px-2 py-0.5 rounded-full font-black">নতুন টুল</span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-300 mt-1">
+          <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
             ফলাফলে সন্তুষ্ট নন? এসএমএস ফরমেট জেনারেটর, সঠিক ফি হিসাব, দ্বিপত্র বিষয়ের নিয়মাবলী এবং সকল বোর্ডের সরাসরি নোটিস-ফলাফল লিংক দেখুন
           </p>
         </div>
@@ -238,7 +238,7 @@ ${siteHeader({ activeKey: 'results', loggedIn, theme: 'dark' })}
         <i class="fas fa-magnifying-glass mr-1"></i> রেজাল্ট অনুসন্ধান করুন
       </button>
     </form>
-    <p class="text-[11px] text-slate-500 mt-2.5"><i class="fas fa-circle-info"></i> সার্ভার অতিরিক্ত লোডের কারণে সাড়া না দিলে নিচের অফিসিয়াল সরকারি সরাসরি লিংকগুলো ব্যবহার করুন।</p>
+    <p class="text-[11px] text-slate-500 mt-2.5 max-w-2xl"><i class="fas fa-circle-info"></i> সার্ভার অতিরিক্ত লোডের কারণে সাড়া না দিলে নিচের অফিসিয়াল সরকারি সরাসরি লিংকগুলো ব্যবহার করুন।</p>
     <div id="ckResult" class="mt-4"></div>
   </section>
 

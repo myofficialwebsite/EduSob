@@ -54,7 +54,7 @@ ${siteHeader({ activeKey: 'admission', loggedIn, theme: 'dark' })}
       <div class="w-12 h-12 sm:w-14 sm:h-14 bg-violet-500/20 rounded-2xl flex items-center justify-center text-violet-400 text-xl sm:text-2xl shrink-0"><i class="fas fa-hands-helping"></i></div>
       <div class="flex-1 min-w-0">
         <h2 class="font-bold text-lg sm:text-xl text-white">🤝 নিজে আবেদন করতে সমস্যা হচ্ছে বা সার্ভার ঝামেলা?</h2>
-        <p class="text-xs sm:text-sm text-slate-300 mt-1">এডুসবের <b>সহায়তা সার্ভিস</b> দিয়ে আমাদের অভিজ্ঞ টিম আপনার পছন্দের ডিগ্রি, অনার্স, কলেজ বা চাকরিতে নির্ভুলভাবে আবেদন করে দেবে — পেমেন্ট ওয়ালেট থেকেই।</p>
+        <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">এডুসবের <b>সহায়তা সার্ভিস</b> দিয়ে আমাদের অভিজ্ঞ টিম আপনার পছন্দের ডিগ্রি, অনার্স, কলেজ বা চাকরিতে নির্ভুলভাবে আবেদন করে দেবে — পেমেন্ট ওয়ালেট থেকেই।</p>
       </div>
       <div class="w-full sm:w-auto shrink-0 pt-2 sm:pt-0">
       ${loggedIn
@@ -245,7 +245,7 @@ async function openAdm(id){
     \${infoHtml}
     <div class="bg-violet-500/10 border border-violet-400/20 rounded-xl p-3 text-xs">
       <p class="text-violet-300 font-semibold">🤝 নিজে করতে ঝামেলা মনে হলে:</p>
-      <p class="text-slate-400 mt-1">এডুসবের সহায়তা সার্ভিস দিয়ে আমরা নির্ভুলভাবে আবেদন সম্পন্ন করে দেব — <a href="/assisted" class="text-violet-300 underline font-bold">সহায়তা নিন</a></p>
+      <p class="text-slate-400 mt-1 max-w-2xl">এডুসবের সহায়তা সার্ভিস দিয়ে আমরা নির্ভুলভাবে আবেদন সম্পন্ন করে দেব — <a href="/assisted" class="text-violet-300 underline font-bold">সহায়তা নিন</a></p>
     </div>\`;
   document.getElementById('admModal').classList.remove('hidden');
   if (LOGGED_IN && a.required_info && a.required_info.length) loadMyInfo(id);
