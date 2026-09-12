@@ -427,6 +427,7 @@ function loadAll(){
       +'<p class="text-slate-600 font-bold text-sm">লেনদেন লোড করা যায়নি</p>'
       +'<button onclick="loadAll()" class="mt-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl text-xs transition-colors">'
       +'<i class="fas fa-rotate-right mr-1.5"></i>আবার চেষ্টা করুন</button></div>';
+  });
   axios.get('/api/shop/payments/mine').then(function(r){
     var ps=r.data.payments||[];
     document.getElementById('tp-list').innerHTML=ps.length?ps.map(function(p){
