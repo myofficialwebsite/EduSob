@@ -543,6 +543,10 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
             <option value="2">২ পেজ স্ট্যান্ডার্ড (2-Page Standard)</option>
             <option value="3">৩ পেজ বিস্তারিত (3-Page Detailed)</option>
           </select>
+          <!-- 🔧 "১ পেজ ফিট" নামটি প্রতিশ্রুতি দিতো যে বিষয়বস্তু এক পেজেই
+               থাকবে, কিন্তু বাস্তবে শুধু ফন্ট/প্যাডিং ছোট করা হতো — দীর্ঘ
+               CV-তে ১.৩ পেজ হয়ে যেতো। এখন প্রকৃত পেজ-সংখ্যা দেখানো হয়। -->
+          <span id="cv-page-info" class="text-[10px] font-bold text-slate-400" aria-live="polite"></span>
         </div>
 
         <div class="flex items-center gap-1.5 bg-slate-800 border border-white/10 px-2.5 py-1 rounded-xl">
@@ -881,6 +885,26 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
 
     var html = renderCV(activeCfg, collect(), withPhoto, lang, curTpl.price===0, options);
     document.getElementById('cv-preview').innerHTML = html;
+    updatePageInfo();
+  }
+
+  // 🔧 প্রকৃত পেজ-সংখ্যা গণনা ও প্রদর্শন (A4 = ২৯৭ মিমি ≈ ১১২৩ পিক্সেল @ ৯৬ dpi)।
+  //    এর আগে "১ পেজ ফিট" নির্বাচন করলেও বিষয়বস্তু এক পেজে থাকবে কি না
+  //    কিছুই জানানো হতো না — ব্যবহারকারী ভুল ধারণা নিয়ে PDF নামাতো।
+  function updatePageInfo(){
+    var el = document.getElementById('cv-page-info');
+    if(!el) return;
+    var pv = document.getElementById('cv-preview');
+    if(!pv) return;
+    var pages = Math.max(1, Math.ceil(pv.scrollHeight / 1123));
+    el.textContent = '≈ ' + toBn(pages) + ' পেজ';
+    if(pages > 1){
+      el.className = 'text-[10px] font-bold text-amber-300';
+      el.title = 'বিষয়বস্তু ' + toBn(pages) + ' পেজে বিস্তৃত — কমাতে চাইলে কমপ্যাক্ট মোড বা তথ্য কমান';
+    } else {
+      el.className = 'text-[10px] font-bold text-emerald-300';
+      el.title = 'বিষয়বস্তু এক পেজের মধ্যে আছে';
+    }
   }
 
   document.addEventListener('input', function(e){
