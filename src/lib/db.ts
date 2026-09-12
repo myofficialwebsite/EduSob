@@ -361,7 +361,7 @@ export async function initDatabase(): Promise<D1Database> {
     // ⚠️ সিকিউরিটি (audit): আগে এখানে পাসওয়ার্ডটি প্লেইনটেক্সট-এ ছিল — রিপোটি
     // পাবলিক হওয়ায় সেই পাসওয়ার্ড সবার জন্য পড়া যেত। এখন শুধু PBKDF2 হ্যাশ
     // (কেবল ফ্রেশ ডেটাবেজে বুটস্ট্র্যাপ হিসেবে) — প্লেইনটেক্সট কোথাও নেই।
-    const hash = 'bef5882d335800a4809b49fd0ae9247e20132fca325b599d31d06a3f128c4be1'
+    const hash = '1832ba446f677ffe11a2b017c895fed84e85bcf0cb05df1f9c2dbc8f7e85c075'
 
     const existing = db.prepare("SELECT id FROM users WHERE phone = '01829486022' OR phone = '01835414122' OR email = 'ab5353069@gmail.com' OR role = 'admin'").get() as any
     if (!existing) {
@@ -586,6 +586,13 @@ let schemaEnsured = false
 async function ensureD1Columns(db: any): Promise<void> {
   const wanted: Array<[string, string, string]> = [
     ['teachers', 'is_active', 'INTEGER NOT NULL DEFAULT 1'],
+    // migrations/0011-এর teachers টেবিলে এই তিনটি কলাম নেই, কিন্তু
+    // ensureD1Schema()-এর DDL-এ আছে। ফাঁকা DB-তে মাইগ্রেশন আগে চলে, তাই
+    // CREATE TABLE IF NOT EXISTS আর কাজ করে না এবং `phone` অনুপস্থিত থাকায়
+    // /api/teacher-support/mentors ৫০০ দেয় ("no such column: phone" — মাপা)।
+    ['teachers', 'qualifications', "TEXT DEFAULT ''"],
+    ['teachers', 'phone', "TEXT DEFAULT ''"],
+    ['teachers', 'user_id', 'INTEGER'],
     ['admissions', 'source', "TEXT DEFAULT ''"],
     ['question_papers', 'source', "TEXT DEFAULT ''"],
     ['scholarships', 'source', "TEXT DEFAULT ''"],
@@ -1003,7 +1010,7 @@ export async function ensureD1Schema(db: any): Promise<void> {
     // ⚠️ পাসওয়ার্ড এখানে নেই — শুধু বুটস্ট্র্যাপ হ্যাশ; বিদ্যমান অ্যাডমিনের পাসওয়ার্ড কখনোই ওভাররাইট করা হয় না।
     try {
       const salt = 'edusob_admin_salt_2026'
-      const hash = 'bef5882d335800a4809b49fd0ae9247e20132fca325b599d31d06a3f128c4be1'
+      const hash = '1832ba446f677ffe11a2b017c895fed84e85bcf0cb05df1f9c2dbc8f7e85c075'
       await db.prepare(`
         INSERT INTO users (user_code, name_bn, name_en, email, phone, password_hash, salt, religion, education_level, role)
         VALUES ('EDU-2026-ADMIN', 'এডমিন', 'Admin', 'ab5353069@gmail.com', '01829486022', ?, ?, 'islam', 'masters', 'admin')

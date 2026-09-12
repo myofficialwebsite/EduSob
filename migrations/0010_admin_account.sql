@@ -12,9 +12,9 @@
 -- বদলে ফেলতে হবে। প্লেইনটেক্সট কখনোই রিপোজিটরিতে রাখা হয় না।
 
 INSERT INTO users (user_code, name_bn, name_en, email, phone, password_hash, salt, religion, education_level, role)
-VALUES ('EDU-2026-ADMIN', 'এডমিন', 'Admin', 'ab5353069@gmail.com', '01829486022', 'bef5882d335800a4809b49fd0ae9247e20132fca325b599d31d06a3f128c4be1', 'edusob_admin_salt_2026', 'islam', 'masters', 'admin')
+VALUES ('EDU-2026-ADMIN', 'এডমিন', 'Admin', 'ab5353069@gmail.com', '01829486022', '1832ba446f677ffe11a2b017c895fed84e85bcf0cb05df1f9c2dbc8f7e85c075', 'edusob_admin_salt_2026', 'islam', 'masters', 'admin')
 ON CONFLICT(phone) DO UPDATE SET
-  role = 'admin'  -- FIX(audit): password_hash/salt আর কখনোই ওভাররাইট করা হয় না
+  role = 'admin';  -- FIX(audit): password_hash/salt আর কখনোই ওভাররাইট করা হয় না
 
 UPDATE users SET phone = '01829486022' WHERE phone = '01835414122';
 DELETE FROM sessions;
