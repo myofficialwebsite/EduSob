@@ -272,7 +272,7 @@ async function tchLoad(isPoll) {
           try {
             new Notification('নতুন চ্যাট: ' + (t.student_name || 'শিক্ষার্থী'), {
               body: String(t.last_message || '').slice(0, 90),
-              icon: '/static/img/logo.png'
+              icon: '/static/icons/icon-192.png'
             });
           } catch (e) { /* কিছু ব্রাউজারে ব্যর্থ হতে পারে */ }
         });

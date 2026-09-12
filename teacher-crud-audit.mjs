@@ -27,7 +27,7 @@ console.log('\n===== শিক্ষক CRUD লাইভ পরীক্ষা 
 let r=await api('POST','/api/teacher-support/admin/teacher-create',{
   name:'পরীক্ষামূলক শিক্ষক', designation:'প্রভাষক', subject:'গণিত',
   education_level:'hsc', phone:PHONE, password:'Test@1234',
-  avatar:'https://edusob.pages.dev/static/img/logo.png'
+  avatar:'/static/icons/icon-192.png'
 })
 console.log(`  ১) তৈরি          HTTP ${r.s} ${r.j.ok?'✅':'❌ '+JSON.stringify(r.j).slice(0,60)}`)
 const id = r.j.teacher_id || r.j.id || (r.j.teacher && r.j.teacher.id)

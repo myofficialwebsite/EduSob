@@ -261,7 +261,7 @@
 }
 .ds-avatar:hover{ transform: scale(1.04); }
 .ds-avatar .user-init,
-.ds-avatar .user-photo{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; object-fit:cover; }
+.ds-avatar .user-photo:not(.hidden){ width:100%; height:100%; display:flex; align-items:center; justify-content:center; object-fit:cover; }
 .ds-avatar__edit{
   position:absolute; right:-2px; bottom:-2px;
   width:19px; height:19px; border-radius:50%;
@@ -761,14 +761,14 @@ body { animation: pageIn 0.4s ease-out; }
    নির্দিষ্ট ক্লাসেই সীমাবদ্ধ (সব a/button নয়), যাতে অলঙ্করণমূলক
    উপাদানের রূপরেখা নষ্ট না হয়। w-full বোতাম ব্লক-স্তরে থাকে। */
 @media (max-width: 767px) {
-  a.px-4, button.px-4, label.px-4,
-  a.px-3, button.px-3,
-  a.px-2\.5, button.px-2\.5,
-  a.px-2, button.px-2,
+  a.px-4:not(.hidden), button.px-4:not(.hidden), label.px-4:not(.hidden),
+  a.px-3:not(.hidden), button.px-3:not(.hidden),
+  a.px-2\.5:not(.hidden), button.px-2\.5:not(.hidden),
+  a.px-2:not(.hidden), button.px-2:not(.hidden),
   /* px- ছাড়াও শুধু py-* দিয়ে বানানো বোতাম (যেমন flex-1 text-xs py-2) */
-  a.py-1, button.py-1, a.py-1\.5, button.py-1\.5,
-  a.py-2, button.py-2, a.py-2\.5, button.py-2\.5,
-  .cat-btn, .nt-btn, .lv-tab, .sub-chip, .level-chip,
+  a.py-1:not(.hidden), button.py-1:not(.hidden), a.py-1\.5:not(.hidden), button.py-1\.5:not(.hidden),
+  a.py-2:not(.hidden), button.py-2:not(.hidden), a.py-2\.5:not(.hidden), button.py-2\.5:not(.hidden),
+  .cat-btn:not(.hidden), .nt-btn:not(.hidden), .lv-tab:not(.hidden), .sub-chip:not(.hidden), .level-chip:not(.hidden),
 .tap-cta:not(.hidden), .mob-subnav-link:not(.hidden), .ds-fab-pill > a:not(.hidden), .ds-fab-pill > button:not(.hidden) {
     min-height: 44px;
     min-width: 44px;
