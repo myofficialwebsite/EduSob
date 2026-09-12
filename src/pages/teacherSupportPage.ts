@@ -491,7 +491,7 @@ function renderMentors(list) {
               '<h3 class="font-bold text-white text-base truncate">'+esc(m.name)+'</h3>'+
               '<span class="text-xs font-bold text-amber-400 flex items-center gap-1"><i class="fas fa-star text-[10px]"></i> '+Number(m.rating).toFixed(2)+'</span>'+
             '</div>'+
-            '<p class="text-xs text-orange-300 font-medium truncate">'+esc(m.designation)+'</p>'+
+            '<p class="text-xs text-orange-300 font-medium leading-tight line-clamp-2">'+esc(m.designation)+'</p>'+
             '<span class="inline-block mt-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-[11px] font-semibold text-slate-300">'+esc(m.subject)+'</span>'+
           '</div>'+
         '</div>'+

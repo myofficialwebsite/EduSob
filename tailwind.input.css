@@ -795,6 +795,18 @@ a[class*="bg-"]:not(.hidden), button[class*="bg-"]:not(.hidden) {
     align-items: center;
     justify-content: center;
   }
+
+  /* ⚠️ CV টেমপ্লেট কার্ড: ওপরের `button[class*="bg-"]` নিয়মটি একে inline-flex
+     বানিয়ে দেয়, ফলে এর ৩টি সন্তান (প্রিভিউ-থাম্বনেইল, নাম, মূল্য-সারি) খাড়া
+     বিন্যাসের বদলে এক সারিতে গাদাগাদি হয়ে যায় — প্রিভিউ ১২৪px-এর বদলে ৩৩px,
+     নামের জন্য ৫১px। কার্ডটি মূলত ব্লক-বিন্যাসের, তাই পূর্বাবস্থায় ফেরানো
+     হয়েছে। স্পেসিফিসিটি সমান করতে `:not(.hidden)` + `button.` — নাহলে
+     (0,2,1) নিয়মটি (0,1,0)-কে হারিয়ে দিত। */
+  button.tpl-card:not(.hidden) {
+    display: block;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
   /* লোগো-লিংক */
 a.font-bold.text-xl:not(.hidden), a.text-xl:not(.hidden) { min-height: 44px; display: inline-flex; align-items: center }
   /* পূর্ণ-প্রস্থ বোতাম ব্লক-স্তরে */

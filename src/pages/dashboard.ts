@@ -131,7 +131,7 @@ export function dashboardPage(user: SessionUser): string {
 
       <div class="flex items-center gap-2 sm:gap-3 shrink-0">
         <!-- ১-ক্লিক রেজাল্ট বাটন -->
-        <button onclick="openResultModal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-500 hover:bg-orange-600 text-slate-950 text-xs font-bold transition shadow-sm">
+        <button onclick="openResultModal()" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-500 hover:bg-orange-600 text-slate-950 text-xs font-bold transition shadow-sm">
           <i class="fas fa-search text-[10px]"></i> <span>রেজাল্ট চেক</span>
         </button>
 
@@ -154,7 +154,7 @@ export function dashboardPage(user: SessionUser): string {
         </a>
 
         <!-- ওয়ালেট পিল -->
-        <a href="/wallet" class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-500/15 border border-orange-500/30 text-orange-300 hover:bg-orange-500/25 text-xs font-bold transition">
+        <a href="/wallet" class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-500/15 border border-orange-500/30 text-orange-300 hover:bg-orange-500/25 text-xs font-bold transition">
           <i class="fas fa-wallet text-[10px]"></i>
           <span>৳ <span class="wallet-val">০</span></span>
         </a>
@@ -312,7 +312,7 @@ export function dashboardPage(user: SessionUser): string {
                   <span class="text-[10px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.2 rounded uppercase">জরুরি আপডেট</span>
                   <span id="urgentNoticeTitle" class="text-xs sm:text-sm font-bold text-white truncate">জরুরি নোটিস ও সময়সূচি চেক</span>
                 </div>
-                <p id="urgentNoticeDesc" class="text-[11px] text-slate-300 mt-0.5 truncate">বোর্ড পরীক্ষা, ভর্তি আবেদন ও স্কলারশিপের ডেডলাইন সক্রিয় রয়েছে।</p>
+                <p id="urgentNoticeDesc" class="text-[11px] text-slate-300 mt-0.5 leading-tight line-clamp-2">বোর্ড পরীক্ষা, ভর্তি আবেদন ও স্কলারশিপের ডেডলাইন সক্রিয় রয়েছে।</p>
               </div>
             </div>
             <div class="flex items-center gap-2 self-end sm:self-auto shrink-0">
@@ -944,7 +944,7 @@ function obRow(s){
   li.innerHTML = icon +
     '<div class="min-w-0 flex-1">' +
       '<p class="text-xs font-bold truncate ' + (s.claimed ? 'text-slate-400 line-through' : 'text-white') + '">' + escH(s.label) + '</p>' +
-      '<p class="text-[10px] text-slate-400 truncate">' + escH(s.hint) + '</p>' +
+      '<p class="text-[10px] text-slate-400 leading-tight line-clamp-2">' + escH(s.hint) + '</p>' +
     '</div>' +
     '<div class="flex items-center gap-2 shrink-0">' +
       '<span class="text-[10px] font-black font-mono ' + (s.claimed ? 'text-emerald-400/70' : 'text-amber-300') + '">৳' + BN(s.bonus) + '</span>' +

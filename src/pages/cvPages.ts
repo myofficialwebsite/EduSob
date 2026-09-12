@@ -1047,7 +1047,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
           +'<div class="h-16 rounded-lg mb-2 flex items-center justify-center font-bold text-white text-xs relative overflow-hidden shadow" style="background:linear-gradient(135deg,'+cfg.primary+','+cfg.accent+')">'
           +(cfg.headerStyle==='monogram'?'<span class="w-7 h-7 rounded bg-white/20 flex items-center justify-center text-sm font-serif">CV</span>':'<span class="opacity-90">'+esc(badge)+'</span>')
           +'</div>'
-          +'<div class="text-[11px] font-bold text-slate-200 truncate">'+esc(t.name_bn)+'</div>'
+          +'<div class="text-[11px] font-bold text-slate-200 leading-tight line-clamp-2">'+esc(t.name_bn)+'</div>'
           +'<div class="flex items-center justify-between mt-1"><span class="text-[10px] text-slate-400">'+esc(badge)+'</span><span class="text-[10px] '+(t.price===0?'text-orange-400 font-bold':'text-amber-400')+'">'+(t.price===0?'ফ্রি':'৳'+toBn(t.price))+'</span></div></button>';
       }).join('');
       pickTpl(templates[0].slug);

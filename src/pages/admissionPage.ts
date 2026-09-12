@@ -175,7 +175,7 @@ function render(){
 
         \${directUrl ? \`
         <div class="mt-3 bg-slate-950/70 border border-white/10 rounded-xl p-2.5 text-[11px] flex items-center justify-between gap-2">
-          <span class="text-slate-400 truncate flex-1 min-w-0 font-mono"><i class="fas fa-link text-orange-400 mr-1"></i>\${esc(directUrl)}</span>
+          <span class="text-slate-400 flex-1 min-w-0 font-mono leading-tight line-clamp-2 break-all"><i class="fas fa-link text-orange-400 mr-1"></i>\${esc(directUrl)}</span>
           <button data-link="\${esc(directUrl)}" onclick="copyDirectLink(this, this.dataset.link)" class="px-2 py-1 bg-white/10 hover:bg-orange-500/20 text-slate-200 hover:text-orange-300 rounded text-[10px] font-semibold shrink-0 transition">
             <i class="fas fa-copy mr-1"></i>লিংক কপি
           </button>
@@ -235,7 +235,7 @@ async function openAdm(id){
         ⚡ সরাসরি আবেদন ফরম পেজে প্রবেশ করুন <i class="fas fa-arrow-up-right-from-square ml-1"></i>
       </a>
       <div class="flex items-center justify-between gap-2 p-2 bg-slate-950 rounded-xl border border-white/10 text-xs">
-        <span class="truncate font-mono text-slate-400">\${esc(directUrl)}</span>
+        <span class="font-mono text-slate-400 leading-tight line-clamp-2 break-all">\${esc(directUrl)}</span>
         <button data-link="\${esc(directUrl)}" onclick="copyDirectLink(this, this.dataset.link)" class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded font-semibold whitespace-nowrap hover:bg-orange-500/30 transition">
           <i class="fas fa-copy mr-1"></i>কপি লিংক
         </button>
