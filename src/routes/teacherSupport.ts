@@ -492,7 +492,33 @@ teacherSupport.put('/admin/teacher/:id', requireAdmin, async (c) => {
 // ১৪. এডমিন: শিক্ষক প্রোফাইল ডিলিট
 teacherSupport.delete('/admin/teacher/:id', requireAdmin, async (c) => {
   const id = Number(c.req.param('id'))
-  await c.env.DB.prepare('DELETE FROM teachers WHERE id = ?').bind(id).run()
+  if (!id) return c.json({ ok: false, error: 'অবৈধ শিক্ষক আইডি।' }, 400)
+
+  /* ⚠️  আগে এখানে সরাসরি DELETE চালানো হতো। কিন্তু
+        teacher_tickets.teacher_id ও teacher_consultations.teacher_id →
+        teachers.id, ON DELETE = NO ACTION (আর PRAGMA foreign_keys চালু)।
+        ফলে যে শিক্ষকের অন্তত একটি টিকিট/কনসালটেশন আছে, তার ক্ষেত্রে
+        DELETE ব্যর্থ হয়ে Hono-র সাধারণ ৫০০ (text/plain "Internal Server
+        Error") চলে যেত — অ্যাডমিন বুঝতেই পারতেন না কেন মুছল না।
+        এখন আগেই সম্পর্কিত রেকর্ড গুনে স্পষ্ট বাংলা বার্তা ও ৪০৯ ফেরত যায়,
+        এবং তথ্য নষ্ট করার ঝুঁকিও থাকে না (রেকর্ডগুলো আগে মুছে ফেলা হয় না)। */
+  const tk = await c.env.DB.prepare('SELECT COUNT(*) AS n FROM teacher_tickets WHERE teacher_id = ?').bind(id).first<any>()
+  const cs = await c.env.DB.prepare('SELECT COUNT(*) AS n FROM teacher_consultations WHERE teacher_id = ?').bind(id).first<any>()
+  const nTk = Number(tk?.n || 0)
+  const nCs = Number(cs?.n || 0)
+  if (nTk || nCs) {
+    const parts: string[] = []
+    if (nTk) parts.push(nTk + 'টি ডাউট টিকিট')
+    if (nCs) parts.push(nCs + 'টি কনসালটেশন')
+    return c.json({
+      ok: false,
+      error: 'এই শিক্ষকের সাথে ' + parts.join(' ও ') + ' যুক্ত আছে, তাই মুছে ফেলা যাচ্ছে না। প্রথমে সেই রেকর্ডগুলো সরিয়ে দিন।',
+      linked: { tickets: nTk, consultations: nCs },
+    }, 409)
+  }
+
+  const res = await c.env.DB.prepare('DELETE FROM teachers WHERE id = ?').bind(id).run()
+  if (!res.meta.changes) return c.json({ ok: false, error: 'এই আইডির কোনো শিক্ষক পাওয়া যায়নি।' }, 404)
   return c.json({ ok: true, message: 'শিক্ষক প্রোফাইল মুছে ফেলা হয়েছে।' })
 })
 

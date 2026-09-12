@@ -9,7 +9,11 @@ const B='http://127.0.0.1:3000'
 const b=await chromium.launch(); const c=await b.newContext({viewport:{width:1280,height:900}}); const p=await c.newPage()
 const errs=[]
 p.on('pageerror',e=>errs.push(String(e.message).slice(0,100)))
-p.on('console',m=>{if(m.type()==='error'&&!/favicon/i.test(m.text()))errs.push(m.text().slice(0,100))})
+/* ৭/৮ নম্বর পরীক্ষায় ইচ্ছে করেই ৪০৯ ও ৪০৪ ডাকা হয় — ক্রোমিয়াম সেই
+   HTTP-ত্রুটিগুলো কনসোলে লগ করে। সেগুলো প্রত্যাশিত, ত্রুটি নয়; বাদ না দিলে
+   আসল ত্রুটির সংখ্যা এই দুটির আড়ালে ঢাকা পড়ে যায়। */
+const EXPECTED_HTTP = /status of (409|404)/
+p.on('console',m=>{if(m.type()==='error'&&!/favicon/i.test(m.text())&&!EXPECTED_HTTP.test(m.text()))errs.push(m.text().slice(0,100))})
 
 await p.goto(B+'/login',{waitUntil:'load'})
 await p.fill('#loginPhoneInput','01829486022'); await p.fill('#loginPassInput','Ab52944820@')
@@ -81,6 +85,28 @@ console.log(`\n  ৬) মুছুন         HTTP ${r.s} ${r.j.ok?'✅':'❌ '+
 r=await api('GET','/api/teacher-support/mentors')
 const gone=!(r.j.mentors||[]).find(x=>String(x.id)===String(id))
 console.log(`     তালিকা থেকে সরেছে: ${gone?'✅':'❌'}  (অবশিষ্ট ${r.j.mentors?r.j.mentors.length:'?'} জন)`)
+
+/* ৭) টিকিট-যুক্ত শিক্ষক মুছতে বাধা দেয় কি?
+   ⚠️  আগে এই পথটি পরীক্ষাই হতো না — সবসময় নতুন (টিকিটহীন) শিক্ষক মুছে
+       "HTTP 200 ✅" দেখানো হতো। কিন্তু teacher_tickets.teacher_id →
+       teachers.id (ON DELETE NO ACTION) হওয়ায় বাস্তবে টিকিট-যুক্ত শিক্ষক
+       মুছলে ৫০০ (text/plain) আসত। এখন ৪০৯ + বাংলা বার্তা প্রত্যাশিত। */
+const tk = await api('GET', '/api/teacher-support/admin/tickets')
+const linkedId = (tk.j.tickets || []).map(x => x.teacher_id).find(Boolean)
+if (!linkedId) {
+  console.log('\n  ৭) টিকিট-যুক্ত শিক্ষক: ⏭️  কোনো টিকিট নেই, পরীক্ষা সম্ভব নয়')
+} else {
+  r = await api('DELETE', '/api/teacher-support/admin/teacher/' + linkedId)
+  const ok409 = r.s === 409 && r.j.ok === false && /যুক্ত আছে/.test(r.j.error || '')
+  console.log(`\n  ৭) টিকিট-যুক্ত মুছুন  HTTP ${r.s} ${ok409 ? '✅ বাধা দিয়েছে' : '❌ ' + JSON.stringify(r.j).slice(0, 70)}`)
+  const still = await api('GET', '/api/teacher-support/admin/teachers')
+  const kept = (still.j.teachers || []).some(x => String(x.id) === String(linkedId))
+  console.log(`     শিক্ষক অক্ষত আছে: ${kept ? '✅' : '❌ মুছে গেছে!'}`)
+}
+
+// ৮) অস্তিত্বহীন আইডি — আগে ২০০ ok:true (মিথ্যা সাফল্য) আসত
+r = await api('DELETE', '/api/teacher-support/admin/teacher/999999')
+console.log(`  ৮) অস্তিত্বহীন আইডি   HTTP ${r.s} ${r.s === 404 && r.j.ok === false ? '✅ ৪০৪' : '❌ ' + JSON.stringify(r.j).slice(0, 60)}`)
 
 console.log(`\n  কনসোল-এরর: ${errs.length}`)
 for(const e of [...new Set(errs)].slice(0,4)) console.log('    '+e)

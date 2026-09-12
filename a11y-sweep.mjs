@@ -117,7 +117,13 @@ const AUDIT = () => {
   }
 
   // ---------- ইন্টারঅ্যাকটিভ ----------
-  const interactive = [...document.querySelectorAll('button, a[href], input, select, textarea, [role="button"], [onclick]')]
+  /* ⚠️  আগে এখানে `summary` ছিল না — ফলে <details>/<summary> অ্যাকর্ডিয়নের
+        শিরোনাম (যা ক্লিকযোগ্য ডিসক্লোজার উইজেট) কখনো ট্যাপ-টার্গেট হিসেবে
+        পরীক্ষাই হতো না, অথচ রিপোর্টে "লঙ্ঘন ০" দেখা যেত — অর্থাৎ অপরীক্ষিত
+        অংশকে পাস হিসেবে দাবি করা হতো। তাই `summary` যোগ করা হয়েছে।
+        `label`-ও বাদ দেওয়া হয়নি ইচ্ছে করে: এটি নিজে ক্লিকযোগ্য নয় (সংশ্লিষ্ট
+        ইনপুটই লক্ষ্য), তাই ২.৫.৮-এর আওতায় আসে না। */
+  const interactive = [...document.querySelectorAll('button, a[href], input, select, textarea, summary, [role="button"], [onclick]')]
   for (const el of interactive) {
     const cs = getComputedStyle(el)
     if (cs.display === 'none' || cs.visibility === 'hidden') continue
