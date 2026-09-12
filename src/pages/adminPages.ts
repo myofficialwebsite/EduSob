@@ -1245,7 +1245,10 @@ async function loadSyncSources(){
     return '<tr class="hover:bg-slate-50 transition">'+
       '<td class="py-3 px-3">'+
         '<p class="font-bold text-slate-900">'+esc(s.name)+'</p>'+
-        '<a href="'+esc(safeUrl(s.source_url))+'" target="_blank" class="text-[10px] text-sky-600 hover:underline flex items-center gap-1">'+
+        // 🔧 একই ট্যাপ-টার্গেট সমস্যা: এই সোর্স-ইউআরএল লিংকের উচ্চতা ছিল
+        //    মাত্র ১৬px। py-2/-mx-1 দিয়ে ~৩২px করা হয়েছে; লেখার অবস্থান
+        //    আগের মতোই থাকে।
+        '<a href="'+esc(safeUrl(s.source_url))+'" target="_blank" class="inline-flex items-center gap-1 text-[10px] text-sky-600 hover:underline py-2 px-1 -mx-1 rounded hover:bg-sky-50 transition-colors">'+
           '<i class="fas fa-arrow-up-right-from-square text-[10px]"></i> '+esc(s.source_url)+
         '</a>'+
       '</td>'+
@@ -1773,7 +1776,13 @@ function renderFilteredCrudList(t) {
           '<span class="text-[10px] px-2 py-0.5 rounded-full font-bold ' + (isLive ? 'bg-orange-100 text-orange-800' : 'bg-amber-100 text-amber-800') + '">' +
             (isLive ? '🟢 লাইভ ও অনুমোদিত' : '🟡 অপেক্ষমান যাচাই') +
           '</span>' +
-          (srcUrl ? '<a href="' + esc(srcUrl) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[10px] text-sky-600 hover:text-sky-800 hover:underline font-medium"><i class="fas fa-external-link-alt text-[10px]"></i>সোর্স যাচাই ↗</a>' : '') +
+          // 🔧 ট্যাপ-টার্গেট: text-[10px] ক্লাসের কারণে এই লিংকের উচ্চতা ছিল মাত্র
+          //    ১৬px — WCAG ২.২ AA (SC ২.৫.৮) অনুযায়ী ন্যূনতম ২৪px-এর নিচে, ফলে
+          //    মোবাইলে টিপতে কষ্ট হতো (এটি বাক্যের ভেতরের ইনলাইন লিংক নয়, তাই
+          //    অব্যাহতিও পায় না)। py-2/px-2 দিয়ে ট্যাপ-এলাকা ~৩২px উঁচু করা হয়েছে;
+          //    -mx-2 থাকায় লেখার অনুভূমিক অবস্থান অপরিবর্তিত থাকে, হোভারে হালকা
+          //    ব্যাকগ্রাউন্ড পাওয়া যায়।
+          (srcUrl ? '<a href="' + esc(srcUrl) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[10px] text-sky-600 hover:text-sky-800 hover:underline font-medium py-2 px-2 -mx-2 rounded-lg hover:bg-sky-50 transition-colors"><i class="fas fa-external-link-alt text-[10px]"></i>সোর্স যাচাই ↗</a>' : '') +
         '</div>' +
       '</div>' +
       '<div class="flex items-center gap-1.5 shrink-0">' +
