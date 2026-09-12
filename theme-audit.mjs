@@ -63,6 +63,71 @@ await ctx.addCookies([{ name: 'edusob_session', value: li.token, url: BASE }])
 const orig = await fetch(`${BASE}/api/auth/me`, { headers: { Cookie: 'edusob_session=' + li.token } })
   .then((r) => r.json()).then((d) => d.user?.religion).catch(() => null)
 
+// WCAG কনট্রাস্ট অনুপাত হিসাব (ব্রাউজার-কনটেক্সটে চালানো হবে)
+const CONTRAST_FN = `(() => {
+  const lum = (c) => {
+    const [r,g,b] = c.map(v => { v/=255; return v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4) })
+    return 0.2126*r + 0.7152*g + 0.0722*b
+  }
+  const parse = (str) => {
+    const m = String(str).match(/rgba?\\(([^)]+)\\)/)
+    if (!m) return null
+    const p = m[1].split(',').map(x => parseFloat(x))
+    return { rgb: [p[0],p[1],p[2]], a: p[3] === undefined ? 1 : p[3] }
+  }
+  // ⚠️ আলফা-কম্পোজিটিং অপরিহার্য: এই ডিজাইনে পটভূমি প্রায়ই সেমি-ট্রান্সপারেন্ট
+  //    ওভারলে (যেমন rgba(249,115,22,0.14) — ১৪% কমলা, কালো পটভূমির ওপর)।
+  //    আগে আলফা উপেক্ষা করে ওটিকে সম্পূর্ণ উজ্জ্বল কমলা ধরা হতো, ফলে প্রায়-সাদা
+  //    লেখার কনট্রাস্ট ভুল করে ১.০৫:১ দেখাতো। এখন স্তরে স্তরে মিশিয়ে হিসাব করা হয়।
+  const over = (fg, a, bg) => [0,1,2].map(k => fg[k]*a + bg[k]*(1-a))
+  const bgOf = (el) => {
+    const layers = []
+    let n = el
+    while (n && n !== document.documentElement) {
+      const st = getComputedStyle(n)
+      const img = st.backgroundImage || ''
+      if (img && img.indexOf('gradient') !== -1) {
+        for (const m2 of img.matchAll(/rgba?\\(([^)]+)\\)/g)) {
+          const g = m2[1].split(',').map(Number)
+          layers.push({ rgb: [g[0],g[1],g[2]], a: g[3] === undefined ? 1 : g[3] })
+        }
+      }
+      const c = parse(st.backgroundColor)
+      if (c && c.a > 0.001) layers.push(c)
+      n = n.parentElement
+    }
+    // সবচেয়ে নিচ থেকে (শেষ) উপরের দিকে (প্রথম) মেশানো হয়
+    let base = [15, 23, 42]  // স্লেট-৯৫০ (পেজের মূল পটভূমি)
+    for (let k = layers.length - 1; k >= 0; k--) base = over(layers[k].rgb, layers[k].a, base)
+    return base
+  }
+  const ratio = (a, b) => {
+    const l1 = lum(a), l2 = lum(b)
+    return (Math.max(l1,l2) + 0.05) / (Math.min(l1,l2) + 0.05)
+  }
+  const out = []
+  const hero = document.querySelector('section.ds-hero')
+  if (!hero) return out
+  for (const el of hero.querySelectorAll('h1,h2,h3,p,span,b,strong,a,div,small')) {
+    const txt = (el.textContent || '').trim()
+    if (!txt || el.children.length > 0) continue
+    // ⚠️ নিছক অলঙ্কারিক চিহ্ন (· | • – — › ইত্যাদি) WCAG অনুযায়ী অব্যাহতিপ্রাপ্ত
+    if (!/[\\p{L}\\p{N}]/u.test(txt)) continue
+    const cs = getComputedStyle(el)
+    const b = el.getBoundingClientRect()
+    if (!b.width || !b.height) continue
+    const fg = parse(cs.color)
+    if (!fg || fg.a < 0.5) continue
+    const size = parseFloat(cs.fontSize)
+    const bold = parseInt(cs.fontWeight, 10) >= 700
+    const large = size >= 24 || (size >= 18.66 && bold)
+    const need = large ? 3.0 : 4.5      // WCAG AA
+    const r = ratio(fg.rgb, bgOf(el))
+    if (r < need) out.push({ txt: txt.slice(0,22), size: Math.round(size), ratio: Math.round(r*100)/100, need })
+  }
+  return out
+})()`
+
 const seen = {}
 for (const [religion, exp] of Object.entries(EXPECT)) {
   // ধর্ম বদল
@@ -91,6 +156,15 @@ for (const [religion, exp] of Object.entries(EXPECT)) {
   const accentOk = info.accent === exp.accent
   log(accentOk, `${religion}: --accent = ${info.accent || '(খালি)'} (প্রত্যাশিত ${exp.accent})`)
   seen[religion] = info.accent
+
+  // কনট্রাস্ট যাচাই (WCAG AA) — থিম বদলালে --accent বদলায়, তাই প্রতি থিমে আলাদা করে দরকার
+  const bad = await page.evaluate(CONTRAST_FN).catch(() => [])
+  if (bad.length) {
+    log(false, `${religion}: কনট্রাস্ট কম — ${bad.length}টি (${bad.slice(0,2).map(b => b.ratio+':1 <'+b.need).join(', ')})`)
+    bad.slice(0, 3).forEach(b => console.log(`        ↳ "${b.txt}" ${b.size}px → ${b.ratio}:1 (দরকার ${b.need}:1)`))
+  } else {
+    log(true, `${religion}: কনট্রাস্ট ঠিক আছে (সব টেক্সট WCAG AA মানে)`)
+  }
 
   // ওভারফ্লো যাচাই — ডেস্কটপ ও মোবাইল
   for (const [name, w, h] of [['ডেস্কটপ', 1280, 800], ['মোবাইল', 390, 844]]) {
