@@ -1,6 +1,23 @@
 // Node.js SQLite D1Database Compatibility Layer
 import { randomHex } from './auth'
 
+/**
+ * D1 মাইগ্রেশন — বিল্ড-টাইমে বান্ডেল।
+ *
+ * সমস্যা: Workers রানটাইমে `fs` থাকে না, তাই migrations/*.sql ফাইলগুলো
+ * D1-এ কখনো প্রয়োগ হতো না — শুধু ensureD1Schema()-এর ভিতরে হার্ডকোড করা
+ * ১৫টি টেবিলই তৈরি হতো। ফলে একটি ফাঁকা/নতুন D1-তে users, mcq_questions-সহ
+ * বাকি ৪২টি টেবিল অনুপস্থিত থাকতো এবং সংশ্লিষ্ট প্রতিটি রুট ৫০০ দিতো।
+ *
+ * সমাধান: Vite-এর import.meta.glob দিয়ে .sql ফাইলগুলো স্ট্রিং হিসেবে
+ * বান্ডেল করা হয়, তারপর ensureD1Schema() সেগুলো ক্রমানুসারে চালায়।
+ */
+const D1_MIGRATIONS = import.meta.glob('../../migrations/*.sql', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>
+
 export interface D1Result<T = any> {
   results: T[]
   success: boolean
@@ -587,12 +604,122 @@ async function ensureD1Columns(db: any): Promise<void> {
   }
 }
 
+/**
+ * একটি বহু-স্টেটমেন্ট SQL স্ট্রিংকে আলাদা আলাদা স্টেটমেন্টে ভাগ করে।
+ *
+ * কেন দরকার: Cloudflare D1-এর `db.exec()` **একবারে একটি মাত্র
+ * স্টেটমেন্ট** চালাতে পারে। আগে ensureD1Schema() ১৫টি CREATE TABLE এক
+ * স্ট্রিং-এ পাঠাতো, ফলে D1 পুরো স্ট্রিংটিকে একটিমাত্র স্টেটমেন্ট হিসেবে
+ * পার্স করতে গিয়ে ব্যর্থ হতো ("incomplete input") এবং **কোনো টেবিলই
+ * তৈরি হতো না** — অর্থাৎ ফাঁকা/নতুন D1-তে সাইট সম্পূর্ণ অচল হয়ে যেত
+ * (প্রতিটি রুট ৫০০)। তাই প্রতিটি স্টেটমেন্ট আলাদা করে চালানো হয়।
+ *
+ * স্প্লিটারটি কোট/মন্তব্য-সচেতন, যাতে কোনো DEFAULT মানের ভিতরে
+ * সেমিকোলন থাকলে ভুল করে স্টেটমেন্ট কেটে না যায়।
+ */
+export function splitSqlStatements(sql: string): string[] {
+  const out: string[] = []
+  let buf = ''
+  let quote: string | null = null
+  for (let i = 0; i < sql.length; i++) {
+    const ch = sql[i]
+    const next = sql[i + 1]
+
+    if (quote) {
+      buf += ch
+      // '' দুইটি কোট = একটি এস্কেপড কোট, শেষ নয়
+      if (ch === quote) {
+        if (next === quote) { buf += next; i++ } else { quote = null }
+      }
+      continue
+    }
+
+    if (ch === "'" || ch === '"' || ch === '`') { quote = ch; buf += ch; continue }
+    if (ch === '-' && next === '-') { // লাইন মন্তব্য — শেষ পর্যন্ত এড়িয়ে যাই
+      const end = sql.indexOf('\n', i)
+      i = end === -1 ? sql.length : end
+      continue
+    }
+    if (ch === '/' && next === '*') { // ব্লক মন্তব্য
+      const end = sql.indexOf('*/', i + 2)
+      i = end === -1 ? sql.length : end + 1
+      continue
+    }
+    if (ch === ';') {
+      if (buf.trim()) out.push(buf.trim())
+      buf = ''
+      continue
+    }
+    buf += ch
+  }
+  if (buf.trim()) out.push(buf.trim())
+  return out
+}
+
+/**
+ * D1-এ মাইগ্রেশন প্রয়োগ — **শুধুমাত্র ফাঁকা/নতুন ডেটাবেজে**।
+ *
+ * ⚠️ কেন শুধু ফাঁকা DB-তে: migrations/*.sql-এ CREATE TABLE ছাড়াও ২৪টি
+ * INSERT, ১৪টি ALTER, ১৮টি UPDATE ও ১টি DELETE আছে। একটি ইতিমধ্যে
+ * মাইগ্রেট করা প্রোডাকশন DB-তে সেগুলো আবার চালালে ডুপ্লিকেট সারি বা
+ * "duplicate column" ত্রুটি হতে পারে। তাই বিদ্যমান DB-তে কোনো পরিবর্তন
+ * করা হয় না — নতুন DB (লোকাল ডেভ, ডিজাস্টার রিকভারি) পুরো স্কিমা পায়।
+ */
+async function ensureD1Migrations(db: any): Promise<void> {
+  try {
+    // ফাঁকা কি না যাচাই (D1-এর নিজস্ব _cf_METADATA/মাইগ্রেশন টেবিল বাদ)
+    const existing: any = await db
+      .prepare(
+        `SELECT name FROM sqlite_master WHERE type='table'
+         AND name NOT LIKE 'sqlite_%' AND name NOT LIKE '\\_cf\\_%' ESCAPE '\\'`
+      )
+      .all()
+    const userTables = ((existing?.results || []) as any[])
+      .map((r: any) => r.name)
+      .filter((n: string) => n !== '_migrations' && n !== 'teachers')
+    // teachers ensureD1Schema()-এর আগেই তৈরি হয়ে থাকতে পারে; তখনও ফাঁকা ধরা হবে
+    if (userTables.length > 0) return
+
+    await db
+      .prepare(
+        `CREATE TABLE IF NOT EXISTS _migrations (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT UNIQUE NOT NULL,
+          executed_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )`
+      )
+      .run()
+
+    const doneRows: any = await db.prepare('SELECT name FROM _migrations').all()
+    const done = new Set<string>(((doneRows?.results || []) as any[]).map((r: any) => r.name))
+
+    for (const path of Object.keys(D1_MIGRATIONS).sort()) {
+      const name = String(path).split('/').pop() || path
+      if (done.has(name)) continue
+      for (const stmt of splitSqlStatements(D1_MIGRATIONS[path])) {
+        try {
+          await db.prepare(stmt).run()
+        } catch (e) {
+          console.warn('[ensureD1Migrations] ব্যর্থ:', (e as any)?.message || e, '·', stmt.slice(0, 70))
+        }
+      }
+      await db.prepare('INSERT OR IGNORE INTO _migrations (name) VALUES (?)').bind(name).run()
+    }
+  } catch (e) {
+    console.warn('[ensureD1Migrations] সতর্কতা:', (e as any)?.message || e)
+  }
+}
+
 export async function ensureD1Schema(db: any): Promise<void> {
   if (schemaEnsured || !db) return
 
+  // migrations/*.sql প্রয়োগ — নতুন/ফাঁকা D1-এ পূর্ণ স্কিমা তৈরি করে।
+  // DDL-এর আগে ডাকা হয়, যাতে "ফাঁকা কি না" যাচাই নির্ভুল থাকে।
+  try { await ensureD1Migrations(db) } catch (e) {}
+
   try {
     if (typeof db.exec === 'function') {
-      await db.exec(`
+      const ddlStatements = splitSqlStatements(`
         CREATE TABLE IF NOT EXISTS teachers (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           name TEXT NOT NULL,
@@ -815,6 +942,18 @@ export async function ensureD1Schema(db: any): Promise<void> {
           created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         );
       `)
+      // D1-এর exec() একাধিক স্টেটমেন্ট চালাতে পারে না — তাই প্রতিটি
+      // স্টেটমেন্ট আলাদা করে চালাই, যাতে একটি ব্যর্থ হলেও বাকিগুলো চলে।
+      for (const stmt of ddlStatements) {
+        try {
+          // ⚠️ db.exec() নয় — D1-এর exec() বহু-লাইন স্টেটমেন্টে "incomplete
+          // input" দিয়ে ব্যর্থ হয় (মাপা: CREATE TABLE IF NOT EXISTS teachers (
+          // … ) পর্যন্ত পাঠানো সত্ত্বেও)। prepare().run() এই ক্ষেত্রে নির্ভরযোগ্য।
+          await db.prepare(stmt).run()
+        } catch (e) {
+          console.warn('[ensureD1Schema] DDL ব্যর্থ:', (e as any)?.message || e, '·', stmt.slice(0, 60))
+        }
+      }
     }
 
     // Check & seed teachers

@@ -44,7 +44,13 @@ tools.get('/mcq/quiz', async (c) => {
   const subject = c.req.query('subject') || ''
   const user = c.get('user')
   const cap = user ? 20 : 10
-  const count = Math.min(parseInt(c.req.query('count') || '10') || 10, cap)
+  // ⚠️ নিরাপত্তা: count সরাসরি SQL-এর LIMIT-এ বাঁধা হয়। SQLite-তে
+  // `LIMIT -1` মানে "কোনো সীমা নেই", তাই count=-1 দিলে পুরো প্রশ্নব্যাংক
+  // একবারেই বেরিয়ে আসতো (অতিথির সীমা ১০ হওয়া সত্ত্বেও ৩০টি এসেছে — মাপা)।
+  // এছাড়া ঋণাত্মক মান কোটায় `used + (-1)` যোগ হয়ে দৈনিক সীমা কমিয়ে দিতো,
+  // ফলে সীমা কখনো শেষই হতো না। তাই ১..cap এর মধ্যে ক্ল্যাম্প করা হয়।
+  const parsedCount = parseInt(c.req.query('count') || '10', 10)
+  const count = Math.min(Math.max(Number.isFinite(parsedCount) ? parsedCount : 10, 1), cap)
 
   // দৈনিক কোটা
   const qKey = user ? ('u' + (user as any).id) : ('ip' + (c.req.header('CF-Connecting-IP') || c.req.header('X-Forwarded-For') || 'unknown'))
