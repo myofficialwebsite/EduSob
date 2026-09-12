@@ -1079,7 +1079,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       }
       refresh();
       showMsg('✅ প্রোফাইল থেকে তথ্য সফলভাবে আনা হয়েছে','text-orange-400');
-    });
+    }).catch(function(){var e=document.getElementById('edu-rows');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
   };
 
   // ১-ক্লিকে নমুনা ডেমো ডেটা লোড
@@ -1183,7 +1183,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       } else {
         showMsg('❌ ' + (d.error || 'সংরক্ষণে সমস্যা হয়েছে'), 'text-red-400');
       }
-    });
+    }).catch(function(){var e=document.getElementById('');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
   };
 
   window.loadCV = function(id){
@@ -1226,7 +1226,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
 
       if(templates.length) pickTpl(c.template_slug);
       showMsg('✅ "' + c.title + '" লোড হয়েছে', 'text-orange-400');
-    });
+    }).catch(function(){var e=document.getElementById('cv-title');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
   };
 
   window.delCV = function(id){
@@ -1235,7 +1235,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
       if(curCvId === id) curCvId = 0;
       loadMine();
       showMsg('🗑️ CV ডিলিট করা হয়েছে', 'text-amber-400');
-    });
+    }).catch(function(){var e=document.getElementById('');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
   };
 
   function loadMine(){
@@ -1250,7 +1250,7 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
             +'<span class="shrink-0 flex gap-2"><button onclick="loadCV('+c.id+')" class="text-orange-400 hover:text-orange-300 font-semibold">খুলুন</button>'
             +'<button onclick="delCV('+c.id+')" class="text-red-400 hover:text-red-300">ডিলিট</button></span></div>';
         }).join('');
-    });
+    }).catch(function(){var e=document.getElementById('my-cvs');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
   }
 
   // প্রিন্ট ও PDF ডাউনলোড হ্যান্ডলার
@@ -1502,7 +1502,7 @@ export function cvAdminPage(isAdmin: boolean): string {
       el.textContent = d.ok ? '✅ সেভ হয়েছে' : '❌ ' + (d.error || 'সমস্যা');
       el.className = 'text-[11px] ' + (d.ok ? 'text-orange-400 font-bold' : 'text-red-400');
       setTimeout(function(){ el.textContent = '' }, 3000);
-    });
+    }).catch(function(){var e=document.getElementById('');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
   };
 
   function adminTplErr(){

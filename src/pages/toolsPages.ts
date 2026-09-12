@@ -358,7 +358,7 @@ function loadWrongBank(){
       return '<details class="bg-slate-800/80 border border-white/10 rounded-xl p-3"><summary class="cursor-pointer font-semibold text-slate-100">'+esc(q.question)+' <span class="text-[10px] text-rose-400 font-bold">(ভুল '+toBn(q.wrong_count)+' বার)</span></summary>'+
       '<p class="mt-2 text-orange-300 font-bold">✔ সঠিক: '+esc(q['option_'+q.correct])+'</p>'+(q.explanation?'<p class="text-xs text-slate-300 mt-1.5 bg-slate-900/60 p-2 rounded">💡 '+esc(q.explanation)+'</p>':'')+'</details>';
     }).join('');
-  });
+  }).catch(function(){var e=document.getElementById('wrong-bank-list');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
 }
 function loadHistory(){
   fetch('/api/tools/mcq/history').then(r=>r.json()).then(function(d){
@@ -369,7 +369,7 @@ function loadHistory(){
       var c = t.score_pct>=80?'text-orange-400':t.score_pct>=50?'text-amber-400':'text-rose-400';
       return '<div class="flex justify-between items-center bg-slate-800/80 border border-white/5 rounded-xl px-3 py-2.5"><span><strong class="text-white font-semibold">'+esc(t.subject||t.level.toUpperCase())+'</strong> <span class="text-[10px] text-slate-400 ml-1">'+esc((t.taken_at||'').slice(0,10))+'</span></span><span class="font-bold '+c+'">'+toBn(t.correct_count)+'/'+toBn(t.total)+' ('+toBn(t.score_pct)+'%)</span></div>';
     }).join('')+'</div>';
-  });
+  }).catch(function(){var e=document.getElementById('history-list');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
 }
 function loadLeaderboard(){
   fetch('/api/tools/leaderboard').then(r=>r.json()).then(function(d){
@@ -380,7 +380,7 @@ function loadLeaderboard(){
     el.innerHTML = b.map(function(u,i){
       return '<div class="flex justify-between items-center bg-slate-800/80 border border-white/5 rounded-xl px-3 py-2 mb-2"><span class="text-slate-200">'+(medals[i]||toBn(i+1)+'.')+' <b class="text-white font-bold">'+esc(u.name_bn)+'</b> <span class="text-[10px] text-slate-400">('+esc(u.user_code)+')</span></span><span class="font-bold text-amber-300">'+toBn(u.avg_pct)+'% <span class="text-[10px] text-slate-400">('+toBn(u.quizzes)+')</span></span></div>';
     }).join('');
-  });
+  }).catch(function(){var e=document.getElementById('leaderboard');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
 }
 loadSubjects(); loadLeaderboard();
 if(LOGGED_IN){loadWrongBank();loadHistory();}
@@ -469,7 +469,7 @@ function loadTasks(){
       '<span class="flex-1 '+(t.status==='done'?'line-through text-slate-500':'')+'">'+esc(t.title)+(t.due_date?' <span class="text-[10px] text-sky-400">📅 '+esc(t.due_date)+'</span>':'')+'</span>'+
       '<button onclick="delTask('+t.id+')" class="text-rose-400 hover:text-rose-300 text-xs">✕</button></div>';
     }).join('');
-  });
+  }).catch(function(){var e=document.getElementById('task-list');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
 }
 window.toggleTask=function(id,done){fetch('/api/tools/planner/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:done?'done':'pending'})}).then(loadTasks)};
 window.delTask=function(id){fetch('/api/tools/planner/'+id,{method:'DELETE'}).then(loadTasks)};
@@ -488,7 +488,7 @@ function loadNotes(){
       '<p class="mt-2 whitespace-pre-wrap text-slate-300">'+esc(n.content||'(খালি)')+'</p>'+
       '<button onclick="delNote('+n.id+')" class="mt-2 text-xs text-rose-400 hover:text-rose-300">🗑 মুছুন</button></details>';
     }).join('');
-  });
+  }).catch(function(){var e=document.getElementById('note-list');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
 }
 window.delNote=function(id){if(confirm('নোটটি মুছবেন?'))fetch('/api/tools/notes/'+id,{method:'DELETE'}).then(loadNotes)};
 document.getElementById('note-form').onsubmit=function(e){e.preventDefault();

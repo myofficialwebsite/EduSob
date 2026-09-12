@@ -242,6 +242,13 @@ function pwaEnablePush(){
       });
     });
   }
+  /* ⚠️  request()-এর শেষে কোনো .catch() নেই — ইচ্ছাকৃত।
+     এই shim-টি axios-এর মতো আচরণ করে: !res.ok হলে এরর throw করে
+     (ওপরে), আর কলার সেই এরর ধরে 'ex.response.data.error' দেখায়।
+     এখানে .catch() বসালে এরর গিলে যায় → axios.post() কখনো রিজেক্ট
+     করবে না → res === undefined → 'res.data.ok'-এ TypeError →
+     ব্যবহারকারী সবসময় জেনেরিক "সমস্যা হয়েছে" দেখে; সার্ভারের
+     নির্দিষ্ট বার্তা ("এই নম্বরে অ্যাকাউন্ট আছে") পৌঁছায় না। */
   var ax = function(cfg) { return request(cfg); };
   ax.get = function(url, cfg) { return request(Object.assign({}, cfg || {}, { url: url, method: 'GET' })); };
   ax.post = function(url, data, cfg) { return request(Object.assign({}, cfg || {}, { url: url, method: 'POST', data: data })); };
