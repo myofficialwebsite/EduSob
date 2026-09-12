@@ -548,7 +548,7 @@ function edusobAiSend(e){
   edusobAiBubble(edusobAiEsc(msg),true);
   var typing=edusobAiBubble('<i class="fas fa-ellipsis fa-fade"></i>',false);
   fetch('/api/ai/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg})})
-    .then(function(r){return r.json()})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
     .then(function(d){
       var html=edusobAiEsc(d.answer||'সমস্যা হয়েছে, আবার চেষ্টা করুন');
       if(d.link)html+='<br><a href="'+d.link+'" class="inline-block mt-1.5 bg-violet-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full hover:opacity-90">'+edusobAiEsc(d.link_text||'দেখুন')+' <i class="fas fa-arrow-right" aria-hidden="true"></i></a>';

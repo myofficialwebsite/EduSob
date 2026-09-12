@@ -349,7 +349,7 @@ window.submitQuiz = function(){
 };
 
 function loadWrongBank(){
-  fetch('/api/tools/wrong-bank').then(r=>r.json()).then(function(d){
+  fetch('/api/tools/wrong-bank').then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(d){
     var el = document.getElementById('wrong-bank-list'); if(!el) return;
     document.getElementById('wb-stats').textContent = 'মোট: '+toBn(d.total)+' · আয়ত্তে: '+toBn(d.mastered);
     var due = d.due||[];
@@ -361,7 +361,7 @@ function loadWrongBank(){
   }).catch(function(){var e=document.getElementById('wrong-bank-list');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
 }
 function loadHistory(){
-  fetch('/api/tools/mcq/history').then(r=>r.json()).then(function(d){
+  fetch('/api/tools/mcq/history').then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(d){
     var el = document.getElementById('history-list'); if(!el) return;
     var a = d.attempts||[];
     if(!a.length){el.innerHTML='<p class="text-slate-400">এখনো কোনো পরীক্ষা দেননি।</p>';return}
@@ -372,7 +372,7 @@ function loadHistory(){
   }).catch(function(){var e=document.getElementById('history-list');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
 }
 function loadLeaderboard(){
-  fetch('/api/tools/leaderboard').then(r=>r.json()).then(function(d){
+  fetch('/api/tools/leaderboard').then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(d){
     var el = document.getElementById('leaderboard');
     var b = d.board||[];
     if(!b.length){el.innerHTML='<p class="text-slate-400">এখনো কেউ পরীক্ষা দেয়নি — প্রথম হোন! 🏆</p>';return}
@@ -457,7 +457,7 @@ ${toolsHeader('planner', loggedIn)}
 ${helpersJs}
 ${loggedIn ? `
 function loadTasks(){
-  fetch('/api/tools/planner').then(r=>r.json()).then(function(d){
+  fetch('/api/tools/planner').then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(d){
     var el = document.getElementById('task-list');
     var ts = d.tasks||[];
     if(!ts.length){el.innerHTML='<p class="text-slate-400">কোনো কাজ নেই — উপরে যোগ করুন!</p>';document.getElementById('task-progress').textContent='';return}
@@ -479,7 +479,7 @@ document.getElementById('task-form').onsubmit=function(e){e.preventDefault();
 };
 
 function loadNotes(){
-  fetch('/api/tools/notes').then(r=>r.json()).then(function(d){
+  fetch('/api/tools/notes').then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(d){
     var el = document.getElementById('note-list');
     var ns = d.notes||[];
     if(!ns.length){el.innerHTML='<p class="text-slate-400">কোনো নোট নেই।</p>';return}
@@ -788,7 +788,7 @@ function loadSyllabus() {
   listEl.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500"><i class="fas fa-spinner fa-spin text-2xl text-orange-400 mb-2"></i><p class="text-sm">সিলেবাস লোড হচ্ছে...</p></div>';
 
   fetch('/api/tools/syllabus?level=' + currentLevel)
-    .then(function(r){ return r.json(); })
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
     .then(function(d){
       syllabusData = d.items || [];
       renderSyllabusList(syllabusData);

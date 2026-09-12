@@ -1231,11 +1231,17 @@ ${siteHeader({ activeKey: 'cv', loggedIn, theme: 'dark' })}
 
   window.delCV = function(id){
     if(!confirm('আপনি কি নিশ্চিতভাবে এই CV টি ডিলিট করতে চান?')) return;
-    fetch('/api/cv/mine/' + id, { method: 'DELETE' }).then(function(){
+    fetch('/api/cv/mine/' + id, { method: 'DELETE' }).then(function(r){
+      /* আগে রেসপন্স একেবারেই যাচাই করা হতো না — সার্ভার
+         ৪০১/৪০৪/৫০০ দিলেও "CV ডিলিট করা হয়েছে" দেখা যেত,
+         অর্থাৎ মিথ্যা সাফল্য-বার্তা। */
+      if(!r.ok) throw new Error('HTTP ' + r.status);
       if(curCvId === id) curCvId = 0;
       loadMine();
       showMsg('🗑️ CV ডিলিট করা হয়েছে', 'text-amber-400');
-    }).catch(function(){var e=document.getElementById('');if(e)e.innerHTML='<p class="text-rose-400 text-xs p-2">তথ্য লোড করা যায়নি</p>';});
+    }).catch(function(){
+      showMsg('❌ CV ডিলিট করা যায়নি — আবার চেষ্টা করুন', 'text-rose-400');
+    });
   };
 
   function loadMine(){
